@@ -2,8 +2,8 @@ Package: Rcompadre
 Type: Package
 Title: Interface to the COMPADRE/COMADRE Database
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Tamora James, Patrick Barks, Iain Stott.
+Maintainer: Owen Jones <jones@biology.sdu.dk>
 Description: An interface to the COMPADRE/COMADRE databases. The
     package provides utility functions for interacting with the
     COMPADRE and COMADRE databases of matrix population model
