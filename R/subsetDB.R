@@ -1,9 +1,6 @@
-#' A function to subset the COMPADRE/COMADRE database
+#' Subsets the COMPADRE/COMADRE database
 #' 
-#' This function allows users to subset the COMPADRE/COMADRE database by
-#' logical argument.
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Subset the COMPADRE/COMADRE database by logical argument.
 #' 
 #' @param sub An argument made using logical operators (see `subset`) with
 #' which to subset the data base. Any of the variables contained in the
@@ -11,15 +8,10 @@
 #' @param db The COMPADRE or COMADRE database object.
 #' @return Returns a subset of the database, with the same structure, but where
 #' the records in the metadata match the criteria given in the `sub` argument.
-#' @note %% ~~further notes~~
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
+#' Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' Bruce Kendall <kendall@@bren.ucsb.edu>
 #' 
-#' Bruce Kendall
-#' 
-#' Rob Salguero-Goómez <rob.salguero@@zoo.ox.ac.uk>
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% references
-#' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
 #' \dontrun{

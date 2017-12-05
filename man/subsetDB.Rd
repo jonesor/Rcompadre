@@ -2,7 +2,7 @@
 % Please edit documentation in R/subsetDB.R
 \name{subsetDB}
 \alias{subsetDB}
-\title{A function to subset the COMPADRE/COMADRE database}
+\title{Subsets the COMPADRE/COMADRE database}
 \usage{
 subsetDB(db, sub)
 }
@@ -18,14 +18,7 @@ Returns a subset of the database, with the same structure, but where
 the records in the metadata match the criteria given in the `sub` argument.
 }
 \description{
-This function allows users to subset the COMPADRE/COMADRE database by
-logical argument.
-}
-\details{
-%% ~~ If necessary, more details than the description above ~~
-}
-\note{
-%% ~~further notes~~
+Subset the COMPADRE/COMADRE database by logical argument.
 }
 \examples{
 
@@ -37,18 +30,8 @@ ssData <- subsetDB(comadre, SurvivalIssue < 1 & Altitude > 1000 & Altitude < 150
 }
 
 }
-\references{
-%% references
-}
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
-
-Bruce Kendall
-
-Rob Salguero-Goómez <rob.salguero@zoo.ox.ac.uk>
+Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
+Bruce Kendall <kendall@bren.ucsb.edu>
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
