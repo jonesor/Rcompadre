@@ -12,6 +12,8 @@ genus and specific epithet separated by either an underscore or a space (
 e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))}
 
 \item{db}{A COM(P)ADRE database.}
+
+\item{returnDatabase}{A logical argument indicating whether a database should be returned.}
 }
 \value{
 If returnDatabase = FALSE, returns a data frame with a column of
