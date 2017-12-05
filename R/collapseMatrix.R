@@ -1,17 +1,25 @@
-#' Collapse matrix model into propagule, pre-reproductive, reproductive and
-#' post-reproductive stages.
-#'
-#' Note: only valid for models without clonality.
+#' Collapse a matrix model to a smaller number of stages
+#' 
+#' This function collapses a matrix model to a smaller number of stages. For
+#' instance, to compare properties of multiple projection matrices with
+#' different numbers of stages, one might first collapse those matrices into a
+#' standardized set of stages (e.g. propagule, pre-reproductive, reproductive
+#' and post-reproductive).\cr\cr
+#' Note: this function is only valid for models without clonality.
 #'
 #' @export
-#' @param matU survival matrix
-#' @param matF fecundity matrix
-#' @param collapse (character) vector indicating which stages must be collapsed
-#' and retained to give matrix containing combined propagule, pre-reproductive,
-#' reproductive and post-reproductive stages.
-#' @return (list) collapsed matrices \code{matA}, \code{matU}, \code{matF} and
-#' character vector \code{matrixStages} specifying which matrix stages are
-#' included in the collapse model.
+#' @param matU Survival matrix
+#' @param matF Fecundity matrix
+#' @param collapse A character vector giving the mapping between the stages of
+#'   the original matrix and the desired stages of the collapsed matrix. The
+#'   indices of \code{collapse} correspond to the desired stages of the
+#'   collapsed matrix, and rach element of \code{collapse} gives the stage index
+#'   (e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
+#'   that correspond to the relevant stage index of the collapsed matrix.
+#' @return A list of three containing the collapsed projection matrix
+#'   \code{matA}, collapsed survival matrix \code{matU}, and collapsed fecundity
+#'   matrix \code{matF}.
+#' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' @examples
 #' matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
 #'                  0.4286, 0.102, 0.0816, 0.0385, 0.0385, 0.2692, 0.2308,
@@ -21,14 +29,11 @@
 #' matF <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 #'                  0, 0, 0, 0, 2.75, 1.75, 0, 0),
 #'                  nrow = 5, byrow = FALSE)
-#' collapse1 <- c("1-2","3-4","5")
-#' (out <- collapseMatrix(matU, matF, collapse1))
-#' eigen(out$matA)
-#' eigen(out$matU)
-#' eigen(out$matF)
+#' collapse1 <- c("1-2", "3-4", "5")
+#' collapseMatrix(matU, matF, collapse1)
 #'
-#' #collapse2 <- c("1-2","3-4-5")
-#' #collapse3 <- c("1-2-3-4-5")
+#' # collapse2 <- c("1-2", "3-4-5")
+#' # collapse3 <- c("1-2-3-4-5")
 collapseMatrix <- function(matU, matF, collapse) {
   matA <- matU + matF
   if (any(is.na(matA))) {
@@ -47,18 +52,18 @@ collapseMatrix <- function(matU, matF, collapse) {
   }
 
   Q <- t(P)
-  w <- Re(eigen(matA)$vectors[,which(Re(eigen(matA)$values) == max(Re(eigen(matA)$values)))])
-  w <- w/sum(w)
+  w <- Re(eigen(matA)$vectors[,which.max(max(Re(eigen(matA)$values)))])
+  w <- w / sum(w)
 
   columns <- which(colSums(Q) > 1)
   for (j in columns) {
     rows <- which(Q[,j] == 1)
     for (i in rows) {
-      Q[i,j] <- w[i]/sum(w[rows])
+      Q[i,j] <- w[i] / sum(w[rows])
     }
   }
   collapseA <- P %*% matA %*% Q
   collapseU <- P %*% matU %*% Q
   collapseF <- P %*% matF %*% Q
-  list(matA = collapseA, matU = collapseU, matF = collapseF)
+  return(list(matA = collapseA, matU = collapseU, matF = collapseF))
 }
