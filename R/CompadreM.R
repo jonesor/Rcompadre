@@ -91,8 +91,8 @@ validCompadreMObject <- function(object) {
   matrixClassNames <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
   mCNpresent <- matrixClassNames%in%names(object@matrixClass)
   if(!all(mCNpresent)) {
-    mCNmissing <- paste0(matrixClassNames[!mCNpresent], collapse = " & ")
-    mCNmsg1 <- paste0(mCNmissing, "from matrixClassNames", collapse = " ")
+    mCNmissing <- paste(matrixClassNames[!mCNpresent], collapse = " & ")
+    mCNmsg1 <- paste(mCNmissing, "missing from matrixClassNames")
     errors <- c(errors, mCNmsg1)
   }
   if(dim(object@matrixClass)[1] != dim) {
