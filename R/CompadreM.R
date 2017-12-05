@@ -29,9 +29,9 @@ setClass("CompadreM",
 ## ---------------------------------------------------------------------
 ## define a method for initialize
 
-setMethod("initialize", "CompadreM", 
+setMethod("initialize", "CompadreM",
           function(.Object, ...) {
-            .Object <- callNextMethod()        
+            .Object <- callNextMethod()
             validObject(.Object)
             .Object
           })
@@ -77,7 +77,7 @@ validCompadreMObject <- function(object) {
     errors <- c(errors, matCmsg2)
   }
   #dimensions
-  dims <- c(dim(object@matA)[1], 
+  dims <- c(dim(object@matA)[1],
             dim(object@matU)[1],
             dim(object@matF)[1],
             dim(object@matC)[1])
@@ -106,4 +106,3 @@ validCompadreMObject <- function(object) {
   }
 }
 setValidity("CompadreM", validCompadreMObject)
-
