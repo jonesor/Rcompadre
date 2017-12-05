@@ -2,27 +2,37 @@
 % Please edit documentation in R/collapseMatrix.R
 \name{collapseMatrix}
 \alias{collapseMatrix}
-\title{Collapse matrix model into propagule, pre-reproductive, reproductive and
-post-reproductive stages.}
+\title{Collapse a matrix model to a smaller number of stages}
 \usage{
 collapseMatrix(matU, matF, collapse)
 }
 \arguments{
-\item{matU}{survival matrix}
+\item{matU}{Survival matrix}
 
-\item{matF}{fecundity matrix}
+\item{matF}{Fecundity matrix}
 
-\item{collapse}{(character) vector indicating which stages must be collapsed
-and retained to give matrix containing combined propagule, pre-reproductive,
-reproductive and post-reproductive stages.}
+\item{collapse}{A character vector giving the mapping between the stages of
+the original matrix and the desired stages of the collapsed matrix. The
+indices of \code{collapse} correspond to the desired stages of the
+collapsed matrix, and each element of \code{collapse} gives the stage index
+(e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
+that correspond to the relevant stage index of the collapsed matrix.}
 }
 \value{
-(list) collapsed matrices \code{matA}, \code{matU}, \code{matF} and
-character vector \code{matrixStages} specifying which matrix stages are
-included in the collapse model.
+A list of three containing the collapsed projection matrix
+  \code{matA}, collapsed survival matrix \code{matU}, and collapsed fecundity
+  matrix \code{matF}.
 }
 \description{
-Note: only valid for models without clonality.
+This function collapses a matrix model to a smaller number of stages. For
+instance, to compare properties of multiple projection matrices with
+different numbers of stages, one might first collapse those matrices to a
+standardized set of stages (e.g. propagule, pre-reproductive, reproductive,
+and post-reproductive). The vital rates in the collapsed matrix are a
+weighted average of the vital rates from the relevant stages of the original
+matrix, weighted by the relative proportion of each stage class expected at
+the stable distribution.\cr\cr
+Note: this function is only valid for models without clonality.
 }
 \examples{
 matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
@@ -33,12 +43,17 @@ matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
 matF <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                  0, 0, 0, 0, 2.75, 1.75, 0, 0),
                  nrow = 5, byrow = FALSE)
-collapse1 <- c("1-2","3-4","5")
-(out <- collapseMatrix(matU, matF, collapse1))
-eigen(out$matA)
-eigen(out$matU)
-eigen(out$matF)
+collapse1 <- c("1-2", "3-4", "5")
+collapseMatrix(matU, matF, collapse1)
 
-#collapse2 <- c("1-2","3-4-5")
-#collapse3 <- c("1-2-3-4-5")
+# collapse2 <- c("1-2", "3-4-5")
+# collapse3 <- c("1-2-3-4-5")
+}
+\references{
+Salguero-Gomez, R. & Plotkin, J. B. (2010) Matrix dimensions
+  bias demographic inferences: implications for comparative plant demography.
+  The American Naturalist 176, 710-722.
+}
+\author{
+Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
 }
