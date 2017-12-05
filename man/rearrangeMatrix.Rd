@@ -2,38 +2,41 @@
 % Please edit documentation in R/rearrangeMatrix.R
 \name{rearrangeMatrix}
 \alias{rearrangeMatrix}
-\title{Re-arrange matrix stages so that all inter-reproductive and non-reproductive
-stages fall in the final rows/columns of the matrix. This is a preparatory
-step to collapsing the matrix model into combined prop, pre-rep, rep and
-post-rep stages.}
+\title{Rearrange matrix stages to segregate reproductive and non-reproductive stages}
 \usage{
-rearrangeMatrix(matU, matF, matFmu)
+rearrangeMatrix(matU, matF, repro_stages)
 }
 \arguments{
-\item{matU}{survival matrix}
+\item{matU}{Survival matrix}
 
-\item{matF}{fecundity matrix}
+\item{matF}{Fecundity matrix}
 
-\item{matFmu}{mean fecundity matrix}
+\item{repro_stages}{Logical vector identifying which stages reproductive}
+}
+\value{
+Returns a list with 5 elements: the rearranged survival matrix
+  (\code{matU}), the rearranged fecundity matrix (\code{matF}), the
+  rearranged vector of reproductive stages (\code{repro_stages}), the numeric
+  index for any rearranged inter-reproductive stages (\code{nonRepInterRep}),
+  and the numeric index for the maximum reproductive stage in the rearranged
+  reproductive stage vector (\code{maxRep}).
 }
 \description{
-Re-arrange matrix stages so that all inter-reproductive and non-reproductive
-stages fall in the final rows/columns of the matrix. This is a preparatory
-step to collapsing the matrix model into combined prop, pre-rep, rep and
-post-rep stages.
+Rearrange matrix stages so that all inter-reproductive stages fall in the
+final rows/columns of the matrix. This is a preparatory step to collapsing
+the matrix model into a standardized set of stages (e.g. propagule,
+pre-reproductive, reproductive, and post-reproductive).
 }
 \examples{
-## FIXME: find an example containing non-reproductive stages
-matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
-                 0.4286, 0.102, 0.0816, 0.0385, 0.0385, 0.2692, 0.2308,
-                 0.3462, 0, 0.0625, 0.125, 0.25, 0.5625, 0.1061, 0.1608,
-                 0.2637, 0.1801, 0.2058),
-                 nrow = 5, byrow = FALSE)
-matF <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 2.75, 1.75, 0, 0),
-                 nrow = 5, byrow = FALSE)
-matFmu <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                   0, 0, 0, 0, 1.0409262, 0.5040727, 0.016433, 0.06956801),
-                 nrow = 5, byrow = FALSE)
-rearrangeMatrix(matU, matF, matFmu)
+matU <- rbind(c(0, 0, 0, 0, 0), c(0.1, 0.16, 0, 0, 0), c(0.2, 0.23, 0.12, 0,
+0), c(0, 0, 0.34, 0.53, 0), c(0, 0, 0, 0.34, 0))
+
+matF <- rbind(c(0, 0, 0, 0, 0), c(0, 0.2, 0, 0.1, 0), c(0, 0.2, 0, 0.1, 0),
+c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
+
+repro_stages <- c(0, 1, 0, 1, 0)
+rearrangeMatrix(matU, matF, repro_stages)
+}
+\author{
+Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
 }
