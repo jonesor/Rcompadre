@@ -121,3 +121,40 @@ validCompadreMObject <- function(object) {
   }
 }
 setValidity("CompadreM", validCompadreMObject)
+
+setMethod("show", signature = (object ="CompadreM"),
+          function (object){
+            Mdim <- dim(object@matA)[1]
+            #start
+            start <- cat(paste("A compadre matrix object with",
+                               as.character(Mdim),
+                               "stages.\n\n"
+                      ))
+            #matrixClass info
+            showstages <- as.data.frame(object@matrixClass)[,c("MatrixClassAuthor","MatrixClassNumber")]
+            dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
+            print(showstages, row.names=F)
+            cat("\n")
+            #matA
+            cat("matA:\n")
+            showmatA <- object@matA
+            dimnames(showmatA) <- list(1:Mdim, 1:Mdim)
+            print(showmatA, nsmall = 3)
+            cat("\n")
+            cat("matU:\n")
+            showmatU <- object@matU
+            dimnames(showmatU) <- list(1:Mdim, 1:Mdim)
+            print(showmatU)
+            cat("\n")
+            cat("matF:\n")
+            showmatF <- object@matF
+            dimnames(showmatF) <- list(1:Mdim, 1:Mdim)
+            print(showmatF)
+            cat("\n")
+            cat("matC:\n")
+            showmatC <- object@matC
+            dimnames(showmatC) <- list(1:Mdim, 1:Mdim)
+            print(showmatC)
+            cat("\n")
+          }
+)
