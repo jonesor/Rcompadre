@@ -26,7 +26,7 @@
 #' }
 #' 
 #' @export checkspecies
-checkspecies <- function(sp_list, db, verbose = FALSE){
+checkspecies <- function(sp_list, db, subsetDB = FALSE){
 # 1. Create the True, False dataframe with species list and output this
   db<-db
   sp<-sp_list
@@ -34,13 +34,19 @@ checkspecies <- function(sp_list, db, verbose = FALSE){
     df<-data.frame(sp,out)
     names(df)[1]<-"Species"
     names(df)[2]<-"InDatabase"
-    return(df)
-    if(verbose == TRUE){
-      ssdb<-subsetDB(db, SpeciesAccepted==sp_list)
-      return(ssdb)
+#    return(df)
+      if(subsetDB == TRUE) {
+        ssdb<-subsetDB(db, SpeciesAccepted==sp_list)
+        return(ssdb)
+        } else {
+           if (any(df$InDatabase==TRUE)) {
+              warning("Hurray, at least one of your species has been found in the database", call. = FALSE)
+          } else {
+            warning("None of your species have been found in the database", call. = FALSE)
+              return(df)
+          }
+        }
     }
-}
-# 2. If verbose = T, use the subsetDB function to create a subset of COMPADREDB. If verbose = F, only return species list, output two things?
 
-# 3. Need to add - if none of your species are in compadre, return message "no species found in database"
-#
+# If subsetDB = T, the subsetDB function will create a subset of COMPADREDB containing only the listed species. 
+# If subsetDB = F, it will only return a species list, with TRUE or FALSE (this is default)
