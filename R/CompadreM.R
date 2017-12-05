@@ -32,6 +32,11 @@ setClass("CompadreM",
 setMethod("initialize", "CompadreM",
           function(.Object, ...) {
             .Object <- callNextMethod()
+            if(length(.Object@matrixClass) == 0) {
+              .Object@matrixClass$MatrixClassOrganized <- character(0)
+              .Object@matrixClass$MatrixClassAuthor <- character(0)
+              .Object@matrixClass$MatrixClassNumber <- double(0)
+            }
             validObject(.Object)
             .Object
           })
@@ -40,54 +45,62 @@ setMethod("initialize", "CompadreM",
 ## define validity check function
 validCompadreMObject <- function(object) {
   errors <- character()
+  ###matrices
+  ##test nonnegativity
   #matA
   if (any(object@matA < 0, na.rm = T) ) {
     matAmsg1 <- "matA is not nonnegative"
     errors <- c(errors, matAmsg1)
-  }
-  if (diff(dim(object@matA)) != 0 ) {
-    matAmsg2 <- "matA is not square"
-    errors <- c(errors, matAmsg2)
   }
   #matU
   if (any(object@matU < 0, na.rm = T) ) {
     matUmsg1 <- "matU is not nonnegative"
     errors <- c(errors, matUmsg1)
   }
-  if (diff(dim(object@matU)) != 0 ) {
-    matUmsg2 <- "matU is not square"
-    errors <- c(errors, matUmsg2)
-  }
   #matF
   if (any(object@matF < 0, na.rm = T) ) {
     matFmsg1 <- "matF is not nonnegative"
     errors <- c(errors, matFmsg1)
-  }
-  if (diff(dim(object@matF)) != 0 ) {
-    matFmsg2 <- "matF is not square"
-    errors <- c(errors, matFmsg2)
   }
   #matC
   if (any(object@matC < 0, na.rm = T) ) {
     matCmsg1 <- "matC is not nonnegative"
     errors <- c(errors, matCmsg1)
   }
-  if (diff(dim(object@matC)) != 0 ) {
+  ##test dimensions
+  dims <- data.frame(matA = dim(object@matA),
+                     matU = dim(object@matU),
+                     matF = dim(object@matF),
+                     matC = dim(object@matC))
+  dimsMeans <- colMeans(dims)
+  dimsDiff <- diff(range(dimsMeans))
+  #matA
+  if (diff(dims[,"matA"]) != 0 ) {
+    matAmsg2 <- "matA is not square"
+    errors <- c(errors, matAmsg2)
+  }
+  #matU
+  if (diff(dims[,"matU"]) != 0 ) {
+    matUmsg2 <- "matU is not square"
+    errors <- c(errors, matUmsg2)
+  }
+  #matF
+  if (diff(dims[,"matF"]) != 0 ) {
+    matFmsg2 <- "matF is not square"
+    errors <- c(errors, matFmsg2)
+  }
+  #matC
+  if (diff(dims[,"matC"]) != 0 ) {
     matCmsg2 <- "matC is not square"
     errors <- c(errors, matCmsg2)
   }
-  #dimensions
-  dims <- c(dim(object@matA)[1],
-            dim(object@matU)[1],
-            dim(object@matF)[1],
-            dim(object@matC)[1])
-  if(diff(range(dims)) != 0) {
-    dimsmsg <- "matA, matU, matF and matC do not have equal dimensions"
+  #equal dimensions among all matrices
+  if(dimsDiff != 0) {
+    dimsmsg <- "matA, matU, matF and matC dimensions do not match"
+    errors <- c(errors, dimsmsg)
   }
-  if(diff(range(dims)) == 0) {
-    dim <- dim(object@matA)[1]
-  }
-  #matrixClass
+  ###matrixClass
+  ##test that necessary column names are there
   matrixClassNames <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
   mCNpresent <- matrixClassNames%in%names(object@matrixClass)
   if(!all(mCNpresent)) {
@@ -95,8 +108,10 @@ validCompadreMObject <- function(object) {
     mCNmsg1 <- paste(mCNmissing, "missing from matrixClassNames")
     errors <- c(errors, mCNmsg1)
   }
-  if(dim(object@matrixClass)[1] != dim) {
-    mCNmsg2 <- "number of rows in matrixClass does not equal matrix dimension"
+  ##test that the row dimension matches the matrices,
+  ##IF the matrices all have equal dimension.
+  if(dimsDiff == 0 & !all(dim(object@matrixClass)[1] == dimsMeans)) {
+    mCNmsg2 <- "number of rows in matrixClass does not match dimensions of matA, matU, matF and matC"
     errors <- c(errors, mCNmsg2)
   }
   if (length(errors) == 0) {
