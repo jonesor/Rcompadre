@@ -1,14 +1,13 @@
 Package: Rcompadre
 Type: Package
-Title: Interface to the COMPADRE/COMADRE Database
+Title: Utilities for working with the COMPADRE/COMADRE Database
 Version: 0.1.0
-Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Tamora James, Patrick Barks, Iain Stott.
+Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Julia Barthold, Tamora James, Patrick Barks, Iain Stott.
 Maintainer: Owen Jones <jones@biology.sdu.dk>
-Description: An interface to the COMPADRE/COMADRE databases. The
-    package provides utility functions for interacting with the
-    COMPADRE and COMADRE databases of matrix population model
-License: GPL-2
+Description: A set of utility tools for working with the COMPADRE/COMADRE databases. The package provides utility functions for interacting with the COMPADRE and COMADRE databases of matrix population model.
+License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-
+Imports: 
+  methods, popdemo
