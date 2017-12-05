@@ -1,52 +1,46 @@
-#' Check if the database contains any of 'my' species
+#' Check whether a COM(P)ADRE database contains one or more species of interest
 #' 
-#' This function takes a list of species and checks whether they are in the database
-#' and outputs the species list in dataframe with a True or False Column. If True, your species have been found.
-#' Verbose = T will use the subsetDB function
-#' and create a subset of the Compadre Object containing only your species. 
+#' This function takes a vector of species names and checks whether those
+#' species are represented within a COM(P)ADRE database. It outputs either a
+#' data frame depicting the species of interest and whether they occurr in the
+#' database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
+#' object subset to the species of interest.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param sp_list A character vector of the users desired species. This is assumed to be
-#' with an underscore between genus and binomial, for example: sp_list<-c("Acipenser_fulvescens","Borrelia_burgdorferi","Falco_peregrinus")
-#' @param db The COMPADRE or COMADRE database object.
-#' @return Returns a subset of the database when verbose=T, with the same structure as the COMPADRE
-#' or COMADRE database object, but which only contains data associated with the species in sp_list object.
-#' @note %% ~~further notes~~
-#' @author Danny Buss <dlb50@cam.ac.uk>
-#' Owen R. Jones <jones@@biology.sdu.dk>
-#' Rob Salguero-Goómez <rob.salguero@@zoo.ox.ac.uk>
+#' @param species A character vector of binomial species names, with the
+#'   genus and specific epithet separated by either an underscore or a space (
+#'   e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))
+#' @param db A COM(P)ADRE database.
+#' @return If returnDatabase = FALSE, returns a data frame with a column of
+#'   species names and a column indicating whether a species occurs in the
+#'   database. If returnDatabase == TRUE, returns  a subset of db containing
+#'   only those species within argument \code{species}
+#' @author Danny Buss <dlb50@@cam.ac.uk>
+#' @author Owen R. Jones <jones@@biology.sdu.dk>
+#' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' @author Patrick Barks <patrick.barks@@gmail.com>
 #' @examples
-#' 
 #' \dontrun{
-#' ssData <- subsetDB(compadre, SpeciesAccepted =="")
-#' ssData <- subsetDB(compadre, SpeciesAccepted==sp_list)
-#' ssData<-subsetDB(comadre, SpeciesAccepted =="Acipenser_fulvescens")
-#' ssData <- subsetDB(comadre, SpeciesAccepted==sp_list)
+#' species <- c("Mammillaria gaumeri", "Euterpe edulis", "Homo sapiens")
+#' checkSpecies(species, compadre)
+#' compadre_subset <- checkSpecies(species, compadre, returnDatabase = TRUE)
 #' }
-#' 
-#' @export checkspecies
-checkspecies <- function(sp_list, db, subsetDB = FALSE){
-# 1. Create the True, False dataframe with species list and output this
-  db<-db
-  sp<-sp_list
-  out<-sapply(sp_list, function(x) x %in% db$metadata$SpeciesAccepted,USE.NAMES =FALSE)
-    df<-data.frame(sp,out)
-    names(df)[1]<-"Species"
-    names(df)[2]<-"InDatabase"
-#    return(df)
-      if(subsetDB == TRUE) {
-        ssdb<-subsetDB(db, SpeciesAccepted==sp_list)
-        return(ssdb)
-        } else {
-           if (any(df$InDatabase==TRUE)) {
-              warning("Hurray, at least one of your species has been found in the database", call. = FALSE)
-          } else {
-            warning("None of your species have been found in the database", call. = FALSE)
-              return(df)
-          }
-        }
-    }
-
-# If subsetDB = T, the subsetDB function will create a subset of COMPADREDB containing only the listed species. 
-# If subsetDB = F, it will only return a species list, with TRUE or FALSE (this is default)
+#' @export checkSpecies
+checkSpecies <- function(species, db, returnDatabase = FALSE){
+  
+  # create dataframe with column for species, and column for whether they are
+  #   present in database
+  findSpecies <- function(x) tolower(x) %in% tolower(gsub('_', ' ', db$metadata$SpeciesAccepted))
+  inDatabase <- sapply(species, findSpecies, USE.NAMES = FALSE)
+  df <- data.frame(species, inDatabase)
+  
+  if (all(df$inDatabase == FALSE)) {
+    warning("None of the species were found in the database", call. = FALSE)
+  }
+  
+  if(returnDatabase == TRUE) {
+    ssdb <- subsetDB(db, SpeciesAccepted %in% species)
+    return(ssdb)
+  } else {
+    return(df)
+  }
+}
