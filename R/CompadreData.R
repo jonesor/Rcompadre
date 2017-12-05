@@ -19,10 +19,7 @@
 setClass("CompadreData",
          slots = c(
              metadata = "data.frame",
-             matA = "list",
-             ## matU = "list",
-             ## matF = "list",
-             ## matC = "list",
+             mat = "list",
              version = "list"
              )
          )
@@ -41,10 +38,10 @@ setMethod("initialize", "CompadreData",
 ## define validity check function
 validCompadreData <- function(object) {
     errors <- character()
-    if (nrow(object@metadata) != length(object@matA)) {
-        msg <- paste0("Unequal metadata and matA lengths:",
+    if (nrow(object@metadata) != length(object@mat)) {
+        msg <- paste0("Unequal metadata and mat lengths:",
                       nrow(object@metadata), ", ",
-                      length(object@matA))
+                      length(object@mat))
         errors <- c(errors, msg)
     }
     if (length(errors) == 0) {
@@ -61,10 +58,17 @@ setValidity("CompadreData", validCompadreData)
 setAs("list", "CompadreData", function(from) asCompadreData(from))
 
 asCompadreData <- function(from) {
-    ## Need to check that 'from' is a old style compadre db object - by checking
-    ## it has the expected structure?
+    ## Need to check that 'from' is a old style compadre db object - this will
+    ## have to be by checking it has the expected structure
     new("CompadreData",
         metadata = from$metadata,
-        matA = lapply(from$mat, `[[`, "matA"),
+        mat = lapply(seq_along(from$mat), function(i) {
+            new("CompadreM",
+                matA = from$mat[[i]]$matA,
+                matU = from$mat[[i]]$matU,
+                matF = from$mat[[i]]$matF,
+                matC = from$mat[[i]]$matC,
+                matrixClass = as.data.frame(from$matrixClass[[i]]))
+        }),
         version = from$version)
 }
