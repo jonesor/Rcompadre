@@ -15,6 +15,7 @@
 #'                  0, 0, 0, 0, 1.0409262, 0.5040727, 0.016433, 0),
 #'                  nrow = 5, byrow = FALSE)
 #' identifyReproStages(matF)
+#' @export identifyReproStages
 identifyReproStages <- function(matF) {
   if (all(is.na(matF))) {
     stop("All elements of matF are NA")
