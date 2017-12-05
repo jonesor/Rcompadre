@@ -1,4 +1,4 @@
-# Class Compadre, definition and methods
+# Class CompadreData, definition and methods
 
 # Copyright (c) 2017 Tamora D. James and Iain M. Stott
 
@@ -16,7 +16,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-setClass("Compadre",
+setClass("CompadreData",
          slots = c(
              metadata = "data.frame",
              matA = "list",
@@ -30,16 +30,16 @@ setClass("Compadre",
 ## ---------------------------------------------------------------------
 ## define a method for initialize
 
-setMethod("initialize", "Compadre", 
+setMethod("initialize", "CompadreData",
     function(.Object, ...) {
-        .Object <- callNextMethod()        
+        .Object <- callNextMethod()
         validObject(.Object)
         .Object
     })
 
 ## ---------------------------------------------------------------------
 ## define validity check function
-validCompadreObject <- function(object) {
+validCompadreData <- function(object) {
     errors <- character()
     if (nrow(object@metadata) != length(object@matA)) {
         msg <- paste0("Unequal metadata and matA lengths:",
@@ -53,17 +53,17 @@ validCompadreObject <- function(object) {
         errors
     }
 }
-setValidity("Compadre", validCompadreObject)
+setValidity("CompadreData", validCompadreData)
 
 
 ## ---------------------------------------------------------------------
-## define method to coerce old compadre db object to Compadre class
-setAs("list", "Compadre", function(from) asCompadre(from))
+## define method to coerce old compadre db object to CompadreData class
+setAs("list", "CompadreData", function(from) asCompadreData(from))
 
-asCompadre <- function(from) {
+asCompadreData <- function(from) {
     ## Need to check that 'from' is a old style compadre db object - by checking
     ## it has the expected structure?
-    new("Compadre",
+    new("CompadreData",
         metadata = from$metadata,
         matA = lapply(from$mat, `[[`, "matA"),
         version = from$version)
