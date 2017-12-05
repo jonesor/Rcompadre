@@ -2,9 +2,12 @@
 #' 
 #' This function collapses a matrix model to a smaller number of stages. For
 #' instance, to compare properties of multiple projection matrices with
-#' different numbers of stages, one might first collapse those matrices into a
-#' standardized set of stages (e.g. propagule, pre-reproductive, reproductive
-#' and post-reproductive).\cr\cr
+#' different numbers of stages, one might first collapse those matrices to a
+#' standardized set of stages (e.g. propagule, pre-reproductive, reproductive,
+#' and post-reproductive). The vital rates in the collapsed matrix are a
+#' weighted average of the vital rates from the relevant stages of the original
+#' matrix, weighted by the relative proportion of each stage class expected at
+#' the stable distribution.\cr\cr
 #' Note: this function is only valid for models without clonality.
 #'
 #' @export
@@ -13,13 +16,16 @@
 #' @param collapse A character vector giving the mapping between the stages of
 #'   the original matrix and the desired stages of the collapsed matrix. The
 #'   indices of \code{collapse} correspond to the desired stages of the
-#'   collapsed matrix, and rach element of \code{collapse} gives the stage index
+#'   collapsed matrix, and each element of \code{collapse} gives the stage index
 #'   (e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
 #'   that correspond to the relevant stage index of the collapsed matrix.
 #' @return A list of three containing the collapsed projection matrix
 #'   \code{matA}, collapsed survival matrix \code{matU}, and collapsed fecundity
 #'   matrix \code{matF}.
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' @references Salguero-Gomez, R. & Plotkin, J. B. (2010) Matrix dimensions
+#'   bias demographic inferences: implications for comparative plant demography.
+#'   The American Naturalist 176, 710-722.
 #' @examples
 #' matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
 #'                  0.4286, 0.102, 0.0816, 0.0385, 0.0385, 0.2692, 0.2308,

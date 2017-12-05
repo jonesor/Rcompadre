@@ -14,7 +14,7 @@ collapseMatrix(matU, matF, collapse)
 \item{collapse}{A character vector giving the mapping between the stages of
 the original matrix and the desired stages of the collapsed matrix. The
 indices of \code{collapse} correspond to the desired stages of the
-collapsed matrix, and rach element of \code{collapse} gives the stage index
+collapsed matrix, and each element of \code{collapse} gives the stage index
 (e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
 that correspond to the relevant stage index of the collapsed matrix.}
 }
@@ -26,9 +26,12 @@ A list of three containing the collapsed projection matrix
 \description{
 This function collapses a matrix model to a smaller number of stages. For
 instance, to compare properties of multiple projection matrices with
-different numbers of stages, one might first collapse those matrices into a
-standardized set of stages (e.g. propagule, pre-reproductive, reproductive
-and post-reproductive).\cr\cr
+different numbers of stages, one might first collapse those matrices to a
+standardized set of stages (e.g. propagule, pre-reproductive, reproductive,
+and post-reproductive). The vital rates in the collapsed matrix are a
+weighted average of the vital rates from the relevant stages of the original
+matrix, weighted by the relative proportion of each stage class expected at
+the stable distribution.\cr\cr
 Note: this function is only valid for models without clonality.
 }
 \examples{
@@ -45,6 +48,11 @@ collapseMatrix(matU, matF, collapse1)
 
 # collapse2 <- c("1-2", "3-4-5")
 # collapse3 <- c("1-2-3-4-5")
+}
+\references{
+Salguero-Gomez, R. & Plotkin, J. B. (2010) Matrix dimensions
+  bias demographic inferences: implications for comparative plant demography.
+  The American Naturalist 176, 710-722.
 }
 \author{
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
