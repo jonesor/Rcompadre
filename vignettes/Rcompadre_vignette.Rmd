@@ -100,7 +100,7 @@ But what are the stages in the matrix? That's easy - to obtain the stage informa
 comadre$matrixClass[[1653]]
 ```
 
-## Plot a life cycle diagram
+## Plot a life cycle diagram
 
 The exercise plots a life cycle with the stages and transitions of a give matrix chosen from the `comadre` (or `compadre`) database (or indeed elsewhere). It will use the R function `plotLifeCycle` from the `Mage` library. This function works well with matrices of relatively low dimensionality (~< 7), and where not many transitions are depicted. 
 
