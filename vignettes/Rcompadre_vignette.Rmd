@@ -9,25 +9,149 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(Rcompadre)
 ```
 
-## R Markdown
 ![logo](images/Logo_COMADRE_Vertical_Color.png)    ![logo](images/Logo_COMPADRE_Vertical_Color.png)
 
-# Workshop materials on the COMADRE and COMPADRE matrix databases.
+The COMADRE and COMPADRE databases together contain several thousand (mostly) published matrix population models (MPMs) for species from across the diverse tree of life.
 
-These databases together contain several thousand (mostly) published matrix population models (MPMs) for species from across the diverse tree of life.
+The purpose of Rcompadre is to provide utilities for accessing, selecting, and transforming MPMs from particular species of interest, and groups of species for comparative demographic analyses.
 
-The purpose of this workshop is to introduce you to the databases and explain their structure and how one can use them to obtain MPMs from particular species of interest, and groups of species for comparative demographic analyses.
+Rcompadre integrates with the RPackage Rage, which provides functions to calculate different life history quantities of interest.
 
-## What the workshop material covers
+## What the vignette covers
 
 - Introduction - what are COMADRE and COMPADRE?
 - Structure of the database
 - What metadata are included?
 - Querying the database
 - Conducting some large-scale comparative analysis
+
+## Obtaining an MPM
+This part explains how to get matrices out of the COMADRE and COMPADRE databases.
+
+You will of course need to download the database first. You can get it from the website here: http://www.compadre-db.org/. Click on **Data**, and then on the **COMADRE Animal Matrix Database**, or  **COMPADRE Plant Matrix Database** button to find it. Download it to your computer.
+
+The two databases are identical in gross structure, so the following code will apply to both.
+
+Let's imagine you want to get matrices for all *Ursus maritimus* (polar bear) species from the database.
+
+Firstly you will need to load the data file (called `COMADRE_v.x.x.x.RData`) into RStudio. You can do that from within RStudio by clicking *File*, *Open file...*, then navigating to find the file, selecting it and clicking *Open*. Alternatively you can use the `load` function:
+
+```{r echo = TRUE, eval = FALSE, comment=">"}
+load("~/Downloads/COMADRE_v.2.0.0.RData")
+```
+
+Once you have loaded the file, you should see it in your `Environment`. It will be called `comadre`.
+
+You can check the structure of the object by typing the following, whereupon you will see there are four parts:
+
+
+```{r, comment=">"}
+names(comadre)
+```
+
+The `metadata` part is a dataframe that  contains information about the matrix models contained in the database.
+
+There are lots of columns in the dataframe, and you could subset the data by any of them.
+
+```{r, comment=">"}
+names(comadre$metadata)
+```
+
+You can find the details of what these columns are in the User Guides.
+
+Since we are interested in getting data for a species matching a particular name (*Ursus maritumus*), we'll need to examine the column called `SpeciesAccepted`, which is the currently accepted binomial species name.
+
+You can use the command `grep` to identify where in the database the species is:
+
+```{r, comment=">"}
+grep("Ursus_maritimus",comadre$metadata$SpeciesAccepted)
+```
+
+Note that the database uses an underscore instead of spaces!
+
+So, these row numbers are where the data are: `r grep("Ursus_maritimus",comadre$metadata$SpeciesAccepted)`.
+
+To get the matrix for any of these we need to access the `mat` part of the database.
+
+Let's look at the first one, at position `r grep("Ursus_maritimus",comadre$metadata$SpeciesAccepted)[1]`.
+
+```{r comment = ">"}
+comadre$mat[[1653]]
+```
+
+
+You will note that there are actually 4 matrices, called `matA`, `matU`, `matF` and `matC`. The  matrix most people will want is the **A** matrix. The others are sub-parts of this matrix that represent processes of survival, fertility and clonality. These three matrices sum to the **A** matrix.
+
+
+You can isolate **just** the **A** matrix like this, renaming it `x`:
+
+```{r comment=">"}
+x <- comadre$mat[[1653]]$matA
+x
+```
+
+Now you can use this matrix to do the analysis of interest...
+
+But what are the stages in the matrix? That's easy - to obtain the stage information you can consult the relevant index for the `comadre$matrixClass` part of the database object like this:
+
+```{r comment=">"}
+comadre$matrixClass[[1653]]
+```
+
+## Plot a life cycle diagram
+
+The exercise plots a life cycle with the stages and transitions of a give matrix chosen from the `comadre` (or `compadre`) database (or indeed elsewhere). It will use the R function `plotLifeCycle` from the `Mage` library. This function works well with matrices of relatively low dimensionality (~< 7), and where not many transitions are depicted. 
+
+```{r, comment=">"}
+library(Mage)
+```
+
+Let's plot the lifecycle described by the `A` matrix for a species containing the word "lion" in the common name used by the author(s) in the original source publiction.
+
+```{r echo=FALSE}
+load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+```
+
+First load the data:
+```{r eval=FALSE}
+load("COMADRE_v.2.0.0.RData")
+```
+
+To find the species with the word `lion` in their common name, we use the function `grep`.
+
+```{r, comment=">"}
+lions <- grep("lion",comadre$metadata$CommonName)
+unique(comadre$metadata$CommonName[lions])
+```
+
+Unfortunately, no actual lion (*Panthera leo*) has been included in this version of COMADRE, but there are plenty of other "lions" in it. We will plot the life cycle of the red lionfish (*Pterois volitans*):
+
+```{r, comment=">"}
+matNum <- which(comadre$metadata$CommonName == "Red lionfish")
+matNum
+sp <- gsub("_"," ",comadre$metadata$SpeciesAccepted[matNum])
+sp
+```
+
+The matrix 'A' and the stages of this study are:
+
+```{r, comment=">"}
+matA <- comadre$mat[[matNum]]$matA
+matA
+stages <- comadre$matrixClass[[matNum]]$MatrixClassAuthor
+stages
+```
+
+To plot its lifecycle, use the function `plotLifeCycle.R` from the `Mage` package. 
+
+
+```{r eval =FALSE}
+plotLifeCycle(matA, title = "Red lionfish")
+```
+
+## Simple Outputs
 
 The suggested order that you tackle these worksheets is:
 
@@ -50,6 +174,8 @@ The COMPADRE and COMADRE website http://www.compadre-db.org (download the latest
 
 [COMADRE User Guide PDF](https://github.com/jonesor/compadreDB/raw/master/COMADRE-UserGuide/COMADRE-UserGuide.pdf)
 
+
+## From the standard R Markdown file as generated by Rstudio
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
