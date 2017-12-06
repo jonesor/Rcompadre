@@ -151,18 +151,530 @@ To plot its lifecycle, use the function `plotLifeCycle.R` from the `Mage` packag
 plotLifeCycle(matA, title = "Red lionfish")
 ```
 
-## Simple Outputs
+## Simple outputs
+This example produces some basic output such as the population growth rate ($\lambda$) and damping ratio (Caswell 2001) for a subset of species and populations given some selection criteria.
 
-The suggested order that you tackle these worksheets is:
+```{r echo=FALSE}
+load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+library(Mage)
+```
 
-1. Obtaining_An_MPM.pdf
-2. PlotALifeCycleDiagram.pdf
-3. SimpleOutputs.pdf
-4. GeographicDistribution.pdf
-5. TernaryPlots.pdf
-6. AgeFromStage.pdf
-7. ObtainingReferences.pdf
-8. CheckingTaxonomy.pdf
+First, use `subsetDB` (from the `Mage` package) to subset the database to the data of interest: only mean matrices for bony fish from studies of 3 years duration or longer, and with a  matrix dimension of 3 or greater.
+
+```{r, comment=">"}
+x<-subsetDB(comadre, MatrixComposite == "Mean" &
+                         Class == "Actinopterygii" &
+                         StudyDuration >= 3 &
+                         MatrixDimension > 3)
+```
+
+The object `x` is now a version of the `comadre` database object that contains only the matrices that match the search criteria.
+
+These matrices can now be analyzed by applying functions in a loop, or by using `lapply`.
+
+For example, to calculate population growth rate and damping ratio for
+the subset of matrices, first create an empty `data.frame` to accommodate the output
+
+```{r, comment=">"}
+output <- data.frame(lambdas = rep(NA, length(x$mat)),
+                     damps = rep(NA, length(x$mat)))
+```
+
+and then use the functions in `popbio` package to derive demographic output (the user may need to install the package first).
+
+```{r, comment=">"}
+library(popbio)
+```
+
+
+```{r, comment=">"}
+for (i in 1:length(x$mat)){
+    output$lambdas[i] <- Re(eigen(x$mat[[i]]$matA)$value)[1]
+    output$damps[i] <- damping.ratio(x$mat[[i]]$matA)
+}
+```
+
+To examine the output:
+
+```{r, comment=">"}
+output
+```
+
+These parameters are presented in the same order as the `metadata` so we could also add the species name to this `data.frame`:
+
+```{r, comment=">"}
+data.frame(Species = x$metadata$SpeciesAccepted,output)
+```
+
+Plot the population growth rates and damping ratios derived from these matrices. In this plot, the vertical, dashed red line indicates 
+ population growth rate = 1 (or log ($\lambda$) = 0)
+
+```{r, comment=">"}
+par(mfrow = c(1,2))
+hist(log(output$lambdas),
+     xlab = "Log population growth rate",
+     col = "gold", main = "")
+abline(v=0,col = "red", lwd = 4, lty = 3)
+hist(output$damps, xlab = "Damping ratio",
+     col = "brown", main = "")
+```
+
+## Geographic distribution
+
+This example produces on a world map the viability (population growth rate $\lambda$ > 1, $\lambda$ = 1, $\lambda$ < 1) of a subset of studied populations given some selection criteria, and color-codes the location of each population according to the value of $\lambda$.
+
+First, subset mean matrices for all Carnivora in the wild in the northern hemisphere, with no issues for survival >1, for which matrices have been split into **A** = **U** + **F** + **C**, and for which reproduction was explicitly modeled.
+
+
+```{r echo=FALSE}
+load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+library(Mage)
+```
+
+Load the data:
+```{r eval=FALSE}
+load("COMADRE_v.2.0.0.RData")
+```
+
+```{r, comment=">"}
+x<-subsetDB(comadre, MatrixComposite == "Mean" &
+                         Order == "Carnivora" &
+                         MatrixCaptivity == "W" &
+                         Lat > 0 &
+                         SurvivalIssue < 1 &
+                         MatrixSplit == "Divided" &
+                         MatrixFec == "Yes")
+```
+
+The object `x` is now a version of the `comadre` database object that contains only the matrices that match the search criteria. To calculate population growth rate for the subset matrices, we can first create an empty `data.frame` to accommodate the output:
+
+```{r, comment=">"}
+output <- data.frame(lambdas = rep(NA, length(x$mat)))
+```
+
+
+Create an empty variable to accommodate output from lambda calculations:
+
+```{r, comment=">"}
+x$metadata$lambdas <- NA
+```
+
+
+Then, create a `for` loop to examine each matrix in turn. Here it may be advisable to use the function `tryCatch` as a wrapper to cope with the situation if/when the function in the loop fails:
+
+```{r, comment=">"}
+for (i in 1:length(x$mat)){
+  tryCatch({
+    x$metadata$lambdas[i] <- Re(eigen(x$mat[[i]]$matA)$value)[1]
+  }, error = function(e){})
+}
+```
+
+Now we can create a vector of color hex codes that can be applied according to the estimate of $\lambda$. THis is done using the `colorRampPalette` function to go from green for high values of $\lambda$, to red for low values of $\lambda$. Here `paste` is used to append a value of `90` to the hex codes to allow transparency for aesthetic reasons.
+
+```{r, comment=">"}
+
+rampfunc <- colorRampPalette(c("green", "red"))
+colVect <- rampfunc(100)
+colVect <- paste(colVect,"90", sep="")
+s1 <- seq(min(x$metadata$lambdas, na.rm=TRUE),max(x$metadata$lambdas, na.rm=TRUE),
+          length.out = 100)
+```
+
+First, load the `maps` package (and install it if necessary). Then plot the world map and overlay the points from our data, color coded by value of $\lambda$. In this case, the points are jittered slightly to improve visibility of nearby populations.
+
+```{r, comment=">"}
+library(maps)
+map("world", col = "gray", fill = TRUE, bg = "light blue",
+    xlim = c(-175, 176), ylim = c(-60, 85), border = "white")
+
+points(jitter(x$metadata$Lon, 0.6), jitter(x$metadata$Lat, 0.6),
+       col = colVect[findInterval(x$metadata$lambdas, s1)],cex = 2, pch = 16)
+```
+
+## Ternary plots
+
+
+```{r echo=FALSE}
+load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+```
+
+Here we produce a ternary plot *a la* Silvertown & Franco (1993) with various life history traits such as mean life expectancy, population growth rate or reactivity as the "fourth" dimension. We will use Caswell (2001) formulation of mean life expectancy from the fundamental matrix (`N`), and the package `popdemo` for the reactivity. Other packages we need include `Mage`, `fields`, `vcd` and `scales`:
+
+```{r, comment=">", message=FALSE}
+library(popdemo)
+library(fields)
+library(Mage)
+library(vcd)
+library(scales)
+```
+
+This is the function to calculate mean life expectancy from Caswell (2001):
+
+```{r, comment = ">"}
+meanLifeExpectancy <- function(matU = matU, startLife = 1){
+  uDim=dim(matU)[1]
+  N = solve(diag(uDim[startLife])-matU)
+  eta = colSums(N)[startLife]
+  return(eta)
+}
+```
+
+As an example for the chosen data, subset COMADRE to studies with a matrix dimension >= 3, that represent mean, unmanipulated conditions duration > 3 years, where sexual reproduction has been modeled explicitly, the matrices are split into U, F and C, and there are no issues with stage-specific survival >1.
+
+```{r, comment=">"}
+x <- subsetDB(comadre, MatrixDimension >= 3 
+                       & MatrixComposite == "Mean" & MatrixTreatment == "Unmanipulated" 
+                       & StudyDuration > 3 & MatrixFec == "Yes" 
+                       & MatrixSplit == "Divided" & SurvivalIssue < 1)
+```
+
+This object (`x`) is now a copy of the database that contains ONLY the matrices of interest.
+
+We can ask how many matrices this is by looking at the size of the metadata part.
+
+```{r, comment = ">"}
+nrow(x$metadata)
+```
+
+These matrices can now be analyzed by applying functions in a loop, or by using `lapply`.
+
+To calculate elasticities, population growth rate, reactivity and mean life expectancy for the subset matrices, first create an empty `data.frame` to accommodate the output:
+
+```{r, comment=">"}
+output <- data.frame(species= rep(NA, nrow(x$metadata)),
+                      lambda = rep(NA, nrow(x$metadata)),
+                      eta = rep(NA, nrow(x$metadata)),
+                      react = rep(NA, nrow(x$metadata)),
+                      EStasis = rep(NA, nrow(x$metadata)),
+                      EProgression = rep(NA, nrow(x$metadata)),
+                      ERetrogression = rep(NA, nrow(x$metadata)),
+                      EFecundity = rep(NA, nrow(x$metadata)),
+                      EClonality = rep(NA, nrow(x$metadata)))
+```
+
+We will use the `Mage` function `matrixElementPerturbation` to calculate element-level perturbations for each matrix in a `for` loop:
+
+```{r, comment=">", warning = FALSE}
+for (i in 1:nrow(x$metadata)){
+ tryCatch({
+    output$species[i] <- x$metadata$SpeciesAuthor[i]
+    output$lambda[i] <- max(Re(eigen(x$mat[[i]]$matA)$value))
+    output$eta[i] <- meanLifeExpectancy(matU = x$mat[[i]]$matU, startLife = 1)
+    output$react[i] <- reactivity(x$mat[[i]]$matA)
+    output[i,c("EStasis", "EProgression", "ERetrogression",
+               "EFecundity", "EClonality")] <- 
+      matrixElementPerturbation(matU = x$mat[[i]]$matU, matF = x$mat[[i]]$matF, 
+                                matC = x$mat[[i]]$matC)[6:10]
+      }, error = function(e){})
+}
+```
+
+Now we can group elasticities of population growth rate to various demographic processes into three axes of our ternary plot:
+
+```{r, comment=">"}
+output$S <- output$EStasis + output$ERetrogression
+output$G <- output$EProgression
+output$R <- output$EFecundity + output$EClonality
+```
+
+We need to scale the coordinates of each point between 0 and 1 - this is necessary due to possible rounding issues:
+
+```{r, comment=">"}
+output$S <- output$S / rowSums(output[, c("S","G","R")])
+output$G <- output$G / rowSums(output[, c("S","G","R")])
+output$R <- output$R / rowSums(output[, c("S","G","R")])
+```
+
+Then we must eliminate the few MPMs where the code did not run correctly, and produced `NA` values:
+
+```{r, comment=">"}
+output <- output[-which(is.na(output$eta)), ]
+```
+
+Now we can finally plot the locations of the chosen matrices in a preliminary ternary plot using the function `ternaryplot` from the package `vcd`. The following code also uses the function `alpha` from the `scales` package to modify the colour transparency of the points.
+
+```{r, comment=">", tidy.opts=list(width.cutoff=50)}
+ternaryplot(output[,c("R","S","G")],scale=1,col=alpha("gray80",0.7),bg="black",
+            dimnames=c("Stasis","Growth","Reproduction"),dimnames_position="edge", 
+            main="Preliminary plot")
+```
+
+
+As a use extension to this ternary plot, we can colour-code the points according to the values of lambda, eta or reactivity. To do that we first need to set up a colour palette for each of these measures, and deduce which colour each point should have.
+
+
+In every case we can use the same `colorRamp` function to deduce the appropriate colour:
+
+```{r, comment=">"}
+col_fun <- colorRamp(c("white", "yellow", "orange", "red", "dark red"))
+```
+
+First, lambda.  For this measure we should first subset out the data with unreasonable values (say > 7):
+
+```{r, comment=">"}
+lambdaData <- subset(output, lambda < 7)
+```
+
+We then log transform and standardize the values, and obtain the hex colour codes for each point using the `rgb` function:
+
+```{r, comment=">"}
+Z <- log(lambdaData$lambda)
+zNorm <- (Z - min(Z))/(max(Z) - min(Z))
+colsLambda <- rgb(col_fun(zNorm), maxColorValue = 256)
+```
+
+We can now plot this diagram:
+
+```{r, comment=">", warning=FALSE}
+ternaryplot(lambdaData[, c("R", "S", "G")], scale = 1, 
+            col = alpha(colsLambda, 0.7),bg = "black", 
+            dimnames = c("Stasis", "Growth", "Reproduction"),
+            dimnames_position = "edge", main =
+              expression(paste("Population growth rate - ", lambda)))
+```
+
+
+Second, mean life expectancy (eta):
+
+```{r, comment=">"}
+etaData <- output
+Z <- log(etaData$eta)
+zNorm <- (Z - min(Z))/(max(Z) - min(Z))
+colsEta <- rgb(col_fun(zNorm), maxColorValue = 256)
+```
+
+For which the plot can be genarated like this, as before:
+
+```{r, comment=">", warning=FALSE}
+ternaryplot(etaData[, c("R", "S", "G")], scale = 1, 
+            col = alpha(colsEta, 0.7),bg = "black", 
+            dimnames = c("Stasis", "Growth", "Reproduction"),
+            dimnames_position = "edge", 
+              main=expression(paste("Mean life expectancy - ", eta["e"])))
+
+```
+
+Thirdly, reactivity:
+
+```{r, comment=">"}
+reactData <- subset(output, react < 140)
+Z <- log(reactData$lambda)
+zNorm <- (Z - min(Z))/(max(Z) - min(Z))
+colsReact <- rgb(col_fun(zNorm), maxColorValue = 256)
+```
+
+And the plot:
+
+```{r, comment=">", warning=FALSE}
+ternaryplot(reactData[, c("R", "S", "G")], scale = 1, 
+            col = alpha(colsReact, 0.7),bg = "black", 
+            dimnames = c("Stasis", "Growth", "Reproduction"),
+            dimnames_position = "edge", 
+              main=expression(paste("Reactivity - ||", hat(A),"||"[1])))
+
+```
+
+One could add the color scale legend using the following code to add to the same plot. Note though, that here the value of the points has been standardised to range from 0 to 1, rather than the original lambda/eta/reactivity values:
+
+```{r, eval = FALSE, warning=FALSE}
+colCode <- colorRampPalette(c("white", "yellow", "orange", "red", "dark red"))(n = 999)
+image.plot(legend.only = TRUE, zlim = range(zNorm), col = colCode, 
+           smallplot = c(.75, .8, .5, .75), cex.axis=0.2) 
+```
+
+## Age from stage
+
+
+It is possible to obtain `lx` and `mx` schedules from matrix population models using methods described by Caswell (2001). There is a function `makeLifeTable` in our `Mage` package, that implements this.
+
+Here is an example.
+
+
+
+```{r echo=FALSE}
+load("~//Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+library(Mage)
+library(MASS)
+```
+
+Load the data:
+```{r eval=FALSE}
+load("COMADRE_v.2.0.0.RData")
+```
+
+Next, query the `metadata` part of `comadre` to identify the location of the desired data using the command `which` in a conditional search:
+
+```{r comment=">"}
+id <- which(comadre$metadata$SpeciesAccepted == "Lepus_americanus")
+id
+```
+
+
+Let's pick the first matrix of the list obtained above:
+
+```{r comment = ">"}
+lt1 <- makeLifeTable(matU = comadre$mat[[id[1]]]$matU, matF = comadre$mat[[id[1]]]$matF,
+                     startLife = 1, nSteps=10)
+lt1
+```
+
+## Obtaining references
+
+The following example illustrates how to check and find the full references and DOI for the publications used in COMADRE. See also Supporting Information Appendix S4 below.
+
+The code relies on the package `rcrossref` (https://github.com/ropensci/rcrossref) which queries *CrossRef*, an official Digital Object Identifier (DOI) Registration Agency of the International DOI Foundation. Thus you will first need to load the package (and install it if necessary):
+
+```{r,eval=FALSE,echo=FALSE}
+install.packages("rcrossref")
+```
+
+```{r, comment=">"}
+library(rcrossref)
+```
+
+First, set the working directory to where the COMADRE R data object has been saved, and load the data therein:
+
+```{r, eval = TRUE, echo = FALSE}
+load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
+```
+
+```{r, eval = FALSE}
+setwd("~/Downloads/COMADRE/")
+load("COMADRE_v.2.0.0.RData")
+```
+
+The `rcrossref` package has a convenient function, `cr_search_free` which conducts a free-text search of the CrossRef database. To use it, one needs to provide some query text, so in this case we can simply create a text string by concatenating the authors, journal and year of publication from COMADRE. 
+
+For example, to obtain the full reference and DOI for the matrices for the koala, *Phascolarctos cinereus*, first identify the pertinent row(s) in the metadata:
+
+```{r,comment=">"}
+id <- which(comadre$metadata$SpeciesAccepted == "Phascolarctos_cinereus")
+length(id)
+```
+
+Then use this information to obtain the source information (authors, journal and year of publication) for the `r length(id)` matrices:
+
+```{r,comment=">"}
+temp <- comadre$metadata[id, c("Authors", "Journal", "YearPublication")]
+head(temp)
+```
+
+Next, paste these pieces of information together to form a single search string for each matrix. One can optionally ask R to return the unique set of values:
+
+```{r,comment=">"}
+x<-apply(temp,1,paste,collapse = " ")
+x<-unique(x)
+x
+```
+
+This shows that the data are from `r length(x)` publications, for which to obtain source information via CrossRef. The `cr_search_free` function returns a `data.frame`, with a column called `doi` that contains the returned Digital Object Identifiers for the publications.
+
+```{r,comment=">"}
+temp <- cr_search_free(x)
+temp$doi
+```
+
+Armed with the DOI, it is easy to obtain the full title, author list etc. from CrossRef in a range of formats using the function `cr_cn`. This uses the raw DOI, without the `http://dx.doi.org/` prefix. Therefore this prefix must first be stripped from the query using `gsub`.
+
+```{r,comment=">"}
+doiValues <- gsub("http://dx.doi.org/","",temp$doi)
+cr_cn(dois=doiValues,format = "text", style = "apa")
+```
+## Checking taxonomy 
+
+The following R code illustrates how to update the taxonomy used in COMADRE using the R package `taxize` (Chamberlain & Szöcs 2013) to query the Catalogue of Life (http://www.catalogueoflife.org) with the names used by the source publication authors in COMADRE. 
+
+The function `classification` in `taxize` allows the programmatic querying of databases including the Catalogue of Life. For example:
+
+```{r,eval = TRUE,echo=TRUE}
+library(taxize)
+```
+
+```{r, eval = TRUE, echo = FALSE}
+setwd("~/Dropbox/MatrixDatabases/COMADRE/v.1.0.0/")
+load("COMADRE_v.1.0.0.RData")
+```
+
+
+
+
+```{r,comment=">"}
+classification("Daphnia magna", db = 'col')
+```
+
+One can capitalise on this for COMADRE. 
+
+First load the required package, `taxize`.
+
+```{r,eval = FALSE}
+library(taxize)
+```
+
+Now make a new vector called `SpeciesBinomial` by concatenate the accepted genus (`GenusAccepted`) and accepted species epithet (`SpeciesEpithetAccepted`) together. This is necessary, rather than simply using `SpeciesAccepted`, because `SpeciesAccepted` retains the infra-specific information which is not used by the following code:
+
+```{r, comment=">"}
+comadre$metadata$SpeciesBinomial <- 
+paste(comadre$metadata$GenusAccepted, comadre$metadata$SpeciesEpithetAccepted)
+```
+
+Some species do not have an epithet (e.g. *Tribolium* sp.), for these the epithet is listed as `NA`. Therefore, to search the Catalogue of Life effectively, the `NA` needs to be removed using `gsub`:
+
+```{r, comment=">"}
+comadre$metadata$SpeciesBinomial <- gsub("NA", "", 
+                                         comadre$metadata$SpeciesBinomial)
+```
+
+Because species appear in the database numerous times it is advisable for efficiency reasons to make a unique subset of the data:
+
+```{r, comment=">"}
+temp <- unique(comadre$metadata[, c("SpeciesBinomial", 
+"GenusAccepted", "Family", "Order", "Class", "Phylum", "Kingdom")])
+```
+
+This dataset is still quite large (`r nrow(temp)` rows), so here I will just obtain the information for the first 5 rows.
+
+```{r, comment=">"}
+temp <- temp[1:5,]
+```
+
+This is accomplished using the `classification` function which repeatedly queries the Catalogue of Life for each entry. Note that whenever there is an uncertainty as to which species is intended, the software prompts the user to select a species from a list.
+
+```{r, comment=">"}
+x <- classification(temp$SpeciesBinomial,db='col')
+```
+
+The object produced by this code is a `list` with elements corresponding to each species. Thus `x[[1]]` will return the first species etc. One can also address the list by element name, which is defined by the query that was submitted e.g. `x[["Acipenser fulvescens"]]`
+
+```{r,comment=">"}
+x[[1]]
+```
+
+Thus, to acquire the taxonomic Order of the species of interest one would use:
+
+```{r,comment=">"}
+x[[1]]$name[x[[1]]$rank == "order"]
+```
+
+One can run through this list object in a loop to compare the information held in COMADRE, with that produced by the query to Catalogue of Life. For example, to check the Orders of the 5 species held in `temp`
+
+```{r,comment=">", tidy.opts=list(blank=TRUE, width.cutoff=60)}
+for(i in 1:nrow(temp)){
+n <- temp$SpeciesBinomial[i]
+dat <- x[[n]]
+CoL_Order <- dat$name[dat$rank == "order"]
+if(temp$Order[i] == CoL_Order){temp$OrderOK[i] <- "OK"
+} else {
+    temp$OrderOK[i] <- "Differs!"}
+}
+```
+
+which will add an extra column called `OrderOK` to the `temp` data frame:
+
+```{r,comment=">"}
+temp
+```
+This approach can naturally be repeated for each part of the taxonomy.
 
 ## Useful links
 
@@ -173,23 +685,3 @@ The COMPADRE and COMADRE website http://www.compadre-db.org (download the latest
 
 
 [COMADRE User Guide PDF](https://github.com/jonesor/compadreDB/raw/master/COMADRE-UserGuide/COMADRE-UserGuide.pdf)
-
-
-## From the standard R Markdown file as generated by Rstudio
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
