@@ -4,19 +4,19 @@
 \alias{rearrangeMatrix}
 \title{Rearrange matrix stages to segregate reproductive and non-reproductive stages}
 \usage{
-rearrangeMatrix(matU, matF, repro_stages)
+rearrangeMatrix(matU, matF, reproStages, matrixStages)
 }
 \arguments{
 \item{matU}{Survival matrix}
 
 \item{matF}{Fecundity matrix}
 
-\item{repro_stages}{Logical vector identifying which stages reproductive}
+\item{reproStages}{Logical vector identifying which stages reproductive}
 }
 \value{
 Returns a list with 5 elements: the rearranged survival matrix
   (\code{matU}), the rearranged fecundity matrix (\code{matF}), the
-  rearranged vector of reproductive stages (\code{repro_stages}), the numeric
+  rearranged vector of reproductive stages (\code{reproStages}), the numeric
   index for any rearranged inter-reproductive stages (\code{nonRepInterRep}),
   and the numeric index for the maximum reproductive stage in the rearranged
   reproductive stage vector (\code{maxRep}).
@@ -34,8 +34,9 @@ matU <- rbind(c(0, 0, 0, 0, 0), c(0.1, 0.16, 0, 0, 0), c(0.2, 0.23, 0.12, 0,
 matF <- rbind(c(0, 0, 0, 0, 0), c(0, 0.2, 0, 0.1, 0), c(0, 0.2, 0, 0.1, 0),
 c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
 
-repro_stages <- c(0, 1, 0, 1, 0)
-rearrangeMatrix(matU, matF, repro_stages)
+reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+matrixStages <- c('prop', 'active', 'active', 'active', 'active')
+rearrangeMatrix(matU, matF, reproStages, matrixStages)
 }
 \author{
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>

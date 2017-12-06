@@ -8,10 +8,10 @@
 #' @export
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
-#' @param repro_stages Logical vector identifying which stages reproductive
+#' @param reproStages Logical vector identifying which stages reproductive
 #' @return Returns a list with 5 elements: the rearranged survival matrix
 #'   (\code{matU}), the rearranged fecundity matrix (\code{matF}), the
-#'   rearranged vector of reproductive stages (\code{repro_stages}), the numeric
+#'   rearranged vector of reproductive stages (\code{reproStages}), the numeric
 #'   index for any rearranged inter-reproductive stages (\code{nonRepInterRep}),
 #'   and the numeric index for the maximum reproductive stage in the rearranged
 #'   reproductive stage vector (\code{maxRep}).
@@ -23,14 +23,15 @@
 #' matF <- rbind(c(0, 0, 0, 0, 0), c(0, 0.2, 0, 0.1, 0), c(0, 0.2, 0, 0.1, 0),
 #' c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
 #' 
-#' repro_stages <- c(0, 1, 0, 1, 0)
-#' rearrangeMatrix(matU, matF, repro_stages)
-rearrangeMatrix <- function(matU, matF, repro_stages) {
-  if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF), length(repro_stages)))) {
+#' reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+#' matrixStages <- c('prop', 'active', 'active', 'active', 'active')
+#' rearrangeMatrix(matU, matF, reproStages, matrixStages)
+rearrangeMatrix <- function(matU, matF, reproStages, matrixStages) {
+  if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF), length(reproStages)))) {
     stop("Expecting matrices with equal dimensions", call. = FALSE)
   }
 
-  Rep <- which(repro_stages == 1)
+  Rep <- which(reproStages == TRUE)
   
   reArrange <- NULL
   matDim <- dim(matF)[1]
@@ -48,18 +49,20 @@ rearrangeMatrix <- function(matU, matF, repro_stages) {
     reArrangeStages <- c(allElseStages, nonRepInterRep)
     reArrange$matU <- matU[reArrangeStages, reArrangeStages]
     reArrange$matF <- matF[reArrangeStages, reArrangeStages]
-    reArrange$repro_stages <- repro_stages[reArrangeStages]
+    reArrange$reproStages <- reproStages[reArrangeStages]
+    reArrange$matrixStages <- matrixStages[reArrangeStages]
   } else {
     ## No non-repro or inter-repro stages so no need to rearrange matrices
     reArrange$matU <- matU
     reArrange$matF <- matF
-    reArrange$repro_stages <- repro_stages
+    reArrange$reproStages <- reproStages
+    reArrange$matrixStages <- matrixStages
   }
   
   ## Stages that were moved to the end
   reArrange$nonRepInterRep <- ifelse(length(nonRepInterRep) > 0, nonRepInterRep, NA)
   ## Max reproductive stage after rearrangement
-  rearrRep <- which(reArrange$repro_stages == 1)
+  rearrRep <- which(reArrange$reproStages == TRUE)
   reArrange$maxRep <- ifelse(length(rearrRep) > 0, max(rearrRep), NA)
   return(reArrange)
 }
