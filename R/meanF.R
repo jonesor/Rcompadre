@@ -15,34 +15,40 @@
 #' @examples
 #' 
 #' @export append_MatFmu
+db<-comadre
 #DANNY HAS DONE A ROB AND NEEDS TO FIX THIS - it works but appears to put things back together wrong
 append_MatFmu <- function(db){
+  
+#  if (includesplit == TRUE){
+    ssdb<-subsetDB(db, MatrixComposite=="Individual")
+    ssdb_mean<-subsetDB(db, MatrixComposite=="Mean")
+#  } else {
+#    ssdb<-subsetDB(db, MatrixComposite=="Individual" & MatrixSplit=="Divided")
+#    ssdb_mean<-subsetDB(db, MatrixComposite=="Mean" & MatrixSplit=="Divided")
+#  }
+  
   #subset of database with only Individual divisible matrices and a sep one for mean matrices
-  ssdb<-subsetDB(db, MatrixComposite=="Individual" & MatrixSplit=="Divided")
-#  ssdb<-subsetDB(db, MatrixComposite=="Individual")
-  ssdb_mean<-subsetDB(db, MatrixComposite=="Mean" & MatrixSplit=="Divided")
-#  ssdb_mean<-subsetDB(db, MatrixComposite=="Mean")
-  len<-length(ssdb$metadata$SpeciesAccepted)
+    len<-length(ssdb$metadata$SpeciesAccepted)
   #flatten DBs 
-  ssdb2<-convert2flat(ssdb)
-  ssdb2_mean<-convert2flat(ssdb_mean)
+    ssdb2<-convert2flat(ssdb)
+    ssdb2_mean<-convert2flat(ssdb_mean)
   
   #create a unique identifier for each population in each database
-  popname<-as.character(paste(ssdb$metadata$SpeciesAuthor,ssdb$metadata$MatrixPopulation, ssdb$metadata$MatrixDimension))
-  popname<-gsub(" ","",popname)
-  popname<-gsub("_","",popname)
-  ssdb2$popname<-popname
-  ssdb2$ID<-rep(1:length(popname))
+    popname<-as.character(paste(ssdb$metadata$SpeciesAuthor,ssdb$metadata$MatrixPopulation, ssdb$metadata$MatrixDimension))
+    popname<-gsub(" ","",popname)
+    popname<-gsub("_","",popname)
+    ssdb2$popname<-popname
+    ssdb2$ID<-rep(1:length(popname))
 
-  popname_mean<-as.character(paste(ssdb_mean$metadata$SpeciesAuthor,ssdb_mean$metadata$MatrixPopulation, ssdb_mean$metadata$MatrixDimension))
-  popname_mean<-gsub(" ","",popname_mean)
-  popname_mean<-gsub("_","",popname_mean)
-  ssdb2_mean<-data.frame(popname_mean,ssdb2_mean$matrixF)
+    popname_mean<-as.character(paste(ssdb_mean$metadata$SpeciesAuthor,ssdb_mean$metadata$MatrixPopulation, ssdb_mean$metadata$MatrixDimension))
+    popname_mean<-gsub(" ","",popname_mean)
+    popname_mean<-gsub("_","",popname_mean)
+    ssdb2_mean<-data.frame(popname_mean,ssdb2_mean$matrixF)
   #rename columns
-  names(ssdb2_mean)<-c("popname","meanF")
+    names(ssdb2_mean)<-c("popname","meanF")
   #Remove complete duplicates (popname & meanF)
-  ssdb2_mean$meanF<-as.character(ssdb2_mean$meanF)
-  ssdb2_mean<-ssdb2_mean[!duplicated(ssdb2_mean),]
+    ssdb2_mean$meanF<-as.character(ssdb2_mean$meanF)
+    ssdb2_mean<-ssdb2_mean[!duplicated(ssdb2_mean),]
 
   # randomly sample mean fecundity matrices for duplicated populations function, taken from:
   #https://amywhiteheadresearch.wordpress.com/2013/01/22/randomly-deleting-duplicate-rows-from-a-dataframe-2/
@@ -72,21 +78,21 @@ append_MatFmu <- function(db){
   }
   
   #Randomly sample and then remove the randomly selected duplicates
-  ssdb2_mean$popnametemp<-as.numeric(ssdb2_mean$popname)
-  ssdb2_mean$dupe<-duplicated.random(ssdb2_mean$popnametemp)
-  ssdb2_mean<-ssdb2_mean[!ssdb2_mean$dupe==TRUE,]
-  ssdb2_mean<-ssdb2_mean[,c(1:2)]
+    ssdb2_mean$popnametemp<-as.numeric(ssdb2_mean$popname)
+    ssdb2_mean$dupe<-duplicated.random(ssdb2_mean$popnametemp)
+    ssdb2_mean<-ssdb2_mean[!ssdb2_mean$dupe==TRUE,]
+    ssdb2_mean<-ssdb2_mean[,c(1:2)]
 
   #Merge by popname
-  ssdb2_mean$meanF<-as.character(ssdb2_mean$meanF)
-  ssdb2_mean$popname<-as.character(ssdb2_mean$popname)
-  ssdb2$popname<-as.character(ssdb2$popname)
-  temp<-merge(ssdb2,ssdb2_mean,by="popname",all.x=T)
-
+    ssdb2_mean$meanF<-as.character(ssdb2_mean$meanF)
+    ssdb2_mean$popname<-as.character(ssdb2_mean$popname)
+    ssdb2$popname<-as.character(ssdb2$popname)
+    temp<-merge(ssdb2,ssdb2_mean,by="popname",all.x=T)
+    temp<-temp[order(temp$ID),]
   #Populate matFmu matrices by string2matrix meanF matrices
-  out<-lapply(temp$meanF, function(x) stringtomatrix(x))
+    out<-lapply(temp$meanF, function(x) stringtomatrix(x))
   #WOULD BE GOOD TO ADD A WARNING HERE THAT CHECKS WHETHER THE NEW FECUNDITY MATRIX IS THE SAME DIMENSIONS AS THE MATF
-
+    
   #After aggregation append empty matrices onto individual dataframe (ssdb)
   ###Appends matFMu into mat within ssdb - Iain Stott wrote this bit
   ssdb$mat<-mapply(FUN = function(X,i){c(X,matFmu = out[i])}, X = ssdb$mat, i = 1:length(ssdb$mat), SIMPLIFY = FALSE)
