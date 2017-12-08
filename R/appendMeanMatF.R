@@ -6,28 +6,28 @@
 #' fecundity matrices for which MatrixComposite == "Mean"), and appends the
 #' relevant mean fecundity matrix to each original set of matrices in the
 #' database. For the purpose of this function, a unique study population is
-#' defined as a unique combination of the metadata columns: Authors,
+#' defined as a unique combination of the metadata columns Authors,
 #' YearPublication, DOI.ISBN, SpeciesAuthor, MatrixPopulation, and
 #' MatrixDimension.
 #' 
 #' @param db A COM(P)ADRE database object.
-#' @return Returns original db, but with an extra entry in slot `mat` which
-#'   contains the mean fecundity matrix associated with the relevant database
-#'   row.
+#' @return Returns db, but with an extra entry in slot `mat` which contains the
+#'   mean fecundity matrix associated with a given row of the database, or NA if
+#'   there are no mean matrices within the db from the relevant population.
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
 #' @author Iain Stott <stott@@biolgy.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' @examples
 #' \dontrun{
-#' # print set of matrices (A, U, F, C) associated with row 5 of database
-#' compadre$mat[[5]]
+#' # print set of matrices (A, U, F, C) associated with row 2 of database
+#' compadre$mat[[2]]
 #' 
 #' # append meanMatFs to database object
 #' compadre_with_meanF <- appendMeanMatF(compadre)
 #' 
-#' # print matrices associated with row 5 of database, now including meanMatF
-#' compadre_with_meanF$mat[[5]]
+#' # print matrices associated with row 2 of database, including meanMatF
+#' compadre_with_meanF$mat[[2]]
 #' }
 #' @export
 appendMeanMatF <- function(db) {
