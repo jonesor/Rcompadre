@@ -58,7 +58,7 @@ collapseMatrix <- function(matU, matF, collapse) {
   }
 
   Q <- t(P)
-  w <- Re(eigen(matA)$vectors[,which.max(max(Re(eigen(matA)$values)))])
+  w <- Re(eigen(matA)$vectors[,which.max(Re(eigen(matA)$values))])
   w <- w / sum(w)
 
   columns <- which(colSums(Q) > 1)
@@ -68,8 +68,10 @@ collapseMatrix <- function(matU, matF, collapse) {
       Q[i,j] <- w[i] / sum(w[rows])
     }
   }
+  
   collapseA <- P %*% matA %*% Q
   collapseU <- P %*% matU %*% Q
   collapseF <- P %*% matF %*% Q
+  
   return(list(matA = collapseA, matU = collapseU, matF = collapseF))
 }
