@@ -2,27 +2,34 @@
 % Please edit documentation in R/stringtomatrix.R
 \name{stringtomatrix}
 \alias{stringtomatrix}
-\title{A function to convert a matrix from the character string format to a matrix}
+\title{Converts a matrix in character string format to numeric matrix format}
 \usage{
 stringtomatrix(A)
 }
 \arguments{
-\item{A}{A matrix presented in the form of a string, with values separated by spaces, and bounded by square brackets.}
+\item{A}{A square matrix in the form of a string, begining with an open
+square bracket and ending with a closed square bracket, with individual
+matrix cell entries separated by a space.}
 }
 \value{
-A `matrix`.
+A square numeric \code{matrix}.
 }
 \description{
-The function converts a matrix from the character string format to class matrix.
-}
-\details{
-%% ~~ If necessary, more details than the description above ~~
+This function converts a matrix in character string format (e.g. "[0.2 0.3
+0.1 0]") to a square numeric matrix.
 }
 \examples{
+x1 <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
+stringtomatrix(x1)
 
-x <- "[0.46145 0.153 0.33615 NA 0.5238 0.59225 NA 0.2118 0.33615 0.24765 0.5238 0.59225 0.0705 0.0633 0.10815 0.0827 0 0 0.0267 0.0947 0.03155 0.15405 0 0 0.06295 0.19195 0.3909 0.24355 0 0 0.02305 0.281 0.1321 0.35145 0 0]"
-stringtomatrix(x)
+x2 <- "[0 0 0 0.42 0.65 0 0 0 0 0.52 0 0 0 0 0.2 0]"
+stringtomatrix(x2)
 
+\dontrun{
+# non-square matrix
+x3 <- "[0.42 0.52 0.15 0.23 0.14]"
+stringtomatrix(x3)
+}
 }
 \seealso{
 convert2flat
