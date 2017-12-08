@@ -10,12 +10,13 @@ convert2flat(db, onlyMatA = FALSE)
 \item{db}{A COM(P)ADRE database object}
 
 \item{onlyMatA}{A logical value (TRUE/FALSE) indicating whether ONLY the full
-projection matrix matA should be included in the flattened data frame}
+projection matrix \code{matA} should be included in the flattened data
+frame}
 }
 \value{
-A \code{data.frame} with the same columns as the metadata slot of db,
-  but with additional columns appended for the matrix stage information and
-  the matrices, both in string format.
+The \code{data.frame} from the metadata slot of \code{db}, but with
+  additional columns appended for the matrix stage information and the
+  matrices themselves, both in string format.
 }
 \description{
 This function converts a list-structured COM(P)ADRE database object to a flat

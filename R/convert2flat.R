@@ -6,10 +6,11 @@
 #'
 #' @param db A COM(P)ADRE database object
 #' @param onlyMatA A logical value (TRUE/FALSE) indicating whether ONLY the full
-#'   projection matrix matA should be included in the flattened data frame
-#' @return A \code{data.frame} with the same columns as the metadata slot of db,
-#'   but with additional columns appended for the matrix stage information and
-#'   the matrices, both in string format.
+#'   projection matrix \code{matA} should be included in the flattened data
+#'   frame
+#' @return The \code{data.frame} from the metadata slot of \code{db}, but with
+#'   additional columns appended for the matrix stage information and the
+#'   matrices themselves, both in string format.
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' @seealso stringtomatrix
 #' @examples
