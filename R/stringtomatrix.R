@@ -11,10 +11,10 @@
 #' @seealso convert2flat
 #' @examples
 #' x1 <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
-#' stringtomatrix(x1)
+#' stringToMatrix(x1)
 #' 
 #' x2 <- "[0 0 0 0.42 0.65 0 0 0 0 0.52 0 0 0 0 0.2 0]"
-#' stringtomatrix(x2)
+#' stringToMatrix(x2)
 #' 
 #' \dontrun{
 #' # non-square matrix
@@ -22,7 +22,7 @@
 #' stringtomatrix(x3)
 #' }
 #' @export
-stringtomatrix <- function(A) {
+stringToMatrix <- function(A) {
   A <- gsub(pattern = "\\[|\\]", "", A)
   A <- gsub(pattern = ";", " ", A)
   A <- strsplit(x = A, split = " |`NA`")[[1]]
