@@ -5,7 +5,6 @@
 #' contain missing values. These columns can subsequently can be used to subset
 #' the COM(P)ADRE database by logical argument.
 #'
-#' @export
 #' @param db A COM(P)ADRE database object.
 #' @return Returns db with extra columns appended to the metadata to indicate
 #'   (TRUE/FALSE) whether there are potential problems with the matrices
@@ -21,6 +20,9 @@
 #' compadre_clean <- cleanDatabase(compadre)
 #' }
 #' 
+#' @importFrom popdemo is.matrix_ergodic is.matrix_primitive is.matrix_irreducible
+#' @importFrom rlang .data
+#' @export 
 cleanDatabase <- function(db) {
   
   # create row index
@@ -38,23 +40,23 @@ cleanDatabase <- function(db) {
   
   # check properties of matA using functions in popdemo
   # these checks require matA with no values of NA
-  db_sub <- subsetDB(db, check_NA_A == F) # subset db to matA with no NAs
+  db_sub <- subsetDB(db, .data$check_NA_A == F) # subset db to matA with no NAs
   
-  checkErgodic <- function(x) popdemo::isErgodic(x$matA)
-  checkPrimitive <- function(x) popdemo::isPrimitive(x$matA)
-  checkIrreducible <- function(x) popdemo::isIrreducible(x$matA)
+  checkErgodic <- function(x) popdemo::is.matrix_ergodic(x$matA)
+  checkPrimitive <- function(x) popdemo::is.matrix_primitive(x$matA)
+  checkIrreducible <- function(x) popdemo::is.matrix_irreducible(x$matA)
   
   db_sub$metadata$check_ergodic <- sapply(db_sub$mat, checkErgodic)
   db_sub$metadata$check_primitive <- sapply(db_sub$mat, checkPrimitive)
   db_sub$metadata$check_irreducible <- sapply(db_sub$mat, checkIrreducible)
   
   # merge checks into full db
-  db_sub$metadata <- subset(db_sub$metadata,select = c('index',
-                                                       'check_ergodic',
-                                                       'check_primitive',
-                                                       'check_irreducible'))
+  db_sub$metadata <- subset(db_sub$metadata, select = c('index',
+                                                        'check_ergodic',
+                                                        'check_primitive',
+                                                        'check_irreducible'))
   db$metadata <- merge(db$metadata, db_sub$metadata, by = 'index', all.x = T)
-  db$metadata <- subset(db$metadata, select = -index)
+  db$metadata <- subset(db$metadata, select = -.data$index)
   
   # return
   return(db)
