@@ -8,6 +8,7 @@
 #' @export
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
+#' @param matrixStages A character vector identifying the matrix stages
 #' @param reproStages Logical vector identifying which stages reproductive
 #' @return Returns a list with 5 elements: the rearranged survival matrix
 #'   (\code{matU}), the rearranged fecundity matrix (\code{matF}), the
@@ -15,6 +16,7 @@
 #'   index for any rearranged inter-reproductive stages (\code{nonRepInterRep}),
 #'   and the numeric index for the maximum reproductive stage in the rearranged
 #'   reproductive stage vector (\code{maxRep}).
+#'   
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' @examples
 #' matU <- rbind(c(0, 0, 0, 0, 0), c(0.1, 0.16, 0, 0, 0), c(0.2, 0.23, 0.12, 0,
@@ -26,8 +28,11 @@
 #' reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
 #' matrixStages <- c('prop', 'active', 'active', 'active', 'active')
 #' rearrangeMatrix(matU, matF, reproStages, matrixStages)
+#' 
+#' 
 rearrangeMatrix <- function(matU, matF, reproStages, matrixStages) {
-  if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF), length(reproStages)))) {
+  if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF),
+                                                     length(reproStages)))) {
     stop("Expecting matrices with equal dimensions", call. = FALSE)
   }
 
@@ -60,7 +65,8 @@ rearrangeMatrix <- function(matU, matF, reproStages, matrixStages) {
   }
   
   ## Stages that were moved to the end
-  reArrange$nonRepInterRep <- ifelse(length(nonRepInterRep) > 0, nonRepInterRep, NA)
+  reArrange$nonRepInterRep <- ifelse(length(nonRepInterRep) > 0, 
+                                     nonRepInterRep, NA)
   ## Max reproductive stage after rearrangement
   rearrRep <- which(reArrange$reproStages == TRUE)
   reArrange$maxRep <- ifelse(length(rearrRep) > 0, max(rearrRep), NA)

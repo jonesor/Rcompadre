@@ -27,10 +27,11 @@ setClass("CompadreData",
 ## ---------------------------------------------------------------------
 ## define a method for initialize
 
+#' @importFrom methods callNextMethod validObject
 setMethod("initialize", "CompadreData",
     function(.Object, ...) {
-        .Object <- callNextMethod()
-        validObject(.Object)
+        .Object <- methods::callNextMethod()
+        methods::validObject(.Object)
         .Object
     })
 
@@ -57,18 +58,19 @@ setValidity("CompadreData", validCompadreData)
 ## define method to coerce old compadre db object to CompadreData class
 setAs("list", "CompadreData", function(from) asCompadreData(from))
 
+#' @importFrom methods new
 asCompadreData <- function(from) {
     ## Need to check that 'from' is a old style compadre db object - this will
     ## have to be by checking it has the expected structure
     new("CompadreData",
         metadata = from$metadata,
         mat = lapply(seq_along(from$mat), function(i) {
-            new("CompadreM",
-                matA = from$mat[[i]]$matA,
-                matU = from$mat[[i]]$matU,
-                matF = from$mat[[i]]$matF,
-                matC = from$mat[[i]]$matC,
-                matrixClass = as.data.frame(from$matrixClass[[i]]))
+          methods::new("CompadreM",
+                       matA = from$mat[[i]]$matA,
+                       matU = from$mat[[i]]$matU,
+                       matF = from$mat[[i]]$matF,
+                       matC = from$mat[[i]]$matC,
+                       matrixClass = as.data.frame(from$matrixClass[[i]]))
         }),
         version = from$version)
 }

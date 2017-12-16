@@ -28,7 +28,7 @@ stringToMatrix(x2)
 \dontrun{
 # non-square matrix
 x3 <- "[0.42 0.52 0.15 0.23 0.14]"
-stringtomatrix(x3)
+stringToMatrix(x3)
 }
 }
 \seealso{

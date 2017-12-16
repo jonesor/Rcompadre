@@ -30,6 +30,7 @@
 #' compadre_with_meanF$mat[[2]]
 #' }
 #' @export
+#' @importFrom rlang .data
 appendMeanMatF <- function(db) {
   
   # create a unique identifier for each population in the database
@@ -42,13 +43,16 @@ appendMeanMatF <- function(db) {
     db$metadata$MatrixDimension
   )))
   
-  # subset database to only mean matrices that are divided, and create unique row ID
-  ssdb_mean <- subsetDB(db, MatrixComposite == "Mean" & MatrixSplit == "Divided")
-  ssdb_mean$metadata$RowId <- 1:nrow(ssdb_mean$metadata)
+  # subset database to only mean matrices that are divided,
+  # and create unique row ID
+  ssdb_mean <- subsetDB(db, .data$MatrixComposite == "Mean" &
+                          .data$MatrixSplit == "Divided")
+  
+  ssdb_mean$metadata$RowId <- seq_len(nrow(ssdb_mean$metadata)) 
   
   # function to return a mean mean matF given PopId
   meanMatF <- function(PopIdFocal) {
-    RowId <- subset(ssdb_mean$metadata, PopId == PopIdFocal)$RowId
+    RowId <- subset(ssdb_mean$metadata, .data$PopId == PopIdFocal)$RowId
     meanMatFs <- lapply(RowId, function(y) ssdb_mean$mat[[y]]$matF)
     
     if (length(meanMatFs) == 0) {        # if no meanMatF for given PopId

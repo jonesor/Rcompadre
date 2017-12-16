@@ -29,15 +29,16 @@ setClass("CompadreM",
 ## ---------------------------------------------------------------------
 ## define a method for initialize
 
+#' @importFrom methods callNextMethod validObject
 setMethod("initialize", "CompadreM",
           function(.Object, ...) {
-            .Object <- callNextMethod()
+            .Object <- methods::callNextMethod()
             if(length(.Object@matrixClass) == 0) {
               .Object@matrixClass$MatrixClassOrganized <- character(0)
               .Object@matrixClass$MatrixClassAuthor <- character(0)
               .Object@matrixClass$MatrixClassNumber <- double(0)
             }
-            validObject(.Object)
+            methods::validObject(.Object)
             .Object
           })
 
@@ -102,7 +103,7 @@ validCompadreMObject <- function(object) {
   ###matrixClass
   ##test that necessary column names are there
   matrixClassNames <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
-  mCNpresent <- matrixClassNames%in%names(object@matrixClass)
+  mCNpresent <- matrixClassNames %in% names(object@matrixClass)
   if(!all(mCNpresent)) {
     mCNmissing <- paste(matrixClassNames[!mCNpresent], collapse = " & ")
     mCNmsg1 <- paste(mCNmissing, "missing from matrixClassNames")

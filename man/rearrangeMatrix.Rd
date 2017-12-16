@@ -12,6 +12,8 @@ rearrangeMatrix(matU, matF, reproStages, matrixStages)
 \item{matF}{Fecundity matrix}
 
 \item{reproStages}{Logical vector identifying which stages reproductive}
+
+\item{matrixStages}{A character vector identifying the matrix stages}
 }
 \value{
 Returns a list with 5 elements: the rearranged survival matrix
@@ -37,6 +39,8 @@ c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
 reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
 matrixStages <- c('prop', 'active', 'active', 'active', 'active')
 rearrangeMatrix(matU, matF, reproStages, matrixStages)
+
+
 }
 \author{
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
