@@ -13,6 +13,7 @@
 #' @export
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
+#' @param matC A clonality matrix
 #' @param collapse A character vector giving the mapping between the stages of
 #'   the original matrix and the desired stages of the collapsed matrix. The
 #'   indices of \code{collapse} correspond to the desired stages of the
@@ -35,13 +36,14 @@
 #' matF <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 #'                  0, 0, 0, 0, 2.75, 1.75, 0, 0),
 #'                  nrow = 5, byrow = FALSE)
+#' matC <- matrix(rep(0, 25), nrow = 5, byrow = TRUE) 
 #' collapse1 <- c("1-2", "3-4", "5")
-#' collapseMatrix(matU, matF, collapse1)
+#' collapseMatrix(matU, matF, matC, collapse1)
 #'
 #' # collapse2 <- c("1-2", "3-4-5")
 #' # collapse3 <- c("1-2-3-4-5")
-collapseMatrix <- function(matU, matF, collapse) {
-  matA <- matU + matF
+collapseMatrix <- function(matU, matF, matC, collapse) {
+  matA <- matU + matF + matC
   if (any(is.na(matA))) {
     stop("Cannot collapse projection matrix containing NAs", call. = FALSE)
   }
@@ -53,12 +55,12 @@ collapseMatrix <- function(matU, matF, collapse) {
   for (i in 1:collapseDim) {
     columns <- as.numeric(splitCollapseUnique[[i]])
     if (!is.na(columns[1])) {
-      P[i,(columns[1]:columns[length(columns)])] <- 1
+      P[i, (columns[1]:columns[length(columns)])] <- 1
     }
   }
 
   Q <- t(P)
-  w <- Re(eigen(matA)$vectors[,which.max(Re(eigen(matA)$values))])
+  w <- Re(eigen(matA)$vectors[ ,which.max(Re(eigen(matA)$values))])
   w <- w / sum(w)
 
   columns <- which(colSums(Q) > 1)
@@ -72,6 +74,10 @@ collapseMatrix <- function(matU, matF, collapse) {
   collapseA <- P %*% matA %*% Q
   collapseU <- P %*% matU %*% Q
   collapseF <- P %*% matF %*% Q
+  collapseC <- P %*% matC %*% Q
   
-  return(list(matA = collapseA, matU = collapseU, matF = collapseF))
+  return(list(matA = collapseA, 
+              matU = collapseU, 
+              matF = collapseF,
+              matC = collapseC))
 }

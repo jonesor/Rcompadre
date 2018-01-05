@@ -4,12 +4,14 @@
 \alias{collapseMatrix}
 \title{Collapse a matrix model to a smaller number of stages}
 \usage{
-collapseMatrix(matU, matF, collapse)
+collapseMatrix(matU, matF, matC, collapse)
 }
 \arguments{
 \item{matU}{Survival matrix}
 
 \item{matF}{Fecundity matrix}
+
+\item{matC}{A clonality matrix}
 
 \item{collapse}{A character vector giving the mapping between the stages of
 the original matrix and the desired stages of the collapsed matrix. The
@@ -43,8 +45,9 @@ matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
 matF <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                  0, 0, 0, 0, 2.75, 1.75, 0, 0),
                  nrow = 5, byrow = FALSE)
+matC <- matrix(rep(0, 25), nrow = 5, byrow = TRUE) 
 collapse1 <- c("1-2", "3-4", "5")
-collapseMatrix(matU, matF, collapse1)
+collapseMatrix(matU, matF, matC, collapse1)
 
 # collapse2 <- c("1-2", "3-4-5")
 # collapse3 <- c("1-2-3-4-5")
