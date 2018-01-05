@@ -32,13 +32,13 @@
 #' identifyReproStages(matF1)
 #' 
 #' # compare different methods for handling NA
-#' identifyReproStages(matF2, na.handling <- "return.na")
-#' identifyReproStages(matF2, na.handling <- "return.true")
-#' identifyReproStages(matF2, na.handling <- "return.false")
+#' identifyReproStages(matF2, na.handling = "return.na")
+#' identifyReproStages(matF2, na.handling = "return.true")
+#' identifyReproStages(matF2, na.handling = "return.false")
 #' 
 #' \dontrun{
 #' # invalid setting for argument na.handling
-#' identifyReproStages(matF2, na.handling <- "NA")
+#' identifyReproStages(matF2, na.handling = "NA")
 #' }
 identifyReproStages <- function(matF, na.handling = "return.true") {
   if (!na.handling %in% c("return.na", "return.true", "return.false")) {

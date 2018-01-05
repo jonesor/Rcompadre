@@ -25,13 +25,12 @@
 #' checkSpecies(species, compadre)
 #' compadre_subset <- checkSpecies(species, compadre, returnDatabase = TRUE)
 #' }
+#' @importFrom rlang .data
 #' @export checkSpecies
 checkSpecies <- function(species, db, returnDatabase = FALSE) {
   # create dataframe with column for species, and column for whether they are
   #   present in database
-  findSpecies <-
-    function(x)
-      tolower(x) %in% tolower(gsub('_', ' ', db$metadata$SpeciesAccepted))
+
   inDatabase <- sapply(species, findSpecies, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
@@ -40,9 +39,18 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   }
   
   if (returnDatabase == TRUE) {
-    ssdb <- subsetDB(db, SpeciesAccepted %in% species)
+    ssdb <- subsetDB(db, .data$SpeciesAccepted %in% species)
     return(ssdb)
   } else {
     return(df)
   }
+}
+
+#' Utility function for checkSpecies
+#' @param x A character vector of species names
+#' @param db The COM(P)ADRE database object to search in
+#' @return A logical indicating whether the species name is in the 
+#' COM(P)ADRE object
+findSpecies <- function(x, db) {
+  tolower(x) %in% tolower(gsub('_', ' ', db$metadata$SpeciesAccepted))
 }

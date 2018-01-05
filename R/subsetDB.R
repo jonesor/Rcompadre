@@ -25,7 +25,7 @@
 subsetDB <- function(db, sub){
   e <- substitute(sub)
   r <- eval(e, db$metadata, parent.frame())
-  subsetID <- (1:length(r))[r & !is.na(r)]
+  subsetID <- seq_len(length(r))[r & !is.na(r)]
  
   # First make a copy of the database.
   ssdb <- db

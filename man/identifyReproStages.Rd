@@ -41,13 +41,13 @@ matF2 <- rbind(c(NA, NA, NA, 1.11), c(0, 0, 0.31, 0.78), c(0, 0, 0, 0), c(0,
 identifyReproStages(matF1)
 
 # compare different methods for handling NA
-identifyReproStages(matF2, na.handling <- "return.na")
-identifyReproStages(matF2, na.handling <- "return.true")
-identifyReproStages(matF2, na.handling <- "return.false")
+identifyReproStages(matF2, na.handling = "return.na")
+identifyReproStages(matF2, na.handling = "return.true")
+identifyReproStages(matF2, na.handling = "return.false")
 
 \dontrun{
 # invalid setting for argument na.handling
-identifyReproStages(matF2, na.handling <- "NA")
+identifyReproStages(matF2, na.handling = "NA")
 }
 }
 \author{
