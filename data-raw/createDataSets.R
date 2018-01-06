@@ -160,15 +160,15 @@ DbToAdd2 <- list(metadata = compadre$metadata[idxToAdd2, ],
 
 
 # Create output data set
-Comadre <- mergeDBs(COMADRE, DbToAdd)
-Compadre <- mergeDBs(COMPADRE, DbToAdd2)
+Comadre <- mergeDBs(COMADRE, DbToAdd) %>% Rcompadre:::asCompadreData()
+Compadre <- mergeDBs(COMPADRE, DbToAdd2) %>% Rcompadre:::asCompadreData()
 
 # do some quick checks to make sure nothing got all cattywompus
-Comadre$version
-dim(Comadre$metadata)
+Comadre@version
+dim(Comadre@metadata)
 
-Compadre$version
-dim(Compadre$metadata)
+Compadre@version
+dim(Compadre@metadata)
 
 # Write the files into the data folder
 devtools::use_data(Comadre,
