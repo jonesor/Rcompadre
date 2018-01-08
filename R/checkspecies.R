@@ -31,7 +31,7 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   # create dataframe with column for species, and column for whether they are
   #   present in database
 
-  inDatabase <- sapply(species, findSpecies, USE.NAMES = FALSE)
+  inDatabase <- sapply(species, findSpecies, db = db, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
   if (all(df$inDatabase == FALSE)) {

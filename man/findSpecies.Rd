@@ -4,10 +4,12 @@
 \alias{findSpecies}
 \title{Utility function for checkSpecies}
 \usage{
-findSpecies(x)
+findSpecies(x, db)
 }
 \arguments{
 \item{x}{A character vector of species names}
+
+\item{db}{The COM(P)ADRE database object to search in}
 }
 \value{
 A logical indicating whether the species name is in the 
