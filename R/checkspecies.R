@@ -9,7 +9,8 @@
 #' @param species A character vector of binomial species names, with the
 #'   genus and specific epithet separated by either an underscore or a space (
 #'   e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))
-#' @param db A COM(P)ADRE database.
+#' @param db A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+#'  from class 'list.
 #' @param returnDatabase A logical argument indicating whether a database should be returned.
 #' @return If returnDatabase = FALSE, returns a data frame with a column of
 #'   species names and a column indicating whether a species occurs in the
@@ -30,7 +31,7 @@
 checkSpecies <- function(species, db, returnDatabase = FALSE) {
   # create dataframe with column for species, and column for whether they are
   #   present in database
-
+  
   inDatabase <- sapply(species, findSpecies, db = db, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
@@ -39,7 +40,7 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   }
   
   if (returnDatabase == TRUE) {
-    ssdb <- subsetDB(db, .data$SpeciesAccepted %in% species)
+    ssdb <- subsetDB(db, SpeciesAccepted %in% species)
     return(ssdb)
   } else {
     return(df)
@@ -47,10 +48,17 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
 }
 
 #' Utility function for checkSpecies
-#' @param x A character vector of species names
-#' @param db The COM(P)ADRE database object to search in
+#' @param x A character vector of species names.
+#' @param db A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+#'  from class 'list'.
 #' @return A logical indicating whether the species name is in the 
-#' COM(P)ADRE object
+#' COM(P)ADRE object.
 findSpecies <- function(x, db) {
-  tolower(x) %in% tolower(gsub('_', ' ', db$metadata$SpeciesAccepted))
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
+  if (class(db) == "list"){
+    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= 401){
+      db <- as(db, "CompadreData")
+    }
+  }
+  tolower(x) %in% tolower(gsub('_', ' ', db@metadata$SpeciesAccepted))
 }

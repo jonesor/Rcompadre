@@ -4,7 +4,8 @@
 #' data frame, by converting each matrix and associated matrixClass information
 #' to a string.
 #'
-#' @param db A COM(P)ADRE database object
+#' @param db A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+#'  from class 'list.
 #' @param onlyMatA A logical value (TRUE/FALSE) indicating whether ONLY the full
 #'   projection matrix \code{matA} should be included in the flattened data
 #'   frame
@@ -19,20 +20,31 @@
 #' }
 #' @export convert2flat
 convert2flat <- function(db, onlyMatA = FALSE){
- 
-  db$metadata$Amatrix <- NULL
-  for (i in 1:nrow(db$metadata)){
-    db$metadata$classnames[i] <- paste(db$matrixClass[[i]]$MatrixClassAuthor,collapse=" | ")
-    db$metadata$matrixA[i] <- paste("[",paste(t(db$mat[[i]]$matA),collapse=" "),"]",sep="")
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
+  if (class(db) == "list"){
+    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= 401){
+      db <- as(db, "CompadreData")
+    }
+  }
+  
+  db@metadata$Amatrix <- NULL
+  for (i in 1:nrow(db@metadata)){
+    db@metadata$classnames[i] <- paste(db@mat[[i]]@matrixClass$MatrixClassAuthor,
+                                       collapse = " | ")
+    db@metadata$matrixA[i] <- paste("[", paste(t(db@mat[[i]]@matA), collapse=" "), "]",
+                                    sep = "")
   }
   
   if(onlyMatA == FALSE) {
-    for (i in 1:nrow(db$metadata)){
-      db$metadata$matrixU[i] <- paste("[",paste(t(db$mat[[i]]$matU),collapse=" "),"]",sep="")
-      db$metadata$matrixF[i] <- paste("[",paste(t(db$mat[[i]]$matF),collapse=" "),"]",sep="")
-      db$metadata$matrixC[i] <- paste("[",paste(t(db$mat[[i]]$matC),collapse=" "),"]",sep="")
+    for (i in 1:nrow(db@metadata)){
+      db@metadata$matrixU[i] <- paste("[", paste(t(db@mat[[i]]@matU), collapse=" "),
+                                      "]", sep = "")
+      db@metadata$matrixF[i] <- paste("[", paste(t(db@mat[[i]]@matF), collapse=" "),
+                                      "]", sep = "")
+      db@metadata$matrixC[i] <- paste("[", paste(t(db@mat[[i]]@matC), collapse=" "),
+                                      "]", sep = "")
     }
   }
-
-  return(db$metadata)
+  
+  return(db@metadata)
 }
