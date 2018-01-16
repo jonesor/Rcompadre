@@ -25,7 +25,7 @@ Subset the COMPADRE/COMADRE database by logical argument.
 ssData <- subsetDB(compadre, MatrixDimension > 3)
 ssData <- subsetDB(compadre, MatrixDimension > 3 & MatrixComposite == "Mean")
 ssData <- subsetDB(comadre, Continent == "Africa" & Class == "Mammalia")
-ssData <- subsetDB(comadre, SurvivalIssue < 1 & Altitude > 1000 & Altitude < 1500)
+ssData <- subsetDB(comadre, Altitude > 1000 & Altitude < 1500)
 }
 }
 \author{
