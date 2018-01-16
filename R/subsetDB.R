@@ -11,44 +11,41 @@
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' Bruce Kendall <kendall@@bren.ucsb.edu>
-#' 
 #' @examples
-#' 
 #' \dontrun{
 #' ssData <- subsetDB(compadre, MatrixDimension > 3)
 #' ssData <- subsetDB(compadre, MatrixDimension > 3 & MatrixComposite == "Mean")
 #' ssData <- subsetDB(comadre, Continent == "Africa" & Class == "Mammalia")
 #' ssData <- subsetDB(comadre, SurvivalIssue < 1 & Altitude > 1000 & Altitude < 1500)
 #' }
-#' 
 #' @export subsetDB
 subsetDB <- function(db, sub){
+  
   e <- substitute(sub)
-  r <- eval(e, db$metadata, parent.frame())
+  r <- eval(e, db@metadata, parent.frame())
   subsetID <- seq_len(length(r))[r & !is.na(r)]
- 
+  
   # First make a copy of the database.
   ssdb <- db
 
   # Subset the sub-parts of the database
-  ssdb$metadata <- ssdb$metadata[subsetID,]
-  ssdb$mat <- ssdb$mat[subsetID]
-  ssdb$matrixClass <- ssdb$matrixClass[subsetID]
+  ssdb@metadata <- ssdb@metadata[subsetID,]
+  ssdb@mat <- ssdb@mat[subsetID]
 
   # Version information is retained, but modified as follows.
   if("version" %in% names(ssdb)){
-    ssdb$version$Version <- paste(ssdb$version$Version,
+    ssdb@version$Version <- paste(ssdb@version$Version,
                                   " - subset created on ",
                                   format(Sys.time(), 
                                          "%b_%d_%Y"),sep="")
-    ssdb$version$DateCreated <- paste(ssdb$version$DateCreated,
+    ssdb@version$DateCreated <- paste(ssdb@version$DateCreated,
                                       " - subset created on ",
                                       format(Sys.time(), 
                                              "%b_%d_%Y"),
                                       sep = "")
-    ssdb$version$NumberAcceptedSpecies <- length(unique(ssdb$metadata$SpeciesAccepted))
-    ssdb$version$NumberStudies <- length(unique(ssdb$metadata$SpeciesAuthor))
-    ssdb$version$NumberMatrices <- length(ssdb$mat)
+    ssdb@version$NumberAcceptedSpecies <- length(unique(ssdb@metadata$SpeciesAccepted))
+    ssdb@version$NumberStudies <- length(unique(ssdb@metadata$SpeciesAuthor))
+    ssdb@version$NumberMatrices <- length(ssdb$mat)
   }
 
   return(ssdb)
