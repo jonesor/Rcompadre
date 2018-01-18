@@ -21,6 +21,7 @@ is_square <- function(x) {
 }
 
 test_that('stages are correctly collapsed', {
+  skip_on_cran()
   # testing to 6 digits per matrix element. we can go higher if
   # we find that there are problems with this cut off
   c1 <- collapseMatrix(matU, matF, matC, collapse1)
@@ -54,6 +55,7 @@ test_that('stages are correctly collapsed', {
 })
 
 test_that('returned matrices are always square', {
+  skip_on_cran()
   c1 <- collapseMatrix(matU, matF, matC, collapse1)
   c2 <- collapseMatrix(matU, matF, matC, collapse2)
   expect_true(all(unlist(lapply(c1, FUN = is_square))))

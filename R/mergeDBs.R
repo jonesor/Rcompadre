@@ -63,17 +63,21 @@ mergeDBs <- function(db1, db2) {
     stop("Something went wrong. Send a reproducible",
          " example to levisc8@gmail.com")
   }
+  
+  
   # If the user hasn't used subset DB to create the smaller versions,
-  # then add in that information
+  # then add in that information. 
+  # I will work on making these messages a bit prettier in the not
+  # so distant future.
   if(!grepl('subset created', out@version$Version)) {
     out@version$Version <- paste(db1@version$Version,
-                                 " - subset created on ",
+                                 " - merge made on ",
                                  format(Sys.time(), 
                                         "%b_%d_%Y"),
                                  sep = "")
     
     out@version$DateCreated <- paste(db1@version$DateCreated,
-                                     " - subset created on ",
+                                     " - merge made on ",
                                      format(Sys.time(), 
                                             "%b_%d_%Y"),
                                      sep = "") 

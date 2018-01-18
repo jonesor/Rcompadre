@@ -21,6 +21,7 @@ mat0 <- matrix(rep(0, 9),
                nrow = 3)
 
 test_that('fails correctly', {
+  skip_on_cran()
   expect_error(identifyReproStages(mat1, na.handling = 'NA'),
                regexp = "Argument na.handling must be either 'return.na', 'return.true', or 'return.false'")
   expect_error(identifyReproStages(matNA, na.handling = 'NA'),
@@ -31,6 +32,7 @@ test_that('fails correctly', {
 })
 
 test_that('returns correct values for each matrix', {
+  skip_on_cran()
   
   # Matrix1
   expect_identical(identifyReproStages(mat1, na.handling = 'return.na'),
