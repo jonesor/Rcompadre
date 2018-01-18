@@ -21,14 +21,12 @@ the records in the metadata match the criteria given in the `sub` argument.
 Subset the COMPADRE/COMADRE database by logical argument.
 }
 \examples{
-
 \dontrun{
 ssData <- subsetDB(compadre, MatrixDimension > 3)
 ssData <- subsetDB(compadre, MatrixDimension > 3 & MatrixComposite == "Mean")
 ssData <- subsetDB(comadre, Continent == "Africa" & Class == "Mammalia")
-ssData <- subsetDB(comadre, SurvivalIssue < 1 & Altitude > 1000 & Altitude < 1500)
+ssData <- subsetDB(comadre, Altitude > 1000 & Altitude < 1500)
 }
-
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
