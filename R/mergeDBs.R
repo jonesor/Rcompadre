@@ -1,8 +1,9 @@
 #' Merge two Compadre/Comadre data sets together
 #' 
 #' @description Merges two data set objects together. These can either
-#' be S4 objects of class CompadreData or S3 list objects that 
-#' contain an older version of the database. 
+#' be S4 objects of class \code{CompadreData}, S3 list objects that 
+#' contain an older version of the database, or a combination of the
+#' two. 
 #' 
 #' @param db1 A \code{CompadreData} object or an older version
 #' of \code{COM(P)ADRE} in a \code{list}.
@@ -77,7 +78,7 @@ mergeDBs <- function(db1, db2) {
                                             "%b_%d_%Y"),
                                      sep = "") 
   }
-  
+
   out@version$NumberAcceptedSpecies <- length(
     unique(out@metadata$SpeciesAccepted)
   )

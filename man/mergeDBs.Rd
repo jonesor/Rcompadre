@@ -19,7 +19,7 @@ databases.
 }
 \description{
 Merges two data set objects together. These can either
-be S4 objects of class CompadreData or S3 list objects that 
+be S4 objects of class \code{CompadreData} or S3 list objects that 
 contain an older version of the database.
 }
 \examples{

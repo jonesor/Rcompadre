@@ -1,22 +1,47 @@
 # Script that creates the subsetted versions of the COM(P)ADRE
 # data bases distributed in RCompadre
 
-# This script assumes that you already have the full versions
-# of the data bases loaded into R
-# Each data set will include ~150 observations + matrices
 
 library(Rcompadre)
 library(dplyr)
+
+# Store package working directory, load most recent
+# Com(p)adre versions, then reset to package working directory
+oldwd <- getwd()
+
+setwd('C:/Users/sl13sise/Dropbox/sApropos project/DemogData')
+load('COMPADRE_v.4.0.1.RData')
+load('COMADRE_v.X.X.X.2.RData')
+setwd(oldwd)
+
+NegativeMatrices <- logical(length(compadre$mat))
+for(i in seq_len(dim(compadre$metadata)[1])) {
+  NegativeMatrices[i] <- any(compadre$mat[[i]]$matA < 0 |
+                               compadre$mat[[i]]$matU < 0,
+                             na.rm = TRUE)
+}
+
+
+compadre <- list(metadata = compadre$metadata[!NegativeMatrices, ],
+                 matrixClass = compadre$matrixClass[!NegativeMatrices],
+                 mat = compadre$mat[!NegativeMatrices],
+                 version = compadre$version)
 
 # Find most of the species mentioned in the vignette
 # I don't think we should use all of them as that would 
 # result in a rather large data set being distributed
 # and CRAN may frown upon that.
+
+if(!inherits(comadre, 'CompadreData')) {
+  comadre <- Rcompadre:::asCompadreData(comadre)
+  
+}
+  
 bonyFish <- subsetDB(comadre, MatrixComposite == "Mean" &
                        Class == "Actinopterygii" &
                        StudyDuration >= 3 &
                        MatrixDimension > 3) %>%
-  .$metadata %>%
+  .@metadata %>%
   .$SpeciesAccepted
 
 Carnivores <- subsetDB(comadre, MatrixComposite == "Mean" &
@@ -26,7 +51,7 @@ Carnivores <- subsetDB(comadre, MatrixComposite == "Mean" &
                          SurvivalIssue < 1 &
                          MatrixSplit == "Divided" &
                          MatrixFec == "Yes") %>%
-  .$metadata %>%
+  .@metadata %>%
   .$SpeciesAccepted
 
 
@@ -37,82 +62,46 @@ ComadreSpp <- c("Ursus_maritimus", "Pterois volitans",
 COMADRE <- subsetDB(comadre, SpeciesAccepted %in% ComadreSpp)
 
 # currently, we have 118 species.
-dim(COMADRE$metadata)
+dim(COMADRE@metadata)
 
 # need to add some survival issues for demo purposes
-summary(COMADRE$metadata$SurvivalIssue) 
+summary(COMADRE@metadata$SurvivalIssue) 
 
 # Solid range of study durations
-summary(COMADRE$metadata$StudyDuration)
+summary(COMADRE@metadata$StudyDuration)
 
 # good range of matrix dimensions too 
-summary(COMADRE$metadata$MatrixDimension)
+summary(COMADRE@metadata$MatrixDimension)
 
 # Decent range of population #s
-summary(COMADRE$metadata$NumberPopulations)
+summary(COMADRE@metadata$NumberPopulations)
+
+# But a bad range of Continents! Thanks to Patrick Barks for pointing
+# that out
+summary(COMADRE@metadata$Continent)
+
 
 # Going to add in some problem children 
-set.seed(5)
-idxToAdd <- which(comadre$metadata$SurvivalIssue > 1) %>%
-  base::sample(size = 20) %>%
+
+
+DbToSample <- subsetDB(comadre, 
+                    SurvivalIssue > 2 |
+                      Continent == 'Africa' | 
+                      Continent == 'Asia' |
+                      Continent == 'Australia' |
+                      Continent == 'S America')
+
+set.seed(20)
+AddToDBIDX <- base::sample(rownames(DbToSample@metadata),
+                           size = 40,
+                           replace = FALSE) %>%
   sort
 
-DbToAdd <- list(metadata = comadre$metadata[idxToAdd, ],
-                matrixClass = comadre$matrixClass[idxToAdd],
-                mat = comadre$mat[idxToAdd],
-                version = comadre$version)
+DbToAdd <- subsetDB(DbToSample, 
+                    as.numeric(rownames(DbToSample@metadata)) %in% AddToDBIDX)
 
-mergeDBs <- function(db1, db2) {
-  
-  # Probably don't want to combine data bases without matching information
-  if(!identical(names(db1), names(db2)) |
-     !identical(names(db1$metadata), names(db2$metadata))) {
-    stop("Data components do not have identical names. Make sure the metadata \n",
-         "in each is identical to other.")
-  }
-  
-  out <- list(metadata = rbind(db1$metadata,
-                               db2$metadata),
-              matrixClass = c(db1$matrixClass,
-                              db2$matrixClass),
-              mat = c(db1$mat,
-                      db2$mat),
-              version = db1$version)
-  
-  # create indexes to check output
-  seq1 <- seq_len(dim(db1$metadata)[1])
-  seq2 <- seq(max(seq1) + 1, dim(out$metadata)[1], by = 1)
-  
-  if(!identical(db1$matrixClass, 
-                out$matrixClass[seq1]) |
-     !identical(db2$matrixClass, 
-                out$matrixClass[seq2])) {
-    
-    # Not sure how to report this as an error other than it being my mistake
-       stop("Developer is a bonehead. Email levisc8@gmail.com")
-  }
-  # If the user hasn't used subset DB to create the smaller versions,
-  # then add in that information
-  if(!grepl('subset created', out$version$Version)) {
-    out$version$Version <- paste(db1$version$Version,
-                                 " - subset created on ",
-                                 format(Sys.time(), 
-                                        "%b_%d_%Y"),
-                                 sep = "")
-    
-    out$version$DateCreated <- paste(db1$version$DateCreated,
-                                     " - subset created on ",
-                                     format(Sys.time(), 
-                                            "%b_%d_%Y"),
-                                     sep = "") 
-  }
-           
-  out$version$NumberAcceptedSpecies <- length(unique(out$metadata$SpeciesAccepted))
-  out$version$NumberStudies <- length(unique(out$metadata$SpeciesAuthor))
-  out$version$NumberMatrices <- length(out$mat)
-  
-  return(out)
-}
+summary(DbToAdd@metadata$Continent)
+summary(DbToAdd@metadata$SurvivalIssue)
 
 # Now, the same for Compadre! I like succulents and trees
 # so I'll start with those
@@ -149,7 +138,7 @@ summary(COMPADRE$metadata$DicotMonoc)
 
 set.seed(7)
 idxToAdd2 <- which(compadre$metadata$SurvivalIssue > 2) %>%
-  base::sample(size = 20) %>%
+  base::sample(size = 40) %>%
   sort
 
 DbToAdd2 <- list(metadata = compadre$metadata[idxToAdd2, ],
@@ -160,15 +149,28 @@ DbToAdd2 <- list(metadata = compadre$metadata[idxToAdd2, ],
 
 
 # Create output data set
-Comadre <- mergeDBs(COMADRE, DbToAdd) %>% Rcompadre:::asCompadreData()
-Compadre <- mergeDBs(COMPADRE, DbToAdd2) %>% Rcompadre:::asCompadreData()
+Comadre <- mergeDBs(COMADRE, DbToAdd) 
+Compadre <- mergeDBs(COMPADRE, DbToAdd2) 
 
-# do some quick checks to make sure nothing got all cattywompus
+# do some final checks to make sure I actually added
+# what I intended to add
 Comadre@version
 dim(Comadre@metadata)
 
 Compadre@version
 dim(Compadre@metadata)
+
+summary(Comadre@metadata$SurvivalIssue) 
+summary(Comadre@metadata$StudyDuration)
+summary(Comadre@metadata$MatrixDimension)
+summary(Comadre@metadata$NumberPopulations)
+summary(Comadre@metadata$Continent)
+
+summary(Compadre@metadata$SurvivalIssue) 
+summary(Compadre@metadata$StudyDuration)
+summary(Compadre@metadata$MatrixDimension)
+summary(Compadre@metadata$NumberPopulations)
+summary(Compadre@metadata$Continent)
 
 # Write the files into the data folder
 devtools::use_data(Comadre,
