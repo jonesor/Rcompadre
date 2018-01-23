@@ -61,7 +61,7 @@ mergeDBs <- function(db1, db2) {
     
     # Not sure how to report this as an error other than it being my mistake
     stop("Something went wrong. Send a reproducible",
-         " example to levisc8@gmail.com")
+         " example to levisc8@gmail.com ")
   }
   
   
