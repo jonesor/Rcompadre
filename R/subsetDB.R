@@ -23,42 +23,42 @@
 subsetDB <- function(db, sub) {
   
   e <- substitute(sub)
-  r <- eval(e, db@metadata, parent.frame())
+  r <- eval(e, db$metadata, parent.frame())
   subsetID <- seq_len(length(r))[r & !is.na(r)]
   
   # First make a copy of the database
   ssdb <- db
 
   # Subset the sub-parts of the database
-  ssdb@metadata <- ssdb@metadata[subsetID,]
-  ssdb@mat <- ssdb@mat[subsetID]
+  ssdb$metadata <- ssdb$metadata[subsetID,]
+  ssdb$mat <- ssdb$mat[subsetID]
 
   # Version information is retained, but modified as follows
-  if("version" %in% methods::slotNames(ssdb)) {
+  if("version" %in% names(ssdb)){
     
-    ssdb@version$Version <- paste0(
-      ssdb@version$Version,
+    ssdb$version$Version <- paste0(
+      ssdb$version$Version,
       " - subset created on ",
       format(Sys.time(), "%b_%d_%Y")
     )
     
-    ssdb@version$DateCreated <- paste0(
-      ssdb@version$DateCreated,
+    ssdb$version$DateCreated <- paste0(
+      ssdb$version$DateCreated,
       " - subset created on ",
       format(Sys.time(), "%b_%d_%Y")
     )
     
-    ssdb@version$NumberAcceptedSpecies <- length(
-      unique(ssdb@metadata$SpeciesAccepted)
+    ssdb$version$NumberAcceptedSpecies <- length(
+      unique(ssdb$metadata$SpeciesAccepted)
     )
     
-    ssdb@version$NumberStudies <- length(
-      unique(paste0(ssdb@metadata$Authors,
-                    ssdb@metadata$Journal,
-                    ssdb@metadata$YearPublication))
+    ssdb$version$NumberStudies <- length(
+      unique(paste0(ssdb$metadata$Authors,
+                    ssdb$metadata$Journal,
+                    ssdb$metadata$YearPublication))
     )
     
-    ssdb@version$NumberMatrices <- length(ssdb@mat)
+    ssdb$version$NumberMatrices <- length(ssdb$mat)
   }
 
   return(ssdb)
