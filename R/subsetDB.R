@@ -8,9 +8,13 @@
 #' @param db The COMPADRE or COMADRE database object.
 #' @return Returns a subset of the database, with the same structure, but where
 #' the records in the metadata match the criteria given in the `sub` argument.
-#' @author Owen R. Jones <jones@@biology.sdu.dk>
+#' @author 
+#' Owen R. Jones <jones@@biology.sdu.dk>
+#' 
 #' Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' 
 #' Bruce Kendall <kendall@@bren.ucsb.edu>
+#' 
 #' @examples
 #' \dontrun{
 #' ssData <- subsetDB(compadre, MatrixDimension > 3)
