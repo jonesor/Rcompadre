@@ -33,5 +33,6 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 
-# iTunes files
+# Other unwanted files
 .DS_Store
+.lnk
