@@ -47,27 +47,6 @@ setMethod("initialize", "CompadreM",
 validCompadreMObject <- function(object) {
   errors <- character()
   ###matrices
-  ##test nonnegativity
-  #matA
-  if (any(object@matA < 0, na.rm = T) ) {
-    matAmsg1 <- "matA is not nonnegative"
-    errors <- c(errors, matAmsg1)
-  }
-  #matU
-  if (any(object@matU < 0, na.rm = T) ) {
-    matUmsg1 <- "matU is not nonnegative"
-    errors <- c(errors, matUmsg1)
-  }
-  #matF
-  if (any(object@matF < 0, na.rm = T) ) {
-    matFmsg1 <- "matF is not nonnegative"
-    errors <- c(errors, matFmsg1)
-  }
-  #matC
-  if (any(object@matC < 0, na.rm = T) ) {
-    matCmsg1 <- "matC is not nonnegative"
-    errors <- c(errors, matCmsg1)
-  }
   ##test dimensions
   dims <- data.frame(matA = dim(object@matA),
                      matU = dim(object@matU),
