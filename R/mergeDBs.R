@@ -38,7 +38,7 @@ mergeDBs <- function(db1, db2) {
   
   # Probably don't want to combine databases without matching information
   if(!identical(names(db1@metadata), names(db2@metadata))) {
-    stop("Metadata components do not have identical names. ",
+    stop("Metadata components do not have identical names.",
          "Make sure the metadata database \n",
          "in each is identical to other.", Call. = FALSE)
   }
