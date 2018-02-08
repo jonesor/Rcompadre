@@ -30,6 +30,8 @@ ssData <- subsetDB(comadre, Altitude > 1000 & Altitude < 1500)
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
+
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
+
 Bruce Kendall <kendall@bren.ucsb.edu>
 }
