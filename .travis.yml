@@ -23,6 +23,12 @@ sudo: false
 dist: trusty
 cache: packages
 
+# Branches
+branches:
+  only:
+  - master
+  - devel
+
 # If anyone else would like to be added to notifications,
 # just add your email below!
 notifications:
