@@ -40,7 +40,6 @@ reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
 matrixStages <- c('prop', 'active', 'active', 'active', 'active')
 rearrangeMatrix(matU, matF, reproStages, matrixStages)
 
-
 }
 \author{
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>

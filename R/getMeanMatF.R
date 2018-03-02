@@ -12,14 +12,19 @@
 #' fecundity in a given stage class and year does not necessarily indicate that
 #' the stage in question is non-reproductive).
 #'
-#' @param db A COM(P)ADRE database object.
+#' @param db A COM(P)ADRE database object. Databases will be will be coerced
+#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
+#' comadre_v2.0.1 and below).
+#' 
 #' @return Returns a list which contains the mean fecundity matrix associated
 #'   with a given row of the database, or NA if there is only a single matrix
 #'   from the relevant population within the db.
+#' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
 #' @author Iain Stott <stott@@biolgy.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
+#' 
 #' @examples
 #' \dontrun{
 #' # print set of matrices (A, U, F, C) associated with row 2 of database
@@ -31,10 +36,22 @@
 #' # print meanMatF associated with row 2 of database
 #' compadre_with_meanF$mat[[2]]
 #' }
-#' @export
+#' 
 #' @importFrom rlang .data
+#'
+#' @export getMeanMatF
+#' 
 getMeanMatF <- function(db) {
-  
+
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
+  if (class(db) == "list"){
+    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
+    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
+    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
+      db <- as(db, "CompadreData")
+    }
+  }
+
   # create a unique identifier for each population in the database
   db@metadata$PopId <- as.numeric(as.factor(paste(
     db@metadata$Authors,

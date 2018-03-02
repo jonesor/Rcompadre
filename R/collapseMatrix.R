@@ -10,7 +10,6 @@
 #' the stable distribution.\cr\cr
 #' Note: this function is only valid for models without clonality.
 #'
-#' @export
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
 #' @param matC A clonality matrix
@@ -20,13 +19,17 @@
 #'   collapsed matrix, and each element of \code{collapse} gives the stage index
 #'   (e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
 #'   that correspond to the relevant stage index of the collapsed matrix.
+#' 
 #' @return A list of three containing the collapsed projection matrix
 #'   \code{matA}, collapsed survival matrix \code{matU}, and collapsed fecundity
 #'   matrix \code{matF}.
+#' 
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' 
 #' @references Salguero-Gomez, R. & Plotkin, J. B. (2010) Matrix dimensions
 #'   bias demographic inferences: implications for comparative plant demography.
 #'   The American Naturalist 176, 710-722.
+#' 
 #' @examples
 #' matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 0.0408, 0.2857,
 #'                  0.4286, 0.102, 0.0816, 0.0385, 0.0385, 0.2692, 0.2308,
@@ -42,6 +45,9 @@
 #'
 #' # collapse2 <- c("1-2", "3-4-5")
 #' # collapse3 <- c("1-2-3-4-5")
+#'
+#' @export collapseMatrix
+#' 
 collapseMatrix <- function(matU, matF, matC, collapse) {
   matA <- matU + matF + matC
   if (any(is.na(matA))) {

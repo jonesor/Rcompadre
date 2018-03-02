@@ -19,8 +19,9 @@ databases.
 }
 \description{
 Merges two data set objects together. These can either
-be S4 objects of class \code{CompadreData} or S3 list objects that 
-contain an older version of the database.
+be S4 objects of class \code{CompadreData}, S3 list objects that 
+contain an older version of the database, or a combination of the
+two.
 }
 \examples{
 \dontrun{

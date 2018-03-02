@@ -51,6 +51,7 @@ collapseMatrix(matU, matF, matC, collapse1)
 
 # collapse2 <- c("1-2", "3-4-5")
 # collapse3 <- c("1-2-3-4-5")
+
 }
 \references{
 Salguero-Gomez, R. & Plotkin, J. B. (2010) Matrix dimensions

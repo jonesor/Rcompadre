@@ -49,6 +49,7 @@ identifyReproStages(matF2, na.handling = "return.false")
 # invalid setting for argument na.handling
 identifyReproStages(matF2, na.handling = "NA")
 }
+
 }
 \author{
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
