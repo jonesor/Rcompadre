@@ -14,6 +14,18 @@ Imports:
   methods, 
   popdemo,
   rlang
-Suggests: knitr, rmarkdown,
-    testthat
+Suggests: knitr, 
+    rmarkdown,
+    testthat,
+    popbio,
+    Rage,
+    fields,
+    scales,
+    vcd,
+    rcrossref,
+    taxize,
+    dplyr,
+    maps,
+    stringr,
+    MASS
 VignetteBuilder: knitr
