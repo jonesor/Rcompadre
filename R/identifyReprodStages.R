@@ -6,11 +6,11 @@
 #' combined propagule, pre-reproductive, reproductive and post-reproductive
 #' stages.
 #'
-#' @export
 #' @param matF A fecundity matrix
 #' @param na.handling One of \code{"return.na"}, \code{"return.true"}, or
 #'   \code{"return.false"}. Determines how values of \code{NA} within
 #'   \code{matF} should be handled. See Value for more details.
+#' 
 #' @return A logical vector of length \code{ncol(matF)}, with values of
 #'   \code{FALSE} corresponding to non-reproductive stages and values of
 #'   \code{TRUE} corresponding to reproductive stages.\cr\cr For a given matrix
@@ -20,8 +20,10 @@
 #'   of \code{NA}, the function will return \code{NA} if \code{na.handling ==
 #'   "return.na"}, \code{TRUE} if \code{na.handling == "return.true"}, or
 #'   \code{FALSE} if \code{na.handling == "return.false"}.
+#' 
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
+#' 
 #' @examples
 #' matF1 <- rbind(c(0, 0.2, 0, 0.5, 0), c(0, 0.3, 0.2, 0.6, 0), c(0, 0, 0, 0,
 #' 0), c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
@@ -40,6 +42,9 @@
 #' # invalid setting for argument na.handling
 #' identifyReproStages(matF2, na.handling = "NA")
 #' }
+#'
+#' @export identifyReproStages
+#' 
 identifyReproStages <- function(matF, na.handling = "return.true") {
   if (!na.handling %in% c("return.na", "return.true", "return.false")) {
     stop("Argument na.handling must be either 'return.na', 'return.true', or 'return.false'")

@@ -25,8 +25,9 @@
 #' }
 #' 
 #' @importFrom methods new
-#' @export
-
+#' 
+#' @export mergeDBs
+#' 
 mergeDBs <- function(db1, db2) {
   
   if(!inherits(db1, 'CompadreData')) {
@@ -63,8 +64,7 @@ mergeDBs <- function(db1, db2) {
     stop("Something went wrong. Send a reproducible",
          " example to levisc8@gmail.com ")
   }
-  
-  
+    
   # If the user hasn't used subset DB to create the smaller versions,
   # then add in that information. 
   # I will work on making these messages a bit prettier in the not

@@ -7,7 +7,9 @@
 subsetDB(db, sub)
 }
 \arguments{
-\item{db}{The COMPADRE or COMADRE database object.}
+\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
+ from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
+comadre_v2.0.1 and below).}
 
 \item{sub}{An argument made using logical operators (see `subset`) with
 which to subset the data base. Any of the variables contained in the
@@ -27,9 +29,12 @@ ssData <- subsetDB(compadre, MatrixDimension > 3 & MatrixComposite == "Mean")
 ssData <- subsetDB(comadre, Continent == "Africa" & Class == "Mammalia")
 ssData <- subsetDB(comadre, Altitude > 1000 & Altitude < 1500)
 }
+
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
+
 Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
+
 Bruce Kendall <kendall@bren.ucsb.edu>
 }

@@ -5,11 +5,11 @@
 #' the matrix model into a standardized set of stages (e.g. propagule,
 #' pre-reproductive, reproductive, and post-reproductive).
 #'
-#' @export
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
 #' @param matrixStages A character vector identifying the matrix stages
 #' @param reproStages Logical vector identifying which stages reproductive
+#'
 #' @return Returns a list with 5 elements: the rearranged survival matrix
 #'   (\code{matU}), the rearranged fecundity matrix (\code{matF}), the
 #'   rearranged vector of reproductive stages (\code{reproStages}), the numeric
@@ -18,6 +18,7 @@
 #'   reproductive stage vector (\code{maxRep}).
 #'   
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' 
 #' @examples
 #' matU <- rbind(c(0, 0, 0, 0, 0), c(0.1, 0.16, 0, 0, 0), c(0.2, 0.23, 0.12, 0,
 #' 0), c(0, 0, 0.34, 0.53, 0), c(0, 0, 0, 0.34, 0))
@@ -29,6 +30,7 @@
 #' matrixStages <- c('prop', 'active', 'active', 'active', 'active')
 #' rearrangeMatrix(matU, matF, reproStages, matrixStages)
 #' 
+#' @export rearrangeMatrix
 #' 
 rearrangeMatrix <- function(matU, matF, reproStages, matrixStages) {
   if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF),

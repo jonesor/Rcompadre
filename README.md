@@ -1,3 +1,6 @@
+[![Travis-CI Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre)
+
+
 Rcompadre
 ==========
 

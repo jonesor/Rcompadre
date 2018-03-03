@@ -6,9 +6,13 @@
 #' @param A A square matrix in the form of a string, begining with an open
 #'   square bracket and ending with a closed square bracket, with individual
 #'   matrix cell entries separated by a space.
+#' 
 #' @return A square numeric \code{matrix}.
+#' 
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
-#' @seealso convert2flat
+#' 
+#' @seealso DBToFlat
+#' 
 #' @examples
 #' x1 <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
 #' stringToMatrix(x1)
@@ -21,7 +25,9 @@
 #' x3 <- "[0.42 0.52 0.15 0.23 0.14]"
 #' stringToMatrix(x3)
 #' }
-#' @export
+#' 
+#' @export stringToMatrix
+#' 
 stringToMatrix <- function(A) {
   A <- gsub(pattern = "\\[|\\]", "", A)
   A <- gsub(pattern = ";", " ", A)

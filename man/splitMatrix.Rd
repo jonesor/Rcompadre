@@ -21,6 +21,7 @@ Warning! The functionality is very basic - it assumes that sexual reproduction i
 data(Tort)
 splitMatrix(Tort)
 }
+
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>

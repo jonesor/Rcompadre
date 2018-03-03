@@ -8,7 +8,9 @@ matrices in a COM(P)ADRE database object}
 getMeanMatF(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object.}
+\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
+ from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
+comadre_v2.0.1 and below).}
 }
 \value{
 Returns a list which contains the mean fecundity matrix associated
@@ -38,6 +40,7 @@ meanF <- getMeanMatF(compadre)
 # print meanMatF associated with row 2 of database
 compadre_with_meanF$mat[[2]]
 }
+
 }
 \author{
 Danny Buss <dlb50@cam.ac.uk>
