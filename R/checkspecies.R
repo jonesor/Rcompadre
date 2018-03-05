@@ -62,13 +62,15 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
 #' @return A logical indicating whether the species name is in the 
 #' COM(P)ADRE object.
 #' 
+#' @importFrom methods as
+#' 
 #' @export findSpecies
 findSpecies <- function(species, db) {
   if (class(db) == "list"){
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- as(db, "CompadreData")
+      db <- methods::as(db, "CompadreData")
     }
   }
   tolower(species) %in% tolower(gsub('_', ' ', db@metadata$SpeciesAccepted))

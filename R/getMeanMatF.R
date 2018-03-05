@@ -37,7 +37,7 @@
 #' compadre_with_meanF$mat[[2]]
 #' }
 #' 
-#' @importFrom rlang .data
+#' @importFrom methods as
 #'
 #' @export getMeanMatF
 #' 
@@ -48,7 +48,7 @@ getMeanMatF <- function(db) {
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- as(db, "CompadreData")
+      db <- methods::as(db, "CompadreData")
     }
   }
 

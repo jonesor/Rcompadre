@@ -24,6 +24,7 @@
 #' ssData <- subsetDB(comadre, Altitude > 1000 & Altitude < 1500)
 #' }
 #' 
+#' @importFrom methods as slotNames
 #' @export subsetDB
 #' 
 subsetDB <- function(db, sub){
@@ -32,7 +33,7 @@ subsetDB <- function(db, sub){
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- as(db, "CompadreData")
+      db <- methods::as(db, "CompadreData")
     }
   }
   
@@ -48,7 +49,7 @@ subsetDB <- function(db, sub){
   ssdb@mat <- ssdb@mat[subsetID]
   
   # Version information is retained, but modified as follows.
-  if("version" %in% slotNames(ssdb)){
+  if("version" %in% methods::slotNames(ssdb)){
     ssdb@version$Version <- paste0(ssdb@version$Version,
                                    " - subset created on ",
                                    format(Sys.time(), "%b_%d_%Y")

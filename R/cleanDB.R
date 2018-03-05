@@ -30,7 +30,7 @@
 #' }
 #'
 #' @importFrom popdemo is.matrix_ergodic is.matrix_primitive is.matrix_irreducible
-#' @importFrom rlang .data
+#' @importFrom methods as
 #' 
 #' @export cleanDB
 #' 
@@ -39,7 +39,7 @@ cleanDB <- function(db) {
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- as(db, "CompadreData")
+      db <- methods::as(db, "CompadreData")
     }
   }
   
@@ -53,7 +53,7 @@ cleanDB <- function(db) {
   db@metadata$check_NA_C <- sapply(db@mat, function(x) any(is.na(x@matC)))
   
   # check whether any columns of matU have sums exceeding 1
-  checkColsums <- function(x) any(colSums(x@matU, na.rm = T) > 1)
+  checkColsums <- function(x) any(colSums(x@matU, na.rm = TRUE) > 1)
   db@metadata$check_colsums_U <- sapply(db@mat, checkColsums)
   
   # check properties of matA using functions in popdemo

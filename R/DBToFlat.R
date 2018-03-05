@@ -27,6 +27,7 @@
 #' compadreFlat <- DBToFlat(compadre, onlyMatA = FALSE)
 #' }
 #' 
+#' @importFrom methods as
 #' @export DBToFlat
 #' 
 DBToFlat <- function(db, onlyMatA = FALSE){
@@ -34,7 +35,7 @@ DBToFlat <- function(db, onlyMatA = FALSE){
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- as(db, "CompadreData")
+      db <- methods::as(db, "CompadreData")
     }
   }
   
