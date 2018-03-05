@@ -20,12 +20,6 @@ comadre_v2.0.1 and below).}
 
 \item{returnDatabase}{A logical argument indicating whether a database 
 should be returned.}
-
-\item{species}{A character vector of species names.}
-
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
 }
 \value{
 If returnDatabase = FALSE, \code{checkSpecies} returns a data frame 

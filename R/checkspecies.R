@@ -59,11 +59,6 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
 #'
 #' @rdname checkSpecies
 #' 
-#' @param species A character vector of species names.
-#' @param db A COM(P)ADRE database object. Databases will be will be coerced
-#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-#' comadre_v2.0.1 and below).
-#' 
 #' @return A logical indicating whether the species name is in the 
 #' COM(P)ADRE object.
 #' 
