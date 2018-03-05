@@ -36,5 +36,3 @@ notifications:
     - jones@biology.sdu.dk
     - levisc8@gmail.com
     
-r_github_packages:
-  - jonesor/Rage
