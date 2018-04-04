@@ -29,20 +29,8 @@
 compareDBs <- function(db1, db2, verbose = FALSE){ 
   # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
   # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  if (class(db1) == "list"){
-    if( "Animalia" %in% db1$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db1$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db1$version$Version))) <= vlim){
-      db1 <- methods::as(db1, "CompadreData")
-    }
-  }
-  if (class(db2) == "list"){
-    if( "Animalia" %in% db2$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db2$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db2$version$Version))) <= vlim){
-      db2 <- methods::as(db2, "CompadreData")
-    }
-  }
+  db1 <- convertLegacyDB(db1)
+  db2 <- convertLegacyDB(db2)
   
   #Quick summary
   cat("Quick Summary\n")

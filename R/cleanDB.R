@@ -35,13 +35,8 @@
 #' @export cleanDB
 #' 
 cleanDB <- function(db) {
-  if (class(db) == "list"){
-    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreData")
-    }
-  }
+  
+  db <- convertLegacyDB(db)
   
   # create row index
   db@metadata$index <- 1:nrow(db@metadata)

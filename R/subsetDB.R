@@ -28,14 +28,7 @@
 #' @export subsetDB
 #' 
 subsetDB <- function(db, sub){
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  if (class(db) == "list"){
-    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreData")
-    }
-  }
+  db <- convertLegacyDB(db)
   
   e <- substitute(sub)
   r <- eval(e, db@metadata, parent.frame())

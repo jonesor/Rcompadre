@@ -24,8 +24,6 @@ of detail.}
 A function to compare two COMPADRE/COMADRE database versions
 }
 \details{
-%% ~~ If necessary, more details than the description above ~~
-
 \code{compareDBs} is preferred, but \code{dbCompare} is provided 
 for legacy purposes.
 }

@@ -30,17 +30,13 @@
 #' 
 mergeDBs <- function(db1, db2) {
   
-  if(!inherits(db1, 'CompadreData')) {
-    db1 <- asCompadreData(db1)
-  }
-  if(!inherits(db2, 'CompadreData')) {
-    db2 <- asCompadreData(db2)
-  }
-  
+  db1 <- convertLegacyDB(db1)
+
+  db2 <- convertLegacyDB(db2)
   # Probably don't want to combine databases without matching information
   if(!identical(names(db1@metadata), names(db2@metadata))) {
     stop("Metadata components do not have identical names. ",
-         "Make sure the metadata database \n",
+         "Make sure the metadata \n",
          "in each is identical to other.", Call. = FALSE)
   }
   
