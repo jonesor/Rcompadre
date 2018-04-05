@@ -36,6 +36,7 @@ subsetDB <- function(db, sub) {
   # Subset the sub-parts of the database
   ssdb$metadata <- ssdb$metadata[subsetID,]
   ssdb$mat <- ssdb$mat[subsetID]
+  ssdb$matrixClass <- ssdb$matrixClass[subsetID]
 
   # Version information is retained, but modified as follows
   if("version" %in% names(ssdb)){
