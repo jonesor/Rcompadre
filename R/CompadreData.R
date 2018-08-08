@@ -74,3 +74,25 @@ asCompadreData <- function(from) {
         }),
         version = from$version)
 }
+
+
+## ---------------------------------------------------------------------
+## accessor functions
+
+# matA
+#' @rdname CompadreDataMethods
+#' @include CompadreData.R
+#' @export
+setGeneric("matAlist", 
+               function(object){
+                   standardGeneric("matAlist")
+               }
+)
+#' @rdname CompadreDataMethods
+#' @export
+setMethod("matAlist", signature = (object = "CompadreData"), 
+          function(object){
+              matAlist <- lapply(object@mat, matA)
+              return(matAlist)
+          }
+)

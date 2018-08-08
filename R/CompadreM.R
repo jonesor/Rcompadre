@@ -139,3 +139,23 @@ setMethod("show", signature = (object ="CompadreM"),
             cat("\n")
           }
 )
+
+
+## ---------------------------------------------------------------------
+## accessor functions
+
+# matA
+#' @rdname CompadreMClass
+#' @export
+setGeneric("matA", 
+               function(object){
+                   standardGeneric("matA")
+               }
+)
+#' @rdname CompadreMMethods
+#' @export
+setMethod("matA", signature = (object = "CompadreM"), 
+          function(object){
+              return(object@matA)
+          }
+)

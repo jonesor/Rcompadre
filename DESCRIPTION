@@ -28,3 +28,20 @@ Suggests: knitr,
     stringr,
     MASS
 VignetteBuilder: knitr
+Collate: 
+    'CompadreData.R'
+    'CompadreM.R'
+    'DBToFlat.R'
+    'checkspecies.R'
+    'cleanDB.R'
+    'collapseMatrix.R'
+    'compareDBs.R'
+    'convertDB.R'
+    'data.R'
+    'getMeanMatF.R'
+    'identifyReprodStages.R'
+    'mergeDBs.R'
+    'rearrangeMatrix.R'
+    'splitMatrix.R'
+    'stringtomatrix.R'
+    'subsetDB.R'
