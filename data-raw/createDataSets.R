@@ -2,7 +2,7 @@
 # data bases distributed in RCompadre
 
 
-library(Rcompadre)
+library(RcompadreDev)
 library(dplyr)
 
 # Store package working directory, load most recent
@@ -33,7 +33,7 @@ compadre <- list(metadata = compadre$metadata[!NegativeMatrices, ],
 # and CRAN may frown upon that.
 
 if(!inherits(comadre, 'CompadreData')) {
-  comadre <- Rcompadre:::asCompadreData(comadre)
+  comadre <- RcompadreDev:::asCompadreData(comadre)
   
 }
   

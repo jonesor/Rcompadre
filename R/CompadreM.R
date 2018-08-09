@@ -16,6 +16,16 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+################################################################################
+#' CompadreM class
+#' 
+#' This page describes the CompadreM class. A CompadreM object describes
+#' a single matrix and its associated data. Methods for the CompadreM class
+#' are mostly focused on extraction of relevant data. Each method includes 
+#' a 'generic' function with the method implemented through that generic.
+#' 
+#' @name CompadreMClass
+
 setClass("CompadreM",
          slots = c(
            matA = "matrix",
@@ -45,7 +55,7 @@ setMethod("initialize", "CompadreM",
 
 ## ---------------------------------------------------------------------
 ## define validity check function
-validCompadreMObject <- function(object) {
+validCompadreM <- function(object) {
   errors <- character()
   ###matrices
   ##test dimensions
@@ -101,7 +111,7 @@ validCompadreMObject <- function(object) {
     errors
   }
 }
-setValidity("CompadreM", validCompadreMObject)
+setValidity("CompadreM", validCompadreM)
 
 setMethod("show", signature = (object ="CompadreM"),
           function (object){
@@ -111,51 +121,32 @@ setMethod("show", signature = (object ="CompadreM"),
                                as.character(Mdim),
                                "stages.\n\n"
                       ))
-            #matrixClass info
-            showstages <- as.data.frame(object@matrixClass)[,c("MatrixClassAuthor","MatrixClassNumber")]
-            dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
-            print(showstages, row.names=F)
-            cat("\n")
-            #matA
-            cat("matA:\n")
-            showmatA <- object@matA
-            dimnames(showmatA) <- list(1:Mdim, 1:Mdim)
-            print(showmatA, nsmall = 3)
-            cat("\n")
-            cat("matU:\n")
-            showmatU <- object@matU
-            dimnames(showmatU) <- list(1:Mdim, 1:Mdim)
-            print(showmatU)
-            cat("\n")
-            cat("matF:\n")
-            showmatF <- object@matF
-            dimnames(showmatF) <- list(1:Mdim, 1:Mdim)
-            print(showmatF)
-            cat("\n")
-            cat("matC:\n")
-            showmatC <- object@matC
-            dimnames(showmatC) <- list(1:Mdim, 1:Mdim)
-            print(showmatC)
-            cat("\n")
-          }
-)
-
-
-## ---------------------------------------------------------------------
-## accessor functions
-
-# matA
-#' @rdname CompadreMClass
-#' @export
-setGeneric("matA", 
-               function(object){
-                   standardGeneric("matA")
-               }
-)
-#' @rdname CompadreMMethods
-#' @export
-setMethod("matA", signature = (object = "CompadreM"), 
-          function(object){
-              return(object@matA)
+            if(Mdim > 0){
+              #matrixClass info
+              showstages <- as.data.frame(object@matrixClass)[,c("MatrixClassAuthor","MatrixClassNumber")]
+              dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
+              print(showstages, row.names=F)
+              cat("\n")
+              #matA
+              cat("matA:\n")
+              showmatA <- object@matA
+              print(showmatA, nsmall = 3)
+              cat("\n")
+              cat("matU:\n")
+              showmatU <- object@matU
+              dimnames(showmatU) <- list(1:Mdim, 1:Mdim)
+              print(showmatU)
+              cat("\n")
+              cat("matF:\n")
+              showmatF <- object@matF
+              dimnames(showmatF) <- list(1:Mdim, 1:Mdim)
+              print(showmatF)
+              cat("\n")
+              cat("matC:\n")
+              showmatC <- object@matC
+              dimnames(showmatC) <- list(1:Mdim, 1:Mdim)
+              print(showmatC)
+              cat("\n")
+            }
           }
 )

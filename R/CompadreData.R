@@ -16,6 +16,16 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+################################################################################
+#' 'CompadreData' class
+#' 
+#' This page describes the 'CompadreData' class. A CompadreData object contains
+#' many CompadreM objects, therefore many matrices. Methods for the CompadreData
+#' class are mostly focused on extraction of relevant data. Each method includes 
+#' a 'generic' function with the method implemented through that generic.
+#' 
+#' @name CompadreDataClass
+
 setClass("CompadreData",
          slots = c(
              metadata = "data.frame",
@@ -75,24 +85,16 @@ asCompadreData <- function(from) {
         version = from$version)
 }
 
-
-## ---------------------------------------------------------------------
-## accessor functions
-
-# matA
-#' @rdname CompadreDataMethods
-#' @include CompadreData.R
-#' @export
-setGeneric("matAlist", 
-               function(object){
-                   standardGeneric("matAlist")
-               }
-)
-#' @rdname CompadreDataMethods
-#' @export
-setMethod("matAlist", signature = (object = "CompadreData"), 
-          function(object){
-              matAlist <- lapply(object@mat, matA)
-              return(matAlist)
+setMethod("show", signature = (object ="CompadreData"),
+          function (object){
+            Mno <- length(object@mat)
+            #start
+            start <- cat(paste("A compadre data object with",
+                               as.character(Mno),
+                               "matrices.\n\n"
+                      ))
+            if(Mno > 0){
+              print(object)
+            }
           }
 )
