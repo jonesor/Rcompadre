@@ -16,16 +16,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-################################################################################
-#' CompadreM class
-#' 
-#' This page describes the CompadreM class. A CompadreM object describes
-#' a single matrix and its associated data. Methods for the CompadreM class
-#' are mostly focused on extraction of relevant data. Each method includes 
-#' a 'generic' function with the method implemented through that generic.
-#' 
-#' @name CompadreMClass
-
 setClass("CompadreM",
          slots = c(
            matA = "matrix",

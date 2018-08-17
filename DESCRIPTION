@@ -12,8 +12,7 @@ RoxygenNote: 6.0.1
 Depends: R (>= 2.10)
 Imports:
   methods, 
-  popdemo,
-  rlang
+  popdemo
 Suggests: knitr, 
     rmarkdown,
     testthat,
@@ -31,6 +30,7 @@ VignetteBuilder: knitr
 Collate: 
     'CompadreData.R'
     'CompadreM.R'
+    'ClassUnionMethods.R'
     'DBToFlat.R'
     'checkspecies.R'
     'cleanDB.R'
