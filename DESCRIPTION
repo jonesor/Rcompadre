@@ -1,4 +1,4 @@
-Package: Rcompadre
+Package: RcompadreDev
 Type: Package
 Title: Utilities for working with the COMPADRE/COMADRE Database
 Version: 0.1.0
@@ -12,8 +12,7 @@ RoxygenNote: 6.0.1
 Depends: R (>= 2.10)
 Imports:
   methods, 
-  popdemo,
-  rlang
+  popdemo
 Suggests: knitr, 
     rmarkdown,
     testthat,
@@ -28,3 +27,21 @@ Suggests: knitr,
     stringr,
     MASS
 VignetteBuilder: knitr
+Collate: 
+    'CompadreData.R'
+    'CompadreM.R'
+    'ClassUnionMethods.R'
+    'DBToFlat.R'
+    'checkspecies.R'
+    'cleanDB.R'
+    'collapseMatrix.R'
+    'compareDBs.R'
+    'convertDB.R'
+    'data.R'
+    'getMeanMatF.R'
+    'identifyReprodStages.R'
+    'mergeDBs.R'
+    'rearrangeMatrix.R'
+    'splitMatrix.R'
+    'stringtomatrix.R'
+    'subsetDB.R'
