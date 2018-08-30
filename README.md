@@ -16,7 +16,14 @@ Expect bugs!
 
 `install_github("jonesor/Rcompadre")`
 
+*To install the development branch*
 
+`install_github("jonesor/Rcompadre",ref = "devel")`
+
+The development branch is named "RcompadreDev". This difference in names allows one to install both `master` and `devel` branches and call functions from the respective versions as follows:
+
+`Rcompadre::subsetDB(mydatabase)`
+`RcompadreDev::subsetDB(mydatabase)`
 
 *Report bugs/errors to:*
 
