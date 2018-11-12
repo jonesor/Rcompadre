@@ -38,40 +38,40 @@ cleanDB <- function(db) {
   
   db <- convertLegacyDB(db)
   
+  #new data.frame for data slot
+  newdata <- data(db)
+
   # create row index
-  db@metadata$index <- 1:nrow(db@metadata)
+  newdata$index <- 1:NumberMatrices(db)
   
   # check matA, matU, matF, and matC for any values of NA
-  db@metadata$check_NA_A <- sapply(db@mat, function(x) any(is.na(x@matA)))
-  db@metadata$check_NA_U <- sapply(db@mat, function(x) any(is.na(x@matU)))
-  db@metadata$check_NA_F <- sapply(db@mat, function(x) any(is.na(x@matF)))
-  db@metadata$check_NA_C <- sapply(db@mat, function(x) any(is.na(x@matC)))
+  newdata$matAcheckNA <- sapply(matA(db), function(x){ any(is.na(x)) })
+  newdata$matUcheckNA <- sapply(matU(db), function(x){ any(is.na(x)) })
+  newdata$matFcheckNA <- sapply(matF(db), function(x){ any(is.na(x)) })
+  newdata$matCcheckNA <- sapply(matC(db), function(x){ any(is.na(x)) })
   
   # check whether any columns of matU have sums exceeding 1
-  checkColsums <- function(x) any(colSums(x@matU, na.rm = TRUE) > 1)
-  db@metadata$check_colsums_U <- sapply(db@mat, checkColsums)
+  newdata$matUcolSums <- sapply(matU(db), 
+    function(x){ any(colSums(x, na.rm = TRUE) > 1) })
   
   # check properties of matA using functions in popdemo
   # these checks require matA with no values of NA
-  db_sub <- subsetDB(db, check_NA_A == F) # subset db to matA with no NAs
-  
-  checkErgodic <- function(x) popdemo::is.matrix_ergodic(x@matA)
-  checkPrimitive <- function(x) popdemo::is.matrix_primitive(x@matA)
-  checkIrreducible <- function(x) popdemo::is.matrix_irreducible(x@matA)
-  
-  db_sub@metadata$check_ergodic <- sapply(db_sub@mat, checkErgodic)
-  db_sub@metadata$check_primitive <- sapply(db_sub@mat, checkPrimitive)
-  db_sub@metadata$check_irreducible <- sapply(db_sub@mat, checkIrreducible)
+  db_sub <- subsetDB(db, matAcheckNA %in% FALSE) # subset db to matA with no NAs
+  newdata_sub <- data(db_sub)
+  newdata_sub$checkPrimitive <- sapply(matA(db_sub), popdemo::isPrimitive)
+  newdata_sub$checkIrreducible <- sapply(matA(db_sub), popdemo::isIrreducible)
+  newdata_sub$checkErgodic <- sapply(matA(db_sub), popdemo::isErgodic)
   
   # merge checks into full db
-  db_sub@metadata <- subset(db_sub@metadata, select = c('index',
-                                                        'check_ergodic',
-                                                        'check_primitive',
-                                                        'check_irreducible'))
-  db@metadata <- merge(db@metadata, db_sub@metadata, by = 'index', all.x = T)
-  db@metadata <- subset(db@metadata, select = -index)
+  newdata_sub2 <- subset(newdata_sub, select = c('index',
+                                                 'check_ergodic',
+                                                 'check_primitive',
+                                                 'check_irreducible'))
+  newdata <- merge(newdata, newdata_sub2, by = 'index', all.x = T)
+  newdata <- subset(newdata, select = -index)
   
   # return
+  db@data <- newdata
   return(db)
 }
 

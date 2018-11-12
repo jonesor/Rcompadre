@@ -31,30 +31,30 @@
 mergeDBs <- function(db1, db2) {
   
   db1 <- convertLegacyDB(db1)
-
+  newdata1 <- data(db1)
   db2 <- convertLegacyDB(db2)
+  newdata2 - data(db2)
+
   # Probably don't want to combine databases without matching information
-  if(!identical(names(db1@metadata), names(db2@metadata))) {
+  if(!identical(names(metadata(db1)), names(metadata(db2)))) {
     stop("Metadata components do not have identical names. ",
          "Make sure the metadata \n",
          "in each is identical to other.", Call. = FALSE)
   }
   
   out <- methods::new('CompadreData',
-                      metadata = rbind(db1@metadata,
-                                       db2@metadata),
-                      mat = c(db1@mat,
-                              db2@mat),
-                      version = db1@version)
+                      data = rbind(data(db1),
+                                   data(db2)),
+                      version = VersionData(db1))
   
   # create indexes to check output
-  seq1 <- seq_len(dim(db1@metadata)[1])
-  seq2 <- seq(max(seq1) + 1, dim(out@metadata)[1], by = 1)
+  seq1 <- seq_len(dim(metadata(db1))[1])
+  seq2 <- seq(max(seq1) + 1, dim(metadata(out))[1], by = 1)
   
-  if(!identical(db1@mat, 
-                out@mat[seq1]) |
-     !identical(db2@mat, 
-                out@mat[seq2])) {
+  if(!identical(mat(db1), 
+                mat(out)[seq1]) |
+     !identical(mat(db2), 
+                mat(out)[seq2])) {
     
     # Not sure how to report this as an error other than it being my mistake
     stop("Something went wrong. Send a reproducible",
@@ -65,31 +65,25 @@ mergeDBs <- function(db1, db2) {
   # then add in that information. 
   # I will work on making these messages a bit prettier in the not
   # so distant future.
-  if(!grepl('subset created', out@version$Version)) {
-    out@version$Version <- paste(db1@version$Version,
-                                 " - merge made on ",
-                                 format(Sys.time(), 
-                                        "%b_%d_%Y"),
-                                 sep = "")
+  outVersion <- VersionData(out)
+  if(!grepl('subset created', Version(out))) {
+    outVersion$Version <- paste(Version(out),
+                                " - merge made on ",
+                                format(Sys.time(), 
+                                       "%b_%d_%Y"),
+                                sep = "")
     
-    out@version$DateCreated <- paste(db1@version$DateCreated,
+    outVersion$DateCreated <- paste(DateCreated(db1),
                                      " - merge made on ",
                                      format(Sys.time(), 
                                             "%b_%d_%Y"),
                                      sep = "") 
   }
 
-  out@version$NumberAcceptedSpecies <- length(
-    unique(out@metadata$SpeciesAccepted)
-  )
-  out@version$NumberStudies <- length(
-    unique(
-      paste0(out@metadata$Authors,
-             out@metadata$Journal,
-             out@metadata$YearPublication))
-  )
-
-  out@version$NumberMatrices <- length(out@mat)
+  outVersion$NumberAcceptedSpecies <- NumberAcceptedSpecies(out)
+  outVersion$NumberStudies <- NumberStudies(out)
+  outVersion$NumberMatrices <- NumberMatrices(out)
   
+  out@version <- outVersion
   return(out)
 }

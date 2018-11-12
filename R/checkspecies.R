@@ -73,5 +73,5 @@ findSpecies <- function(species, db) {
       db <- methods::as(db, "CompadreData")
     }
   }
-  tolower(species) %in% tolower(gsub('_', ' ', db@metadata$SpeciesAccepted))
+  tolower(species) %in% tolower(gsub('_', ' ', SpeciesAccepted(db)))
 }

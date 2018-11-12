@@ -6,6 +6,9 @@
 #' combined propagule, pre-reproductive, reproductive and post-reproductive
 #' stages.
 #'
+#' @param CompadreM a CompadreM object. If this argument is not empty, then 
+#'   matF is extracted from the CompadreM object, and
+#'   any object passed to matF is ignored.
 #' @param matF A fecundity matrix
 #' @param na.handling One of \code{"return.na"}, \code{"return.true"}, or
 #'   \code{"return.false"}. Determines how values of \code{NA} within
@@ -45,7 +48,13 @@
 #'
 #' @export identifyReproStages
 #' 
-identifyReproStages <- function(matF, na.handling = "return.true") {
+identifyReproStages <- function(CompadreM = NULL, matF = NULL, 
+                                na.handling = "return.true") {
+  if(!is.null(CompadreM)){
+    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
+    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
+    matF <- matF(CompadreM)
+  }
   if (!na.handling %in% c("return.na", "return.true", "return.false")) {
     stop("Argument na.handling must be either 'return.na', 'return.true', or 'return.false'")
   } else if (all(is.na(matF))) {
