@@ -32,37 +32,40 @@ compareDBs <- function(db1, db2, verbose = FALSE){
   db1 <- convertLegacyDB(db1)
   db2 <- convertLegacyDB(db2)
   
+  newdata1 <- data(db1)
+  newdata1 <- data(db2)
+
   #Quick summary
   cat("Quick Summary\n")
   
   #File 1
-  uniqueSource1 <- unique(paste(db1@metadata$Authors, " (",
-                                db1@metadata$YearPublication, ") ",
-                                db1@metadata$Journal, sep = ""))                     
-  db1@metadata$binomial <- db1@metadata$SpeciesAccepted
+  uniqueSource1 <- unique(paste(Authors(db1), " (",
+                                YearPublication(db1), ") ",
+                                Journal(db1), sep = ""))                     
+  binomial1 <- SpeciesAccepted(db1)
   
   cat(paste("File-1 contains the demographic and associated data from ", 
             length(uniqueSource1), " source papers, corresponding to ",
-            length(unique(db1@metadata$binomial))," accepted species, and ",
-            nrow(db1@metadata), " matrices.\n\n",sep=""))
+            length(unique(binomial1))," accepted species, and ",
+            NumberMatrices(db1), " matrices.\n\n",sep=""))
   
   #File 2
-  uniqueSource2 <- unique(paste(db2@metadata$Authors, " (",
-                                db2@metadata$YearPublication, ") ",
-                                db2@metadata$Journal, sep = ""))                      
-  db2@metadata$binomial <- db2@metadata$SpeciesAccepted
+  uniqueSource2 <- unique(paste(Authors(db2), " (",
+                                YearPublication(db2), ") ",
+                                Journal(db2), sep = ""))                      
+  binomial2 <- SpeciesAccepted(db2)
   
   cat(paste("File-2 contains the demographic and associated data for ", 
             length(uniqueSource2), " source papers, corresponding to ",
-            length(unique(db2@metadata$binomial))," accepted species, and ",
-            nrow(db2@metadata), " matrices.\n\n",sep=""))
+            length(unique(binomial2))," accepted species, and ",
+            NumberMatrices(db2), " matrices.\n\n",sep=""))
   
   if(verbose == TRUE){
     cat("Detailed summary\n")
     
     #Accepted species in File 1 that are not in File 2
-    sp1 <- unique(db1@metadata$binomial)
-    sp2 <- unique(db2@metadata$binomial)
+    sp1 <- unique(binomial1)
+    sp2 <- unique(binomial2)
     
     cat("Number of accepted species in File 1, based on latin binomial\n")
     print(length(sp1))
@@ -77,8 +80,8 @@ compareDBs <- function(db1, db2, verbose = FALSE){
     print(sp2[which(!sp2%in%sp1)])
     
     #Get unique author species for both files
-    asp1 <- unique(db1@metadata$SpeciesAuthor)
-    asp2 <- unique(db2@metadata$SpeciesAuthor)
+    asp1 <- unique(SpeciesAuthor(db1))
+    asp2 <- unique(SpeciesAuthor(db2))
     
     cat("Number of unique study-species combinations in File 1\n")
     print(length(asp1))
@@ -99,7 +102,7 @@ compareDBs <- function(db1, db2, verbose = FALSE){
     print(sort(uniqueSource1[which(!uniqueSource1%in%uniqueSource2)]))
     
     
-    cat("See the User Guide for definitiions\n")
+    cat("See the User Guide for definitions\n")
   }
 }
 

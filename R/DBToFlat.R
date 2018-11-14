@@ -39,26 +39,20 @@ DBToFlat <- function(db, onlyMatA = FALSE){
     }
   }
   
-  db@metadata$Amatrix <- NULL
-  for (i in 1:nrow(db@metadata)){
-    db@metadata$classnames[i] <- paste(db@mat[[i]]@matrixClass$MatrixClassAuthor,
-                                       collapse = " | ")
-    db@metadata$matrixA[i] <- paste("[", paste(t(db@mat[[i]]@matA), collapse=" "), "]",
-                                    sep = "")
-  }
-  
+  newdata <- metadata(db)
+  newdata$MatrixClassAuthor <- sapply(MatrixClassAuthor(db), function(x) {
+                                      paste(x, collapse = " | ") })
+  newdata$matA <- sapply(matA(db), function(x){
+                         paste("[", paste(t(x), collapse=" "), "]", sep = "") })
   if(onlyMatA == FALSE) {
-    for (i in 1:nrow(db@metadata)){
-      db@metadata$matrixU[i] <- paste("[", paste(t(db@mat[[i]]@matU), collapse=" "),
-                                      "]", sep = "")
-      db@metadata$matrixF[i] <- paste("[", paste(t(db@mat[[i]]@matF), collapse=" "),
-                                      "]", sep = "")
-      db@metadata$matrixC[i] <- paste("[", paste(t(db@mat[[i]]@matC), collapse=" "),
-                                      "]", sep = "")
-    }
+    newdata$matU <- sapply(matU(db), function(x){
+                          paste("[", paste(t(x), collapse=" "), "]", sep = "") })
+    newdata$matF <- sapply(matF(db), function(x){
+                          paste("[", paste(t(x), collapse=" "), "]", sep = "") })
+    newdata$matC <- sapply(matC(db), function(x){
+                          paste("[", paste(t(x), collapse=" "), "]", sep = "") })
   }
-  
-  return(db@metadata)
+  return(newdata)
 }
 
 #' @rdname DBToFlat

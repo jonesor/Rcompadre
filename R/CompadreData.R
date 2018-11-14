@@ -19,14 +19,14 @@
 ################################################################################
 #' CompadreData class
 #' 
-#' Needs description
+#' This page describes methods for accessing any metadata information from 
+#' CompadreData objects.
 #' 
-#' @name CompadreData
+#' @name CompadreMetadataMethods
 
 setClass("CompadreData",
          slots = c(
-             metadata = "data.frame",
-             mat = "list",
+             data = "data.frame",
              version = "list"
              )
          )
@@ -36,7 +36,7 @@ setClass("CompadreData",
 ################################################################################
 ## Initialize & check
 
-## define a method for initialize
+## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
 setMethod("initialize", "CompadreData",
     function(.Object, ...) {
@@ -47,14 +47,27 @@ setMethod("initialize", "CompadreData",
 
 
 ## -----------------------------------------------------------------------------
-## define validity check function
+## define validity check function (does not need to be documented)
 validCompadreData <- function(object) {
+    dat <- object@data
     errors <- character()
-    if (nrow(object@metadata) != length(object@mat)) {
-        msg <- paste0("Unequal metadata and mat lengths:",
-                      nrow(object@metadata), ", ",
-                      length(object@mat))
+    if (!("mat" %in% names(dat))) {
+        msg <- 
+"data must contain a column 'mat' containing matrices\n
+ in the form of a list of 'ConmpadreM' objects"
         errors <- c(errors, msg)
+    }
+    if ("mat" %in% names(dat)) {
+        if (!(class(dat$mat) %in% "list")) {
+            msg <- "column 'mat' must be a list column"
+            errors <- c(errors, msg)
+        }
+        if (class(dat$mat) %in% "list") {
+            if (!(all(sapply(dat$mat, class) %in% "CompadreM"))) {
+                msg <- "all elements of 'mat' must be 'CompadreM' objects"
+                errors <- c(errors, msg)
+            }
+        }
     }
     if (length(errors) == 0) {
         TRUE
@@ -67,31 +80,59 @@ setValidity("CompadreData", validCompadreData)
 
 
 ################################################################################
+## Working with all data (matrices and metadata)
+
+## -----------------------------------------------------------------------------
 ## define method to coerce old compadre db object to CompadreData class
 setAs("list", "CompadreData", function(from) asCompadreData(from))
 
+#' This page describes methods for working with the entire database (including 
+#' both matrices and metadata) using CompadreData objects.
+#' @name CompadreDataMethods
+#' @export
 #' @importFrom methods new
 asCompadreData <- function(from) {
-    ## Need to check that 'from' is a old style compadre db object - this will
-    ## have to be by checking it has the expected structure
+    # is all the data required to fill S4 slots there?
+    if(!all(c( "metadata", "matrixClass", "mat", "version") %in% names(from))) {
+        stop(
+"This doesn't appear to be an old compadre data object. It does\n
+ not contain all of the components 'metadata', 'mat', 'matrixClass'\n
+ and 'version' required to generate a CompadreData object. See ?CompadreData")
+    }
+    # do all the matrix list elements contain matA, matF, matU and matC?
+    matNames <- sapply(comadre$mat, names)
+    matNamesMatch <- all(apply(matnames, 
+                         2, 
+                         function(N){ N == c("matA", "matU", "matF", "matC") }))
+    if(!matNamesMatch) {
+        stop(
+"Not all matrices in this compadre data object contain all 
+ of the components matA, matU, matF and matC (in that order) 
+ required to generate CompadreM objects. See ?CompadreM"
+        )
+    }
+    # get metadata
+    metadata <- from$metadata
+    # get matrices and coerce into CompadreM objects
+    mat <- lapply(seq_along(from$mat), function(i) {
+        methods::new("CompadreM",
+                    matA = from$mat[[i]]$matA,
+                    matU = from$mat[[i]]$matU,
+                    matF = from$mat[[i]]$matF,
+                    matC = from$mat[[i]]$matC,
+                    matrixClass = as.data.frame(from$matrixClass[[i]]))
+    })
+    # add matrices to metadata as a list column
+    dat <- data.frame(metadata, I(mat))
+    # create a new CompadreData object with the new data and version
     new("CompadreData",
-        metadata = from$metadata,
-        mat = lapply(seq_along(from$mat), function(i) {
-          methods::new("CompadreM",
-                       matA = from$mat[[i]]$matA,
-                       matU = from$mat[[i]]$matU,
-                       matF = from$mat[[i]]$matF,
-                       matC = from$mat[[i]]$matC,
-                       matrixClass = as.data.frame(from$matrixClass[[i]]))
-        }),
+        data = dat,
         version = from$version)
 }
 
 
-################################################################################
-## Methods
-
-# show
+## -----------------------------------------------------------------------------
+## define a method for showing the object (does not need to be documented)
 setMethod("show", signature = (object ="CompadreData"),
           function (object){
             Mno <- NumberMatrices(object)
@@ -119,10 +160,10 @@ setMethod("show", signature = (object ="CompadreData"),
 #' This method enables subsetting the data using square brackets, i.e. for a
 #' CompadreData object "DB" one can use DB[1:2, 1:10] to get a new CompadreData
 #' object that includes the first two matrices and the the first 10 columns of 
-#' their associated metadata. It's possible to pass numeric vectors, logical 
+#' their associated metadata. It's possible to pass logical vectors, numeric
 #' vectors, or character vectors that match the row or column names of the 
-#' metadata. The function calls subsetDB to do the work of subsetting rows.
-#' @rdname CompadreData
+#' metadata. 
+#' @rdname CompadreDataMethods
 #' @export
 setMethod(f = "[", signature = signature(x = "CompadreData", i = "ANY", j = "ANY", drop = "ANY"), 
     function(x, i, j, ..., drop = FALSE) {
@@ -130,47 +171,89 @@ setMethod(f = "[", signature = signature(x = "CompadreData", i = "ANY", j = "ANY
         if(!any(is.logical(i), is.numeric(i), is.character(i))) {
             stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
         }
-        if(is.logical(i)) i_logical <- i
-        if(is.numeric(i)) {
-            i_logical <- logical(NumberMatrices(x))
-            i_logical[i] <- TRUE
-        }
-        if(is.character(i)){
-            i_numeric <- match(i, row.names(x))
-            i_logical <- logical(NumberMatrices(x))
-            i_logical[i_numeric] <- TRUE
-        }
     }
     if(!missing(j)){
         if(!any(is.logical(j), is.numeric(j), is.character(j))) {
             stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
         }
+        cols <- j
+        if(is.logical(j) & !j[1]){
+            warning("'mat' was included in the output by default, although not selected")
+            cols[1] <- TRUE
+        }
+        if(is.numeric(j) & !(1 %in% j)){
+            warning("'mat' was included in the output by default, although not selected")
+            cols <- c(1, j)
+        }
+        if(is.character(j) & !(names(data(x))[1] %in% j)){
+            warning("'mat' was included in the output by default, although not selected")
+            cols <- c(names(data(x))[1], j)
+        }
     }
-    xout <- subsetDB(x, i_logical)
-    meta <- metadata(xout)[, j, drop = FALSE]
-    xout@metadata <- meta
+    dat <- data(x)[i, j, drop = FALSE]
+    ver <- Version(x)
+    ver$Version <- paste0(x@version$Version,
+                          " - subset created on ",
+                          format(Sys.time(), "%b_%d_%Y")
+                         )
+    ver$DateCreated <- paste0(x@version$DateCreated,
+                              " - subset created on ",
+                              format(Sys.time(), "%b_%d_%Y")
+                             )
+    ver$NumberAcceptedSpecies <- length(unique(x@metadata$SpeciesAccepted))
+    ver$NumberStudies <- length(unique(paste0(x@metadata$Authors,
+                                              x@metadata$Journal,
+                                              x@metadata$YearPublication
+                                             )))
+    ssdb@version$NumberMatrices <- dim(x@data)[1]
+    xout <- methods::new(CompadreData, data = dat, version = ver)
     xout
 })
 
 
 ## -----------------------------------------------------------------------------
-## metadata slot
+## data slot
+
+# data
+#' The data accessor function accesses the data of a CompadreData
+#' object, which includes both the matrices and the metadata.
+#' The matrices are included as a list column of CompadreM objects, 
+#' with the variable (column) name 'mat'.
+#' @rdname CompadreDataMethods
+#' @export
+setGeneric("data", 
+               function(object){
+                   standardGeneric("data")
+               }
+)
+#' @rdname CompadreMetadataMethods
+#' @export
+setMethod("data", signature = "CompadreData", 
+          function(object){
+            return(object@data)
+          }
+)
+
+################################################################################
+## Working with just the metadata
 
 # metadata
 #' The metadata accessor function accesses the metadata of a CompadreData
-#' object (it does not apply to CompadreM objects).
-#' @rdname CompadreData
+#' object, which is a data frame including all variables, but excluding the 
+#' matrices. Further methods described below allow the user to access 
+#' individual metadata variables as vectors.
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("metadata", 
-               function(object, i, j){
+               function(object){
                    standardGeneric("metadata")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("metadata", signature = "CompadreData", 
-          function(object, i){
-            return(object@metadata[ , ...])
+          function(object){
+            return(object@data[ , !names(object@data %in% "mat")])
           }
 )
 
@@ -198,776 +281,776 @@ setMethod("metadata", signature = "CompadreData",
 # "MatrixSplit", "MatrixFec", "Observation",
 # "MatrixDimension", "SurvivalIssue".
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("SpeciesAuthor", 
                function(object){
                    standardGeneric("SpeciesAuthor")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("SpeciesAuthor", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "SpeciesAuthor"])
+            return(object@data[ , "SpeciesAuthor"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("SpeciesAccepted", 
                function(object){
                    standardGeneric("SpeciesAccepted")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("SpeciesAccepted", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "SpeciesAccepted"])
+            return(object@data[ , "SpeciesAccepted"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("CommonName", 
                function(object){
                    standardGeneric("CommonName")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("CommonName", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "CommonName"])
+            return(object@data[ , "CommonName"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Infraspecific", 
                function(object){
                    standardGeneric("Infraspecific")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Infraspecific", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Infraspecific"])
+            return(object@data[ , "Infraspecific"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Genus", 
                function(object){
                    standardGeneric("Genus")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Genus", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Genus"])
+            return(object@data[ , "Genus"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("GenusAccepted", 
                function(object){
                    standardGeneric("GenusAccepted")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("GenusAccepted", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "GenusAccepted"])
+            return(object@data[ , "GenusAccepted"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("GenusAuthor", 
                function(object){
                    standardGeneric("GenusAuthor")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("GenusAuthor", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "GenusAuthor"])
+            return(object@data[ , "GenusAuthor"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Family", 
                function(object){
                    standardGeneric("Family")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Family", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Family"])
+            return(object@data[ , "Family"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Order", 
                function(object){
                    standardGeneric("Order")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Order", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Order"])
+            return(object@data[ , "Order"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Class", 
                function(object){
                    standardGeneric("Class")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Class", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Class"])
+            return(object@data[ , "Class"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Phylum", 
                function(object){
                    standardGeneric("Phylum")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Phylum", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Phylum"])
+            return(object@data[ , "Phylum"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Kingdom", 
                function(object){
                    standardGeneric("Kingdom")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Kingdom", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Kingdom"])
+            return(object@data[ , "Kingdom"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("OrganismType", 
                function(object){
                    standardGeneric("OrganismType")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("OrganismType", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "OrganismType"])
+            return(object@data[ , "OrganismType"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("DicotMonoc", 
                function(object){
                    standardGeneric("DicotMonoc")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("DicotMonoc", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "DicotMonoc"])
+            return(object@data[ , "DicotMonoc"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("AngioGymno", 
                function(object){
                    standardGeneric("AngioGymno")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("AngioGymno", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "AngioGymno"])
+            return(object@data[ , "AngioGymno"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Authors", 
                function(object){
                    standardGeneric("Authors")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Authors", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Authors"])
+            return(object@data[ , "Authors"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Journal", 
                function(object){
                    standardGeneric("Journal")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Journal", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Journal"])
+            return(object@data[ , "Journal"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("YearPublication", 
                function(object){
                    standardGeneric("YearPublication")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("YearPublication", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "YearPublication"])
+            return(object@data[ , "YearPublication"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("DOI.ISBN", 
                function(object){
                    standardGeneric("DOI.ISBN")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("DOI.ISBN", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "DOI.ISBN"])
+            return(object@data[ , "DOI.ISBN"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("AdditionalSource", 
                function(object){
                    standardGeneric("AdditionalSource")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("AdditionalSource", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "AdditionalSource"])
+            return(object@data[ , "AdditionalSource"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("StudyDuration", 
                function(object){
                    standardGeneric("StudyDuration")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("StudyDuration", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "StudyDuration"])
+            return(object@data[ , "StudyDuration"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("StudyStart", 
                function(object){
                    standardGeneric("StudyStart")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("StudyStart", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "StudyStart"])
+            return(object@data[ , "StudyStart"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("StudyEnd", 
                function(object){
                    standardGeneric("StudyEnd")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("StudyEnd", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "StudyEnd"])
+            return(object@data[ , "StudyEnd"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("AnnualPeriodicity", 
                function(object){
                    standardGeneric("AnnualPeriodicity")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("AnnualPeriodicity", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "AnnualPeriodicity"])
+            return(object@data[ , "AnnualPeriodicity"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("NumberPopulations", 
                function(object){
                    standardGeneric("NumberPopulations")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("NumberPopulations", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "NumberPopulations"])
+            return(object@data[ , "NumberPopulations"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixCriteriaSize", 
                function(object){
                    standardGeneric("MatrixCriteriaSize")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixCriteriaSize", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixCriteriaSize"])
+            return(object@data[ , "MatrixCriteriaSize"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixCriteriaOntogeny", 
                function(object){
                    standardGeneric("MatrixCriteriaOntogeny")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixCriteriaOntogeny", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixCriteriaOntogeny"])
+            return(object@data[ , "MatrixCriteriaOntogeny"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixCriteriaAge", 
                function(object){
                    standardGeneric("MatrixCriteriaAge")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixCriteriaAge", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixCriteriaAge"])
+            return(object@data[ , "MatrixCriteriaAge"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixPopulation", 
                function(object){
                    standardGeneric("MatrixPopulation")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixPopulation", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixPopulation"])
+            return(object@data[ , "MatrixPopulation"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Lat", 
                function(object){
                    standardGeneric("Lat")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Lat", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Lat"])
+            return(object@data[ , "Lat"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Lon", 
                function(object){
                    standardGeneric("Lon")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Lon", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Lon"])
+            return(object@data[ , "Lon"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Altitude", 
                function(object){
                    standardGeneric("Altitude")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Altitude", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Altitude"])
+            return(object@data[ , "Altitude"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Country", 
                function(object){
                    standardGeneric("Country")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Country", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Country"])
+            return(object@data[ , "Country"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Continent", 
                function(object){
                    standardGeneric("Continent")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Continent", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Continent"])
+            return(object@data[ , "Continent"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Ecoregion", 
                function(object){
                    standardGeneric("Ecoregion")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Ecoregion", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Ecoregion"])
+            return(object@data[ , "Ecoregion"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("StudiedSex", 
                function(object){
                    standardGeneric("StudiedSex")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("StudiedSex", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "StudiedSex"])
+            return(object@data[ , "StudiedSex"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixComposite", 
                function(object){
                    standardGeneric("MatrixComposite")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixComposite", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixComposite"])
+            return(object@data[ , "MatrixComposite"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixTreatment", 
                function(object){
                    standardGeneric("MatrixTreatment")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixTreatment", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixTreatment"])
+            return(object@data[ , "MatrixTreatment"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixCaptivity", 
                function(object){
                    standardGeneric("MatrixCaptivity")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixCaptivity", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixCaptivity"])
+            return(object@data[ , "MatrixCaptivity"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixStartYear", 
                function(object){
                    standardGeneric("MatrixStartYear")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixStartYear", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixStartYear"])
+            return(object@data[ , "MatrixStartYear"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixStartSeason", 
                function(object){
                    standardGeneric("MatrixStartSeason")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixStartSeason", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixStartSeason"])
+            return(object@data[ , "MatrixStartSeason"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixStartMonth", 
                function(object){
                    standardGeneric("MatrixStartMonth")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixStartMonth", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixStartMonth"])
+            return(object@data[ , "MatrixStartMonth"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixEndYear", 
                function(object){
                    standardGeneric("MatrixEndYear")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixEndYear", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixEndYear"])
+            return(object@data[ , "MatrixEndYear"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixEndSeason", 
                function(object){
                    standardGeneric("MatrixEndSeason")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixEndSeason", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixEndSeason"])
+            return(object@data[ , "MatrixEndSeason"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixEndMonth", 
                function(object){
                    standardGeneric("MatrixEndMonth")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixEndMonth", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixEndMonth"])
+            return(object@data[ , "MatrixEndMonth"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixSplit", 
                function(object){
                    standardGeneric("MatrixSplit")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixSplit", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixSplit"])
+            return(object@data[ , "MatrixSplit"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixFec", 
                function(object){
                    standardGeneric("MatrixFec")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixFec", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixFec"])
+            return(object@data[ , "MatrixFec"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Observation", 
                function(object){
                    standardGeneric("Observation")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Observation", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "Observation"])
+            return(object@data[ , "Observation"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("MatrixDimension", 
                function(object){
                    standardGeneric("MatrixDimension")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("MatrixDimension", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "MatrixDimension"])
+            return(object@data[ , "MatrixDimension"])
           }
 )
 
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("SurvivalIssue", 
                function(object){
                    standardGeneric("SurvivalIssue")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("SurvivalIssue", signature = "CompadreData", 
           function(object){
-            return(object@metadata[ , "SurvivalIssue"])
+            return(object@data[ , "SurvivalIssue"])
           }
 )
 
 
+################################################################################
+## Working with just matrices
+## (Note most relevant functions for working with matrices are contained in
+## 'ClassUnionMethods.R' and described in the 'CompdareMatrixMethods' rd file)
 
 ## -----------------------------------------------------------------------------
-## mat slot
-# NOTE: several methods are contained and documents in ClassUnionMethods, 
-# which apply to both CompadreData and CompadreM objects. These are
-# currently:
-# matA, matU, matF, matC
+## mat column
 
 # mat
 #' The mat accessor function accesses the matrices of a CompadreData object
 #' object.
-#' @rdname CompadreData
+#' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("mat",
                function(object, ...){
                    standardGeneric("mat")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMatrixMethods
 #' @export
 setMethod("mat", signature = "CompadreData", 
           function(object){
@@ -976,20 +1059,40 @@ setMethod("mat", signature = "CompadreData",
 )
 
 
-
 ## -----------------------------------------------------------------------------
 ## version slot
 
+################################################################################
+## Working with version information
+
+# All version data
+#' All version information (including subset information) for a CompadreData 
+#' object, as a list.
+#' @rdname CompadreMetadataMethods
+#' @export
+setGeneric("VersionData", 
+               function(object, ...){
+                   standardGeneric("VersionData")
+               }
+)
+#' @rdname CompadreMetadataMethods
+#' @export
+setMethod("VersionData", signature = "CompadreData", 
+          function(object){
+            return(object@version)
+          }
+)
+
 # Version
 #' The version (including subset if relevant) of a CompadreData object.
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("Version", 
                function(object, ...){
                    standardGeneric("Version")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("Version", signature = "CompadreData", 
           function(object){
@@ -1006,7 +1109,7 @@ setGeneric("DateCreated",
                    standardGeneric("DateCreated")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("DateCreated", signature = "CompadreData", 
           function(object){
@@ -1016,53 +1119,56 @@ setMethod("DateCreated", signature = "CompadreData",
 
 # NumberAcceptedSpecies
 #' The number of accepted binary species names in a CompadreData object.
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("NumberAcceptedSpecies", 
                function(object, ...){
                    standardGeneric("NumberAcceptedSpecies")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("NumberAcceptedSpecies", signature = "CompadreData", 
           function(object){
-            return(object@version$NumberAcceptedSpecies)
+            return(length(unique(SpeciesAccepted(object))))
           }
 )
 
 # NumberStudies
 #' The number of different studies in a CompadreData object.
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("NumberStudies", 
                function(object, ...){
                    standardGeneric("NumberStudies")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("NumberStudies", signature = "CompadreData", 
           function(object){
-            return(object@version$NumberStudies)
+            return(length(unique(paste0(Authors(object),
+                                        Journal(object),
+                                        YearPublication(object)
+                                        ))))
           }
 )
 
 # NumberMatrices
 #' The number of CompadreM objects contained in a CompadreData object (i.e. the)
 #' number of projection matrices).
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setGeneric("NumberMatrices", 
                function(object, ...){
                    standardGeneric("NumberMatrices")
                }
 )
-#' @rdname CompadreData
+#' @rdname CompadreMetadataMethods
 #' @export
 setMethod("NumberMatrices", signature = "CompadreData", 
           function(object){
-            return(object@version$NumberMatrices)
+            return(dim(data(object)[1]))
           }
 )
 

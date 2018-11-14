@@ -52,25 +52,27 @@ getMeanMatF <- function(db) {
     }
   }
 
+  newdata <- data(db)
   # create a unique identifier for each population in the database
-  db@metadata$PopId <- as.numeric(as.factor(paste(
-    db@metadata$Authors,
-    db@metadata$YearPublication,
-    db@metadata$DOI.ISBN,
-    db@metadata$SpeciesAuthor,
-    db@metadata$MatrixPopulation,
-    db@metadata$MatrixDimension
+  newdata$PopId <- as.numeric(as.factor(paste(
+    Authors(db),
+    YearPublication(db),
+    DOI.ISBN(db),
+    SpeciesAuthor(db),
+    MatrixPopulation(db),
+    MatrixDimension(db)
   )))
   
   # subset database to only mean matrices that are divided,
   # and create unique row ID
-  ssdb_mean <- subsetDB(db, MatrixSplit == "Divided")
-  ssdb_mean@metadata$RowId <- seq_len(nrow(ssdb_mean@metadata)) 
+  ssdb <- subsetDB(db, MatrixSplit %in% "Divided")
+  ssnewdata <- data(ssdb)
+  ssnewdata$RowId <- seq_len(nrow(ssnewdata)) 
   
   # function to return a mean mean matF given PopId
   meanMatF <- function(PopIdFocal) {
-    RowId <- subset(ssdb_mean@metadata, PopId == PopIdFocal)$RowId
-    meanMatFs <- lapply(RowId, function(y) ssdb_mean@mat[[y]]@matF)
+    RowId <- subset(ssnewdata, PopId == PopIdFocal)$RowId
+    meanMatFs <- lapply(RowId, function(y) matF(ssdb)[[y]] )
     
     if (length(meanMatFs) == 1) {        # if only one meanMatF for given PopId
       return(NA)
@@ -88,18 +90,18 @@ getMeanMatF <- function(db) {
   }
   
   # create vector of unique PopIds, and list of corresponding meanMatFs
-  unique_study_pop <- sort(unique(db@metadata$PopId))
+  unique_study_pop <- sort(unique(newdata$PopId))
   unique_mean_mat_F <- lapply(unique_study_pop, meanMatF)
 
   # function to return meanMatF corresponding to given row number of db
   appendMeanMatF <- function(i) {
-    PopId <- db@metadata$PopId[i]
+    PopId <- newdata$PopId[i]
     index_mean_mat_F <- which(unique_study_pop == PopId)
     return(unique_mean_mat_F[[index_mean_mat_F]])
   }
   
   # create list of meanMatFs for each row of database
-  meanMatList <- lapply(1:nrow(db@metadata), appendMeanMatF)
+  meanMatList <- lapply(1:nrow(newdata), appendMeanMatF)
   
   return(meanMatList)
 }

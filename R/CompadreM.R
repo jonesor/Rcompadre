@@ -16,6 +16,14 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+################################################################################
+#' Methods for working with matrices in com(p)adre
+#' 
+#' This page describes methods for accessing any matrix information from 
+#' CompadreM and CompadreData objects.
+#' 
+#' @name CompadreMatrixMethods
+
 setClass("CompadreM",
          slots = c(
            matA = "matrix",
@@ -26,9 +34,10 @@ setClass("CompadreM",
          )
 )
 
-## ---------------------------------------------------------------------
-## define a method for initialize
+################################################################################
+## Initialize & check
 
+## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
 setMethod("initialize", "CompadreM",
           function(.Object, ...) {
@@ -44,7 +53,7 @@ setMethod("initialize", "CompadreM",
           })
 
 ## ---------------------------------------------------------------------
-## define validity check function
+## define validity check function (does not need to be documented)
 validCompadreM <- function(object) {
   errors <- character()
   ###matrices
@@ -102,6 +111,11 @@ validCompadreM <- function(object) {
   }
 }
 setValidity("CompadreM", validCompadreM)
+
+
+## -----------------------------------------------------------------------------
+## define a method for showing the object (does not need to be documented)
+# show
 
 setMethod("show", signature = (object ="CompadreM"),
           function (object){

@@ -10,6 +10,9 @@
 #' the stable distribution.\cr\cr
 #' Note: this function is only valid for models without clonality.
 #'
+#' @param CompadreM a CompadreM object. If this argument is not empty, then 
+#'   matU, matF and matC are extracted from the CompadreM object, and
+#'   any objects passed to matU, matF and matC are ignored.
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
 #' @param matC A clonality matrix
@@ -49,6 +52,15 @@
 #' @export collapseMatrix
 #' 
 collapseMatrix <- function(matU, matF, matC, collapse) {
+  if(!is.null(CompadreM)){
+    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
+    if(!is.null(matU)) warning("Extracting matU from CompadreM, ignored given matU")
+    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
+    if(!is.null(matC)) warning("Extracting matC from CompadreM, ignored given matC")
+    matU <- matU(CompadreM)
+    matF <- matF(CompadreM)
+    matC <- matC(CompadreM)
+  }
   matA <- matU + matF + matC
   if (any(is.na(matA))) {
     stop("Cannot collapse projection matrix containing NAs", call. = FALSE)

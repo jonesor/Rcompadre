@@ -5,6 +5,9 @@
 #' the matrix model into a standardized set of stages (e.g. propagule,
 #' pre-reproductive, reproductive, and post-reproductive).
 #'
+#' @param CompadreM a CompadreM object. If this argument is not empty, then 
+#'   matU, matF and matrixStages are extracted from the CompadreM object, and
+#'   any objects passed to matU, matF and matrixStages are ignored.
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
 #' @param matrixStages A character vector identifying the matrix stages
@@ -32,7 +35,17 @@
 #' 
 #' @export rearrangeMatrix
 #' 
-rearrangeMatrix <- function(matU, matF, reproStages, matrixStages) {
+rearrangeMatrix <- function(CompadreM = NULL, matU = NULL, matF = NULL, 
+                            reproStages, matrixStages = NULL) {
+  if(!is.null(CompadreM)){
+    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
+    if(!is.null(matU)) warning("Extracting matU from CompadreM, ignored given matU")
+    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
+    matU <- matU(CompadreM)
+    matF <- matF(CompadreM)
+    if(!is.null(stageNames)) warning("Extracting matrixStages from CompadreM, ignored given matrixStages")
+    matrixStages <- stageNames(CompadreM)
+  }
   if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF),
                                                      length(reproStages)))) {
     stop("Expecting matrices with equal dimensions", call. = FALSE)
