@@ -11,7 +11,7 @@
 
 convertLegacyDB <- function(db) { 
   if (!inherits(db, 'CompadreData')){
-    requiredFields <- c('metdata', 'mat', 'matrixClass')
+    requiredFields <- c('metadata', 'mat', 'matrixClass')
     
     if(all(requiredFields %in% names(db))){
       db <- methods::as(db, "CompadreData")
