@@ -56,7 +56,7 @@ cleanDB <- function(db) {
   
   # check properties of matA using functions in popdemo
   # these checks require matA with no values of NA
-  db_sub <- subsetDB(db, matAcheckNA %in% FALSE) # subset db to matA with no NAs
+  db_sub <- subsetDB(db, newdata$matAcheckNA %in% FALSE) # subset db to matA with no NAs
   newdata_sub <- data(db_sub)
   newdata_sub$checkPrimitive <- sapply(matA(db_sub), popdemo::isPrimitive)
   newdata_sub$checkIrreducible <- sapply(matA(db_sub), popdemo::isIrreducible)
