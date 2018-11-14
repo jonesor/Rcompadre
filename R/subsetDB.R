@@ -38,11 +38,11 @@ subsetDB <- function(db, sub){
   ssdb <- db
 
   # Subset the sub-parts of the database
-  data(ssdb) <- data(ssdb)[subsetID, ]
+  ssdb@data <- data(ssdb)[subsetID, ]
   
   # Version information is retained, but modified as follows.
   if("version" %in% methods::slotNames(ssdb)){
-    newversion <- version(ssdb)
+    newversion <- VersionData(ssdb)
     newversion$Version <- paste0(Version(ssdb),
                                    " - subset created on ",
                                    format(Sys.time(), "%b_%d_%Y")
