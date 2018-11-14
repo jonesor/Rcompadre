@@ -33,7 +33,7 @@ mergeDBs <- function(db1, db2) {
   db1 <- convertLegacyDB(db1)
   newdata1 <- data(db1)
   db2 <- convertLegacyDB(db2)
-  newdata2 - data(db2)
+  newdata2 <- data(db2)
 
   # Probably don't want to combine databases without matching information
   if(!identical(names(metadata(db1)), names(metadata(db2)))) {
