@@ -100,8 +100,8 @@ asCompadreData <- function(from) {
  and 'version' required to generate a CompadreData object. See ?CompadreData")
     }
     # do all the matrix list elements contain matA, matF, matU and matC?
-    matNames <- sapply(comadre$mat, names)
-    matNamesMatch <- all(apply(matnames, 
+    matNames <- sapply(from$mat, names)
+    matNamesMatch <- all(apply(matNames, 
                          2, 
                          function(N){ N == c("matA", "matU", "matF", "matC") }))
     if(!matNamesMatch) {
@@ -123,7 +123,8 @@ asCompadreData <- function(from) {
                     matrixClass = as.data.frame(from$matrixClass[[i]]))
     })
     # add matrices to metadata as a list column
-    dat <- data.frame(metadata, I(mat))
+    dat <- metadata
+    dat$mat <- mat
     # create a new CompadreData object with the new data and version
     new("CompadreData",
         data = dat,
