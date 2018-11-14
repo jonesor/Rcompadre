@@ -254,7 +254,7 @@ setGeneric("metadata",
 #' @export
 setMethod("metadata", signature = "CompadreData", 
           function(object){
-            return(object@data[ , !names(object@data %in% "mat")])
+            return(object@data[ , !(names(object@data %in% "mat")])
           }
 )
 
