@@ -1,7 +1,7 @@
 Package: RcompadreDev
 Type: Package
 Title: Utilities for working with the COMPADRE/COMADRE Database
-Version: 0.1.0
+Version: 0.2.0
 Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Julia Barthold Jones, Tamora James, Patrick Barks, Iain Stott.
 Maintainer: Owen Jones <jones@biology.sdu.dk>
 Description: A set of utility tools for working with the COMPADRE/COMADRE databases. The package provides utility functions for interacting with the COMPADRE and COMADRE databases of matrix population model.

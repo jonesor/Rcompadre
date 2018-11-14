@@ -1,5 +1,6 @@
-[![Travis-CI Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre)
+[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=master)](https://travis-ci.org/jonesor/Rcompadre)
 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=master&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
 
 Rcompadre
 ==========
@@ -15,7 +16,17 @@ Expect bugs!
 
 `install_github("jonesor/Rcompadre")`
 
+*To install the development branch*
 
+`install_github("jonesor/Rcompadre",ref = "devel")`
+
+The development branch is named "RcompadreDev". This difference in names allows one to install both `master` and `devel` branches and call functions from the respective versions as follows:
+
+`Rcompadre::subsetDB(mydatabase)`
+
+or
+
+`RcompadreDev::subsetDB(mydatabase)`
 
 *Report bugs/errors to:*
 
