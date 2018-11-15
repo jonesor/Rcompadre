@@ -20,7 +20,7 @@ convertLegacyDB <- function(db) {
            "1. 'metadata'\n",
            "2. 'mat'\n",
            "3. 'matrixClass'\n",
-           "Please download a newer version from www.compadre-db.org or query",
+           "Please download a newer version from www.compadre-db.org or query ",
            "the database API directly from R.")
     }
   }  
