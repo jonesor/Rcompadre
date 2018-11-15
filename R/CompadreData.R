@@ -89,8 +89,8 @@ setAs("list", "CompadreData", function(from) asCompadreData(from))
 #' This page describes methods for working with the entire database (including 
 #' both matrices and metadata) using CompadreData objects.
 #' @name CompadreDataMethods
-#' @export
 #' @importFrom methods new
+#' @export
 asCompadreData <- function(from) {
     # is all the data required to fill S4 slots there?
     if(!all(c( "metadata", "matrixClass", "mat", "version") %in% names(from))) {
@@ -254,7 +254,7 @@ setGeneric("metadata",
 #' @export
 setMethod("metadata", signature = "CompadreData", 
           function(object){
-            return(object@data[ , !names(object@data %in% "mat")])
+            return(object@data[ , !(names(object@data) %in% "mat")])
           }
 )
 
