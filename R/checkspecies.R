@@ -70,7 +70,7 @@ findSpecies <- function(species, db) {
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreData")
+      db <- methods::as(db, "CompadreDB")
     }
   }
   tolower(species) %in% tolower(gsub('_', ' ', SpeciesAccepted(db)))

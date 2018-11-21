@@ -27,13 +27,10 @@
 #' @export compareDBs
 #' 
 compareDBs <- function(db1, db2, verbose = FALSE){ 
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  db1 <- convertLegacyDB(db1)
-  db2 <- convertLegacyDB(db2)
-  
-  newdata1 <- data(db1)
-  newdata1 <- data(db2)
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
+  db1 <- methods::as(db1, "CompadreDB")
+  db2 <- methods::as(db2, "CompadreDB")
 
   #Quick summary
   cat("Quick Summary\n")

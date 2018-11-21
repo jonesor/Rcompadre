@@ -36,10 +36,10 @@
 #' 
 cleanDB <- function(db) {
   
-  db <- convertLegacyDB(db)
+  db <- methods::as(db, "CompadreDB")
   
   #new data.frame for data slot
-  newdata <- data(db)
+  newdata <- CompadreData(db)
 
   # create row index
   newdata$index <- 1:NumberMatrices(db)
@@ -57,7 +57,7 @@ cleanDB <- function(db) {
   # check properties of matA using functions in popdemo
   # these checks require matA with no values of NA
   db_sub <- subsetDB(db, newdata$matAcheckNA %in% FALSE) # subset db to matA with no NAs
-  newdata_sub <- data(db_sub)
+  newdata_sub <- CompadreData(db_sub)
   newdata_sub$checkPrimitive <- sapply(matA(db_sub), popdemo::isPrimitive)
   newdata_sub$checkIrreducible <- sapply(matA(db_sub), popdemo::isIrreducible)
   newdata_sub$checkErgodic <- sapply(matA(db_sub), popdemo::isErgodic)
@@ -67,12 +67,31 @@ cleanDB <- function(db) {
                                                  'check_ergodic',
                                                  'check_primitive',
                                                  'check_irreducible'))
-  newdata <- merge(newdata, newdata_sub2, by = 'index', all.x = T)
-  newdata <- subset(newdata, select = -index)
-  
+  newdata3 <- merge(newdata, newdata_sub2, by = 'index', all.x = T)
+  cleandata <- subset(newdata3, select = -index)
+
+  # New version with extra info
+  cleanversion <- VersionData(db)
+  cleanversion$Version <- paste0(Version(db),
+                                  " - clean subset created on ",
+                                  format(Sys.time(), "%b_%d_%Y")
+                                )
+  cleanversion$DateCreated <- paste0(DateCreated(db),
+                                      " - clean subset created on ",
+                                      format(Sys.time(), "%b_%d_%Y")
+                                    )
+  cleanversion$NumberAcceptedSpecies <- length(unique(cleandata$SpeciesAccepted))
+  cleanversion$NumberStudies <- length(unique(paste0(cleandata$Authors,
+                                                     cleandata$Journal,
+                                                     cleandata$YearPublication
+                                                    )))
+  cleanversion$NumberMatrices <- dim(cleandata)[1]
+
   # return
-  db@data <- newdata
-  return(db)
+  cleandb <- methods::new("CompadreDB", 
+                          CompadreData = cleandata, 
+                          VersionData = cleanversion)
+  return(cleandb)
 }
 
 #' @rdname cleanDB

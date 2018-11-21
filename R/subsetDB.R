@@ -28,36 +28,34 @@
 #' @export subsetDB
 #' 
 subsetDB <- function(db, sub){
-  db <- convertLegacyDB(db)
+  db <- methods::as(db, "CompadreDB")
   
   e <- substitute(sub)
+  mdat <- CompadreData(db)[!(names(CompadreData(db)) %in% "mat")]
   r <- eval(e, metadata(db), parent.frame())
   subsetID <- seq_len(length(r))[r & !is.na(r)]
   
-  # First make a copy of the database
-  ssdb <- db
-
   # Subset the sub-parts of the database
-  ssdb@data <- data(ssdb)[subsetID, ]
+  ssdata <- CompadreData(ssdb)[subsetID, ]
   
   # Version information is retained, but modified as follows.
-  if("version" %in% methods::slotNames(ssdb)){
-    newversion <- VersionData(ssdb)
-    newversion$Version <- paste0(Version(ssdb),
-                                   " - subset created on ",
-                                   format(Sys.time(), "%b_%d_%Y")
-                                  )
-    newversion$DateCreated <- paste0(DateCreated(ssdb),
-                                       " - subset created on ",
-                                       format(Sys.time(), "%b_%d_%Y")
-                                      )
-    newversion$NumberAcceptedSpecies <- length(unique(SpeciesAccepted(ssdb)))
-    newversion$NumberStudies <- length(unique(paste0(Authors(ssdb),
-                                                       Journal(ssdb),
-                                                       YearPublication(ssdb)
-                                                      )))
-    newversion$NumberMatrices <- dim(data(ssdb)[1])
-    ssdb@version <- newversion
-  }
+  ssversion <- VersionData(db)
+  ssversion$Version <- paste0(Version(db),
+                                  " - subset created on ",
+                                  format(Sys.time(), "%b_%d_%Y")
+                                )
+  ssversion$DateCreated <- paste0(DateCreated(db),
+                                      " - subset created on ",
+                                      format(Sys.time(), "%b_%d_%Y")
+                                    )
+  ssversion$NumberAcceptedSpecies <- length(unique(ssdata$SpeciesAccepted))
+  ssversion$NumberStudies <- length(unique(paste0(ssdata$Authors,
+                                                  ssdata$Journal,
+                                                  ssdata$YearPublication
+                                                    )))
+  ssversion$NumberMatrices <- dim(ssdata)[1]
+
+  # new database to return
+  ssdb <- new("CompadreDB, CompadreData = ssdata, VersionData = ssversion")
   return(ssdb)
 }

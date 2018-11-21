@@ -35,11 +35,11 @@ DBToFlat <- function(db, onlyMatA = FALSE){
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreData")
+      db <- methods::as(db, "CompadreDB")
     }
   }
   
-  newdata <- metadata(db)
+  newdata <- CompadreData(db)[!(names(CompadreData(db) %in% "mat"))]
   newdata$MatrixClassAuthor <- sapply(MatrixClassAuthor(db), function(x) {
                                       paste(x, collapse = " | ") })
   newdata$matA <- sapply(matA(db), function(x){

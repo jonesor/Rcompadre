@@ -3,20 +3,20 @@
 #' 
 #' @param db The \code{Com(p)adre} data base to convert
 #' 
-#' @return A \code{CompadreData} object
+#' @return A \code{CompadreDB} object
 #' 
 #' @importFrom methods as
 #' 
 #' @export
 
 convertLegacyDB <- function(db) { 
-  if (!inherits(db, 'CompadreData')){
+  if (!inherits(db, 'CompadreDB')){
     requiredFields <- c('metadata', 'mat', 'matrixClass')
     
     if(all(requiredFields %in% names(db))){
-      db <- methods::as(db, "CompadreData")
+      db <- methods::as(db, "CompadreDB")
     } else {
-      stop("'CompadreData' objects require at least the following fields:\n",
+      stop("'CompadreDB' objects require at least the following fields:\n",
            "1. 'metadata'\n",
            "2. 'mat'\n",
            "3. 'matrixClass'\n",

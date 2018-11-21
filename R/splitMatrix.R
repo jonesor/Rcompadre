@@ -3,8 +3,8 @@
 #' This function splits a matrix population model into three constituent matrices, U (growth and survival processes), F (sexual reproduction) and C (clonal reproduction).
 #' Warning! The functionality is very basic - it assumes that sexual reproduction is located in the top row of the matrix, and that everything else is growth or survival (the U matrix). Clonality is assumed to be non-existant.
 #'
-#' @param CompadreM a CompadreM object. If this argument is not empty, then 
-#'   matA is extracted from the CompadreM object, and
+#' @param CompadreMat a CompadreMat object. If this argument is not empty, then 
+#'   matA is extracted from the CompadreMat object, and
 #'   any object passed to matA is ignored.
 #' @param matA A matrix population model.
 #' 
@@ -21,10 +21,10 @@
 #' @export splitMatrix
 #' 
 splitMatrix <- function(matA){
-  if(!is.null(CompadreM)){
-    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
-    if(!is.null(matA)) warning("Extracting matU from CompadreM, ignored given matU")
-    matA <- matA(CompadreM)
+  if(!is.null(CompadreMat)){
+    if(!class(CompadreMat) %in% "CompadreMat") stop("CompadreMat must be a CompadreMat object")
+    if(!is.null(matA)) warning("Extracting matU from CompadreMat, ignored given matU")
+    matA <- matA(CompadreMat)
   }
   matU <- matA
   matU[1,] <- rep(0,ncol(matA))
