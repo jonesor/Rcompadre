@@ -198,7 +198,7 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
                             " - subset created on ",
                             format(Sys.time(), "%b_%d_%Y")
                             )
-        newver$DateCreated <- paste0(DateCreated(x),
+        newver$DateCreated <- paste0(DateCreated(db),
                                 " - subset created on ",
                                 format(Sys.time(), "%b_%d_%Y")
                                 )
@@ -431,7 +431,7 @@ setGeneric("NumberAcceptedSpecies",
 #' @export
 setMethod("NumberAcceptedSpecies", signature = "CompadreDB", 
           function(object){
-            return(length(unique(SpeciesAccepted(object))))
+            return(length(unique(object$SpeciesAccepted)))
           }
 )
 
@@ -448,9 +448,9 @@ setGeneric("NumberStudies",
 #' @export
 setMethod("NumberStudies", signature = "CompadreDB", 
           function(object){
-            return(length(unique(paste0(Authors(object),
-                                        Journal(object),
-                                        YearPublication(object)
+            return(length(unique(paste0(object$Authors,
+                                        object$Journal,
+                                        object$YearPublication
                                         ))))
           }
 )

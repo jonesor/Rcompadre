@@ -36,10 +36,10 @@ compareDBs <- function(db1, db2, verbose = FALSE){
   cat("Quick Summary\n")
   
   #File 1
-  uniqueSource1 <- unique(paste(Authors(db1), " (",
-                                YearPublication(db1), ") ",
-                                Journal(db1), sep = ""))                     
-  binomial1 <- SpeciesAccepted(db1)
+  uniqueSource1 <- unique(paste(db1$Authors, " (",
+                                db1$YearPublication, ") ",
+                                db1$Journal, sep = ""))                     
+  binomial1 <- db1$SpeciesAccepted
   
   cat(paste("File-1 contains the demographic and associated data from ", 
             length(uniqueSource1), " source papers, corresponding to ",
@@ -47,10 +47,10 @@ compareDBs <- function(db1, db2, verbose = FALSE){
             NumberMatrices(db1), " matrices.\n\n",sep=""))
   
   #File 2
-  uniqueSource2 <- unique(paste(Authors(db2), " (",
-                                YearPublication(db2), ") ",
-                                Journal(db2), sep = ""))                      
-  binomial2 <- SpeciesAccepted(db2)
+  uniqueSource2 <- unique(paste(db$Authors, " (",
+                                db2$YearPublication, ") ",
+                                db2$Journal, sep = ""))                     
+  binomial2 <- db2$SpeciesAccepted
   
   cat(paste("File-2 contains the demographic and associated data for ", 
             length(uniqueSource2), " source papers, corresponding to ",

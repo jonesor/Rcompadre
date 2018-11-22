@@ -55,12 +55,12 @@ getMeanMatF <- function(db) {
   newdata <- CompadreData(db)
   # create a unique identifier for each population in the database
   newdata$PopId <- as.numeric(as.factor(paste(
-    Authors(db),
-    YearPublication(db),
-    DOI.ISBN(db),
-    SpeciesAuthor(db),
-    MatrixPopulation(db),
-    MatrixDimension(db)
+    db$Authors,
+    db$YearPublication,
+    db$DOI.ISBN,
+    db$SpeciesAuthor,
+    db$MatrixPopulation,
+    db$MatrixDimension
   )))
   
   # subset database to only mean matrices that are divided,

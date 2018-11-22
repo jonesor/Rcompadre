@@ -48,7 +48,7 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   }
   
   if (returnDatabase == TRUE) {
-    ssdb <- subsetDB(db, SpeciesAccepted %in% species)
+    ssdb <- subsetDB(db, db$SpeciesAccepted %in% species)
     return(ssdb)
   } else {
     return(df)
@@ -73,5 +73,5 @@ findSpecies <- function(species, db) {
       db <- methods::as(db, "CompadreDB")
     }
   }
-  tolower(species) %in% tolower(gsub('_', ' ', SpeciesAccepted(db)))
+  tolower(species) %in% tolower(gsub('_', ' ', db$SpeciesAccepted))
 }
