@@ -216,21 +216,21 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 
 #' @name CompadreDataMethods
 #' @export
-as.data.frame.CompadreData <- function(x) as.data.frame(CompadreData(x))
+as.data.frame.CompadreDB <- function(x) as.data.frame(CompadreData(x))
 
 #' @name CompadreDataMethods
 #' @importFrom tibble as_tibble
 #' @export
-as_tibble.CompadreData <- function(x) as_tibble(CompadreData(x))
+as_tibble.CompadreDB <- function(x) as_tibble(CompadreData(x))
 
 #' @name CompadreDataMethods
 #' @export
-head.CompadreData <- function(x) head(CompadreData(x))
+head.CompadreDB <- function(x) head(CompadreData(x))
 
 #' @name CompadreDataMethods
 #' @importFrom tibble as_tibble
 #' @export
-merge.CompadreData <- function(x, y, ...) {
+merge.CompadreDB <- function(x, y, ...) {
   if (inherits(y, "CompadreDB")) {
     y <- CompadreData(y)
   }
@@ -243,7 +243,7 @@ merge.CompadreData <- function(x, y, ...) {
 
 #' @name CompadreDataMethods
 #' @export
-subset.CompadreData <- function(x, subset, select, drop = FALSE, ...) {
+subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   
   if (!"data" %in% slotNames(x)) {
     stop("subset method requires CompadreDB object with slot 'data'")
@@ -319,7 +319,7 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' 
 #' @rdname CompadreDataMethods
 #' @export
-setMethod("$", signature = "CompadreData",
+setMethod("$", signature = "CompadreDB",
           function(x, name) {
             if (!("CompadreData" %in% slotNames(x))) {
               stop("$ method requires CompadreDB object with slot 'CompadreData'")
@@ -351,7 +351,7 @@ setReplaceMethod("$", signature = "CompadreDB",
 
 #' @rdname CompadreDataMethods
 #' @export
-names.CompadreData <- function(x) {
+names.CompadreDB <- function(x) {
   if (!("CompadreData" %in% slotNames(x))) {
     stop("names method requires CompadreData object with slot 'CompadreData'")
   }

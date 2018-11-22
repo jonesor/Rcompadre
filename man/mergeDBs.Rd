@@ -7,26 +7,26 @@
 mergeDBs(db1, db2)
 }
 \arguments{
-\item{db1}{A \code{CompadreData} object or an older version
+\item{db1}{A \code{CompadreDB} object or an older version
 of \code{COM(P)ADRE} in a \code{list}.}
 
-\item{db2}{A \code{CompadreData} object or an older version
+\item{db2}{A \code{CompadreDB} object or an older version
 of \code{COM(P)ADRE} in a \code{list}.}
 }
 \value{
-A \code{CompadreData} object containing both
+A \code{CompadreDB} object containing both
 databases.
 }
 \description{
 Merges two data set objects together. These can either
-be S4 objects of class \code{CompadreData}, S3 list objects that 
+be S4 objects of class \code{CompadreDB}, S3 list objects that 
 contain an older version of the database, or a combination of the
 two.
 }
 \examples{
 \dontrun{
-data(Compadre)
-data(Comadre)
+CompadreData(Compadre)
+CompadreData(Comadre)
 
 BigDB <- mergeDBs(Compadre, Comadre)
 

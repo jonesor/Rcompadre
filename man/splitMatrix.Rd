@@ -8,6 +8,10 @@ splitMatrix(matA)
 }
 \arguments{
 \item{matA}{A matrix population model.}
+
+\item{CompadreMat}{a CompadreMat object. If this argument is not empty, then 
+matA is extracted from the CompadreMat object, and
+any object passed to matA is ignored.}
 }
 \value{
 A list of three matrices: `matU`,`matF` and `matC`.

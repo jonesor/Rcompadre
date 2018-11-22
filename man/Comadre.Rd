@@ -203,7 +203,7 @@
 Comadre
 }
 \description{
-A \code{CompadreData} object consisting of \code{metadata},
+A \code{CompadreDB} object consisting of \code{metadata},
 \code{mat}, and \code{version}
 }
 \keyword{datasets}
