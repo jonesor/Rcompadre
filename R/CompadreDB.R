@@ -120,7 +120,7 @@ asCompadreDB <- function(from) {
                     matrixClass = as.data.frame(from$matrixClass[[i]]))
     })
     # add matrices to metadata as a list column
-    dat <- as_tibble(from$metadata)
+    dat <- from$metadata
     vars <- names(dat)
     dat$mat <- mat
     dat <- dat[, c("mat", vars)]
