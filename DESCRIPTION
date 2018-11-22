@@ -28,8 +28,8 @@ Suggests: knitr,
     MASS
 VignetteBuilder: knitr
 Collate: 
-    'CompadreData.R'
-    'CompadreM.R'
+    'CompadreDB.R'
+    'CompadreMat.R'
     'ClassUnionMethods.R'
     'DBToFlat.R'
     'checkspecies.R'
