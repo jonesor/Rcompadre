@@ -171,7 +171,7 @@
        survival value when the \strong{U} matrix is > 1}
    }
    
- \item{\strong{mat}}{ - A list of \code{CompadreM}'s. These contain the \strong{A}
+ \item{\strong{mat}}{ - A list of \code{CompadreMat}'s. These contain the \strong{A}
  matrices, the submatrices (\strong{U}, \strong{F}, and \strong{C}),
  and the \code{matrixClass} data frame. \code{matrixClass} slot contains
  the following information -}
@@ -204,7 +204,7 @@
 Compadre
 }
 \description{
-A \code{CompadreData} object consisting of \code{metadata},
+A \code{CompadreDB} object consisting of \code{metadata},
 \code{mat}, and \code{version}
 }
 \keyword{datasets}

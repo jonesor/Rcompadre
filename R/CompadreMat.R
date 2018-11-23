@@ -1,4 +1,4 @@
-# Class CompadreM, definition and methods
+# Class CompadreMat, definition and methods
 
 # Copyright (c) 2017 Tamora D. James and Iain M. Stott
 
@@ -20,11 +20,11 @@
 #' Methods for working with matrices in com(p)adre
 #' 
 #' This page describes methods for accessing any matrix information from 
-#' CompadreM and CompadreData objects.
+#' CompadreMat and CompadreDB objects.
 #' 
 #' @name CompadreMatrixMethods
 
-setClass("CompadreM",
+setClass("CompadreMat",
          slots = c(
            matA = "matrix",
            matU = "matrix",
@@ -39,7 +39,7 @@ setClass("CompadreM",
 
 ## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
-setMethod("initialize", "CompadreM",
+setMethod("initialize", "CompadreMat",
           function(.Object, ...) {
             .Object <- methods::callNextMethod()
             if(length(.Object@matrixClass) == 0) {
@@ -54,14 +54,14 @@ setMethod("initialize", "CompadreM",
 
 ## ---------------------------------------------------------------------
 ## define validity check function (does not need to be documented)
-validCompadreM <- function(object) {
+validCompadreMat <- function(object) {
   errors <- character()
   ###matrices
   ##test dimensions
-  dims <- data.frame(matA = dim(object@matA),
-                     matU = dim(object@matU),
-                     matF = dim(object@matF),
-                     matC = dim(object@matC))
+  dims <- data.frame(matA = dim(matA(object)),
+                     matU = dim(matU(object)),
+                     matF = dim(matF(object)),
+                     matC = dim(matC(object)))
   dimsMeans <- colMeans(dims)
   dimsDiff <- diff(range(dimsMeans))
   #matA
@@ -92,7 +92,7 @@ validCompadreM <- function(object) {
   ###matrixClass
   ##test that necessary column names are there
   matrixClassNames <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
-  mCNpresent <- matrixClassNames %in% names(object@matrixClass)
+  mCNpresent <- matrixClassNames %in% names(matrixClass(object))
   if(!all(mCNpresent)) {
     mCNmissing <- paste(matrixClassNames[!mCNpresent], collapse = " & ")
     mCNmsg1 <- paste(mCNmissing, "missing from matrixClassNames")
@@ -100,7 +100,7 @@ validCompadreM <- function(object) {
   }
   ##test that the row dimension matches the matrices,
   ##IF the matrices all have equal dimension.
-  if(dimsDiff == 0 & !all(dim(object@matrixClass)[1] == dimsMeans)) {
+  if(dimsDiff == 0 & !all(dim(matrixClass(object))[1] == dimsMeans)) {
     mCNmsg2 <- "number of rows in matrixClass does not match dimensions of matA, matU, matF and matC"
     errors <- c(errors, mCNmsg2)
   }
@@ -110,16 +110,16 @@ validCompadreM <- function(object) {
     errors
   }
 }
-setValidity("CompadreM", validCompadreM)
+setValidity("CompadreMat", validCompadreMat)
 
 
 ## -----------------------------------------------------------------------------
 ## define a method for showing the object (does not need to be documented)
 # show
 
-setMethod("show", signature = (object ="CompadreM"),
+setMethod("show", signature = (object ="CompadreMat"),
           function (object){
-            Mdim <- dim(object@matA)[1]
+            Mdim <- dim(matA(object))[1]
             #start
             start <- cat(paste("A compadre matrix object with",
                                as.character(Mdim),
@@ -127,27 +127,27 @@ setMethod("show", signature = (object ="CompadreM"),
                       ))
             if(Mdim > 0){
               #matrixClass info
-              showstages <- as.data.frame(object@matrixClass)[,c("MatrixClassAuthor","MatrixClassNumber")]
+              showstages <- as.data.frame(matrixClass(object))[,c("MatrixClassAuthor","MatrixClassNumber")]
               dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
               print(showstages, row.names=F)
               cat("\n")
               #matA
               cat("matA:\n")
-              showmatA <- object@matA
+              showmatA <- matA(object)
               print(showmatA, nsmall = 3)
               cat("\n")
               cat("matU:\n")
-              showmatU <- object@matU
+              showmatU <- matU(object)
               dimnames(showmatU) <- list(1:Mdim, 1:Mdim)
               print(showmatU)
               cat("\n")
               cat("matF:\n")
-              showmatF <- object@matF
+              showmatF <- matF(object)
               dimnames(showmatF) <- list(1:Mdim, 1:Mdim)
               print(showmatF)
               cat("\n")
               cat("matC:\n")
-              showmatC <- object@matC
+              showmatC <- matC(object)
               dimnames(showmatC) <- list(1:Mdim, 1:Mdim)
               print(showmatC)
               cat("\n")

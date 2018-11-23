@@ -6,8 +6,8 @@
 #' combined propagule, pre-reproductive, reproductive and post-reproductive
 #' stages.
 #'
-#' @param CompadreM a CompadreM object. If this argument is not empty, then 
-#'   matF is extracted from the CompadreM object, and
+#' @param CompadreMat a CompadreMat object. If this argument is not empty, then 
+#'   matF is extracted from the CompadreMat object, and
 #'   any object passed to matF is ignored.
 #' @param matF A fecundity matrix
 #' @param na.handling One of \code{"return.na"}, \code{"return.true"}, or
@@ -48,12 +48,12 @@
 #'
 #' @export identifyReproStages
 #' 
-identifyReproStages <- function(CompadreM = NULL, matF = NULL, 
+identifyReproStages <- function(CompadreMat = NULL, matF = NULL, 
                                 na.handling = "return.true") {
-  if(!is.null(CompadreM)){
-    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
-    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
-    matF <- matF(CompadreM)
+  if(!is.null(CompadreMat)){
+    if(!class(CompadreMat) %in% "CompadreMat") stop("CompadreMat must be a CompadreMat object")
+    if(!is.null(matF)) warning("Extracting matF from CompadreMat, ignored given matF")
+    matF <- matF(CompadreMat)
   }
   if (!na.handling %in% c("return.na", "return.true", "return.false")) {
     stop("Argument na.handling must be either 'return.na', 'return.true', or 'return.false'")

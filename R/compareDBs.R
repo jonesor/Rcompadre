@@ -27,80 +27,68 @@
 #' @export compareDBs
 #' 
 compareDBs <- function(db1, db2, verbose = FALSE){ 
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
-  db1 <- convertLegacyDB(db1)
-  db2 <- convertLegacyDB(db2)
-  
-  newdata1 <- data(db1)
-  newdata1 <- data(db2)
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
+  db1 <- methods::as(db1, "CompadreDB")
+  db2 <- methods::as(db2, "CompadreDB")
 
   #Quick summary
-  cat("Quick Summary\n")
+  cat("Quick Summary...\n\n")
   
   #File 1
-  uniqueSource1 <- unique(paste(Authors(db1), " (",
-                                YearPublication(db1), ") ",
-                                Journal(db1), sep = ""))                     
-  binomial1 <- SpeciesAccepted(db1)
-  
-  cat(paste("File-1 contains the demographic and associated data from ", 
-            length(uniqueSource1), " source papers, corresponding to ",
-            length(unique(binomial1))," accepted species, and ",
-            NumberMatrices(db1), " matrices.\n\n",sep=""))
+  cat(paste("DB1 contains data for:\n", 
+            NumberStudies(db1), " source papers\n",
+            NumberAcceptedSpecies(db1)," accepted species\n",
+            NumberMatrices(db1), " matrices\n\n", sep = ""))
   
   #File 2
-  uniqueSource2 <- unique(paste(Authors(db2), " (",
-                                YearPublication(db2), ") ",
-                                Journal(db2), sep = ""))                      
-  binomial2 <- SpeciesAccepted(db2)
-  
-  cat(paste("File-2 contains the demographic and associated data for ", 
-            length(uniqueSource2), " source papers, corresponding to ",
-            length(unique(binomial2))," accepted species, and ",
-            NumberMatrices(db2), " matrices.\n\n",sep=""))
+  cat(paste("DB2 contains data for:\n", 
+            NumberStudies(db2), " source papers\n",
+            NumberAcceptedSpecies(db2)," accepted species\n",
+            NumberMatrices(db2), " matrices\n\n", sep = ""))
   
   if(verbose == TRUE){
-    cat("Detailed summary\n")
+    cat("Detailed summary...\n\n")
     
     #Accepted species in File 1 that are not in File 2
-    sp1 <- unique(binomial1)
-    sp2 <- unique(binomial2)
+    sp1 <- unique(db1$SpeciesAccepted)
+    sp2 <- unique(db2$SpeciesAccepted)
     
-    cat("Number of accepted species in File 1, based on latin binomial\n")
-    print(length(sp1))
-    
-    cat("Number of accepted species in File 2, based on latin binomial\n")
-    print(length(sp2))
-    
-    cat("Accepted species in File 1 that are not in File 2 (based on latin binomial)\n")
+    cat("Species in DB1 not in DB2:\n")
     print(sp1[which(!sp1%in%sp2)])
     
-    cat("Accepted species in File 2 that are not in File 1 (based on latin binomial)\n")
+    cat("Species in DB2 not in DB1:\n")
     print(sp2[which(!sp2%in%sp1)])
     
     #Get unique author species for both files
-    asp1 <- unique(SpeciesAuthor(db1))
-    asp2 <- unique(SpeciesAuthor(db2))
+    #asp1 <- unique(SpeciesAuthor(db1))
+    #asp2 <- unique(SpeciesAuthor(db2))
     
-    cat("Number of unique study-species combinations in File 1\n")
-    print(length(asp1))
+    #cat("Number of study-species combinations in DB1\n")
+    #print(length(asp1))
     
-    cat("Number of unique study-species combinations in File 2\n")
-    print(length(asp2))
+    #cat("Number of study-species combinations in DB2\n")
+    #print(length(asp2))
     
-    #cat("Study-species in File 1 that are not in File 2\n")
+    #cat("Study-species in DB1 that are not in DB2\n")
     #print(asp1[which(!asp1%in%asp2)])
     
-    #cat("Study-species in File 2 that are not in File 1\n")
+    #cat("Study-species in DB2 that are not in DB1\n")
     #print(asp2[which(!asp2%in%asp1)])
-    
-    cat("\n\nSource papers in File 2 that are not in File 1\n")
+
+    uniqueSource1 <- unique(paste(db1$Authors, " (",
+                                  db1$YearPublication, ") ",
+                                  db1$Journal, sep = ""))
+
+    uniqueSource2 <- unique(paste(db2$Authors, " (",
+                                  db2$YearPublication, ") ",
+                                  db2$Journal, sep = ""))
+
+    cat("\n\nSource papers in DB2 not in DB1\n")
     print(sort(uniqueSource2[which(!uniqueSource2%in%uniqueSource1)]))
     
-    cat("\n\nSource papers in File 1 that are not in File 2\n")
+    cat("\n\nSource papers in DB1 not in DB2\n")
     print(sort(uniqueSource1[which(!uniqueSource1%in%uniqueSource2)]))
-    
     
     cat("See the User Guide for definitions\n")
   }

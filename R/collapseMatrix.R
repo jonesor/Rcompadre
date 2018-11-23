@@ -10,8 +10,8 @@
 #' the stable distribution.\cr\cr
 #' Note: this function is only valid for models without clonality.
 #'
-#' @param CompadreM a CompadreM object. If this argument is not empty, then 
-#'   matU, matF and matC are extracted from the CompadreM object, and
+#' @param CompadreMat a CompadreMat object. If this argument is not empty, then 
+#'   matU, matF and matC are extracted from the CompadreMat object, and
 #'   any objects passed to matU, matF and matC are ignored.
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
@@ -52,14 +52,14 @@
 #' @export collapseMatrix
 #' 
 collapseMatrix <- function(matU, matF, matC, collapse) {
-  if(!is.null(CompadreM)){
-    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
-    if(!is.null(matU)) warning("Extracting matU from CompadreM, ignored given matU")
-    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
-    if(!is.null(matC)) warning("Extracting matC from CompadreM, ignored given matC")
-    matU <- matU(CompadreM)
-    matF <- matF(CompadreM)
-    matC <- matC(CompadreM)
+  if(!is.null(CompadreMat)){
+    if(!class(CompadreMat) %in% "CompadreMat") stop("CompadreMat must be a CompadreMat object")
+    if(!is.null(matU)) warning("Extracting matU from CompadreMat, ignored given matU")
+    if(!is.null(matF)) warning("Extracting matF from CompadreMat, ignored given matF")
+    if(!is.null(matC)) warning("Extracting matC from CompadreMat, ignored given matC")
+    matU <- matU(CompadreMat)
+    matF <- matF(CompadreMat)
+    matC <- matC(CompadreMat)
   }
   matA <- matU + matF + matC
   if (any(is.na(matA))) {

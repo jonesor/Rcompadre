@@ -1,24 +1,24 @@
 #' Merge two Compadre/Comadre data sets together
 #' 
 #' @description Merges two data set objects together. These can either
-#' be S4 objects of class \code{CompadreData}, S3 list objects that 
+#' be S4 objects of class \code{CompadreDB}, S3 list objects that 
 #' contain an older version of the database, or a combination of the
 #' two. 
 #' 
-#' @param db1 A \code{CompadreData} object or an older version
+#' @param db1 A \code{CompadreDB} object or an older version
 #' of \code{COM(P)ADRE} in a \code{list}.
-#' @param db2 A \code{CompadreData} object or an older version
+#' @param db2 A \code{CompadreDB} object or an older version
 #' of \code{COM(P)ADRE} in a \code{list}.
 #' 
-#' @return A \code{CompadreData} object containing both
+#' @return A \code{CompadreDB} object containing both
 #' databases.
 #' 
 #' @author Sam Levin
 #' 
 #' @examples 
 #' \dontrun{
-#' data(Compadre)
-#' data(Comadre)
+#' CompadreData(Compadre)
+#' CompadreData(Comadre)
 #' 
 #' BigDB <- mergeDBs(Compadre, Comadre)
 #' 
@@ -30,26 +30,30 @@
 #' 
 mergeDBs <- function(db1, db2) {
   
-  db1 <- convertLegacyDB(db1)
-  newdata1 <- data(db1)
-  db2 <- convertLegacyDB(db2)
-  newdata2 <- data(db2)
+  db1 <- methods::as(db1, "CompadreDB")
+  newdata1 <- CompadreData(db1)
+  db2 <- methods::as(db2, "CompadreDB")
+  newdata2 <- CompadreData(db2)
 
   # Probably don't want to combine databases without matching information
-  if(!identical(names(metadata(db1)), names(metadata(db2)))) {
+  mdat1 <- CompadreData(db1)
+  mdat1 <- mdat1[!(names(mdat1) %in% "mat")]
+  mdat2 <- CompadreData(db2)
+  mdat2 <- mdat2[!(names(mdat2) %in% "mat")]
+  if(!identical(names(mdat1), names(mdat2))) {
     stop("Metadata components do not have identical names. ",
          "Make sure the metadata \n",
          "in each is identical to other.", Call. = FALSE)
   }
   
-  out <- methods::new('CompadreData',
-                      data = rbind(data(db1),
-                                   data(db2)),
+  out <- methods::new('CompadreDB',
+                      data = rbind(CompadreData(db1),
+                                   CompadreData(db2)),
                       version = VersionData(db1))
   
   # create indexes to check output
-  seq1 <- seq_len(dim(metadata(db1))[1])
-  seq2 <- seq(max(seq1) + 1, dim(metadata(out))[1], by = 1)
+  seq1 <- seq_len(dim(mdat1)[1])
+  seq2 <- seq(max(seq1) + 1, dim(CompadreData(out))[1], by = 1)
   
   if(!identical(mat(db1), 
                 mat(out)[seq1]) |

@@ -19,6 +19,10 @@ indices of \code{collapse} correspond to the desired stages of the
 collapsed matrix, and each element of \code{collapse} gives the stage index
 (e.g. "2") or range of stage indices (e.g. "2-3") from the original matrix
 that correspond to the relevant stage index of the collapsed matrix.}
+
+\item{CompadreMat}{a CompadreMat object. If this argument is not empty, then 
+matU, matF and matC are extracted from the CompadreMat object, and
+any objects passed to matU, matF and matC are ignored.}
 }
 \value{
 A list of three containing the collapsed projection matrix

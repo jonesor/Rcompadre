@@ -43,30 +43,30 @@
 #' 
 getMeanMatF <- function(db) {
 
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreData'
+  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
   if (class(db) == "list"){
     if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
     if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
     if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreData")
+      db <- methods::as(db, "CompadreDB")
     }
   }
 
-  newdata <- data(db)
+  newdata <- CompadreData(db)
   # create a unique identifier for each population in the database
   newdata$PopId <- as.numeric(as.factor(paste(
-    Authors(db),
-    YearPublication(db),
-    DOI.ISBN(db),
-    SpeciesAuthor(db),
-    MatrixPopulation(db),
-    MatrixDimension(db)
+    db$Authors,
+    db$YearPublication,
+    db$DOI.ISBN,
+    db$SpeciesAuthor,
+    db$MatrixPopulation,
+    db$MatrixDimension
   )))
   
   # subset database to only mean matrices that are divided,
   # and create unique row ID
   ssdb <- subsetDB(db, MatrixSplit %in% "Divided")
-  ssnewdata <- data(ssdb)
+  ssnewdata <- CompadreData(ssdb)
   ssnewdata$RowId <- seq_len(nrow(ssnewdata)) 
   
   # function to return a mean mean matF given PopId

@@ -4,9 +4,14 @@
 \alias{identifyReproStages}
 \title{Identify which stages in a matrix model are reproductive}
 \usage{
-identifyReproStages(matF, na.handling = "return.true")
+identifyReproStages(CompadreMat = NULL, matF = NULL,
+  na.handling = "return.true")
 }
 \arguments{
+\item{CompadreMat}{a CompadreMat object. If this argument is not empty, then 
+matF is extracted from the CompadreMat object, and
+any object passed to matF is ignored.}
+
 \item{matF}{A fecundity matrix}
 
 \item{na.handling}{One of \code{"return.na"}, \code{"return.true"}, or

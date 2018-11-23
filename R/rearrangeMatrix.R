@@ -5,8 +5,8 @@
 #' the matrix model into a standardized set of stages (e.g. propagule,
 #' pre-reproductive, reproductive, and post-reproductive).
 #'
-#' @param CompadreM a CompadreM object. If this argument is not empty, then 
-#'   matU, matF and matrixStages are extracted from the CompadreM object, and
+#' @param CompadreMat a CompadreMat object. If this argument is not empty, then 
+#'   matU, matF and matrixStages are extracted from the CompadreMat object, and
 #'   any objects passed to matU, matF and matrixStages are ignored.
 #' @param matU Survival matrix
 #' @param matF Fecundity matrix
@@ -35,16 +35,16 @@
 #' 
 #' @export rearrangeMatrix
 #' 
-rearrangeMatrix <- function(CompadreM = NULL, matU = NULL, matF = NULL, 
+rearrangeMatrix <- function(CompadreMat = NULL, matU = NULL, matF = NULL, 
                             reproStages, matrixStages = NULL) {
-  if(!is.null(CompadreM)){
-    if(!class(CompadreM) %in% "CompadreM") stop("CompadreM must be a CompadreM object")
-    if(!is.null(matU)) warning("Extracting matU from CompadreM, ignored given matU")
-    if(!is.null(matF)) warning("Extracting matF from CompadreM, ignored given matF")
-    matU <- matU(CompadreM)
-    matF <- matF(CompadreM)
-    if(!is.null(stageNames)) warning("Extracting matrixStages from CompadreM, ignored given matrixStages")
-    matrixStages <- stageNames(CompadreM)
+  if(!is.null(CompadreMat)){
+    if(!class(CompadreMat) %in% "CompadreMat") stop("CompadreMat must be a CompadreMat object")
+    if(!is.null(matU)) warning("Extracting matU from CompadreMat, ignored given matU")
+    if(!is.null(matF)) warning("Extracting matF from CompadreMat, ignored given matF")
+    matU <- matU(CompadreMat)
+    matF <- matF(CompadreMat)
+    if(!is.null(stageNames)) warning("Extracting matrixStages from CompadreMat, ignored given matrixStages")
+    matrixStages <- stageNames(CompadreMat)
   }
   if (!(identical(dim(matU), dim(matF)) && identical(ncol(matF),
                                                      length(reproStages)))) {

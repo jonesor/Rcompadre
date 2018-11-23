@@ -11,7 +11,7 @@ convertLegacyDB(db)
 \item{db}{The \code{Com(p)adre} data base to convert}
 }
 \value{
-A \code{CompadreData} object
+A \code{CompadreDB} object
 }
 \description{
 utility to convert older versions of database to

@@ -4,9 +4,14 @@
 \alias{rearrangeMatrix}
 \title{Rearrange matrix stages to segregate reproductive and non-reproductive stages}
 \usage{
-rearrangeMatrix(matU, matF, reproStages, matrixStages)
+rearrangeMatrix(CompadreMat = NULL, matU = NULL, matF = NULL, reproStages,
+  matrixStages = NULL)
 }
 \arguments{
+\item{CompadreMat}{a CompadreMat object. If this argument is not empty, then 
+matU, matF and matrixStages are extracted from the CompadreMat object, and
+any objects passed to matU, matF and matrixStages are ignored.}
+
 \item{matU}{Survival matrix}
 
 \item{matF}{Fecundity matrix}
