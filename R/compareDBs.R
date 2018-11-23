@@ -3,9 +3,10 @@
 #' @param db1,db2 COM(P)ADRE database objects to compare. Databases will be 
 #' coerced from the old 'list' format where appropriate (compadre_v4.0.1 and 
 #' below; comadre_v2.0.1 and below).
+#' 
 #' @param verbose A logical argument indicating whether or not to return lots
 #' of detail.
-#'
+#' 
 #' @return Prints a summary to the screen of the comparison between two databases.
 #'
 #' @details \code{compareDBs} is preferred, but \code{dbCompare} is provided 
@@ -24,8 +25,8 @@
 #' @export compareDBs
 #' 
 compareDBs <- function(db1, db2, verbose = FALSE){ 
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
+
+    # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
   db1 <- methods::as(db1, "CompadreDB")
   db2 <- methods::as(db2, "CompadreDB")
 

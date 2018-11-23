@@ -18,7 +18,7 @@ below; comadre_v2.0.1 and below).}
 of detail.}
 }
 \value{
-%% ~Describe the value returned %% If it is a LIST, use %%
+Prints a summary to the screen of the comparison between two databases.
 }
 \description{
 A function to compare two COMPADRE/COMADRE database versions
