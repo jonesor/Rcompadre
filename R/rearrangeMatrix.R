@@ -23,6 +23,7 @@
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' 
 #' @examples
+#' \dontrun{
 #' matU <- rbind(c(0, 0, 0, 0, 0), c(0.1, 0.16, 0, 0, 0), c(0.2, 0.23, 0.12, 0,
 #' 0), c(0, 0, 0.34, 0.53, 0), c(0, 0, 0, 0.34, 0))
 #' 
@@ -32,7 +33,7 @@
 #' reproStages <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
 #' matrixStages <- c('prop', 'active', 'active', 'active', 'active')
 #' rearrangeMatrix(matU, matF, reproStages, matrixStages)
-#' 
+#' }
 #' @export rearrangeMatrix
 #' 
 rearrangeMatrix <- function(CompadreMat = NULL, matU = NULL, matF = NULL, 
