@@ -58,7 +58,7 @@ validCompadreM <- function(object) {
   errors <- character()
   ###matrices
   ##test dimensions
-  dims <- cbind(matA = dim(object@matA),
+  dims <- data.frame(matA = dim(object@matA),
                      matU = dim(object@matU),
                      matF = dim(object@matF),
                      matC = dim(object@matC))
