@@ -42,7 +42,7 @@ Note: this function is only valid for models without clonality.
 }
 \examples{
 \dontrun{
-matU <- matrix(c(0.2582, 0.1613, 0.1935, 0.2258, 0.1613, 
+matU <- matrix(c(0.2581, 0.1613, 0.1935, 0.2258, 0.1613, 
                  0.0408, 0.2857, 0.4286, 0.1020, 0.0816, 
                  0.0385, 0.0385, 0.2692, 0.2308, 0.3462, 
                  0.0000, 0.0625, 0.1250, 0.2500, 0.5625,

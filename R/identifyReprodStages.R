@@ -28,6 +28,7 @@
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples
+#' \dontrun{
 #' matF1 <- rbind(c(0, 0.2, 0, 0.5, 0), c(0, 0.3, 0.2, 0.6, 0), c(0, 0, 0, 0,
 #' 0), c(0, 0, 0, 0, 0), c(0, 0, 0, 0, 0))
 #'
@@ -41,7 +42,6 @@
 #' identifyReproStages(matF2, na.handling = "return.true")
 #' identifyReproStages(matF2, na.handling = "return.false")
 #' 
-#' \dontrun{
 #' # invalid setting for argument na.handling
 #' identifyReproStages(matF2, na.handling = "NA")
 #' }
