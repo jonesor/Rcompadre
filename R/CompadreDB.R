@@ -26,7 +26,7 @@
 
 setClass("CompadreDB",
          slots = c(
-             CompadreData = "tibble",
+             CompadreData = "data.frame",
              VersionData = "list"
              )
          )
@@ -224,6 +224,7 @@ as.data.frame.CompadreDB <- function(x) as.data.frame(CompadreData(x))
 as_tibble.CompadreDB <- function(x) as_tibble(CompadreData(x))
 
 #' @name CompadreDataMethods
+#' @importFrom utils head
 #' @export
 head.CompadreDB <- function(x) head(CompadreData(x))
 
