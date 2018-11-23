@@ -1,15 +1,12 @@
 #' A function to compare two COMPADRE/COMADRE database versions
 #' 
-#' A function to compare two COMPADRE/COMADRE database versions
-#' 
-#' 
 #' @param db1,db2 COM(P)ADRE database objects to compare. Databases will be 
 #' coerced from the old 'list' format where appropriate (compadre_v4.0.1 and 
 #' below; comadre_v2.0.1 and below).
 #' @param verbose A logical argument indicating whether or not to return lots
 #' of detail.
 #'
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
+#' @return Prints a summary to the screen of the comparison between two databases.
 #'
 #' @details \code{compareDBs} is preferred, but \code{dbCompare} is provided 
 #' for legacy purposes.
