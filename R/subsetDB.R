@@ -59,5 +59,3 @@ subsetDB <- function(db, sub){
   ssdb <- new("CompadreDB", CompadreData = ssdata, VersionData = ssversion)
   return(ssdb)
 }
-
-test <- subsetDB(compadre, SpeciesAccepted == "Alaria nana")
