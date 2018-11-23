@@ -55,25 +55,4 @@ CompadreMat and CompadreDB objects.
 Most methods for working with matrices are applicable to both CompadreMat and 
 CompadreDB objects. These are described on this page (along with a couple) 
 of methods applicable to only CompadreMat or CompadreDB objects).
-
-The 'matA' function extracts the matA (projection) matrix from a CompadreMat 
-or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-for CompadreDB objects this is a list of matrices.
-
-The 'matU' function extracts the matU (survival) matrix from a CompadreMat 
-or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-for CompadreDB objects this is a list of matrices.
-
-The 'matF' function extracts the matF (sexual reproduction) matrix from a CompadreMat 
-or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-for CompadreDB objects this is a list of matrices.
-
-The 'matC' function extracts the matC (clonal reproduction) matrix from a CompadreMat 
-or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-for CompadreDB objects this is a list of matrices.
-
-The 'matrixClass' function extracts the matrixClass data frame from a CompadreMat 
-or CompadreDB object. For CompadreMat objects, this is a single data frame, 
-for CompadreDB objects this is a list of data frames. The matrixClass data
-includes information on the matrix, e.g. names of stages.
 }

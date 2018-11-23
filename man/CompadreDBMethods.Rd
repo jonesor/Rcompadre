@@ -14,14 +14,4 @@ asCompadreDB(from)
 \description{
 This page describes methods for accessing any metadata information from 
 CompadreDB objects.
-
-This page describes methods for working with the entire database (including 
-both matrices and metadata) using CompadreDB objects.
-
-This method enables subsetting the data using square brackets, i.e. for a
-CompadreDB object "DB" one can use DB[1:2, 1:10] to get a new CompadreDB
-object that includes the first two matrices and the the first 10 columns of 
-their associated metadata. It's possible to pass logical vectors, numeric
-vectors, or character vectors that match the row or column names of the 
-metadata.
 }

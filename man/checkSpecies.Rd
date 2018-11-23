@@ -38,8 +38,6 @@ species are represented within a COM(P)ADRE database. It outputs either a
 data frame depicting the species of interest and whether they occurr in the
 database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
 object subset to the species of interest.
-
-Utility function for checkSpecies
 }
 \examples{
 \dontrun{

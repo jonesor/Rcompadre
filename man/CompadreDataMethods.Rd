@@ -4,15 +4,10 @@
 \name{CompadreDataMethods}
 \alias{CompadreDataMethods}
 \alias{as.data.frame.CompadreDB}
-\alias{CompadreDataMethods}
 \alias{as_tibble.CompadreDB}
-\alias{CompadreDataMethods}
 \alias{head.CompadreDB}
-\alias{CompadreDataMethods}
 \alias{merge.CompadreDB}
-\alias{CompadreDataMethods}
 \alias{subset.CompadreDB}
-\alias{CompadreDataMethods}
 \alias{CompadreData,CompadreDB-method}
 \alias{$,CompadreDB-method}
 \alias{$<-,CompadreDB-method}

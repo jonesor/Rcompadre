@@ -26,7 +26,7 @@
 
 setClass("CompadreDB",
          slots = c(
-             CompadreData = "data.frame",
+             CompadreData = "tibble",
              VersionData = "list"
              )
          )
