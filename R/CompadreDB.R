@@ -469,7 +469,7 @@ setGeneric("NumberMatrices",
 #' @export
 setMethod("NumberMatrices", signature = "CompadreDB", 
           function(object){
-            return(dim(CompadreData(object)[1]))
+            return(dim(CompadreData(object))[1])
           }
 )
 

@@ -32,11 +32,11 @@ subsetDB <- function(db, sub){
   
   e <- substitute(sub)
   mdat <- CompadreData(db)[!(names(CompadreData(db)) %in% "mat")]
-  r <- eval(e, metadata(db), parent.frame())
+  r <- eval(e, mdat, parent.frame())
   subsetID <- seq_len(length(r))[r & !is.na(r)]
   
   # Subset the sub-parts of the database
-  ssdata <- CompadreData(ssdb)[subsetID, ]
+  ssdata <- CompadreData(db)[subsetID, ]
   
   # Version information is retained, but modified as follows.
   ssversion <- VersionData(db)
@@ -56,6 +56,8 @@ subsetDB <- function(db, sub){
   ssversion$NumberMatrices <- dim(ssdata)[1]
 
   # new database to return
-  ssdb <- new("CompadreDB, CompadreData = ssdata, VersionData = ssversion")
+  ssdb <- new("CompadreDB", CompadreData = ssdata, VersionData = ssversion)
   return(ssdb)
 }
+
+test <- subsetDB(compadre, SpeciesAccepted == "Alaria nana")
