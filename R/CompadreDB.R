@@ -90,7 +90,7 @@ setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 #' both matrices and metadata) using CompadreDB objects.
 #' @rdname CompadreDBMethods
 #' @importFrom methods new
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble add_column
 #' @export
 asCompadreDB <- function(from) {
     # is all the data required to fill S4 slots there?
@@ -119,11 +119,11 @@ asCompadreDB <- function(from) {
                     matC = from$mat[[i]]$matC,
                     matrixClass = as.data.frame(from$matrixClass[[i]]))
     })
+    
     # add matrices to metadata as a list column
-    dat <- from$metadata
-    vars <- names(dat)
-    dat$mat <- mat
-    dat <- dat[, c("mat", vars)]
+    dat <- as_tibble(from$metadata)
+    dat <- add_column(dat, mat = mat, .before = 1)
+    
     # create a new CompadreDB object with the new data and version
     new("CompadreDB",
         CompadreData = dat,
