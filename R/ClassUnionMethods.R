@@ -133,7 +133,7 @@ setMethod("matrixClass", signature = "CompadreMatOrDB",
               return(object@matrixClass)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass }) )
             }
           }
 )
@@ -158,7 +158,7 @@ setMethod("stageNames", signature = "CompadreMatOrDB",
               return(object@matrixClass$MatrixClassAuthor)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
             }
           }
 )
@@ -175,7 +175,7 @@ setMethod("MatrixClassAuthor", signature = "CompadreMatOrDB",
               return(object@matrixClass$MatrixClassAuthor)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
             }
           }
 )
@@ -201,7 +201,7 @@ setMethod("stageStatus", signature = "CompadreMatOrDB",
               return(object@matrixClass$matrixClassOrganized)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
             }
           }
 )
@@ -218,7 +218,7 @@ setMethod("MatrixClassOrganized", signature = "CompadreMatOrDB",
               return(object@matrixClass$matrixClassOrganized)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
             }
           }
 )
