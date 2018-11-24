@@ -112,22 +112,28 @@ asCompadreDB <- function(from) {
     }
     # get matrices and coerce into CompadreMat objects
     mat <- lapply(seq_along(from$mat), function(i) {
-        methods::new("CompadreMat",
-                    matA = from$mat[[i]]$matA,
-                    matU = from$mat[[i]]$matU,
-                    matF = from$mat[[i]]$matF,
-                    matC = from$mat[[i]]$matC,
-                    matrixClass = as.data.frame(from$matrixClass[[i]]))
+      new("CompadreMat",
+          matA = from$mat[[i]]$matA,
+          matU = from$mat[[i]]$matU,
+          matF = from$mat[[i]]$matF,
+          matC = from$mat[[i]]$matC,
+          matrixClass = as.data.frame(from$matrixClass[[i]]))
     })
     
     # add matrices to metadata as a list column
     dat <- as_tibble(from$metadata)
     dat <- add_column(dat, mat = mat, .before = 1)
     
+    # strip out species/study/matrix counts from legacy db, if any
+    db_version <- from$version
+    db_version$NumberAcceptedSpecies <- NULL
+    db_version$NumberStudies <- NULL
+    db_version$NumberMatrices <- NULL
+    
     # create a new CompadreDB object with the new data and version
     new("CompadreDB",
         CompadreData = dat,
-        VersionData = from$version)
+        VersionData = db_version)
 }
 
 
@@ -203,7 +209,13 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 
 #' @name CompadreDataMethods
 #' @export
-as.data.frame.CompadreDB <- function(x) as.data.frame(CompadreData(x))
+as.data.frame.CompadreDB <- function(x, ...) {
+  dat <- CompadreData(x)
+  as.data.frame(dat, ...)
+} 
+
+setAs("CompadreDB", "data.frame", function(from)
+  as.data.frame.CompadreDB(from))
 
 #' @name CompadreDataMethods
 #' @importFrom tibble as_tibble
@@ -213,7 +225,7 @@ as_tibble.CompadreDB <- function(x) as_tibble(CompadreData(x))
 #' @name CompadreDataMethods
 #' @importFrom utils head
 #' @export
-head.CompadreDB <- function(x) head(CompadreData(x))
+head.CompadreDB <- function(x, n = 6L, ...) head(CompadreData(x), n = n, ...)
 
 #' @name CompadreDataMethods
 #' @importFrom tibble as_tibble
@@ -230,6 +242,7 @@ merge.CompadreDB <- function(x, y, ...) {
 
 
 #' @name CompadreDataMethods
+#' @importFrom methods slotNames
 #' @export
 subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   
@@ -253,7 +266,6 @@ subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
     names(nl) <- names(x@data)
     vars <- eval(substitute(select), nl, parent.frame())
   }
-  # dat <- data(x)[i, j, drop = FALSE]
   x[r, vars, drop = drop]
 }
 
@@ -306,6 +318,7 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' "MatrixDimension", "SurvivalIssue".
 #' 
 #' @rdname CompadreDataMethods
+#' @importFrom methods slotNames
 #' @export
 setMethod("$", signature = "CompadreDB",
           function(x, name) {
@@ -318,21 +331,22 @@ setMethod("$", signature = "CompadreDB",
 
 
 #' @rdname CompadreDataMethods
+#' @importFrom methods new slotNames
 #' @export
 setReplaceMethod("$", signature = "CompadreDB", 
                  function(x, name, value) { 
                    if (!("CompadreData" %in% slotNames(x))) {
                      stop("$<- method requires CompadreDB object with slot 'CompadreData'")
                    }
-                   if("mat" %in% var) {
-                       warning("Replacing 'mat' column may be problematic unless all\nits elements are valid 'CompadreMat' objects.")
+                   if("mat" %in% name) {
+                     warning("Replacing 'mat' column may be problematic unless all\nits elements are valid 'CompadreMat' objects.")
                    }
                    datout <- CompadreData(x)
-                   datout[[var]] <- value 
-                   dbout <- methods::new("CompadreDB", 
-                                         CompadreData = datout, 
-                                         VersionData = VersionData(x))
-                   return(x)
+                   datout[[name]] <- value 
+                   
+                   new("CompadreDB", 
+                       CompadreData = datout, 
+                       VersionData = VersionData(x))
                  }
 )
 

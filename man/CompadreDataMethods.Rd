@@ -28,11 +28,11 @@ object, which is a data frame including the matrices and all the
 metadata variables. Further methods described below allow the user to access 
 individual metadata variables as vectors.}
 \usage{
-\method{as.data.frame}{CompadreDB}(x)
+\method{as.data.frame}{CompadreDB}(x, ...)
 
 \method{as_tibble}{CompadreDB}(x)
 
-\method{head}{CompadreDB}(x)
+\method{head}{CompadreDB}(x, n = 6L, ...)
 
 \method{merge}{CompadreDB}(x, y, ...)
 
