@@ -2,12 +2,9 @@
 % Please edit documentation in R/cleanDB.R
 \name{cleanDB}
 \alias{cleanDB}
-\alias{cleanDatabase}
 \title{Flag potential issues in matrices of a COM(P)ADRE database.}
 \usage{
 cleanDB(db)
-
-cleanDatabase(db)
 }
 \arguments{
 \item{db}{A COM(P)ADRE database object. Databases will be will be coerced
@@ -25,10 +22,6 @@ This function adds columns to the metatadata slot of a COM(P)ADRE database
 object that flag potential problems in the matrices, such as when matrices
 contain missing values. These columns can subsequently can be used to subset
 the COM(P)ADRE database by logical argument.
-}
-\details{
-\code{cleanDB} is preferred, but \code{cleanDatabase} is provided 
-for legacy purposes.
 }
 \examples{
 \dontrun{
