@@ -58,10 +58,10 @@ validCompadreMat <- function(object) {
   errors <- character()
   ###matrices
   ##test dimensions
-  dims <- data.frame(matA = dim(matA(object)),
-                     matU = dim(matU(object)),
-                     matF = dim(matF(object)),
-                     matC = dim(matC(object)))
+  dims <- cbind(matA = dim(matA(object)),
+                matU = dim(matU(object)),
+                matF = dim(matF(object)),
+                matC = dim(matC(object)))
   dimsMeans <- colMeans(dims)
   dimsDiff <- diff(range(dimsMeans))
   #matA
