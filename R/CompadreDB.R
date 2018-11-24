@@ -164,53 +164,40 @@ setMethod("show", signature = (object ="CompadreDB"),
 #' vectors, or character vectors that match the row or column names of the 
 #' metadata. 
 #' @rdname CompadreDBMethods
+#' @importFrom methods new
 #' @export
 setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY", drop = "ANY"), 
-    function(x, i, j, ..., drop = FALSE) {
-        dat <- CompadreData(x)
-        if(!missing(i)){
-            if(!any(is.logical(i), is.numeric(i), is.character(i))) {
+          function(x, i, j, ..., drop = FALSE) {
+            dat <- CompadreData(x)
+            if(!missing(i)){
+              if(!any(is.logical(i), is.numeric(i), is.character(i))) {
                 stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
+              }
             }
-        }
-    if(!missing(j)){
-        if(!any(is.logical(j), is.numeric(j), is.character(j))) {
-            stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
-        }
-        mat_col <- which(names(x@data) == "mat")
-        # test for length 1 b/c in [.data.frame, x[,TRUE] selects all columns
-        if(is.logical(j) & j[mat_col] != TRUE & length(j) != 1){
-            warning("'mat' was included in the output by default, although not selected")
-            j[mat_col] <- TRUE
-        }
-        if(is.numeric(j) & !(mat_col %in% j)){
-            warning("'mat' was included in the output by default, although not selected")
-            j <- c(mat_col, j)
-        }
-        if(is.character(j) & !("mat" %in% j)){
-            warning("'mat' was included in the output by default, although not selected")
-            j <- c("mat", j)
-        }
-    }
-        newdat <- dat[i, j, drop = FALSE]
-        newver <- VersionData(x)
-        newver$Version <- paste0(Version(x),
-                            " - subset created on ",
-                            format(Sys.time(), "%b_%d_%Y")
-                            )
-        newver$DateCreated <- paste0(DateCreated(db),
-                                " - subset created on ",
-                                format(Sys.time(), "%b_%d_%Y")
-                                )
-        newver$NumberAcceptedSpecies <- length(unique(newdat$SpeciesAccepted))
-        newverver$NumberStudies <- length(unique(paste0(newdat$Authors,
-                                                newdat$Journal,
-                                                newdat$YearPublication
-                                                )))
-        newver$NumberMatrices <- dim(newdat)[1]
-        dbout <- methods::new(CompadreDB, CompadreData = newdat, VersionData = newver)
-        dbout
-    }
+            if(!missing(j)){
+              if(!any(is.logical(j), is.numeric(j), is.character(j))) {
+                stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
+              }
+              mat_col <- which(names(dat) == "mat")
+              # test for length 1 b/c in [.data.frame, x[,TRUE] selects all columns
+              if(is.logical(j) & j[mat_col] != TRUE & length(j) != 1){
+                warning("'mat' was included in the output by default, although not selected")
+                j[mat_col] <- TRUE
+              }
+              if(is.numeric(j) & !(mat_col %in% j)){
+                warning("'mat' was included in the output by default, although not selected")
+                j <- c(mat_col, j)
+              }
+              if(is.character(j) & !("mat" %in% j)){
+                warning("'mat' was included in the output by default, although not selected")
+                j <- c("mat", j)
+              }
+            }
+            
+            new("CompadreDB",
+                CompadreData = dat[i, j, drop = FALSE],
+                VersionData = VersionData(x))
+          }
 )
 
 
