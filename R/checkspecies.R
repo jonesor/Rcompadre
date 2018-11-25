@@ -26,11 +26,9 @@
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples
-#' \dontrun{
-#' species <- c("Mammillaria gaumeri", "Euterpe edulis", "Homo sapiens")
-#' checkSpecies(species, compadre)
-#' compadre_subset <- checkSpecies(species, compadre, returnDatabase = TRUE)
-#' }
+#' species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")
+#' checkSpecies(species, Compadre)
+#' CompadreSubset <- checkSpecies(species, Compadre, returnDatabase = TRUE)
 #' 
 #' @export checkSpecies
 checkSpecies <- function(species, db, returnDatabase = FALSE) {
@@ -61,4 +59,3 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
 findSpecies <- function(species, db) {
   tolower(species) %in% tolower(gsub('_', ' ', db$SpeciesAccepted))
 }
-

@@ -21,9 +21,7 @@
 #' @seealso stringToMatrix
 #' 
 #' @examples
-#' \dontrun{
-#' compadreFlat <- DBToFlat(compadre, onlyMatA = FALSE)
-#' }
+#' CompadreFlat <- DBToFlat(Compadre, onlyMatA = FALSE)
 #' 
 #' @export DBToFlat
 DBToFlat <- function(db, onlyMatA = FALSE){

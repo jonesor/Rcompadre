@@ -23,16 +23,14 @@
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples
-#' \dontrun{
-#' # print set of matrices (A, U, F, C) associated with row 2 of database
-#' compadre$mat[[2]]
+#' # print matF associated with row 16 of database
+#' Compadre$mat[[16]]
 #'
 #' # create list of meanMatFs
-#' meanF <- getMeanMatF(compadre)
+#' meanF <- getMeanMatF(Compadre)
 #'
-#' # print meanMatF associated with row 2 of database
-#' compadre_with_meanF$mat[[2]]
-#' }
+#' # print meanMatF associated with row 16 of database
+#' meanF[[16]]
 #' 
 #' @export getMeanMatF
 getMeanMatF <- function(db) {

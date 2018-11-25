@@ -24,9 +24,7 @@ contain missing values. These columns can subsequently can be used to subset
 the COM(P)ADRE database by logical argument.
 }
 \examples{
-\dontrun{
-compadre_clean <- cleanDB(compadre)
-}
+CompadreClean <- cleanDB(Compadre)
 
 }
 \author{

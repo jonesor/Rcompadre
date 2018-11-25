@@ -32,11 +32,9 @@ database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
 object subset to the species of interest.
 }
 \examples{
-\dontrun{
-species <- c("Mammillaria gaumeri", "Euterpe edulis", "Homo sapiens")
-checkSpecies(species, compadre)
-compadre_subset <- checkSpecies(species, compadre, returnDatabase = TRUE)
-}
+species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")
+checkSpecies(species, Compadre)
+CompadreSubset <- checkSpecies(species, Compadre, returnDatabase = TRUE)
 
 }
 \author{

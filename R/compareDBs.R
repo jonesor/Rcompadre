@@ -15,9 +15,10 @@
 #' @keywords manip attribute
 #' 
 #' @examples
-#' \dontrun{
-#' 	compareDBs(comadreSubset,comadre,verbose = TRUE)
-#' }
+#' Compadre1 <- subset(Compadre, Continent == "Asia")
+#' Compadre2 <- subset(Compadre, Continent == "Africa")
+#' 
+#' compareDBs(Compadre1, Compadre2)
 #' 
 #' @export compareDBs
 compareDBs <- function(db1, db2, verbose = FALSE){ 

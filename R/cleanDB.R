@@ -22,9 +22,7 @@
 #' @keywords utilities
 #' 
 #' @examples
-#' \dontrun{
-#' compadre_clean <- cleanDB(compadre)
-#' }
+#' CompadreClean <- cleanDB(Compadre)
 #'
 #' @importFrom popdemo isErgodic isIrreducible isPrimitive
 #' @importFrom methods new

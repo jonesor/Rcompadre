@@ -18,12 +18,10 @@ A \code{CompadreDB} object containing both databases.
 Merges two CompadreDB objects together.
 }
 \examples{
-\dontrun{
-CompadreData(Compadre)
-CompadreData(Comadre)
+Compadre1 <- subset(Compadre, Continent == "Asia")
+Compadre2 <- subset(Compadre, Continent == "Africa")
 
-BigDB <- mergeDBs(Compadre, Comadre)
-}
+mergeDBs(Compadre1, Compadre2)
 
 }
 \author{

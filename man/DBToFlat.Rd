@@ -31,9 +31,7 @@ to a string.
 for legacy purposes.
 }
 \examples{
-\dontrun{
-compadreFlat <- DBToFlat(compadre, onlyMatA = FALSE)
-}
+CompadreFlat <- DBToFlat(Compadre, onlyMatA = FALSE)
 
 }
 \seealso{
