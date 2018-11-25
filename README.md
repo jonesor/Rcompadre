@@ -1,8 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre)
-
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
+[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
 
 Rcompadre
 =========
@@ -52,7 +50,7 @@ or load from a local `.RData` file with
 compadre_legacy <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If working with a locally-stored legacy database object (of class `"list"`), convert to the `CompadreDB` class using
+If working with a locally-stored legacy database object (of class "list"), convert to the "CompadreDB" class using
 
 ``` r
 compadre <- convertLegacyDB(compadre_legacy)
