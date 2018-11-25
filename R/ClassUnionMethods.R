@@ -17,6 +17,7 @@ setClassUnion("CompadreMatOrDB", c("CompadreMat", "CompadreDB"))
 
 # matA
 #' @rdname CompadreMatrixMethods
+#' @param object A CompadreDB object
 #' @export
 setGeneric("matA", 
                function(object){
@@ -145,6 +146,8 @@ setMethod("matrixClass", signature = "CompadreMatOrDB",
 #' this is a list of character vectors. The matrixClassAuthor data
 #' describes the names of the stages as determined by the author of the original 
 #' work the matrix was sourced from.
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("stageNames", 
                function(object){
                    standardGeneric("stageNames")
@@ -162,6 +165,9 @@ setMethod("stageNames", signature = "CompadreMatOrDB",
             }
           }
 )
+
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("MatrixClassAuthor", 
                function(object){
                    standardGeneric("MatrixClassAuthor")
@@ -188,11 +194,14 @@ setMethod("MatrixClassAuthor", signature = "CompadreMatOrDB",
 #' this is a list of character vectors. The matrixClassAuthor data
 #' describes the names of the stages as determined by the author of the original 
 #' work the matrix was sourced from.
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("stageStatus", 
                function(object){
                    standardGeneric("stageStatus")
                }
 )
+
 #' @rdname CompadreMatrixMethods
 #' @export
 setMethod("stageStatus", signature = "CompadreMatOrDB", 
@@ -205,11 +214,15 @@ setMethod("stageStatus", signature = "CompadreMatOrDB",
             }
           }
 )
+
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("MatrixClassOrganized", 
                function(object){
                    standardGeneric("MatrixClassOrganized")
                }
 )
+
 #' @rdname CompadreMatrixMethods
 #' @export
 setMethod("MatrixClassOrganized", signature = "CompadreMatOrDB", 

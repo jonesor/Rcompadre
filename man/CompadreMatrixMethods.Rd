@@ -14,9 +14,13 @@
 \alias{matC,CompadreMatOrDB-method}
 \alias{matrixClass}
 \alias{matrixClass,CompadreMatOrDB-method}
+\alias{stageNames}
 \alias{stageNames,CompadreMatOrDB-method}
+\alias{MatrixClassAuthor}
 \alias{MatrixClassAuthor,CompadreMatOrDB-method}
+\alias{stageStatus}
 \alias{stageStatus,CompadreMatOrDB-method}
+\alias{MatrixClassOrganized}
 \alias{MatrixClassOrganized,CompadreMatOrDB-method}
 \title{Methods for working with matrices in com(p)adre}
 \usage{
@@ -40,13 +44,24 @@ matrixClass(object)
 
 \S4method{matrixClass}{CompadreMatOrDB}(object)
 
+stageNames(object)
+
 \S4method{stageNames}{CompadreMatOrDB}(object)
+
+MatrixClassAuthor(object)
 
 \S4method{MatrixClassAuthor}{CompadreMatOrDB}(object)
 
+stageStatus(object)
+
 \S4method{stageStatus}{CompadreMatOrDB}(object)
 
+MatrixClassOrganized(object)
+
 \S4method{MatrixClassOrganized}{CompadreMatOrDB}(object)
+}
+\arguments{
+\item{object}{A CompadreDB object}
 }
 \description{
 This page describes methods for accessing any matrix information from 

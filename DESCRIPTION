@@ -42,3 +42,4 @@ Collate:
     'mergeDBs.R'
     'stringtomatrix.R'
     'subsetDB.R'
+    'subsetting.R'
