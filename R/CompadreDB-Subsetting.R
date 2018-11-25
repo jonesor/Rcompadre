@@ -8,7 +8,7 @@
 #' @note Dropping columns with the minus symbol (\code{-}) is not currently
 #'   supported.
 #' 
-#' @name Subset-CompadreDB
+#' @name CompadreDB-Subsetting
 #' 
 #' @examples
 #' # subset to the first 10 rows
@@ -29,7 +29,7 @@ NULL
 
 
 
-#' @rdname Subset-CompadreDB
+#' @rdname CompadreDB-Subsetting
 #' @param x A \code{CompadreDB} object
 #' @param i row indices (see \link{[.data.frame})
 #' @param j column indices (see \link{[.data.frame})
@@ -73,7 +73,7 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 
 
 
-#' @rdname Subset-CompadreDB
+#' @rdname CompadreDB-Subsetting
 #' @param subset logical expression indicating which rows to keep
 #' @param select expression indicating which columns to keep
 #' @importFrom methods slotNames

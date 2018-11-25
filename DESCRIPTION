@@ -31,6 +31,7 @@ VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
     'CompadreDB-Methods.R'
+    'CompadreDB-Subsetting.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
     'DBToFlat.R'
@@ -43,4 +44,3 @@ Collate:
     'getMeanMatF.R'
     'mergeDBs.R'
     'stringtomatrix.R'
-    'subsetting.R'
