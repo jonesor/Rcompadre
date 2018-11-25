@@ -10,9 +10,7 @@ compareDBs(db1, db2, verbose = FALSE)
 dbCompare(db1, db2, verbose = FALSE)
 }
 \arguments{
-\item{db1, db2}{COM(P)ADRE database objects to compare. Databases will be 
-coerced from the old 'list' format where appropriate (compadre_v4.0.1 and 
-below; comadre_v2.0.1 and below).}
+\item{db1, db2}{COM(P)ADRE database objects to compare.}
 
 \item{verbose}{A logical argument indicating whether or not to return lots
 of detail.}

@@ -4,9 +4,7 @@
 #' data frame, by converting each matrix and associated matrixClass information
 #' to a string.
 #'
-#' @param db A COM(P)ADRE database object. Databases will be will be coerced
-#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-#' comadre_v2.0.1 and below).
+#' @param db A COM(P)ADRE database object.
 #' @param onlyMatA A logical value (TRUE/FALSE) indicating whether ONLY the full
 #'   projection matrix \code{matA} should be included in the flattened data
 #'   frame
@@ -29,14 +27,10 @@
 #' 
 #' @importFrom methods as
 #' @export DBToFlat
-#' 
 DBToFlat <- function(db, onlyMatA = FALSE){
-  if (class(db) == "list"){
-    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreDB")
-    }
+  
+  if (!inherits(db, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function convertLegacyDB")
   }
   
   newdata <- CompadreData(db)[!(names(CompadreData(db) %in% "mat"))]
