@@ -38,6 +38,7 @@ Collate:
     'compareDBs.R'
     'convertDB.R'
     'data.R'
+    'fetchDB.R'
     'getMeanMatF.R'
     'mergeDBs.R'
     'stringtomatrix.R'
