@@ -4,3 +4,4 @@
 ^appveyor\.yml$
 ^\.travis\.yml$
 ^\.git$
+^README\.Rmd$
