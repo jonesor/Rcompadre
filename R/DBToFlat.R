@@ -25,7 +25,6 @@
 #' compadreFlat <- DBToFlat(compadre, onlyMatA = FALSE)
 #' }
 #' 
-#' @importFrom methods as
 #' @export DBToFlat
 DBToFlat <- function(db, onlyMatA = FALSE){
   
@@ -33,7 +32,7 @@ DBToFlat <- function(db, onlyMatA = FALSE){
     stop("db must be of class CompadreDB. See function convertLegacyDB")
   }
   
-  newdata <- CompadreData(db)[!(names(CompadreData(db) %in% "mat"))]
+  newdata <- CompadreData(db)[!(names(CompadreData(db)) %in% "mat")]
   newdata$MatrixClassAuthor <- sapply(MatrixClassAuthor(db), function(x) {
                                       paste(x, collapse = " | ") })
   newdata$matA <- sapply(matA(db), function(x){
