@@ -8,14 +8,11 @@ matrices in a COM(P)ADRE database object}
 getMeanMatF(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
+\item{db}{A COM(P)ADRE database object}
 }
 \value{
 Returns a list which contains the mean fecundity matrix associated
-  with a given row of the database, or NA if there is only a single matrix
-  from the relevant population within the db.
+  with a given row of the database.
 }
 \description{
 This function takes a COM(P)ADRE database object and calculates a grand mean
