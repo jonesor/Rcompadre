@@ -2,21 +2,16 @@
 % Please edit documentation in R/checkspecies.R
 \name{checkSpecies}
 \alias{checkSpecies}
-\alias{findSpecies}
 \title{Check whether a COM(P)ADRE database contains one or more species of interest}
 \usage{
 checkSpecies(species, db, returnDatabase = FALSE)
-
-findSpecies(species, db)
 }
 \arguments{
 \item{species}{A character vector of binomial species names, with the
 genus and specific epithet separated by either an underscore or a space (
 e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))}
 
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
+\item{db}{A COM(P)ADRE database object}
 
 \item{returnDatabase}{A logical argument indicating whether a database 
 should be returned.}
@@ -28,9 +23,6 @@ If returnDatabase = FALSE, \code{checkSpecies} returns a data frame
   containing only those species within argument \code{species}. 
   \code{findSpecies} returns TRUE if a species is found in the database, 
   FALSE if not, and is called by \code{checkSpecies}.
-
-A logical indicating whether the species name is in the 
-COM(P)ADRE object.
 }
 \description{
 This function takes a vector of species names and checks whether those

@@ -9,9 +9,7 @@
 #' @param species A character vector of binomial species names, with the
 #'   genus and specific epithet separated by either an underscore or a space (
 #'   e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))
-#' @param db A COM(P)ADRE database object. Databases will be will be coerced
-#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-#' comadre_v2.0.1 and below).
+#' @param db A COM(P)ADRE database object
 #' @param returnDatabase A logical argument indicating whether a database 
 #' should be returned.
 #' 
@@ -35,43 +33,32 @@
 #' }
 #' 
 #' @export checkSpecies
-#' 
 checkSpecies <- function(species, db, returnDatabase = FALSE) {
   # create dataframe with column for species, and column for whether they are
   #   present in database
   
-  inDatabase <- sapply(species, findSpecies, db = db, USE.NAMES = FALSE)
+  if (!inherits(db, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function convertLegacyDB")
+  }
+  
+  inDatabase <- vapply(species, findSpecies, db = db, FALSE, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
-  if (all(df$inDatabase == FALSE)) {
+  if (all(inDatabase == FALSE)) {
     warning("None of the species were found in the database", call. = FALSE)
   }
   
   if (returnDatabase == TRUE) {
-    ssdb <- subsetDB(db, db$SpeciesAccepted %in% species)
+    ssdb <- db[db$SpeciesAccepted %in% species,]
     return(ssdb)
   } else {
     return(df)
   }
 }
 
-#' Utility function for checkSpecies
-#'
-#' @rdname checkSpecies
-#' 
-#' @return A logical indicating whether the species name is in the 
-#' COM(P)ADRE object.
-#' 
-#' @importFrom methods as
-#' 
-#' @export findSpecies
+
+# Utility function for checkSpecies
 findSpecies <- function(species, db) {
-  if (class(db) == "list"){
-    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreDB")
-    }
-  }
   tolower(species) %in% tolower(gsub('_', ' ', db$SpeciesAccepted))
 }
+
