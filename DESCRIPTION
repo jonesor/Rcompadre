@@ -30,6 +30,7 @@ Suggests: knitr,
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
+    'CompadreDB-Methods.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
     'DBToFlat.R'

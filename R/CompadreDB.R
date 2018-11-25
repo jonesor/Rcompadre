@@ -16,13 +16,15 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-################################################################################
-#' CompadreDB class
+
+
+
+#' CompadreDB Class
 #' 
-#' This page describes methods for accessing any metadata information from 
-#' CompadreDB objects.
+#' This page describes the CompadreDB class, including methods for accessing the
+#' various components of CompadreDB objects.
 #' 
-#' @name CompadreDataMethods
+#' @name CompadreDB
 #' @slot CompadreData A tibble-style data frame with a list-column of matrix
 #'   population models (column \code{mat}) and a variety of other metadata
 #'   columns.
@@ -38,9 +40,6 @@ setClass("CompadreDB",
 
 
 
-################################################################################
-## Initialize & check
-
 ## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
 setMethod("initialize", "CompadreDB",
@@ -51,7 +50,7 @@ setMethod("initialize", "CompadreDB",
     })
 
 
-## -----------------------------------------------------------------------------
+
 ## define validity check function (does not need to be documented)
 validCompadreDB <- function(object) {
     dat <- CompadreData(object)
@@ -84,16 +83,13 @@ setValidity("CompadreDB", validCompadreDB)
 
 
 
-################################################################################
-## Working with all data (matrices and metadata)
-
-## -----------------------------------------------------------------------------
 ## define method to coerce old compadre db object to CompadreDB class
 setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 
-#' This page describes methods for working with the entire database (including 
-#' both matrices and metadata) using CompadreDB objects.
-#' @rdname CompadreDataMethods
+
+
+#' Convert legacy COM(P)ADRE database object o CompadreDB
+#' @rdname CompadreDB
 #' @param from A legacy COM(P)ADRE database
 #' @importFrom methods new
 #' @importFrom tibble as_tibble add_column
@@ -143,7 +139,7 @@ asCompadreDB <- function(from) {
 }
 
 
-## -----------------------------------------------------------------------------
+
 ## define a method for showing the object (does not need to be documented)
 setMethod("show", signature = (object ="CompadreDB"),
           function (object){
@@ -166,60 +162,20 @@ setMethod("show", signature = (object ="CompadreDB"),
 )
 
 
-## -----------------------------------------------------------------------------
-# Subset, replace, merge
-#' @rdname CompadreDataMethods
-#' @export
-as.data.frame.CompadreDB <- function(x, ...) {
-  dat <- CompadreData(x)
-  as.data.frame(dat, ...)
-} 
 
-setAs("CompadreDB", "data.frame", function(from)
-  as.data.frame.CompadreDB(from))
+## Accessors -------------------------------------------------------------------
 
-#' @rdname CompadreDataMethods
-#' @importFrom tibble as_tibble
-#' @export
-as_tibble.CompadreDB <- function(x) as_tibble(CompadreData(x))
-
-#' @rdname CompadreDataMethods
-#' @importFrom utils head
-#' @param n The number of rows to show
-#' @export
-head.CompadreDB <- function(x, n = 6L, ...) head(CompadreData(x), n = n, ...)
-
-#' @rdname CompadreDataMethods
-#' @importFrom tibble as_tibble
-#' @param y A data.frame to merge with x
-#' @export
-merge.CompadreDB <- function(x, y, ...) {
-  if (inherits(y, "CompadreDB")) {
-    y <- CompadreData(y)
-  }
-  dataout <- as_tibble(merge(CompadreData(x), y, ...))
-  dbout <- methods::new("CompadreDB", CompadreData = dataout, 
-                                      VersionData = VersionData(x))
-  dbout
-}
-
-
-################################################################################
-## Working with individual variables
-
-# CompadreData
-#' The CompadreData accessor function accesses the data of a CompadreDB
-#' object, which is a data frame including the matrices and all the 
-#' metadata variables. Further methods described below allow the user to access 
-#' individual metadata variables as vectors.
-#' @rdname CompadreDataMethods
+#' Extract the data slot
+#' @rdname CompadreDB
+#' @param object A CompadreDB object
 #' @export
 setGeneric("CompadreData", 
-               function(object){
-                   standardGeneric("CompadreData")
-               }
+           function(object){
+             standardGeneric("CompadreData")
+           }
 )
-#' @rdname CompadreDataMethods
+
+#' @rdname CompadreDB
 #' @export
 setMethod("CompadreData", signature = "CompadreDB", 
           function(object){
@@ -227,31 +183,7 @@ setMethod("CompadreData", signature = "CompadreDB",
           }
 )
 
-# Metadata variables
-#' These functions access certain variables from the metadata slot of a
-#' CompadreDB object. These methods are implemented using 
-#' CompadreDBObject$VariableName and are effectively the same as using 
-#' `CompadreData(CompadreDBObject, "VariableName")`. Most variables are available 
-#' for both compadre and comadre, but some are only available for either one or 
-#' the other. Where a variable is not available for the chosen database, the 
-#' function will simply return an error. The variables are: 
-#' "SpeciesAuthor", "SpeciesAccepted", "CommonName", "Infraspecific" [comadre], 
-#' "Genus" [compadre] or "GenusAccepted" [comadre], "GenusAuthor" [comadre],
-#' "Family", "Order" , "Class", "Phylum", "Kingdom", 
-#' "OrganismType", "DicotMonoc", [compadre], "AngioGymno" [compadre],
-#' "Authors", "Journal", "YearPublication", "DOI.ISBN", "AdditionalSource",
-#' "StudyDuration", "StudyStart", "StudyEnd", "AnnualPeriodicity",
-#' "NumberPopulations", "MatrixCriteriaSize", "MatrixCriteriaOntogeny",
-#' "MatrixCriteriaAge", "MatrixPopulation", 
-#' "Lat", "Lon", "Altitude", "Country", "Continent", "Ecoregion",
-#' "StudiedSex",
-#' "MatrixComposite", "MatrixTreatment", "MatrixCaptivity",
-#' "MatrixStartYear", "MatrixStartSeason", "MatrixStartMonth",
-#' "MatrixEndYear", "MatrixEndSeason", "MatrixEndMonth",
-#' "MatrixSplit", "MatrixFec", "Observation",
-#' "MatrixDimension", "SurvivalIssue".
-#' 
-#' @rdname CompadreDataMethods
+#' @rdname CompadreDB
 #' @param x A CompadreDB object
 #' @param name The name of a column within x
 #' @importFrom methods slotNames
@@ -265,8 +197,7 @@ setMethod("$", signature = "CompadreDB",
           }
 )
 
-
-#' @rdname CompadreDataMethods
+#' @rdname CompadreDB
 #' @importFrom methods new slotNames
 #' @param value Vector of values to assign to the column
 #' @export
@@ -288,36 +219,16 @@ setReplaceMethod("$", signature = "CompadreDB",
 )
 
 
-#' @rdname CompadreDataMethods
-#' @export
-names.CompadreDB <- function(x) {
-  if (!("CompadreData" %in% slotNames(x))) {
-    stop("names method requires CompadreData object with slot 'CompadreData'")
-  }
-  names(CompadreData(x))
-}
-
-
-
-## -----------------------------------------------------------------------------
-## version slot
-
-################################################################################
-## Working with version information
-
-# All version data
-#' All version information (including subset information) for a CompadreDB 
-#' object, as a list.
-#' @rdname CompadreDataMethods
-#' @param object A CompadreDB object
-#' @param ... Ignored
+#' Extract the version slot
+#' @rdname CompadreDB
 #' @export
 setGeneric("VersionData", 
-               function(object, ...){
-                   standardGeneric("VersionData")
-               }
+           function(object){
+             standardGeneric("VersionData")
+           }
 )
-#' @rdname CompadreDataMethods
+
+#' @rdname CompadreDB
 #' @export
 setMethod("VersionData", signature = "CompadreDB", 
           function(object){
@@ -325,16 +236,16 @@ setMethod("VersionData", signature = "CompadreDB",
           }
 )
 
-# Version
-#' The version (including subset if relevant) of a CompadreDB object.
-#' @rdname CompadreDataMethods
+#' The CompadreDB version number
+#' @rdname CompadreDB
 #' @export
 setGeneric("Version", 
-               function(object, ...){
-                   standardGeneric("Version")
-               }
+           function(object){
+             standardGeneric("Version")
+           }
 )
-#' @rdname CompadreDataMethods
+
+#' @rdname CompadreDB
 #' @export
 setMethod("Version", signature = "CompadreDB", 
           function(object){
@@ -342,75 +253,19 @@ setMethod("Version", signature = "CompadreDB",
           }
 )
 
-# DateCreated
-#' The date a CompadreDB Version was created.
-#' @rdname CompadreDataMethods
+#' The date that a CompadreDB version was created
+#' @rdname CompadreDB
 #' @export
 setGeneric("DateCreated", 
-               function(object, ...){
-                   standardGeneric("DateCreated")
-               }
+           function(object){
+             standardGeneric("DateCreated")
+           }
 )
-#' @rdname CompadreDataMethods
+
+#' @rdname CompadreDB
 #' @export
 setMethod("DateCreated", signature = "CompadreDB", 
           function(object){
             return(VersionData(object)$DateCreated)
           }
 )
-
-# NumberAcceptedSpecies
-#' The number of accepted binary species names in a CompadreDB object.
-#' @rdname CompadreDataMethods
-#' @export
-setGeneric("NumberAcceptedSpecies", 
-               function(object, ...){
-                   standardGeneric("NumberAcceptedSpecies")
-               }
-)
-#' @rdname CompadreDataMethods
-#' @export
-setMethod("NumberAcceptedSpecies", signature = "CompadreDB", 
-          function(object){
-            return(length(unique(object$SpeciesAccepted)))
-          }
-)
-
-# NumberStudies
-#' The number of different studies in a CompadreDB object.
-#' @rdname CompadreDataMethods
-#' @export
-setGeneric("NumberStudies", 
-               function(object, ...){
-                   standardGeneric("NumberStudies")
-               }
-)
-#' @rdname CompadreDataMethods
-#' @export
-setMethod("NumberStudies", signature = "CompadreDB", 
-          function(object){
-            return(length(unique(paste0(object$Authors,
-                                        object$Journal,
-                                        object$YearPublication
-                                        ))))
-          }
-)
-
-# NumberMatrices
-#' The number of CompadreMat objects contained in a CompadreDB object (i.e. the)
-#' number of projection matrices).
-#' @rdname CompadreDataMethods
-#' @export
-setGeneric("NumberMatrices", 
-               function(object, ...){
-                   standardGeneric("NumberMatrices")
-               }
-)
-#' @rdname CompadreDataMethods
-#' @export
-setMethod("NumberMatrices", signature = "CompadreDB", 
-          function(object){
-            return(dim(CompadreData(object))[1])
-          }
-)
-
