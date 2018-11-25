@@ -1,18 +1,36 @@
 #' Subsetting CompadreDB objects
 #' 
-#' This method enables subsetting the data using square brackets, i.e. for a
-#' CompadreDB object "DB" one can use DB[1:2, 1:10] to get a new CompadreDB
-#' object that includes the first two matrices and the the first 10 columns of 
-#' their associated metadata. It's possible to pass logical vectors, numeric
-#' vectors, or character vectors that match the row or column names of the 
-#' metadata. 
+#' \code{CompadreDB} objects can be subset just like a regular
+#' \code{data.frame}, using either \code{[} or \code{subset()}. Note, however,
+#' that the \code{mat} column will always be retained during subsetting, even if
+#' it is not included in the user's column subset.
+#' 
+#' @note Dropping columns with the minus symbol (\code{-}) is not currently
+#'   supported.
+#' 
 #' @name Subset-CompadreDB
+#' 
+#' @examples
+#' # subset to the first 10 rows
+#' Compadre[1:10,]
+#' 
+#' # subset to the species 'Echinacea angustifolia'
+#' subset(Compadre, SpeciesAccepted == "Echinacea angustifolia")
+#' 
+#' # remove the column SurvivalIssue
+#' Compadre[,names(Compadre) != "SurvivalIssue"]
+#' 
+#' \dontrun{
+#' # column selection doesn't include mat, but mat will still be returned with a
+#' #  along with a warning
+#' subset(Compadre, select = c("SpeciesAccepted", "Authors"))
+#' }
 NULL
 
 
 
 #' @rdname Subset-CompadreDB
-#' @param x A CompadreDB object
+#' @param x A \code{CompadreDB} object
 #' @param i row indices (see \link{[.data.frame})
 #' @param j column indices (see \link{[.data.frame})
 #' @param ... ignored
@@ -48,7 +66,7 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
             }
             
             new("CompadreDB",
-                CompadreData = dat[i, j, drop = FALSE],
+                CompadreData = dat[i, j],
                 VersionData = VersionData(x))
           }
 )
