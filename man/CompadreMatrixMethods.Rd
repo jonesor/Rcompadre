@@ -71,3 +71,24 @@ Most methods for working with matrices are applicable to both CompadreMat and
 CompadreDB objects. These are described on this page (along with a couple) 
 of methods applicable to only CompadreMat or CompadreDB objects).
 }
+\section{Slots}{
+
+\describe{
+\item{\code{matA}}{A matrix population model (i.e. a square projection matrix)}
+
+\item{\code{matU}}{The survival component of a matrix population model (i.e. a square
+projection matrix reflecting survival-related transitions; e.g.
+progression, stasis, and retrogression)}
+
+\item{\code{matF}}{The sexual component of a matrix population model (i.e. a square
+projection matrix reflecting transitions due to sexual reproduction)}
+
+\item{\code{matC}}{The clonal component of a matrix population model (i.e. a square
+projection matrix reflecting transitions due to clonal reproduction)}
+
+\item{\code{matrixClass}}{A data frame with columns \code{MatrixClassOrganized}
+(elements are "active", "prop", or "dorm") \code{MatrixClassAuthor} (the
+matrix author's stage description), and \code{MatrixClassNumber} (integer
+stage number)}
+}}
+

@@ -23,6 +23,12 @@
 #' CompadreDB objects.
 #' 
 #' @name CompadreDataMethods
+#' @slot CompadreData A tibble-style data frame with a list-column of matrix
+#'   population models (column \code{mat}) and a variety of other metadata
+#'   columns.
+#' @slot VersionData A list with elements \code{Version} (database version
+#'   number), \code{DateCreated} (date of version release), and \code{Agreement}
+#'   (a url link to the User Agreement)
 setClass("CompadreDB",
          slots = c(
              CompadreData = "data.frame",
