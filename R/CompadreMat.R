@@ -129,7 +129,7 @@ setMethod("show", signature = (object ="CompadreMat"),
               #matrixClass info
               showstages <- as.data.frame(matrixClass(object))[,c("MatrixClassAuthor","MatrixClassNumber")]
               dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
-              print(showstages, row.names=F)
+              print(showstages, row.names = FALSE)
               cat("\n")
               #matA
               cat("matA:\n")
