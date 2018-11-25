@@ -62,15 +62,16 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 #' @export
 subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   
-  if (!"data" %in% slotNames(x)) {
+  if (!"CompadreData" %in% slotNames(x)) {
     stop("subset method requires CompadreDB object with slot 'data'")
   }
   
+  dat <- CompadreData(x)
   if (missing(subset)) {
-    r <- rep_len(TRUE, nrow(x@data))
+    r <- rep_len(TRUE, nrow(dat))
   } else {
     e <- substitute(subset)
-    r <- eval(e, x@data, parent.frame())
+    r <- eval(e, dat, parent.frame())
     if (!is.logical(r)) stop("'subset' must be logical")
     r <- r & !is.na(r)
   }
@@ -78,8 +79,8 @@ subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   if (missing(select)) {
     vars <- TRUE
   } else {
-    nl <- as.list(seq_along(x@data))
-    names(nl) <- names(x@data)
+    nl <- as.list(seq_along(dat))
+    names(nl) <- names(dat)
     vars <- eval(substitute(select), nl, parent.frame())
   }
   x[r, vars, drop = drop]
