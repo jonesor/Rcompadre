@@ -7,15 +7,14 @@
 cleanDB(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
+\item{db}{A COM(P)ADRE database object.}
 }
 \value{
 Returns db with extra columns appended to the metadata to indicate
   (TRUE/FALSE) whether there are potential problems with the matrices
   corresponding to a given row of the metadata, including whether matA is
-  ergodic, primitive, and irreducible.
+  ergodic, primitive, and irreducible, and whether matU is singular (i.e.
+  cannot be inverted).
 }
 \description{
 This function adds columns to the metatadata slot of a COM(P)ADRE database
