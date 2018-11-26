@@ -21,15 +21,44 @@
 
 #' CompadreDB Class
 #' 
+#' @description 
 #' This page describes the CompadreDB class, including methods for accessing the
-#' various components of CompadreDB objects.
+#' slots (see functions \code{CompadreData} and \code{VersionData}), accessing
+#' (\code{$}) and replacing (\code{$<-}) columns within the \code{data} slot,
+#' accessing elements from the \code{version} slot (see functions
+#' \code{VersionData} and \code{DateCreated}), and converting legacy database
+#' objects to the CompadreDB class (see \code{asCompadreDB}).
 #' 
 #' @name CompadreDB
+#' 
 #' @slot data A tibble-style data frame with a list-column of matrix population
 #'   models (column \code{mat}) and a variety of other metadata columns.
 #' @slot version A list with elements \code{Version} (database version number),
 #'   \code{DateCreated} (date of version release), and \code{Agreement} (a url
 #'   link to the User Agreement)
+#' 
+#' @seealso 
+#' \code{\link{CompadreDB-Methods}} \code{\link{CompadreDB-Subsetting}}
+#' 
+#' @author Iain M. Stott
+#' @author Tamora D. James
+#' 
+#' @examples 
+#' # convert legacy database object to CompadreDB
+#' Compadre <- asCompadreDB(CompadreLegacy)
+#' 
+#' # extract entire 'data' slot
+#' dat <- CompadreData(Compadre)
+#' 
+#' # access the date of database creation
+#' DateCreated(Compadre)
+#' 
+#' # extract column SpeciesAccepted
+#' Compadre$SpeciesAccepted
+#' 
+#' # create new list-column with stage-specific survival
+#' Compadre$stage_survival <- lapply(Compadre$mat, function(x) colSums(x@matU))
+#' 
 setClass("CompadreDB",
          slots = c(
              data = "data.frame",
@@ -187,34 +216,37 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' @param name The name of a column within x
 #' @importFrom methods slotNames
 #' @export
-setMethod("$", signature = "CompadreDB",
-          function(x, name) {
-            if (!("data" %in% slotNames(x))) {
-              stop("$ method requires CompadreDB object with slot 'data'")
-            }
-            return(x@data[[name]])
-          }
+setMethod(
+  "$", signature = "CompadreDB",
+  function(x, name) {
+    if (!("data" %in% slotNames(x))) {
+      stop("$ method requires CompadreDB object with slot 'data'")
+    }
+    return(x@data[[name]])
+  }
 )
 
 #' @rdname CompadreDB
 #' @importFrom methods new slotNames
 #' @param value Vector of values to assign to the column
 #' @export
-setReplaceMethod("$", signature = "CompadreDB", 
-                 function(x, name, value) { 
-                   if (!("data" %in% slotNames(x))) {
-                     stop("$<- method requires CompadreDB object with slot 'data'")
-                   }
-                   if("mat" %in% name) {
-                     warning("Replacing 'mat' column may be problematic unless all\nits elements are valid 'CompadreMat' objects.")
-                   }
-                   datout <- x@data
-                   datout[[name]] <- value 
-                   
-                   new("CompadreDB", 
-                       data = datout, 
-                       version = x@version)
-                 }
+setReplaceMethod(
+  "$", signature = "CompadreDB", 
+  function(x, name, value) { 
+    if (!("data" %in% slotNames(x))) {
+      stop("$<- method requires CompadreDB object with slot 'data'")
+    }
+    if("mat" %in% name) {
+      warning("Replacing 'mat' column may be problematic unless all ",
+              "its elements are valid 'CompadreMat' objects")
+    }
+    datout <- x@data
+    datout[[name]] <- value 
+    
+    new("CompadreDB", 
+        data = datout, 
+        version = x@version)
+  }
 )
 
 

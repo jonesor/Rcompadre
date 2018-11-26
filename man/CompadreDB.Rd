@@ -51,7 +51,11 @@ DateCreated(object)
 }
 \description{
 This page describes the CompadreDB class, including methods for accessing the
-various components of CompadreDB objects.
+slots (see functions \code{CompadreData} and \code{VersionData}), accessing
+(\code{$}) and replacing (\code{$<-}) columns within the \code{data} slot,
+accessing elements from the \code{version} slot (see functions
+\code{VersionData} and \code{DateCreated}), and converting legacy database
+objects to the CompadreDB class (see \code{asCompadreDB}).
 }
 \section{Slots}{
 
@@ -64,3 +68,28 @@ models (column \code{mat}) and a variety of other metadata columns.}
 link to the User Agreement)}
 }}
 
+\examples{
+# convert legacy database object to CompadreDB
+Compadre <- asCompadreDB(CompadreLegacy)
+
+# extract entire 'data' slot
+dat <- CompadreData(Compadre)
+
+# access the date of database creation
+DateCreated(Compadre)
+
+# extract column SpeciesAccepted
+Compadre$SpeciesAccepted
+
+# create new list-column with stage-specific survival
+Compadre$stage_survival <- lapply(Compadre$mat, function(x) colSums(x@matU))
+
+}
+\seealso{
+\code{\link{CompadreDB-Methods}} \code{\link{CompadreDB-Subsetting}}
+}
+\author{
+Iain M. Stott
+
+Tamora D. James
+}
