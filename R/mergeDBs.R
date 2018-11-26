@@ -46,6 +46,6 @@ mergeDBs <- function(db1, db2) {
   }
   
   new('CompadreDB',
-      CompadreData = rbind(dat1, dat2),
-      VersionData = vers_out)
+      data = rbind(dat1, dat2),
+      version = vers_out)
 }

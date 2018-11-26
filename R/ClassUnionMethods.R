@@ -31,7 +31,7 @@ setMethod("matA", signature = "CompadreMat",
 #' @export
 setMethod("matA", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat, function(M) { M@matA }))
+            return(lapply(object@data$mat, function(M) { M@matA }))
           }
 )
 
@@ -59,7 +59,7 @@ setMethod("matU", signature = "CompadreMat",
 #' @export
 setMethod("matU", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat, function(M) { M@matU }))
+            return(lapply(object@data$mat, function(M) { M@matU }))
           }
 )
 
@@ -87,7 +87,7 @@ setMethod("matF", signature = "CompadreMat",
 #' @export
 setMethod("matF", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat, function(M) { M@matF }))
+            return(lapply(object@data$mat, function(M) { M@matF }))
           }
 )
 
@@ -115,7 +115,7 @@ setMethod("matC", signature = "CompadreMat",
 #' @export
 setMethod("matC", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat, function(M) { M@matC }))
+            return(lapply(object@data$mat, function(M) { M@matC }))
           }
 )
 
@@ -147,8 +147,7 @@ setMethod("matrixClass", signature = "CompadreMat",
 #' @export
 setMethod("matrixClass", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat,
-                          function(M) { M@matrixClass }))
+            return(lapply(object@data$mat, function(M) { M@matrixClass }))
           }
 )
 
@@ -180,7 +179,7 @@ setMethod("MatrixClassAuthor", signature = "CompadreMat",
 #' @export
 setMethod("MatrixClassAuthor", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat,
+            return(lapply(object@data$mat,
                           function(M) { M@matrixClass$MatrixClassAuthor }))
           }
 )
@@ -211,7 +210,7 @@ setMethod("MatrixClassOrganized", signature = "CompadreMat",
 #' @export
 setMethod("MatrixClassOrganized", signature = "CompadreDB", 
           function(object) {
-            return(lapply(object@CompadreData$mat,
+            return(lapply(object@data$mat,
                           function(M) { M@matrixClass$MatrixClassOrganized }))
           }
 )

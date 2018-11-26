@@ -25,16 +25,15 @@
 #' various components of CompadreDB objects.
 #' 
 #' @name CompadreDB
-#' @slot CompadreData A tibble-style data frame with a list-column of matrix
-#'   population models (column \code{mat}) and a variety of other metadata
-#'   columns.
-#' @slot VersionData A list with elements \code{Version} (database version
-#'   number), \code{DateCreated} (date of version release), and \code{Agreement}
-#'   (a url link to the User Agreement)
+#' @slot data A tibble-style data frame with a list-column of matrix population
+#'   models (column \code{mat}) and a variety of other metadata columns.
+#' @slot version A list with elements \code{Version} (database version number),
+#'   \code{DateCreated} (date of version release), and \code{Agreement} (a url
+#'   link to the User Agreement)
 setClass("CompadreDB",
          slots = c(
-             CompadreData = "data.frame",
-             VersionData = "list"
+             data = "data.frame",
+             version = "list"
              )
          )
 
@@ -53,12 +52,12 @@ setMethod("initialize", "CompadreDB",
 
 ## define validity check function (does not need to be documented)
 validCompadreDB <- function(object) {
-    dat <- CompadreData(object)
+    dat <- object@data
     errors <- character()
     if (!("mat" %in% names(dat))) {
         msg <- 
-"CompadreData must contain a column 'mat' containing matrices\n
- in the form of a list of 'ConmpadreM' objects"
+"CompadreDB must contain a column 'mat' containing matrices\n
+ in the form of a list of 'ConmpadreMat' objects"
         errors <- c(errors, msg)
     }
     if ("mat" %in% names(dat)) {
@@ -134,8 +133,8 @@ asCompadreDB <- function(from) {
     
     # create a new CompadreDB object with the new data and version
     new("CompadreDB",
-        CompadreData = dat,
-        VersionData = db_version)
+        data = dat,
+        version = db_version)
 }
 
 
@@ -157,7 +156,7 @@ setMethod("show", signature = (object ="CompadreDB"),
                       " MATRICES.\n\n",
                       sep = ""
             ))
-            print(CompadreData(object))
+            print(object@data)
           }
 )
 
@@ -179,7 +178,7 @@ setGeneric("CompadreData",
 #' @export
 setMethod("CompadreData", signature = "CompadreDB", 
           function(object){
-            return(object@CompadreData)
+            return(object@data)
           }
 )
 
@@ -190,10 +189,10 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' @export
 setMethod("$", signature = "CompadreDB",
           function(x, name) {
-            if (!("CompadreData" %in% slotNames(x))) {
-              stop("$ method requires CompadreDB object with slot 'CompadreData'")
+            if (!("data" %in% slotNames(x))) {
+              stop("$ method requires CompadreDB object with slot 'data'")
             }
-            return(CompadreData(x)[[name]])
+            return(x@data[[name]])
           }
 )
 
@@ -203,18 +202,18 @@ setMethod("$", signature = "CompadreDB",
 #' @export
 setReplaceMethod("$", signature = "CompadreDB", 
                  function(x, name, value) { 
-                   if (!("CompadreData" %in% slotNames(x))) {
-                     stop("$<- method requires CompadreDB object with slot 'CompadreData'")
+                   if (!("data" %in% slotNames(x))) {
+                     stop("$<- method requires CompadreDB object with slot 'data'")
                    }
                    if("mat" %in% name) {
                      warning("Replacing 'mat' column may be problematic unless all\nits elements are valid 'CompadreMat' objects.")
                    }
-                   datout <- CompadreData(x)
+                   datout <- x@data
                    datout[[name]] <- value 
                    
                    new("CompadreDB", 
-                       CompadreData = datout, 
-                       VersionData = VersionData(x))
+                       data = datout, 
+                       version = x@version)
                  }
 )
 
@@ -232,7 +231,7 @@ setGeneric("VersionData",
 #' @export
 setMethod("VersionData", signature = "CompadreDB", 
           function(object){
-            return(object@VersionData)
+            return(object@version)
           }
 )
 
@@ -249,7 +248,7 @@ setGeneric("Version",
 #' @export
 setMethod("Version", signature = "CompadreDB", 
           function(object){
-            return(VersionData(object)$Version)
+            return(object@version$Version)
           }
 )
 
@@ -266,6 +265,6 @@ setGeneric("DateCreated",
 #' @export
 setMethod("DateCreated", signature = "CompadreDB", 
           function(object){
-            return(VersionData(object)$DateCreated)
+            return(object@version$DateCreated)
           }
 )

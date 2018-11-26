@@ -56,12 +56,11 @@ various components of CompadreDB objects.
 \section{Slots}{
 
 \describe{
-\item{\code{CompadreData}}{A tibble-style data frame with a list-column of matrix
-population models (column \code{mat}) and a variety of other metadata
-columns.}
+\item{\code{data}}{A tibble-style data frame with a list-column of matrix population
+models (column \code{mat}) and a variety of other metadata columns.}
 
-\item{\code{VersionData}}{A list with elements \code{Version} (database version
-number), \code{DateCreated} (date of version release), and \code{Agreement}
-(a url link to the User Agreement)}
+\item{\code{version}}{A list with elements \code{Version} (database version number),
+\code{DateCreated} (date of version release), and \code{Agreement} (a url
+link to the User Agreement)}
 }}
 

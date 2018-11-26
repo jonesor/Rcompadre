@@ -68,8 +68,8 @@ cleanDB <- function(db) {
   )
   
   new("CompadreDB",
-      CompadreData = dat,
-      VersionData = VersionData(db))
+      data = dat,
+      version = db@version)
 }
 
 

@@ -39,7 +39,7 @@ NULL
 #' @export
 setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY", drop = "ANY"), 
           function(x, i, j, ..., drop = FALSE) {
-            dat <- CompadreData(x)
+            dat <- x@data
             if(!missing(i)){
               if(!any(is.logical(i), is.numeric(i), is.character(i))) {
                 stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
@@ -66,8 +66,8 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
             }
             
             new("CompadreDB",
-                CompadreData = dat[i, j],
-                VersionData = VersionData(x))
+                data = dat[i, j],
+                version = x@version)
           }
 )
 
@@ -80,11 +80,11 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 #' @export
 subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   
-  if (!"CompadreData" %in% slotNames(x)) {
+  if (!"data" %in% slotNames(x)) {
     stop("subset method requires CompadreDB object with slot 'data'")
   }
   
-  dat <- CompadreData(x)
+  dat <- x@data
   if (missing(subset)) {
     r <- rep_len(TRUE, nrow(dat))
   } else {
