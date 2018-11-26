@@ -1,7 +1,4 @@
 
-## Set class union between CompadreMat and CompadreDB, so the same accessor 
-## functions can be used for both
-
 ################################################################################
 #' Accessor methods for CompadreMat and CompadreDB objects
 #'
@@ -9,36 +6,35 @@
 #' CompadreDB objects. These are described on this page (along with a couple) 
 #' of methods applicable to only CompadreMat or CompadreDB objects).
 #' 
-#' @rdname CompadreMatrixMethods
+#' @name CompadreMatrixMethods
+NULL
 
-# Set class union for the two classes. Each class 'contains' the class union, 
-# so methods set for the union can be used by both classes.
-setClassUnion("CompadreMatOrDB", c("CompadreMat", "CompadreDB"))
+
 
 # matA
 #' @rdname CompadreMatrixMethods
 #' @param object A CompadreDB object
 #' @export
 setGeneric("matA", 
-               function(object){
-                   standardGeneric("matA")
-               }
+           function(object){
+             standardGeneric("matA")
+           }
 )
-#' The 'matA' function extracts the matA (projection) matrix from a CompadreMat 
-#' or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-#' for CompadreDB objects this is a list of matrices.
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("matA", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matA)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matA }) )
-            }
+setMethod("matA", signature = "CompadreMat", 
+          function(object) {
+            return(object@matA)
           }
 )
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matA", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat, function(M) { M@matA }))
+          }
+)
+
 
 
 # matU
@@ -48,190 +44,174 @@ setMethod("matA", signature = "CompadreMatOrDB",
 #' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("matU", 
-               function(object){
-                   standardGeneric("matU")
-               }
+           function(object){
+             standardGeneric("matU")
+           }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("matU", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matU)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matU }) )
-            }
+setMethod("matU", signature = "CompadreMat", 
+          function(object) {
+            return(object@matU)
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matU", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat, function(M) { M@matU }))
           }
 )
 
-#' The 'matF' function extracts the matF (sexual reproduction) matrix from a CompadreMat 
-#' or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-#' for CompadreDB objects this is a list of matrices.
+
+
+# matF
+#' The 'matF' function extracts the matF (sexual reproduction) matrix from a
+#' CompadreMat or CompadreDB object. For CompadreMat objects, this is a single
+#' matrix, for CompadreDB objects this is a list of matrices.
 #' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("matF", 
-               function(object){
-                   standardGeneric("matF")
-               }
+           function(object){
+             standardGeneric("matF")
+           }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("matF", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matF)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matF }) )
-            }
+setMethod("matF", signature = "CompadreMat", 
+          function(object) {
+            return(object@matF)
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matF", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat, function(M) { M@matF }))
           }
 )
 
+
+
 # matC
-#' The 'matC' function extracts the matC (clonal reproduction) matrix from a CompadreMat 
-#' or CompadreDB object. For CompadreMat objects, this is a single matrix, 
-#' for CompadreDB objects this is a list of matrices.
+#' The 'matC' function extracts the matC (clonal reproduction) matrix from a
+#' CompadreMat or CompadreDB object. For CompadreMat objects, this is a single
+#' matrix, for CompadreDB objects this is a list of matrices.
 #' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("matC", 
-               function(object){
-                   standardGeneric("matC")
-               }
+           function(object){
+             standardGeneric("matC")
+           }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("matC", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matC)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matC }) )
-            }
+setMethod("matC", signature = "CompadreMat", 
+          function(object) {
+            return(object@matC)
           }
 )
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matC", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat, function(M) { M@matC }))
+          }
+)
+
+
+
 
 ## matrixClass slot
 
 # matrixClass
-#' The 'matrixClass' function extracts the matrixClass data frame from a CompadreMat 
-#' or CompadreDB object. For CompadreMat objects, this is a single data frame, 
-#' for CompadreDB objects this is a list of data frames. The matrixClass data
-#' includes information on the matrix, e.g. names of stages.
+#' The 'matrixClass' function extracts the matrixClass data frame from a
+#' CompadreMat or CompadreDB object. For CompadreMat objects, this is a single
+#' data frame, for CompadreDB objects this is a list of data frames. The
+#' matrixClass data includes information on the matrix, e.g. names of stages.
 #' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("matrixClass", 
-               function(object){
-                   standardGeneric("matrixClass")
-               }
+           function(object){
+             standardGeneric("matrixClass")
+           }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("matrixClass", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matrixClass)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass }) )
-            }
+setMethod("matrixClass", signature = "CompadreMat", 
+          function(object) {
+            return(object@matrixClass)
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matrixClass", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat,
+                          function(M) { M@matrixClass }))
           }
 )
 
-# stageNames (MatrixClassAuthor)
-#' The 'matrixClassAuthor' and 'stageNames' functions extract the matrixClassAuthor column from 
-#' the matrixClass data frame from a CompadreMat or CompadreDB object. 
-#' For CompadreMat objects, this is a single character vector, for CompadreDB objects 
-#' this is a list of character vectors. The matrixClassAuthor data
-#' describes the names of the stages as determined by the author of the original 
+
+
+
+# MatrixClassAuthor
+#' The 'MatrixClassAuthor' function extracts the MatrixClassAuthor column from
+#' the matrixClass data frame from a CompadreMat or CompadreDB object. For
+#' CompadreMat objects, this is a single character vector, for CompadreDB
+#' objects this is a list of character vectors. The matrixClassAuthor data
+#' describes the names of the stages as determined by the author of the original
 #' work the matrix was sourced from.
-#' @rdname CompadreMatrixMethods
-#' @export
-setGeneric("stageNames", 
-               function(object){
-                   standardGeneric("stageNames")
-               }
-)
-#' @rdname CompadreMatrixMethods
-#' @export
-setMethod("stageNames", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matrixClass$MatrixClassAuthor)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
-            }
-          }
-)
-
 #' @rdname CompadreMatrixMethods
 #' @export
 setGeneric("MatrixClassAuthor", 
-               function(object){
-                   standardGeneric("MatrixClassAuthor")
-               }
+           function(object){
+             standardGeneric("MatrixClassAuthor")
+           }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("MatrixClassAuthor", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matrixClass$MatrixClassAuthor)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
-            }
+setMethod("MatrixClassAuthor", signature = "CompadreMat", 
+          function(object) {
+            return(object@matrixClass$MatrixClassAuthor)
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassAuthor", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat,
+                          function(M) { M@matrixClass$MatrixClassAuthor }))
           }
 )
 
 
-# stageStatus (matrixClassOrganized)
-#' The 'matrixClassAuthor' function extracts the matrixClassAuthor column from 
-#' the matrixClass data frame from a CompadreMat or CompadreDB object. 
-#' For CompadreMat objects, this is a single character vector, for CompadreDB objects 
-#' this is a list of character vectors. The matrixClassAuthor data
-#' describes the names of the stages as determined by the author of the original 
+# MatrixClassOrganized
+#' The 'MatrixClassOrganized' function extracts the MatrixClassOrganized column
+#' from the matrixClass data frame from a CompadreMat or CompadreDB object. For
+#' CompadreMat objects, this is a single character vector, for CompadreDB
+#' objects this is a list of character vectors. The matrixClassAuthor data
+#' describes the names of the stages as determined by the author of the original
 #' work the matrix was sourced from.
 #' @rdname CompadreMatrixMethods
 #' @export
-setGeneric("stageStatus", 
-               function(object){
-                   standardGeneric("stageStatus")
-               }
+setGeneric("MatrixClassOrganized", 
+           function(object){
+             standardGeneric("MatrixClassOrganized")
+           }
 )
-
 #' @rdname CompadreMatrixMethods
 #' @export
-setMethod("stageStatus", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matrixClass$matrixClassOrganized)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
-            }
+setMethod("MatrixClassOrganized", signature = "CompadreMat", 
+          function(object) {
+            return(object@matrixClass$MatrixClassOrganized)
           }
 )
-
 #' @rdname CompadreMatrixMethods
 #' @export
-setGeneric("MatrixClassOrganized", 
-               function(object){
-                   standardGeneric("MatrixClassOrganized")
-               }
-)
-
-#' @rdname CompadreMatrixMethods
-#' @export
-setMethod("MatrixClassOrganized", signature = "CompadreMatOrDB", 
-          function(object){
-            if(class(object) %in% "CompadreMat"){
-              return(object@matrixClass$matrixClassOrganized)
-            }
-            if(class(object) %in% "CompadreDB"){
-              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
-            }
+setMethod("MatrixClassOrganized", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@CompadreData$mat,
+                          function(M) { M@matrixClass$MatrixClassOrganized }))
           }
 )
