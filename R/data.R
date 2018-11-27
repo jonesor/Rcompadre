@@ -228,8 +228,8 @@
 #' * Agreement - Link to the COMADRE license agreement
 NULL
 
-#' @rdname Compadre-Data
+#' @rdname Compadre
 "Compadre"
 
-#' @rdname Compadre-Data
+#' @rdname Compadre
 "Comadre"
