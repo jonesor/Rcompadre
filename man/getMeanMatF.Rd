@@ -8,14 +8,11 @@ matrices in a COM(P)ADRE database object}
 getMeanMatF(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
+\item{db}{A COM(P)ADRE database object}
 }
 \value{
 Returns a list which contains the mean fecundity matrix associated
-  with a given row of the database, or NA if there is only a single matrix
-  from the relevant population within the db.
+  with a given row of the database.
 }
 \description{
 This function takes a COM(P)ADRE database object and calculates a grand mean
@@ -30,16 +27,14 @@ fecundity in a given stage class and year does not necessarily indicate that
 the stage in question is non-reproductive).
 }
 \examples{
-\dontrun{
-# print set of matrices (A, U, F, C) associated with row 2 of database
-compadre$mat[[2]]
+# print matF associated with row 16 of database
+Compadre$mat[[16]]
 
 # create list of meanMatFs
-meanF <- getMeanMatF(compadre)
+meanF <- getMeanMatF(Compadre)
 
-# print meanMatF associated with row 2 of database
-compadre_with_meanF$mat[[2]]
-}
+# print meanMatF associated with row 16 of database
+meanF[[16]]
 
 }
 \author{

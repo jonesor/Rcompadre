@@ -1,8 +1,6 @@
 #' A function to compare two COMPADRE/COMADRE database versions
 #' 
-#' @param db1,db2 COM(P)ADRE database objects to compare. Databases will be 
-#' coerced from the old 'list' format where appropriate (compadre_v4.0.1 and 
-#' below; comadre_v2.0.1 and below).
+#' @param db1,db2 COM(P)ADRE database objects to compare.
 #' 
 #' @param verbose A logical argument indicating whether or not to return lots
 #' of detail.
@@ -17,18 +15,17 @@
 #' @keywords manip attribute
 #' 
 #' @examples
-#' \dontrun{
-#' 	compareDBs(comadreSubset,comadre,verbose = TRUE)
-#' }
+#' Compadre1 <- subset(Compadre, Continent == "Asia")
+#' Compadre2 <- subset(Compadre, Continent == "Africa")
 #' 
-#' @importFrom methods as
+#' compareDBs(Compadre1, Compadre2)
+#' 
 #' @export compareDBs
-#' 
 compareDBs <- function(db1, db2, verbose = FALSE){ 
 
-    # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
-  db1 <- methods::as(db1, "CompadreDB")
-  db2 <- methods::as(db2, "CompadreDB")
+  if (!inherits(db1, "CompadreDB") | !inherits(db2, "CompadreDB")) {
+    stop("dbs must be of class CompadreDB. See function convertLegacyDB")
+  }
 
   #Quick summary
   cat("Quick Summary...\n\n")

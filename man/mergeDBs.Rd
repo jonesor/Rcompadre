@@ -2,35 +2,26 @@
 % Please edit documentation in R/mergeDBs.R
 \name{mergeDBs}
 \alias{mergeDBs}
-\title{Merge two Compadre/Comadre data sets together}
+\title{Merge two Compadre/Comadre databases together}
 \usage{
 mergeDBs(db1, db2)
 }
 \arguments{
-\item{db1}{A \code{CompadreDB} object or an older version
-of \code{COM(P)ADRE} in a \code{list}.}
+\item{db1}{A \code{CompadreDB} object}
 
-\item{db2}{A \code{CompadreDB} object or an older version
-of \code{COM(P)ADRE} in a \code{list}.}
+\item{db2}{A \code{CompadreDB} object}
 }
 \value{
-A \code{CompadreDB} object containing both
-databases.
+A \code{CompadreDB} object containing both databases.
 }
 \description{
-Merges two data set objects together. These can either
-be S4 objects of class \code{CompadreDB}, S3 list objects that 
-contain an older version of the database, or a combination of the
-two.
+Merges two CompadreDB objects together.
 }
 \examples{
-\dontrun{
-CompadreData(Compadre)
-CompadreData(Comadre)
+Compadre1 <- subset(Compadre, Continent == "Asia")
+Compadre2 <- subset(Compadre, Continent == "Africa")
 
-BigDB <- mergeDBs(Compadre, Comadre)
-
-}
+mergeDBs(Compadre1, Compadre2)
 
 }
 \author{

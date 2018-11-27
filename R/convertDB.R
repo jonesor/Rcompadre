@@ -1,14 +1,14 @@
-#' utility to convert older versions of database to
+#' Convert legacy COM(P)ADRE database to CompadreDB object
+#' 
+#' Utility to convert older versions of database to
 #' modern class
 #' 
-#' @param db The \code{Com(p)adre} data base to convert
+#' @param db The legacy COM(P)ADRE database to convert
 #' 
 #' @return A \code{CompadreDB} object
 #' 
 #' @importFrom methods as
-#' 
 #' @export
-
 convertLegacyDB <- function(db) { 
   if (!inherits(db, 'CompadreDB')){
     requiredFields <- c('metadata', 'mat', 'matrixClass')
@@ -25,4 +25,4 @@ convertLegacyDB <- function(db) {
     }
   }  
   return(db)
-} 
+}

@@ -1,18 +1,31 @@
+---
+output: github_document
+
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
 
-Rcompadre
-=========
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = TRUE
+)
+options(digits = 4)
+```
+
+# Rcompadre
 
 An R package to work with the [COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix Population Databases. Note this package is at an early stage of development, and may contain bugs.
 
-Installation
-------------
+
+## Installation
 
 Install from GitHub with:
 
-``` r
+```{r, eval=FALSE}
 devtools::install_github("jonesor/Rcompadre")
 #
 # or
@@ -22,15 +35,13 @@ remotes::install_github("jonesor/Rcompadre")
 ```
 
 Or, to install the development branch (package name `RcompadreDev`) use:
-
-``` r
+```{r, eval=FALSE}
 remotes::install_github("jonesor/Rcompadre", ref = "devel")
 ```
 
-Usage
------
+## Usage
 
-``` r
+```{r}
 library(RcompadreDev)
 ```
 
@@ -38,21 +49,19 @@ library(RcompadreDev)
 
 Fetch the most recent database version from [compadre-db.org](https://www.compadre-db.org/) with
 
-``` r
+```{r}
 compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
-#> This is COMPADRE version 4.0.1 (release date Aug_12_2016)
-#> See user agreement at https://www.compadre-db.org/Page/UserAgreement
 ```
 
 or load from a local `.RData` file with
 
-``` r
+```{r, eval=FALSE}
 compadre_legacy <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
 If working with a locally-stored legacy database object (of class "list"), convert to the "CompadreDB" class using
 
-``` r
+```{r, eval=FALSE}
 compadre <- convertLegacyDB(compadre_legacy)
 ```
 
@@ -60,7 +69,7 @@ compadre <- convertLegacyDB(compadre_legacy)
 
 For the most part `CompadreDB` objects work like a data frame. They can be subset using `[` or `subset()`
 
-``` r
+```{r, results="hide"}
 # subset to the first 10 rows
 compadre[1:10,]
 
@@ -72,20 +81,20 @@ subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 First we'll use the function `cleanDB` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
 
-``` r
+```{r}
 compadre_clean <- cleanDB(compadre)
 ```
 
 We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we'll subset the database accordingly.
 
-``` r
+```{r}
 compadre_sub <- subset(compadre_clean,
                        check_NA_A == FALSE & check_ergodic == TRUE)
 ```
 
 Finally, we'll use the `lambda` function from the library [popbio](https://github.com/cstubben/popbio) to calculate the population growth rate for every matrix in `compadre_sub`.
 
-``` r
+```{r}
 library(popbio)
 compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
 ```

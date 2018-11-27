@@ -30,6 +30,8 @@ Suggests: knitr,
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
+    'CompadreDB-Methods.R'
+    'CompadreDB-Subsetting.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
     'DBToFlat.R'
@@ -38,7 +40,7 @@ Collate:
     'compareDBs.R'
     'convertDB.R'
     'data.R'
+    'fetchDB.R'
     'getMeanMatF.R'
     'mergeDBs.R'
     'stringtomatrix.R'
-    'subsetDB.R'

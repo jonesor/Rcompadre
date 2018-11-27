@@ -17,6 +17,7 @@ setClassUnion("CompadreMatOrDB", c("CompadreMat", "CompadreDB"))
 
 # matA
 #' @rdname CompadreMatrixMethods
+#' @param object A CompadreDB object
 #' @export
 setGeneric("matA", 
                function(object){
@@ -133,7 +134,7 @@ setMethod("matrixClass", signature = "CompadreMatOrDB",
               return(object@matrixClass)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass }) )
             }
           }
 )
@@ -145,6 +146,8 @@ setMethod("matrixClass", signature = "CompadreMatOrDB",
 #' this is a list of character vectors. The matrixClassAuthor data
 #' describes the names of the stages as determined by the author of the original 
 #' work the matrix was sourced from.
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("stageNames", 
                function(object){
                    standardGeneric("stageNames")
@@ -158,10 +161,13 @@ setMethod("stageNames", signature = "CompadreMatOrDB",
               return(object@matrixClass$MatrixClassAuthor)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
             }
           }
 )
+
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("MatrixClassAuthor", 
                function(object){
                    standardGeneric("MatrixClassAuthor")
@@ -175,7 +181,7 @@ setMethod("MatrixClassAuthor", signature = "CompadreMatOrDB",
               return(object@matrixClass$MatrixClassAuthor)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassAuthor }) )
             }
           }
 )
@@ -188,11 +194,14 @@ setMethod("MatrixClassAuthor", signature = "CompadreMatOrDB",
 #' this is a list of character vectors. The matrixClassAuthor data
 #' describes the names of the stages as determined by the author of the original 
 #' work the matrix was sourced from.
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("stageStatus", 
                function(object){
                    standardGeneric("stageStatus")
                }
 )
+
 #' @rdname CompadreMatrixMethods
 #' @export
 setMethod("stageStatus", signature = "CompadreMatOrDB", 
@@ -201,15 +210,19 @@ setMethod("stageStatus", signature = "CompadreMatOrDB",
               return(object@matrixClass$matrixClassOrganized)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
             }
           }
 )
+
+#' @rdname CompadreMatrixMethods
+#' @export
 setGeneric("MatrixClassOrganized", 
                function(object){
                    standardGeneric("MatrixClassOrganized")
                }
 )
+
 #' @rdname CompadreMatrixMethods
 #' @export
 setMethod("MatrixClassOrganized", signature = "CompadreMatOrDB", 
@@ -218,7 +231,7 @@ setMethod("MatrixClassOrganized", signature = "CompadreMatOrDB",
               return(object@matrixClass$matrixClassOrganized)
             }
             if(class(object) %in% "CompadreDB"){
-              return( lapply(compadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
+              return( lapply(CompadreData(object)$mat, function(M){ M@matrixClass$matrixClassOrganized }) )
             }
           }
 )

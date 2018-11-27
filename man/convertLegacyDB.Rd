@@ -2,18 +2,17 @@
 % Please edit documentation in R/convertDB.R
 \name{convertLegacyDB}
 \alias{convertLegacyDB}
-\title{utility to convert older versions of database to
-modern class}
+\title{Convert legacy COM(P)ADRE database to CompadreDB object}
 \usage{
 convertLegacyDB(db)
 }
 \arguments{
-\item{db}{The \code{Com(p)adre} data base to convert}
+\item{db}{The legacy COM(P)ADRE database to convert}
 }
 \value{
 A \code{CompadreDB} object
 }
 \description{
-utility to convert older versions of database to
+Utility to convert older versions of database to
 modern class
 }

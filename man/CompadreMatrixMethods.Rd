@@ -14,9 +14,13 @@
 \alias{matC,CompadreMatOrDB-method}
 \alias{matrixClass}
 \alias{matrixClass,CompadreMatOrDB-method}
+\alias{stageNames}
 \alias{stageNames,CompadreMatOrDB-method}
+\alias{MatrixClassAuthor}
 \alias{MatrixClassAuthor,CompadreMatOrDB-method}
+\alias{stageStatus}
 \alias{stageStatus,CompadreMatOrDB-method}
+\alias{MatrixClassOrganized}
 \alias{MatrixClassOrganized,CompadreMatOrDB-method}
 \title{Methods for working with matrices in com(p)adre}
 \usage{
@@ -40,13 +44,24 @@ matrixClass(object)
 
 \S4method{matrixClass}{CompadreMatOrDB}(object)
 
+stageNames(object)
+
 \S4method{stageNames}{CompadreMatOrDB}(object)
+
+MatrixClassAuthor(object)
 
 \S4method{MatrixClassAuthor}{CompadreMatOrDB}(object)
 
+stageStatus(object)
+
 \S4method{stageStatus}{CompadreMatOrDB}(object)
 
+MatrixClassOrganized(object)
+
 \S4method{MatrixClassOrganized}{CompadreMatOrDB}(object)
+}
+\arguments{
+\item{object}{A CompadreDB object}
 }
 \description{
 This page describes methods for accessing any matrix information from 
@@ -56,3 +71,24 @@ Most methods for working with matrices are applicable to both CompadreMat and
 CompadreDB objects. These are described on this page (along with a couple) 
 of methods applicable to only CompadreMat or CompadreDB objects).
 }
+\section{Slots}{
+
+\describe{
+\item{\code{matA}}{A matrix population model (i.e. a square projection matrix)}
+
+\item{\code{matU}}{The survival component of a matrix population model (i.e. a square
+projection matrix reflecting survival-related transitions; e.g.
+progression, stasis, and retrogression)}
+
+\item{\code{matF}}{The sexual component of a matrix population model (i.e. a square
+projection matrix reflecting transitions due to sexual reproduction)}
+
+\item{\code{matC}}{The clonal component of a matrix population model (i.e. a square
+projection matrix reflecting transitions due to clonal reproduction)}
+
+\item{\code{matrixClass}}{A data frame with columns \code{MatrixClassOrganized}
+(elements are "active", "prop", or "dorm") \code{MatrixClassAuthor} (the
+matrix author's stage description), and \code{MatrixClassNumber} (integer
+stage number)}
+}}
+

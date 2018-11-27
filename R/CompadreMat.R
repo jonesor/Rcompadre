@@ -23,7 +23,18 @@
 #' CompadreMat and CompadreDB objects.
 #' 
 #' @name CompadreMatrixMethods
-
+#' @slot matA A matrix population model (i.e. a square projection matrix)
+#' @slot matU The survival component of a matrix population model (i.e. a square
+#'   projection matrix reflecting survival-related transitions; e.g.
+#'   progression, stasis, and retrogression)
+#' @slot matF The sexual component of a matrix population model (i.e. a square
+#'   projection matrix reflecting transitions due to sexual reproduction)
+#' @slot matC The clonal component of a matrix population model (i.e. a square
+#'   projection matrix reflecting transitions due to clonal reproduction)
+#' @slot matrixClass A data frame with columns \code{MatrixClassOrganized}
+#'   (elements are "active", "prop", or "dorm") \code{MatrixClassAuthor} (the
+#'   matrix author's stage description), and \code{MatrixClassNumber} (integer
+#'   stage number)
 setClass("CompadreMat",
          slots = c(
            matA = "matrix",
@@ -58,10 +69,10 @@ validCompadreMat <- function(object) {
   errors <- character()
   ###matrices
   ##test dimensions
-  dims <- data.frame(matA = dim(matA(object)),
-                     matU = dim(matU(object)),
-                     matF = dim(matF(object)),
-                     matC = dim(matC(object)))
+  dims <- cbind(matA = dim(matA(object)),
+                matU = dim(matU(object)),
+                matF = dim(matF(object)),
+                matC = dim(matC(object)))
   dimsMeans <- colMeans(dims)
   dimsDiff <- diff(range(dimsMeans))
   #matA
@@ -116,7 +127,6 @@ setValidity("CompadreMat", validCompadreMat)
 ## -----------------------------------------------------------------------------
 ## define a method for showing the object (does not need to be documented)
 # show
-
 setMethod("show", signature = (object ="CompadreMat"),
           function (object){
             Mdim <- dim(matA(object))[1]
@@ -129,7 +139,7 @@ setMethod("show", signature = (object ="CompadreMat"),
               #matrixClass info
               showstages <- as.data.frame(matrixClass(object))[,c("MatrixClassAuthor","MatrixClassNumber")]
               dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
-              print(showstages, row.names=F)
+              print(showstages, row.names = FALSE)
               cat("\n")
               #matA
               cat("matA:\n")

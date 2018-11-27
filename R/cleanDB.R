@@ -5,17 +5,13 @@
 #' contain missing values. These columns can subsequently can be used to subset
 #' the COM(P)ADRE database by logical argument.
 #'
-#' @param db A COM(P)ADRE database object. Databases will be will be coerced
-#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-#' comadre_v2.0.1 and below).
+#' @param db A COM(P)ADRE database object.
 #' 
 #' @return Returns db with extra columns appended to the metadata to indicate
 #'   (TRUE/FALSE) whether there are potential problems with the matrices
 #'   corresponding to a given row of the metadata, including whether matA is
-#'   ergodic, primitive, and irreducible.
-#' 
-#' @details \code{cleanDB} is preferred, but \code{cleanDatabase} is provided 
-#' for legacy purposes.
+#'   ergodic, primitive, and irreducible, and whether matU is singular (i.e.
+#'   cannot be inverted).
 #' 
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
 #' @author Roberto Salguero-Goméz <rob.salguero@@zoo.ox.ac.uk>
@@ -25,74 +21,73 @@
 #' @keywords utilities
 #' 
 #' @examples
-#' \dontrun{
-#' compadre_clean <- cleanDB(compadre)
-#' }
+#' CompadreClean <- cleanDB(Compadre)
 #'
-#' @importFrom popdemo is.matrix_ergodic is.matrix_primitive is.matrix_irreducible
-#' @importFrom methods as
-#' 
+#' @importFrom popdemo isErgodic isIrreducible isPrimitive
+#' @importFrom methods new
 #' @export cleanDB
-#' 
 cleanDB <- function(db) {
   
-  db <- methods::as(db, "CompadreDB")
+  if (!inherits(db, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function convertLegacyDB")
+  }
   
-  #new data.frame for data slot
-  newdata <- CompadreData(db)
-
-  # create row index
-  newdata$index <- 1:NumberMatrices(db)
+  dat <- CompadreData(db)
   
-  # check matA, matU, matF, and matC for any values of NA
-  newdata$matAcheckNA <- sapply(matA(db), function(x){ any(is.na(x)) })
-  newdata$matUcheckNA <- sapply(matU(db), function(x){ any(is.na(x)) })
-  newdata$matFcheckNA <- sapply(matF(db), function(x){ any(is.na(x)) })
-  newdata$matCcheckNA <- sapply(matC(db), function(x){ any(is.na(x)) })
+  dat$check_NA_A <- vapply(db$mat, function(x) any(is.na(x@matA)), logical(1))
+  dat$check_NA_U <- vapply(db$mat, function(x) any(is.na(x@matU)), logical(1))
+  dat$check_NA_F <- vapply(db$mat, function(x) any(is.na(x@matF)), logical(1))
+  dat$check_NA_C <- vapply(db$mat, function(x) any(is.na(x@matC)), logical(1))
   
-  # check whether any columns of matU have sums exceeding 1
-  newdata$matUcolSums <- sapply(matU(db), 
-    function(x){ any(colSums(x, na.rm = TRUE) > 1) })
+  dat$check_ergodic <- mapply(
+    CheckMats,
+    has_na = dat$check_NA_A,
+    mat = matA(db),
+    MoreArgs = list(fn = popdemo::isErgodic)
+  )
   
-  # check properties of matA using functions in popdemo
-  # these checks require matA with no values of NA
-  db_sub <- subsetDB(db, newdata$matAcheckNA %in% FALSE) # subset db to matA with no NAs
-  newdata_sub <- CompadreData(db_sub)
-  newdata_sub$checkPrimitive <- sapply(matA(db_sub), popdemo::isPrimitive)
-  newdata_sub$checkIrreducible <- sapply(matA(db_sub), popdemo::isIrreducible)
-  newdata_sub$checkErgodic <- sapply(matA(db_sub), popdemo::isErgodic)
+  dat$check_irreducible <- mapply(
+    CheckMats,
+    has_na = dat$check_NA_A,
+    mat = matA(db),
+    MoreArgs = list(fn = popdemo::isIrreducible)
+  )
   
-  # merge checks into full db
-  newdata_sub2 <- subset(newdata_sub, select = c('index',
-                                                 'check_ergodic',
-                                                 'check_primitive',
-                                                 'check_irreducible'))
-  newdata3 <- merge(newdata, newdata_sub2, by = 'index', all.x = T)
-  cleandata <- subset(newdata3, select = -index)
-
-  # New version with extra info
-  cleanversion <- VersionData(db)
-  cleanversion$Version <- paste0(Version(db),
-                                  " - clean subset created on ",
-                                  format(Sys.time(), "%b_%d_%Y")
-                                )
-  cleanversion$DateCreated <- paste0(DateCreated(db),
-                                      " - clean subset created on ",
-                                      format(Sys.time(), "%b_%d_%Y")
-                                    )
-  cleanversion$NumberAcceptedSpecies <- length(unique(cleandata$SpeciesAccepted))
-  cleanversion$NumberStudies <- length(unique(paste0(cleandata$Authors,
-                                                     cleandata$Journal,
-                                                     cleandata$YearPublication
-                                                    )))
-  cleanversion$NumberMatrices <- dim(cleandata)[1]
-
-  # return
-  cleandb <- methods::new("CompadreDB", 
-                          CompadreData = cleandata, 
-                          VersionData = cleanversion)
-  return(cleandb)
+  dat$check_primitive <- mapply(
+    CheckMats,
+    has_na = dat$check_NA_A,
+    mat = matA(db),
+    MoreArgs = list(fn = popdemo::isPrimitive)
+  )
+  
+  dat$check_singular_U <- mapply(
+    CheckMats,
+    has_na = dat$check_NA_A,
+    mat = matU(db),
+    MoreArgs = list(fn = CheckSingular)
+  )
+  
+  new("CompadreDB",
+      CompadreData = dat,
+      VersionData = VersionData(db))
 }
 
-#' @rdname cleanDB
-cleanDatabase <- function(db) { cleanDB(db) }
+
+
+# utilities
+CheckMats <- function(has_na, mat, fn) {
+  fn <- match.fun(fn)
+  ifelse(has_na, NA, fn(mat))
+}
+
+CheckSingular <- function(matU) {
+  # try calculating fundamental matrix
+  N <- try(solve(diag(nrow(matU)) - matU), silent = TRUE)
+  
+  # flag if singular
+  if (class(N) == 'try-error' && grepl('singular', N[1])) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}

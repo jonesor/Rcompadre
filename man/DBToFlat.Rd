@@ -10,9 +10,7 @@ DBToFlat(db, onlyMatA = FALSE)
 convert2flat(db, onlyMatA = FALSE)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object. Databases will be will be coerced
- from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-comadre_v2.0.1 and below).}
+\item{db}{A COM(P)ADRE database object.}
 
 \item{onlyMatA}{A logical value (TRUE/FALSE) indicating whether ONLY the full
 projection matrix \code{matA} should be included in the flattened data
@@ -33,9 +31,7 @@ to a string.
 for legacy purposes.
 }
 \examples{
-\dontrun{
-compadreFlat <- DBToFlat(compadre, onlyMatA = FALSE)
-}
+CompadreFlat <- DBToFlat(Compadre, onlyMatA = FALSE)
 
 }
 \seealso{

@@ -12,13 +12,10 @@
 #' fecundity in a given stage class and year does not necessarily indicate that
 #' the stage in question is non-reproductive).
 #'
-#' @param db A COM(P)ADRE database object. Databases will be will be coerced
-#'  from the old 'list' format where appropriate (compadre_v4.0.1 and below; 
-#' comadre_v2.0.1 and below).
+#' @param db A COM(P)ADRE database object
 #' 
 #' @return Returns a list which contains the mean fecundity matrix associated
-#'   with a given row of the database, or NA if there is only a single matrix
-#'   from the relevant population within the db.
+#'   with a given row of the database.
 #' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
@@ -26,35 +23,24 @@
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples
-#' \dontrun{
-#' # print set of matrices (A, U, F, C) associated with row 2 of database
-#' compadre$mat[[2]]
+#' # print matF associated with row 16 of database
+#' Compadre$mat[[16]]
 #'
 #' # create list of meanMatFs
-#' meanF <- getMeanMatF(compadre)
+#' meanF <- getMeanMatF(Compadre)
 #'
-#' # print meanMatF associated with row 2 of database
-#' compadre_with_meanF$mat[[2]]
-#' }
+#' # print meanMatF associated with row 16 of database
+#' meanF[[16]]
 #' 
-#' @importFrom methods as
-#'
 #' @export getMeanMatF
-#' 
 getMeanMatF <- function(db) {
 
-  # convert legacy versions of COM(P)ADRE from class 'list' to 'CompadreDB'
-  if (class(db) == "list"){
-    if( "Animalia" %in% db$metadata$Kingdom ) vlim <- 201
-    if( "Plantae" %in% db$metadata$Kingdom ) vlim <- 401
-    if (as.numeric(gsub("\\.", "", sub("(\\s.*$)", "", db$version$Version))) <= vlim){
-      db <- methods::as(db, "CompadreDB")
-    }
+  if (!inherits(db, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function convertLegacyDB")
   }
-
-  newdata <- CompadreData(db)
+  
   # create a unique identifier for each population in the database
-  newdata$PopId <- as.numeric(as.factor(paste(
+  db$PopId <- as.numeric(as.factor(paste(
     db$Authors,
     db$YearPublication,
     db$DOI.ISBN,
@@ -63,45 +49,38 @@ getMeanMatF <- function(db) {
     db$MatrixDimension
   )))
   
-  # subset database to only mean matrices that are divided,
-  # and create unique row ID
-  ssdb <- subsetDB(db, MatrixSplit %in% "Divided")
-  ssnewdata <- CompadreData(ssdb)
-  ssnewdata$RowId <- seq_len(nrow(ssnewdata)) 
+  # create unique row ID
+  db$RowId <- seq_len(nrow(CompadreData(db)))
   
-  # function to return a mean mean matF given PopId
-  meanMatF <- function(PopIdFocal) {
-    RowId <- subset(ssnewdata, PopId == PopIdFocal)$RowId
-    meanMatFs <- lapply(RowId, function(y) matF(ssdb)[[y]] )
-    
-    if (length(meanMatFs) == 1) {        # if only one meanMatF for given PopId
-      return(NA)
-    } else {                             # if multiple meanMatF for given PopId
-      meanMatFsSum <- matrix(0,
-                             nrow = nrow(meanMatFs[[1]]),
-                             ncol = ncol(meanMatFs[[1]]))
-      
-      for(i in 1:length(meanMatFs)) {
-        meanMatFsSum <- meanMatFsSum + meanMatFs[[i]]
-      }
-      
-      return(meanMatFsSum / length(meanMatFs))
-    }
-  }
+  # extract matFs
+  db$matF <- matF(db)
   
   # create vector of unique PopIds, and list of corresponding meanMatFs
-  unique_study_pop <- sort(unique(newdata$PopId))
-  unique_mean_mat_F <- lapply(unique_study_pop, meanMatF)
-
-  # function to return meanMatF corresponding to given row number of db
-  appendMeanMatF <- function(i) {
-    PopId <- newdata$PopId[i]
-    index_mean_mat_F <- which(unique_study_pop == PopId)
-    return(unique_mean_mat_F[[index_mean_mat_F]])
-  }
+  unique_study_pop <- sort(unique(db$PopId))
+  unique_mean_mat_F <- lapply(
+    unique_study_pop, FUN = meanMatF,
+    db_RowId = db$RowId, db_PopId = db$PopId, db_matF = db$matF
+  )
   
-  # create list of meanMatFs for each row of database
-  meanMatList <- lapply(1:nrow(newdata), appendMeanMatF)
+  # match unique mean matFs to original rows of newdata
+  m <- match(db$PopId, unique_study_pop)
+  out <- unique_mean_mat_F[m]
   
-  return(meanMatList)
+  return(out)
 }
+
+
+
+# get mean matrix from list of matrices
+mean_list <- function(x) {
+  n <- length(x)
+  return(Reduce("+", x) / n)
+}
+
+
+# function to return a mean matF given db and PopId
+meanMatF <- function(PopIdFocal, db_RowId, db_PopId, db_matF) {
+  RowIdFocal <- db_RowId[db_PopId == PopIdFocal]
+  return(mean_list(db_matF[RowIdFocal]))
+}
+
