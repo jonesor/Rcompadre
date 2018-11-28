@@ -36,7 +36,7 @@ mergeDBs <- function(db1, db2) {
   vers1 <- VersionData(db1)
   vers2 <- VersionData(db2)
   
-  if (all.equal(vers1, vers2)) {
+  if (isTRUE(all.equal(vers1, vers2))) {
     vers_out <- vers1
   } else {
     # if version info differs, set Version and DateCreated to NA
