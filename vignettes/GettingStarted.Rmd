@@ -33,30 +33,30 @@ Importantly, *Rcompadre* coerces the data as a so-called `CompadreDB` S4 class o
 
 `CompadreData` contains a tibble-style data frame that includes a list column of matrix population models (MPMs) alongside associated metadata columns. Each element of the matrix column of the data frame (`mat`) contains a list of MPMs, while remaining columns include metadata associated with the matrices, while `VersionData` is a list of information about the database version. In practice, knowledge of the details of this structure is not necessary thanks to the tools provided by the `Rcompadre` package.
 
-## Loading the data.
+## Obtaining and loading the data.
 
 To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at [www.compadre-db.org](http://www.compadre-db.org).
 
-When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this:
+When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command `convertLegacyDB`:
 
 ```{r fake load the data, eval=FALSE}
 load("COMPADRE_v.4.0.1.RData")
+compadre <- convertLegacyDB(compadre)
 ```
 
-Alternatively, the function `fetchDB` will automatically download the latest version of COMPADRE or COMADRE from the website. For example:
+Alternatively, the function `fetchDB` will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:
 
 ```{r fake fetch data with fetchDB, eval=FALSE}
 Compadre <- fetchDB('compadre')
 ```
 
-
-However, for this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses!
+For this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses! You can load it like this:
 
 ```{r load example COMPADRE data, eval=TRUE}
 data(Compadre)
 ```
 
-We can now ask for a summary of this object, which will tell us that it is a `CompadreDB` class `S4` object. Simply typing the name of the object (`Compadre` in this case) will give a brief summary of its contents and display the first few rows of the data (which is class `tibble`).
+We can now ask for a summary of this object, which will tell us that it is a `CompadreDB` class `S4` object. Simply typing the name of the object (`Compadre` in this case) will give a brief summary of its contents and display the first few rows of the data (which is a `tibble`).
 
 ```{r Summarise the database}
 summary(Compadre)
@@ -132,9 +132,9 @@ classInfo[[1]]
 classInfo[[1]]$MatrixClassAuthor
 ```
 
-# Subsetting the data based on metadata
+# Subsetting the database based on metadata
 
-It is often desirable to subset the data based on sets of criteria. As with a normal dataframe these datbases can be subset using `subset`. For example, I could subset to only Eudicot species as follows:
+It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using `subset`. For example, I could subset to only Eudicot species as follows:
 
 ```{r subset 1}
 x <- subset(Compadre,DicotMonoc == "Eudicot")
@@ -149,7 +149,7 @@ x <- subset(Compadre,DicotMonoc == "Eudicot" &
               MatrixDimension > 2)
 ```
 
-You can compare compadre datasets using the `compareDBs` command:
+You can compare compadre data sets using the `compareDBs` command:
 
 ```{r compare }
 compareDBs(Compadre,x)
@@ -173,11 +173,10 @@ x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
 
 ## Calculations from matrices
 
-When we have a set of matrices that we want to make calculations from, we can use `lapply` to apply a function across all the matrices in the list produced by `matA`. For example, to calculate lambda from all the **A** matrices we can use the following code to obtain lambda for the matrices in the `x` object produced above. The `lapply` function returns a list so it is first necessary to coerce the list into a vector using `unlist`. Then we can examine a summary, produce a histogram etc.
+When we have a set of matrices that we want to make calculations from, we can use `sapply` to apply a function across all the matrices in the list produced by `matA`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
 
 ```{r matrix calculations}
-lambdaVals<-lapply(matA(x),popdemo::eigs,what="lambda")
-lambdaVals <- unlist(lambdaVals)
+lambdaVals<-sapply(matA(x),popdemo::eigs,what="lambda")
 summary(lambdaVals)
 hist(lambdaVals,main="Lambda values")
 ```
