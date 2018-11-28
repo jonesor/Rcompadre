@@ -123,47 +123,47 @@ setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 #' @importFrom tibble as_tibble add_column
 #' @export
 asCompadreDB <- function(from) {
-    # is all the data required to fill S4 slots there?
-    if(!all(c( "metadata", "matrixClass", "mat", "version") %in% names(from))) {
-        stop(
-"This doesn't appear to be an old compadre data object. It does\n
- not contain all of the components 'metadata', 'mat', 'matrixClass'\n
- and 'version' required to generate a CompadreDB object. See ?CompadreDB")
-    }
-    # do all the matrix list elements contain matA, matF, matU and matC?
-    CheckNames <- function(x) all(names(x) == c("matA", "matU", "matF", "matC"))
-    matNamesMatch <- all(vapply(from$mat, CheckNames, logical(1)))
-    if(!matNamesMatch) {
-        stop(
-"Not all matrices in this compadre data object contain all 
- of the components matA, matU, matF and matC (in that order) 
- required to generate CompadreMat objects. See ?CompadreMat"
-        )
-    }
-    # get matrices and coerce into CompadreMat objects
-    mat <- lapply(seq_along(from$mat), function(i) {
-      new("CompadreMat",
-          matA = from$mat[[i]]$matA,
-          matU = from$mat[[i]]$matU,
-          matF = from$mat[[i]]$matF,
-          matC = from$mat[[i]]$matC,
-          matrixClass = as.data.frame(from$matrixClass[[i]]))
-    })
-    
-    # add matrices to metadata as a list column
-    dat <- as_tibble(from$metadata)
-    dat <- add_column(dat, mat = mat, .before = 1)
-    
-    # strip out species/study/matrix counts from legacy db, if any
-    db_version <- from$version
-    db_version$NumberAcceptedSpecies <- NULL
-    db_version$NumberStudies <- NULL
-    db_version$NumberMatrices <- NULL
-    
-    # create a new CompadreDB object with the new data and version
-    new("CompadreDB",
-        data = dat,
-        version = db_version)
+  # is all the data required to fill S4 slots there?
+  if(!all(c( "metadata", "matrixClass", "mat", "version") %in% names(from))) {
+    stop("This doesn't appear to be an old compadre data object. It does ",
+         "not contain all of the components 'metadata', 'mat', ",
+         "'matrixClass' and 'version' required to generate a CompadreDB ",
+         "object. See ?CompadreDB", call. = FALSE)
+  }
+  # do all the matrix list elements contain matA, matF, matU and matC?
+  CheckNames <- function(x) {
+    all(c("matA", "matU", "matF", "matC") %in% names(x))
+  }
+  matNamesMatch <- all(vapply(from$mat, CheckNames, logical(1)))
+  if(!matNamesMatch) {
+    stop("Not all matrices in this compadre data object contain all of ",
+         "the components matA, matU, matF and matC required to generate ",
+         "CompadreMat objects. See ?CompadreMat", call. = FALSE)
+  }
+  # get matrices and coerce into CompadreMat objects
+  mat <- lapply(seq_along(from$mat), function(i) {
+    new("CompadreMat",
+        matA = from$mat[[i]]$matA,
+        matU = from$mat[[i]]$matU,
+        matF = from$mat[[i]]$matF,
+        matC = from$mat[[i]]$matC,
+        matrixClass = as.data.frame(from$matrixClass[[i]]))
+  })
+  
+  # add matrices to metadata as a list column
+  dat <- as_tibble(from$metadata)
+  dat <- add_column(dat, mat = mat, .before = 1)
+  
+  # strip out species/study/matrix counts from legacy db, if any
+  db_version <- from$version
+  db_version$NumberAcceptedSpecies <- NULL
+  db_version$NumberStudies <- NULL
+  db_version$NumberMatrices <- NULL
+  
+  # create a new CompadreDB object with the new data and version
+  new("CompadreDB",
+      data = dat,
+      version = db_version)
 }
 
 
