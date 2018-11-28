@@ -1,0 +1,191 @@
+---
+title: "Getting Started with Rcompadre"
+author: "Owen Jones"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with Rcompadre}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r, eval = TRUE,echo=FALSE}
+library(RcompadreDev)
+```
+
+## Introduction
+
+The COMPADRE and COMADRE Plant and Animal Matrix Databases contain matrix population models (MPMs) and associated metadata obtained from the published literature (Salguero-Gomez et al. 2015, 2016). 
+
+Wherever possible the full MPM (the **A** matrix) has been split into three additional constituent matrices based on the nature of the demographic processes involved. These are the **U** matrix, which summarises growth and survival; the **F** matrix, which summarises sexual reproduction; and the **C** matrix, which summarises asexual (clonal) reproduction. These additional matrices sum to equal the **A** matrix (**A** = **U** + **F** + **C**). Thus, each MPM is presented as a list of these 4 matrices in the databases together with information about the MPM stages defined by the author. 
+
+In addition, each set of MPMs is associated with metadata including taxonomy of the species studied, the geographic location, the published source information and so on. For further details please see the two papers on COMPADRE and COMADRE (Salguero-Gomez et al. 2015, 2016), and the User Guide which is available via the website ([www.compadre-db.org](http://www.compadre-db.org)).
+
+The databases are distributed as `Rdata` files containing a `list` class object which provides the data in a structured format. Although it is possible to use the database without using the *Rcompadre* package this is not recommended. *Rcompadre* provides users with a range of useful tools for working with the database that will greatly improve user experience.
+
+Importantly, *Rcompadre* coerces the data as a so-called `CompadreDB` S4 class object. The details of what this means is beyond the scope of this vignette, apart from that the object has two *slots* called `CompadreData` and `VersionData`. 
+
+`CompadreData` contains a tibble-style data frame that includes a list column of matrix population models (MPMs) alongside associated metadata columns. Each element of the matrix column of the data frame (`mat`) contains a list of MPMs, while remaining columns include metadata associated with the matrices, while `VersionData` is a list of information about the database version. In practice, knowledge of the details of this structure is not necessary thanks to the tools provided by the `Rcompadre` package.
+
+## Loading the data.
+
+To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at [www.compadre-db.org](http://www.compadre-db.org).
+
+When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this:
+
+```{r fake load the data, eval=FALSE}
+load("COMPADRE_v.4.0.1.RData")
+```
+
+Alternatively, the function `fetchDB` will automatically download the latest version of COMPADRE or COMADRE from the website. For example:
+
+```{r fake fetch data with fetchDB, eval=FALSE}
+Compadre <- fetchDB('compadre')
+```
+
+
+However, for this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses!
+
+```{r load example COMPADRE data, eval=TRUE}
+data(Compadre)
+```
+
+We can now ask for a summary of this object, which will tell us that it is a `CompadreDB` class `S4` object. Simply typing the name of the object (`Compadre` in this case) will give a brief summary of its contents and display the first few rows of the data (which is class `tibble`).
+
+```{r Summarise the database}
+summary(Compadre)
+Compadre
+```
+
+This summary tells us that we have successfully loaded the data, and that there are `r length(Compadre$mat)` matrices. The database also contains some Version information which can be accessed using the command `VersionData(Compadre)`. This includes information including the version number, date created, and link to the database user agreement.
+
+```{r Version of database}
+VersionData(Compadre)
+```
+
+## Exploring the data
+
+The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the `names` command, in the same way that you would for a data frame. Each element of the `mat` column contains a list of the four matrices (**A**, **U**, **F**, **C**) and information on matrix stages while the other columns are ordinary vectors.
+
+```{r Names}
+names(Compadre)
+```
+
+We can explore this information in various ways, for example, by producing tables, histograms, or other plots of variables of interest.
+
+```{r Tables and Histograms}
+table(Compadre$DicotMonoc)
+hist(Compadre$StudyDuration,main = "StudyDuration")
+plot(Compadre$Lon,Compadre$Lat,main = "Location")
+```
+
+## Finding data for for a particular species
+
+If, for example, you want to check if a species is in the database you can use the `checkSpecies` function. For example, we can ask if the species _Succisa pratensis_ is present.
+
+```{r Check species}
+checkSpecies("Succisa pratensis",Compadre)
+```
+
+The function works with vectors of species names as follows. 
+
+```{r Check species 2}
+spList <- c("Succisa pratensis","Onodrim ent","Aster amellus")
+checkSpecies(spList,Compadre)
+```
+
+Optionally, the function can return a subset of the database restricted to matched species names.
+
+```{r Check species3}
+compadre_succisa<- checkSpecies("Succisa pratensis",Compadre,returnDatabase = TRUE)
+compadre_succisa
+```
+
+## Accessing the matrices
+
+Matrices in `CompadreDB` objects are stored in a special vector, called `mat` as part of the data. However, the matrices are stored as special objects within the data frame and should be addressed using Rcompadre accessor functions to obtain the A, U, F and C matrices (see the User Guide), or information about the stage definitions used.
+
+Thus, to obtain the A matrix, which includes all types of transition one would use the `matA` function, which will return a list of A matrices from the database (there are equivalent functions, `matU`, `matF` and `matC`:
+
+```{r get matrices 1}
+matA(compadre_succisa)
+```
+
+Thus one could select particular matrices from this list using `[[ ]]` syntax
+
+```{r get matrices 2}
+x <- matA(compadre_succisa)
+x[[1]]
+```
+
+It is often desirable to know what the stages are in the matrices. To access this information you can use the `matrixClass` function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.
+
+```{r get matrices 3}
+classInfo <- matrixClass(compadre_succisa)
+classInfo[[1]]
+classInfo[[1]]$MatrixClassAuthor
+```
+
+# Subsetting the data based on metadata
+
+It is often desirable to subset the data based on sets of criteria. As with a normal dataframe these datbases can be subset using `subset`. For example, I could subset to only Eudicot species as follows:
+
+```{r subset 1}
+x <- subset(Compadre,DicotMonoc == "Eudicot")
+x
+```
+
+These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is >2 I could use the following command:
+
+```{r subset 2}
+x <- subset(Compadre,DicotMonoc == "Eudicot" & 
+              Country %in% c("USA","CAN") & 
+              MatrixDimension > 2)
+```
+
+You can compare compadre datasets using the `compareDBs` command:
+
+```{r compare }
+compareDBs(Compadre,x)
+```
+
+## Potential issues with MPMs
+
+Numerous matrix calculations (Caswell 2001) have particular requirements for use. The details are beyond the scope of this vignette, but include things like (1) ergodicity, (2) primitivity, (3) singularity and (4) irreducibility. In addition, most matrix calculations will not work if there are missing values (i.e. `NA`) in the MPM. 
+
+We can flag these by adding metadata using the `cleanDB` function.
+
+```{r cleanDB }
+Compadre_flagged <- cleanDB(Compadre)
+```
+
+We could then use `subset` like this:
+
+```{r subset flagged }
+x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
+```
+
+## Calculations from matrices
+
+When we have a set of matrices that we want to make calculations from, we can use `lapply` to apply a function across all the matrices in the list produced by `matA`. For example, to calculate lambda from all the **A** matrices we can use the following code to obtain lambda for the matrices in the `x` object produced above. The `lapply` function returns a list so it is first necessary to coerce the list into a vector using `unlist`. Then we can examine a summary, produce a histogram etc.
+
+```{r matrix calculations}
+lambdaVals<-lapply(matA(x),popdemo::eigs,what="lambda")
+lambdaVals <- unlist(lambdaVals)
+summary(lambdaVals)
+hist(lambdaVals,main="Lambda values")
+```
+
+## References
+
+Caswell, H. (2001). Matrix Population Models: Construction, Analysis, and Interpretation. 2nd edition. Sinauer Associates, Sunderland, MA. ISBN-10: 0878930965
+
+Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. doi: [10.1111/1365-2745.12334](http://doi.org/10.1111/1365-2745.12334)
+
+Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. doi: [10.1111/1365-2656.12482](http://doi.org/10.1111/1365-2656.12482)
