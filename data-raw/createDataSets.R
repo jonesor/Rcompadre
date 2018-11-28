@@ -73,3 +73,7 @@ usethis::use_data(Comadre,
                   CompadreLegacy,
                   overwrite = TRUE)
 
+
+# write legacy subsample to .RData in inst/testdata for testing
+dir.create('inst/testdata/', recursive = TRUE)
+save(CompadreLegacy, file = "inst/testdata/CompadreLegacy.RData")
