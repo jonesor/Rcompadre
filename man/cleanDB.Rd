@@ -2,25 +2,26 @@
 % Please edit documentation in R/cleanDB.R
 \name{cleanDB}
 \alias{cleanDB}
-\title{Flag potential issues in matrices of a COM(P)ADRE database.}
+\title{Flag potential issues in matrices of a COM(P)ADRE database}
 \usage{
 cleanDB(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object.}
+\item{db}{A CompadreDB object}
 }
 \value{
-Returns db with extra columns appended to the metadata to indicate
+Returns db with extra columns appended to the data slot to indicate
   (TRUE/FALSE) whether there are potential problems with the matrices
   corresponding to a given row of the metadata, including whether matA is
   ergodic, primitive, and irreducible, and whether matU is singular (i.e.
   cannot be inverted).
 }
 \description{
-This function adds columns to the metatadata slot of a COM(P)ADRE database
-object that flag potential problems in the matrices, such as when matrices
-contain missing values. These columns can subsequently can be used to subset
-the COM(P)ADRE database by logical argument.
+Adds columns to the data slot of a CompadreDB object that flag potential
+problems in the matrix population models, such as matrices containing missing
+values, or projection models that are non-ergodic, reducible, or imprimitive.
+These columns can subsequently be used to subset the database by logical
+argument.
 }
 \examples{
 CompadreClean <- cleanDB(Compadre)
