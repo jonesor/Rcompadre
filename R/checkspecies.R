@@ -42,10 +42,6 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   inDatabase <- vapply(species, findSpecies, db = db, FALSE, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
-  if (all(inDatabase == FALSE)) {
-    warning("None of the species were found in the database", call. = FALSE)
-  }
-  
   if (returnDatabase == TRUE) {
     ssdb <- db[db$SpeciesAccepted %in% species,]
     return(ssdb)
