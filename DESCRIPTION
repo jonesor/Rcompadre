@@ -19,15 +19,6 @@ Suggests:
     rmarkdown,
     testthat,
     popbio,
-    fields,
-    scales,
-    vcd,
-    rcrossref,
-    taxize,
-    dplyr,
-    maps,
-    stringr,
-    MASS,
     covr
 VignetteBuilder: knitr
 Collate: 
@@ -36,12 +27,12 @@ Collate:
     'CompadreDB-Subsetting.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
-    'DBToFlat.R'
-    'checkspecies.R'
-    'cleanDB.R'
-    'compareDBs.R'
+    'cdb_check_species.R'
+    'cdb_compare.R'
+    'cdb_fetch.R'
+    'cdb_flag.R'
+    'cdb_flatten.R'
+    'cdb_mean_matF.R'
+    'cdb_merge.R'
     'data.R'
-    'fetchDB.R'
-    'getMeanMatF.R'
-    'mergeDBs.R'
-    'stringtomatrix.R'
+    'string_to_mat.R'

@@ -51,20 +51,20 @@ library(RcompadreDev)
 Fetch the most recent database version from [compadre-db.org](https://www.compadre-db.org/) with
 
 ```{r}
-compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
+compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
 ```
 
 or load from a local `.RData` file with
 
 ```{r, eval=FALSE}
-compadre <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
+compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If you prefer using `load()` to load your local copy of a legacy database, use `asCompadreDB()` to convert it to the 'CompadreDB' class
+If you prefer using `load()` to load your local copy of a legacy database, use `as_cdb()` to convert it to the 'CompadreDB' class
 
 ```{r, eval=FALSE}
 load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
-compadre <- asComadreDB(compadre)
+compadre <- as_cdb(compadre)
 ```
 
 #### Subsetting
@@ -81,10 +81,10 @@ subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
-First we'll use the function `cleanDB` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
+First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
 
 ```{r}
-compadre_clean <- cleanDB(compadre)
+compadre_clean <- cdb_flag(compadre)
 ```
 
 We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we'll subset the database accordingly.
