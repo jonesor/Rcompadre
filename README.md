@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
+[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre) [![Coverage status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=devel)
 
 Rcompadre
 =========
