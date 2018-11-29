@@ -1,18 +1,20 @@
-#' A function to compare two COMPADRE/COMADRE database versions
+#' Compare two versions or subsets of a COM(P)ADRE database
 #' 
-#' @param db1,db2 COM(P)ADRE database objects to compare.
+#' Prints a summary of the differences between two CompadreDB objects, including
+#' the number of species, studies, and matrices in each. If argument
+#' \code{verbose == TRUE}, additionally prints a list of the species and studies
+#' that are present in one database but not the other.
 #' 
+#' @param db1,db2 CompadreDB objects to compare
 #' @param verbose A logical argument indicating whether or not to return lots
-#' of detail.
+#' of detail
 #' 
-#' @return Prints a summary to the screen of the comparison between two databases.
+#' @return NULL (output is printed rather than returned)
 #'
 #' @details \code{compareDBs} is preferred, but \code{dbCompare} is provided 
 #' for legacy purposes.
 #' 
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
-#' 
-#' @keywords manip attribute
 #' 
 #' @examples
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
@@ -24,7 +26,7 @@
 compareDBs <- function(db1, db2, verbose = FALSE){ 
 
   if (!inherits(db1, "CompadreDB") | !inherits(db2, "CompadreDB")) {
-    stop("dbs must be of class CompadreDB. See function convertLegacyDB")
+    stop("dbs must be of class CompadreDB. See function asCompadreDB")
   }
 
   #Quick summary

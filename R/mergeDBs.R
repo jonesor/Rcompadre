@@ -1,11 +1,10 @@
-#' Merge two Compadre/Comadre databases together
+#' Merge two COM(P)ADRE databases together
 #' 
-#' @description Merges two CompadreDB objects together.
+#' Merges two CompadreDB objects via a row-bind of the data slots.
 #' 
-#' @param db1 A \code{CompadreDB} object
-#' @param db2 A \code{CompadreDB} object
+#' @param db1,db2 CompadreDB objects
 #' 
-#' @return A \code{CompadreDB} object containing both databases.
+#' @return A CompadreDB object containing both databases
 #' 
 #' @author Sam Levin
 #' 
@@ -20,7 +19,7 @@
 mergeDBs <- function(db1, db2) {
   
   if (!inherits(db1, "CompadreDB") | !inherits(db2, "CompadreDB")) {
-    stop("dbs must be of class CompadreDB. See function convertLegacyDB")
+    stop("dbs must be of class CompadreDB. See function asCompadreDB")
   }
 
   # dbs must have matching columns to merge
@@ -36,7 +35,7 @@ mergeDBs <- function(db1, db2) {
   vers1 <- VersionData(db1)
   vers2 <- VersionData(db2)
   
-  if (all.equal(vers1, vers2)) {
+  if (isTRUE(all.equal(vers1, vers2))) {
     vers_out <- vers1
   } else {
     # if version info differs, set Version and DateCreated to NA
@@ -46,6 +45,6 @@ mergeDBs <- function(db1, db2) {
   }
   
   new('CompadreDB',
-      CompadreData = rbind(dat1, dat2),
-      VersionData = vers_out)
+      data = rbind(dat1, dat2),
+      version = vers_out)
 }

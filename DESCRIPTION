@@ -14,7 +14,8 @@ Imports:
   methods, 
   popdemo,
   tibble
-Suggests: knitr, 
+Suggests: 
+    knitr,
     rmarkdown,
     testthat,
     popbio,
@@ -26,7 +27,8 @@ Suggests: knitr,
     dplyr,
     maps,
     stringr,
-    MASS
+    MASS,
+    covr
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
@@ -38,7 +40,6 @@ Collate:
     'checkspecies.R'
     'cleanDB.R'
     'compareDBs.R'
-    'convertDB.R'
     'data.R'
     'fetchDB.R'
     'getMeanMatF.R'

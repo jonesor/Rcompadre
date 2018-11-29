@@ -3,23 +3,26 @@
 \name{compareDBs}
 \alias{compareDBs}
 \alias{dbCompare}
-\title{A function to compare two COMPADRE/COMADRE database versions}
+\title{Compare two versions or subsets of a COM(P)ADRE database}
 \usage{
 compareDBs(db1, db2, verbose = FALSE)
 
 dbCompare(db1, db2, verbose = FALSE)
 }
 \arguments{
-\item{db1, db2}{COM(P)ADRE database objects to compare.}
+\item{db1, db2}{CompadreDB objects to compare}
 
 \item{verbose}{A logical argument indicating whether or not to return lots
-of detail.}
+of detail}
 }
 \value{
-Prints a summary to the screen of the comparison between two databases.
+NULL (output is printed rather than returned)
 }
 \description{
-A function to compare two COMPADRE/COMADRE database versions
+Prints a summary of the differences between two CompadreDB objects, including
+the number of species, studies, and matrices in each. If argument
+\code{verbose == TRUE}, additionally prints a list of the species and studies
+that are present in one database but not the other.
 }
 \details{
 \code{compareDBs} is preferred, but \code{dbCompare} is provided 
@@ -35,5 +38,3 @@ compareDBs(Compadre1, Compadre2)
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
 }
-\keyword{attribute}
-\keyword{manip}

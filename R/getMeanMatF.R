@@ -1,21 +1,20 @@
-#' Calculates a population-specific grand mean fecundity matrix for each set of
-#' matrices in a COM(P)ADRE database object
+#' Calculates a population-specific mean fecundity matrix for each set of
+#' matrices in a COM(P)ADRE database
 #'
-#' This function takes a COM(P)ADRE database object and calculates a grand mean
-#' fecundity matrix for each unique population (a mean of all
-#' population-specific fecundity matrices, including fecundity matrices for
-#' which \code{MatrixComposite == 'Mean'}). Here, a unique study population is
-#' defined as a unique combination of the metadata columns Authors,
-#' YearPublication, DOI.ISBN, SpeciesAuthor, MatrixPopulation, and
-#' MatrixDimension. The main purpose of this function is to identify stage
-#' classes that are \emph{potentially} reproductive (i.e. the absense of
-#' fecundity in a given stage class and year does not necessarily indicate that
-#' the stage in question is non-reproductive).
+#' Takes a CompadreDB object and calculates a grand mean fecundity matrix for
+#' each unique population (a mean of all population-specific fecundity matrices,
+#' including fecundity matrices for which \code{MatrixComposite == 'Mean'}).
+#' Here, a unique study population is defined as a unique combination of the
+#' metadata columns 'Authors', 'YearPublication', 'DOI.ISBN', 'SpeciesAuthor',
+#' 'MatrixPopulation', and 'MatrixDimension'. The main purpose of this function
+#' is to identify stage classes that are \emph{potentially} reproductive (i.e.
+#' the absense of fecundity in a given stage class and year does not necessarily
+#' indicate that the stage in question is non-reproductive).
 #'
-#' @param db A COM(P)ADRE database object
+#' @param db A CompadreDB object
 #' 
-#' @return Returns a list which contains the mean fecundity matrix associated
-#'   with a given row of the database.
+#' @return Returns a list of matrices, reprenting the mean fecundity matrix
+#'   associated with each row of the database.
 #' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
@@ -36,7 +35,7 @@
 getMeanMatF <- function(db) {
 
   if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function convertLegacyDB")
+    stop("db must be of class CompadreDB. See function asCompadreDB")
   }
   
   # create a unique identifier for each population in the database

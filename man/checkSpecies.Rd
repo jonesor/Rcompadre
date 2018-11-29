@@ -7,28 +7,27 @@
 checkSpecies(species, db, returnDatabase = FALSE)
 }
 \arguments{
-\item{species}{A character vector of binomial species names, with the
-genus and specific epithet separated by either an underscore or a space (
-e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))}
+\item{species}{A character vector of binomial species names, with the genus
+and specific epithet separated by either an underscore or a space (e.g.
+\code{c("Acipenser_fulvescens", "Borrelia_burgdorferi")})}
 
-\item{db}{A COM(P)ADRE database object}
+\item{db}{A CompadreDB object}
 
-\item{returnDatabase}{A logical argument indicating whether a database 
-should be returned.}
+\item{returnDatabase}{A logical argument indicating whether a database should
+be returned.}
 }
 \value{
-If returnDatabase = FALSE, \code{checkSpecies} returns a data frame 
-  with a column of species names and a column indicating whether a species 
-  occurs in the database. If returnDatabase == TRUE, returns  a subset of db 
-  containing only those species within argument \code{species}. 
-  \code{findSpecies} returns TRUE if a species is found in the database, 
-  FALSE if not, and is called by \code{checkSpecies}.
+If \code{returnDatabase == FALSE}, \code{checkSpecies} returns a data
+  frame with a column of species names and a column indicating whether a
+  species occurs in the database. If \code{returnDatabase == TRUE}, returns
+  a subset of \code{db} containing only those species within argument
+  \code{species}.
 }
 \description{
 This function takes a vector of species names and checks whether those
-species are represented within a COM(P)ADRE database. It outputs either a
-data frame depicting the species of interest and whether they occurr in the
-database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
+species are represented within a CompadreDB object. It outputs either a data
+frame depicting the species of interest and whether they occurr in the
+database (TRUE/FALSE), or, if \code{returnDatabase == TRUE}, a CompadreDB
 object subset to the species of interest.
 }
 \examples{

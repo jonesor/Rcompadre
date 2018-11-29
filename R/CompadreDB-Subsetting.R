@@ -5,9 +5,6 @@
 #' that the \code{mat} column will always be retained during subsetting, even if
 #' it is not included in the user's column subset.
 #' 
-#' @note Dropping columns with the minus symbol (\code{-}) is not currently
-#'   supported.
-#' 
 #' @name CompadreDB-Subsetting
 #' 
 #' @examples
@@ -37,37 +34,51 @@ NULL
 #' @param drop ignored
 #' @importFrom methods new
 #' @export
-setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY", drop = "ANY"), 
+setMethod(f = "[", signature = signature(x = "CompadreDB",
+                                         i = "ANY",
+                                         j = "ANY",
+                                         drop = "ANY"), 
           function(x, i, j, ..., drop = FALSE) {
-            dat <- CompadreData(x)
-            if(!missing(i)){
-              if(!any(is.logical(i), is.numeric(i), is.character(i))) {
-                stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
-              }
-            }
+            dat <- x@data
             if(!missing(j)){
               if(!any(is.logical(j), is.numeric(j), is.character(j))) {
-                stop("subset criteria must be logical, numeric (column / row numbers)\nor character (column / row names)")
+                stop("subset criteria must be logical, numeric (column / row",
+                     "numbers) or character (column / row names)")
               }
               mat_col <- which(names(dat) == "mat")
-              # test for length 1 b/c in [.data.frame, x[,TRUE] selects all columns
+              # test for length 1 b/c x[,TRUE] should select all columns
               if(is.logical(j) & j[mat_col] != TRUE & length(j) != 1){
-                warning("'mat' was included in the output by default, although not selected")
+                warning("'mat' was included in the output by default, ",
+                        "although not selected")
                 j[mat_col] <- TRUE
               }
-              if(is.numeric(j) & !(mat_col %in% j)){
-                warning("'mat' was included in the output by default, although not selected")
-                j <- c(mat_col, j)
+              if(is.numeric(j)){
+                if (all(j >= 0) & !(mat_col %in% j)) {
+                  warning("'mat' was included in the output by default, ",
+                          "although not selected")
+                  j <- c(mat_col, j)
+                } else if (all(j < 0) & (mat_col %in% abs(j))) {
+                  warning("'mat' was included in the output by default, ",
+                          "although not selected")
+                  if (length(j) == 1) {
+                    # if trying to remove ONLY mat col, keep all cols
+                    j <- TRUE
+                  } else {
+                    # if trying to remove mat col + others, remove only others
+                    j <- j[-which(mat_col %in% abs(j))]
+                  }
+                }
               }
-              if(is.character(j) & !("mat" %in% j)){
-                warning("'mat' was included in the output by default, although not selected")
+              if(is.character(j) & !("mat" %in% j)) {
+                warning("'mat' was included in the output by default, ",
+                        "although not selected")
                 j <- c("mat", j)
               }
             }
             
             new("CompadreDB",
-                CompadreData = dat[i, j],
-                VersionData = VersionData(x))
+                data = dat[i, j],
+                version = x@version)
           }
 )
 
@@ -80,11 +91,11 @@ setMethod(f = "[", signature = signature(x = "CompadreDB", i = "ANY", j = "ANY",
 #' @export
 subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
   
-  if (!"CompadreData" %in% slotNames(x)) {
+  if (!"data" %in% slotNames(x)) {
     stop("subset method requires CompadreDB object with slot 'data'")
   }
   
-  dat <- CompadreData(x)
+  dat <- x@data
   if (missing(subset)) {
     r <- rep_len(TRUE, nrow(dat))
   } else {

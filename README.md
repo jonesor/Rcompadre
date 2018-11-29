@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
+[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre) [![Coverage status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=devel)
 
 Rcompadre
 =========
@@ -17,11 +17,12 @@ devtools::install_github("jonesor/Rcompadre")
 #
 # or
 #
-install.packages("remotes") # smaller and quicker to install than devtools
+# use remotes, a devtools dependency that is smaller and quicker to install
+install.packages("remotes")
 remotes::install_github("jonesor/Rcompadre")
 ```
 
-Or, to install the development branch (package name `RcompadreDev`) use:
+To install the development branch (package name `RcompadreDev`) use:
 
 ``` r
 remotes::install_github("jonesor/Rcompadre", ref = "devel")
@@ -47,13 +48,14 @@ compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
 or load from a local `.RData` file with
 
 ``` r
-compadre_legacy <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
+compadre <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If working with a locally-stored legacy database object (of class "list"), convert to the "CompadreDB" class using
+If you prefer using `load()` to load your local copy of a legacy database, use `asCompadreDB()` to convert it to the 'CompadreDB' class
 
 ``` r
-compadre <- convertLegacyDB(compadre_legacy)
+load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
+compadre <- asComadreDB(compadre)
 ```
 
 #### Subsetting
@@ -91,3 +93,8 @@ compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
 ```
 
 In the code above, the accessor function `matA()` is used to extract a list of projection matrices (the full matrix, "matA") from every row of `compadre_sub`. There are also accessor functions for the matrix subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts of the database too.
+
+Contributions
+-------------
+
+All contributions are welcome. Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

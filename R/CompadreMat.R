@@ -67,53 +67,42 @@ setMethod("initialize", "CompadreMat",
 ## define validity check function (does not need to be documented)
 validCompadreMat <- function(object) {
   errors <- character()
-  ###matrices
-  ##test dimensions
-  dims <- cbind(matA = dim(matA(object)),
-                matU = dim(matU(object)),
-                matF = dim(matF(object)),
-                matC = dim(matC(object)))
-  dimsMeans <- colMeans(dims)
-  dimsDiff <- diff(range(dimsMeans))
-  #matA
-  if (diff(dims[,"matA"]) != 0 ) {
-    matAmsg2 <- "matA is not square"
-    errors <- c(errors, matAmsg2)
+
+  # test matrix dimensions
+  dims <- cbind(dim(object@matA),
+                dim(object@matU),
+                dim(object@matF),
+                dim(object@matC))
+
+  n_row <- dims[1,]
+  n_col <- dims[2,]
+
+  check_square <- n_row == n_col
+  check_equal_dims <- all(n_row == n_row[1]) & all(n_col == n_col[1])
+
+  if (!all(check_square)) {
+    m <- c("matA", "matU", "matF", "matC")
+    errors <- c(errors, paste("The following matrices are not square:",
+                              paste(m[!check_square], collapse = ", ")))
   }
-  #matU
-  if (diff(dims[,"matU"]) != 0 ) {
-    matUmsg2 <- "matU is not square"
-    errors <- c(errors, matUmsg2)
+  if (!check_equal_dims) {
+    errors <- c(errors, "Dimensions of matA, matU, matF and matC do not match")
   }
-  #matF
-  if (diff(dims[,"matF"]) != 0 ) {
-    matFmsg2 <- "matF is not square"
-    errors <- c(errors, matFmsg2)
+
+  # test that matrixClass has required column names
+  m_names <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
+  m_names_present <- m_names %in% names(object@matrixClass)
+
+  if (!all(m_names_present)) {
+    errors <- c(errors,
+                paste("The following columns are missing from matrixClass:",
+                      paste(m_names[!m_names_present], collapse = ", ")))
   }
-  #matC
-  if (diff(dims[,"matC"]) != 0 ) {
-    matCmsg2 <- "matC is not square"
-    errors <- c(errors, matCmsg2)
-  }
-  #equal dimensions among all matrices
-  if(dimsDiff != 0) {
-    dimsmsg <- "matA, matU, matF and matC dimensions do not match"
-    errors <- c(errors, dimsmsg)
-  }
-  ###matrixClass
-  ##test that necessary column names are there
-  matrixClassNames <- c("MatrixClassOrganized", "MatrixClassAuthor", "MatrixClassNumber")
-  mCNpresent <- matrixClassNames %in% names(matrixClass(object))
-  if(!all(mCNpresent)) {
-    mCNmissing <- paste(matrixClassNames[!mCNpresent], collapse = " & ")
-    mCNmsg1 <- paste(mCNmissing, "missing from matrixClassNames")
-    errors <- c(errors, mCNmsg1)
-  }
-  ##test that the row dimension matches the matrices,
-  ##IF the matrices all have equal dimension.
-  if(dimsDiff == 0 & !all(dim(matrixClass(object))[1] == dimsMeans)) {
-    mCNmsg2 <- "number of rows in matrixClass does not match dimensions of matA, matU, matF and matC"
-    errors <- c(errors, mCNmsg2)
+
+  # test that the row dimension of matrixClass matches matA
+  if (nrow(object@matrixClass) != dims[1,1]) {
+    errors <- c(errors,
+                "Number of rows in matrixClass does not match nrow(matA)")
   }
   if (length(errors) == 0) {
     TRUE
@@ -121,6 +110,7 @@ validCompadreMat <- function(object) {
     errors
   }
 }
+
 setValidity("CompadreMat", validCompadreMat)
 
 

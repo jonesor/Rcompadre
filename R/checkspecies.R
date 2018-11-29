@@ -1,24 +1,23 @@
 #' Check whether a COM(P)ADRE database contains one or more species of interest
 #'
 #' This function takes a vector of species names and checks whether those
-#' species are represented within a COM(P)ADRE database. It outputs either a
-#' data frame depicting the species of interest and whether they occurr in the
-#' database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
+#' species are represented within a CompadreDB object. It outputs either a data
+#' frame depicting the species of interest and whether they occurr in the
+#' database (TRUE/FALSE), or, if \code{returnDatabase == TRUE}, a CompadreDB
 #' object subset to the species of interest.
 #'
-#' @param species A character vector of binomial species names, with the
-#'   genus and specific epithet separated by either an underscore or a space (
-#'   e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))
-#' @param db A COM(P)ADRE database object
-#' @param returnDatabase A logical argument indicating whether a database 
-#' should be returned.
+#' @param species A character vector of binomial species names, with the genus
+#'   and specific epithet separated by either an underscore or a space (e.g.
+#'   \code{c("Acipenser_fulvescens", "Borrelia_burgdorferi")})
+#' @param db A CompadreDB object
+#' @param returnDatabase A logical argument indicating whether a database should
+#'   be returned.
 #' 
-#' @return If returnDatabase = FALSE, \code{checkSpecies} returns a data frame 
-#'   with a column of species names and a column indicating whether a species 
-#'   occurs in the database. If returnDatabase == TRUE, returns  a subset of db 
-#'   containing only those species within argument \code{species}. 
-#'   \code{findSpecies} returns TRUE if a species is found in the database, 
-#'   FALSE if not, and is called by \code{checkSpecies}.
+#' @return If \code{returnDatabase == FALSE}, \code{checkSpecies} returns a data
+#'   frame with a column of species names and a column indicating whether a
+#'   species occurs in the database. If \code{returnDatabase == TRUE}, returns
+#'   a subset of \code{db} containing only those species within argument
+#'   \code{species}.
 #' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
@@ -36,15 +35,11 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   #   present in database
   
   if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function convertLegacyDB")
+    stop("db must be of class CompadreDB. See function asCompadreDB")
   }
   
   inDatabase <- vapply(species, findSpecies, db = db, FALSE, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
-  
-  if (all(inDatabase == FALSE)) {
-    warning("None of the species were found in the database", call. = FALSE)
-  }
   
   if (returnDatabase == TRUE) {
     ssdb <- db[db$SpeciesAccepted %in% species,]

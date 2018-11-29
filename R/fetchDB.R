@@ -10,6 +10,7 @@
 #' 
 #' @return A CompadreDB object
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
+#' 
 #' @examples
 #' \dontrun{
 #' compadre <- fetchDB('compadre')

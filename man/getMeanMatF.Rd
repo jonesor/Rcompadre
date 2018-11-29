@@ -2,29 +2,28 @@
 % Please edit documentation in R/getMeanMatF.R
 \name{getMeanMatF}
 \alias{getMeanMatF}
-\title{Calculates a population-specific grand mean fecundity matrix for each set of
-matrices in a COM(P)ADRE database object}
+\title{Calculates a population-specific mean fecundity matrix for each set of
+matrices in a COM(P)ADRE database}
 \usage{
 getMeanMatF(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object}
+\item{db}{A CompadreDB object}
 }
 \value{
-Returns a list which contains the mean fecundity matrix associated
-  with a given row of the database.
+Returns a list of matrices, reprenting the mean fecundity matrix
+  associated with each row of the database.
 }
 \description{
-This function takes a COM(P)ADRE database object and calculates a grand mean
-fecundity matrix for each unique population (a mean of all
-population-specific fecundity matrices, including fecundity matrices for
-which \code{MatrixComposite == 'Mean'}). Here, a unique study population is
-defined as a unique combination of the metadata columns Authors,
-YearPublication, DOI.ISBN, SpeciesAuthor, MatrixPopulation, and
-MatrixDimension. The main purpose of this function is to identify stage
-classes that are \emph{potentially} reproductive (i.e. the absense of
-fecundity in a given stage class and year does not necessarily indicate that
-the stage in question is non-reproductive).
+Takes a CompadreDB object and calculates a grand mean fecundity matrix for
+each unique population (a mean of all population-specific fecundity matrices,
+including fecundity matrices for which \code{MatrixComposite == 'Mean'}).
+Here, a unique study population is defined as a unique combination of the
+metadata columns 'Authors', 'YearPublication', 'DOI.ISBN', 'SpeciesAuthor',
+'MatrixPopulation', and 'MatrixDimension'. The main purpose of this function
+is to identify stage classes that are \emph{potentially} reproductive (i.e.
+the absense of fecundity in a given stage class and year does not necessarily
+indicate that the stage in question is non-reproductive).
 }
 \examples{
 # print matF associated with row 16 of database

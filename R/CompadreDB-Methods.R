@@ -17,7 +17,7 @@ NULL
 #' @param ... additional arguments
 #' @export
 as.data.frame.CompadreDB <- function(x, ...) {
-  dat <- CompadreData(x)
+  dat <- x@data
   as.data.frame(dat, ...)
 } 
 
@@ -28,38 +28,40 @@ setAs("CompadreDB", "data.frame", function(from)
 #' @rdname CompadreDB-Methods
 #' @importFrom tibble as_tibble
 #' @export
-as_tibble.CompadreDB <- function(x) as_tibble(CompadreData(x))
+as_tibble.CompadreDB <- function(x) as_tibble(x@data)
 
 
 #' @rdname CompadreDB-Methods
 #' @importFrom utils head
 #' @param n The number of rows to extract
 #' @export
-head.CompadreDB <- function(x, n = 6L, ...) head(CompadreData(x), n = n, ...)
+head.CompadreDB <- function(x, n = 6L, ...) head(x@data, n = n, ...)
 
 
 #' @rdname CompadreDB-Methods
 #' @export
 names.CompadreDB <- function(x) {
-  if (!("CompadreData" %in% slotNames(x))) {
-    stop("names method requires CompadreData object with slot 'CompadreData'")
+  if (!("data" %in% slotNames(x))) {
+    stop("names method requires CompadreDB object with slot 'data'")
   }
-  names(CompadreData(x))
+  names(x@data)
 }
 
 
 #' @rdname CompadreDB-Methods
 #' @importFrom tibble as_tibble
+#' @importFrom methods new
 #' @param y A data.frame to merge with x
 #' @export
 merge.CompadreDB <- function(x, y, ...) {
   if (inherits(y, "CompadreDB")) {
-    y <- CompadreData(y)
+    y <- y@data
   }
-  dataout <- as_tibble(merge(CompadreData(x), y, ...))
-  dbout <- methods::new("CompadreDB", CompadreData = dataout, 
-                                      VersionData = VersionData(x))
-  dbout
+  dataout <- as_tibble(merge(x@data, y, ...))
+  
+  new("CompadreDB",
+      data = dataout, 
+      version = x@version)
 }
 
 
@@ -77,7 +79,7 @@ setGeneric("NumberAcceptedSpecies",
 #' @export
 setMethod("NumberAcceptedSpecies", signature = "CompadreDB", 
           function(object){
-            return(length(unique(object$SpeciesAccepted)))
+            return(length(unique(object@data$SpeciesAccepted)))
           }
 )
 
@@ -95,10 +97,9 @@ setGeneric("NumberStudies",
 #' @export
 setMethod("NumberStudies", signature = "CompadreDB", 
           function(object){
-            return(length(unique(paste0(object$Authors,
-                                        object$Journal,
-                                        object$YearPublication
-                                        ))))
+            return(length(unique(paste0(object@data$Authors,
+                                        object@data$Journal,
+                                        object@data$YearPublication))))
           }
 )
 
@@ -116,6 +117,6 @@ setGeneric("NumberMatrices",
 #' @export
 setMethod("NumberMatrices", signature = "CompadreDB", 
           function(object){
-            return(dim(CompadreData(object))[1])
+            return(nrow(object@data))
           }
 )

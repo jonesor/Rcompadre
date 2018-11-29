@@ -55,12 +55,25 @@ s2 <- c(302L, 1903L, 1123L, 11L, 547L, 1492L, 1233L, 1621L, 885L, 914L,
         1511L, 1191L, 1847L, 1293L, 283L, 1891L, 1054L, 191L, 2092L, 
         474L, 1744L)
 
-# random 150 matrices
+# subsamples to distribute
 Compadre <- Compadre[s1,]
 Comadre <- Comadre[s2,]
+
+
+# subsample of legacy version (for testing asCompadreDB)
+CompadreLegacy <- compadre
+CompadreLegacy$metadata <- CompadreLegacy$metadata[s1,]
+CompadreLegacy$mat <- CompadreLegacy$mat[s1]
+CompadreLegacy$matrixClass <- CompadreLegacy$matrixClass[s1]
+
 
 # Write the files into the data folder
 usethis::use_data(Comadre,
                   Compadre,
+                  CompadreLegacy,
                   overwrite = TRUE)
 
+
+# write legacy subsample to .RData in inst/testdata for testing
+dir.create('inst/testdata/', recursive = TRUE)
+save(CompadreLegacy, file = "inst/testdata/CompadreLegacy.RData")

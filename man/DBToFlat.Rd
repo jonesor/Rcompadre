@@ -3,28 +3,27 @@
 \name{DBToFlat}
 \alias{DBToFlat}
 \alias{convert2flat}
-\title{Convert a list-structured COM(P)ADRE database object to a flat data frame}
+\title{Convert a COM(P)ADRE database object to a flat data frame}
 \usage{
 DBToFlat(db, onlyMatA = FALSE)
 
 convert2flat(db, onlyMatA = FALSE)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object.}
+\item{db}{A CompadreDB object}
 
 \item{onlyMatA}{A logical value (TRUE/FALSE) indicating whether ONLY the full
 projection matrix \code{matA} should be included in the flattened data
 frame}
 }
 \value{
-The \code{data.frame} from the metadata slot of \code{db}, but with
+The \code{data.frame} from the data slot of \code{db}, but with
   additional columns appended for the matrix stage information and the
   matrices themselves, both in string format.
 }
 \description{
-This function converts a list-structured COM(P)ADRE database object to a flat
-data frame, by converting each matrix and associated matrixClass information
-to a string.
+Converts a CompadreDB object to a flat data frame, by converting each matrix
+and associated matrixClass information to a string.
 }
 \details{
 \code{DBToFlat} is preferred, but \code{convert2flat} is provided 
