@@ -63,7 +63,13 @@ setMethod(f = "[", signature = signature(x = "CompadreDB",
                 } else if (all(j < 0) & (mat_col %in% abs(j))) {
                   warning("'mat' was included in the output by default, ",
                           "although not selected")
-                  j <- j[-which(mat_col %in% abs(j))]
+                  if (length(j) == 1) {
+                    # if trying to remove ONLY mat col, keep all cols
+                    j <- TRUE
+                  } else {
+                    # if trying to remove mat col + others, remove only others
+                    j <- j[-which(mat_col %in% abs(j))]
+                  }
                 }
               }
               if(is.character(j) & !("mat" %in% j)) {
