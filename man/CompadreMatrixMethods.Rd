@@ -6,24 +6,31 @@
 \alias{matA}
 \alias{matA,CompadreMat-method}
 \alias{matA,CompadreDB-method}
+\alias{matA,list-method}
 \alias{matU}
 \alias{matU,CompadreMat-method}
 \alias{matU,CompadreDB-method}
+\alias{matU,list-method}
 \alias{matF}
 \alias{matF,CompadreMat-method}
 \alias{matF,CompadreDB-method}
+\alias{matF,list-method}
 \alias{matC}
 \alias{matC,CompadreMat-method}
 \alias{matC,CompadreDB-method}
+\alias{matC,list-method}
 \alias{matrixClass}
 \alias{matrixClass,CompadreMat-method}
 \alias{matrixClass,CompadreDB-method}
+\alias{matrixClass,list-method}
 \alias{MatrixClassAuthor}
 \alias{MatrixClassAuthor,CompadreMat-method}
 \alias{MatrixClassAuthor,CompadreDB-method}
+\alias{MatrixClassAuthor,list-method}
 \alias{MatrixClassOrganized}
 \alias{MatrixClassOrganized,CompadreMat-method}
 \alias{MatrixClassOrganized,CompadreDB-method}
+\alias{MatrixClassOrganized,list-method}
 \title{Methods for working with matrices in com(p)adre}
 \usage{
 matA(object)
@@ -32,11 +39,15 @@ matA(object)
 
 \S4method{matA}{CompadreDB}(object)
 
+\S4method{matA}{list}(object)
+
 matU(object)
 
 \S4method{matU}{CompadreMat}(object)
 
 \S4method{matU}{CompadreDB}(object)
+
+\S4method{matU}{list}(object)
 
 matF(object)
 
@@ -44,11 +55,15 @@ matF(object)
 
 \S4method{matF}{CompadreDB}(object)
 
+\S4method{matF}{list}(object)
+
 matC(object)
 
 \S4method{matC}{CompadreMat}(object)
 
 \S4method{matC}{CompadreDB}(object)
+
+\S4method{matC}{list}(object)
 
 matrixClass(object)
 
@@ -56,17 +71,23 @@ matrixClass(object)
 
 \S4method{matrixClass}{CompadreDB}(object)
 
+\S4method{matrixClass}{list}(object)
+
 MatrixClassAuthor(object)
 
 \S4method{MatrixClassAuthor}{CompadreMat}(object)
 
 \S4method{MatrixClassAuthor}{CompadreDB}(object)
 
+\S4method{MatrixClassAuthor}{list}(object)
+
 MatrixClassOrganized(object)
 
 \S4method{MatrixClassOrganized}{CompadreMat}(object)
 
 \S4method{MatrixClassOrganized}{CompadreDB}(object)
+
+\S4method{MatrixClassOrganized}{list}(object)
 }
 \arguments{
 \item{object}{A CompadreDB object}

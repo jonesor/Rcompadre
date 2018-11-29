@@ -34,7 +34,17 @@ setMethod("matA", signature = "CompadreDB",
             return(lapply(object@data$mat, function(M) { M@matA }))
           }
 )
-
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matA", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to matA() must be of class ",
+                   "CompadreMat")
+            }
+            return(lapply(object, function(M) { M@matA }))
+          }
+)
 
 
 # matU
@@ -60,6 +70,17 @@ setMethod("matU", signature = "CompadreMat",
 setMethod("matU", signature = "CompadreDB", 
           function(object) {
             return(lapply(object@data$mat, function(M) { M@matU }))
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matU", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to matU() must be of class ",
+                   "CompadreMat")
+            }
+            return(lapply(object, function(M) { M@matU }))
           }
 )
 
@@ -90,6 +111,17 @@ setMethod("matF", signature = "CompadreDB",
             return(lapply(object@data$mat, function(M) { M@matF }))
           }
 )
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matF", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to matF() must be of class ",
+                   "CompadreMat")
+            }
+            return(lapply(object, function(M) { M@matF }))
+          }
+)
 
 
 
@@ -116,6 +148,17 @@ setMethod("matC", signature = "CompadreMat",
 setMethod("matC", signature = "CompadreDB", 
           function(object) {
             return(lapply(object@data$mat, function(M) { M@matC }))
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matC", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to matC() must be of class ",
+                   "CompadreMat")
+            }
+            return(lapply(object, function(M) { M@matC }))
           }
 )
 
@@ -148,6 +191,17 @@ setMethod("matrixClass", signature = "CompadreMat",
 setMethod("matrixClass", signature = "CompadreDB", 
           function(object) {
             return(lapply(object@data$mat, function(M) { M@matrixClass }))
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("matrixClass", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to matrixClass() must be of ",
+                   "class CompadreMat")
+            }
+            return(lapply(object, function(M) { M@matrixClass }))
           }
 )
 
@@ -183,6 +237,18 @@ setMethod("MatrixClassAuthor", signature = "CompadreDB",
                           function(M) { M@matrixClass$MatrixClassAuthor }))
           }
 )
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassAuthor", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to MatrixClassAuthor() must ",
+                   "be of class CompadreMat")
+            }
+            return(lapply(object,
+                          function(M) { M@matrixClass$MatrixClassAuthor }))
+          }
+)
 
 
 # MatrixClassOrganized
@@ -211,6 +277,18 @@ setMethod("MatrixClassOrganized", signature = "CompadreMat",
 setMethod("MatrixClassOrganized", signature = "CompadreDB", 
           function(object) {
             return(lapply(object@data$mat,
+                          function(M) { M@matrixClass$MatrixClassOrganized }))
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassOrganized", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to MatrixClassOrganized() ",
+                   "must be of class CompadreMat")
+            }
+            return(lapply(object,
                           function(M) { M@matrixClass$MatrixClassOrganized }))
           }
 )
