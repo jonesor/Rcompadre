@@ -17,11 +17,12 @@ devtools::install_github("jonesor/Rcompadre")
 #
 # or
 #
-install.packages("remotes") # smaller and quicker to install than devtools
+# use remotes, a devtools dependency that is smaller and quicker to install
+install.packages("remotes")
 remotes::install_github("jonesor/Rcompadre")
 ```
 
-Or, to install the development branch (package name `RcompadreDev`) use:
+To install the development branch (package name `RcompadreDev`) use:
 
 ``` r
 remotes::install_github("jonesor/Rcompadre", ref = "devel")
@@ -47,13 +48,14 @@ compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
 or load from a local `.RData` file with
 
 ``` r
-compadre_legacy <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
+compadre <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If working with a locally-stored legacy database object (of class "list"), convert to the "CompadreDB" class using
+If you prefer using `load()` to load your local copy of a legacy database, use `asCompadreDB()` to convert it to the 'CompadreDB' class
 
 ``` r
-compadre <- convertLegacyDB(compadre_legacy)
+load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
+compadre <- asComadreDB(compadre)
 ```
 
 #### Subsetting
