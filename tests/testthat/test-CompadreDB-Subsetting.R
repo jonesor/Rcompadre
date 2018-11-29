@@ -1,7 +1,8 @@
-context("[")
+context("CompadreDB-Subsetting")
 
-test_that("[ method for CompadreDB works correctly", {
+test_that("CompadreDB-Subsetting works correctly", {
   
+  # [
   sub1 <- Compadre[1:5,]
   expect_s4_class(sub1, "CompadreDB")
   expect_true(nrow(sub1@data) == 5)
@@ -25,12 +26,31 @@ test_that("[ method for CompadreDB works correctly", {
   
   sub7 <- Compadre[,names(Compadre) %in% c("mat", "SpeciesAuthor")]
   expect_true(ncol(sub7@data) == 2)
+  
+  # subset()
+  sub1 <- subset(Compadre, SpeciesAccepted == "Lechea cernua")
+  n1 <- length(which(Compadre@data$SpeciesAccepted == "Lechea cernua"))
+  expect_s4_class(sub1, "CompadreDB")
+  expect_true(nrow(sub1@data) == n1)
+  
+  sub2 <- subset(Compadre, select = c("mat", "SpeciesAccepted"))
+  expect_true(ncol(sub2@data) == 2)
+  
+  sub3 <- subset(Compadre, MatrixDimension == 4, select = 1:5)
+  n3 <- length(which(Compadre@data$MatrixDimension == 4))
+  expect_true(nrow(sub3@data) == n3)
+  expect_true(ncol(sub3@data) == 5)
 })
 
 
-test_that("[ method for CompadreDB warns and fails gracefully", {
+test_that("CompadreDB-Subsetting warns and fails gracefully", {
   
+  # [
   expect_warning(Compadre[,-1])
   expect_warning(Compadre[,"SpeciesAccepted"])
   expect_warning(Compadre[,names(Compadre) != "mat"])
+  
+  # subset()
+  expect_error(subset(Compadre, 1:5))
+  expect_warning(subset(Compadre, select = 5:10))
 })
