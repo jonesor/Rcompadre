@@ -43,10 +43,7 @@
 #' @author Iain M. Stott
 #' @author Tamora D. James
 #' 
-#' @examples 
-#' # convert legacy database object to CompadreDB
-#' Compadre <- asCompadreDB(CompadreLegacy)
-#' 
+#' @examples
 #' # extract entire 'data' slot
 #' dat <- CompadreData(Compadre)
 #' 
@@ -115,16 +112,26 @@ setValidity("CompadreDB", validCompadreDB)
 setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 
 
-
-#' Convert legacy COM(P)ADRE database object o CompadreDB
-#' @rdname CompadreDB
+#' Convert legacy COM(P)ADRE database object to CompadreDB
+#' 
+#' Convert a legacy COM(P)ADRE database object (of class 'list') to a CompadreDB
+#' object.
+#' 
 #' @param from A legacy COM(P)ADRE database
+#' 
+#' @return A CompadreDB object
+#' 
+#' @author Iain M. Stott
+#' 
+#' @examples
+#' Compadre <- asCompadreDB(CompadreLegacy)
+#' 
 #' @importFrom methods new
 #' @importFrom tibble as_tibble add_column
 #' @export
 asCompadreDB <- function(from) {
   # is all the data required to fill S4 slots there?
-  if(!all(c( "metadata", "matrixClass", "mat", "version") %in% names(from))) {
+  if(!all(c("metadata", "matrixClass", "mat", "version") %in% names(from))) {
     stop("This doesn't appear to be an old compadre data object. It does ",
          "not contain all of the components 'metadata', 'mat', ",
          "'matrixClass' and 'version' required to generate a CompadreDB ",

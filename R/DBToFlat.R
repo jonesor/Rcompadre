@@ -27,7 +27,7 @@
 DBToFlat <- function(db, onlyMatA = FALSE){
   
   if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function convertLegacyDB")
+    stop("db must be of class CompadreDB. See function asCompadreDB")
   }
   
   newdata <- CompadreData(db)[!(names(CompadreData(db)) %in% "mat")]

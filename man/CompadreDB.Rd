@@ -3,7 +3,6 @@
 \docType{class}
 \name{CompadreDB}
 \alias{CompadreDB}
-\alias{asCompadreDB}
 \alias{CompadreData}
 \alias{CompadreData,CompadreDB-method}
 \alias{$,CompadreDB-method}
@@ -16,8 +15,6 @@
 \alias{DateCreated,CompadreDB-method}
 \title{CompadreDB Class}
 \usage{
-asCompadreDB(from)
-
 CompadreData(object)
 
 \S4method{CompadreData}{CompadreDB}(object)
@@ -39,8 +36,6 @@ DateCreated(object)
 \S4method{DateCreated}{CompadreDB}(object)
 }
 \arguments{
-\item{from}{A legacy COM(P)ADRE database}
-
 \item{object}{A CompadreDB object}
 
 \item{x}{A CompadreDB object}
@@ -69,9 +64,6 @@ link to the User Agreement)}
 }}
 
 \examples{
-# convert legacy database object to CompadreDB
-Compadre <- asCompadreDB(CompadreLegacy)
-
 # extract entire 'data' slot
 dat <- CompadreData(Compadre)
 

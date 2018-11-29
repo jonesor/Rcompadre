@@ -38,7 +38,6 @@ Collate:
     'checkspecies.R'
     'cleanDB.R'
     'compareDBs.R'
-    'convertDB.R'
     'data.R'
     'fetchDB.R'
     'getMeanMatF.R'

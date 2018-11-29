@@ -30,7 +30,7 @@
 cleanDB <- function(db) {
   
   if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function convertLegacyDB")
+    stop("db must be of class CompadreDB. See function asCompadreDB")
   }
   
   dat <- db@data

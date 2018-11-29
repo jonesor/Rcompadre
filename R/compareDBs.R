@@ -24,7 +24,7 @@
 compareDBs <- function(db1, db2, verbose = FALSE){ 
 
   if (!inherits(db1, "CompadreDB") | !inherits(db2, "CompadreDB")) {
-    stop("dbs must be of class CompadreDB. See function convertLegacyDB")
+    stop("dbs must be of class CompadreDB. See function asCompadreDB")
   }
 
   #Quick summary

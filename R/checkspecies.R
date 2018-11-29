@@ -36,7 +36,7 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
   #   present in database
   
   if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function convertLegacyDB")
+    stop("db must be of class CompadreDB. See function asCompadreDB")
   }
   
   inDatabase <- vapply(species, findSpecies, db = db, FALSE, USE.NAMES = FALSE)
