@@ -1,11 +1,10 @@
-#' Merge two Compadre/Comadre databases together
+#' Merge two COM(P)ADRE databases together
 #' 
-#' @description Merges two CompadreDB objects together.
+#' Merges two CompadreDB objects via a row-bind of the data slots.
 #' 
-#' @param db1 A \code{CompadreDB} object
-#' @param db2 A \code{CompadreDB} object
+#' @param db1,db2 CompadreDB objects
 #' 
-#' @return A \code{CompadreDB} object containing both databases.
+#' @return A CompadreDB object containing both databases
 #' 
 #' @author Sam Levin
 #' 

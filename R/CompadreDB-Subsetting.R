@@ -5,9 +5,6 @@
 #' that the \code{mat} column will always be retained during subsetting, even if
 #' it is not included in the user's column subset.
 #' 
-#' @note Dropping columns with the minus symbol (\code{-}) is not currently
-#'   supported.
-#' 
 #' @name CompadreDB-Subsetting
 #' 
 #' @examples

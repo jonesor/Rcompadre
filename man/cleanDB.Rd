@@ -12,7 +12,7 @@ cleanDB(db)
 \value{
 Returns db with extra columns appended to the data slot to indicate
   (TRUE/FALSE) whether there are potential problems with the matrices
-  corresponding to a given row of the metadata, including whether matA is
+  corresponding to a given row of the data, including whether matA is
   ergodic, primitive, and irreducible, and whether matU is singular (i.e.
   cannot be inverted).
 }
@@ -36,4 +36,3 @@ Danny Buss <dlb50@cam.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
-\keyword{utilities}

@@ -1,5 +1,3 @@
-
-################################################################################
 #' Accessor methods for CompadreMat and CompadreDB objects
 #'
 #' Most methods for working with matrices are applicable to both CompadreMat and 

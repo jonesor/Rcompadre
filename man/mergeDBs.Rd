@@ -2,20 +2,18 @@
 % Please edit documentation in R/mergeDBs.R
 \name{mergeDBs}
 \alias{mergeDBs}
-\title{Merge two Compadre/Comadre databases together}
+\title{Merge two COM(P)ADRE databases together}
 \usage{
 mergeDBs(db1, db2)
 }
 \arguments{
-\item{db1}{A \code{CompadreDB} object}
-
-\item{db2}{A \code{CompadreDB} object}
+\item{db1, db2}{CompadreDB objects}
 }
 \value{
-A \code{CompadreDB} object containing both databases.
+A CompadreDB object containing both databases
 }
 \description{
-Merges two CompadreDB objects together.
+Merges two CompadreDB objects via a row-bind of the data slots.
 }
 \examples{
 Compadre1 <- subset(Compadre, Continent == "Asia")
