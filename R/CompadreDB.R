@@ -27,7 +27,7 @@
 #' (\code{$}) and replacing (\code{$<-}) columns within the \code{data} slot,
 #' accessing elements from the \code{version} slot (see functions
 #' \code{VersionData} and \code{DateCreated}), and converting legacy database
-#' objects to the CompadreDB class (see \code{asCompadreDB}).
+#' objects to the CompadreDB class (see \code{as_cdb}).
 #' 
 #' @name CompadreDB
 #' 
@@ -109,7 +109,7 @@ setValidity("CompadreDB", validCompadreDB)
 
 
 ## define method to coerce old compadre db object to CompadreDB class
-setAs("list", "CompadreDB", function(from) asCompadreDB(from))
+setAs("list", "CompadreDB", function(from) as_cdb(from))
 
 
 #' Convert legacy COM(P)ADRE database object to CompadreDB
@@ -124,12 +124,12 @@ setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 #' @author Iain M. Stott
 #' 
 #' @examples
-#' Compadre <- asCompadreDB(CompadreLegacy)
+#' Compadre <- as_cdb(CompadreLegacy)
 #' 
 #' @importFrom methods new
 #' @importFrom tibble as_tibble add_column
 #' @export
-asCompadreDB <- function(from) {
+as_cdb <- function(from) {
   # is all the data required to fill S4 slots there?
   if(!all(c("metadata", "matrixClass", "mat", "version") %in% names(from))) {
     stop("This doesn't appear to be an old compadre data object. It does ",

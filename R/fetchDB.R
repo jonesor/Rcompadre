@@ -4,8 +4,8 @@
 #' \url{https://compadre-db.org}, or load any version stored in a local .RData
 #' file.
 #'
-#' @param db Either "comadre" or "compadre" (case insensitive) to fetch the most
-#'   recent database from \url{https://compadre-db.org}, or a path to an
+#' @param cdb Either "comadre" or "compadre" (case insensitive) to fetch the
+#'   most recent database from \url{https://compadre-db.org}, or a path to an
 #'   existing COMPADRE database (i.e. .RData file) stored on the local machine.
 #' 
 #' @return A CompadreDB object
@@ -13,18 +13,18 @@
 #' 
 #' @examples
 #' \dontrun{
-#' compadre <- fetchDB('compadre')
+#' compadre <- cdb_fetch('compadre')
 #' }
 #' @export
-fetchDB <- function(db) {
+cdb_fetch <- function(cdb) {
   
   # get url or path
-  if (tolower(db) == 'comadre') {
+  if (tolower(cdb) == 'comadre') {
     path <- url('https://www.compadre-db.org/Data/ComadreDownload')
-  } else if (tolower(db) == 'compadre') {
+  } else if (tolower(cdb) == 'compadre') {
     path <- url('https://www.compadre-db.org/Data/CompadreDownload')
   } else {
-    path <- path.expand(db)
+    path <- path.expand(cdb)
   }
   
   # fetch and load
@@ -36,7 +36,7 @@ fetchDB <- function(db) {
   if (inherits(dbFetch, "CompadreDB")) {
     dbOut <- dbFetch
   } else {
-    dbOut <- asCompadreDB(dbFetch)
+    dbOut <- as_cdb(dbFetch)
   }
   
   # print db name, version, and release date

@@ -50,7 +50,7 @@ slots (see functions \code{CompadreData} and \code{VersionData}), accessing
 (\code{$}) and replacing (\code{$<-}) columns within the \code{data} slot,
 accessing elements from the \code{version} slot (see functions
 \code{VersionData} and \code{DateCreated}), and converting legacy database
-objects to the CompadreDB class (see \code{asCompadreDB}).
+objects to the CompadreDB class (see \code{as_cdb}).
 }
 \section{Slots}{
 

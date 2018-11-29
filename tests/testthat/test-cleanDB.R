@@ -1,8 +1,8 @@
-context("cleanDB")
+context("cdb_flag")
 
-test_that("cleanDB works correctly", {
+test_that("cdb_flag works correctly", {
   
-  db_clean <- cleanDB(Compadre)
+  db_clean <- cdb_flag(Compadre)
   
   expect_s4_class(db_clean, "CompadreDB")
   
@@ -18,7 +18,7 @@ test_that("cleanDB works correctly", {
 })
 
 
-test_that("cleanDB warns and fails gracefully", {
+test_that("cdb_flag warns and fails gracefully", {
   
-  expect_error(cleanDB(Compadre@data))
+  expect_error(cdb_flag(Compadre@data))
 })

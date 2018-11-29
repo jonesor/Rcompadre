@@ -2,7 +2,7 @@ context("CompadreDB")
 
 test_that("CompadreDB works correctly", {
   
-  db1 <- db2 <- db3 <- db4 <- asCompadreDB(CompadreLegacy)
+  db1 <- db2 <- db3 <- db4 <- as_cdb(CompadreLegacy)
   
   expect_true(validCompadreDB(db1))
   expect_output(print(db1))

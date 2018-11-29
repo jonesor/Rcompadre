@@ -11,8 +11,8 @@ load('~/COMADRE_v.X.X.X.RData')
 load('~/COMPADRE_v.X.X.X.RData')
 
 # convert to CompadreDB
-Compadre <- asCompadreDB(compadre)
-Comadre <- asCompadreDB(comadre)
+Compadre <- as_cdb(compadre)
+Comadre <- as_cdb(comadre)
 
 # # create reproducible random subsamples
 # s1 <- sample(seq_along(Compadre$SpeciesAccepted), 150)
@@ -77,3 +77,4 @@ usethis::use_data(Comadre,
 # write legacy subsample to .RData in inst/testdata for testing
 dir.create('inst/testdata/', recursive = TRUE)
 save(CompadreLegacy, file = "inst/testdata/CompadreLegacy.RData")
+

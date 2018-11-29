@@ -7,28 +7,27 @@
 #'   square bracket and ending with a closed square bracket, with individual
 #'   matrix cell entries separated by a space.
 #' 
-#' @return A square numeric \code{matrix}.
+#' @return A square numeric matrix
 #' 
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
-#' @seealso DBToFlat
+#' @seealso cdb_flatten
 #' 
 #' @examples
 #' x1 <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
-#' stringToMatrix(x1)
+#' string_to_mat(x1)
 #' 
 #' x2 <- "[0 0 0 0.42 0.65 0 0 0 0 0.52 0 0 0 0 0.2 0]"
-#' stringToMatrix(x2)
+#' string_to_mat(x2)
 #' 
 #' \dontrun{
 #' # non-square matrix
 #' x3 <- "[0.42 0.52 0.15 0.23 0.14]"
-#' stringToMatrix(x3)
+#' string_to_mat(x3)
 #' }
 #' 
-#' @export stringToMatrix
-#' 
-stringToMatrix <- function(A) {
+#' @export string_to_mat
+string_to_mat <- function(A) {
   A <- gsub(pattern = "\\[|\\]", "", A)
   A <- gsub(pattern = ";", " ", A)
   A <- strsplit(x = A, split = " |`NA`")[[1]]

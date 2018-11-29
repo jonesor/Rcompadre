@@ -1,15 +1,15 @@
-context("getMeanMatF")
+context("cdb_mean_matF")
 
-test_that("getMeanMatF works correctly", {
+test_that("cdb_mean_matF works correctly", {
   
-  x <- getMeanMatF(Compadre)
+  x <- cdb_mean_matF(Compadre)
   
   expect_is(x, "list")
   expect_is(x[[1]], "matrix")
   expect_length(x, nrow(Compadre@data))
 })
 
-test_that("getMeanMatF warns and fails gracefully", {
+test_that("cdb_mean_matF warns and fails gracefully", {
   
-  expect_error(getMeanMatF(Compadre@data))
+  expect_error(cdb_mean_matF(Compadre@data))
 })

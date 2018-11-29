@@ -11,7 +11,7 @@
 #' the absense of fecundity in a given stage class and year does not necessarily
 #' indicate that the stage in question is non-reproductive).
 #'
-#' @param db A CompadreDB object
+#' @param cdb A CompadreDB object
 #' 
 #' @return Returns a list of matrices, reprenting the mean fecundity matrix
 #'   associated with each row of the database.
@@ -26,43 +26,43 @@
 #' Compadre$mat[[16]]
 #'
 #' # create list of meanMatFs
-#' meanF <- getMeanMatF(Compadre)
+#' meanF <- cdb_mean_matF(Compadre)
 #'
 #' # print meanMatF associated with row 16 of database
 #' meanF[[16]]
 #' 
-#' @export getMeanMatF
-getMeanMatF <- function(db) {
+#' @export cdb_mean_matF
+cdb_mean_matF <- function(cdb) {
 
-  if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function asCompadreDB")
+  if (!inherits(cdb, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function as_cdb")
   }
   
   # create a unique identifier for each population in the database
-  db$PopId <- as.numeric(as.factor(paste(
-    db$Authors,
-    db$YearPublication,
-    db$DOI.ISBN,
-    db$SpeciesAuthor,
-    db$MatrixPopulation,
-    db$MatrixDimension
+  cdb$PopId <- as.numeric(as.factor(paste(
+    cdb$Authors,
+    cdb$YearPublication,
+    cdb$DOI.ISBN,
+    cdb$SpeciesAuthor,
+    cdb$MatrixPopulation,
+    cdb$MatrixDimension
   )))
   
   # create unique row ID
-  db$RowId <- seq_len(nrow(CompadreData(db)))
+  cdb$RowId <- seq_len(nrow(cdb@data))
   
   # extract matFs
-  db$matF <- matF(db)
+  cdb$matF <- matF(cdb)
   
   # create vector of unique PopIds, and list of corresponding meanMatFs
-  unique_study_pop <- sort(unique(db$PopId))
+  unique_study_pop <- sort(unique(cdb$PopId))
   unique_mean_mat_F <- lapply(
     unique_study_pop, FUN = meanMatF,
-    db_RowId = db$RowId, db_PopId = db$PopId, db_matF = db$matF
+    db_RowId = cdb$RowId, db_PopId = cdb$PopId, db_matF = cdb$matF
   )
   
   # match unique mean matFs to original rows of newdata
-  m <- match(db$PopId, unique_study_pop)
+  m <- match(cdb$PopId, unique_study_pop)
   out <- unique_mean_mat_F[m]
   
   return(out)

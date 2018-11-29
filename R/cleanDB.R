@@ -6,12 +6,12 @@
 #' These columns can subsequently be used to subset the database by logical
 #' argument.
 #'
-#' @param db A CompadreDB object
+#' @param cdb A CompadreDB object
 #' 
-#' @return Returns db with extra columns appended to the data slot to indicate
-#'   (TRUE/FALSE) whether there are potential problems with the matrices
-#'   corresponding to a given row of the data, including whether matA is
-#'   ergodic, primitive, and irreducible, and whether matU is singular (i.e.
+#' @return Returns \code{cdb} with extra columns appended to the data slot to
+#'   indicate (TRUE/FALSE) whether there are potential problems with the
+#'   matrices corresponding to a given row of the data, including whether matA
+#'   is ergodic, primitive, and irreducible, and whether matU is singular (i.e.
 #'   cannot be inverted).
 #' 
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
@@ -20,26 +20,26 @@
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples
-#' CompadreClean <- cleanDB(Compadre)
+#' CompadreFlag <- cdb_flag(Compadre)
 #'
 #' @importFrom popdemo isErgodic isIrreducible isPrimitive
 #' @importFrom methods new
-#' @export cleanDB
-cleanDB <- function(db) {
+#' @export cdb_flag
+cdb_flag <- function(cdb) {
   
-  if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function asCompadreDB")
+  if (!inherits(cdb, "CompadreDB")) {
+    stop("cdb must be of class CompadreDB. See function as_cdb")
   }
   
-  dat <- db@data
+  dat <- cdb@data
   
-  dat$check_NA_A <- vapply(db$mat, function(x) any(is.na(x@matA)), logical(1))
-  dat$check_NA_U <- vapply(db$mat, function(x) any(is.na(x@matU)), logical(1))
-  dat$check_NA_F <- vapply(db$mat, function(x) any(is.na(x@matF)), logical(1))
-  dat$check_NA_C <- vapply(db$mat, function(x) any(is.na(x@matC)), logical(1))
+  dat$check_NA_A <- vapply(cdb$mat, function(x) any(is.na(x@matA)), logical(1))
+  dat$check_NA_U <- vapply(cdb$mat, function(x) any(is.na(x@matU)), logical(1))
+  dat$check_NA_F <- vapply(cdb$mat, function(x) any(is.na(x@matF)), logical(1))
+  dat$check_NA_C <- vapply(cdb$mat, function(x) any(is.na(x@matC)), logical(1))
   
-  matA <- matA(db)
-  matU <- matU(db)
+  matA <- matA(cdb)
+  matU <- matU(cdb)
   
   dat$check_ergodic <- mapply(
     CheckMats,
@@ -71,7 +71,7 @@ cleanDB <- function(db) {
   
   new("CompadreDB",
       data = dat,
-      version = db@version)
+      version = cdb@version)
 }
 
 

@@ -5,19 +5,18 @@
 #' frame depicting the species of interest and whether they occurr in the
 #' database (TRUE/FALSE), or, if \code{returnDatabase == TRUE}, a CompadreDB
 #' object subset to the species of interest.
-#'
+#' 
+#' @param cdb A CompadreDB object
 #' @param species A character vector of binomial species names, with the genus
 #'   and specific epithet separated by either an underscore or a space (e.g.
 #'   \code{c("Acipenser_fulvescens", "Borrelia_burgdorferi")})
-#' @param db A CompadreDB object
 #' @param returnDatabase A logical argument indicating whether a database should
 #'   be returned.
 #' 
-#' @return If \code{returnDatabase == FALSE}, \code{checkSpecies} returns a data
-#'   frame with a column of species names and a column indicating whether a
-#'   species occurs in the database. If \code{returnDatabase == TRUE}, returns
-#'   a subset of \code{db} containing only those species within argument
-#'   \code{species}.
+#' @return If \code{returnDatabase == FALSE}, returns a data frame with a column
+#'   of species names and a column indicating whether a species occurs in the
+#'   database. If \code{returnDatabase == TRUE}, returns a subset of \code{cdb}
+#'   containing only those species within argument \code{species}.
 #' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
@@ -26,23 +25,23 @@
 #' 
 #' @examples
 #' species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")
-#' checkSpecies(species, Compadre)
-#' CompadreSubset <- checkSpecies(species, Compadre, returnDatabase = TRUE)
+#' cdb_check_species(Compadre, species)
+#' CompadreSubset <- cdb_check_species(Compadre, species, returnDatabase = TRUE)
 #' 
-#' @export checkSpecies
-checkSpecies <- function(species, db, returnDatabase = FALSE) {
+#' @export cdb_check_species
+cdb_check_species <- function(cdb, species, returnDatabase = FALSE) {
   # create dataframe with column for species, and column for whether they are
   #   present in database
   
-  if (!inherits(db, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function asCompadreDB")
+  if (!inherits(cdb, "CompadreDB")) {
+    stop("db must be of class CompadreDB. See function as_cdb")
   }
   
-  inDatabase <- vapply(species, findSpecies, db = db, FALSE, USE.NAMES = FALSE)
+  inDatabase <- vapply(species, findSpecies, db = cdb, FALSE, USE.NAMES = FALSE)
   df <- data.frame(species, inDatabase)
   
   if (returnDatabase == TRUE) {
-    ssdb <- db[db$SpeciesAccepted %in% species,]
+    ssdb <- cdb[cdb$SpeciesAccepted %in% species,]
     return(ssdb)
   } else {
     return(df)
@@ -50,7 +49,7 @@ checkSpecies <- function(species, db, returnDatabase = FALSE) {
 }
 
 
-# Utility function for checkSpecies
+# Utility function
 findSpecies <- function(species, db) {
   tolower(species) %in% tolower(gsub('_', ' ', db$SpeciesAccepted))
 }

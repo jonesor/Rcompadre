@@ -37,17 +37,17 @@ Importantly, *Rcompadre* coerces the data as a so-called `CompadreDB` S4 class o
 
 To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at [www.compadre-db.org](http://www.compadre-db.org).
 
-When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command `convertLegacyDB`:
+When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command `as_cdb`:
 
 ```{r fake load the data, eval=FALSE}
 load("COMPADRE_v.4.0.1.RData")
-compadre <- convertLegacyDB(compadre)
+compadre <- as_cdb(compadre)
 ```
 
-Alternatively, the function `fetchDB` will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:
+Alternatively, the function `cdb_fetch` will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:
 
-```{r fake fetch data with fetchDB, eval=FALSE}
-Compadre <- fetchDB('compadre')
+```{r fake fetch data with cdb_fetch, eval=FALSE}
+Compadre <- cdb_fetch('compadre')
 ```
 
 For this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses! You can load it like this:
@@ -87,23 +87,23 @@ plot(Compadre$Lon,Compadre$Lat,main = "Location")
 
 ## Finding data for for a particular species
 
-If, for example, you want to check if a species is in the database you can use the `checkSpecies` function. For example, we can ask if the species _Succisa pratensis_ is present.
+If, for example, you want to check if a species is in the database you can use the `cdb_check_species` function. For example, we can ask if the species _Succisa pratensis_ is present.
 
 ```{r Check species}
-checkSpecies("Succisa pratensis",Compadre)
+cdb_check_species(Compadre, "Succisa pratensis")
 ```
 
 The function works with vectors of species names as follows. 
 
 ```{r Check species 2}
-spList <- c("Succisa pratensis","Onodrim ent","Aster amellus")
-checkSpecies(spList,Compadre)
+spList <- c("Succisa pratensis", "Onodrim ent", "Aster amellus")
+cdb_check_species(Compadre, spList)
 ```
 
 Optionally, the function can return a subset of the database restricted to matched species names.
 
 ```{r Check species3}
-compadre_succisa<- checkSpecies("Succisa pratensis",Compadre,returnDatabase = TRUE)
+compadre_succisa<- cdb_check_species(Compadre, "Succisa pratensis", returnDatabase = TRUE)
 compadre_succisa
 ```
 
@@ -137,7 +137,7 @@ classInfo[[1]]$MatrixClassAuthor
 It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using `subset`. For example, I could subset to only Eudicot species as follows:
 
 ```{r subset 1}
-x <- subset(Compadre,DicotMonoc == "Eudicot")
+x <- subset(Compadre, DicotMonoc == "Eudicot")
 x
 ```
 
@@ -145,24 +145,24 @@ These subset arguments can be as complex as needed. For example, to subset to on
 
 ```{r subset 2}
 x <- subset(Compadre,DicotMonoc == "Eudicot" & 
-              Country %in% c("USA","CAN") & 
+              Country %in% c("USA", "CAN") & 
               MatrixDimension > 2)
 ```
 
-You can compare compadre data sets using the `compareDBs` command:
+You can compare compadre data sets using the `cdb_compare` command:
 
 ```{r compare }
-compareDBs(Compadre,x)
+cdb_compare(Compadre,x)
 ```
 
 ## Potential issues with MPMs
 
 Numerous matrix calculations (Caswell 2001) have particular requirements for use. The details are beyond the scope of this vignette, but include things like (1) ergodicity, (2) primitivity, (3) singularity and (4) irreducibility. In addition, most matrix calculations will not work if there are missing values (i.e. `NA`) in the MPM. 
 
-We can flag these by adding metadata using the `cleanDB` function.
+We can flag these by adding metadata using the `cdb_flag` function.
 
-```{r cleanDB }
-Compadre_flagged <- cleanDB(Compadre)
+```{r cdb_flag }
+Compadre_flagged <- cdb_flag(Compadre)
 ```
 
 We could then use `subset` like this:
@@ -176,9 +176,9 @@ x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
 When we have a set of matrices that we want to make calculations from, we can use `sapply` to apply a function across all the matrices in the list produced by `matA`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
 
 ```{r matrix calculations}
-lambdaVals<-sapply(matA(x),popdemo::eigs,what="lambda")
+lambdaVals <- sapply(matA(x), popdemo::eigs, what="lambda")
 summary(lambdaVals)
-hist(lambdaVals,main="Lambda values")
+hist(lambdaVals, main = "Lambda values")
 ```
 
 ## References

@@ -1,8 +1,8 @@
-context("DBToFlat")
+context("cdb_flatten")
 
-test_that("DBToFlat works correctly", {
+test_that("cdb_flatten works correctly", {
   
-  dbf1 <- DBToFlat(Compadre)
+  dbf1 <- cdb_flatten(Compadre)
   
   expect_is(dbf1, "data.frame")
   expect_is(dbf1$matA, "character")
@@ -11,7 +11,7 @@ test_that("DBToFlat works correctly", {
   expect_is(dbf1$matC, "character")
   expect_equal(dbf1$SpeciesAuthor, Compadre@data$SpeciesAuthor)
   
-  dbf2 <- DBToFlat(Compadre, onlyMatA = TRUE)
+  dbf2 <- cdb_flatten(Compadre, onlyMatA = TRUE)
   expect_is(dbf2, "data.frame")
   expect_is(dbf2$matA, "character")
   expect_true(!"matU" %in% names(dbf2))
@@ -20,8 +20,8 @@ test_that("DBToFlat works correctly", {
 })
 
 
-test_that("DBToFlat warns and fails gracefully", {
+test_that("cdb_flatten warns and fails gracefully", {
   
-  expect_error(DBToFlat(Compadre@data))
+  expect_error(cdb_flatten(Compadre@data))
 })
 

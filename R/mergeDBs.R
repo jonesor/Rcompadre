@@ -2,7 +2,7 @@
 #' 
 #' Merges two CompadreDB objects via a row-bind of the data slots.
 #' 
-#' @param db1,db2 CompadreDB objects
+#' @param cdb1,cdb2 CompadreDB objects
 #' 
 #' @return A CompadreDB object containing both databases
 #' 
@@ -12,28 +12,28 @@
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
 #' Compadre2 <- subset(Compadre, Continent == "Africa")
 #' 
-#' mergeDBs(Compadre1, Compadre2)
+#' cdb_merge(Compadre1, Compadre2)
 #' 
 #' @importFrom methods new
-#' @export mergeDBs
-mergeDBs <- function(db1, db2) {
+#' @export cdb_merge
+cdb_merge <- function(cdb1, cdb2) {
   
-  if (!inherits(db1, "CompadreDB") | !inherits(db2, "CompadreDB")) {
-    stop("dbs must be of class CompadreDB. See function asCompadreDB")
+  if (!inherits(cdb1, "CompadreDB") | !inherits(cdb2, "CompadreDB")) {
+    stop("cdbs must be of class CompadreDB. See function as_cdb")
   }
 
-  # dbs must have matching columns to merge
-  dat1 <- CompadreData(db1)
-  dat2 <- CompadreData(db2)
+  # cdbs must have matching columns to merge
+  dat1 <- CompadreData(cdb1)
+  dat2 <- CompadreData(cdb2)
   if(!identical(names(dat1), names(dat2))) {
-    stop("Metadata components do not have identical names. ",
-         "Make sure the metadata \n",
+    stop("Data components do not have identical names. ",
+         "Make sure the data slot \n",
          "in each is identical to other.", Call. = FALSE)
   }
   
-  # test whether dbs have same version info
-  vers1 <- VersionData(db1)
-  vers2 <- VersionData(db2)
+  # test whether cdbs have same version info
+  vers1 <- VersionData(cdb1)
+  vers2 <- VersionData(cdb2)
   
   if (isTRUE(all.equal(vers1, vers2))) {
     vers_out <- vers1
