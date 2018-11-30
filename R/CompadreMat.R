@@ -127,13 +127,13 @@ setMethod("show", signature = (object ="CompadreMat"),
                       ))
             if(Mdim > 0){
               #matrixClass info
-              showstages <- as.data.frame(matrixClass(object))[,c("MatrixClassAuthor","MatrixClassNumber")]
-              dimnames(showstages)[[2]] <- c("Stage name", "Stage number")
-              print(showstages, row.names = FALSE)
+              showstages <- matrixClass(object)[,c("MatrixClassOrganized", "MatrixClassAuthor")]
+              print(showstages)
               cat("\n")
               #matA
               cat("matA:\n")
               showmatA <- matA(object)
+              dimnames(showmatA) <- list(1:Mdim, 1:Mdim)
               print(showmatA, nsmall = 3)
               cat("\n")
               cat("matU:\n")
