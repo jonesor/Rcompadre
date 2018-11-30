@@ -13,6 +13,5 @@ test_that("CompadreDB $ and $<- methods work correctly", {
 
 test_that("CompadreDB $ and $<- methods warn and fail gracefully", {
   
-  expect_warning(Compadre$mat <- Compadre$mat)
-  expect_error(supressWarnings(Compadre$mat <- 1L))
+  expect_error(Compadre$mat <- 1L)
 })
