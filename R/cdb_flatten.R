@@ -1,48 +1,45 @@
-#' Convert a COM(P)ADRE database object to a flat data frame
+#' Convert a COM(P)ADRE database to a flat data frame with matrices and vectors
+#' stored in string representation
 #'
-#' Converts a CompadreDB object to a flat data frame, by converting each matrix
-#' and associated matrixClass information to a string.
+#' Converts a CompadreDB object to a flat data frame by extracting the data
+#' slot, and splitting the \code{mat} column into separate columns for each
+#' component (matrices \code{matA}, \code{matU}, \code{matF}, \code{matC}, and
+#' vectors \code{MatrixClassAuthor}, and \code{MatrixClassOrganized}). The
+#' component matrices and vectors within the six new columns are stored in
+#' string format so that the database can be written to a flat file format such
+#' as csv (see \link{string_representation}).
 #'
 #' @param cdb A CompadreDB object
-#' @param onlyMatA A logical value (TRUE/FALSE) indicating whether ONLY the full
-#'   projection matrix \code{matA} should be included in the flattened data
-#'   frame
 #' 
-#' @return The \code{data.frame} from the data slot of \code{cdb}, but with
-#'   additional columns appended for the matrix stage information and the
-#'   matrices themselves, both in string format.
+#' @return A data frame based on the data slot of \code{cdb}, but with the
+#'   column \code{mat} replaced by six separate columns (for matrices
+#'   \code{matA}, \code{matU}, \code{matF}, \code{matC}, and vectors
+#'   \code{MatrixClassAuthor}, and \code{MatrixClassOrganized}), whose elements
+#'   are matrices or vectors in string representation.
 #'
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
+#' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @seealso string_to_mat
+#' @seealso string_representation
 #' 
 #' @examples
-#' CompadreFlat <- cdb_flatten(Compadre, onlyMatA = FALSE)
+#' CompadreFlat <- cdb_flatten(Compadre)
 #' 
 #' @export cdb_flatten
-cdb_flatten <- function(cdb, onlyMatA = FALSE){
+cdb_flatten <- function(cdb) {
   
   if (!inherits(cdb, "CompadreDB")) {
     stop("cdb must be of class CompadreDB. See function as_cdb")
   }
   
-  newdata <- CompadreData(cdb)[!(names(CompadreData(cdb)) %in% "mat")]
+  db <- cdb_tidy(cdb)
   
-  newdata$MatrixClassAuthor <- sapply(MatrixClassAuthor(cdb), function(x) {
-                                      paste(x, collapse = " | ") })
+  db$matA <- vapply(db$matA, mat_to_string, "")
+  db$matU <- vapply(db$matU, mat_to_string, "")
+  db$matF <- vapply(db$matF, mat_to_string, "")
+  db$matC <- vapply(db$matC, mat_to_string, "")
+  db$MatrixClassAuthor <- vapply(db$MatrixClassAuthor, vec_to_string, "")
+  db$MatrixClassOrganized <- vapply(db$MatrixClassOrganized, vec_to_string, "")
   
-  newdata$matA <- vapply(matA(cdb), flattenMat, "")
-  
-  if(onlyMatA == FALSE) {
-    newdata$matU <- vapply(matU(cdb), flattenMat, "")
-    newdata$matF <- vapply(matF(cdb), flattenMat, "")
-    newdata$matC <- vapply(matC(cdb), flattenMat, "")
-  }
-  return(newdata)
-}
-
-
-# utility
-flattenMat <- function(x) {
-  paste0("[", paste(t(x), collapse=" "), "]")
+  return(db)
 }

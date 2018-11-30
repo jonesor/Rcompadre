@@ -34,5 +34,6 @@ Collate:
     'cdb_flatten.R'
     'cdb_mean_matF.R'
     'cdb_merge.R'
+    'cdb_tidy.R'
     'data.R'
     'string_to_mat.R'

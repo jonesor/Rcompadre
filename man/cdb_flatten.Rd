@@ -2,33 +2,39 @@
 % Please edit documentation in R/cdb_flatten.R
 \name{cdb_flatten}
 \alias{cdb_flatten}
-\title{Convert a COM(P)ADRE database object to a flat data frame}
+\title{Convert a COM(P)ADRE database to a flat data frame with matrices and vectors
+stored in string representation}
 \usage{
-cdb_flatten(cdb, onlyMatA = FALSE)
+cdb_flatten(cdb)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
-
-\item{onlyMatA}{A logical value (TRUE/FALSE) indicating whether ONLY the full
-projection matrix \code{matA} should be included in the flattened data
-frame}
 }
 \value{
-The \code{data.frame} from the data slot of \code{cdb}, but with
-  additional columns appended for the matrix stage information and the
-  matrices themselves, both in string format.
+A data frame based on the data slot of \code{cdb}, but with the
+  column \code{mat} replaced by six separate columns (for matrices
+  \code{matA}, \code{matU}, \code{matF}, \code{matC}, and vectors
+  \code{MatrixClassAuthor}, and \code{MatrixClassOrganized}), whose elements
+  are matrices or vectors in string representation.
 }
 \description{
-Converts a CompadreDB object to a flat data frame, by converting each matrix
-and associated matrixClass information to a string.
+Converts a CompadreDB object to a flat data frame by extracting the data
+slot, and splitting the \code{mat} column into separate columns for each
+component (matrices \code{matA}, \code{matU}, \code{matF}, \code{matC}, and
+vectors \code{MatrixClassAuthor}, and \code{MatrixClassOrganized}). The
+component matrices and vectors within the six new columns are stored in
+string format so that the database can be written to a flat file format such
+as csv (see \link{string_representation}).
 }
 \examples{
-CompadreFlat <- cdb_flatten(Compadre, onlyMatA = FALSE)
+CompadreFlat <- cdb_flatten(Compadre)
 
 }
 \seealso{
-string_to_mat
+string_representation
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
+
+Patrick M. Barks <patrick.barks@gmail.com>
 }
