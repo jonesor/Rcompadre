@@ -40,9 +40,9 @@ list-columns containing vectors or matrices to a flat file format such as
 csv.
 
 String representations of vectors and matrices begin with an open bracket
-(\code{[}) and end with a closed bracket (\code{]}). Matrix elements are
-separated with a space (\code{[0.2 0.3 0.1 0]}) whereas vector elements are
-separate with two vertical bars (\code{[Seedling||Juvenile||Reproductive]}).
+("[") and end with a closed bracket ("]"). Matrix elements are separated with
+a space ("[0.2 0.3 0.1 0]") whereas vector elements are separate with two
+vertical bars ("[Seedling||Juvenile||Reproductive]").
 }
 \examples{
 mat_str <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
@@ -66,7 +66,7 @@ string_to_mat(mat_str)
 }
 }
 \seealso{
-cdb_flatten
+\link{cdb_flatten} \link{cdb_unflatten}
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>

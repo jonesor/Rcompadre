@@ -8,7 +8,7 @@ CompadreDB object}
 cdb_unflatten(db)
 }
 \arguments{
-\item{db}{A data frame created with \code{cdb_flatten}, with columns for
+\item{db}{A data frame created with \link{cdb_flatten}, with columns for
 matrices \code{matA}, \code{matU}, \code{matF}, \code{matC}, and vectors
 \code{MatrixClassAuthor}, and \code{MatrixClassOrganized} in string
 representation.}
@@ -19,8 +19,8 @@ A CompadreDB object. Because version details are lost when the
   of the returned CompadreDB object will be \code{NA}.
 }
 \description{
-Converts a flattened COM(P)ADRE database (created by cdb_flatten) back to the
-CompadreDB class (see \link{cdb_flatten}).
+Converts a flattened COM(P)ADRE database (created by \link{cdb_flatten}) back
+to the CompadreDB class
 }
 \examples{
 CompadreFlat <- cdb_flatten(Compadre)    # flatten
@@ -28,9 +28,7 @@ Compadre2 <- cdb_unflatten(CompadreFlat) # reconstitute
 
 }
 \seealso{
-string_representation
-
-cdb_flatten
+\link{cdb_flatten} \link{string_representation}
 }
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>

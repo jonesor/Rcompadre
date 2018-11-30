@@ -31,7 +31,7 @@ CompadreFlat <- cdb_flatten(Compadre)
 
 }
 \seealso{
-string_representation
+\link{cdb_unflatten} \link{string_representation}
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>

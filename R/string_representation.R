@@ -7,9 +7,9 @@
 #' csv.
 #' 
 #' String representations of vectors and matrices begin with an open bracket
-#' (\code{[}) and end with a closed bracket (\code{]}). Matrix elements are
-#' separated with a space (\code{[0.2 0.3 0.1 0]}) whereas vector elements are
-#' separate with two vertical bars (\code{[Seedling||Juvenile||Reproductive]}).
+#' ("[") and end with a closed bracket ("]"). Matrix elements are separated with
+#' a space ("[0.2 0.3 0.1 0]") whereas vector elements are separate with two
+#' vertical bars ("[Seedling||Juvenile||Reproductive]").
 #' 
 #' @name string_representation
 #' 
@@ -28,7 +28,7 @@
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @seealso cdb_flatten
+#' @seealso \link{cdb_flatten} \link{cdb_unflatten}
 #' 
 #' @examples
 #' mat_str <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"

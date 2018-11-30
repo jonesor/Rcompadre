@@ -1,10 +1,10 @@
 #' Reconstitute a flattened COM(P)ADRE database (created by cdb_flatten) as a
 #' CompadreDB object
 #'
-#' Converts a flattened COM(P)ADRE database (created by cdb_flatten) back to the
-#' CompadreDB class (see \link{cdb_flatten}).
+#' Converts a flattened COM(P)ADRE database (created by \link{cdb_flatten}) back
+#' to the CompadreDB class
 #'
-#' @param db A data frame created with \code{cdb_flatten}, with columns for
+#' @param db A data frame created with \link{cdb_flatten}, with columns for
 #'   matrices \code{matA}, \code{matU}, \code{matF}, \code{matC}, and vectors
 #'   \code{MatrixClassAuthor}, and \code{MatrixClassOrganized} in string
 #'   representation.
@@ -15,8 +15,7 @@
 #'
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @seealso string_representation
-#' @seealso cdb_flatten
+#' @seealso \link{cdb_flatten} \link{string_representation}
 #' 
 #' @examples
 #' CompadreFlat <- cdb_flatten(Compadre)    # flatten

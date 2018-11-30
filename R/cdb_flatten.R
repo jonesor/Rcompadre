@@ -20,7 +20,7 @@
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @seealso string_representation
+#' @seealso \link{cdb_unflatten} \link{string_representation}
 #' 
 #' @examples
 #' CompadreFlat <- cdb_flatten(Compadre)
