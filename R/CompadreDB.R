@@ -185,7 +185,7 @@ setMethod("show", signature = (object ="CompadreDB"),
                                               }
             if(!is.character(Version(object))) V <- "Unknown"
             #start
-            cat(paste("A com(p)adre database ('CompadreDB') object with ",
+            cat(paste("A COM(P)ADRE database ('CompadreDB') object with ",
                       as.character(Sno),
                       " SPECIES and ",
                       as.character(Mno),
