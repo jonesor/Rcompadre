@@ -1,10 +1,11 @@
-#' Merge two COM(P)ADRE databases together
+#' Merge two COM(P)ADRE databases via row-bind
 #' 
-#' Merges two CompadreDB objects via a row-bind of the data slots.
+#' Merge two CompadreDB objects via a row-bind of the data slots.
 #' 
 #' @param cdb1,cdb2 CompadreDB objects
 #' 
-#' @return A CompadreDB object containing both databases
+#' @return A CompadreDB object created by binding the rows of \code{cdb1} and
+#'   \code{cdb2}
 #' 
 #' @author Sam Levin
 #' 
@@ -12,11 +13,11 @@
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
 #' Compadre2 <- subset(Compadre, Continent == "Africa")
 #' 
-#' cdb_merge(Compadre1, Compadre2)
+#' cdb_rbind(Compadre1, Compadre2)
 #' 
 #' @importFrom methods new
-#' @export cdb_merge
-cdb_merge <- function(cdb1, cdb2) {
+#' @export cdb_rbind
+cdb_rbind <- function(cdb1, cdb2) {
   
   if (!inherits(cdb1, "CompadreDB") | !inherits(cdb2, "CompadreDB")) {
     stop("cdbs must be of class CompadreDB. See function as_cdb")
