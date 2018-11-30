@@ -19,12 +19,14 @@ Suggests:
     rmarkdown,
     testthat,
     popbio,
+    ggplot2,
     covr
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
     'CompadreDB-Methods.R'
     'CompadreDB-Subsetting.R'
+    'CompadreDB-Tidyverse.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
     'cdb_check_species.R'
