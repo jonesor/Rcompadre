@@ -17,6 +17,8 @@
 #' @param vec A vector
 #' @param mat_str A square numeric matrix in string representation
 #' @param vec_str A vector in string representation
+#' @param numeric Logical value indicating whether a string representation of a
+#'   vector should be coerced to numeric (if FALSE remains character)
 #' 
 #' @return 
 #' A square numeric matrix (\code{string_to_mat}), vector
@@ -71,8 +73,8 @@ vec_to_string <- function(vec) {
 
 #' @rdname string_representation
 #' @export string_to_mat
-string_to_mat <- function(mat_s) {
-  mat <- gsub("^\\[|\\]$", "", mat_s)
+string_to_mat <- function(mat_str) {
+  mat <- gsub("^\\[|\\]$", "", mat_str)
   mat <- gsub(pattern = ";", " ", mat)
   mat <- strsplit(mat, split = "[[:space:]]")[[1]]
   mat[mat == "NA"] <- NA_real_

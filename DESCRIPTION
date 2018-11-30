@@ -36,4 +36,4 @@ Collate:
     'cdb_merge.R'
     'cdb_tidy.R'
     'data.R'
-    'string_to_mat.R'
+    'string_representation.R'
