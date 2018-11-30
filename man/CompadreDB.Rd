@@ -7,6 +7,8 @@
 \alias{CompadreData,CompadreDB-method}
 \alias{$,CompadreDB-method}
 \alias{$<-,CompadreDB-method}
+\alias{[[,CompadreDB,ANY,missing-method}
+\alias{[[<-,CompadreDB,ANY,missing-method}
 \alias{VersionData}
 \alias{VersionData,CompadreDB-method}
 \alias{Version}
@@ -22,6 +24,10 @@ CompadreData(object)
 \S4method{$}{CompadreDB}(x, name)
 
 \S4method{$}{CompadreDB}(x, name) <- value
+
+\S4method{[[}{CompadreDB,ANY,missing}(x, i, j, ...)
+
+\S4method{[[}{CompadreDB,ANY,missing}(x, i, j) <- value
 
 VersionData(object)
 
@@ -43,6 +49,10 @@ DateCreated(object)
 \item{name}{The name of a column within x}
 
 \item{value}{Vector of values to assign to the column}
+
+\item{i, j}{elements to extract or replace (see \link{[[.data.frame})}
+
+\item{...}{ignored}
 }
 \description{
 This page describes the CompadreDB class, including methods for accessing the

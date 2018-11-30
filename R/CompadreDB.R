@@ -223,37 +223,65 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' @param name The name of a column within x
 #' @importFrom methods slotNames
 #' @export
-setMethod(
-  "$", signature = "CompadreDB",
-  function(x, name) {
-    if (!("data" %in% slotNames(x))) {
-      stop("$ method requires CompadreDB object with slot 'data'")
-    }
-    return(x@data[[name]])
-  }
+setMethod("$", signature = "CompadreDB",
+          function(x, name) {
+            if (!("data" %in% slotNames(x))) {
+              stop("$ method requires CompadreDB object with slot 'data'")
+            }
+            return(x@data[[name]])
+          }
 )
 
 #' @rdname CompadreDB
 #' @importFrom methods new slotNames
 #' @param value Vector of values to assign to the column
 #' @export
-setReplaceMethod(
-  "$", signature = "CompadreDB", 
-  function(x, name, value) { 
-    if (!("data" %in% slotNames(x))) {
-      stop("$<- method requires CompadreDB object with slot 'data'")
-    }
-    if("mat" %in% name) {
-      warning("Replacing 'mat' column may be problematic unless all ",
-              "its elements are valid 'CompadreMat' objects")
-    }
-    datout <- x@data
-    datout[[name]] <- value 
-    
-    new("CompadreDB", 
-        data = datout, 
-        version = x@version)
-  }
+setReplaceMethod("$", signature = "CompadreDB", 
+                 function(x, name, value) { 
+                   if (!("data" %in% slotNames(x))) {
+                     stop("$<- method requires CompadreDB object with slot ",
+                          "'data'", call. = FALSE)
+                   }
+                   datout <- x@data
+                   datout[[name]] <- value 
+                   
+                   new("CompadreDB", 
+                       data = datout, 
+                       version = x@version)
+                 }
+)
+
+#' @rdname CompadreDB
+#' @importFrom methods slotNames
+#' @param i,j elements to extract or replace (see \link{[[.data.frame})
+#' @param ... ignored
+#' @export
+setMethod("[[", c("CompadreDB", "ANY", "missing"), 
+          function(x, i, j, ...) {
+            if (!("data" %in% slotNames(x))) {
+              stop("[[ method requires CompadreDB object with slot 'data'")
+            }
+            x@data[[i]]
+          }
+)
+
+
+#' @rdname CompadreDB
+#' @importFrom methods slotNames new
+#' @export
+setReplaceMethod("[[", c("CompadreDB", "ANY", "missing", "ANY"), 
+                 function(x, i, j, value) {
+                   if (!("data" %in% slotNames(x))) {
+                     stop("$<- method requires CompadreDB object with slot ",
+                          "'data'", call. = FALSE)
+                   }
+                   dat <- x@data
+                   dat[[i]] <- value 
+                   
+                   new("CompadreDB", 
+                       data = dat, 
+                       version = x@version)
+                 }
 )
 
 
