@@ -31,6 +31,18 @@
 \alias{MatrixClassOrganized,CompadreMat-method}
 \alias{MatrixClassOrganized,CompadreDB-method}
 \alias{MatrixClassOrganized,list-method}
+\alias{mpm_has_prop}
+\alias{mpm_has_prop,CompadreMat-method}
+\alias{mpm_has_prop,CompadreDB-method}
+\alias{mpm_has_active}
+\alias{mpm_has_active,CompadreMat-method}
+\alias{mpm_has_active,CompadreDB-method}
+\alias{mpm_has_dorm}
+\alias{mpm_has_dorm,CompadreMat-method}
+\alias{mpm_has_dorm,CompadreDB-method}
+\alias{mpm_first_active}
+\alias{mpm_first_active,CompadreMat-method}
+\alias{mpm_first_active,CompadreDB-method}
 \title{Methods for working with matrices in com(p)adre}
 \usage{
 matA(object)
@@ -88,6 +100,30 @@ MatrixClassOrganized(object)
 \S4method{MatrixClassOrganized}{CompadreDB}(object)
 
 \S4method{MatrixClassOrganized}{list}(object)
+
+mpm_has_prop(object)
+
+\S4method{mpm_has_prop}{CompadreMat}(object)
+
+\S4method{mpm_has_prop}{CompadreDB}(object)
+
+mpm_has_active(object)
+
+\S4method{mpm_has_active}{CompadreMat}(object)
+
+\S4method{mpm_has_active}{CompadreDB}(object)
+
+mpm_has_dorm(object)
+
+\S4method{mpm_has_dorm}{CompadreMat}(object)
+
+\S4method{mpm_has_dorm}{CompadreDB}(object)
+
+mpm_first_active(object)
+
+\S4method{mpm_first_active}{CompadreMat}(object)
+
+\S4method{mpm_first_active}{CompadreDB}(object)
 }
 \arguments{
 \item{object}{A CompadreDB object}
