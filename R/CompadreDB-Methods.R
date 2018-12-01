@@ -41,9 +41,6 @@ head.CompadreDB <- function(x, n = 6L, ...) head(x@data, n = n, ...)
 #' @rdname CompadreDB-Methods
 #' @export
 names.CompadreDB <- function(x) {
-  if (!("data" %in% slotNames(x))) {
-    stop("names method requires CompadreDB object with slot 'data'")
-  }
   names(x@data)
 }
 
