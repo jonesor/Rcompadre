@@ -29,7 +29,7 @@ test_that("CompadreDB works correctly", {
   
   expect_error(Compadre$mat <- 1L)
   
-  # [[]] and [[]]<-
+  # [[ and [[<-
   expect_equal(Compadre[["SpeciesAuthor"]], Compadre@data$SpeciesAuthor)
   
   db1 <- Compadre
