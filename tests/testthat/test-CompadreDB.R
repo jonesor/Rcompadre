@@ -19,6 +19,26 @@ test_that("CompadreDB works correctly", {
   db4@data$mat <- CompadreLegacy$mat
   expect_false(isTRUE(validCompadreDB(db4)))
   
+  # $ and $<-
+  expect_equal(Compadre$SpeciesAuthor, Compadre@data$SpeciesAuthor)
+  
+  db1 <- Compadre
+  db1$ones <- 1L
+  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_true(all(db1$ones == 1L))
+  
+  expect_error(Compadre$mat <- 1L)
+  
+  # [[]] and [[]]<-
+  expect_equal(Compadre[["SpeciesAuthor"]], Compadre@data$SpeciesAuthor)
+  
+  db1 <- Compadre
+  db1[["ones"]] <- 1L
+  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_true(all(db1$ones == 1L))
+  
+  expect_error(Compadre[["mat"]] <- 1L)
+  
   # accessors
   expect_is(CompadreData(Compadre), "data.frame")
   expect_is(VersionData(Compadre), "list")
