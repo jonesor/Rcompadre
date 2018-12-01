@@ -4,7 +4,6 @@ test_that("cdb_compare works correctly", {
   
   db1 <- Compadre[1:50,]
   db2 <- Compadre[51:100,]
-  cdb_compare(db1, db2, verbose = TRUE)
   
   expect_output(cdb_compare(db1, db2))
   expect_output(cdb_compare(db1, db2, verbose = TRUE))
