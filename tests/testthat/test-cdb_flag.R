@@ -10,6 +10,7 @@ test_that("cdb_flag works correctly", {
   expect_is(db_clean@data$check_NA_U, "logical")
   expect_is(db_clean@data$check_NA_F, "logical")
   expect_is(db_clean@data$check_NA_C, "logical")
+  expect_is(db_clean@data$check_zero_U, "logical")
   
   expect_is(db_clean@data$check_ergodic, "logical")
   expect_is(db_clean@data$check_irreducible, "logical")

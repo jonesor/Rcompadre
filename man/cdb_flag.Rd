@@ -12,16 +12,17 @@ cdb_flag(cdb)
 \value{
 Returns \code{cdb} with extra columns appended to the data slot to
   indicate (TRUE/FALSE) whether there are potential problems with the
-  matrices corresponding to a given row of the data, including whether matA
-  is ergodic, primitive, and irreducible, and whether matU is singular (i.e.
-  cannot be inverted).
+  matrices corresponding to a given row of the data, including whether each
+  of the component matrices have missing values, whether matU contains only
+  zeros, whether matU is non-invertable, or whether matA is ergodic,
+  primitive, and irreducible.
 }
 \description{
 Adds columns to the data slot of a CompadreDB object that flag potential
 problems in the matrix population models, such as matrices containing missing
-values, or projection models that are non-ergodic, reducible, or imprimitive.
-These columns can subsequently be used to subset the database by logical
-argument.
+values or all zeros, matrices that are non-invertable, or projection models
+that are non-ergodic, reducible, or imprimitive. These columns can
+subsequently be used to subset the database by logical argument.
 }
 \examples{
 CompadreFlag <- cdb_flag(Compadre)
