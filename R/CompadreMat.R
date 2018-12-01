@@ -53,12 +53,6 @@ setClass("CompadreMat",
 setMethod("initialize", "CompadreMat",
           function(.Object, ...) {
             .Object <- methods::callNextMethod()
-            if(length(.Object@matrixClass) == 0) {
-              .Object@matrixClass <- data.frame(MatrixClassOrganized = character(0),
-                                                MatrixClassAuthor = character(0),
-                                                MatrixClassNumber = double(0)
-              )
-            }
             methods::validObject(.Object)
             .Object
           })
