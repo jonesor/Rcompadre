@@ -40,6 +40,7 @@ Collate:
     'cdb_id_studies.R'
     'cdb_mean_matF.R'
     'cdb_rbind.R'
+    'cdb_subset_wild.R'
     'cdb_tidy.R'
     'cdb_unflatten.R'
     'data.R'
