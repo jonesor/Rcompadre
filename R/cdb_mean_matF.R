@@ -1,17 +1,24 @@
 #' Calculates a population-specific mean fecundity matrix for each set of
 #' matrices in a COM(P)ADRE database
-#'
+#' 
+#' @description 
 #' Takes a CompadreDB object and calculates a grand mean fecundity matrix for
 #' each unique population (a mean of all population-specific fecundity matrices,
 #' including fecundity matrices for which \code{MatrixComposite == 'Mean'}).
-#' Here, a unique study population is defined as a unique combination of the
-#' metadata columns 'Authors', 'YearPublication', 'DOI.ISBN', 'SpeciesAuthor',
-#' 'MatrixPopulation', and 'MatrixDimension'. The main purpose of this function
-#' is to identify stage classes that are \emph{potentially} reproductive (i.e.
-#' the absense of fecundity in a given stage class and year does not necessarily
-#' indicate that the stage in question is non-reproductive).
+#' 
+#' Populations are defined based on unique combinations of the columns
+#' 'SpeciesAuthor', 'MatrixPopulation', and 'MatrixDimension', (or optionally, a
+#' different set of columns supplied by the user).
+#' 
+#' The main purpose of this function is to identify stage classes that are
+#' \emph{potentially} reproductive (i.e. the absense of fecundity in a given
+#' stage class and year does not necessarily indicate that the stage in question
+#' is non-reproductive).
 #'
 #' @param cdb A CompadreDB object
+#' @param columns A vector of column names from which unique populations should
+#'   be identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
+#'   "MatrixDimension")}.
 #' 
 #' @return Returns a list of matrices, reprenting the mean fecundity matrix
 #'   associated with each row of the database.
@@ -32,21 +39,14 @@
 #' meanF[[16]]
 #' 
 #' @export cdb_mean_matF
-cdb_mean_matF <- function(cdb) {
-
-  if (!inherits(cdb, "CompadreDB")) {
-    stop("db must be of class CompadreDB. See function as_cdb")
-  }
+cdb_mean_matF <- function(cdb, columns = c("SpeciesAuthor",
+                                           "MatrixPopulation",
+                                           "MatrixDimension")) {
+  
+  # leave validation to cdb_id
   
   # create a unique identifier for each population in the database
-  cdb$PopId <- as.numeric(as.factor(paste(
-    cdb$Authors,
-    cdb$YearPublication,
-    cdb$DOI.ISBN,
-    cdb$SpeciesAuthor,
-    cdb$MatrixPopulation,
-    cdb$MatrixDimension
-  )))
+  cdb$PopId <- cdb_id(cdb, columns)
   
   # create unique row ID
   cdb$RowId <- seq_len(nrow(cdb@data))

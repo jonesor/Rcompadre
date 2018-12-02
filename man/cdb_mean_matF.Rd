@@ -5,10 +5,15 @@
 \title{Calculates a population-specific mean fecundity matrix for each set of
 matrices in a COM(P)ADRE database}
 \usage{
-cdb_mean_matF(cdb)
+cdb_mean_matF(cdb, columns = c("SpeciesAuthor", "MatrixPopulation",
+  "MatrixDimension"))
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
+
+\item{columns}{A vector of column names from which unique populations should
+be identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
+"MatrixDimension")}.}
 }
 \value{
 Returns a list of matrices, reprenting the mean fecundity matrix
@@ -18,12 +23,15 @@ Returns a list of matrices, reprenting the mean fecundity matrix
 Takes a CompadreDB object and calculates a grand mean fecundity matrix for
 each unique population (a mean of all population-specific fecundity matrices,
 including fecundity matrices for which \code{MatrixComposite == 'Mean'}).
-Here, a unique study population is defined as a unique combination of the
-metadata columns 'Authors', 'YearPublication', 'DOI.ISBN', 'SpeciesAuthor',
-'MatrixPopulation', and 'MatrixDimension'. The main purpose of this function
-is to identify stage classes that are \emph{potentially} reproductive (i.e.
-the absense of fecundity in a given stage class and year does not necessarily
-indicate that the stage in question is non-reproductive).
+
+Populations are defined based on unique combinations of the columns
+'SpeciesAuthor', 'MatrixPopulation', and 'MatrixDimension', (or optionally, a
+different set of columns supplied by the user).
+
+The main purpose of this function is to identify stage classes that are
+\emph{potentially} reproductive (i.e. the absense of fecundity in a given
+stage class and year does not necessarily indicate that the stage in question
+is non-reproductive).
 }
 \examples{
 # print matF associated with row 16 of database
