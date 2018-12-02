@@ -35,6 +35,8 @@ Collate:
     'cdb_fetch.R'
     'cdb_flag.R'
     'cdb_flatten.R'
+    'cdb_id.R'
+    'cdb_id_stage_def.R'
     'cdb_mean_matF.R'
     'cdb_rbind.R'
     'cdb_tidy.R'
