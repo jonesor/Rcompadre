@@ -8,7 +8,7 @@
 #'
 #' @param cdb A CompadreDB object
 #' @param stage_def Whether to define matrix stage class based on
-#'   'MarixClassAuthor' or 'MatrixClassOrganized' (see \emph{Details}).
+#'   "MarixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
 #' 
 #' @return Vector of integer identifiers corresponding to the rows of
 #'   \code{cdb}.

@@ -6,10 +6,10 @@
 #' that are present in one database but not the other.
 #' 
 #' @param cdb1,cdb2 CompadreDB objects to compare
-#' @param verbose A logical argument indicating whether or not to return lots
-#' of detail
+#' @param verbose Logical argument indicating whether or not to return lots of
+#'   detail
 #' 
-#' @return NULL (output is printed rather than returned)
+#' @return NULL. Output is printed rather than returned.
 #' 
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 

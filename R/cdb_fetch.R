@@ -1,6 +1,6 @@
 #' Fetch the COM(P)ADRE database from compadre-db.org or a local file
 #'
-#' Fetch the current version of the COM(P)ADRE database from
+#' Fetches the current version of a COM(P)ADRE database from
 #' \url{https://compadre-db.org}, or load any version stored in a local .RData
 #' file.
 #'
@@ -9,6 +9,7 @@
 #'   existing COMPADRE database (i.e. .RData file) stored on the local machine.
 #' 
 #' @return A CompadreDB object
+#' 
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples

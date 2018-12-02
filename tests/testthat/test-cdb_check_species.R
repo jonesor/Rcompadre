@@ -6,11 +6,11 @@ test_that("cdb_check_species works correctly", {
   df1 <- cdb_check_species(Compadre, species)
   
   expect_is(df1, "data.frame")
-  expect_is(df1$inDatabase, "logical")
+  expect_is(df1$in_db, "logical")
   expect_true(nrow(df1) == length(species))
   
   
-  db1 <- cdb_check_species(Compadre, species, returnDatabase = TRUE)
+  db1 <- cdb_check_species(Compadre, species, return_db = TRUE)
   
   expect_s4_class(db1, "CompadreDB")
   expect_true(all(db1$SpeciesAccepted %in% species))

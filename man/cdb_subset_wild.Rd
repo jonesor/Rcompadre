@@ -15,14 +15,14 @@ A CompadreDB object reflecting the subset of \code{cdb} corresponding
   (\code{MatrixTreatment == "Unmanipulated"}) populations.
 }
 \description{
-Subset a COM(P)ADRE database to the rows reflecting wild, unmanipulated
+Subsets a CompadreDB object to the rows reflecting wild, unmanipulated
 populations \code{(MatrixCaptivity == "W" & MatrixTreatment ==
 "Unmanipulated")}.
 
-Note that such a subset may be overly stringent, as it excludes populations
-subject to "treatments" (i.e. \code{MatrixTreatment != "Unmanipulated"}) that
-may not necessitate exclusion from a given analysis (e.g. "treatment" may
-reflect grazing status, time since fire, etc.).
+Note that such a subset may be overly stringent for some analyses, as it
+excludes populations subject to "treatments" that may not necessitate
+exclusion (e.g. "treatment" may reflect grazing status, time since fire,
+etc.).
 }
 \examples{
 CompadreWild <- cdb_subset_wild(Compadre)

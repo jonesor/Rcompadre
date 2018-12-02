@@ -6,7 +6,7 @@
 #' of columns supplied by the user).
 #'
 #' @param cdb A CompadreDB object
-#' @param columns A vector of column names from which unique combinations should
+#' @param columns Vector of column names from which unique combinations should
 #'   be identified. Defaults to \code{c("Authors", "Journal", "YearPublication",
 #'   "DOI.ISBN")}.
 #' 

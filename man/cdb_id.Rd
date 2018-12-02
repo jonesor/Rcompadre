@@ -10,7 +10,7 @@ cdb_id(cdb, columns)
 \arguments{
 \item{cdb}{A CompadreDB object}
 
-\item{columns}{A vector of column names from which unique combinations should
+\item{columns}{Vector of column names from which unique combinations should
 be identified}
 }
 \value{

@@ -9,11 +9,11 @@ cdb_compare(cdb1, cdb2, verbose = FALSE)
 \arguments{
 \item{cdb1, cdb2}{CompadreDB objects to compare}
 
-\item{verbose}{A logical argument indicating whether or not to return lots
-of detail}
+\item{verbose}{Logical argument indicating whether or not to return lots of
+detail}
 }
 \value{
-NULL (output is printed rather than returned)
+NULL. Output is printed rather than returned.
 }
 \description{
 Prints a summary of the differences between two CompadreDB objects, including

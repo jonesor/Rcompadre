@@ -14,7 +14,7 @@ A CompadreDB object created by binding the rows of \code{cdb1} and
   \code{cdb2}
 }
 \description{
-Merge two CompadreDB objects via a row-bind of the data slots.
+Merges two CompadreDB objects via a row-bind of the data slots.
 }
 \examples{
 Compadre1 <- subset(Compadre, Continent == "Asia")

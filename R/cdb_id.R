@@ -6,7 +6,7 @@
 #' set of columns.
 #'
 #' @param cdb A CompadreDB object
-#' @param columns A vector of column names from which unique combinations should
+#' @param columns Vector of column names from which unique combinations should
 #'   be identified
 #' 
 #' @return Vector of integer identifiers corresponding to the rows of

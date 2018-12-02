@@ -4,35 +4,35 @@
 \alias{cdb_check_species}
 \title{Check whether a COM(P)ADRE database contains one or more species of interest}
 \usage{
-cdb_check_species(cdb, species, returnDatabase = FALSE)
+cdb_check_species(cdb, species, return_db = FALSE)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
 
-\item{species}{A character vector of binomial species names, with the genus
-and specific epithet separated by either an underscore or a space (e.g.
+\item{species}{Character vector of binomial species names, with the genus and
+specific epithet separated by either an underscore or a space (e.g.
 \code{c("Acipenser_fulvescens", "Borrelia_burgdorferi")})}
 
-\item{returnDatabase}{A logical argument indicating whether a database should
-be returned.}
+\item{return_db}{Logical argument indicating whether a database should be
+returned}
 }
 \value{
-If \code{returnDatabase == FALSE}, returns a data frame with a column
-  of species names and a column indicating whether a species occurs in the
-  database. If \code{returnDatabase == TRUE}, returns a subset of \code{cdb}
+If \code{return_db == FALSE}, returns a data frame with a column of
+  species names and a column indicating whether a species occurs in the
+  database. If \code{return_db == TRUE}, returns a subset of \code{cdb}
   containing only those species within argument \code{species}.
 }
 \description{
-This function takes a vector of species names and checks whether those
-species are represented within a CompadreDB object. It outputs either a data
-frame depicting the species of interest and whether they occurr in the
-database (TRUE/FALSE), or, if \code{returnDatabase == TRUE}, a CompadreDB
-object subset to the species of interest.
+Takes a vector of species names and checks whether those species are
+represented within a CompadreDB object. It outputs either a data frame
+depicting the species of interest and whether they occur in the database
+(TRUE/FALSE), or, if \code{return_db == TRUE}, a CompadreDB object subset to
+the species of interest.
 }
 \examples{
 species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")
 cdb_check_species(Compadre, species)
-CompadreSubset <- cdb_check_species(Compadre, species, returnDatabase = TRUE)
+CompadreSubset <- cdb_check_species(Compadre, species, return_db = TRUE)
 
 }
 \author{

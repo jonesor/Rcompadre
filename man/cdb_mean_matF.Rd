@@ -2,7 +2,7 @@
 % Please edit documentation in R/cdb_mean_matF.R
 \name{cdb_mean_matF}
 \alias{cdb_mean_matF}
-\title{Calculates a population-specific mean fecundity matrix for each set of
+\title{Calculate a population-specific mean fecundity matrix for each set of
 matrices in a COM(P)ADRE database}
 \usage{
 cdb_mean_matF(cdb, columns = c("SpeciesAuthor", "MatrixPopulation",
@@ -11,8 +11,8 @@ cdb_mean_matF(cdb, columns = c("SpeciesAuthor", "MatrixPopulation",
 \arguments{
 \item{cdb}{A CompadreDB object}
 
-\item{columns}{A vector of column names from which unique populations should
-be identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
+\item{columns}{Vector of column names from which unique populations should be
+identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
 "MatrixDimension")}.}
 }
 \value{

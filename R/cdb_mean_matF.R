@@ -1,4 +1,4 @@
-#' Calculates a population-specific mean fecundity matrix for each set of
+#' Calculate a population-specific mean fecundity matrix for each set of
 #' matrices in a COM(P)ADRE database
 #' 
 #' @description 
@@ -16,8 +16,8 @@
 #' is non-reproductive).
 #'
 #' @param cdb A CompadreDB object
-#' @param columns A vector of column names from which unique populations should
-#'   be identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
+#' @param columns Vector of column names from which unique populations should be
+#'   identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
 #'   "MatrixDimension")}.
 #' 
 #' @return Returns a list of matrices, reprenting the mean fecundity matrix

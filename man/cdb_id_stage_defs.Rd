@@ -11,7 +11,7 @@ cdb_id_stage_defs(cdb, stage_def)
 \item{cdb}{A CompadreDB object}
 
 \item{stage_def}{Whether to define matrix stage class based on
-'MarixClassAuthor' or 'MatrixClassOrganized' (see \emph{Details}).}
+"MarixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).}
 }
 \value{
 Vector of integer identifiers corresponding to the rows of

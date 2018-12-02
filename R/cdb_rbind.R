@@ -1,6 +1,6 @@
 #' Merge two COM(P)ADRE databases via row-bind
 #' 
-#' Merge two CompadreDB objects via a row-bind of the data slots.
+#' Merges two CompadreDB objects via a row-bind of the data slots.
 #' 
 #' @param cdb1,cdb2 CompadreDB objects
 #' 
