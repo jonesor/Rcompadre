@@ -44,10 +44,10 @@
 #' @seealso \link{cdb_id}
 #' 
 #' @examples
-#' cdb_id_stage_def(Compadre, stage_def = "MatrixClassOrganized")
+#' cdb_id_stage_defs(Compadre, stage_def = "MatrixClassOrganized")
 #' 
-#' @export cdb_id_stage_def
-cdb_id_stage_def <- function(cdb, stage_def) {
+#' @export cdb_id_stage_defs
+cdb_id_stage_defs <- function(cdb, stage_def) {
 
   if (!inherits(cdb, "CompadreDB")) {
     stop("db must be of class CompadreDB. See function as_cdb")
