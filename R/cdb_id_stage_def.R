@@ -47,8 +47,7 @@
 #' cdb_id_stage_def(Compadre, stage_def = "MatrixClassOrganized")
 #' 
 #' @export cdb_id_stage_def
-cdb_id_stage_def <- function(cdb, stage_def = c("MatrixClassOrganized",
-                                                "MatrixClassAuthor")) {
+cdb_id_stage_def <- function(cdb, stage_def) {
 
   if (!inherits(cdb, "CompadreDB")) {
     stop("db must be of class CompadreDB. See function as_cdb")

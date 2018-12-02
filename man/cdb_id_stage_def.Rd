@@ -5,8 +5,7 @@
 \title{Create integer identifiers for a COM(P)ADRE database corresponding to unique
 combinations of species, study, and matrix stage class definitions}
 \usage{
-cdb_id_stage_def(cdb, stage_def = c("MatrixClassOrganized",
-  "MatrixClassAuthor"))
+cdb_id_stage_def(cdb, stage_def)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
