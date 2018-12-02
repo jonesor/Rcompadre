@@ -12,5 +12,13 @@ test_that("cdb_fetch works correctly", {
   expect_s4_class(db1, "CompadreDB")
   expect_s4_class(db2, "CompadreDB")
   expect_s4_class(db3, "CompadreDB")
+  
+  # fetch .RData already in CompadreDB format
+  temp <- tempdir()
+  file_path <- paste0(temp, "/comp_test.RData")
+  save(db3, file = file_path)
+  db4 <- cdb_fetch(file_path)
+  
+  unlink(temp)
 })
 
