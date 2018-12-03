@@ -4,18 +4,40 @@
 \alias{cdb_flag}
 \title{Flag potential issues in matrices of a COM(P)ADRE database}
 \usage{
-cdb_flag(cdb)
+cdb_flag(cdb, check_NA_A = TRUE, check_NA_U = TRUE,
+  check_NA_F = TRUE, check_NA_C = TRUE, check_zero_U = TRUE,
+  check_singular_U = TRUE, check_ergodic = TRUE,
+  check_irreducible = TRUE, check_primitive = TRUE)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
+
+\item{check_NA_A}{check for missing values in matA?}
+
+\item{check_NA_U}{check for missing values in matU?}
+
+\item{check_NA_F}{check for missing values in matF?}
+
+\item{check_NA_C}{check for missing values in matC?}
+
+\item{check_zero_U}{check whether matU all zeros (including NA)?}
+
+\item{check_singular_U}{check whether matU singular (i.e. non-invertable)?}
+
+\item{check_ergodic}{check whether matA ergodic (see
+\code{\link[popdemo]{isErgodic}})?}
+
+\item{check_irreducible}{check whether matA irreducible (see
+\code{\link[popdemo]{isIrreducible}})?}
+
+\item{check_primitive}{check whether matA primitive (see
+\code{\link[popdemo]{isPrimitive}})?}
 }
 \value{
-Returns \code{cdb} with extra columns appended to the data slot to
-  indicate (TRUE/FALSE) whether there are potential problems with the
-  matrices corresponding to a given row of the data, including whether each
-  of the component matrices have missing values, whether matU contains only
-  zeros, whether matU is non-invertable, or whether matA is ergodic,
-  primitive, and irreducible.
+Returns \code{cdb} with extra columns appended to the data slot
+  (columns have the same names as the corresponding \code{check_} arguments)
+  to indicate (TRUE/FALSE) whether there are potential problems with the
+  matrices corresponding to a given row of the data.
 }
 \description{
 Adds columns to the data slot of a CompadreDB object that flag potential
