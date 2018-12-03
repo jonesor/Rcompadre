@@ -8,7 +8,7 @@
 #'
 #' @param cdb A CompadreDB object
 #' @param stage_def Whether to define matrix stage class based on
-#'   "MarixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
+#'   "MatrixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
 #' 
 #' @return Vector of integer identifiers corresponding to the rows of
 #'   \code{cdb}.
@@ -20,21 +20,21 @@
 #' ('prop', 'active', or 'dorm'), whereas 'MatrixClassAuthor' reflects a
 #' description of the stage classes as defined by the original author (e.g.
 #' \code{c('Seedling', 'Medium rosette', 'Large (2 rosettes)', 'Flowering')}).
-#' 
+#'
 #' Because the 'MatrixClassAuthor' definitions are less standardized, they are
 #' more prone to typos that could lead to slight differences between stage
 #' descriptions of matrices that really do have the same stage classes (e.g. a
 #' set of matrices from a single study/species/population). Therefore, using
-#' 'MarixClassAuthor' to define stage classes is potentially prone to mistakenly
-#' 'splitting' identifiers that should really be the same.
-#' 
+#' 'MatrixClassAuthor' to define stage classes is potentially prone to
+#' mistakenly 'splitting' identifiers that should really be the same.
+#'
 #' 'MatrixClassOrganized' has the opposite problem. It's possible for two
 #' matrices from a given study to have the same stage definitions based on
 #' 'MatrixClassOrganized', but legitimately differ in stage definitions as
-#' defined by the author. Therefore, using 'MarixClassAuthor' to define stage
+#' defined by the author. Therefore, using 'MatrixClassAuthor' to define stage
 #' classes is potentially prone to mistakenly 'lumping' identifiers that should
 #' actually differ.
-#' 
+#'
 #' Because the majority of studies in COM(P)ADRE use a single set of stage
 #' definitions for all matrices, and typos are rare, results for the different
 #' stage definitions will usually be similar. Note, however, that the actual
