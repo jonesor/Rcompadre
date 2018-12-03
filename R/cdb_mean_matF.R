@@ -70,16 +70,9 @@ cdb_mean_matF <- function(cdb, columns = c("SpeciesAuthor",
 
 
 
-# get mean matrix from list of matrices
-mean_list <- function(x) {
-  n <- length(x)
-  return(Reduce("+", x) / n)
-}
-
-
 # function to return a mean matF given db and PopId
 meanMatF <- function(PopIdFocal, db_RowId, db_PopId, db_matF) {
   RowIdFocal <- db_RowId[db_PopId == PopIdFocal]
-  return(mean_list(db_matF[RowIdFocal]))
+  return(mat_mean(db_matF[RowIdFocal]))
 }
 

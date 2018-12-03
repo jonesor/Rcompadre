@@ -44,5 +44,6 @@ Collate:
     'cdb_tidy.R'
     'cdb_unflatten.R'
     'data.R'
+    'mpm_mean.R'
     'string_representation.R'
     'zzz.R'
