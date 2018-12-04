@@ -3,11 +3,17 @@
 #' @description
 #' Calculates an element-wise mean over a list of matrices or CompadreMat
 #' objects of constant dimension.
-#' 
-#' Does not currently have an option to remove \code{NA}.
 #'
 #' @param x List of matrices (\code{mat_mean}) or list of CompadreMat objects
 #'   (\code{mpm_mean}), all of same dimension
+#' @param na.rm Logical indicating whether missing values should be excluded
+#'   (see \emph{Details}). Defaults to \code{FALSE}.
+#'   
+#' @details 
+#' If \code{na.rm == TRUE}, missing values are ignored in the calculation of the
+#' mean matrix. If \code{na.rm == TRUE} and a given element is \code{NA} in
+#' \emph{every} matrix within \code{x}, the value returned for that element will
+#' be \code{0}.
 #' 
 #' @return A matrix (\code{mat_mean}) or a CompadreMat object (\code{mpm_mean}).
 #' 
@@ -26,24 +32,32 @@
 NULL
 
 
+
 #' @rdname mpm_mean
 #' @export
-mat_mean <- function(x) {
+mat_mean <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 | length(unique(n_col)) != 1) {
     stop("All matrices in list must be of same dimension")
   }
+  if (na.rm) x <- lapply(x, zero_NA)
   n <- length(x)
   return(Reduce("+", x) / n)
 }
 
 
+# utility to zero out any NA in a list of matrices
+zero_NA <- function(m) {
+  m[is.na(m)] <- 0
+  return(m)
+}
+
 
 #' @rdname mpm_mean
 #' @importFrom methods new
 #' @export
-mpm_mean <- function(x) {
+mpm_mean <- function(x, na.rm = FALSE) {
   matA <- lapply(x, function(m) m@matA)
   matU <- lapply(x, function(m) m@matU)
   matF <- lapply(x, function(m) m@matF)
@@ -64,10 +78,10 @@ mpm_mean <- function(x) {
             "list element")
   }
   
-  meanA <- mat_mean(matA)
-  meanU <- mat_mean(matU)
-  meanF <- mat_mean(matF)
-  meanC <- mat_mean(matC)
+  meanA <- mat_mean(matA, na.rm = na.rm)
+  meanU <- mat_mean(matU, na.rm = na.rm)
+  meanF <- mat_mean(matF, na.rm = na.rm)
+  meanC <- mat_mean(matC, na.rm = na.rm)
   
   new("CompadreMat",
       matA = meanA,

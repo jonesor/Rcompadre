@@ -5,13 +5,16 @@
 \alias{mat_mean}
 \title{Calculate a mean over a list of matrices or CompadreMat objects}
 \usage{
-mat_mean(x)
+mat_mean(x, na.rm = FALSE)
 
-mpm_mean(x)
+mpm_mean(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{List of matrices (\code{mat_mean}) or list of CompadreMat objects
 (\code{mpm_mean}), all of same dimension}
+
+\item{na.rm}{Logical indicating whether missing values should be excluded
+(see \emph{Details}). Defaults to \code{FALSE}.}
 }
 \value{
 A matrix (\code{mat_mean}) or a CompadreMat object (\code{mpm_mean}).
@@ -19,8 +22,12 @@ A matrix (\code{mat_mean}) or a CompadreMat object (\code{mpm_mean}).
 \description{
 Calculates an element-wise mean over a list of matrices or CompadreMat
 objects of constant dimension.
-
-Does not currently have an option to remove \code{NA}.
+}
+\details{
+If \code{na.rm == TRUE}, missing values are ignored in the calculation of the
+mean matrix. If \code{na.rm == TRUE} and a given element is \code{NA} in
+\emph{every} matrix within \code{x}, the value returned for that element will
+be \code{0}.
 }
 \examples{
 # there are four rows for species 'Haplopappus_radiatus' in Compadre

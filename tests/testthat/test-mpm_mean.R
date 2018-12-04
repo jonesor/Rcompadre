@@ -16,6 +16,27 @@ test_that("mpm_mean works correctly", {
   y2 <- mat_mean(mats2)
   expect_is(y2, "matrix")
   expect_true(all(dim(y2) == c(2, 2)))
+  
+  # na handling
+  mpms1[[1]]@matA[1,1] <- NA
+  z1 <- mpm_mean(mpms1)
+  expect_true(is.na(z1@matA[1,1]))
+  
+  z2 <- mpm_mean(mpms1, na.rm = TRUE)
+  expect_true(!is.na(z2@matA[1,1]))
+  
+  mats_na <- list(matrix(0:3, nrow = 2), matrix(1:4, nrow = 2))
+  mats_na[[1]][1,1] <- NA
+  
+  z3 <- mat_mean(mats_na)
+  expect_true(is.na(z3[1,1]))
+  
+  z4 <- mat_mean(mats_na, na.rm = TRUE)
+  expect_true(!is.na(z4[1,1]))
+  
+  mats_na[[2]][1,1] <- NA
+  z5 <- mat_mean(mats_na, na.rm = TRUE)
+  expect_true(z5[1,1] == 0)
 })
 
 test_that("mpm_mean warns and fails gracefully", {
