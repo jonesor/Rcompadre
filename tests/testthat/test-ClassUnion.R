@@ -60,27 +60,6 @@ test_that("ClassUnion methods work correctly", {
   expect_true(all.equal(mc1[[1]], mc2[[1]]) & all.equal(mc1[[1]], mc3))
   expect_true(all.equal(mca1[[1]], mca2[[1]]) & all.equal(mca1[[1]], mca3))
   expect_true(all.equal(mco1[[1]], mco2[[1]]) & all.equal(mco1[[1]], mco3))
-  
-  
-  prop_db <- mpm_has_prop(Compadre)
-  active_db <- mpm_has_active(Compadre)
-  dorm_db <- mpm_has_dorm(Compadre)
-  first_active_db <- mpm_first_active(Compadre)
-  
-  expect_is(prop_db, "logical")
-  expect_is(active_db, "logical")
-  expect_is(dorm_db, "logical")
-  expect_is(first_active_db, "integer")
-  
-  prop_mat <- mpm_has_prop(Compadre@data$mat[[15]])
-  active_mat <- mpm_has_active(Compadre@data$mat[[15]])
-  dorm_mat <- mpm_has_dorm(Compadre@data$mat[[15]])
-  first_active_mat <- mpm_first_active(Compadre@data$mat[[15]])
-  
-  expect_is(prop_mat, "logical")
-  expect_is(active_mat, "logical")
-  expect_is(dorm_mat, "logical")
-  expect_is(first_active_mat, "integer")
 })
 
 
