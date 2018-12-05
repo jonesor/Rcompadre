@@ -6,8 +6,9 @@
 \usage{
 cdb_flag(cdb, check_NA_A = TRUE, check_NA_U = TRUE,
   check_NA_F = TRUE, check_NA_C = TRUE, check_zero_U = TRUE,
-  check_singular_U = TRUE, check_ergodic = TRUE,
-  check_irreducible = TRUE, check_primitive = TRUE)
+  check_singular_U = TRUE, check_component_sum = TRUE,
+  check_ergodic = TRUE, check_irreducible = TRUE,
+  check_primitive = TRUE)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
@@ -23,6 +24,9 @@ cdb_flag(cdb, check_NA_A = TRUE, check_NA_U = TRUE,
 \item{check_zero_U}{check whether matU all zeros (including NA)?}
 
 \item{check_singular_U}{check whether matU singular (i.e. non-invertable)?}
+
+\item{check_component_sum}{do matU, matF, and matC components sum to matA
+(see \emph{Details})?}
 
 \item{check_ergodic}{check whether matA ergodic (see
 \code{\link[popdemo]{isErgodic}})?}
@@ -42,12 +46,26 @@ Returns \code{cdb} with extra columns appended to the data slot
 \description{
 Adds columns to the data slot of a CompadreDB object that flag potential
 problems in the matrix population models, such as matrices containing missing
-values or all zeros, matrices that are non-invertable, or projection models
-that are non-ergodic, reducible, or imprimitive. These columns can
-subsequently be used to subset the database by logical argument.
+values or all zeros, matrices that are non-invertable, projection models in
+which the \strong{U}/\strong{F}/\strong{C} components do not sum to
+\strong{A}, or projection models that are non-ergodic, reducible, or
+imprimitive. These columns can subsequently be used to subset the database by
+logical argument.
+}
+\details{
+For the flag \code{check_component_sum}, a value of \code{NA} will be
+returned if the matrix sum of matU, matF, and matC consists only of zeros
+and/or \code{NA}, indicating that the matrix has not been split.
 }
 \examples{
 CompadreFlag <- cdb_flag(Compadre)
+
+# exclude checks for missing values
+CompadreFlag <- cdb_flag(Compadre,
+                         check_NA_A = FALSE,
+                         check_NA_U = FALSE,
+                         check_NA_F = FALSE,
+                         check_NA_C = FALSE)
 
 }
 \author{

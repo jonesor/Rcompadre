@@ -13,6 +13,7 @@ test_that("cdb_flag works correctly", {
   expect_is(db_clean@data$check_zero_U, "logical")
   
   expect_is(db_clean@data$check_singular_U, "logical")
+  expect_is(db_clean@data$check_component_sum, "logical")
   expect_is(db_clean@data$check_ergodic, "logical")
   expect_is(db_clean@data$check_irreducible, "logical")
   expect_is(db_clean@data$check_primitive, "logical")
