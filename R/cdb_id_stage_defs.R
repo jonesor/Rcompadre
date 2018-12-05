@@ -1,14 +1,15 @@
 #' Create integer identifiers for a COM(P)ADRE database corresponding to unique
-#' combinations of species, study, and matrix stage class definitions
+#' combinations of species and matrix stage class definitions
 #'
 #' Creates a vector of integer identifiers corresponding to the rows of a
-#' CompadreDB object, based on unique combinations of the column 'SpeciesAuthor'
-#' and a list of matrix stage class definitions (either 'MatrixClassAuthor' or
-#' 'MatrixClassOrganized').
+#' CompadreDB object, based on unique combinations of the column
+#' 'SpeciesAccepted' and a list of matrix stage class definitions (either
+#' 'MatrixClassAuthor' or 'MatrixClassOrganized').
 #'
 #' @param cdb A CompadreDB object
 #' @param stage_def Whether to define matrix stage class based on
 #'   "MatrixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
+#'   Defaults to "MatrixClassAuthor".
 #' 
 #' @return Vector of integer identifiers corresponding to the rows of
 #'   \code{cdb}.
@@ -47,7 +48,7 @@
 #' cdb_id_stage_defs(Compadre, stage_def = "MatrixClassOrganized")
 #' 
 #' @export cdb_id_stage_defs
-cdb_id_stage_defs <- function(cdb, stage_def) {
+cdb_id_stage_defs <- function(cdb, stage_def = "MatrixClassAuthor") {
 
   if (!inherits(cdb, "CompadreDB")) {
     stop("db must be of class CompadreDB. See function as_cdb")
@@ -60,6 +61,6 @@ cdb_id_stage_defs <- function(cdb, stage_def) {
   cdb@data$stage_def <- stage_fun(cdb)
   cdb@data$stage_def <- vapply(cdb@data$stage_def, paste, collapse = "", "")
   
-  cdb_id(cdb, columns = c("SpeciesAuthor", "stage_def"))
+  cdb_id(cdb, columns = c("SpeciesAccepted", "stage_def"))
 }
 

@@ -3,15 +3,16 @@
 \name{cdb_id_stage_defs}
 \alias{cdb_id_stage_defs}
 \title{Create integer identifiers for a COM(P)ADRE database corresponding to unique
-combinations of species, study, and matrix stage class definitions}
+combinations of species and matrix stage class definitions}
 \usage{
-cdb_id_stage_defs(cdb, stage_def)
+cdb_id_stage_defs(cdb, stage_def = "MatrixClassAuthor")
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
 
 \item{stage_def}{Whether to define matrix stage class based on
-"MatrixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).}
+"MatrixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
+Defaults to "MatrixClassAuthor".}
 }
 \value{
 Vector of integer identifiers corresponding to the rows of
@@ -19,9 +20,9 @@ Vector of integer identifiers corresponding to the rows of
 }
 \description{
 Creates a vector of integer identifiers corresponding to the rows of a
-CompadreDB object, based on unique combinations of the column 'SpeciesAuthor'
-and a list of matrix stage class definitions (either 'MatrixClassAuthor' or
-'MatrixClassOrganized').
+CompadreDB object, based on unique combinations of the column
+'SpeciesAccepted' and a list of matrix stage class definitions (either
+'MatrixClassAuthor' or 'MatrixClassOrganized').
 }
 \details{
 The vector 'MatrixClassOrganized' reflects standardized stage classes
