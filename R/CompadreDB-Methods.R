@@ -33,9 +33,29 @@ as_tibble.CompadreDB <- function(x) as_tibble(x@data)
 
 #' @rdname CompadreDB-Methods
 #' @importFrom utils head
+#' @importFrom methods new
 #' @param n The number of rows to extract
 #' @export
-head.CompadreDB <- function(x, n = 6L, ...) head(x@data, n = n, ...)
+head.CompadreDB <- function(x, n = 6L, ...) {
+  dat <- head(x@data, n = n, ...)
+  
+  new("CompadreDB",
+      data = dat, 
+      version = x@version)
+}
+
+
+#' @rdname CompadreDB-Methods
+#' @importFrom utils tail
+#' @importFrom methods new
+#' @export
+tail.CompadreDB <- function(x, n = 6L, ...) {
+  dat <- tail(x@data, n = n, ...)
+  
+  new("CompadreDB",
+      data = dat, 
+      version = x@version)
+}
 
 
 #' @rdname CompadreDB-Methods
@@ -43,6 +63,7 @@ head.CompadreDB <- function(x, n = 6L, ...) head(x@data, n = n, ...)
 names.CompadreDB <- function(x) {
   names(x@data)
 }
+
 
 
 #' @rdname CompadreDB-Methods
