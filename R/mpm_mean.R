@@ -74,7 +74,7 @@ mpm_mean <- function(x, na.rm = FALSE) {
   }
   if (length(unique(stage_aut_col)) != 1L) {
     warning("CompadreMat objects in given list do not all have the same ",
-            "MatrixClassAuthor. Returning MatrixClassAuthor from ",
+            "MatrixClassAuthor. Returning MatrixClassAuthor from first ",
             "list element")
   }
   
