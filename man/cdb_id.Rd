@@ -25,8 +25,7 @@ set of columns.
 \details{
 Identifiers are assigned by pasting together the relevant columns, assigning
 factor levels based on alphabetical order, and then converting the factor
-levels to integers, as in \code{as.integer(as.factor(paste(cdb[,columns],
-collapse = "")))}.
+levels to integers.
 }
 \examples{
 cdb_id(Compadre, columns = c("SpeciesAuthor", "MatrixTreatment"))

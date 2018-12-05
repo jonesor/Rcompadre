@@ -27,8 +27,7 @@ of columns supplied by the user).
 \details{
 Identifiers are assigned by pasting together the relevant columns, assigning
 factor levels based on alphabetical order, and then converting the factor
-levels to integers, as in \code{as.integer(as.factor(paste(cdb[,columns],
-collapse = "")))}.
+levels to integers.
 }
 \examples{
 Compadre$StudyID <- cdb_id_studies(Compadre)
