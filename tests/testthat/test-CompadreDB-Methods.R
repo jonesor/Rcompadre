@@ -9,8 +9,12 @@ test_that("CompadreDB-Methods work correctly", {
   expect_is(tb, "tbl_df")
   
   hd <- head(Compadre, n = 10)
-  expect_is(hd, "data.frame")
-  expect_true(nrow(hd) == 10)
+  expect_s4_class(hd, "CompadreDB")
+  expect_true(nrow(hd@data) == 10)
+  
+  tl <- tail(Compadre, n = 10)
+  expect_s4_class(tl, "CompadreDB")
+  expect_true(nrow(tl@data) == 10)
   
   nm <- names(Compadre)
   expect_equal(nm, names(Compadre@data))

@@ -2,7 +2,7 @@ context("CompadreDB")
 
 test_that("CompadreDB works correctly", {
   
-  db1 <- db2 <- db3 <- db4 <- asCompadreDB(CompadreLegacy)
+  db1 <- db2 <- db3 <- db4 <- as_cdb(CompadreLegacy)
   
   expect_true(validCompadreDB(db1))
   expect_output(print(db1))
@@ -18,6 +18,26 @@ test_that("CompadreDB works correctly", {
   # mat a list-column but without CompadreMat objects
   db4@data$mat <- CompadreLegacy$mat
   expect_false(isTRUE(validCompadreDB(db4)))
+  
+  # $ and $<-
+  expect_equal(Compadre$SpeciesAuthor, Compadre@data$SpeciesAuthor)
+  
+  db1 <- Compadre
+  db1$ones <- 1L
+  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_true(all(db1$ones == 1L))
+  
+  expect_error(Compadre$mat <- 1L)
+  
+  # [[ and [[<-
+  expect_equal(Compadre[["SpeciesAuthor"]], Compadre@data$SpeciesAuthor)
+  
+  db1 <- Compadre
+  db1[["ones"]] <- 1L
+  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_true(all(db1$ones == 1L))
+  
+  expect_error(Compadre[["mat"]] <- 1L)
   
   # accessors
   expect_is(CompadreData(Compadre), "data.frame")

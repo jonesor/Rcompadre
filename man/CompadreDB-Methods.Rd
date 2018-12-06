@@ -6,6 +6,7 @@
 \alias{as.data.frame.CompadreDB}
 \alias{as_tibble.CompadreDB}
 \alias{head.CompadreDB}
+\alias{tail.CompadreDB}
 \alias{names.CompadreDB}
 \alias{merge.CompadreDB}
 \alias{NumberAcceptedSpecies}
@@ -21,6 +22,8 @@
 \method{as_tibble}{CompadreDB}(x)
 
 \method{head}{CompadreDB}(x, n = 6L, ...)
+
+\method{tail}{CompadreDB}(x, n = 6L, ...)
 
 \method{names}{CompadreDB}(x)
 

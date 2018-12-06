@@ -27,7 +27,7 @@
 #' (\code{$}) and replacing (\code{$<-}) columns within the \code{data} slot,
 #' accessing elements from the \code{version} slot (see functions
 #' \code{VersionData} and \code{DateCreated}), and converting legacy database
-#' objects to the CompadreDB class (see \code{asCompadreDB}).
+#' objects to the CompadreDB class (see \code{as_cdb}).
 #' 
 #' @name CompadreDB
 #' 
@@ -109,7 +109,7 @@ setValidity("CompadreDB", validCompadreDB)
 
 
 ## define method to coerce old compadre db object to CompadreDB class
-setAs("list", "CompadreDB", function(from) asCompadreDB(from))
+setAs("list", "CompadreDB", function(from) as_cdb(from))
 
 
 #' Convert legacy COM(P)ADRE database object to CompadreDB
@@ -124,12 +124,12 @@ setAs("list", "CompadreDB", function(from) asCompadreDB(from))
 #' @author Iain M. Stott
 #' 
 #' @examples
-#' Compadre <- asCompadreDB(CompadreLegacy)
+#' Compadre <- as_cdb(CompadreLegacy)
 #' 
 #' @importFrom methods new
 #' @importFrom tibble as_tibble add_column
 #' @export
-asCompadreDB <- function(from) {
+as_cdb <- function(from) {
   # is all the data required to fill S4 slots there?
   if(!all(c("metadata", "matrixClass", "mat", "version") %in% names(from))) {
     stop("This doesn't appear to be an old compadre data object. It does ",
@@ -185,7 +185,7 @@ setMethod("show", signature = (object ="CompadreDB"),
                                               }
             if(!is.character(Version(object))) V <- "Unknown"
             #start
-            cat(paste("A com(p)adre database ('CompadreDB') object with ",
+            cat(paste("A COM(P)ADRE database ('CompadreDB') object with ",
                       as.character(Sno),
                       " SPECIES and ",
                       as.character(Mno),
@@ -221,39 +221,51 @@ setMethod("CompadreData", signature = "CompadreDB",
 #' @rdname CompadreDB
 #' @param x A CompadreDB object
 #' @param name The name of a column within x
-#' @importFrom methods slotNames
 #' @export
-setMethod(
-  "$", signature = "CompadreDB",
-  function(x, name) {
-    if (!("data" %in% slotNames(x))) {
-      stop("$ method requires CompadreDB object with slot 'data'")
-    }
-    return(x@data[[name]])
-  }
+setMethod("$", signature = "CompadreDB",
+          function(x, name) {
+            return(x@data[[name]])
+          }
 )
 
 #' @rdname CompadreDB
-#' @importFrom methods new slotNames
+#' @importFrom methods new
 #' @param value Vector of values to assign to the column
 #' @export
-setReplaceMethod(
-  "$", signature = "CompadreDB", 
-  function(x, name, value) { 
-    if (!("data" %in% slotNames(x))) {
-      stop("$<- method requires CompadreDB object with slot 'data'")
-    }
-    if("mat" %in% name) {
-      warning("Replacing 'mat' column may be problematic unless all ",
-              "its elements are valid 'CompadreMat' objects")
-    }
-    datout <- x@data
-    datout[[name]] <- value 
-    
-    new("CompadreDB", 
-        data = datout, 
-        version = x@version)
-  }
+setReplaceMethod("$", signature = "CompadreDB", 
+                 function(x, name, value) { 
+                   datout <- x@data
+                   datout[[name]] <- value 
+                   
+                   new("CompadreDB", 
+                       data = datout, 
+                       version = x@version)
+                 }
+)
+
+#' @rdname CompadreDB
+#' @param i,j elements to extract or replace (see \link{[[.data.frame})
+#' @param ... ignored
+#' @export
+setMethod("[[", c("CompadreDB", "ANY", "missing"), 
+          function(x, i, j, ...) {
+            x@data[[i]]
+          }
+)
+
+
+#' @rdname CompadreDB
+#' @importFrom methods new
+#' @export
+setReplaceMethod("[[", c("CompadreDB", "ANY", "missing", "ANY"), 
+                 function(x, i, j, value) {
+                   dat <- x@data
+                   dat[[i]] <- value 
+                   
+                   new("CompadreDB", 
+                       data = dat, 
+                       version = x@version)
+                 }
 )
 
 

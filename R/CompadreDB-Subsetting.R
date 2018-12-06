@@ -87,13 +87,8 @@ setMethod(f = "[", signature = signature(x = "CompadreDB",
 #' @rdname CompadreDB-Subsetting
 #' @param subset logical expression indicating which rows to keep
 #' @param select expression indicating which columns to keep
-#' @importFrom methods slotNames
 #' @export
 subset.CompadreDB <- function(x, subset, select, drop = FALSE, ...) {
-  
-  if (!"data" %in% slotNames(x)) {
-    stop("subset method requires CompadreDB object with slot 'data'")
-  }
   
   dat <- x@data
   if (missing(subset)) {

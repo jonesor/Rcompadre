@@ -19,29 +19,33 @@ Suggests:
     rmarkdown,
     testthat,
     popbio,
-    fields,
-    scales,
-    vcd,
-    rcrossref,
-    taxize,
-    dplyr,
+    ggplot2,
     maps,
-    stringr,
-    MASS,
+    dplyr,
     covr
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
     'CompadreDB-Methods.R'
     'CompadreDB-Subsetting.R'
+    'CompadreDB-Tidyverse.R'
     'CompadreMat.R'
     'ClassUnionMethods.R'
-    'DBToFlat.R'
-    'checkspecies.R'
-    'cleanDB.R'
-    'compareDBs.R'
+    'cdb_check_species.R'
+    'cdb_collapse.R'
+    'cdb_compare.R'
+    'cdb_fetch.R'
+    'cdb_flag.R'
+    'cdb_flatten.R'
+    'cdb_id.R'
+    'cdb_id_stage_defs.R'
+    'cdb_id_studies.R'
+    'cdb_mean_matF.R'
+    'cdb_rbind.R'
+    'cdb_tidy.R'
+    'cdb_unflatten.R'
     'data.R'
-    'fetchDB.R'
-    'getMeanMatF.R'
-    'mergeDBs.R'
-    'stringtomatrix.R'
+    'mpm_mean.R'
+    'mpm_methods.R'
+    'string_representation.R'
+    'zzz.R'

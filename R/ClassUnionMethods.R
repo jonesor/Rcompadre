@@ -290,3 +290,4 @@ setMethod("MatrixClassOrganized", signature = "list",
                           function(M) { M@matrixClass$MatrixClassOrganized }))
           }
 )
+

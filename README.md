@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre) [![Coverage status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=devel)
+Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
+=========================================================================
 
-Rcompadre
-=========
+[![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre) [![Coverage status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=devel)
 
 An R package to work with the [COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix Population Databases. Note this package is at an early stage of development, and may contain bugs.
 
@@ -40,7 +40,7 @@ library(RcompadreDev)
 Fetch the most recent database version from [compadre-db.org](https://www.compadre-db.org/) with
 
 ``` r
-compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
+compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
 #> This is COMPADRE version 4.0.1 (release date Aug_12_2016)
 #> See user agreement at https://www.compadre-db.org/Page/UserAgreement
 ```
@@ -48,14 +48,14 @@ compadre <- fetchDB("compadre") # or use 'comadre' for the animal database
 or load from a local `.RData` file with
 
 ``` r
-compadre <- fetchDB("path/to/file/COMPADRE_v.4.0.1.RData")
+compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If you prefer using `load()` to load your local copy of a legacy database, use `asCompadreDB()` to convert it to the 'CompadreDB' class
+If you prefer using `load()` to load your local copy of a legacy database, use `as_cdb()` to convert it to the 'CompadreDB' class
 
 ``` r
 load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
-compadre <- asComadreDB(compadre)
+compadre <- as_cdb(compadre)
 ```
 
 #### Subsetting
@@ -72,16 +72,16 @@ subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
-First we'll use the function `cleanDB` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
+First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
 
 ``` r
-compadre_clean <- cleanDB(compadre)
+compadre_flags <- cdb_flag(compadre)
 ```
 
 We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we'll subset the database accordingly.
 
 ``` r
-compadre_sub <- subset(compadre_clean,
+compadre_sub <- subset(compadre_flags,
                        check_NA_A == FALSE & check_ergodic == TRUE)
 ```
 
