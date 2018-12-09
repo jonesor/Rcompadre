@@ -2,33 +2,36 @@
 #' 
 #' @description 
 #' Adds columns to the data slot of a CompadreDB object that flag potential
-#' problems in the matrix population models, such as matrices containing missing
-#' values or all zeros, matrices that are non-invertable, projection models in
-#' which the \strong{U}/\strong{F}/\strong{C} components do not sum to
-#' \strong{A}, or projection models that are non-ergodic, reducible, or
-#' imprimitive. These columns can subsequently be used to subset the database by
-#' logical argument.
+#' problems in the matrix population models. These columns can subsequently be
+#' used to subset the database by logical argument. Optional checks include:
+#' \itemize{
+#'   \item \code{check_NA_A}: missing values in matA?
+#'   \item \code{check_NA_U}: missing values in matU?
+#'   \item \code{check_NA_F}: missing values in matF?
+#'   \item \code{check_NA_C}: missing values in matC?
+#'   \item \code{check_zero_U}: matU all zeros (including NA)?
+#'   \item \code{check_singular_U}: matU singular (i.e. non-invertable)?
+#'   \item \code{check_component_sum}: do matU/matF/matC components sum to matA
+#'     (see \emph{Details})?
+#'   \item \code{check_ergodic}: is matA ergodic (see
+#'     \code{\link[popdemo]{isErgodic}})?
+#'   \item \code{check_irreducible}: is matA irreducible (see
+#'     \code{\link[popdemo]{isIrreducible}})?
+#'   \item \code{check_primitive}: is matA primitive (see
+#'     \code{\link[popdemo]{isPrimitive}})?
+#' }
 #' 
 #' @param cdb A CompadreDB object
-#' @param check_NA_A check for missing values in matA?
-#' @param check_NA_U check for missing values in matU?
-#' @param check_NA_F check for missing values in matF?
-#' @param check_NA_C check for missing values in matC?
-#' @param check_zero_U check whether matU all zeros (including NA)?
-#' @param check_singular_U check whether matU singular (i.e. non-invertable)?
-#' @param check_component_sum do matU, matF, and matC components sum to matA
-#'   (see \emph{Details})?
-#' @param check_ergodic check whether matA ergodic (see
-#'   \code{\link[popdemo]{isErgodic}})?
-#' @param check_irreducible check whether matA irreducible (see
-#'   \code{\link[popdemo]{isIrreducible}})?
-#' @param check_primitive check whether matA primitive (see
-#'   \code{\link[popdemo]{isPrimitive}})?
+#' @param checks Character vector specifying which checks to run.
+#' 
+#'   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
+#'   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
+#'   "check_ergodic", "check_irreducible", "check_primitive")}
 #' 
 #' @return Returns \code{cdb} with extra columns appended to the data slot
-#'   (columns have the same names as the corresponding \code{check_} arguments)
-#'   to indicate (TRUE/FALSE) whether there are potential problems with the
-#'   matrices corresponding to a given row of the data.
+#'   (columns have the same names as the corresponding elements of
+#'   \code{checks}) to indicate (TRUE/FALSE) whether there are potential
+#'   problems with the matrices corresponding to a given row of the data.
 #' 
 #' @details 
 #' For the flag \code{check_component_sum}, a value of \code{NA} will be
@@ -43,30 +46,43 @@
 #' @examples
 #' CompadreFlag <- cdb_flag(Compadre)
 #' 
-#' # exclude checks for missing values
-#' CompadreFlag <- cdb_flag(Compadre,
-#'                          check_NA_A = FALSE,
-#'                          check_NA_U = FALSE,
-#'                          check_NA_F = FALSE,
-#'                          check_NA_C = FALSE)
-#'
+#' # only check whether matA has missing values, and whether matA is ergodic
+#' CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
+#' 
 #' @importFrom popdemo isErgodic isIrreducible isPrimitive
 #' @importFrom methods new
 #' @export cdb_flag
-cdb_flag <- function(cdb,
-                     check_NA_A = TRUE,
-                     check_NA_U = TRUE,
-                     check_NA_F = TRUE,
-                     check_NA_C = TRUE,
-                     check_zero_U = TRUE,
-                     check_singular_U = TRUE,
-                     check_component_sum = TRUE,
-                     check_ergodic = TRUE,
-                     check_irreducible = TRUE,
-                     check_primitive = TRUE) {
+cdb_flag <- function(cdb, checks = c("check_NA_A",
+                                     "check_NA_U",
+                                     "check_NA_F",
+                                     "check_NA_C",
+                                     "check_zero_U",
+                                     "check_singular_U",
+                                     "check_component_sum",
+                                     "check_ergodic",
+                                     "check_irreducible",
+                                     "check_primitive")) {
   
   if (!inherits(cdb, "CompadreDB")) {
     stop("cdb must be of class CompadreDB. See function as_cdb")
+  }
+  
+  checks_allow <- c("check_NA_A",
+                    "check_NA_U",
+                    "check_NA_F",
+                    "check_NA_C",
+                    "check_zero_U",
+                    "check_singular_U",
+                    "check_component_sum",
+                    "check_ergodic",
+                    "check_irreducible",
+                    "check_primitive")
+  
+  checks_check <- checks %in% checks_allow
+  
+  if (any(!checks_check)) {
+    stop("The following elements of argument 'checks' are not valid: ",
+         paste(checks[!checks_check], collapse = ", "), call. = FALSE)
   }
   
   dat <- cdb@data
@@ -82,23 +98,23 @@ cdb_flag <- function(cdb,
   vec_NA_F <- vapply(matF, function(x) any(is.na(x)), FALSE)
   vec_NA_C <- vapply(matC, function(x) any(is.na(x)), FALSE)
   
-  if (check_NA_A) {
+  if ("check_NA_A" %in% checks) {
     dat$check_NA_A <- vec_NA_A
   }
-  if (check_NA_U) {
+  if ("check_NA_U" %in% checks) {
     dat$check_NA_U <- vec_NA_U
   }
-  if (check_NA_F) {
+  if ("check_NA_F" %in% checks) {
     dat$check_NA_F <- vec_NA_F
   }
-  if (check_NA_C) {
+  if ("check_NA_C" %in% checks) {
     dat$check_NA_C <- vec_NA_C
   }
-  if (check_zero_U) {
+  if ("check_zero_U" %in% checks) {
     dat$check_zero_U <- vapply(matU, function(x) all(x == 0 | is.na(x)), FALSE)
   }
   
-  if (check_singular_U) {
+  if ("check_singular_U" %in% checks) {
     dat$check_singular_U <- mapply(
       CheckMats,
       has_na = vec_NA_U,
@@ -107,11 +123,11 @@ cdb_flag <- function(cdb,
     )
   }
   
-  if (check_component_sum) {
+  if ("check_component_sum" %in% checks) {
     dat$check_component_sum <- mapply(ComponentSum, matA, matU, matF, matC)
   }
   
-  if (check_ergodic) {
+  if ("check_ergodic" %in% checks) {
     dat$check_ergodic <- mapply(
       CheckMats,
       has_na = vec_NA_A,
@@ -120,7 +136,7 @@ cdb_flag <- function(cdb,
     )
   }
   
-  if (check_irreducible) {
+  if ("check_irreducible" %in% checks) {
     dat$check_irreducible <- mapply(
       CheckMats,
       has_na = vec_NA_A,
@@ -129,7 +145,7 @@ cdb_flag <- function(cdb,
     )
   }
   
-  if (check_primitive) {
+  if ("check_primitive" %in% checks) {
     dat$check_primitive <- mapply(
       CheckMats,
       has_na = vec_NA_A,
