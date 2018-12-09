@@ -32,7 +32,9 @@ cdb_flatten <- function(cdb) {
     stop("cdb must be of class CompadreDB. See function as_cdb")
   }
   
-  db <- cdb_tidy(cdb)
+  cdb <- cdb_unnest(cdb)
+  db <- cdb@data
+  db$mat <- NULL
   
   db$matA <- vapply(db$matA, mat_to_string, "")
   db$matU <- vapply(db$matU, mat_to_string, "")
