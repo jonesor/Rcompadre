@@ -224,7 +224,7 @@ compadre_life_expect <- Compadre %>%
          MatrixTreatment == "Unmanipulated",
          MatrixCaptivity == "W",
          AnnualPeriodicity == "1") %>% 
-  mutate(StageID = cdb_id_stage_defs(.)) %>%
+  mutate(StageID = cdb_id_stages(.)) %>%
   cdb_collapse(columns = "StageID") %>%
   cdb_flag() %>% 
   filter(check_NA_U == FALSE,

@@ -29,9 +29,9 @@ pseudoreplication.
 All members of a group \emph{must} have the same matrix dimension (consider
 adding MatrixDimension as a grouping variable). All members of a group
 \emph{should} have the same AnnualPeriodicity and matrix stage class
-definitions (see \code{\link{cdb_id_stage_defs}}). Note that Seasonal
-matrices should not be collapsed using this method (they should be
-matrix-multiplied rather than averaged).
+definitions (see \code{\link{cdb_id_stages}}). Note that Seasonal matrices
+should not be collapsed using this method (they should be matrix-multiplied
+rather than averaged).
 }
 \details{
 Will give a warning if members of any group do not all share the same
@@ -57,18 +57,18 @@ Within a group, rows of a given column are collapsed as follows:
 }
 }
 \examples{
-# add column identifying unique stage class definitions
-Compadre$id_stage <- cdb_id_stage_defs(Compadre, "MatrixClassOrganized")
-
 # filter out Seasonal matrices
 CompSub <- subset(Compadre, MatrixComposite != "Seasonal")
+
+# add column identifying unique stage class definitions
+CompSub$id_stage <- cdb_id_stages(CompSub, "MatrixClassOrganized")
 
 # collapse
 CompCollapse <- cdb_collapse(CompSub, columns = c("id_stage"))
 
 }
 \seealso{
-\link{cdb_id_stage_defs}
+\link{cdb_id_stages}
 }
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>
