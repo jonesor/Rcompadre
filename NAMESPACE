@@ -2,6 +2,7 @@
 
 S3method(as.data.frame,CompadreDB)
 S3method(as_tibble,CompadreDB)
+S3method(dim,CompadreDB)
 S3method(head,CompadreDB)
 S3method(merge,CompadreDB)
 S3method(names,CompadreDB)

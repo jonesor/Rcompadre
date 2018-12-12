@@ -19,6 +19,15 @@ test_that("CompadreDB-Methods work correctly", {
   nm <- names(Compadre)
   expect_equal(nm, names(Compadre@data))
   
+  dm <- dim(Compadre)
+  expect_is(dm, "integer")
+  expect_length(dm, 2)
+  
+  n_row <- nrow(Compadre)
+  n_col <- ncol(Compadre)
+  expect_is(n_row, "integer")
+  expect_is(n_col, "integer")
+  
   traits <- data.frame(SpeciesAccepted = sample(Compadre$SpeciesAccepted, 5),
                        value = 1:5)
   
