@@ -23,7 +23,8 @@ Suggests:
     maps,
     dplyr,
     ggtern,
-    covr
+    covr,
+    Rage
 Remotes: jonesor/Rage
 VignetteBuilder: knitr
 Collate: 
