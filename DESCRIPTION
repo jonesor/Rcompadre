@@ -22,7 +22,7 @@ Suggests:
     ggplot2,
     maps,
     dplyr,
-    ggtern
+    ggtern,
     covr
 Remotes: jonesor/Rage
 VignetteBuilder: knitr
