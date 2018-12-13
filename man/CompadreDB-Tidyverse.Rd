@@ -66,5 +66,6 @@ full_join.CompadreDB(x, y, by = NULL, copy = FALSE, suffix = c(".x",
 \item{suffix}{see \code{\link[dplyr]{join}}}
 }
 \description{
-Tidyverse methods for CompadreDB objects
+CompadreDB methods for functions in \link[dplyr]{dplyr} and
+\link[ggplot2]{ggplot2}.
 }

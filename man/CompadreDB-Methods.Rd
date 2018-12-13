@@ -8,6 +8,7 @@
 \alias{head.CompadreDB}
 \alias{tail.CompadreDB}
 \alias{names.CompadreDB}
+\alias{dim.CompadreDB}
 \alias{merge.CompadreDB}
 \alias{NumberAcceptedSpecies}
 \alias{NumberAcceptedSpecies,CompadreDB-method}
@@ -27,6 +28,8 @@
 
 \method{names}{CompadreDB}(x)
 
+\method{dim}{CompadreDB}(x)
+
 \method{merge}{CompadreDB}(x, y, ...)
 
 NumberAcceptedSpecies(object)
@@ -42,15 +45,13 @@ NumberMatrices(object)
 \S4method{NumberMatrices}{CompadreDB}(object)
 }
 \arguments{
-\item{x}{A CompadreDB object}
+\item{x, object}{A CompadreDB object}
 
 \item{...}{additional arguments}
 
 \item{n}{The number of rows to extract}
 
 \item{y}{A data.frame to merge with x}
-
-\item{object}{A CompadreDB object}
 }
 \description{
 This page describes a variety of methods that can be used with CompadreDB

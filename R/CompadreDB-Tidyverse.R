@@ -1,5 +1,8 @@
 #' Tidyverse methods for CompadreDB objects
 #' 
+#' CompadreDB methods for functions in \link[dplyr]{dplyr} and
+#' \link[ggplot2]{ggplot2}.
+#' 
 #' @name CompadreDB-Tidyverse
 #' @param x,model,.data A CompadreDB object
 #' @param data see \code{\link[ggplot2]{fortify}}

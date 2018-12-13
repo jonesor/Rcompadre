@@ -291,3 +291,42 @@ setMethod("MatrixClassOrganized", signature = "list",
           }
 )
 
+
+
+
+# MatrixClassNumber
+#' @rdname CompadreMatrixMethods
+#' @export
+setGeneric("MatrixClassNumber", 
+           function(object){
+             standardGeneric("MatrixClassNumber")
+           }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassNumber", signature = "CompadreMat", 
+          function(object) {
+            return(object@matrixClass$MatrixClassNumber)
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassNumber", signature = "CompadreDB", 
+          function(object) {
+            return(lapply(object@data$mat,
+                          function(M) { M@matrixClass$MatrixClassNumber }))
+          }
+)
+#' @rdname CompadreMatrixMethods
+#' @export
+setMethod("MatrixClassNumber", signature = "list", 
+          function(object) {
+            if (!all(vapply(object, class, "") == "CompadreMat")) {
+              stop("All elements of list passed to MatrixClassNumber() ",
+                   "must be of class CompadreMat")
+            }
+            return(lapply(object,
+                          function(M) { M@matrixClass$MatrixClassNumber }))
+          }
+)
+

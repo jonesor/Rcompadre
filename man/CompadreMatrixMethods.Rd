@@ -31,6 +31,10 @@
 \alias{MatrixClassOrganized,CompadreMat-method}
 \alias{MatrixClassOrganized,CompadreDB-method}
 \alias{MatrixClassOrganized,list-method}
+\alias{MatrixClassNumber}
+\alias{MatrixClassNumber,CompadreMat-method}
+\alias{MatrixClassNumber,CompadreDB-method}
+\alias{MatrixClassNumber,list-method}
 \title{Methods for working with matrices in com(p)adre}
 \usage{
 matA(object)
@@ -88,6 +92,14 @@ MatrixClassOrganized(object)
 \S4method{MatrixClassOrganized}{CompadreDB}(object)
 
 \S4method{MatrixClassOrganized}{list}(object)
+
+MatrixClassNumber(object)
+
+\S4method{MatrixClassNumber}{CompadreMat}(object)
+
+\S4method{MatrixClassNumber}{CompadreDB}(object)
+
+\S4method{MatrixClassNumber}{list}(object)
 }
 \arguments{
 \item{object}{A CompadreDB object}

@@ -7,19 +7,23 @@
 #' (\code{NumberAcceptedSpecies}), studies (\code{NumberStudies}), or matrices
 #' (\code{NumberMatrices}).
 #' 
+#' @param x,object A CompadreDB object
+#' @param y A data.frame to merge with x
+#' @param n The number of rows to extract
+#' @param ... additional arguments
+#' 
 #' @name CompadreDB-Methods
 NULL
 
 
 
+
 #' @rdname CompadreDB-Methods
-#' @param x A CompadreDB object
-#' @param ... additional arguments
 #' @export
 as.data.frame.CompadreDB <- function(x, ...) {
   dat <- x@data
   as.data.frame(dat, ...)
-} 
+}
 
 setAs("CompadreDB", "data.frame", function(from)
   as.data.frame.CompadreDB(from))
@@ -34,7 +38,6 @@ as_tibble.CompadreDB <- function(x) as_tibble(x@data)
 #' @rdname CompadreDB-Methods
 #' @importFrom utils head
 #' @importFrom methods new
-#' @param n The number of rows to extract
 #' @export
 head.CompadreDB <- function(x, n = 6L, ...) {
   dat <- head(x@data, n = n, ...)
@@ -65,11 +68,16 @@ names.CompadreDB <- function(x) {
 }
 
 
+#' @rdname CompadreDB-Methods
+#' @export
+dim.CompadreDB <- function(x) {
+  dim(x@data)
+}
+
 
 #' @rdname CompadreDB-Methods
 #' @importFrom tibble as_tibble
 #' @importFrom methods new
-#' @param y A data.frame to merge with x
 #' @export
 merge.CompadreDB <- function(x, y, ...) {
   if (inherits(y, "CompadreDB")) {
@@ -85,7 +93,6 @@ merge.CompadreDB <- function(x, y, ...) {
 
 #' The number of accepted binary species names in a CompadreDB object
 #' @rdname CompadreDB-Methods
-#' @param object A CompadreDB object
 #' @export
 setGeneric("NumberAcceptedSpecies", 
                function(object){

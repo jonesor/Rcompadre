@@ -4,53 +4,47 @@
 \alias{cdb_flag}
 \title{Flag potential issues in matrices of a COM(P)ADRE database}
 \usage{
-cdb_flag(cdb, check_NA_A = TRUE, check_NA_U = TRUE,
-  check_NA_F = TRUE, check_NA_C = TRUE, check_zero_U = TRUE,
-  check_singular_U = TRUE, check_component_sum = TRUE,
-  check_ergodic = TRUE, check_irreducible = TRUE,
-  check_primitive = TRUE)
+cdb_flag(cdb, checks = c("check_NA_A", "check_NA_U", "check_NA_F",
+  "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
+  "check_ergodic", "check_irreducible", "check_primitive"))
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
 
-\item{check_NA_A}{check for missing values in matA?}
+\item{checks}{Character vector specifying which checks to run.
 
-\item{check_NA_U}{check for missing values in matU?}
-
-\item{check_NA_F}{check for missing values in matF?}
-
-\item{check_NA_C}{check for missing values in matC?}
-
-\item{check_zero_U}{check whether matU all zeros (including NA)?}
-
-\item{check_singular_U}{check whether matU singular (i.e. non-invertable)?}
-
-\item{check_component_sum}{do matU, matF, and matC components sum to matA
-(see \emph{Details})?}
-
-\item{check_ergodic}{check whether matA ergodic (see
-\code{\link[popdemo]{isErgodic}})?}
-
-\item{check_irreducible}{check whether matA irreducible (see
-\code{\link[popdemo]{isIrreducible}})?}
-
-\item{check_primitive}{check whether matA primitive (see
-\code{\link[popdemo]{isPrimitive}})?}
+  Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
+  "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
+  "check_ergodic", "check_irreducible", "check_primitive")}}
 }
 \value{
 Returns \code{cdb} with extra columns appended to the data slot
-  (columns have the same names as the corresponding \code{check_} arguments)
-  to indicate (TRUE/FALSE) whether there are potential problems with the
-  matrices corresponding to a given row of the data.
+  (columns have the same names as the corresponding elements of
+  \code{checks}) to indicate (TRUE/FALSE) whether there are potential
+  problems with the matrices corresponding to a given row of the data.
 }
 \description{
 Adds columns to the data slot of a CompadreDB object that flag potential
-problems in the matrix population models, such as matrices containing missing
-values or all zeros, matrices that are non-invertable, projection models in
-which the \strong{U}/\strong{F}/\strong{C} components do not sum to
-\strong{A}, or projection models that are non-ergodic, reducible, or
-imprimitive. These columns can subsequently be used to subset the database by
-logical argument.
+problems in the matrix population models. These columns can subsequently be
+used to subset the database by logical argument.
+
+Optional checks include:
+\itemize{
+  \item \code{check_NA_A}: missing values in matA?
+  \item \code{check_NA_U}: missing values in matU?
+  \item \code{check_NA_F}: missing values in matF?
+  \item \code{check_NA_C}: missing values in matC?
+  \item \code{check_zero_U}: matU all zeros (including NA)?
+  \item \code{check_singular_U}: matU singular (i.e. non-invertable)?
+  \item \code{check_component_sum}: do matU/matF/matC components sum to matA
+    (see \emph{Details})?
+  \item \code{check_ergodic}: is matA ergodic (see
+    \code{\link[popdemo]{isErgodic}})?
+  \item \code{check_irreducible}: is matA irreducible (see
+    \code{\link[popdemo]{isIrreducible}})?
+  \item \code{check_primitive}: is matA primitive (see
+    \code{\link[popdemo]{isPrimitive}})?
+}
 }
 \details{
 For the flag \code{check_component_sum}, a value of \code{NA} will be
@@ -60,12 +54,8 @@ and/or \code{NA}, indicating that the matrix has not been split.
 \examples{
 CompadreFlag <- cdb_flag(Compadre)
 
-# exclude checks for missing values
-CompadreFlag <- cdb_flag(Compadre,
-                         check_NA_A = FALSE,
-                         check_NA_U = FALSE,
-                         check_NA_F = FALSE,
-                         check_NA_C = FALSE)
+# only check whether matA has missing values, and whether matA is ergodic
+CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
 
 }
 \author{

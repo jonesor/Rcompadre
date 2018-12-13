@@ -45,10 +45,10 @@
 #' @seealso \link{cdb_id}
 #' 
 #' @examples
-#' cdb_id_stage_defs(Compadre, stage_def = "MatrixClassOrganized")
+#' cdb_id_stages(Compadre, stage_def = "MatrixClassOrganized")
 #' 
-#' @export cdb_id_stage_defs
-cdb_id_stage_defs <- function(cdb, stage_def = "MatrixClassAuthor") {
+#' @export cdb_id_stages
+cdb_id_stages <- function(cdb, stage_def = "MatrixClassAuthor") {
 
   if (!inherits(cdb, "CompadreDB")) {
     stop("db must be of class CompadreDB. See function as_cdb")
@@ -59,7 +59,7 @@ cdb_id_stage_defs <- function(cdb, stage_def = "MatrixClassAuthor") {
   
   stage_fun <- match.fun(stage_def)
   cdb@data$stage_def <- stage_fun(cdb)
-  cdb@data$stage_def <- vapply(cdb@data$stage_def, paste, collapse = "", "")
+  cdb@data$stage_def <- vapply(cdb@data$stage_def, paste, "", collapse = ", ")
   
   cdb_id(cdb, columns = c("SpeciesAccepted", "stage_def"))
 }
