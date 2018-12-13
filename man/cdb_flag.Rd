@@ -26,7 +26,9 @@ Returns \code{cdb} with extra columns appended to the data slot
 \description{
 Adds columns to the data slot of a CompadreDB object that flag potential
 problems in the matrix population models. These columns can subsequently be
-used to subset the database by logical argument. Optional checks include:
+used to subset the database by logical argument.
+
+Optional checks include:
 \itemize{
   \item \code{check_NA_A}: missing values in matA?
   \item \code{check_NA_U}: missing values in matU?
