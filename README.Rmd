@@ -103,6 +103,15 @@ compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
 
 In the code above, the accessor function `matA()` is used to extract a list of projection matrices (the full matrix, "matA") from every row of `compadre_sub`. There are also accessor functions for the matrix subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts of the database too.
 
+## Previous releases
+
+Specific earlier releases of this package can be installed using the appropriate `@` tag. 
+
+To install version 0.1.0, our (thus far) only release:
+
+```{r}
+devtools::install_github("jonesor/Rcompadre@v0.1.0")
+```
 
 ## Contributions
 
