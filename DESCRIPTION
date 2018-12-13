@@ -22,7 +22,9 @@ Suggests:
     ggplot2,
     maps,
     dplyr,
+    ggtern
     covr
+Remotes: jonesor/Rage
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
