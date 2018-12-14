@@ -1,5 +1,12 @@
+^codecov\.yml$
+^CODE_OF_CONDUCT\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
 ^appveyor\.yml$
 ^\.travis\.yml$
+<<<<<<< HEAD
+=======
+^\.git$
+^README\.Rmd$
+>>>>>>> devel

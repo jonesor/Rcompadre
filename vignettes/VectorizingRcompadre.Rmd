@@ -1,0 +1,245 @@
+---
+title: "Vectorizing with Rcompadre"
+author: "Patrick Barks"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vectorizing with Rcompadre}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+COM(P)ADRE databases contain thousands of matrix population models. If we want to derive traits from a large set of these matrices, we'll need to use either loops or vectorization.
+
+Vectorizing means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a data frame, a list of matrices, etc. Vectorized code generally runs faster than loops, and many R users find that vectorized code is easier to write and understand.
+
+## Preliminaries
+
+We'll start by loading a few packages and a dataset that we'll be using throughout this vignette. The dataset `Compadre` is a subset of a recent COMPADRE release that's built into Rcompadre.
+
+```{r}
+library(Rcompadre)
+library(popbio)
+data(Compadre)
+```
+
+## Introduction to vectorization
+
+To understand vectorization, we first need a vector. For this purpose, we'll extract a list of __A__ matrices from the `mat` column of `Compadre`, and add this list of matrices to `Compadre` as a new column.
+
+```{r}
+Compadre$matA <- matA(Compadre)
+```
+
+This new column, `Compadre$matA`, is both a vector and a list.
+
+```{r}
+is.vector(Compadre$matA)   # it really is a vector
+is.list(Compadre$matA)     # and also a list
+length(Compadre$matA)      # with 150 matrices
+Compadre$matA[1:3]         # here are the first three
+```
+
+Let's say we want to calculate the dimension of every matrix in `Compadre$matA`. In fact, `Compadre` already has this data in the column 'MatrixDimension', but let's say we want to double-check it. We'll use the function `nrow()`, and assume that the number of rows and columns are equal. But we can't use `nrow()` directly on `Compadre$matA`, because the function `nrow()` isn't vectorized. It can only take one object at a time.
+
+
+#### Manual approach
+
+We could do something like this...
+
+```{r}
+Compadre$dim <- numeric(nrow(Compadre))  # create empty vector to store output
+Compadre$dim[1] <- nrow(Compadre$matA[[1]])  # nrow matrix 1
+Compadre$dim[2] <- nrow(Compadre$matA[[2]])  # nrow matrix 2
+Compadre$dim[3] <- nrow(Compadre$matA[[3]])  # nrow matrix 3
+# ... all the way to 150
+```
+
+But that's not very efficient for 150 matrices.
+
+#### Loop approach
+
+A loop would be much more efficient here.
+
+```{r}
+# create empty vector to store output
+Compadre$dim <- numeric(nrow(Compadre))
+
+# loop through all rows of Compadre
+for(i in seq_len(nrow(Compadre))) {
+  Compadre$dim[i] <- nrow(Compadre$matA[[i]])
+}
+```
+
+#### Vectorized approach
+
+An even nicer approach is to _vectorize_ the function `nrow()` over the vector `Compadre$matA` using `sapply()`.
+
+```{r}
+Compadre$dim <- sapply(Compadre$matA, nrow)
+```
+
+`sapply()` applies the function specified in the 2nd argument (`nrow()`) to every element of the vector in the first argument (`Compadre$matA`), and returns a vector of the results. The advantage of `sapply()` over the loop is that we don't need to pre-define an object to store the results.
+
+#### Vectorizing custom functions
+
+We can also vectorize with a custom function. Let's say we want to know, for every matrix, whether there are stages with no transitions (i.e. any column sums equal to zero). Here's a vectorized approach.
+
+```{r}
+# function to determine whether matrix 'mat' has any stages with no transitions
+NullStages <- function(mat) any(colSums(mat) == 0)
+
+# apply function to every element of A
+Compadre$null_stages <- sapply(Compadre$matA, NullStages)
+```
+
+The key to vectorizing is to make sure the function works on individual elements of the vector.
+
+```{r, eval=FALSE}
+NullStages(Compadre$matA[[1]]) # apply function to single element
+```
+
+## Accessor functions and vectorization
+
+Note that, in the example above, it wasn't necessary to create the column `Compadre$matA` before vectorizing over the __A__ matrices. We could have simply used the `matA()` accessor within `sapply()`. 
+
+```{r}
+Compadre$null_stages <- sapply(matA(Compadre), NullStages)
+```
+
+#### Using `cdb_unnest()` to avoid accessors
+
+That said, using accessor funtions can get tedious. Rather than constantly using accessor functions to extract components of the `mat` column, we could use the function `cdb_unnest()` to extract separate columns for all matrix components at the start of our analysis.
+
+```{r}
+# create new columns matA, matU, matF, matC, MatrixClassAuthor, etc..
+CompUnnest <- cdb_unnest(Compadre)
+```
+
+Then we can refer to any component using `$`, e.g.
+
+```{r}
+# apply NullStages to every matA
+CompUnnest$null_stages <- sapply(CompUnnest$matA, NullStages)
+
+# count number of dormant stages in every MatrixClassOrganized
+NumberDormant <- function(stages) length(which(stages == "dorm"))
+CompUnnest$n_dormant <- sapply(CompUnnest$MatrixClassOrganized, NumberDormant)
+```
+
+
+## Other apply functions
+
+`vapply()` is similar to `sapply()`, except that the output type is specified as an argument.
+
+```{r}
+sapply(CompUnnest$matA[1:6], nrow)
+vapply(CompUnnest$matA[1:6], nrow, numeric(1)) # must specify output type
+```
+
+`lapply()` always returns a list, so it's useful if our output is more complex than a single value for each input. For example, we could use lapply to calculate vectors of stage-specific survival (column sums of matU).
+
+```{r}
+lapply(CompUnnest$matU[1:4], function(m) colSums(m))
+```
+
+`mapply()` is for vectorizing over multiple arguments. For example, the `lifeExpectancy()` function below (taken from the package [Rage](https://github.com/jonesor/Rage)) calculates life expectancy given two arguments: a __U__ matrix, and an integer indicator for the stage class reflecting the 'start of life'. The start of life is often defined as the first 'active' stage class (i.e. not propagule or dormant), the index of which will vary from row to row.
+
+```{r}
+# function to calculate life expectancy
+lifeExpectancy <- function(matU, startLife) {
+  N <- solve(diag(nrow(matU)) - matU)
+  return(colSums(N)[startLife])
+}
+
+# get index of first active stage class with mpm_first_active()
+CompUnnest$start_life <- mpm_first_active(CompUnnest)
+
+# vectorize lifeExpectancy over matU and start_life
+mapply(lifeExpectancy,             # function
+       CompUnnest$matU[1:6],       # first argument to vectorize over
+       CompUnnest$start_life[1:6]) # second argument to vectorize over
+```
+
+
+## When functions fail
+
+Just like loops, vectorization fails if the function being vectorized throws an error on _any_ element of the vector. Here's an example. The `lambda()` function from [popbio](https://cran.r-project.org/web/packages/popbio/index.html) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
+
+```{r error=TRUE}
+# works for a single matrix
+lambda(CompUnnest$matA[[1]])
+
+# but fails when applied to all matrices because a few have missing values
+CompUnnest$lambda <- sapply(CompUnnest$matA, lambda)
+```
+
+There are two basic approaches to overcoming this:
+
+#### 1. Remove or skip problem elements
+
+If `lambda()` doesn't work on matrices with missing values, one approach is to simply remove matrices with missing values. The `cdb_flag()` function is an easy way to check for missing values, and other common issues that might hinder our analyses.
+
+```{r}
+# add column 'check_NA_A', indicating whether matA contains missing values (T/F)
+CompFlag <- cdb_flag(CompUnnest, checks = "check_NA_A")
+
+# remove rows where matA contains missing values
+CompSub <- subset(CompFlag, check_NA_A == FALSE)
+
+# apply lambda() to every remaining matA
+CompSub$lambda <- sapply(CompSub$matA, lambda)
+```
+
+Alternatively, if we want to avoid subsetting, we could pre-define a placeholder column for the result, and then selectively apply the `lambda()` function to only those matrices that don't contain missing values.
+
+```{r}
+# identify rows with no missing values in matA
+no_missing <- which(CompFlag$check_NA_A == FALSE)
+
+# create placeholder column for lambda
+CompFlag$lambda <- NA
+
+# apply lambda() to all matA with no missing values
+CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing], lambda)
+```
+
+Rows where there were missing values in matA retain the original placeholder value of `NA`.
+
+#### 2. Modify the function
+
+A second approach is to modify the function we want to vectorize with so that it can natively handle special cases. For example, we might modify `lambda()` so that it returns `NA` if a matrix contains missing values.
+
+```{r}
+lambda2 <- function(mat) {
+  # check mat for missing values: if TRUE return NA, else return lambda(mat)
+  ifelse(any(is.na(mat)), NA, lambda(mat))     
+}
+
+CompUnnest$lambda <- sapply(CompUnnest$matA, lambda2)
+```
+
+If the special cases are harder to test for, we could use R's condition-handling functions like `try()` or `tryCatch()`. Here's an example.
+
+```{r}
+lambda3 <- function(mat) {
+  # try lambda(mat): if error return NA
+  tryCatch(lambda(mat), error = function(err) NA)
+} 
+
+CompUnnest$lambda <- sapply(CompUnnest$matA, lambda3)
+```
+
+This latter approach requires caution, as we'll get an `NA` for _any_ error. Some errors might reflect problems with our data or code that are fixable, in which case an `NA` may be misleading.
+

@@ -1,19 +1,55 @@
 Package: Rcompadre
 Type: Package
 Title: Utilities for working with the COMPADRE/COMADRE Database
-Version: 0.1.0
+Version: 0.2.0
 Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Julia Barthold Jones, Tamora James, Patrick Barks, Iain Stott.
 Maintainer: Owen Jones <jones@biology.sdu.dk>
 Description: A set of utility tools for working with the COMPADRE/COMADRE databases. The package provides utility functions for interacting with the COMPADRE and COMADRE databases of matrix population model.
 License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Depends: R (>= 2.10)
 Imports:
   methods, 
   popdemo,
-  rlang
-Suggests: knitr, rmarkdown,
-    testthat
+  tibble
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat,
+    popbio,
+    ggplot2,
+    maps,
+    dplyr,
+    ggtern,
+    covr,
+    Rage,
+    rcrossref
+Remotes: jonesor/Rage
 VignetteBuilder: knitr
+Collate: 
+    'CompadreDB.R'
+    'CompadreDB-Methods.R'
+    'CompadreDB-Subsetting.R'
+    'CompadreDB-Tidyverse.R'
+    'CompadreMat.R'
+    'ClassUnionMethods.R'
+    'cdb_check_species.R'
+    'cdb_collapse.R'
+    'cdb_compare.R'
+    'cdb_fetch.R'
+    'cdb_flag.R'
+    'cdb_flatten.R'
+    'cdb_id.R'
+    'cdb_id_stages.R'
+    'cdb_id_studies.R'
+    'cdb_mean_matF.R'
+    'cdb_rbind.R'
+    'cdb_unflatten.R'
+    'cdb_unnest.R'
+    'data.R'
+    'mpm_mean.R'
+    'mpm_methods.R'
+    'string_representation.R'
+    'zzz.R'

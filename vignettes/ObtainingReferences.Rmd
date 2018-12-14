@@ -1,0 +1,58 @@
+---
+title: "Obtaining References"
+author: "Owen Jones"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The following example illustrates how to find the full formatted citations for the publications used in COMADRE or COMPADRE. This can be useful to find further details of the matrices you may be using in your study, or to provide references for your data e.g. in supplementary information.
+
+The code relies on the package `rcrossref` (https://github.com/ropensci/rcrossref) which queries *CrossRef*, a Digital Object Identifier (DOI) Registration Agency of the International DOI Foundation.
+
+To install the `rcrossref` package:
+
+```{r,eval=FALSE}
+install.packages("rcrossref")
+```
+
+We should then load the required packages like this:
+
+```{r}
+library(Rcompadre)
+library(rcrossref)
+```
+
+We aim to obtain the full reference and DOI for the matrices for a set of matrices. In this example we will use the example data available in the `Rcompadre` package.
+
+```{r load example COMPADRE data, eval=TRUE}
+data(Comadre)
+```
+
+Here we will create a subset of matrices containing data for species in the *Ursidae* family:
+
+```{r}
+Comadre <- subset(Comadre, Family == "Ursidae")
+```
+
+In this case, our subset contains `r length(matA(Comadre))` matrices, and we can examine the source information for these by asking for the `Authors`, `Journal`, publication year (`YearPublication`) and DOI (`DOI.ISBN`) like this:
+
+```{r}
+Comadre$Authors
+Comadre$YearPublication
+Comadre$DOI.ISBN
+```
+
+We are now ready to obtain the full references for these data. The `rcrossref` package has a convenient function, `cr_cn` which obtains citations in various formats from CrossRef based on the DOIs. 
+
+Thus, we can obtain the full references for this subset of the COMADRE database like this:
+
+```{r}
+rcrossref::cr_cn(unique(Comadre$DOI.ISBN),format = "text",style = "apa")
+```
+
+Various other formats and styles of output are available, see `?rcrossref::cr_cn` for details.
+

@@ -3,208 +3,116 @@
 \docType{data}
 \name{Compadre}
 \alias{Compadre}
-\title{COMPADRE Animal demography data base}
-\format{\itemize{
-  \item{\strong{metadata}}{ - A \code{data.frame} with 130 rows and 47 columns}
-    \describe{
-      \item{SpeciesAuthor}{character - Binomial species name
-       given by the paper author}
-       \item{SpeciesAccepted}{character - Accepted binomial species name 
-       taken from \emph{The Plant List}}
-       \item{CommonName}{character - The common name used in the publication}
-       \item{Genus}{character - Taxonomic genus name derived from
-       \emph{The Plant List}}
-       \item{Family}{factor - Family which the species belongs}
-       \item{Order}{factor - Order to which the species belongs}
-       \item{Class}{factor - Class to which the species belongs}
-       \item{Phylum}{factor - Phylum to which the species belongs}
-       \item{Kingdom}{factor - Kingdom to which the species belongs}
-       \item{OrganismType}{factor - General plant/algae type. This is
-       mainly based on architectural organization. The species was 
-       assigned to one of the following values based on descriptions
-       by the authors and/or external sources: \code{Algae},
-       \code{Fungi}, \code{Annual}, \code{Bryophyte}, \code{Epiphyte},
-       \code{Fern}, \code{Herbaceous perennial}, \code{Liana}, \code{Palm},
-       \code{Shrub}, \code{Succulent}, and \code{Tree}. For further details
-       on each level, please see 
-       \url{https://github.com/jonesor/compadreDB/blob/master/COMPADRE-UserGuide/COMPADRE-UserGuide.pdf}
-       }
-       \item{DicotMonoc}{factor - Designates whether the species is a
-       dicot or monocot. Non-angiosperm species are designated \code{NA}}
-       \item{AngioGymno}{factor - Designates whether the species is a
-       gymnosperm or angiosperm. Species that are neither are designated
-       \code{NA}}
-       \item{Authors}{characer - Last (family) name of all authors 
-       separated with a ";"}
-       \item{Journal}{character - The type of document from which the
-       data were sourced. Possible values are \code{abbreviated
-       journal name}, \code{Book}, \code{PhD thesis}, \code{MSc thesis},
-       \code{Report}, \code{Conference talk}, and \code{Conference poster}}
-       \item{YearPublication}{character - The year of publication}
-       \item{DOI.ISBN}{character - The Digitial Object Identifier or 
-       International Standard Book Number codes to identify each 
-       publication.}
-       \item{AdditionalSource}{character - Additional source(s) used to 
-       reconstruct the matrix or obtain additional metadata for the matrix
-       (if applicable)}
-       \item{StudyDuration}{numeric - The number of years of observation
-       for the study. This is calculated as \code{StudyEnd} - 
-       \code{StudyStart}} 
-       \item{StudyStart}{numeric - The year that the study began}
-       \item{StudyEnd}{numeric - The year that the study ended}
-       \item{AnnualPeriodicty}{numeric - The time frame for which seasonal
-       or annual MPMs are constructed. A value of \code{1} indicates that
-       the iteration period is 1 year, \code{2} indicates iterations twice
-       per year, \code{0.2} indicates every 5 years, etc.}
-       \item{NumberPopulations}{numeric - The number of study populations
-       as defined by the authors. Within site replication of permanent 
-       plots is not defined as separate populations}
-       \item{MatrixCriteriaSize}{factor - Indicates whether the matrix
-       contains stages based on size. If so, indicates what that measure
-       of size is}
-       \item{MatrixCriteriaOntogeny}{factor - Indicates whether the matrix
-       contains stages based on ontogenic/developmental stages}
-       \item{MatrixCriteriaAge}{factor - Indicates whether the matrix 
-       contains stages based on age}
-       \item{MatrixPopulation}{character - Definition of where the matrix
-       was recorded, usually given by the author. In some cases, 
-       where the author provides no name, we give the closest geographic 
-       location instead. If there are multiple populations in the study 
-       and their names are not pertinent/available, sequential names in 
-       alphabetical order are assigned for each population in the study
-       (e.g. \code{A}, \code{B}, \code{C}, etc)}
-       \item{Lat}{numeric - The latitude in decimal format. Negative
-       values indicate the site is in the southern hemisphere}
-       \item{Lon}{numeric - The longitude in decimal format. Negative
-       values indicate the site is west of the Greenwich Meridian}
-       \item{Altitude}{numeric - Altitude of the studied population. Units
-       are meters above sea level}
-       \item{Country}{factor - The country where the study took place.
-       3-letter ISO country codes are used
-       (see \url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3} for
-       codes). Studies taking place in multiple countries have each 
-       country separated by a \code{;}}
-       \item{Continent}{factor - The continent where the study took place.
-       possible entries are \code{Africa}, \code{Asia}, \code{Europe},
-       \code{N America} (USA, Canada, and Mexico), \code{S America} (everything
-       in the Americas except USA, Canada, and Mexico), and \code{Oceania}.
-       Various definitions of Oceania exist - we have opted for this one:
-       \url{http://en.wikipedia.org/wiki/List_of_Oceanian_countries_by_population}}
-       \item{Ecoregion}{character - Indicates the ecoregion the study
-       occurred in. These are taken from Figure 1 of Olson et al 2001.
-       \url{https://worldwildlife.org/biomes} contains a more inclusive
-       description of water ecoregions. \code{LAB} is used to denote 
-       studies that occurred in a lab or greenhouse setting. Possible values
-       are as follows:
-       \itemize{
-         \item{TMB}{ - Terrestrial tropical and subtropical moist broadleaf forest}
-         \item{TDB}{ - Terrestrial tropical and subtropical dry broadleaf forest}
-         \item{TSC}{ - Terrestrial tropical and subtropical coniferous forests}
-         \item{TBM}{ - Terrestrial temperate broadleaf and mixed forests}
-         \item{TCF}{ - Terrestrial temperate coniferous forests}
-         \item{BOR}{ - Terrestrial boreal forests/taiga}
-         \item{TGV}{ - Terrestrial tropical and subtropical grassland, savanna, shrubland}
-         \item{TGS}{ - Terrestrial temperate grassland, savanna, shrubland}
-         \item{FGS}{ - Terrestrial flooded grassland and savanna}
-         \item{MON}{ - Terrestrial montane grassland and shrubland}
-         \item{TUN}{ - Terrestrial tundra}
-         \item{MED}{ - Terrestrial Mediterranean forests, woodlands, and scrubs}
-         \item{DES}{ - Terrestrial deserts and xeric shrublands}
-         \item{MAN}{ - Terrestrial mangroves}
-         \item{LRE}{ - Freshwater large river ecosystems}
-         \item{LRH}{ - Freshwater large river headwater ecosystems}
-         \item{LRD}{ - Freshwater large river delta ecosystems}
-         \item{SRE}{ - Freshwater small river ecosystems}
-         \item{SLE}{ - Freshwater small lake ecosystems}
-         \item{LLE}{ - Freshwater large lake ecosystems}
-         \item{XBE}{ - Freshwater xeric basin ecosystems}
-         \item{POE}{ - Marine polar ecosystems}
-         \item{TSS}{ - Marine temperate shelf and seas ecosystems}
-         \item{TEU}{ - Marine temperate upwellings}
-         \item{TRU}{ - Marine tropical upwellings}
-         \item{TRC}{ - Marine tropical coral}
-           
-       }
-       }
-       \item{StudiedSex}{factor - Possible values are \code{M} (studied
-       only males), \code{F} (studied only females), \code{H} (studied
-       only hermaphrodites), \code{M/F} (males and females separately in
-       the same matrix model), and \code{A} (all sexes studied together)}
-       \item{MatrixComposite}{factor - Indicates the type of matrix
-       population model. Possible values are \code{Individual},
-       \code{Mean}, \code{Pooled}, and \code{Seasonal}. See Figure 2
-       of the COMPADRE user guide 
-       (\url{https://github.com/jonesor/compadreDB/blob/master/COMPADRE-UserGuide/COMPADRE-UserGuide.Rmd})
-       for more information}
-       \item{MatrixTreatment}{character - Describes if a treatment was
-       applied to the population or not. If yes, includes a brief
-       description of the treatment. If not, \code{Unmanipulated}}
-       \item{MatrixCaptivity}{factor - Whether the species was studied
-       in the wild or under captivity. Possible values are \code{W} (
-       wild), \code{C} (captive), or \code{CW} (captured from a wild
-       population)}
-       \item{MatrixStartYear}{numeric - First year of matrix}
-       \item{MatrixStartSeason}{factor - First season in the matrix as 
-       described by the author. Seasons are hemisphere specific. 
-       possible values are \code{1} (spring), \code{2} (summer),
-       \code{3} (fall), and \code{4} (winter)}
-       \item{MatrixStartMonth}{numeric - First month of the matrix}
-       \item{MatrixEndYear}{numeric - Final year of the matrix}
-       \item{MatrixEndSeason}{factor - Final season of the matrix. Codes
-       are the same as \code{MatrixStartSeason}}
-       \item{MatrixEndMonth}{numeric - Final month of the matrix}
-       \item{MatrixSplit}{factor - Indicates whether the \strong{A}
-       matrix has been split into its constituent \strong{U},
-       \strong{F}, and \strong{C} matrices. \code{Divided} indicates
-       that it has been split, whereas \code{Indivisible} indicates 
-       that there is insufficient information to divide the matrix.
-       When this happens, the \strong{A} matrix is reported and
-       the others are filled with \code{NA}s}
-       \item{MatrixFec}{factor - Records whether fecundity was measured
-       at all in the matrix model. Fecundity may be recorded as 0 because
-       it was unmeasured or because it was measured and estimated to be 0}
-       \item{Observation}{factor - Additional observations recorded
-       by data base compilers that may be useful, but is not suited
-       for other columns in the metadata data frame}
-       \item{MatrixDimension}{numeric - Dimension of the \strong{A} matrix}
-       \item{SurvivalIssue}{numeric - Denotes the minimum stage specific
-       survival value when the \strong{U} matrix is > 1}
-   }
-   
- \item{\strong{mat}}{ - A list of \code{CompadreM}'s. These contain the \strong{A}
- matrices, the submatrices (\strong{U}, \strong{F}, and \strong{C}),
- and the \code{matrixClass} data frame. \code{matrixClass} slot contains
- the following information -}
- \describe{
-   \item{MatrixClassOrganized}{character - Standardized stages for a matrix
-   population model. These can be \code{prop} (propagule), \code{active} (
-   not a propagule or dormant stage), or \code{dorm} (dormant)}
-   \item{MatrixClassAuthor}{character - The stage descriptions from the
-    publication}
-   \item{MatrixClassNumber}{A numerical representation for the matrix
-   stages}
- }
- 
- \item{\strong{version}}{ - A list containing summary information on the version
- of \code{COMPADRE}. It contains the following information - }
- \describe{
-   \item{Version}{The version number of the data base(Major_Minor_Patch)}
-   \item{DateCreated}{The date that the \code{.rda} was created. Automatically
-   updates when \code{subsetDB} or \code{mergeDBs} is used.}
-   \item{NumberAcceptedSpecies}{The number of accepted species names
-   in this version or subset of the data base.}
-   \item{NumberStudies}{The number of studies in this version or subset of
-   the data base}
-   \item{NumberMatrices}{The number of matrices in this version or subset of
-   the data base}
-   \item{Agreement}{Link to the \code{COMPADRE} license agreement}
- }
+\alias{Comadre}
+\title{Subsamples of the COMPADRE Plant Matrix Database and COMADRE Animal
+Matrix Database for testing and examples}
+\format{Slot \strong{data} - A tibble-style data frame with the following 48 columns:
+\itemize{
+\item mat - A list of 'CompadreMat' objects, each with the following slots:
+\itemize{
+\item matA - A matrix population model
+\item matU - The survival- and growth-related component of matA
+\item matF - The sexual reproduction component of matA
+\item matC - The clonal reproduction component of matA
+\item matrixClass - A data frame with the following columns:
+\itemize{
+\item MatrixClassOrganized - Standardized stage class of the matrix
+population model
+\item MatrixClassAuthor - Stage description from the original publication
+\item MatrixClassNumber - Integer stage number
+}
+}
+\item SpeciesAuthor - Binomial species name given by the paper's author
+\item SpeciesAccepted - Accepted binomial species name taken from \emph{The Plant
+List} or \emph{Catalogue of Life}
+\item CommonName - Common name for species used in the publication
+\item Genus - Taxonomic genus that the accepted species belongs to
+\item Family - Family that the species belongs to
+\item Order - Order that the species belongs to
+\item Class - Class that the species belongs to
+\item Phylum - Phylum that the species belongs to
+\item Kingdom - Kingdom that the species belongs to
+\item OrganismType - Organism type (see COMPADRE User Guide for documentation)
+\item DicotMonoc - Whether the species is a dicot or monocot. Non-angiosperms are
+\code{NA}.
+\item AngioGymno - Whether the species is an angiosperm or gymnosperm. Non-plants
+are \code{NA}.
+\item Authors - Last name of all authors (separated with ";")
+\item Journal - Abbreviated journal title, or type of source document (e.g. "PhD
+thesis")
+\item YearPublication - Year of publication
+\item DOI.ISBN - Digitial Object Identifier or International Standard Book Number
+codes to identify each publication
+\item AdditionalSource - Additional source(s) used to reconstruct the matrix or
+obtain additional metadata for the matrix (if applicable)
+\item StudyDuration - Number of years of observation in study (\code{StudyEnd - StudyStart})
+\item StudyStart - Study start year
+\item StudyEnd - Study end year
+\item AnnualPeriodicity - Inverse of the length of the projection interval (in
+years)
+\item NumberPopulations - The number of study populations as defined by the
+authors. Within site replication of permanent plots is not defined as
+separate populations
+\item MatrixCriteriaSize - Indicates whether the matrix contains stages based on
+size. If so, indicates what that measure of size is
+\item MatrixCriteriaOntogeny - Indicates whether the matrix contains stages based
+on ontogenic/developmental stages
+\item MatrixCriteriaAge - Indicates whether the matrix contains stages based on
+age
+\item MatrixPopulation - Population name or definition of where the matrix was
+recorded, usually given by the author. See COMPADRE User Guide.
+\item Lat - Latitude in decimal degrees
+\item Lon - Longitude in decimal degrees
+\item Altitude - Altitude of study site (m above sea level)
+\item Country - 3-letter ISO country code for the country in which the study took
+place (multiple countries separated with ";")
+\item Continent - Continent on which study took place
+\item Ecoregion - Ecoregion in which study took place. See COMPADRE User Guide.
+\item StudiedSex - Whether study included only males ("M"), only females ("F"),
+or both sexes ("M/F")
+\item MatrixComposite - Indicates the type of matrix population model. Possible
+values are \code{Individual}, \code{Mean}, \code{Pooled}, and \code{Seasonal}. See COMPADRE
+User Guide.
+\item MatrixTreatment - Describes if a treatment was applied to the population or
+not. If yes, includes a brief description of the treatment. If not,
+\code{Unmanipulated}
+\item MatrixCaptivity - Whether species was studied in the wild (\code{W}), captivity
+(\code{C}), or captured from a wild population (\code{CW})
+\item MatrixStartYear - First year of matrix
+\item MatrixStartSeason - First season of matrix as described by author
+(hemisphere-specific)
+\item MatrixStartMonth - First month of matrix
+\item MatrixEndYear - Final year of matrix
+\item MatrixEndSeason - Final season of matrix as described by author
+(hemisphere-specific)
+\item MatrixEndMonth - Final month of matrix
+\item MatrixSplit - Whether the \strong{A} matrix has been split into components
+\strong{U}, \strong{F}, and \strong{C} ("Divided") or not ("Indivisible"). If not,
+elements of \code{matU}, \code{matF}, and \code{matC} are filled with \code{NA}
+\item MatrixFec - Whether fecundity was measured for the matrix model
+\item Observation - Additional observations recorded by database compilers
+\item MatrixDimension - Dimension of the \strong{A} matrix
+\item SurvivalIssue - Denotes the maximum stage-specific survival value
+\cr
+}
+
+Slot \strong{version} - A list with the following elements:
+\itemize{
+\item Version - The version number of the database
+\item DateCreated - The date that the \code{.RData} file was created
+\item Agreement - Link to the COMADRE license agreement
 }}
 \usage{
 Compadre
+
+Comadre
 }
 \description{
-A \code{CompadreData} object consisting of \code{metadata},
-\code{mat}, and \code{version}
+\code{Compadre} (plant matrices) and \code{Comadre} (animal matrices) are subsamples of
+the COMPADRE Plant Matrix Database and COMADRE Animal Matrix Database,
+respectively, that are used for testing and examples. Each object is of class
+'CompadreDB' and therefore has the following two slots: \code{data} and \code{version}.
+
+For full documentation see the \href{https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide}{COMPADRE User Guide}.
 }
 \keyword{datasets}
