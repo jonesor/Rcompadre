@@ -5,8 +5,6 @@
 ^data-raw$
 ^appveyor\.yml$
 ^\.travis\.yml$
-<<<<<<< HEAD
-=======
 ^\.git$
 ^README\.Rmd$
->>>>>>> devel
+^docs$
