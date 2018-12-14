@@ -29,20 +29,17 @@ branches:
   - master
   - devel
 
-<<<<<<< HEAD
-=======
+
 after_success:
   - Rscript -e 'covr::codecov()'
 
->>>>>>> devel
 # If anyone else would like to be added to notifications,
 # just add your email below!
 notifications:
   email:
     - jones@biology.sdu.dk
     - levisc8@gmail.com
-<<<<<<< HEAD
-=======
+
 
 # pkgdown 
 
@@ -51,4 +48,4 @@ deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
   skip_cleanup: true
->>>>>>> devel
+
