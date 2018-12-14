@@ -3,10 +3,10 @@ Type: Package
 Title: Utilities for working with the COMPADRE/COMADRE Database
 Version: 0.2.0
 Authors@R: as.person(c(
-    "Patrick Barks <barks@biology.sdu.dk> [aut,cre]", 
+    "Patrick Barks <barks@biology.sdu.dk> [aut]", 
     "Danny Buss <dlb50@cam.ac.uk> [aut]",
     "Roberto Salguero-Gomez <rob.salguero@zoo.ox.ac.uk> [aut]",
-    "Iain Stott <stott@biology.sdu.dk> [aut,cre]", 
+    "Iain Stott <stott@biology.sdu.dk> [aut]", 
     "Tamora James <tdjames1@sheffield.ac.uk> [aut]",
     "Owen Jones <jones@biology.sdu.dk> [aut,cre]", 
     "Julia Jones <juliajones@biology.sdu.dk> [aut]"
