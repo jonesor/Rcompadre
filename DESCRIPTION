@@ -25,7 +25,7 @@ Suggests:
     ggtern,
     covr,
     Rage,
-    crossref
+    rcrossref
 Remotes: jonesor/Rage
 VignetteBuilder: knitr
 Collate: 
