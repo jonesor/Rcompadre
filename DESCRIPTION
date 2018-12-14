@@ -24,7 +24,8 @@ Suggests:
     dplyr,
     ggtern,
     covr,
-    Rage
+    Rage,
+    crossref
 Remotes: jonesor/Rage
 VignetteBuilder: knitr
 Collate: 
