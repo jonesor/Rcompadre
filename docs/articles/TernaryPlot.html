@@ -131,10 +131,10 @@ Compadre &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cd
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rage<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/matrixElementPerturbation">matrixElementPerturbation</a></span>(<span class="dt">matU =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)[[<span class="dv">1</span>]],
                                 <span class="dt">matF =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(Compadre)[[<span class="dv">1</span>]],
                                 <span class="dt">matC =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matC</a></span>(Compadre)[[<span class="dv">1</span>]])</code></pre></div>
-<pre><code>##    SStasis SProgression SRetrogression SFecundity SClonality   EStasis
-## 1 1.001039     2.362377      0.2390942  0.3515523          0 0.5109709
+<pre><code>##    SStasis SRetrogression SProgression SFecundity SClonality   EStasis
+## 1 1.000001      0.2391149     2.365109   0.351586          0 0.5104358
 ##   EProgression ERetrogression EFecundity EClonality
-## 1    0.2747331     0.07687073  0.1376847          0</code></pre>
+## 1    0.2749906     0.07687694  0.1376969          0</code></pre>
 <p>We can use a <code>for</code> loop to run through each set of matrices in turn to calculate the summed elasticity for survival (S), growth (G) and reproduction (R) like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Amats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matA</a></span>(Compadre)
 Umats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)
@@ -154,15 +154,34 @@ output<span class="op">$</span>R[i] &lt;-<span class="st"> </span>temp<span clas
 <span class="co">#Calculate growth rate</span>
 output<span class="op">$</span>lam[i] &lt;-<span class="st"> </span>popdemo<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/popdemo/topics/eigs">eigs</a></span>(Amats[[i]], <span class="st">"lambda"</span>)
 }</code></pre></div>
+<pre><code>## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero
+
+## Warning: All elements of matF are zero</code></pre>
 <p>Let’s take a look at this output:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(output)</code></pre></div>
 <pre><code>##            S          G           R       lam
-## 1 0.58784164 0.27473312 0.137684662 1.0580286
-## 2 0.46806303 0.34128799 0.154346203 1.4118127
-## 3 0.97903105 0.01442441 0.007430567 0.9962044
-## 4 0.09352197 0.62185363 0.284441729 1.1241625
-## 5 0.90631317 0.09071665 0.003097944 0.9659322
-## 6 0.78254541 0.21738722 0.000000000 0.9154951</code></pre>
+## 1 0.58731274 0.27499063 0.137696890 1.0580286
+## 2 0.46765629 0.37791246 0.154347265 1.4118127
+## 3 0.97762061 0.01494911 0.007431082 0.9962044
+## 4 0.09347354 0.62204961 0.284476663 1.1241625
+## 5 0.90610402 0.09079782 0.003098288 0.9659322
+## 6 0.78256642 0.21743352 0.000000000 0.9154951</code></pre>
 <p>Now we have elasticities for our three demographic processes we can place these onto a ternary plot. However, we should first scale the elasticities so that they sum to 1 - this is necessary because of possible rounding issues:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(x)))</code></pre></div>
 <p>Now for the plot:</p>
@@ -182,7 +201,7 @@ B</code></pre></div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Owen Jones.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones.</p>
 </div>
 
 <div class="pkgdown">
