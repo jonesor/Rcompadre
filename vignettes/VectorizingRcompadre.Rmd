@@ -29,7 +29,7 @@ Vectorizing means applying a function to each element of a vector. Here vector i
 We'll start by loading a few packages and a dataset that we'll be using throughout this vignette. The dataset `Compadre` is a subset of a recent COMPADRE release that's built into Rcompadre.
 
 ```{r}
-library(RcompadreDev)
+library(Rcompadre)
 library(popbio)
 data(Compadre)
 ```

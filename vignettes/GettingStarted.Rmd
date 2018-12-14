@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 ```{r, eval = TRUE,echo=FALSE}
-library(RcompadreDev)
+library(Rcompadre)
 ```
 
 ## Introduction
@@ -63,7 +63,7 @@ summary(Compadre)
 Compadre
 ```
 
-This summary tells us that we have successfully loaded the data, and that there are `r length(Compadre$mat)` matrices. The database also contains some Version information which can be accessed using the command `VersionData(Compadre)`. This includes information including the version number, date created, and link to the database user agreement.
+This summary tells us that we have successfully loaded the data, and that there are `r length(matA(Compadre))` matrices. The database also contains some Version information which can be accessed using the command `VersionData(Compadre)`. This includes information including the version number, date created, and link to the database user agreement.
 
 ```{r Version of database}
 VersionData(Compadre)

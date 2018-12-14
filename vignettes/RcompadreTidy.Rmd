@@ -28,7 +28,7 @@ Rcompadre includes methods for a variety of functions in the "[Tidyverse](https:
 We'll begin by loading a few packages.
 
 ```{r message=FALSE}
-library(RcompadreDev)
+library(Rcompadre)
 library(dplyr)
 library(ggplot2)
 library(maps)     # for plotting world map

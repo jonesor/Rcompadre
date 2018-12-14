@@ -1,4 +1,4 @@
 library(testthat)
-library(RcompadreDev)
+library(Rcompadre)
 
-test_check("RcompadreDev")
+test_check("Rcompadre")

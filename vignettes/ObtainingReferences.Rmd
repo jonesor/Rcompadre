@@ -22,7 +22,7 @@ install.packages("rcrossref")
 We should then load the required packages like this:
 
 ```{r}
-library(RcompadreDev)
+library(Rcompadre)
 library(rcrossref)
 ```
 

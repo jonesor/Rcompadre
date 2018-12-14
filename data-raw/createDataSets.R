@@ -3,7 +3,7 @@
 # data bases distributed in RCompadre
 
 
-# load RcompadreDev
+# load Rcompadre
 devtools::load_all()
 
 # load dbs

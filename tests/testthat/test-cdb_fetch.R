@@ -2,7 +2,7 @@ context("cdb_fetch")
 
 test_that("cdb_fetch works correctly", {
   
-  local_path <- paste0(system.file("testdata", package = "RcompadreDev"),
+  local_path <- paste0(system.file("testdata", package = "Rcompadre"),
                        "/CompadreLegacy.RData")
   
   # db1 <- cdb_fetch('compadre')  # web
