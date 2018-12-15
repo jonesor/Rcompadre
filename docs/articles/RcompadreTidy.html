@@ -86,7 +86,7 @@
       <h1>Using Rcompadre with the Tidyverse</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2018-12-14</h4>
+            <h4 class="date">2018-12-15</h4>
       
       
       <div class="hidden name"><code>RcompadreTidy.Rmd</code></div>
@@ -138,22 +138,7 @@ compadre_use &lt;-<span class="st"> </span><span class="kw"><a href="https://www
 <p>and here’s the equivalent piped sequence</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">compadre_use &lt;-<span class="st"> </span>Compadre <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/cdb_flag.html">cdb_flag</a></span>() <span class="op">%&gt;%</span><span class="st">               </span><span class="co"># first argument is Compadre, from previous line</span>
-<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(check_NA_A <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)  <span class="co"># first argument is output of cdb_flag()</span>
-<span class="co">#&gt; Loading required package: RcompadreDev</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'RcompadreDev'</span>
-<span class="co">#&gt; The following objects are masked from 'package:Rcompadre':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     as_cdb, cdb_check_species, cdb_collapse, cdb_compare,</span>
-<span class="co">#&gt;     cdb_fetch, cdb_flag, cdb_flatten, cdb_id, cdb_id_stages,</span>
-<span class="co">#&gt;     cdb_id_studies, cdb_mean_matF, cdb_rbind, cdb_unflatten,</span>
-<span class="co">#&gt;     cdb_unnest, CompadreData, DateCreated, mat_mean,</span>
-<span class="co">#&gt;     mat_to_string, matA, matC, matF, matrixClass,</span>
-<span class="co">#&gt;     MatrixClassAuthor, MatrixClassNumber, MatrixClassOrganized,</span>
-<span class="co">#&gt;     matU, mpm_first_active, mpm_has_active, mpm_has_dorm,</span>
-<span class="co">#&gt;     mpm_has_prop, mpm_mean, NumberAcceptedSpecies, NumberMatrices,</span>
-<span class="co">#&gt;     NumberStudies, string_to_mat, string_to_vec, vec_to_string,</span>
-<span class="co">#&gt;     Version, VersionData</span></code></pre></div>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(check_NA_A <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)  <span class="co"># first argument is output of cdb_flag()</span></code></pre></div>
 <p>The advantage of piping here is that we don’t have to use nested functions (<code><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset(cdb_flag())</a></code>), and we don’t have to create object names for every intermediate step in our analysis.</p>
 </div>
 </div>

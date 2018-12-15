@@ -86,7 +86,7 @@
       <h1>Obtaining References</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2018-12-14</h4>
+            <h4 class="date">2018-12-15</h4>
       
       
       <div class="hidden name"><code>ObtainingReferences.Rmd</code></div>
@@ -106,42 +106,27 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Comadre)</code></pre></div>
 <p>Here we will create a subset of matrices containing data for species in the <em>Ursidae</em> family:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Comadre, Family <span class="op">==</span><span class="st"> "Ursidae"</span>)</code></pre></div>
-<pre><code>## Loading required package: RcompadreDev</code></pre>
-<pre><code>## 
-## Attaching package: 'RcompadreDev'</code></pre>
-<pre><code>## The following objects are masked from 'package:Rcompadre':
-## 
-##     as_cdb, cdb_check_species, cdb_collapse, cdb_compare,
-##     cdb_fetch, cdb_flag, cdb_flatten, cdb_id, cdb_id_stages,
-##     cdb_id_studies, cdb_mean_matF, cdb_rbind, cdb_unflatten,
-##     cdb_unnest, CompadreData, DateCreated, mat_mean,
-##     mat_to_string, matA, matC, matF, matrixClass,
-##     MatrixClassAuthor, MatrixClassNumber, MatrixClassOrganized,
-##     matU, mpm_first_active, mpm_has_active, mpm_has_dorm,
-##     mpm_has_prop, mpm_mean, NumberAcceptedSpecies, NumberMatrices,
-##     NumberStudies, string_to_mat, string_to_vec, vec_to_string,
-##     Version, VersionData</code></pre>
 <p>In this case, our subset contains 3 matrices, and we can examine the source information for these by asking for the <code>Authors</code>, <code>Journal</code>, publication year (<code>YearPublication</code>) and DOI (<code>DOI.ISBN</code>) like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre<span class="op">$</span>Authors</code></pre></div>
-<pre><code>## [1] "Hunter; Caswell; Runge; Regehr; Amstrup; Stirling"
-## [2] "Carroll; Noss; Paquet; Schumaker"                 
-## [3] "Wielgus"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre<span class="op">$</span>YearPublication</code></pre></div>
-<pre><code>## [1] "2010" "2003" "2002"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre<span class="op">$</span>DOI.ISBN</code></pre></div>
-<pre><code>## [1] "10.1890/09-1641"               "10.1890/02-5195"              
-## [3] "10.1016/S0006-3207(01)00265-8"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre<span class="op">$</span>Authors
+<span class="co">#&gt; [1] "Hunter; Caswell; Runge; Regehr; Amstrup; Stirling"</span>
+<span class="co">#&gt; [2] "Carroll; Noss; Paquet; Schumaker"                 </span>
+<span class="co">#&gt; [3] "Wielgus"</span>
+Comadre<span class="op">$</span>YearPublication
+<span class="co">#&gt; [1] "2010" "2003" "2002"</span>
+Comadre<span class="op">$</span>DOI.ISBN
+<span class="co">#&gt; [1] "10.1890/09-1641"               "10.1890/02-5195"              </span>
+<span class="co">#&gt; [3] "10.1016/S0006-3207(01)00265-8"</span></code></pre></div>
 <p>We are now ready to obtain the full references for these data. The <code>rcrossref</code> package has a convenient function, <code>cr_cn</code> which obtains citations in various formats from CrossRef based on the DOIs.</p>
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rcrossref<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">cr_cn</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(Comadre<span class="op">$</span>DOI.ISBN),<span class="dt">format =</span> <span class="st">"text"</span>,<span class="dt">style =</span> <span class="st">"apa"</span>)</code></pre></div>
-<pre><code>## [[1]]
-## [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"
-## 
-## [[2]]
-## [1] "Carroll, C., Noss, R. F., Paquet, P. C., &amp; Schumaker, N. H. (2003). USE OF POPULATION VIABILITY ANALYSIS AND RESERVE SELECTION ALGORITHMS IN REGIONAL CONSERVATION PLANS. Ecological Applications, 13(6), 1773–1789. doi:10.1890/02-5195"
-## 
-## [[3]]
-## [1] "Wielgus, R. B. (2002). Minimum viable population and reserve sizes for naturally regulated grizzly bears in British Columbia. Biological Conservation, 106(3), 381–388. doi:10.1016/s0006-3207(01)00265-8"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rcrossref<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">cr_cn</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(Comadre<span class="op">$</span>DOI.ISBN),<span class="dt">format =</span> <span class="st">"text"</span>,<span class="dt">style =</span> <span class="st">"apa"</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] "Carroll, C., Noss, R. F., Paquet, P. C., &amp; Schumaker, N. H. (2003). USE OF POPULATION VIABILITY ANALYSIS AND RESERVE SELECTION ALGORITHMS IN REGIONAL CONSERVATION PLANS. Ecological Applications, 13(6), 1773–1789. doi:10.1890/02-5195"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] "Wielgus, R. B. (2002). Minimum viable population and reserve sizes for naturally regulated grizzly bears in British Columbia. Biological Conservation, 106(3), 381–388. doi:10.1016/s0006-3207(01)00265-8"</span></code></pre></div>
 <p>Various other formats and styles of output are available, see <code><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">?rcrossref::cr_cn</a></code> for details.</p>
   </div>
 
