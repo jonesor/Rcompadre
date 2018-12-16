@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/AgeFromStage.html">Age-from-stage analyses</a>
+    </li>
+    <li>
       <a href="articles/GettingStarted.html">Getting Started with Rcompadre</a>
     </li>
     <li>
@@ -97,19 +100,12 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install from GitHub with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jonesor/Rcompadre"</span>)
-<span class="co">#or with build_opts = NULL to ensure Vignettes are included</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jonesor/Rcompadre"</span>,<span class="dt">build_opts =</span> <span class="ot">NULL</span>)
-<span class="co">#</span>
-<span class="co"># or</span>
-<span class="co">#</span>
-<span class="co"># use remotes, a devtools dependency that is smaller and quicker to install</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"remotes"</span>)
-remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"jonesor/Rcompadre"</span>)
-<span class="co">#or with build_opts = NULL to ensure Vignettes are included</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install package 'remotes' if necessary</span>
+<span class="co"># will already be installed if 'devtools' is installed</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"remotes"</span>) 
+
+<span class="co"># argument 'build_opts = NULL' only needed if you want to build vignettes</span>
 remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"jonesor/Rcompadre"</span>, <span class="dt">build_opts =</span> <span class="ot">NULL</span>)</code></pre></div>
-<p>To install the development branch (package name <code>RcompadreDev</code>) use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"jonesor/Rcompadre"</span>, <span class="dt">ref =</span> <span class="st">"devel"</span>)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
