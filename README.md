@@ -13,23 +13,12 @@ Installation
 Install from GitHub with:
 
 ``` r
-devtools::install_github("jonesor/Rcompadre")
-#or with build_opts = NULL to ensure Vignettes are included
-devtools::install_github("jonesor/Rcompadre",build_opts = NULL)
-#
-# or
-#
-# use remotes, a devtools dependency that is smaller and quicker to install
-install.packages("remotes")
-remotes::install_github("jonesor/Rcompadre")
-#or with build_opts = NULL to ensure Vignettes are included
+# install package 'remotes' if necessary
+# will already be installed if 'devtools' is installed
+install.packages("remotes") 
+
+# argument 'build_opts = NULL' only needed if you want to build vignettes
 remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
-```
-
-To install the development branch (package name `RcompadreDev`) use:
-
-``` r
-remotes::install_github("jonesor/Rcompadre", ref = "devel")
 ```
 
 Usage
