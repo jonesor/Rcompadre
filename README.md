@@ -21,6 +21,12 @@ install.packages("remotes")
 remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
 ```
 
+To install the development branch use:
+
+``` r
+remotes::install_github("jonesor/Rcompadre", ref = "devel")
+```
+
 Usage
 -----
 
@@ -93,7 +99,7 @@ Specific earlier releases of this package can be installed using the appropriate
 To install version 0.1.0, our (thus far) only release:
 
 ``` r
-devtools::install_github("jonesor/Rcompadre@v0.1.0")
+remotes::install_github("jonesor/Rcompadre@v0.1.0")
 ```
 
 Contributions
