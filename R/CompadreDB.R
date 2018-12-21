@@ -92,7 +92,7 @@ validCompadreDB <- function(object) {
             errors <- c(errors, msg)
         }
         if (class(dat$mat) %in% "list") {
-            if (!(all(sapply(dat$mat, class) %in% "CompadreMat"))) {
+            if (!(all(vapply(dat$mat, class, "") %in% "CompadreMat"))) {
                 msg <- "all elements of 'mat' must be 'CompadreMat' objects"
                 errors <- c(errors, msg)
             }

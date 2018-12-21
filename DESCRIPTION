@@ -2,7 +2,15 @@ Package: Rcompadre
 Type: Package
 Title: Utilities for working with the COMPADRE/COMADRE Database
 Version: 0.2.0
-Author: Owen Jones, Roberto Salguero-Gomez, Danny Buss, Julia Barthold Jones, Tamora James, Patrick Barks, Iain Stott.
+Authors@R: as.person(c(
+    "Patrick Barks <barks@biology.sdu.dk> [aut]", 
+    "Danny Buss <dlb50@cam.ac.uk> [aut]",
+    "Roberto Salguero-Gomez <rob.salguero@zoo.ox.ac.uk> [aut]",
+    "Iain Stott <stott@biology.sdu.dk> [aut]", 
+    "Tamora James <tdjames1@sheffield.ac.uk> [aut]",
+    "Owen Jones <jones@biology.sdu.dk> [aut,cre]", 
+    "Julia Jones <juliajones@biology.sdu.dk> [aut]"
+      ))
 Maintainer: Owen Jones <jones@biology.sdu.dk>
 Description: A set of utility tools for working with the COMPADRE/COMADRE databases. The package provides utility functions for interacting with the COMPADRE and COMADRE databases of matrix population model.
 License: GPL-2 | file LICENSE
