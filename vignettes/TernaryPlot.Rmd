@@ -4,14 +4,23 @@ author: "Rob Salguero-Gomez and Owen Jones"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Ternary Plots}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 Here we produce a ternary plot *a la* Silvertown & Franco (1993) with population growth rate as the "fourth" dimension. We will use functions from the `popdemo`, `Rage` and `ggtern` packages so first we need to load those:
 
-```{r, comment=">", message=FALSE}
+```{r, message=FALSE}
 library(Rcompadre)
 library(popdemo)
 library(Rage)
