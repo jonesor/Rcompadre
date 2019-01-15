@@ -61,7 +61,7 @@ CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
 \author{
 Julia Jones <juliajones@biology.sdu.dk>
 
-Roberto Salguero-Goméz <rob.salguero@zoo.ox.ac.uk>
+Roberto Salguero-Gomez <rob.salguero@zoo.ox.ac.uk>
 
 Danny Buss <dlb50@cam.ac.uk>
 

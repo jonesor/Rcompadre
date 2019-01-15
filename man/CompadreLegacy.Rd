@@ -28,7 +28,7 @@ are \code{NA}.
 \item Journal - Abbreviated journal title, or type of source document (e.g. "PhD
 thesis")
 \item YearPublication - Year of publication
-\item DOI.ISBN - Digitial Object Identifier or International Standard Book Number
+\item DOI.ISBN - Digital Object Identifier or International Standard Book Number
 codes to identify each publication
 \item AdditionalSource - Additional source(s) used to reconstruct the matrix or
 obtain additional metadata for the matrix (if applicable)

@@ -11,7 +11,7 @@
 #' different set of columns supplied by the user).
 #' 
 #' The main purpose of this function is to identify stage classes that are
-#' \emph{potentially} reproductive (i.e. the absense of fecundity in a given
+#' \emph{potentially} reproductive (i.e. the absence of fecundity in a given
 #' stage class and year does not necessarily indicate that the stage in question
 #' is non-reproductive).
 #'
@@ -20,12 +20,12 @@
 #'   identified. Defaults to \code{c("SpeciesAuthor", "MatrixPopulation",
 #'   "MatrixDimension")}.
 #' 
-#' @return Returns a list of matrices, reprenting the mean fecundity matrix
+#' @return Returns a list of matrices, representing the mean fecundity matrix
 #'   associated with each row of the database.
 #' 
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
-#' @author Iain Stott <stott@@biolgy.ox.ac.uk>
+#' @author Iain Stott <stott@@biology.sdu.dk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
 #' @examples

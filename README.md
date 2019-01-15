@@ -63,13 +63,13 @@ subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
-First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
+First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicity, irreducibility, or primitivity.
 
 ``` r
 compadre_flags <- cdb_flag(compadre)
 ```
 
-We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we'll subset the database accordingly.
+We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we'll subset the database accordingly.
 
 ``` r
 compadre_sub <- subset(compadre_flags,

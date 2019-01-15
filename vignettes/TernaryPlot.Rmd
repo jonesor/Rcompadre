@@ -41,9 +41,9 @@ We can calculate elasticities of population growth rate to changes in the matrix
 popdemo::elas(matA(Compadre)[[1]])
 ```
 
-We have split most matrices in COMPADRE into the constituent U, F and C matrices, which represent growth/survival, sexual reproduction and clonal reproduction respectively. Thefore, we can classify the elements of the matrix to growth processes (which we can further identify as stasis, progression, and retrogression), sexual reproduction, and clonal reproduction. 
+We have split most matrices in COMPADRE into the constituent U, F and C matrices, which represent growth/survival, sexual reproduction and clonal reproduction respectively. Therefore, we can classify the elements of the matrix to growth processes (which we can further identify as stasis, progression, and retrogression), sexual reproduction, and clonal reproduction. 
 
-We can use the `matrixElementPerturbation` function from the `Rage` package to conduct this element-by-element elasticity analyis. The function outputs both sensitivities (prefixed with S) and elasticities (prefixed with E) as follows:
+We can use the `matrixElementPerturbation` function from the `Rage` package to conduct this element-by-element elasticity analysis. The function outputs both sensitivities (prefixed with S) and elasticities (prefixed with E) as follows:
 
 
 ```{r}
