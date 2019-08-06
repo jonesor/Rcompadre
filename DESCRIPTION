@@ -53,6 +53,7 @@ Collate:
     'cdb_id_stages.R'
     'cdb_id_studies.R'
     'cdb_mean_matF.R'
+    'cdb_metadata.R'
     'cdb_rbind.R'
     'cdb_unflatten.R'
     'cdb_unnest.R'
