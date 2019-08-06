@@ -87,6 +87,20 @@ ungroup.CompadreDB <- function(x, ...) {
 
 
 #' @rdname CompadreDB-Tidyverse
+summarize.CompadreDB <- function(.data, ...) {
+  .data <- .data@data
+  NextMethod()
+}
+
+
+#' @rdname CompadreDB-Tidyverse
+summarise.CompadreDB <- function(.data, ...) {
+  .data <- .data@data
+  NextMethod()
+}
+
+
+#' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 select.CompadreDB <- function(.data, ...) {
   vers <- .data@version
@@ -171,7 +185,7 @@ inner_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new callGeneric
 full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
-                                  suffix = c(".x", ".y"), ...) {
+                                 suffix = c(".x", ".y"), ...) {
   vers <- x@version
   x <- x@data
   x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
@@ -199,6 +213,8 @@ register_all_s3_methods = function() {
   register_s3_method("dplyr", "mutate", "CompadreDB")
   register_s3_method("dplyr", "group_by", "CompadreDB")
   register_s3_method("dplyr", "ungroup", "CompadreDB")
+  register_s3_method("dplyr", "summarize", "CompadreDB")
+  register_s3_method("dplyr", "summarise", "CompadreDB")
   register_s3_method("dplyr", "select", "CompadreDB")
   register_s3_method("dplyr", "rename", "CompadreDB")
   register_s3_method("dplyr", "left_join", "CompadreDB")

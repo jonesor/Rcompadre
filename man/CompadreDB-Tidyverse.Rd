@@ -9,6 +9,8 @@
 \alias{mutate.CompadreDB}
 \alias{group_by.CompadreDB}
 \alias{ungroup.CompadreDB}
+\alias{summarize.CompadreDB}
+\alias{summarise.CompadreDB}
 \alias{select.CompadreDB}
 \alias{rename.CompadreDB}
 \alias{left_join.CompadreDB}
@@ -30,6 +32,10 @@ mutate.CompadreDB(.data, ...)
 group_by.CompadreDB(.data, ..., add = FALSE)
 
 ungroup.CompadreDB(x, ...)
+
+summarize.CompadreDB(.data, ...)
+
+summarise.CompadreDB(.data, ...)
 
 select.CompadreDB(.data, ...)
 
