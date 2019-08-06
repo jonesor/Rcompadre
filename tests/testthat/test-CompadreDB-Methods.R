@@ -44,3 +44,16 @@ test_that("CompadreDB-Methods work correctly", {
   expect_is(nmatrices, "integer")
 })
 
+
+
+test_that("Number_ functions fail gracefully", {
+  
+  comp_nospp <- Compadre[,-which(names(Compadre) == "SpeciesAccepted")]
+  comp_noauth <- Compadre[,-which(names(Compadre) == "Authors")]
+  
+  expect_error(NumberAcceptedSpecies(comp_nospp))
+  expect_error(NumberStudies(comp_noauth))
+})
+
+
+

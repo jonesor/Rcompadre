@@ -95,7 +95,7 @@ merge.CompadreDB <- function(x, y, ...) {
 #' @rdname CompadreDB-Methods
 #' @export
 setGeneric("NumberAcceptedSpecies", 
-               function(object){
+               function(object) {
                    standardGeneric("NumberAcceptedSpecies")
                }
 )
@@ -103,8 +103,14 @@ setGeneric("NumberAcceptedSpecies",
 #' @rdname CompadreDB-Methods
 #' @export
 setMethod("NumberAcceptedSpecies", signature = "CompadreDB", 
-          function(object){
-            return(length(unique(object@data$SpeciesAccepted)))
+          function(object) {
+            if (!"SpeciesAccepted" %in% names(object@data)) {
+              stop("Cannot count number of species because column ",
+                   "'SpeciesAccepted' is missing")
+            } else {
+              return(length(unique(object@data$SpeciesAccepted)))
+            }
+            
           }
 )
 
@@ -113,7 +119,7 @@ setMethod("NumberAcceptedSpecies", signature = "CompadreDB",
 #' @rdname CompadreDB-Methods
 #' @export
 setGeneric("NumberStudies", 
-               function(object){
+               function(object) {
                    standardGeneric("NumberStudies")
                }
 )
@@ -121,10 +127,17 @@ setGeneric("NumberStudies",
 #' @rdname CompadreDB-Methods
 #' @export
 setMethod("NumberStudies", signature = "CompadreDB", 
-          function(object){
-            return(length(unique(paste0(object@data$Authors,
-                                        object@data$Journal,
-                                        object@data$YearPublication))))
+          function(object) {
+            col_req <- c("Authors", "Journal", "YearPublication")
+            col_missing <- setdiff(col_req, names(object@data))
+            if (length(col_missing) > 0) {
+              stop("Cannot count number of studies because the following ",
+                   "columns are missing: ", paste(col_missing, collapse = ", "))
+            } else {
+              return(length(unique(paste0(object@data$Authors,
+                                          object@data$Journal,
+                                          object@data$YearPublication))))
+            }
           }
 )
 
@@ -133,7 +146,7 @@ setMethod("NumberStudies", signature = "CompadreDB",
 #' @rdname CompadreDB-Methods
 #' @export
 setGeneric("NumberMatrices", 
-               function(object){
+               function(object) {
                    standardGeneric("NumberMatrices")
                }
 )
@@ -141,7 +154,7 @@ setGeneric("NumberMatrices",
 #' @rdname CompadreDB-Methods
 #' @export
 setMethod("NumberMatrices", signature = "CompadreDB", 
-          function(object){
+          function(object) {
             return(nrow(object@data))
           }
 )
