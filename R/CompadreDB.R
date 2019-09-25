@@ -177,13 +177,14 @@ as_cdb <- function(from) {
 
 ## define a method for showing the object (does not need to be documented)
 setMethod("show", signature = (object ="CompadreDB"),
-          function (object){
+          function (object) {
             Mno <- NumberMatrices(object)
-            Sno <- NumberAcceptedSpecies(object)
-            if(is.character(Version(object))) { V <- paste("Version:",
-                                                           Version(object))
-                                              }
-            if(!is.character(Version(object))) V <- "Unknown"
+            Sno <- ifelse("SpeciesAccepted" %in% names(object@data),
+                          NumberAcceptedSpecies(object),
+                          "??")
+            V <- ifelse(is.character(Version(object)),
+                        paste("Version:", Version(object)),
+                        "Version: Unknown")
             #start
             cat(paste("A COM(P)ADRE database ('CompadreDB') object with ",
                       as.character(Sno),
