@@ -167,22 +167,21 @@ compadre_surv_first_active <- Compadre %>%
 ```
 
 
-## The `group_by` function
+## The `group_by` and `summarize` functions
 
-The `group_by()` function is used for split-apply-combine operations, where we want to apply a function separately to different groups within our data, and then recombine the results. It's usually followed either by `summarize()` or `mutate()`.
+The `group_by()` and `summarize()` functions are used for split-apply-combine operations, where we want to apply a function separately to different groups within our data, and then recombine the results.
 
-Rcompadre doesn't have a method for `summarize()` because common applications are unlikely to return a valid CompadreDB object. So, if we want to use `summarize()`, we first need to extract the `data` slot (a tibble-style data frame) using `CompadreData()`. Here's an example
+Here's an example. We'll use `group_by()` to group our database by unique values of species (column 'SpeciesAccepted'), and then use `summarize()` to count the number of unique populations (column 'MatrixPopulation') for each group. Notice that the output is a regular tibble (i.e. no longer a CompadreDB object) with one row for each unique 'group' (i.e. species).
 
 ```{r}
 # count number of unique populations by species
 Compadre %>% 
-  CompadreData() %>%
   group_by(SpeciesAccepted) %>% 
-  summarize(n_pops = length(unique(MatrixPopulation))) %>% 
-  arrange(desc(n_pops)) # arrange in descending order of n_pops
+  summarize(n_populations = length(unique(MatrixPopulation))) %>% 
+  arrange(desc(n_populations)) # arrange in descending order of n_pops
 ```
 
-We can, however, use `group_by()` with `mutate()` directly on a CompadreDB object. Here's an example:
+If, instead of a summary table with one row per species, we would rather append the number of populations per species as a new column of our CompadreDB object, then we can follow `group_by()` with `mutate()` instead of `summarize()`. Here's an example:
 
 ```{r}
 # subset to species with 10+ unique populations

@@ -39,6 +39,12 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   expect_s4_class(db5, "CompadreDB")
   expect_is(db5@data, "grouped_df")
   
+  # summarize
+  sum1 <- summarize(db5, n = n())
+  sum2 <- summarise(db5, n = n())
+  expect_is(sum1, "tbl")
+  expect_is(sum2, "tbl")
+  
   # ungroup
   db6 <- ungroup(db5)
   expect_s4_class(db6, "CompadreDB")
