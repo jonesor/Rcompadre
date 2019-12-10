@@ -31,7 +31,11 @@ Install from GitHub with:
 install.packages("remotes") 
 
 # argument 'build_opts = NULL' only needed if you want to build vignettes
-remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
+remotes::install_github("jonesor/Rcompadre", build_vignettes = TRUE)
+
+# use argument 'build_vignettes = FALSE' if the vignette build fails
+remotes::install_github("jonesor/Rcompadre", build_vignettes = FALSE)
+
 ```
 
 To install the development branch use:
@@ -54,7 +58,7 @@ Fetch the most recent database version from [compadre-db.org](https://www.compad
 compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
 ```
 
-or load from a local `.RData` file with
+or load from a local `.RData` file with, for example:
 
 ```{r, eval=FALSE}
 compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
@@ -105,12 +109,12 @@ In the code above, the accessor function `matA()` is used to extract a list of p
 
 ## Previous releases
 
-Specific earlier releases of this package can be installed using the appropriate `@` tag. 
+Specific earlier releases of this package can be installed using the appropriate `@` tag. You can see details of the existing releases [here](https://github.com/jonesor/Rcompadre/releases). Note that the most recent version does not necessarily have an `@` tag.
 
-To install version 0.1.0, our (thus far) only release:
+To install version 0.2.0, our last release before our introduction of the new `CompadreDB` class, and associated major changes to the package:
 
 ```{r, eval=FALSE}
-remotes::install_github("jonesor/Rcompadre@v0.1.0")
+remotes::install_github("jonesor/Rcompadre@v0.2.0")
 ```
 
 ## Contributions
