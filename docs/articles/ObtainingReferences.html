@@ -89,7 +89,7 @@
       <h1>Obtaining References</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2018-12-21</h4>
+            <h4 class="date">2019-12-10</h4>
       
       
       <div class="hidden name"><code>ObtainingReferences.Rmd</code></div>
@@ -101,35 +101,35 @@
 <p>The following example illustrates how to find the full formatted citations for the publications used in COMADRE or COMPADRE. This can be useful to find further details of the matrices you may be using in your study, or to provide references for your data e.g. in supplementary information.</p>
 <p>The code relies on the package <code>rcrossref</code> (<a href="https://github.com/ropensci/rcrossref" class="uri">https://github.com/ropensci/rcrossref</a>) which queries <em>CrossRef</em>, a Digital Object Identifier (DOI) Registration Agency of the International DOI Foundation.</p>
 <p>To install the <code>rcrossref</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"rcrossref"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"rcrossref"</span>)</a></code></pre></div>
 <p>We should then load the required packages like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rcrossref)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rcrossref)</a></code></pre></div>
 <p>We aim to obtain the full reference and DOI for the matrices for a set of matrices. In this example we will use the example data available in the <code>Rcompadre</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Comadre)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Comadre)</a></code></pre></div>
 <p>Here we will create a subset of matrices containing data for species in the <em>Ursidae</em> family:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Comadre, Family <span class="op">==</span><span class="st"> "Ursidae"</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">Comadre &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Comadre, Family <span class="op">==</span><span class="st"> "Ursidae"</span>)</a></code></pre></div>
 <p>In this case, our subset contains 3 matrices, and we can examine the source information for these by asking for the <code>Authors</code>, <code>Journal</code>, publication year (<code>YearPublication</code>) and DOI (<code>DOI.ISBN</code>) like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Comadre<span class="op">$</span>Authors
-<span class="co">#&gt; [1] "Hunter; Caswell; Runge; Regehr; Amstrup; Stirling"</span>
-<span class="co">#&gt; [2] "Carroll; Noss; Paquet; Schumaker"                 </span>
-<span class="co">#&gt; [3] "Wielgus"</span>
-Comadre<span class="op">$</span>YearPublication
-<span class="co">#&gt; [1] "2010" "2003" "2002"</span>
-Comadre<span class="op">$</span>DOI.ISBN
-<span class="co">#&gt; [1] "10.1890/09-1641"               "10.1890/02-5195"              </span>
-<span class="co">#&gt; [3] "10.1016/S0006-3207(01)00265-8"</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">Comadre<span class="op">$</span>Authors</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] "Hunter; Caswell; Runge; Regehr; Amstrup; Stirling"</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [2] "Carroll; Noss; Paquet; Schumaker"                 </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [3] "Wielgus"</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">Comadre<span class="op">$</span>YearPublication</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1] "2010" "2003" "2002"</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">Comadre<span class="op">$</span>DOI.ISBN</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; [1] "10.1890/09-1641"               "10.1890/02-5195"              </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; [3] "10.1016/S0006-3207(01)00265-8"</span></a></code></pre></div>
 <p>We are now ready to obtain the full references for these data. The <code>rcrossref</code> package has a convenient function, <code>cr_cn</code> which obtains citations in various formats from CrossRef based on the DOIs.</p>
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rcrossref<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">cr_cn</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(Comadre<span class="op">$</span>DOI.ISBN),<span class="dt">format =</span> <span class="st">"text"</span>,<span class="dt">style =</span> <span class="st">"apa"</span>)
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] "Carroll, C., Noss, R. F., Paquet, P. C., &amp; Schumaker, N. H. (2003). USE OF POPULATION VIABILITY ANALYSIS AND RESERVE SELECTION ALGORITHMS IN REGIONAL CONSERVATION PLANS. Ecological Applications, 13(6), 1773–1789. doi:10.1890/02-5195"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] "Wielgus, R. B. (2002). Minimum viable population and reserve sizes for naturally regulated grizzly bears in British Columbia. Biological Conservation, 106(3), 381–388. doi:10.1016/s0006-3207(01)00265-8"</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">rcrossref<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">cr_cn</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(Comadre<span class="op">$</span>DOI.ISBN),<span class="dt">format =</span> <span class="st">"text"</span>,<span class="dt">style =</span> <span class="st">"apa"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; [1] "Carroll, C., Noss, R. F., Paquet, P. C., &amp; Schumaker, N. H. (2003). USE OF POPULATION VIABILITY ANALYSIS AND RESERVE SELECTION ALGORITHMS IN REGIONAL CONSERVATION PLANS. Ecological Applications, 13(6), 1773–1789. doi:10.1890/02-5195"</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; [1] "Wielgus, R. B. (2002). Minimum viable population and reserve sizes for naturally regulated grizzly bears in British Columbia. Biological Conservation, 106(3), 381–388. doi:10.1016/s0006-3207(01)00265-8"</span></a></code></pre></div>
 <p>Various other formats and styles of output are available, see <code><a href="https://www.rdocumentation.org/packages/rcrossref/topics/cr_cn">?rcrossref::cr_cn</a></code> for details.</p>
   </div>
 
