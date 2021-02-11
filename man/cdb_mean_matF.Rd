@@ -5,8 +5,10 @@
 \title{Calculate a population-specific mean fecundity matrix for each set of
 matrices in a COM(P)ADRE database}
 \usage{
-cdb_mean_matF(cdb, columns = c("SpeciesAuthor", "MatrixPopulation",
-  "MatrixDimension"))
+cdb_mean_matF(
+  cdb,
+  columns = c("SpeciesAuthor", "MatrixPopulation", "MatrixDimension")
+)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}

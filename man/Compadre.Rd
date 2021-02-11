@@ -6,7 +6,8 @@
 \alias{Comadre}
 \title{Subsamples of the COMPADRE Plant Matrix Database and COMADRE Animal
 Matrix Database for testing and examples}
-\format{Slot \strong{data} - A tibble-style data frame with the following 48 columns:
+\format{
+Slot \strong{data} - A tibble-style data frame with the following 48 columns:
 \itemize{
 \item mat - A list of 'CompadreMat' objects, each with the following slots:
 \itemize{
@@ -101,7 +102,12 @@ Slot \strong{version} - A list with the following elements:
 \item Version - The version number of the database
 \item DateCreated - The date that the \code{.RData} file was created
 \item Agreement - Link to the COMADRE license agreement
-}}
+}
+
+An object of class \code{CompadreDB} with 150 rows and 48 columns.
+
+An object of class \code{CompadreDB} with 150 rows and 48 columns.
+}
 \usage{
 Compadre
 

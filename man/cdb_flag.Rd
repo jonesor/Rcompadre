@@ -4,9 +4,12 @@
 \alias{cdb_flag}
 \title{Flag potential issues in matrices of a COM(P)ADRE database}
 \usage{
-cdb_flag(cdb, checks = c("check_NA_A", "check_NA_U", "check_NA_F",
-  "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-  "check_ergodic", "check_irreducible", "check_primitive"))
+cdb_flag(
+  cdb,
+  checks = c("check_NA_A", "check_NA_U", "check_NA_F", "check_NA_C", "check_zero_U",
+    "check_singular_U", "check_component_sum", "check_ergodic", "check_irreducible",
+    "check_primitive")
+)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}

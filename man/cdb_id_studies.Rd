@@ -4,8 +4,10 @@
 \alias{cdb_id_studies}
 \title{Create a vector of unique study identifiers from a COM(P)ADRE database}
 \usage{
-cdb_id_studies(cdb, columns = c("Authors", "Journal", "YearPublication",
-  "DOI.ISBN"))
+cdb_id_studies(
+  cdb,
+  columns = c("Authors", "Journal", "YearPublication", "DOI.ISBN")
+)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}
