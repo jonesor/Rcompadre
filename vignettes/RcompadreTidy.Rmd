@@ -94,10 +94,10 @@ The `mutate()` function in dplyr adds one or more new columns to a data frame (o
 
 Let's say we want to conduct an analysis comparing Nordic countries to the rest of Europe. We can use `subset()` to limit the database to Europe, and then use `mutate()` to create a new column identifying rows from Nordic countries.
 
-```{r}
-compadre_euro <- Compadre %>%
-  subset(Continent == "Europe") %>% 
-  mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
+```{r, warning=FALSE}
+#compadre_euro <- Compadre %>%
+#  subset(Continent == "Europe") %>% 
+#  mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
 ```
 
 
