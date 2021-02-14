@@ -5,8 +5,8 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Obtaining References}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
 The following example illustrates how to find the full formatted citations for the publications used in COMADRE or COMPADRE. This can be useful to find further details of the matrices you may be using in your study, or to provide references for your data e.g. in supplementary information.
