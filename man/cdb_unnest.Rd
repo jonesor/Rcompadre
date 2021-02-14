@@ -5,8 +5,11 @@
 \title{Unnest a COM(P)ADRE database by spreading the components of CompadreMat into
 separate list-columns}
 \usage{
-cdb_unnest(cdb, components = c("matA", "matU", "matF", "matC",
-  "MatrixClassAuthor", "MatrixClassOrganized", "MatrixClassNumber"))
+cdb_unnest(
+  cdb,
+  components = c("matA", "matU", "matF", "matC", "MatrixClassAuthor",
+    "MatrixClassOrganized", "MatrixClassNumber")
+)
 }
 \arguments{
 \item{cdb}{A CompadreDB object}

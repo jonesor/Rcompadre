@@ -5,7 +5,8 @@
 \alias{CompadreLegacy}
 \title{Subsample of a legacy version of the COMPADRE Plant Matrix Database for
 testing and examples}
-\format{A list with four elements:
+\format{
+A list with four elements:
 
 \strong{metadata} - A data frame with the following 47 columns:
 \itemize{
@@ -108,13 +109,14 @@ version
 \item NumberStudies - The number of studies in the original version
 \item NumberMatrices - The number of matrices in the original version
 \item Agreement - Link to the COMADRE license agreement
-}}
+}
+}
 \usage{
 CompadreLegacy
 }
 \description{
 \code{CompadreLegacy} is a subsample of the COMPADRE Plant Matrix Database in the
 legacy format (class 'list'), for use in testing and examples. For full
-documentation see the \href{https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide}{COMPADRE User Guide}.
+documentation see the \href{https://jonesor.github.io/CompadreGuides/}{COMPADRE User Guide}.
 }
 \keyword{datasets}

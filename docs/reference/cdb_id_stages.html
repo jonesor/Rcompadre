@@ -9,21 +9,36 @@
 <title>Create integer identifiers for a COM(P)ADRE database corresponding to unique
 combinations of species and matrix stage class definitions — cdb_id_stages • Rcompadre</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -31,16 +46,15 @@ combinations of species and matrix stage class definitions — cdb_id_stages •
 
 
 
+
 <meta property="og:title" content="Create integer identifiers for a COM(P)ADRE database corresponding to unique
 combinations of species and matrix stage class definitions — cdb_id_stages" />
-
 <meta property="og:description" content="Creates a vector of integer identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the column
 'SpeciesAccepted' and a list of matrix stage class definitions (either
 'MatrixClassAuthor' or 'MatrixClassOrganized')." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -54,9 +68,10 @@ CompadreDB object, based on unique combinations of the column
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,7 +93,7 @@ CompadreDB object, based on unique combinations of the column
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -93,9 +108,6 @@ CompadreDB object, based on unique combinations of the column
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/AgeFromStage.html">Age-from-stage analyses</a>
-    </li>
-    <li>
       <a href="../articles/GettingStarted.html">Getting Started with Rcompadre</a>
     </li>
     <li>
@@ -105,15 +117,11 @@ CompadreDB object, based on unique combinations of the column
       <a href="../articles/RcompadreTidy.html">Using Rcompadre with the Tidyverse</a>
     </li>
     <li>
-      <a href="../articles/TernaryPlot.html">Ternary Plots</a>
-    </li>
-    <li>
       <a href="../articles/VectorizingRcompadre.html">Vectorizing with Rcompadre</a>
     </li>
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -123,6 +131,7 @@ CompadreDB object, based on unique combinations of the column
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -135,16 +144,14 @@ combinations of species and matrix stage class definitions</h1>
     </div>
 
     <div class="ref-description">
-    
     <p>Creates a vector of integer identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the column
 'SpeciesAccepted' and a list of matrix stage class definitions (either
 'MatrixClassAuthor' or 'MatrixClassOrganized').</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>cdb_id_stages</span>(<span class='no'>cdb</span>, <span class='kw'>stage_def</span> <span class='kw'>=</span> <span class='st'>"MatrixClassAuthor"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>cdb_id_stages</span><span class='op'>(</span><span class='va'>cdb</span>, stage_def <span class='op'>=</span> <span class='st'>"MatrixClassAuthor"</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -159,18 +166,17 @@ CompadreDB object, based on unique combinations of the column
 Defaults to "MatrixClassAuthor".</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Vector of integer identifiers corresponding to the rows of
   <code>cdb</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The vector 'MatrixClassOrganized' reflects standardized stage classes
 ('prop', 'active', or 'dorm'), whereas 'MatrixClassAuthor' reflects a
 description of the stage classes as defined by the original author (e.g.
-<code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c('Seedling', 'Medium rosette', 'Large (2 rosettes)', 'Flowering')</a></code>).</p>
+<code><a href='https://rdrr.io/r/base/c.html'>c('Seedling', 'Medium rosette', 'Large (2 rosettes)', 'Flowering')</a></code>).</p>
 <p>Because the 'MatrixClassAuthor' definitions are less standardized, they are
 more prone to typos that could lead to slight differences between stage
 descriptions of matrices that really do have the same stage classes (e.g. a
@@ -188,14 +194,16 @@ definitions for all matrices, and typos are rare, results for the different
 stage definitions will usually be similar. Note, however, that the actual
 integers returned for the different stage definitions are likely to be very
 different (because they are based on alphabetical order).</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='cdb_id.html'>cdb_id</a></p></div>
-    
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>cdb_id_stages</span>(<span class='no'>Compadre</span>, <span class='kw'>stage_def</span> <span class='kw'>=</span> <span class='st'>"MatrixClassOrganized"</span>)</div><div class='output co'>#&gt;   [1]  98  65   3  49  44  89 103  93  20  87  99  17  63 105  19  85  56  83
+    <pre class="examples"><div class='input'><span class='fu'>cdb_id_stages</span><span class='op'>(</span><span class='va'>Compadre</span>, stage_def <span class='op'>=</span> <span class='st'>"MatrixClassOrganized"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   [1]  98  65   3  49  44  89 103  93  20  87  99  17  63 105  19  85  56  83
 #&gt;  [19]  34 111  77  45  79  97  81  23  68  80 107 102   6 110  37  35  25  60
 #&gt;  [37]  46  87  11  91  90  69  62  96   5  21  51 113  93  85  26  61  33 100
 #&gt;  [55]  59 114  67  35  11  66   4   8  22 106   1  43  14 112 114  30  28   9
@@ -206,24 +214,13 @@ different (because they are based on alphabetical order).</p>
 #&gt; [145]  29  10  50  15  24  43</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -231,13 +228,16 @@ different (because they are based on alphabetical order).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -41,17 +41,41 @@ select.CompadreDB(.data, ...)
 
 rename.CompadreDB(.data, ...)
 
-left_join.CompadreDB(x, y, by = NULL, copy = FALSE, suffix = c(".x",
-  ".y"), ...)
+left_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-right_join.CompadreDB(x, y, by = NULL, copy = FALSE, suffix = c(".x",
-  ".y"), ...)
+right_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-inner_join.CompadreDB(x, y, by = NULL, copy = FALSE, suffix = c(".x",
-  ".y"), ...)
+inner_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-full_join.CompadreDB(x, y, by = NULL, copy = FALSE, suffix = c(".x",
-  ".y"), ...)
+full_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 }
 \arguments{
 \item{data}{see \code{\link[ggplot2]{fortify}}}
