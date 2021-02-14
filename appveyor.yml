@@ -18,23 +18,34 @@ environment:
   matrix:
     - R_VERSION: release
       R_ARCH: x64
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true
 
     - R_VERSION: release
       R_ARCH: i386
-
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true      
+      
     - R_VERSION: devel
       R_ARCH: x64
-
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true
+      
     - R_VERSION: devel
       R_ARCH: i386
-
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true
+      
     - R_VERSION: oldrel
       R_ARCH: x64
-
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true
+      
     - R_VERSION: oldrel
       R_ARCH: i386
-
-
+      R_REMOTES_STANDALONE: true
+      USE_RTOOLS: true
+      
 build_script:
   - travis-tool.sh install_deps
 
@@ -63,3 +74,13 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+notifications:
+  - provider: Email
+    to:
+    - jones@biology.sdu.dk
+    subject: 'Rccmpadre: r-appveyor build {{status}}'
+    message: "https://ci.appveyor.com/project/jonesor/RCompadre"
+    on_build_success: false
+    on_build_failure: false
+    on_build_status_changed: true
