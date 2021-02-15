@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -93,9 +94,7 @@ The `mutate()` function in dplyr adds one or more new columns to a data frame (o
 
 Let's say we want to conduct an analysis comparing Nordic countries to the rest of Europe. We can use `subset()` to limit the database to Europe, and then use `mutate()` to create a new column identifying rows from Nordic countries.
 
-```{r}
-#These lines currently cause a build failure "no method to invoke".
-#They work fine on personal computers though :/
+```{r, warning=FALSE}
 #compadre_euro <- Compadre %>%
 #  subset(Continent == "Europe") %>% 
 #  mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
@@ -106,7 +105,7 @@ Let's say we want to conduct an analysis comparing Nordic countries to the rest 
 
 A variety of Rcompadre functions take a CompadreDB object as their first argument and return a vector. To use these functions within `mutate()` in a piped sequence, we generally need to explicitly refer to the object on the left side of the pipe with a dot (`"."`).
 
-Here's an example with the Rcompadre functions `mpm_has_active()` and `cdb_id_studies()`, each of which take a CompadreDB object and return a vector.
+Here's an example with the Rcomadre functions `mpm_has_active()` and `cdb_id_studies()`, each of which take a CompadreDB object and return a vector.
 
 ```{r}
 compadre_use <- Compadre %>% 
@@ -153,7 +152,7 @@ compadre_stage_surv$stage_survival[[20]]
 
 #### Vectorizing over multiple arguments
 
-Let's say we want to know the survival probability for the first 'active' stage class (i.e. a stage that's not dormant or propagule) for every row of the database. One approach is to write our own function that takes matU and the integer index of the first active stage class, and returns the corresponding survival probability, e.g.
+Let's say we want to know the survival probability for the first 'active' stage class (i.e. a stage that's not dormant or propagule) for every row of the database. One approch is to write our own function that takes matU and the integer index of the first active stage class, and returns the corresponding survival probability, e.g.
 
 ```{r}
 SurvFirstActive <- function(matU, first_active) colSums(matU)[first_active]
@@ -200,7 +199,7 @@ Make sure to use `ungroup()` after you're finished with the groups, to prevent u
 
 ## Using CompadreDB objects with `ggplot`
 
-Rcompadre includes methods that allow CompadreDB objects to be used as data arguments within `ggplot()`, just like any old data frame. Below are some example plots.
+Rcompadre includes methods that allow CompdareDB objects to be used as data arguments within `ggplot()`, just like any old data frame. Below are some example plots.
 
 __Plot study coordinates on world map:__
 
