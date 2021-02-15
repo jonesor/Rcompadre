@@ -1,7 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
+Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
+=========================================================================
 
 [![Build
 Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre)
@@ -14,100 +15,78 @@ An R package to work with the [COM(P)ADRE](https://www.compadre-db.org/)
 Plant and Animal Matrix Population Databases. Note this package is at an
 early stage of development, and may contain bugs.
 
-## Installation
+Installation
+------------
 
 Install from GitHub with:
 
-``` r
-# install package 'remotes' if necessary
-# will already be installed if 'devtools' is installed
-install.packages("remotes") 
+    # install package 'remotes' if necessary
+    # will already be installed if 'devtools' is installed
+    install.packages("remotes") 
 
-# argument 'build_opts = NULL' only needed if you want to build vignettes
-remotes::install_github("jonesor/Rcompadre", build_vignettes = TRUE)
-
-# use argument 'build_vignettes = FALSE' if the vignette build fails
-remotes::install_github("jonesor/Rcompadre", build_vignettes = FALSE)
-```
+    # argument 'build_opts = NULL' only needed if you want to build vignettes
+    remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
 
 To install the development branch use:
 
-``` r
-remotes::install_github("jonesor/Rcompadre", ref = "devel")
-```
+    remotes::install_github("jonesor/Rcompadre", ref = "devel")
 
-## Usage
+Usage
+-----
 
-``` r
-library(Rcompadre)
-```
+    library(Rcompadre)
 
 #### Fetching a database
 
 Fetch the most recent database version from
-[compadre-db.org](https://www.compadre-db.org/)
-with
+[compadre-db.org](https://www.compadre-db.org/) with
 
-``` r
-compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
-```
+    compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
 
-or load from a local `.RData` file with, for example:
+or load from a local `.RData` file with
 
-``` r
-compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
-```
+    compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
 
 If you prefer using `load()` to load your local copy of a legacy
 database, use `as_cdb()` to convert it to the ‘CompadreDB’ class
 
-``` r
-load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
-compadre <- as_cdb(compadre)
-```
+    load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
+    compadre <- as_cdb(compadre)
 
 #### Subsetting
 
 For the most part `CompadreDB` objects work like a data frame. They can
 be subset using `[` or `subset()`
 
-``` r
-# subset to the first 10 rows
-compadre[1:10,]
+    # subset to the first 10 rows
+    compadre[1:10,]
 
-# subset to the species 'Echinacea angustifolia'
-subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
-```
+    # subset to the species 'Echinacea angustifolia'
+    subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
 First we’ll use the function `cdb_flag` to add columns to the database
 flagging potential issues with the projection matrices, such as missing
-values, or matrices that don’t meet assumptions like ergodicity,
+values, or matrices that don’t meet assumptions like ergodicty,
 irreducibility, or primitivity.
 
-``` r
-compadre_flags <- cdb_flag(compadre)
-```
+    compadre_flags <- cdb_flag(compadre)
 
 We’ll only be able to calculate population growth rates from matrices
 that don’t contain missing values, and we only want to use matrices that
-meet the assumption of ergodicity, so we’ll subset the database
+meet the assumption of ergodicty, so we’ll subset the database
 accordingly.
 
-``` r
-compadre_sub <- subset(compadre_flags,
-                       check_NA_A == FALSE & check_ergodic == TRUE)
-```
+    compadre_sub <- subset(compadre_flags,
+                           check_NA_A == FALSE & check_ergodic == TRUE)
 
 Finally, we’ll use the `lambda` function from the library
 [popbio](https://github.com/cstubben/popbio) to calculate the population
 growth rate for every matrix in `compadre_sub`.
 
-``` r
-library(popbio)
-compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
-```
+    library(popbio)
+    compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
 
 In the code above, the accessor function `matA()` is used to extract a
 list of projection matrices (the full matrix, “matA”) from every row of
@@ -115,22 +94,33 @@ list of projection matrices (the full matrix, “matA”) from every row of
 subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts
 of the database too.
 
-## Previous releases
+Previous releases
+-----------------
 
 Specific earlier releases of this package can be installed using the
-appropriate `@` tag. You can see details of the existing releases
-[here](https://github.com/jonesor/Rcompadre/releases). Note that the
-most recent version does not necessarily have an `@` tag.
+appropriate `@` tag.
 
-To install version 0.2.0, our last release before our introduction of
-the new `CompadreDB` class, and associated major changes to the package:
+To install version 0.1.0, our (thus far) only release:
 
-``` r
-remotes::install_github("jonesor/Rcompadre@v0.2.0")
-```
+    remotes::install_github("jonesor/Rcompadre@v0.1.0")
 
-## Contributions
+Contributions
+-------------
 
 All contributions are welcome. Please note that this project is released
 with a [Contributor Code of Conduct](CONDUCT.md). By participating in
 this project you agree to abide by its terms.
+
+There are numerous ways of contributing.
+
+1.  You can submit bug reports, suggestions etc. by [opening an
+    issue](https://github.com/jonesor/Rcompadre/issues).
+
+2.  You can copy or fork the repository, make your own code edits and
+    then send us a pull request. [Here’s how to do
+    that](https://jarv.is/notes/how-to-pull-request-fork-github/).
+
+3.  You can get to know us and join as a collaborator on the main
+    repository.
+
+4.  You are also welcome to email us.

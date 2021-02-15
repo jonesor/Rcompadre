@@ -89,7 +89,7 @@
       <h1>Ternary Plots</h1>
                         <h4 class="author">Rob Salguero-Gomez and Owen Jones</h4>
             
-            <h4 class="date">2019-12-10</h4>
+            <h4 class="date">2018-12-21</h4>
       
       
       <div class="hidden name"><code>TernaryPlot.Rmd</code></div>
@@ -99,85 +99,85 @@
     
     
 <p>Here we produce a ternary plot <em>a la</em> Silvertown &amp; Franco (1993) with population growth rate as the “fourth” dimension. We will use functions from the <code>popdemo</code>, <code>Rage</code> and <code>ggtern</code> packages so first we need to load those:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(popdemo)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rage)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggtern)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(popdemo)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rage)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggtern)</code></pre></div>
 <p>Next, we will load the dataset, flag problematic data (non-ergodic matrices) and exclude them, like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">Compadre &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_flag.html">cdb_flag</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">Compadre &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Compadre, MatrixSplit <span class="op">==</span><span class="st"> "Divided"</span> <span class="op">&amp;</span><span class="st"> </span>check_ergodic <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Compadre)
+Compadre &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_flag.html">cdb_flag</a></span>(Compadre)
+Compadre &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Compadre, MatrixSplit <span class="op">==</span><span class="st"> "Divided"</span> <span class="op">&amp;</span><span class="st"> </span>check_ergodic <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</code></pre></div>
 <p>We can calculate elasticities of population growth rate to changes in the matrix elements using the <code>elas</code> function from the <code>popdemo</code> package. For example, the elasticity matrix for the first <strong>A</strong> matrix in this example database looks like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">popdemo<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/popdemo/topics/elas">elas</a></span>(<span class="kw"><a href="../reference/CompadreMatrixMethods.html">matA</a></span>(Compadre)[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;             A1         A2         A3         A4</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [1,] 0.1645631 0.06524073 0.02430743 0.03131899</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; [2,] 0.1208672 0.16721803 0.04892799 0.01682975</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [3,] 0.0000000 0.07802604 0.11046976 0.02794895</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; [4,] 0.0000000 0.04335812 0.03273957 0.06818440</span></a></code></pre></div>
-<p>We have split most matrices in COMPADRE into the constituent U, F and C matrices, which represent growth/survival, sexual reproduction and clonal reproduction respectively. Therefore, we can classify the elements of the matrix to growth processes (which we can further identify as stasis, progression, and retrogression), sexual reproduction, and clonal reproduction.</p>
-<p>We can use the <code>matrixElementPerturbation</code> function from the <code>Rage</code> package to conduct this element-by-element elasticity analysis. The function outputs both sensitivities (prefixed with S) and elasticities (prefixed with E) as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">Rage<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/matrixElementPerturbation">matrixElementPerturbation</a></span>(<span class="dt">matU =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                                <span class="dt">matF =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(Compadre)[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">                                <span class="dt">matC =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matC</a></span>(Compadre)[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;    SStasis SRetrogression SProgression SFecundity SClonality   EStasis</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1 1.000001      0.2391149     2.365109   0.351586          0 0.5104358</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;   EProgression ERetrogression EFecundity EClonality</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 1    0.2749906     0.07687694  0.1376969          0</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">popdemo<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/popdemo/topics/elas">elas</a></span>(<span class="kw"><a href="../reference/CompadreMatrixMethods.html">matA</a></span>(Compadre)[[<span class="dv">1</span>]])
+<span class="co">#&gt;             A1         A2         A3         A4</span>
+<span class="co">#&gt; [1,] 0.1645631 0.06524073 0.02430743 0.03131899</span>
+<span class="co">#&gt; [2,] 0.1208672 0.16721803 0.04892799 0.01682975</span>
+<span class="co">#&gt; [3,] 0.0000000 0.07802604 0.11046976 0.02794895</span>
+<span class="co">#&gt; [4,] 0.0000000 0.04335812 0.03273957 0.06818440</span></code></pre></div>
+<p>We have split most matrices in COMPADRE into the constituent U, F and C matrices, which represent growth/survival, sexual reproduction and clonal reproduction respectively. Thefore, we can classify the elements of the matrix to growth processes (which we can further identify as stasis, progression, and retrogression), sexual reproduction, and clonal reproduction.</p>
+<p>We can use the <code>matrixElementPerturbation</code> function from the <code>Rage</code> package to conduct this element-by-element elasticity analyis. The function outputs both sensitivities (prefixed with S) and elasticities (prefixed with E) as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rage<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/matrixElementPerturbation">matrixElementPerturbation</a></span>(<span class="dt">matU =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)[[<span class="dv">1</span>]],
+                                <span class="dt">matF =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(Compadre)[[<span class="dv">1</span>]],
+                                <span class="dt">matC =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matC</a></span>(Compadre)[[<span class="dv">1</span>]])
+<span class="co">#&gt;    SStasis SRetrogression SProgression SFecundity SClonality   EStasis</span>
+<span class="co">#&gt; 1 1.000001      0.2391149     2.365109   0.351586          0 0.5104358</span>
+<span class="co">#&gt;   EProgression ERetrogression EFecundity EClonality</span>
+<span class="co">#&gt; 1    0.2749906     0.07687694  0.1376969          0</span></code></pre></div>
 <p>We can use a <code>for</code> loop to run through each set of matrices in turn to calculate the summed elasticity for survival (S), growth (G) and reproduction (R) like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">Amats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matA</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">Umats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">Fmats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">Cmats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matC</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">output &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">S=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="ot">NA</span>,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(Umats)),<span class="dt">G=</span><span class="ot">NA</span>,<span class="dt">R=</span><span class="ot">NA</span>,<span class="dt">lam=</span><span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(Umats)){</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">  temp &lt;-<span class="st"> </span>Rage<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/matrixElementPerturbation">matrixElementPerturbation</a></span>(Umats[[i]],</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">                                          Fmats[[i]],</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">                                          Cmats[[i]])</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">output<span class="op">$</span>S[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EStasis <span class="op">+</span><span class="st"> </span>temp<span class="op">$</span>ERetrogression</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">output<span class="op">$</span>G[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EProgression</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">output<span class="op">$</span>R[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EFecundity <span class="op">+</span><span class="st"> </span>temp<span class="op">$</span>EClonality</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#Calculate growth rate</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17">output<span class="op">$</span>lam[i] &lt;-<span class="st"> </span>popdemo<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/popdemo/topics/eigs">eigs</a></span>(Amats[[i]], <span class="st">"lambda"</span>)</a>
-<a class="sourceLine" id="cb5-18" data-line-number="18">}</a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; Warning: All elements of matF are zero</span></a>
-<a class="sourceLine" id="cb5-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">#&gt; Warning: All elements of matF are zero</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Amats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matA</a></span>(Compadre)
+Umats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(Compadre)
+Fmats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(Compadre)
+Cmats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matC</a></span>(Compadre)
+
+output &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">S=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="ot">NA</span>,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(Umats)),<span class="dt">G=</span><span class="ot">NA</span>,<span class="dt">R=</span><span class="ot">NA</span>,<span class="dt">lam=</span><span class="ot">NA</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(Umats)){
+  temp &lt;-<span class="st"> </span>Rage<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/matrixElementPerturbation">matrixElementPerturbation</a></span>(Umats[[i]],
+                                          Fmats[[i]],
+                                          Cmats[[i]])
+  
+output<span class="op">$</span>S[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EStasis <span class="op">+</span><span class="st"> </span>temp<span class="op">$</span>ERetrogression
+output<span class="op">$</span>G[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EProgression
+output<span class="op">$</span>R[i] &lt;-<span class="st"> </span>temp<span class="op">$</span>EFecundity <span class="op">+</span><span class="st"> </span>temp<span class="op">$</span>EClonality
+
+<span class="co">#Calculate growth rate</span>
+output<span class="op">$</span>lam[i] &lt;-<span class="st"> </span>popdemo<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/popdemo/topics/eigs">eigs</a></span>(Amats[[i]], <span class="st">"lambda"</span>)
+}
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span>
+
+<span class="co">#&gt; Warning: All elements of matF are zero</span></code></pre></div>
 <p>Let’s take a look at this output:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(output)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;            S          G           R       lam</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1 0.58731274 0.27499063 0.137696890 1.0580286</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2 0.46765629 0.37791246 0.154347265 1.4118127</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3 0.97762061 0.01494911 0.007431082 0.9962044</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4 0.09347354 0.62204961 0.284476663 1.1241625</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 5 0.90610402 0.09079782 0.003098288 0.9659322</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 6 0.78256642 0.21743352 0.000000000 0.9154951</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(output)
+<span class="co">#&gt;            S          G           R       lam</span>
+<span class="co">#&gt; 1 0.58731274 0.27499063 0.137696890 1.0580286</span>
+<span class="co">#&gt; 2 0.46765629 0.37791246 0.154347265 1.4118127</span>
+<span class="co">#&gt; 3 0.97762061 0.01494911 0.007431082 0.9962044</span>
+<span class="co">#&gt; 4 0.09347354 0.62204961 0.284476663 1.1241625</span>
+<span class="co">#&gt; 5 0.90610402 0.09079782 0.003098288 0.9659322</span>
+<span class="co">#&gt; 6 0.78256642 0.21743352 0.000000000 0.9154951</span></code></pre></div>
 <p>Now we have elasticities for our three demographic processes we can place these onto a ternary plot. However, we should first scale the elasticities so that they sum to 1 - this is necessary because of possible rounding issues:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(x)))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(output[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(x)))</code></pre></div>
 <p>Now for the plot:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">B&lt;-ggtern<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/ggtern">ggtern</a></span>(<span class="dt">data=</span>output,<span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/aes">aes</a></span>(<span class="dt">x =</span> R,<span class="dt">y=</span>G,<span class="dt">z=</span>S,<span class="dt">colour =</span> lam))  <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">    </span><span class="kw">scale_color_viridis_c</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/theme_showarrows">theme_showarrows</a></span>() <span class="op">+</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/theme_clockwise">theme_clockwise</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">B</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">B&lt;-ggtern<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/ggtern">ggtern</a></span>(<span class="dt">data=</span>output,<span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/aes">aes</a></span>(<span class="dt">x =</span> R,<span class="dt">y=</span>G,<span class="dt">z=</span>S,<span class="dt">colour =</span> lam))  <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">    </span><span class="kw">scale_color_viridis_c</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/theme_showarrows">theme_showarrows</a></span>() <span class="op">+</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggtern/topics/theme_clockwise">theme_clockwise</a></span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="ot">NULL</span>
+B</code></pre></div>
 <p><img src="TernaryPlot_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Now you can try this, try using another variable, such as reactivity, or life expectancy as the “fourth” dimension instead of lambda.</p>
   </div>

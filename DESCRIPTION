@@ -1,6 +1,6 @@
 Package: Rcompadre
 Type: Package
-Title: Utilities for working with the COMPADRE/COMADRE Database
+Title: Utilities for Working with the COMPADRE/COMADRE Plant and Animal Matrix Model Databases
 Version: 0.2.0
 Authors@R: as.person(c(
     "Patrick Barks <barks@biology.sdu.dk> [aut]", 
@@ -12,19 +12,17 @@ Authors@R: as.person(c(
     "Julia Jones <juliajones@biology.sdu.dk> [aut]"
       ))
 Maintainer: Owen Jones <jones@biology.sdu.dk>
-Description: A set of utility tools for working with the COMPADRE/COMADRE databases. The package provides utility functions for interacting with the COMPADRE and COMADRE databases of matrix population model.
+Description: Utility functions for interacting with the COMPADRE and COMADRE databases of matrix population models.
 License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-Language: en-US
 Depends: R (>= 2.10)
 Imports:
   methods, 
   popdemo,
   tibble
-Suggests:
-    spelling, 
+Suggests: 
     knitr,
     rmarkdown,
     testthat,

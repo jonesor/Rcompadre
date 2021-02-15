@@ -89,7 +89,7 @@
       <h1>Age-from-stage analyses</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2019-12-10</h4>
+            <h4 class="date">2018-12-21</h4>
       
       
       <div class="hidden name"><code>AgeFromStage.Rmd</code></div>
@@ -107,72 +107,72 @@
 <h2 class="hasAnchor">
 <a href="#preliminaries" class="anchor"></a>Preliminaries</h2>
 <p>We’ll start by loading a few packages and a dataset that we’ll be using throughout this vignette. The dataset <code>Compadre</code> is a subset of a recent COMPADRE release that’s built into Rcompadre.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rage)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Compadre)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">tibble.width =</span> <span class="ot">Inf</span>) <span class="co"># always print all columns of tibble</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rcompadre)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Rage)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(Compadre)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">tibble.width =</span> <span class="ot">Inf</span>) <span class="co"># always print all columns of tibble</span></code></pre></div>
 </div>
 <div id="age-from-stage-methods-with-a-single-matrix-population-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#age-from-stage-methods-with-a-single-matrix-population-model" class="anchor"></a>Age-from-stage methods with a single matrix population model</h2>
 <p>Next we’ll grab an MPM, arbitrarily selecting the fourth one in <code>Compadre</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">mpm &lt;-<span class="st"> </span>Compadre<span class="op">$</span>mat[[<span class="dv">4</span>]]</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">mpm</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; A compadre matrix object with 5 stages.</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;   MatrixClassOrganized MatrixClassAuthor</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 1               active     Small rosette</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 2               active    Medium rosette</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 3               active Large (1 rosette)</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 4               active Large (2 rosette)</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 5               active         Flowering</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; matA:</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;         1      2       3       4    5</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 1 0.04410 0.0238 0.00000 0.00000 1.70</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 2 0.26245 0.1276 0.00000 0.00000 0.70</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 3 0.41065 0.4657 0.20205 0.03335 0.15</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 4 0.12100 0.1276 0.17520 0.06665 0.00</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 5 0.00000 0.0838 0.37620 0.76665 0.05</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; matU:</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;         1      2       3       4    5</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; 1 0.04410 0.0238 0.00000 0.00000 0.00</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; 2 0.26245 0.1276 0.00000 0.00000 0.00</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; 3 0.41065 0.4657 0.20205 0.03335 0.00</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; 4 0.12100 0.1276 0.17520 0.06665 0.00</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; 5 0.00000 0.0838 0.37620 0.76665 0.05</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; matF:</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt;   1 2 3 4    5</span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; 1 0 0 0 0 1.70</span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; 2 0 0 0 0 0.70</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; 3 0 0 0 0 0.15</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">#&gt; 4 0 0 0 0 0.00</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt; 5 0 0 0 0 0.00</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt; matC:</span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt;   1 2 3 4 5</span></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt; 1 0 0 0 0 0</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="co">#&gt; 2 0 0 0 0 0</span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="co">#&gt; 3 0 0 0 0 0</span></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">#&gt; 4 0 0 0 0 0</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="co">#&gt; 5 0 0 0 0 0</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpm &lt;-<span class="st"> </span>Compadre<span class="op">$</span>mat[[<span class="dv">4</span>]]
+mpm
+<span class="co">#&gt; A compadre matrix object with 5 stages.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   MatrixClassOrganized MatrixClassAuthor</span>
+<span class="co">#&gt; 1               active     Small rosette</span>
+<span class="co">#&gt; 2               active    Medium rosette</span>
+<span class="co">#&gt; 3               active Large (1 rosette)</span>
+<span class="co">#&gt; 4               active Large (2 rosette)</span>
+<span class="co">#&gt; 5               active         Flowering</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; matA:</span>
+<span class="co">#&gt;         1      2       3       4    5</span>
+<span class="co">#&gt; 1 0.04410 0.0238 0.00000 0.00000 1.70</span>
+<span class="co">#&gt; 2 0.26245 0.1276 0.00000 0.00000 0.70</span>
+<span class="co">#&gt; 3 0.41065 0.4657 0.20205 0.03335 0.15</span>
+<span class="co">#&gt; 4 0.12100 0.1276 0.17520 0.06665 0.00</span>
+<span class="co">#&gt; 5 0.00000 0.0838 0.37620 0.76665 0.05</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; matU:</span>
+<span class="co">#&gt;         1      2       3       4    5</span>
+<span class="co">#&gt; 1 0.04410 0.0238 0.00000 0.00000 0.00</span>
+<span class="co">#&gt; 2 0.26245 0.1276 0.00000 0.00000 0.00</span>
+<span class="co">#&gt; 3 0.41065 0.4657 0.20205 0.03335 0.00</span>
+<span class="co">#&gt; 4 0.12100 0.1276 0.17520 0.06665 0.00</span>
+<span class="co">#&gt; 5 0.00000 0.0838 0.37620 0.76665 0.05</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; matF:</span>
+<span class="co">#&gt;   1 2 3 4    5</span>
+<span class="co">#&gt; 1 0 0 0 0 1.70</span>
+<span class="co">#&gt; 2 0 0 0 0 0.70</span>
+<span class="co">#&gt; 3 0 0 0 0 0.15</span>
+<span class="co">#&gt; 4 0 0 0 0 0.00</span>
+<span class="co">#&gt; 5 0 0 0 0 0.00</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; matC:</span>
+<span class="co">#&gt;   1 2 3 4 5</span>
+<span class="co">#&gt; 1 0 0 0 0 0</span>
+<span class="co">#&gt; 2 0 0 0 0 0</span>
+<span class="co">#&gt; 3 0 0 0 0 0</span>
+<span class="co">#&gt; 4 0 0 0 0 0</span>
+<span class="co">#&gt; 5 0 0 0 0 0</span></code></pre></div>
 <p>This MPM has 5 stage class, and it’s apparent from the <code>MatrixClassAuthor</code> column that the stages are not based solely on age. Nonetheless, we can estimate age-schedules of survivorship and reproduction using the functions <code><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificSurv">ageSpecificSurv()</a></code> and <code><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificRepro">ageSpecificRepro()</a></code> from the library <a href="https://github.com/jonesor/Rage">Rage</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># extract U and F matrices</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">mat_U &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(mpm)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">mat_F &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(mpm)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># calculate lx</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">lx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificSurv">ageSpecificSurv</a></span>(mat_U, <span class="dt">startLife =</span> <span class="dv">1</span>, <span class="dt">N =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co"># calculate mx</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">mx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificRepro">ageSpecificRepro</a></span>(mat_U, mat_F, <span class="dt">startLife =</span> <span class="dv">1</span>, <span class="dt">N =</span> <span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract U and F matrices</span>
+mat_U &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(mpm)
+mat_F &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CompadreMatrixMethods.html">matF</a></span>(mpm)
+
+<span class="co"># calculate lx</span>
+lx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificSurv">ageSpecificSurv</a></span>(mat_U, <span class="dt">startLife =</span> <span class="dv">1</span>, <span class="dt">N =</span> <span class="dv">15</span>)
+
+<span class="co"># calculate mx</span>
+mx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificRepro">ageSpecificRepro</a></span>(mat_U, mat_F, <span class="dt">startLife =</span> <span class="dv">1</span>, <span class="dt">N =</span> <span class="dv">15</span>)</code></pre></div>
 <p>In addition to the relevant matrix components, the <code>ageSpecific-</code> functions require two extra arguments. The first, <code>startLife</code>, is an integer indicating which stage reflects the ‘start of life’. Usually this will be <code>1</code>, but sometimes we might want to skip over stages that are propagule (i.e. seed) or dormant. The MPM we selected didn’t have any such stages (see the column <code>MatrixClassOrganized</code> above), so we can stick with <code>1</code>. The second argument, <code>N</code> is the number of time steps to calculate over.</p>
 <p>Let’s take a look at the trajectories.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lx, <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">xlab =</span> <span class="st">"Age"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lx, <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">xlab =</span> <span class="st">"Age"</span>)</code></pre></div>
 <p><img src="AgeFromStage_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(mx, <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">xlab =</span> <span class="st">"Age"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(mx, <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">xlab =</span> <span class="st">"Age"</span>)</code></pre></div>
 <p><img src="AgeFromStage_files/figure-html/unnamed-chunk-4-2.png" width="576"></p>
 </div>
 <div id="extending-to-many-matrix-population-models" class="section level2">
@@ -180,83 +180,83 @@
 <a href="#extending-to-many-matrix-population-models" class="anchor"></a>Extending to many matrix population models</h2>
 <p>Now we’ll extend the basic approach above to many models. Specifically, we’ll examine trajectories of survivorship for all of the tree species in <code>Compadre</code>.</p>
 <p>First, we’ll subset <code>Compadre</code> to our group of interest (<code>OrganismType == "Tree"</code>). We’ll also remove matrices with missing values, and limit our selection to matrices with a periodicity (i.e. transition interval) of 1 year.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">comp_flag &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_flag.html">cdb_flag</a></span>(Compadre, <span class="st">"check_NA_U"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">comp_use &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(comp_flag, OrganismType <span class="op">==</span><span class="st"> "Tree"</span> <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">                     </span>check_NA_U <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">                     </span>AnnualPeriodicity <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comp_flag &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_flag.html">cdb_flag</a></span>(Compadre, <span class="st">"check_NA_U"</span>)
+
+comp_use &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(comp_flag, OrganismType <span class="op">==</span><span class="st"> "Tree"</span> <span class="op">&amp;</span>
+<span class="st">                     </span>check_NA_U <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span>
+<span class="st">                     </span>AnnualPeriodicity <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 <p>Let’s take a look at the species/populations that made the cut.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/CompadreDB.html">CompadreData</a></span>(comp_use)[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"SpeciesAccepted"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixTreatment"</span>)]</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 7 x 3</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   SpeciesAccepted          MatrixPopulation                             </span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                        </span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 2 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 3 Castanea dentata         Leelanau                                     </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 4 Phyllanthus emblica      Biligiri Rangaswamy Temple Wildlife Sactuary </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 5 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 6 Manilkara zapota         Central Veracruz state                       </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 7 Rhododendron ponticum    Ockham Common Nature Reserve                 </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   MatrixTreatment                     </span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;   &lt;chr&gt;                               </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; 1 Fruit harvesting and no cover       </span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 2 Fruit harvesting and Mistletoe cover</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 3 Unmanipulated                       </span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; 4 Time since last fire: 3 years       </span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; 5 Unmanipulated                       </span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; 6 Unmanipulated                       </span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; 7 Unmanipulated</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/CompadreDB.html">CompadreData</a></span>(comp_use)[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"SpeciesAccepted"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixTreatment"</span>)]
+<span class="co">#&gt; # A tibble: 7 x 3</span>
+<span class="co">#&gt;   SpeciesAccepted          MatrixPopulation                             </span>
+<span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                        </span>
+<span class="co">#&gt; 1 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span>
+<span class="co">#&gt; 2 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span>
+<span class="co">#&gt; 3 Castanea dentata         Leelanau                                     </span>
+<span class="co">#&gt; 4 Phyllanthus emblica      Biligiri Rangaswamy Temple Wildlife Sactuary </span>
+<span class="co">#&gt; 5 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span>
+<span class="co">#&gt; 6 Manilkara zapota         Central Veracruz state                       </span>
+<span class="co">#&gt; 7 Rhododendron ponticum    Ockham Common Nature Reserve                 </span>
+<span class="co">#&gt;   MatrixTreatment                     </span>
+<span class="co">#&gt;   &lt;chr&gt;                               </span>
+<span class="co">#&gt; 1 Fruit harvesting and no cover       </span>
+<span class="co">#&gt; 2 Fruit harvesting and Mistletoe cover</span>
+<span class="co">#&gt; 3 Unmanipulated                       </span>
+<span class="co">#&gt; 4 Time since last fire: 3 years       </span>
+<span class="co">#&gt; 5 Unmanipulated                       </span>
+<span class="co">#&gt; 6 Unmanipulated                       </span>
+<span class="co">#&gt; 7 Unmanipulated</span></code></pre></div>
 <p>Notice that there are 3 matrices for the species <em>Phyllanthus indofischeri</em>, reflecting different treatment groups. Let’s collapse these replicates down to a single matrix per species, by averaging the relevant MPMs using <code><a href="../reference/cdb_collapse.html">cdb_collapse()</a></code>. We’ll also use the function <code><a href="../reference/cdb_id_stages.html">cdb_id_stages()</a></code>, to make sure we’re only collapsing matrices that have the same stage class definitions.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># add column ID-ing matrices with same MatrixClassAuthor vector</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">comp_use<span class="op">$</span>stage_id &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_id_stages.html">cdb_id_stages</a></span>(comp_use)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># collapse database to single matrix per species * MatrixClassAuthor</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">comp_collapse &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_collapse.html">cdb_collapse</a></span>(comp_use, <span class="st">"stage_id"</span>)</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co"># check species/populations again</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw"><a href="../reference/CompadreDB.html">CompadreData</a></span>(comp_collapse)[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"SpeciesAccepted"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixTreatment"</span>)]</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   SpeciesAccepted          MatrixPopulation                             </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                        </span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 1 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; 2 Castanea dentata         Leelanau                                     </span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 3 Phyllanthus emblica      Biligiri Rangaswamy Temple Wildlife Sactuary </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 4 Manilkara zapota         Central Veracruz state                       </span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 5 Rhododendron ponticum    Ockham Common Nature Reserve                 </span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;   MatrixTreatment                                                          </span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;   &lt;chr&gt;                                                                    </span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 1 Fruit harvesting and no cover; Fruit harvesting and Mistletoe cover; Unm…</span></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 2 Unmanipulated                                                            </span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 3 Time since last fire: 3 years                                            </span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 4 Unmanipulated                                                            </span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; 5 Unmanipulated</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add column ID-ing matrices with same MatrixClassAuthor vector</span>
+comp_use<span class="op">$</span>stage_id &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_id_stages.html">cdb_id_stages</a></span>(comp_use)
+
+<span class="co"># collapse database to single matrix per species * MatrixClassAuthor</span>
+comp_collapse &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdb_collapse.html">cdb_collapse</a></span>(comp_use, <span class="st">"stage_id"</span>)
+
+<span class="co"># check species/populations again</span>
+<span class="kw"><a href="../reference/CompadreDB.html">CompadreData</a></span>(comp_collapse)[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"SpeciesAccepted"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixTreatment"</span>)]
+<span class="co">#&gt; # A tibble: 5 x 3</span>
+<span class="co">#&gt;   SpeciesAccepted          MatrixPopulation                             </span>
+<span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                        </span>
+<span class="co">#&gt; 1 Phyllanthus indofischeri Biligiri Rangaswamy Temple Wildlife Sanctuary</span>
+<span class="co">#&gt; 2 Castanea dentata         Leelanau                                     </span>
+<span class="co">#&gt; 3 Phyllanthus emblica      Biligiri Rangaswamy Temple Wildlife Sactuary </span>
+<span class="co">#&gt; 4 Manilkara zapota         Central Veracruz state                       </span>
+<span class="co">#&gt; 5 Rhododendron ponticum    Ockham Common Nature Reserve                 </span>
+<span class="co">#&gt;   MatrixTreatment                                                          </span>
+<span class="co">#&gt;   &lt;chr&gt;                                                                    </span>
+<span class="co">#&gt; 1 Fruit harvesting and no cover; Fruit harvesting and Mistletoe cover; Unm…</span>
+<span class="co">#&gt; 2 Unmanipulated                                                            </span>
+<span class="co">#&gt; 3 Time since last fire: 3 years                                            </span>
+<span class="co">#&gt; 4 Unmanipulated                                                            </span>
+<span class="co">#&gt; 5 Unmanipulated</span></code></pre></div>
 <p>Next, let’s look at the organized stage classes for each MPM. If any of our MPMs include propagule or dormant stage classes, we may want to account for them when calculating lx.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/CompadreMatrixMethods.html">MatrixClassOrganized</a></span>(comp_collapse)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] "prop"   "active" "active" "active" "active" "active" "active"</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active" "active" "active"</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active"</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active" "active" "active"</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; [9] "active"</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; [[5]]</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; [1] "active" "active" "active" "active"</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/CompadreMatrixMethods.html">MatrixClassOrganized</a></span>(comp_collapse)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] "prop"   "active" "active" "active" "active" "active" "active"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active" "active" "active"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt; [1] "active" "active" "active" "active" "active" "active" "active" "active"</span>
+<span class="co">#&gt; [9] "active"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[5]]</span>
+<span class="co">#&gt; [1] "active" "active" "active" "active"</span></code></pre></div>
 <p>Indeed, 1 MPM incudes a propagule stage. So let’s use the function <code><a href="../reference/mpm_methods.html">mpm_first_active()</a></code> to determine the first ‘active’ stage class for each MPM, which we’ll use to define the start of life.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">comp_collapse<span class="op">$</span>start_life &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mpm_methods.html">mpm_first_active</a></span>(comp_collapse)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comp_collapse<span class="op">$</span>start_life &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mpm_methods.html">mpm_first_active</a></span>(comp_collapse)</code></pre></div>
 <p>Finally, we’ll use <code><a href="https://www.rdocumentation.org/packages/base/topics/mapply">mapply()</a></code> to vectorize the function <code><a href="https://www.rdocumentation.org/packages/Rage/topics/ageSpecificSurv">ageSpecificSurv()</a></code> over arguments matU and startLife. By default, <code><a href="https://www.rdocumentation.org/packages/base/topics/mapply">mapply()</a></code> will return an array where the columns correspond to rows of our database, and rows correspond to ages — 0 through <code>N</code>. Given that the output is an array, we’ll use the function <code><a href="https://www.rdocumentation.org/packages/graphics/topics/matplot">matplot()</a></code> to plot age-trajectories of survivorship for each species.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">lx_array &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mapply">mapply</a></span>(ageSpecificSurv,</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">                   <span class="dt">matU =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(comp_collapse),</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">                   <span class="dt">startLife =</span> comp_collapse<span class="op">$</span>start_life,</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">                   <span class="dt">N =</span> <span class="dv">250</span>)</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/matplot">matplot</a></span>(lx_array, <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="st">"y"</span>, <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.0001</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">        <span class="dt">lwd =</span> <span class="fl">1.5</span>, <span class="dt">xlab =</span> <span class="st">"Age (years)"</span>, <span class="dt">ylab =</span> <span class="st">"lx"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lx_array &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mapply">mapply</a></span>(ageSpecificSurv,
+                   <span class="dt">matU =</span> <span class="kw"><a href="../reference/CompadreMatrixMethods.html">matU</a></span>(comp_collapse),
+                   <span class="dt">startLife =</span> comp_collapse<span class="op">$</span>start_life,
+                   <span class="dt">N =</span> <span class="dv">250</span>)
+
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/matplot">matplot</a></span>(lx_array, <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="st">"y"</span>, <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.0001</span>, <span class="dv">1</span>),
+        <span class="dt">lwd =</span> <span class="fl">1.5</span>, <span class="dt">xlab =</span> <span class="st">"Age (years)"</span>, <span class="dt">ylab =</span> <span class="st">"lx"</span>)</code></pre></div>
 <p><img src="AgeFromStage_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
 </div>
 <div id="references" class="section level2">
