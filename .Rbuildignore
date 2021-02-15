@@ -8,3 +8,4 @@
 ^\.git$
 ^README\.Rmd$
 ^docs$
+^pkgdown$

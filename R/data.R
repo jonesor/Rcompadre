@@ -5,7 +5,7 @@
 #' `CompadreLegacy` is a subsample of the COMPADRE Plant Matrix Database in the
 #' legacy format (class 'list'), for use in testing and examples. For full
 #' documentation see the [COMPADRE User
-#' Guide](https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide).
+#' Guide](https://jonesor.github.io/CompadreGuides/).
 #' 
 #' @md
 #' 

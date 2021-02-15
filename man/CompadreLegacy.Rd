@@ -117,6 +117,6 @@ CompadreLegacy
 \description{
 \code{CompadreLegacy} is a subsample of the COMPADRE Plant Matrix Database in the
 legacy format (class 'list'), for use in testing and examples. For full
-documentation see the \href{https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide}{COMPADRE User Guide}.
+documentation see the \href{https://jonesor.github.io/CompadreGuides/}{COMPADRE User Guide}.
 }
 \keyword{datasets}
