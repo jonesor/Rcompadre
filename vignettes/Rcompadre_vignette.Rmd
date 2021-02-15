@@ -17,7 +17,7 @@ The COMADRE and COMPADRE databases together contain several thousand (mostly) pu
 
 The purpose of Rcompadre is to provide utilities for accessing, selecting, and transforming MPMs from particular species of interest, and groups of species for comparative demographic analyses.
 
-Rcompadre integrates with the RPackage Rage, which provides functions to calculate different life history quantities of interest.
+Rcompadre integrates with the R package Rage, which provides functions to calculate different life history quantities of interest.
 
 ## What the vignette covers
 
@@ -61,7 +61,7 @@ names(comadre$metadata)
 
 You can find the details of what these columns are in the User Guides.
 
-Since we are interested in getting data for a species matching a particular name (*Ursus maritumus*), we'll need to examine the column called `SpeciesAccepted`, which is the currently accepted binomial species name.
+Since we are interested in getting data for a species matching a particular name (*Ursus maritimus*), we'll need to examine the column called `SpeciesAccepted`, which is the currently accepted binomial species name.
 
 You can use the command `grep` to identify where in the database the species is:
 
@@ -108,7 +108,7 @@ The exercise plots a life cycle with the stages and transitions of a give matrix
 library(Mage)
 ```
 
-Let's plot the lifecycle described by the `A` matrix for a species containing the word "lion" in the common name used by the author(s) in the original source publiction.
+Let's plot the lifecycle described by the `A` matrix for a species containing the word "lion" in the common name used by the author(s) in the original source publication.
 
 ```{r echo=FALSE}
 load("~/Dropbox/MatrixDatabases/COMADRE/v.2.0.0/COMADRE_v.2.0.0.RData")
@@ -170,7 +170,7 @@ x<-subsetDB(comadre, MatrixComposite == "Mean" &
 
 The object `x` is now a version of the `comadre` database object that contains only the matrices that match the search criteria.
 
-These matrices can now be analyzed by applying functions in a loop, or by using `lapply`.
+These matrices can now be analysed by applying functions in a loop, or by using `lapply`.
 
 For example, to calculate population growth rate and damping ratio for
 the subset of matrices, first create an empty `data.frame` to accommodate the output
@@ -221,9 +221,9 @@ hist(output$damps, xlab = "Damping ratio",
 
 ## Geographic distribution
 
-This example produces on a world map the viability (population growth rate $\lambda$ > 1, $\lambda$ = 1, $\lambda$ < 1) of a subset of studied populations given some selection criteria, and color-codes the location of each population according to the value of $\lambda$.
+This example produces on a world map the viability (population growth rate $\lambda$ > 1, $\lambda$ = 1, $\lambda$ < 1) of a subset of studied populations given some selection criteria, and colour-codes the location of each population according to the value of $\lambda$.
 
-First, subset mean matrices for all Carnivora in the wild in the northern hemisphere, with no issues for survival >1, for which matrices have been split into **A** = **U** + **F** + **C**, and for which reproduction was explicitly modeled.
+First, subset mean matrices for all Carnivora in the wild in the northern hemisphere, with no issues for survival >1, for which matrices have been split into **A** = **U** + **F** + **C**, and for which reproduction was explicitly modelled.
 
 
 ```{r echo=FALSE}
@@ -270,7 +270,7 @@ for (i in 1:length(x$mat)){
 }
 ```
 
-Now we can create a vector of color hex codes that can be applied according to the estimate of $\lambda$. THis is done using the `colorRampPalette` function to go from green for high values of $\lambda$, to red for low values of $\lambda$. Here `paste` is used to append a value of `90` to the hex codes to allow transparency for aesthetic reasons.
+Now we can create a vector of colour hex codes that can be applied according to the estimate of $\lambda$. This is done using the `colorRampPalette` function to go from green for high values of $\lambda$, to red for low values of $\lambda$. Here `paste` is used to append a value of `90` to the hex codes to allow transparency for aesthetic reasons.
 
 ```{r, comment=">"}
 
@@ -281,7 +281,7 @@ s1 <- seq(min(x$metadata$lambdas, na.rm=TRUE),max(x$metadata$lambdas, na.rm=TRUE
           length.out = 100)
 ```
 
-First, load the `maps` package (and install it if necessary). Then plot the world map and overlay the points from our data, color coded by value of $\lambda$. In this case, the points are jittered slightly to improve visibility of nearby populations.
+First, load the `maps` package (and install it if necessary). Then plot the world map and overlay the points from our data, colour coded by value of $\lambda$. In this case, the points are jittered slightly to improve visibility of nearby populations.
 
 ```{r, comment=">"}
 library(maps)
@@ -320,7 +320,7 @@ meanLifeExpectancy <- function(matU = matU, startLife = 1){
 }
 ```
 
-As an example for the chosen data, subset COMADRE to studies with a matrix dimension >= 3, that represent mean, unmanipulated conditions duration > 3 years, where sexual reproduction has been modeled explicitly, the matrices are split into U, F and C, and there are no issues with stage-specific survival >1.
+As an example for the chosen data, subset COMADRE to studies with a matrix dimension >= 3, that represent mean, unmanipulated conditions duration > 3 years, where sexual reproduction has been modelled explicitly, the matrices are split into U, F and C, and there are no issues with stage-specific survival >1.
 
 ```{r, comment=">"}
 x <- subsetDB(comadre, MatrixDimension >= 3 
@@ -337,7 +337,7 @@ We can ask how many matrices this is by looking at the size of the metadata part
 nrow(x$metadata)
 ```
 
-These matrices can now be analyzed by applying functions in a loop, or by using `lapply`.
+These matrices can now be analysed by applying functions in a loop, or by using `lapply`.
 
 To calculate elasticities, population growth rate, reactivity and mean life expectancy for the subset matrices, first create an empty `data.frame` to accommodate the output:
 
@@ -444,7 +444,7 @@ zNorm <- (Z - min(Z))/(max(Z) - min(Z))
 colsEta <- rgb(col_fun(zNorm), maxColorValue = 256)
 ```
 
-For which the plot can be genarated like this, as before:
+For which the plot can be generated like this, as before:
 
 ```{r, comment=">", warning=FALSE}
 ternaryplot(etaData[, c("R", "S", "G")], scale = 1, 
@@ -475,7 +475,7 @@ ternaryplot(reactData[, c("R", "S", "G")], scale = 1,
 
 ```
 
-One could add the color scale legend using the following code to add to the same plot. Note though, that here the value of the points has been standardised to range from 0 to 1, rather than the original lambda/eta/reactivity values:
+One could add the colour scale legend using the following code to add to the same plot. Note though, that here the value of the points has been standardised to range from 0 to 1, rather than the original lambda/eta/reactivity values:
 
 ```{r, eval = FALSE, warning=FALSE}
 colCode <- colorRampPalette(c("white", "yellow", "orange", "red", "dark red"))(n = 999)

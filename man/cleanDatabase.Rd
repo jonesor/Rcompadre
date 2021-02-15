@@ -7,7 +7,8 @@
 cleanDatabase(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object.}
+\item{db}{A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+from class 'list.}
 }
 \value{
 Returns db with extra columns appended to the metadata to indicate
@@ -29,8 +30,11 @@ compadre_clean <- cleanDatabase(compadre)
 }
 \author{
 Julia Jones <juliajones@biology.sdu.dk>
-Roberto Salguero-Goméz
-Danny Buss
-Patrick Barks
+
+Roberto Salguero-Goméz <rob.salguero@zoo.ox.ac.uk>
+
+Danny Buss <dlb50@cam.ac.uk>
+
+Patrick Barks <patrick.barks@gmail.com>
 }
 \keyword{utilities}

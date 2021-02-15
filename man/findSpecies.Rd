@@ -7,13 +7,14 @@
 findSpecies(x, db)
 }
 \arguments{
-\item{x}{A character vector of species names}
+\item{x}{A character vector of species names.}
 
-\item{db}{The COM(P)ADRE database object to search in}
+\item{db}{A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+from class 'list'.}
 }
 \value{
 A logical indicating whether the species name is in the 
-COM(P)ADRE object
+COM(P)ADRE object.
 }
 \description{
 Utility function for checkSpecies

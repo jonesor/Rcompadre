@@ -34,14 +34,14 @@
 #'        \item{AngioGymno}{factor - Designates whether the species is a
 #'        gymnosperm or angiosperm. Species that are neither are designated
 #'        \code{NA}}
-#'        \item{Authors}{characer - Last (family) name of all authors 
+#'        \item{Authors}{character - Last (family) name of all authors 
 #'        separated with a ";"}
 #'        \item{Journal}{character - The type of document from which the
 #'        data were sourced. Possible values are \code{abbreviated
 #'        journal name}, \code{Book}, \code{PhD thesis}, \code{MSc thesis},
 #'        \code{Report}, \code{Conference talk}, and \code{Conference poster}}
 #'        \item{YearPublication}{character - The year of publication}
-#'        \item{DOI.ISBN}{character - The Digitial Object Identifier or 
+#'        \item{DOI.ISBN}{character - The Digital Object Identifier or 
 #'        International Standard Book Number codes to identify each 
 #'        publication.}
 #'        \item{AdditionalSource}{character - Additional source(s) used to 
@@ -63,7 +63,7 @@
 #'        contains stages based on size. If so, indicates what that measure
 #'        of size is}
 #'        \item{MatrixCriteriaOntogeny}{factor - Indicates whether the matrix
-#'        contains stages based on ontogenic/developmental stages}
+#'        contains stages based on ontogenetic/developmental stages}
 #'        \item{MatrixCriteriaAge}{factor - Indicates whether the matrix 
 #'        contains stages based on age}
 #'        \item{MatrixPopulation}{character - Definition of where the matrix
@@ -220,7 +220,7 @@
 #'        \item{ColCheckOK}{logical - Whether the taxonomy detailed here has been verified
 #'        on the \emph{Catalogue of Life}. See 
 #'        \url{http://www.catalogueoflife.org/} for more details}
-#'        \item{ColCheckDate}{character - The date that the taxonomy was checkd on the 
+#'        \item{ColCheckDate}{character - The date that the taxonomy was checked on the 
 #'        \emph{Catalogue of Life}}
 #'        \item{Infraspecific}{character - Taxonomic infraspecific name of the
 #'        study's \code{SpeciesAuthor}}
@@ -228,23 +228,23 @@
 #'        of \code{SpeciesAccepted}, per the \emph{Catalogue of Life}}
 #'        \item{GenusAccepted}{character - Taxonomic genus name of 
 #'        \code{SpeciesAccepted}, per the \emph{Catalogue of Life}}
-#'        \code{GenusAuthor}{chracter - Genus used in \code{SpeciesAuthor}}
+#'        \code{GenusAuthor}{character - Genus used in \code{SpeciesAuthor}}
 #'        \item{Family}{factor - Family which the species belongs}
 #'        \item{Order}{factor - Order to which the species belongs}
 #'        \item{Class}{factor - Class to which the species belongs}
 #'        \item{Phylum}{factor - Phylum to which the species belongs}
 #'        \item{Kingdom}{factor - Kingdom to which the species belongs}
-#'        \item{OrganismType}{factor - Broad type of organism. Generall, this is 
+#'        \item{OrganismType}{factor - Broad type of organism. Generally, this is 
 #'        \code{Class} in animals (except for humans). Non-animals included
 #'        in \code{COMADRE} include \code{Bacteria} and \code{Virus}}
-#'        \item{Authors}{characer - Last (family) name of all authors 
+#'        \item{Authors}{character - Last (family) name of all authors 
 #'        separated with a ";"}
 #'        \item{Journal}{character - The type of document from which the
 #'        data were sourced. Possible values are \code{abbreviated
 #'        journal name}, \code{Book}, \code{PhD thesis}, \code{MSc thesis},
 #'        \code{Report}, \code{Conference talk}, and \code{Conference poster}}
 #'        \item{YearPublication}{character - The year of publication}
-#'        \item{DOI.ISBN}{character - The Digitial Object Identifier or 
+#'        \item{DOI.ISBN}{character - The Digital Object Identifier or 
 #'        International Standard Book Number codes to identify each 
 #'        publication.}
 #'        \item{AdditionalSource}{character - Additional source(s) used to 
@@ -266,7 +266,7 @@
 #'        contains stages based on size. If so, indicates what that measure
 #'        of size is}
 #'        \item{MatrixCriteriaOntogeny}{factor - Indicates whether the matrix
-#'        contains stages based on ontogenic/developmental stages}
+#'        contains stages based on ontogenetic/developmental stages}
 #'        \item{MatrixCriteriaAge}{factor - Indicates whether the matrix 
 #'        contains stages based on age}
 #'        \item{MatrixPopulation}{character - Definition of where the matrix

@@ -14,7 +14,7 @@ A list of three matrices: `matU`,`matF` and `matC`.
 }
 \description{
 This function splits a matrix population model into three constituent matrices, U (growth and survival processes), F (sexual reproduction) and C (clonal reproduction).
-Warning! The functionality is very basic - it assumes that sexual reproduction is located in the top row of the matrix, and that everything else is growth or survival (the U matrix). Clonality is assumed to be non-existant.
+Warning! The functionality is very basic - it assumes that sexual reproduction is located in the top row of the matrix, and that everything else is growth or survival (the U matrix). Clonality is assumed to be non-existent.
 }
 \examples{
 \dontrun{library(popdemo)

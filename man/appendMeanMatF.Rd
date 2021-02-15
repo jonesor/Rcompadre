@@ -8,7 +8,8 @@ in a COM(P)ADRE database object}
 appendMeanMatF(db)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object.}
+\item{db}{A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+from class 'list'.}
 }
 \value{
 Returns db, but with an extra entry in slot `mat` which contains the
@@ -42,7 +43,7 @@ Danny Buss <dlb50@cam.ac.uk>
 
 Julia Jones <juliajones@biology.sdu.dk>
 
-Iain Stott <stott@biolgy.ox.ac.uk>
+Iain Stott <stott@biology.ox.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }

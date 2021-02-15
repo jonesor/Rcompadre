@@ -17,7 +17,7 @@
 #'   there are no mean matrices within the db from the relevant population.
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
-#' @author Iain Stott <stott@@biolgy.ox.ac.uk>
+#' @author Iain Stott <stott@@biology.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' @examples
 #' \dontrun{

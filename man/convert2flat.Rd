@@ -7,7 +7,8 @@
 convert2flat(db, onlyMatA = FALSE)
 }
 \arguments{
-\item{db}{A COM(P)ADRE database object}
+\item{db}{A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+from class 'list.}
 
 \item{onlyMatA}{A logical value (TRUE/FALSE) indicating whether ONLY the full
 projection matrix \code{matA} should be included in the flattened data
@@ -29,7 +30,7 @@ compadreFlat <- convert2flat(compadre, onlyMatA = FALSE)
 }
 }
 \seealso{
-stringtomatrix
+stringToMatrix
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>

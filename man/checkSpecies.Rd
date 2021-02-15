@@ -11,7 +11,8 @@ checkSpecies(species, db, returnDatabase = FALSE)
 genus and specific epithet separated by either an underscore or a space (
 e.g. c("Acipenser_fulvescens", "Borrelia_burgdorferi"))}
 
-\item{db}{A COM(P)ADRE database.}
+\item{db}{A COM(P)ADRE database object. Database versions <=4.0.1 will be coerced
+from class 'list.}
 
 \item{returnDatabase}{A logical argument indicating whether a database should be returned.}
 }
@@ -24,7 +25,7 @@ If returnDatabase = FALSE, returns a data frame with a column of
 \description{
 This function takes a vector of species names and checks whether those
 species are represented within a COM(P)ADRE database. It outputs either a
-data frame depicting the species of interest and whether they occurr in the
+data frame depicting the species of interest and whether they occur in the
 database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
 object subset to the species of interest.
 }

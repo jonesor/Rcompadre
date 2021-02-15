@@ -3,7 +3,7 @@
 #' This function converts a matrix in character string format (e.g. "[0.2 0.3
 #' 0.1 0]") to a square numeric matrix.
 #' 
-#' @param A A square matrix in the form of a string, begining with an open
+#' @param A A square matrix in the form of a string, beginning with an open
 #'   square bracket and ending with a closed square bracket, with individual
 #'   matrix cell entries separated by a space.
 #' @return A square numeric \code{matrix}.
@@ -21,7 +21,7 @@
 #' x3 <- "[0.42 0.52 0.15 0.23 0.14]"
 #' stringToMatrix(x3)
 #' }
-#' @export
+#' @export stringToMatrix
 stringToMatrix <- function(A) {
   A <- gsub(pattern = "\\[|\\]", "", A)
   A <- gsub(pattern = ";", " ", A)

@@ -4,7 +4,8 @@
 \name{Compadre}
 \alias{Compadre}
 \title{COMPADRE Animal demography data base}
-\format{\itemize{
+\format{
+\itemize{
   \item{\strong{metadata}}{ - A \code{data.frame} with 130 rows and 47 columns}
     \describe{
       \item{SpeciesAuthor}{character - Binomial species name
@@ -34,14 +35,14 @@
        \item{AngioGymno}{factor - Designates whether the species is a
        gymnosperm or angiosperm. Species that are neither are designated
        \code{NA}}
-       \item{Authors}{characer - Last (family) name of all authors 
+       \item{Authors}{character - Last (family) name of all authors 
        separated with a ";"}
        \item{Journal}{character - The type of document from which the
        data were sourced. Possible values are \code{abbreviated
        journal name}, \code{Book}, \code{PhD thesis}, \code{MSc thesis},
        \code{Report}, \code{Conference talk}, and \code{Conference poster}}
        \item{YearPublication}{character - The year of publication}
-       \item{DOI.ISBN}{character - The Digitial Object Identifier or 
+       \item{DOI.ISBN}{character - The Digital Object Identifier or 
        International Standard Book Number codes to identify each 
        publication.}
        \item{AdditionalSource}{character - Additional source(s) used to 
@@ -63,7 +64,7 @@
        contains stages based on size. If so, indicates what that measure
        of size is}
        \item{MatrixCriteriaOntogeny}{factor - Indicates whether the matrix
-       contains stages based on ontogenic/developmental stages}
+       contains stages based on ontogenetic/developmental stages}
        \item{MatrixCriteriaAge}{factor - Indicates whether the matrix 
        contains stages based on age}
        \item{MatrixPopulation}{character - Definition of where the matrix
@@ -199,7 +200,8 @@
    the data base}
    \item{Agreement}{Link to the \code{COMPADRE} license agreement}
  }
-}}
+}
+}
 \usage{
 Compadre
 }

@@ -2,7 +2,7 @@
 #'
 #' This function takes a vector of species names and checks whether those
 #' species are represented within a COM(P)ADRE database. It outputs either a
-#' data frame depicting the species of interest and whether they occurr in the
+#' data frame depicting the species of interest and whether they occur in the
 #' database (TRUE/FALSE), or, if returnDatabase == TRUE, a COM(P)ADRE database
 #' object subset to the species of interest.
 #'

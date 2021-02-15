@@ -13,7 +13,7 @@
 #'   additional columns appended for the matrix stage information and the
 #'   matrices themselves, both in string format.
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
-#' @seealso stringtomatrix
+#' @seealso stringToMatrix
 #' @examples
 #' \dontrun{
 #' compadreFlat <- convert2flat(compadre, onlyMatA = FALSE)
