@@ -16,7 +16,7 @@ Description: Utility functions for interacting with the COMPADRE and COMADRE dat
 License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
 Imports:
   methods, 
