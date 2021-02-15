@@ -26,7 +26,7 @@ filter.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -37,7 +37,7 @@ slice.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -48,7 +48,7 @@ arrange.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -59,7 +59,7 @@ mutate.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -70,7 +70,7 @@ group_by.CompadreDB <- function(.data, ..., add = FALSE) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -89,14 +89,14 @@ ungroup.CompadreDB <- function(x, ...) {
 #' @rdname CompadreDB-Tidyverse
 summarize.CompadreDB <- function(.data, ...) {
   .data <- .data@data
-  NextMethod()
+  callGeneric()
 }
 
 
 #' @rdname CompadreDB-Tidyverse
 summarise.CompadreDB <- function(.data, ...) {
   .data <- .data@data
-  NextMethod()
+  callGeneric()
 }
 
 
@@ -106,7 +106,7 @@ select.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
@@ -117,7 +117,7 @@ rename.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = NextMethod(),
+      data = callGeneric(),
       version = vers)
 }
 
