@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "Rcompadre",
   "description": "Utility functions for interacting with the COMPADRE and COMADRE databases of matrix population models.",
@@ -246,7 +249,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "readme": "https://github.com/jonesor/Rcompadre/blob/master/README.md",
-  "fileSize": "1921.369KB",
-  "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=devel"]
+  "fileSize": "1928.017KB",
+  "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=devel"],
+  "developmentStatus": "https://www.repostatus.org/#wip"
 }
