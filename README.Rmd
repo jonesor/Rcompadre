@@ -59,7 +59,7 @@ or load from a local `.RData` file with
 compadre <- cdb_fetch("path/to/file/COMPADRE_v.4.0.1.RData")
 ```
 
-If you prefer using `load()` to load your local copy of a legacy database, use `as_cdb()` to convert it to the 'CompadreDB' class
+If you prefer using `load()` to load your local copy of a legacy database, use `as_cdb()` to convert it to the `CompadreDB` class
 
 ```{r, eval=FALSE}
 load("COMPADRE_v.4.0.1.RData") # loads object 'compadre'
@@ -80,7 +80,7 @@ subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
-First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicty, irreducibility, or primitivity.
+First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicity, irreducibility, or primitivity.
 
 ```{r,eval=FALSE}
 compadre_flags <- cdb_flag(compadre)
