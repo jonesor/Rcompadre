@@ -249,8 +249,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "1926.013KB",
+  "fileSize": "1926.087KB",
   "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=devel"],
-  "developmentStatus": "https://www.repostatus.org/#wip",
-  "readme": "https://github.com/jonesor/Rcompadre/blob/master/README.md"
+  "developmentStatus": "https://www.repostatus.org/#wip"
 }
