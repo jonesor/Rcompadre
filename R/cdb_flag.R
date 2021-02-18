@@ -41,7 +41,7 @@
 #' and/or \code{NA}, indicating that the matrix has not been split.
 #' 
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
-#' @author Roberto Salguero-Goméz <rob.salguero@@zoo.ox.ac.uk>
+#' @author Roberto Salguero-Gomez <rob.salguero@@zoo.ox.ac.uk>
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 

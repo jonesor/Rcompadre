@@ -33,7 +33,7 @@
 #' * Journal - Abbreviated journal title, or type of source document (e.g. "PhD
 #'   thesis")
 #' * YearPublication - Year of publication
-#' * DOI.ISBN - Digitial Object Identifier or International Standard Book Number
+#' * DOI.ISBN - Digital Object Identifier or International Standard Book Number
 #'   codes to identify each publication
 #' * AdditionalSource - Additional source(s) used to reconstruct the matrix or
 #'   obtain additional metadata for the matrix (if applicable)
@@ -167,7 +167,7 @@
 #' * Journal - Abbreviated journal title, or type of source document (e.g. "PhD
 #'   thesis")
 #' * YearPublication - Year of publication
-#' * DOI.ISBN - Digitial Object Identifier or International Standard Book Number
+#' * DOI.ISBN - Digital Object Identifier or International Standard Book Number
 #'   codes to identify each publication
 #' * AdditionalSource - Additional source(s) used to reconstruct the matrix or
 #'   obtain additional metadata for the matrix (if applicable)
