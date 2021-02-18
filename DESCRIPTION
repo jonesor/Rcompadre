@@ -23,6 +23,7 @@ Imports:
   popdemo,
   tibble
 Suggests: 
+    spelling,
     knitr,
     rmarkdown,
     testthat,
