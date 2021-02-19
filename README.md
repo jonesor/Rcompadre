@@ -3,17 +3,25 @@
 
 # Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
 
+**Master Branch**
+
 [![License: GPL
 v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Build
-Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=devel)](https://travis-ci.org/jonesor/Rcompadre)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)
-[![Coverage
-status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=devel)
+[![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/R-CMD-check.yaml/badge.svg?branch=master)](https://github.com/jonesor/Rcompadre/actions/workflows/R-CMD-check.yaml)
+
+**Development Branch**
+
+[![License: GPL
+v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/R-CMD-check.yaml/badge.svg?branch=devel)](https://github.com/jonesor/Rcompadre/actions/workflows/R-CMD-check.yaml)
+
+------------------------------------------------------------------------
 
 An R package to work with the [COM(P)ADRE](https://www.compadre-db.org/)
 Plant and Animal Matrix Population Databases. Note this package is at an
