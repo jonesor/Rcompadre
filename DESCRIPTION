@@ -72,7 +72,6 @@ Suggests:
     covr,
     Rage,
     rcrossref
-Remotes: jonesor/Rage
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
@@ -100,3 +99,6 @@ Collate:
     'mpm_methods.R'
     'string_representation.R'
     'zzz.R'
+Language: en-GB
+Config/testthat/parallel: true
+Config/testthat/edition: 3
