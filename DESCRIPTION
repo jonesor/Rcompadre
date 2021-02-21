@@ -70,7 +70,6 @@ Suggests:
     dplyr,
     ggtern,
     covr,
-    Rage,
     rcrossref
 VignetteBuilder: knitr
 Collate: 
