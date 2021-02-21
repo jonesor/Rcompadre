@@ -129,7 +129,7 @@
 <tr class="even">
 <td></td>
 <td align="left"><a href="https://codecov.io/github/jonesor/Rcompadre?branch=master"><img src="https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg" alt="Coverage status"></a></td>
-<td align="left"><a href="https://codecov.io/github/jonesor/Rcompadre?branch=devel"><img src="https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg" alt="Coverage status"></a></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -185,7 +185,7 @@
 <p>First we’ll use the function <code>cdb_flag</code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
-<p>We’ll only be able to calculate population growth rates from matrices that don’t contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we’ll subset the database accordingly.</p>
+<p>We’ll only be able to calculate population growth rates from matrices that don’t contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we’ll subset the database accordingly.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre_flags</span>,
                        <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -246,13 +246,15 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Patrick Barks <br><small class="roles"> Author </small>  </li>
+<li>Patrick Barks <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5947-8151" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Danny Buss <br><small class="roles"> Author </small>  </li>
-<li>Roberto Salguero-Gomez <br><small class="roles"> Author </small>  </li>
-<li>Iain Stott <br><small class="roles"> Author </small>  </li>
-<li>Tamora James <br><small class="roles"> Author </small>  </li>
-<li>Owen Jones <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Julia Jones <br><small class="roles"> Author </small>  </li>
+<li>Roberto Salguero-Gomez <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6085-4433" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Iain Stott <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2724-7436" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Tamora James <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-1363-4742" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Owen Jones <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5720-4686" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Julia Jones <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9223-1778" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Sam Levin <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3289-9925" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -261,7 +263,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

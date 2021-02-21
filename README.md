@@ -90,7 +90,7 @@ compadre_flags <- cdb_flag(compadre)
 
 We’ll only be able to calculate population growth rates from matrices
 that don’t contain missing values, and we only want to use matrices that
-meet the assumption of ergodicty, so we’ll subset the database
+meet the assumption of ergodicity, so we’ll subset the database
 accordingly.
 
 ``` r
