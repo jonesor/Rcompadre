@@ -97,7 +97,7 @@ First we'll use the function `cdb_flag` to add columns to the database flagging 
 compadre_flags <- cdb_flag(compadre)
 ```
 
-We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicty, so we'll subset the database accordingly.
+We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we'll subset the database accordingly.
 
 ```{r, eval=FALSE}
 compadre_sub <- subset(compadre_flags,
