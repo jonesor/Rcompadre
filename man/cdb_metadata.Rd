@@ -14,7 +14,7 @@ Tibble with all metadata columns of \code{cdb}
 }
 \description{
 Extract a tibble with only metadata information from a CompadreDB object, by 
-droping the matrix column "mat".
+dropping the matrix column "mat".
 }
 \details{
 Transform the Large CompadreDB object into a tibble and drops the

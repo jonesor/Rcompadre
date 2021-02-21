@@ -36,3 +36,7 @@ vignettes/*.pdf
 # Other unwanted files
 .DS_Store
 *.lnk
+doc
+Meta
+tests/testthat-problems.rds
+tests/spelling.Rout.save

@@ -56,7 +56,7 @@ Populations are defined based on unique combinations of the columns
 'SpeciesAuthor', 'MatrixPopulation', and 'MatrixDimension', (or optionally, a
 different set of columns supplied by the user).
 The main purpose of this function is to identify stage classes that are
-potentially reproductive (i.e. the absense of fecundity in a given
+potentially reproductive (i.e. the absence of fecundity in a given
 stage class and year does not necessarily indicate that the stage in question
 is non-reproductive)." />
 <meta property="og:image" content="/logo.png" />
@@ -99,7 +99,7 @@ is non-reproductive)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -114,22 +114,27 @@ is non-reproductive)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/GettingStarted.html">Getting Started with Rcompadre</a>
+      <a href="../articles/a01_GettingStarted.html">Getting Started with Rcompadre</a>
     </li>
     <li>
-      <a href="../articles/ObtainingReferences.html">Obtaining References</a>
+      <a href="../articles/a02_RcompadreTidy.html">Using Rcompadre with the Tidyverse</a>
     </li>
     <li>
-      <a href="../articles/RcompadreTidy.html">Using Rcompadre with the Tidyverse</a>
+      <a href="../articles/a03_VectorizingRcompadre.html">Vectorizing with Rcompadre</a>
     </li>
     <li>
-      <a href="../articles/VectorizingRcompadre.html">Vectorizing with Rcompadre</a>
+      <a href="../articles/a04_ObtainingReferences.html">Obtaining References</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jonesor/Rcompadre/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -145,7 +150,7 @@ is non-reproductive)." />
     <div class="page-header">
     <h1>Calculate a population-specific mean fecundity matrix for each set of
 matrices in a COM(P)ADRE database</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/jonesor/Rcompadre/blob/master/R/cdb_mean_matF.R'><code>R/cdb_mean_matF.R</code></a></small>
     <div class="hidden name"><code>cdb_mean_matF.Rd</code></div>
     </div>
 
@@ -157,7 +162,7 @@ including fecundity matrices for which <code>MatrixComposite == 'Mean'</code>).<
 'SpeciesAuthor', 'MatrixPopulation', and 'MatrixDimension', (or optionally, a
 different set of columns supplied by the user).</p>
 <p>The main purpose of this function is to identify stage classes that are
-<em>potentially</em> reproductive (i.e. the absense of fecundity in a given
+<em>potentially</em> reproductive (i.e. the absence of fecundity in a given
 stage class and year does not necessarily indicate that the stage in question
 is non-reproductive).</p>
     </div>
@@ -184,13 +189,13 @@ identified. Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("Species
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a list of matrices, reprenting the mean fecundity matrix
+    <p>Returns a list of matrices, representing the mean fecundity matrix
   associated with each row of the database.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Danny Buss &lt;dlb50@cam.ac.uk&gt;</p>
 <p>Julia Jones &lt;juliajones@biology.sdu.dk&gt;</p>
-<p>Iain Stott &lt;stott@biolgy.ox.ac.uk&gt;</p>
+<p>Iain Stott &lt;stott@biology.sdu.dk&gt;</p>
 <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -280,7 +285,7 @@ identified. Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("Species
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

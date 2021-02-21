@@ -1,7 +1,7 @@
 #' Extract metadata from a COM(P)ADRE database
 #' 
 #' Extract a tibble with only metadata information from a CompadreDB object, by 
-#' droping the matrix column "mat".
+#' dropping the matrix column "mat".
 #' 
 #' @param cdb A CompadreDB object
 #'   

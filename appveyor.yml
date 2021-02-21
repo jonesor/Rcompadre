@@ -6,7 +6,6 @@ init:
         $ErrorActionPreference = "Stop"
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
-
 install:
   ps: Bootstrap
 
@@ -26,15 +25,15 @@ environment:
       R_REMOTES_STANDALONE: true
       USE_RTOOLS: true      
       
-    - R_VERSION: devel
-      R_ARCH: x64
-      R_REMOTES_STANDALONE: true
-      USE_RTOOLS: true
+#   - R_VERSION: devel
+#     R_ARCH: x64
+#     R_REMOTES_STANDALONE: true
+#     USE_RTOOLS: true
       
-    - R_VERSION: devel
-      R_ARCH: i386
-      R_REMOTES_STANDALONE: true
-      USE_RTOOLS: true
+#   - R_VERSION: devel
+#     R_ARCH: i386
+#     R_REMOTES_STANDALONE: true
+#     USE_RTOOLS: true
       
     - R_VERSION: oldrel
       R_ARCH: x64
@@ -79,7 +78,7 @@ notifications:
   - provider: Email
     to:
     - jones@biology.sdu.dk
-    subject: 'Rccmpadre: r-appveyor build {{status}}'
+    subject: 'Rcompadre: r-appveyor build {{status}}'
     message: "https://ci.appveyor.com/project/jonesor/RCompadre"
     on_build_success: false
     on_build_failure: false
