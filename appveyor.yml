@@ -78,7 +78,7 @@ notifications:
   - provider: Email
     to:
     - jones@biology.sdu.dk
-    subject: 'Rccmpadre: r-appveyor build {{status}}'
+    subject: 'Rcompadre: r-appveyor build {{status}}'
     message: "https://ci.appveyor.com/project/jonesor/RCompadre"
     on_build_success: false
     on_build_failure: false
