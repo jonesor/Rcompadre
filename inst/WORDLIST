@@ -1,3 +1,4 @@
+ac
 AdditionalSource
 adre
 ADRE
@@ -15,7 +16,10 @@ Castaldo
 Caswell
 Catalogue
 cdb
+CMD
 Colchero
+COM
+com
 comadre
 COMADRE
 CommonName
@@ -24,11 +28,11 @@ COMPADRE
 CompadreDB
 CompadreMat
 Conde
-CMD
 CrossRef
 csv
 DateCreated
 Davison
+db
 dicot
 DicotMonoc
 dk
@@ -37,12 +41,14 @@ doi
 DOI
 DOIs
 dplyr
+Ecol
 Ecoregion
 elasticities
 ergodic
 ergodicity
 Espino
 et
+etc
 Eudicot
 Farack
 funtions
@@ -65,8 +71,10 @@ jones
 juliajones
 Kroon
 lapply
+Lat
 Lebreton
 Levin
+Lon
 lx
 magrittr
 matA
@@ -107,6 +115,7 @@ NumberMatrices
 NumberPopulations
 NumberStudies
 ontogenic
+org
 OrganismType
 patrick
 Phyllanthus
@@ -116,12 +125,13 @@ pre
 primitivity
 propagule
 pseudoreplication
+R's
 RData
 Roemer
+roemer
 Runge
 Ruoff
 Römer
-roemer
 salguero
 Salguero
 Scheuerlein
