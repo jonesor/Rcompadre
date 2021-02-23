@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - devel
+      - master
   pull_request:
     branches:
       - devel
+      - master
 
 name: pkgdown_build_site
 
@@ -50,6 +52,8 @@ jobs:
           install.packages("textshaping",type = "binary",dependencies = TRUE)
           install.packages("devtools")
           devtools::install(pkg = ".", dependencies = TRUE)
+          install.packages("knitr",dependencies = TRUE)
+          knitr::knit(input = "README.Rmd")
           install.packages("pkgdown", dependencies = TRUE)    
           pkgdown::build_site()
 
