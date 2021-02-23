@@ -61,6 +61,13 @@
     },
     {
       "@type": "Person",
+      "givenName": "Julia",
+      "familyName": "Jones",
+      "email": "juliajones@biology.sdu.dk",
+      "@id": "https://orcid.org/0000-0001-9223-1778"
+    },
+    {
+      "@type": "Person",
       "givenName": "Sam",
       "familyName": "Levin",
       "email": "levisc8@gmail.com",
@@ -258,8 +265,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "2290.607KB",
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=master"],
-  "readme": "https://github.com/jonesor/Rcompadre/blob/master/README.md"
+  "fileSize": "2290.057KB",
+  "developmentStatus": "https://www.repostatus.org/#wip",
+  "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=master"]
 }
