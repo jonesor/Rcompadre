@@ -12,6 +12,8 @@
 #' 
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data acquisition}
+#' 
 #' @examples
 #' \dontrun{
 #' compadre <- cdb_fetch('compadre')

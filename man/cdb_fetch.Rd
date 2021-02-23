@@ -24,6 +24,11 @@ file.
 compadre <- cdb_fetch('compadre')
 }
 }
+\seealso{
+Other {data acquisition}: 
+\code{\link{cdb_metadata}()}
+}
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>
 }
+\concept{{data acquisition}}

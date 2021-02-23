@@ -61,13 +61,6 @@
     },
     {
       "@type": "Person",
-      "givenName": "Julia",
-      "familyName": "Jones",
-      "email": "juliajones@biology.sdu.dk",
-      "@id": "https://orcid.org/0000-0001-9223-1778"
-    },
-    {
-      "@type": "Person",
       "givenName": "Sam",
       "familyName": "Levin",
       "email": "levisc8@gmail.com",

@@ -150,8 +150,156 @@
     <tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-data-acquisition" class="hasAnchor"><a href="#section-data-acquisition" class="anchor"></a>Data acquisition</h2>
+          <p class="section-desc"><p>Functions for acquiring data from COMPADRE/COMADRE.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="cdb_fetch.html">cdb_fetch()</a></code> </p>
+        </td>
+        <td><p>Fetch the COM(P)ADRE database from compadre-db.org or a local file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_metadata.html">cdb_metadata()</a></code> </p>
+        </td>
+        <td><p>Extract metadata from a COM(P)ADRE database</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-checking" class="hasAnchor"><a href="#section-data-checking" class="anchor"></a>Data checking</h2>
+          <p class="section-desc"><p>Functions for checking data.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="cdb_check_species.html">cdb_check_species()</a></code> </p>
+        </td>
+        <td><p>Check whether a COM(P)ADRE database contains one or more species of interest</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_collapse.html">cdb_collapse()</a></code> </p>
+        </td>
+        <td><p>Collapse a COM(P)ADRE database by averaging matrices over levels of one or 
+more grouping variables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_compare.html">cdb_compare()</a></code> </p>
+        </td>
+        <td><p>Compare two versions or subsets of a COM(P)ADRE database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_flag.html">cdb_flag()</a></code> </p>
+        </td>
+        <td><p>Flag potential issues in matrices of a COM(P)ADRE database</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-management" class="hasAnchor"><a href="#section-data-management" class="anchor"></a>Data management</h2>
+          <p class="section-desc"><p>Functions for manipulating and managing data.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="cdb_flatten.html">cdb_flatten()</a></code> </p>
+        </td>
+        <td><p>Convert a COM(P)ADRE database to a flat data frame with matrices and vectors
+stored in string representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_id.html">cdb_id()</a></code> </p>
+        </td>
+        <td><p>Create integer identifiers for a COM(P)ADRE database corresponding to unique
+combinations of a given set of columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_id_stages.html">cdb_id_stages()</a></code> </p>
+        </td>
+        <td><p>Create integer identifiers for a COM(P)ADRE database corresponding to unique
+combinations of species and matrix stage class definitions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_id_studies.html">cdb_id_studies()</a></code> </p>
+        </td>
+        <td><p>Create a vector of unique study identifiers from a COM(P)ADRE database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_mean_matF.html">cdb_mean_matF()</a></code> </p>
+        </td>
+        <td><p>Calculate a population-specific mean fecundity matrix for each set of
+matrices in a COM(P)ADRE database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_rbind.html">cdb_rbind()</a></code> </p>
+        </td>
+        <td><p>Merge two COM(P)ADRE databases via row-bind</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_unflatten.html">cdb_unflatten()</a></code> </p>
+        </td>
+        <td><p>Reconstitute a flattened COM(P)ADRE database (created by cdb_flatten) as a
+CompadreDB object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cdb_unnest.html">cdb_unnest()</a></code> </p>
+        </td>
+        <td><p>Unnest a COM(P)ADRE database by spreading the components of CompadreMat into
+separate list-columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mpm_mean.html">mat_mean()</a></code> <code><a href="mpm_mean.html">mpm_mean()</a></code> </p>
+        </td>
+        <td><p>Calculate a mean over a list of matrices or CompadreMat objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mpm_methods.html">mpm_has_prop()</a></code> <code><a href="mpm_methods.html">mpm_has_active()</a></code> <code><a href="mpm_methods.html">mpm_has_dorm()</a></code> <code><a href="mpm_methods.html">mpm_first_active()</a></code> </p>
+        </td>
+        <td><p>Extract stage-class information from CompadreMat or CompadreDB objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="string_representation.html">mat_to_string()</a></code> <code><a href="string_representation.html">vec_to_string()</a></code> <code><a href="string_representation.html">string_to_mat()</a></code> <code><a href="string_representation.html">string_to_vec()</a></code> </p>
+        </td>
+        <td><p>Convert vectors or square numeric matrices to and from string representation</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>All functions listed alphabetically.</p></p>
         </th>
       </tr>
       
@@ -333,7 +481,7 @@ separate list-columns</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

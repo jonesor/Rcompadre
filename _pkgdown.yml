@@ -1,0 +1,19 @@
+reference:
+  - title: "Data acquisition"
+    desc: "Functions for acquiring data from COMPADRE/COMADRE."
+    contents:
+      - has_concept("data acquisition")
+  - title: "Data checking"
+    desc: "Functions for checking data."
+    contents:
+      - has_concept("data checking")
+  - title: "Data management"
+    desc: "Functions for manipulating and managing data."
+    contents:
+      - has_concept("data management")
+
+  - title: "All functions"
+    desc: "All functions listed alphabetically."
+    contents:
+      - starts_with("[a-zA-Z]")
+

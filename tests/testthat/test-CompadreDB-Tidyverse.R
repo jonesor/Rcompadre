@@ -7,10 +7,10 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   
   # ggplot fortify
   cf <- fortify(Compadre)
-  expect_is(cf, "data.frame")
+  expect_s3_class(cf, "data.frame")
   
   p <- ggplot(cf, aes(Lon, Lat)) + geom_point()
-  expect_is(p, "ggplot")
+  expect_true("ggplot" %in% class(p))
   
   # filter
   db1 <- filter(Compadre, MatrixDimension == 3, Family == "Compositae")
@@ -37,13 +37,13 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   # group_by
   db5 <- group_by(Compadre, Family)
   expect_s4_class(db5, "CompadreDB")
-  expect_is(db5@data, "grouped_df")
+  expect_true("grouped_df" %in% class(db5@data))
   
   # summarize
   sum1 <- summarize(db5, n = n())
   sum2 <- summarise(db5, n = n())
-  expect_is(sum1, "tbl")
-  expect_is(sum2, "tbl")
+  expect_true("tbl" %in% class(sum1))
+  expect_true("tbl" %in% class(sum2))
   
   # ungroup
   db6 <- ungroup(db5)

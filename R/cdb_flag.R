@@ -45,6 +45,8 @@
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data checking}
+#' 
 #' @examples
 #' CompadreFlag <- cdb_flag(Compadre)
 #' 

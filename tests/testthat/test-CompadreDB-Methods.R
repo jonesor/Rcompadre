@@ -3,10 +3,10 @@ context("CompadreDB-Methods")
 test_that("CompadreDB-Methods work correctly", {
   
   df <- as.data.frame(Compadre)
-  expect_is(df, "data.frame")
+  expect_s3_class(df, "data.frame")
   
   tb <- as_tibble(Compadre)
-  expect_is(tb, "tbl_df")
+  expect_s3_class(tb, "tbl_df")
   
   hd <- head(Compadre, n = 10)
   expect_s4_class(hd, "CompadreDB")
@@ -20,13 +20,13 @@ test_that("CompadreDB-Methods work correctly", {
   expect_equal(nm, names(Compadre@data))
   
   dm <- dim(Compadre)
-  expect_is(dm, "integer")
+  expect_true("integer" == class(dm))
   expect_length(dm, 2)
   
   n_row <- nrow(Compadre)
   n_col <- ncol(Compadre)
-  expect_is(n_row, "integer")
-  expect_is(n_col, "integer")
+  expect_type(n_row, "integer")
+  expect_type(n_col, "integer")
   
   traits <- data.frame(SpeciesAccepted = sample(Compadre$SpeciesAccepted, 5),
                        value = 1:5)
@@ -39,9 +39,9 @@ test_that("CompadreDB-Methods work correctly", {
   nstudies <- NumberStudies(Compadre)
   nmatrices <- NumberMatrices(Compadre)
   
-  expect_is(nspecies, "integer")
-  expect_is(nstudies, "integer")
-  expect_is(nmatrices, "integer")
+  expect_type(nspecies, "integer")
+  expect_type(nstudies, "integer")
+  expect_type(nmatrices, "integer")
 })
 
 

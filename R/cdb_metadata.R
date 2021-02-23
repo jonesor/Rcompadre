@@ -8,6 +8,8 @@
 #' @return Tibble with all metadata columns of \code{cdb}
 #'   
 #' @author Gesa Römer <gesa.roemer@@gmail.com>
+#' 
+#' @family {data acquisition}
 #'   
 #' @details Transform the Large CompadreDB object into a tibble and drops the
 #' matrix column ("mat").

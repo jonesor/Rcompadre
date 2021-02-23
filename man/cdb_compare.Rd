@@ -28,6 +28,13 @@ Compadre2 <- subset(Compadre, Continent == "Africa")
 cdb_compare(Compadre1, Compadre2)
 
 }
+\seealso{
+Other {data checking}: 
+\code{\link{cdb_check_species}()},
+\code{\link{cdb_collapse}()},
+\code{\link{cdb_flag}()}
+}
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
 }
+\concept{{data checking}}

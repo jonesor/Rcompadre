@@ -16,6 +16,8 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data management}
+#' 
 #' @details
 #' The vector 'MatrixClassOrganized' reflects standardized stage classes
 #' ('prop', 'active', or 'dorm'), whereas 'MatrixClassAuthor' reflects a

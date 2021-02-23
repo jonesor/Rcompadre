@@ -28,6 +28,8 @@
 #' @author Iain Stott <stott@@biology.sdu.dk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data management}
+#' 
 #' @examples
 #' # print matF associated with row 16 of database
 #' Compadre$mat[[16]]

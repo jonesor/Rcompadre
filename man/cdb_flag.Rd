@@ -61,6 +61,12 @@ CompadreFlag <- cdb_flag(Compadre)
 CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
 
 }
+\seealso{
+Other {data checking}: 
+\code{\link{cdb_check_species}()},
+\code{\link{cdb_collapse}()},
+\code{\link{cdb_compare}()}
+}
 \author{
 Julia Jones <juliajones@biology.sdu.dk>
 
@@ -70,3 +76,4 @@ Danny Buss <dlb50@cam.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
+\concept{{data checking}}

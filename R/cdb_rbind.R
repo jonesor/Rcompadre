@@ -9,6 +9,8 @@
 #' 
 #' @author Sam Levin
 #' 
+#' @family {data management}
+#' 
 #' @examples 
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
 #' Compadre2 <- subset(Compadre, Continent == "Africa")
