@@ -28,8 +28,7 @@ options(digits = 4)
 |   | [![Coverage status](https://codecov.io/gh/jonesor/Rcompadre/branch/devel/graph/badge.svg)](https://codecov.io/github/jonesor/Rcompadre?branch=master) |    |
     
 
-
-An R package to work with the [COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix Population Databases. 
+An R package to facilitate working with the [COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix Population Databases.
 
 ## Installation
 
