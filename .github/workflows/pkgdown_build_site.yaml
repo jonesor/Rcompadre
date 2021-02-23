@@ -47,7 +47,8 @@ jobs:
         
       - name: Build the site
         run: |
-          install.packages("devtools")    
+          install.packages("devtools")
+          install.packages("textshaping")
           devtools::install(pkg = ".", dependencies = TRUE)
           install.packages("pkgdown")    
           pkgdown::build_site()
