@@ -57,7 +57,7 @@ jobs:
           install.packages("pkgdown", dependencies = TRUE)    
           pkgdown::build_site()
         shell: Rscript {0}
-      
+
       -name: Commit to github
        run:|
           git add docs/
