@@ -58,8 +58,8 @@ jobs:
           pkgdown::build_site()
         shell: Rscript {0}
 
-      -name: Commit to github
-       run:|
+      - name: Commit to github
+        run: |
           git add docs/
           git add README.md
           git commit -m 'Re-build site and README' || echo "No changes to commit"
