@@ -56,13 +56,14 @@ jobs:
           knitr::knit(input = "README.Rmd")
           install.packages("pkgdown", dependencies = TRUE)    
           pkgdown::build_site()
+        shell: Rscript {0}
+      
+      -name: Commit to github
+       run:|
           git add docs/
           git add README.md
           git commit -m 'Re-build site and README' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
-
-
-        shell: Rscript {0}
 
       - name: Session info
         run: |
