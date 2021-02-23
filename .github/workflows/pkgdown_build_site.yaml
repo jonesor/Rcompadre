@@ -7,8 +7,8 @@ on:
       - master
   pull_request:
     branches:
-      - devel
-      - master
+      #- master
+      #- devel
 
 name: pkgdown_build_site
 
