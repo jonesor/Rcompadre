@@ -29,10 +29,7 @@ setMethod("matA", signature = "CompadreMat",
 #' @export
 setMethod("matA", signature = "CompadreDB", 
           function(object) {
-            return(lapply(lapply(object@data$mat, function(M) { M@matA }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object@data$mat, function(M) { M@matA }))
           }
 )
 #' @rdname CompadreMatrixMethods
@@ -43,10 +40,7 @@ setMethod("matA", signature = "list",
               stop("All elements of list passed to matA() must be of class ",
                    "CompadreMat")
             }
-            return(lapply(lapply(object@data$mat, function(M) { M@matA }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object, function(M) { M@matA }))
           }
 )
 
@@ -73,11 +67,8 @@ setMethod("matU", signature = "CompadreMat",
 #' @export
 setMethod("matU", signature = "CompadreDB", 
           function(object) {
-            return(lapply(lapply(object@data$mat, function(M) { M@matU }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
-            }
+            return(lapply(object@data$mat, function(M) { M@matU }))
+          }
 )
 #' @rdname CompadreMatrixMethods
 #' @export
@@ -87,10 +78,7 @@ setMethod("matU", signature = "list",
               stop("All elements of list passed to matU() must be of class ",
                    "CompadreMat")
             }
-            return(lapply(lapply(object@data$mat, function(M) { M@matU }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object, function(M) { M@matU }))
           }
 )
 
@@ -118,10 +106,7 @@ setMethod("matF", signature = "CompadreMat",
 #' @export
 setMethod("matF", signature = "CompadreDB", 
           function(object) {
-            return(lapply(lapply(object@data$mat, function(M) { M@matF }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object@data$mat, function(M) { M@matF }))
           }
 )
 #' @rdname CompadreMatrixMethods
@@ -132,10 +117,7 @@ setMethod("matF", signature = "list",
               stop("All elements of list passed to matF() must be of class ",
                    "CompadreMat")
             }
-            return(lapply(lapply(object@data$mat, function(M) { M@matF }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object, function(M) { M@matF }))
           }
 )
 
@@ -163,10 +145,7 @@ setMethod("matC", signature = "CompadreMat",
 #' @export
 setMethod("matC", signature = "CompadreDB", 
           function(object) {
-            return(lapply(lapply(object@data$mat, function(M) { M@matC }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object@data$mat, function(M) { M@matC }))
           }
 )
 #' @rdname CompadreMatrixMethods
@@ -177,10 +156,7 @@ setMethod("matC", signature = "list",
               stop("All elements of list passed to matC() must be of class ",
                    "CompadreMat")
             }
-            return(lapply(lapply(object@data$mat, function(M) { M@matC }),function(m){
-              rownames(m) <- colnames(m)
-              return(m)
-            }))
+            return(lapply(object, function(M) { M@matC }))
           }
 )
 
