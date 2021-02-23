@@ -48,9 +48,8 @@ jobs:
       - name: Build the site
         run: |
           install.packages("devtools")
-          install.packages("textshaping")
           devtools::install(pkg = ".", dependencies = TRUE)
-          install.packages("pkgdown")    
+          install.packages("pkgdown", dependencies = TRUE)    
           pkgdown::build_site()
 
         shell: Rscript {0}
