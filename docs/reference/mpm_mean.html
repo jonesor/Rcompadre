@@ -235,8 +235,12 @@ be <code>0</code>.</p>
 #&gt; </div><div class='input'>
 <span class='co'># extract list of matA and take mean</span>
 <span class='va'>mats</span> <span class='op'>&lt;-</span> <span class='fu'><a href='CompadreMatrixMethods.html'>matA</a></span><span class='op'>(</span><span class='va'>mpms</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in lapply(object@data$mat, function(M) {    M@matA}): trying to get slot "data" from an object of a basic class ("list") with no slots</span></div><div class='input'><span class='fu'>mat_mean</span><span class='op'>(</span><span class='va'>mats</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in vapply(x, nrow, numeric(1)): object 'mats' not found</span></div></pre>
+<span class='fu'>mat_mean</span><span class='op'>(</span><span class='va'>mats</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         A1     A2      A3      A4
+#&gt; A1 0.00000 0.0000 0.00000 1.96575
+#&gt; A2 0.19725 0.4090 0.17650 0.15400
+#&gt; A3 0.03250 0.1605 0.38175 0.37500
+#&gt; A4 0.00000 0.1175 0.26100 0.37150</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
