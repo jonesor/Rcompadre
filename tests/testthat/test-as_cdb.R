@@ -6,7 +6,7 @@ test_that("as_cdb works correctly", {
   
   expect_s4_class(db, "CompadreDB")
   expect_s4_class(db$mat[[1]], "CompadreMat")
-  expect_is(db@data, "tbl_df")
+  expect_type(db@data, "tbl_df")
   expect_length(db@data$mat, length(CompadreLegacy$mat))
 })
 

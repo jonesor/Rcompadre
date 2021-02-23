@@ -4,8 +4,8 @@ test_that("cdb_mean_matF works correctly", {
   
   x <- cdb_mean_matF(Compadre)
   
-  expect_is(x, "list")
-  expect_is(x[[1]], "matrix")
+  expect_type(x, "list")
+  expect_type(x[[1]], "matrix")
   expect_length(x, nrow(Compadre@data))
 })
 

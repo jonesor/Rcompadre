@@ -6,17 +6,17 @@ test_that("cdb_flag works correctly", {
   
   expect_s4_class(db_clean, "CompadreDB")
   
-  expect_is(db_clean@data$check_NA_A, "logical")
-  expect_is(db_clean@data$check_NA_U, "logical")
-  expect_is(db_clean@data$check_NA_F, "logical")
-  expect_is(db_clean@data$check_NA_C, "logical")
-  expect_is(db_clean@data$check_zero_U, "logical")
+  expect_type(db_clean@data$check_NA_A, "logical")
+  expect_type(db_clean@data$check_NA_U, "logical")
+  expect_type(db_clean@data$check_NA_F, "logical")
+  expect_type(db_clean@data$check_NA_C, "logical")
+  expect_type(db_clean@data$check_zero_U, "logical")
   
-  expect_is(db_clean@data$check_singular_U, "logical")
-  expect_is(db_clean@data$check_component_sum, "logical")
-  expect_is(db_clean@data$check_ergodic, "logical")
-  expect_is(db_clean@data$check_irreducible, "logical")
-  expect_is(db_clean@data$check_primitive, "logical")
+  expect_type(db_clean@data$check_singular_U, "logical")
+  expect_type(db_clean@data$check_component_sum, "logical")
+  expect_type(db_clean@data$check_ergodic, "logical")
+  expect_type(db_clean@data$check_irreducible, "logical")
+  expect_type(db_clean@data$check_primitive, "logical")
   
   db_clean2 <- cdb_flag(Compadre, checks = c("check_ergodic",
                                              "check_irreducible",

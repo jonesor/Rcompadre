@@ -5,8 +5,8 @@ test_that("string_representation functions work correctly", {
   ms1 <- "[3.3 5.2 6.1 0.1 0.2 0.3 0.2 0.4 0.1]"
   m1 <- string_to_mat(ms1)
   
-  expect_is(m1, "matrix")
-  expect_is(c(m1), "numeric")
+  expect_type(m1, "matrix")
+  expect_type(c(m1), "numeric")
   expect_true(!any(is.na(m1)))
   expect_true(nrow(m1) == ncol(m1))
   
@@ -16,39 +16,39 @@ test_that("string_representation functions work correctly", {
   
   vs1 <- "[0.2||0.5||0.3]"
   v1 <- string_to_vec(vs1, numeric = TRUE)
-  expect_is(v1, "numeric")
+  expect_type(v1, "numeric")
   expect_length(v1, 3)
   
   vs2 <- "[Seed Bank||Reproductive Small (0.6-1.4 cm)||Dormant]"
   v2 <- string_to_vec(vs2)
-  expect_is(v2, "character")
+  expect_type(v2, "character")
   expect_length(v2, 3)
   
   vs3 <- "[1.0]"
   v3 <- string_to_vec(vs3, numeric = TRUE)
-  expect_is(v3, "numeric")
+  expect_type(v3, "numeric")
   expect_length(v3, 1)
   
   ms1_reconv <- mat_to_string(m1)
-  expect_is(ms1_reconv, "character")
+  expect_type(ms1_reconv, "character")
   expect_length(ms1_reconv, 1)
   expect_match(ms1_reconv, "^\\[")
   expect_match(ms1_reconv, "\\]$")
   
   ms2_reconv <- mat_to_string(m2)
-  expect_is(ms2_reconv, "character")
+  expect_type(ms2_reconv, "character")
   expect_length(ms2_reconv, 1)
   expect_match(ms2_reconv, " NA ")
   
   vs1_reconv <- vec_to_string(v1)
-  expect_is(vs1_reconv, "character")
+  expect_type(vs1_reconv, "character")
   expect_length(vs1_reconv, 1)
   expect_match(vs1_reconv, "^\\[")
   expect_match(vs1_reconv, "\\]$")
   expect_match(vs1_reconv, "\\|\\|")
   
   vs2_reconv <- vec_to_string(v2)
-  expect_is(vs2_reconv, "character")
+  expect_type(vs2_reconv, "character")
   expect_length(vs2_reconv, 1)
   expect_match(vs2_reconv, "^\\[")
   expect_match(vs2_reconv, "\\]$")

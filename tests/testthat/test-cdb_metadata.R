@@ -4,7 +4,7 @@ test_that("cdb_metadata works correctly", {
   
   Compadre_metadata <- cdb_metadata(Compadre)
   
-  expect_is(Compadre_metadata, "tbl_df")
+  expect_type(Compadre_metadata, "tbl_df")
   expect_true(ncol(Compadre_metadata) == (ncol(Compadre)-1))
 })
 
