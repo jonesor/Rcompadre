@@ -63,6 +63,7 @@ jobs:
         
       - name: Build the site
         run: |
+          devtools::install(pkg = ".", dependencies = TRUE)
           install.packages("pkgdown")    
           pkgdown::build_site()
 
