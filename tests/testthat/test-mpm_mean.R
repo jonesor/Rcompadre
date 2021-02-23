@@ -9,12 +9,12 @@ test_that("mpm_mean works correctly", {
   
   mats1 <- list(matrix(0:3, nrow = 2))
   y1 <- mat_mean(mats1)
-  expect_type(y1, "matrix")
+  expect_is(y1, "matrix")
   expect_true(all(y1 == mats1[[1]]))
   
   mats2 <- list(matrix(0:3, nrow = 2), matrix(1:4, nrow = 2))
   y2 <- mat_mean(mats2)
-  expect_type(y2, "matrix")
+  expect_is(y2, "matrix")
   expect_true(all(dim(y2) == c(2, 2)))
   
   # na handling

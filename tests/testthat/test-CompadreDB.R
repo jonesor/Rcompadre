@@ -40,8 +40,8 @@ test_that("CompadreDB works correctly", {
   expect_error(Compadre[["mat"]] <- 1L)
   
   # accessors
-  expect_type(CompadreData(Compadre), "data.frame")
-  expect_type(VersionData(Compadre), "list")
+  expect_is(CompadreData(Compadre), "data.frame")
+  expect_is(VersionData(Compadre), "list")
   expect_length(Version(Compadre), 1)
   expect_length(DateCreated(Compadre), 1)
   expect_length(DateCreated(Compadre), 1)
