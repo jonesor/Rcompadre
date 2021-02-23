@@ -35,6 +35,12 @@ cdb_check_species(Compadre, species)
 CompadreSubset <- cdb_check_species(Compadre, species, return_db = TRUE)
 
 }
+\seealso{
+Other {data checking}: 
+\code{\link{cdb_collapse}()},
+\code{\link{cdb_compare}()},
+\code{\link{cdb_flag}()}
+}
 \author{
 Danny Buss <dlb50@cam.ac.uk>
 
@@ -44,3 +50,4 @@ Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
+\concept{{data checking}}

@@ -98,7 +98,7 @@
       <h1 data-toc-skip>Getting Started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-02-21</h4>
+            <h4 class="date">2021-02-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -140,18 +140,18 @@
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # A tibble: 150 x 48</span>
-<span class="co">#&gt;    mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    &lt;lis&gt; &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
-<span class="co">#&gt;  1 &lt;Com… Setaria_incr… Setaria incras… &lt;NA&gt;       Seta… Poace… Poal… Lili…</span>
-<span class="co">#&gt;  2 &lt;Com… Lechea_cernua Lechea cernua   &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt;  3 &lt;Com… Actinostemon… Actinostemon c… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt;  4 &lt;Com… Gaura_neomex… Gaura neomexic… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt;  5 &lt;Com… Eriogonum_lo… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt;  6 &lt;Com… Platanthera_… Platanthera ho… &lt;NA&gt;       Plat… Orchi… Aspa… Lili…</span>
-<span class="co">#&gt;  7 &lt;Com… Succisa_prat… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt;  8 &lt;Com… Haplopappus_… Pyrrocoma radi… &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt;  9 &lt;Com… Astragalus_t… Astragalus tre… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; 10 &lt;Com… Plantago_cor… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
+<span class="co">#&gt;    mat    SpeciesAuthor    SpeciesAccepted   CommonName Genus Family Order Class</span>
+<span class="co">#&gt;    &lt;list&gt; &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
+<span class="co">#&gt;  1 &lt;Comp… Setaria_incrass… Setaria incrassa… &lt;NA&gt;       Seta… Poace… Poal… Lili…</span>
+<span class="co">#&gt;  2 &lt;Comp… Lechea_cernua    Lechea cernua     &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
+<span class="co">#&gt;  3 &lt;Comp… Actinostemon_co… Actinostemon con… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
+<span class="co">#&gt;  4 &lt;Comp… Gaura_neomexica… Gaura neomexican… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
+<span class="co">#&gt;  5 &lt;Comp… Eriogonum_longi… Eriogonum longif… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class="co">#&gt;  6 &lt;Comp… Platanthera_hoo… Platanthera hook… &lt;NA&gt;       Plat… Orchi… Aspa… Lili…</span>
+<span class="co">#&gt;  7 &lt;Comp… Succisa_pratens… Succisa pratensis &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
+<span class="co">#&gt;  8 &lt;Comp… Haplopappus_rad… Pyrrocoma radiata &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
+<span class="co">#&gt;  9 &lt;Comp… Astragalus_trem… Astragalus tremo… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt; 10 &lt;Comp… Plantago_corono… Plantago coronop… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
 <span class="co">#&gt; # … with 140 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
@@ -260,32 +260,32 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;        A1    A2    A3    A4    A5    A6</span>
-<span class="co">#&gt; [1,] 0.00 0.000 0.000 0.000 1.006 1.851</span>
-<span class="co">#&gt; [2,] 0.55 0.492 0.150 0.000 0.000 0.000</span>
-<span class="co">#&gt; [3,] 0.25 0.356 0.450 0.067 0.000 0.099</span>
-<span class="co">#&gt; [4,] 0.00 0.137 0.321 0.568 0.358 0.197</span>
-<span class="co">#&gt; [5,] 0.00 0.000 0.064 0.167 0.269 0.197</span>
-<span class="co">#&gt; [6,] 0.00 0.000 0.000 0.184 0.358 0.493</span>
+<span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span>
+<span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span>
+<span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span>
+<span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span>
+<span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
+<span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
+<span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt;            A1     A2     A3   A4      A5</span>
-<span class="co">#&gt; [1,] 0.060000 0.0000 0.0000 0.00 3.91724</span>
-<span class="co">#&gt; [2,] 0.002069 0.0000 0.0000 0.00 0.13505</span>
-<span class="co">#&gt; [3,] 0.000000 0.7333 0.4062 0.12 0.01923</span>
-<span class="co">#&gt; [4,] 0.000000 0.0000 0.3438 0.70 0.53846</span>
-<span class="co">#&gt; [5,] 0.000000 0.0000 0.0000 0.14 0.36538</span></code></pre></div>
+<span class="co">#&gt;          A1     A2     A3   A4      A5</span>
+<span class="co">#&gt; A1 0.060000 0.0000 0.0000 0.00 3.91724</span>
+<span class="co">#&gt; A2 0.002069 0.0000 0.0000 0.00 0.13505</span>
+<span class="co">#&gt; A3 0.000000 0.7333 0.4062 0.12 0.01923</span>
+<span class="co">#&gt; A4 0.000000 0.0000 0.3438 0.70 0.53846</span>
+<span class="co">#&gt; A5 0.000000 0.0000 0.0000 0.14 0.36538</span></code></pre></div>
 <p>Thus one could select particular matrices from this list using <code>[[ ]]</code> syntax</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt;        A1    A2    A3    A4    A5    A6</span>
-<span class="co">#&gt; [1,] 0.00 0.000 0.000 0.000 1.006 1.851</span>
-<span class="co">#&gt; [2,] 0.55 0.492 0.150 0.000 0.000 0.000</span>
-<span class="co">#&gt; [3,] 0.25 0.356 0.450 0.067 0.000 0.099</span>
-<span class="co">#&gt; [4,] 0.00 0.137 0.321 0.568 0.358 0.197</span>
-<span class="co">#&gt; [5,] 0.00 0.000 0.064 0.167 0.269 0.197</span>
-<span class="co">#&gt; [6,] 0.00 0.000 0.000 0.184 0.358 0.493</span></code></pre></div>
+<span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span>
+<span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span>
+<span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span>
+<span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span>
+<span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
+<span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
+<span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></code></pre></div>
 <p>It is often desirable to know what the stages are in the matrices. To access this information you can use the <code>matrixClass</code> function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">classInfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matrixClass</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
@@ -329,18 +329,18 @@
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 80 SPECIES and 108 MATRICES.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; # A tibble: 108 x 48</span>
-<span class="co">#&gt;    mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    &lt;lis&gt; &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
-<span class="co">#&gt;  1 &lt;Com… Lechea_cernua Lechea cernua   &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt;  2 &lt;Com… Actinostemon… Actinostemon c… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt;  3 &lt;Com… Gaura_neomex… Gaura neomexic… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt;  4 &lt;Com… Eriogonum_lo… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt;  5 &lt;Com… Succisa_prat… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt;  6 &lt;Com… Haplopappus_… Pyrrocoma radi… &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt;  7 &lt;Com… Astragalus_t… Astragalus tre… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt;  8 &lt;Com… Plantago_cor… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
-<span class="co">#&gt;  9 &lt;Com… Petrocoptis_… Silene glaucif… &lt;NA&gt;       Sile… Caryo… Cary… Magn…</span>
-<span class="co">#&gt; 10 &lt;Com… Astragalus_p… Astragalus pec… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt;    mat    SpeciesAuthor    SpeciesAccepted   CommonName Genus Family Order Class</span>
+<span class="co">#&gt;    &lt;list&gt; &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
+<span class="co">#&gt;  1 &lt;Comp… Lechea_cernua    Lechea cernua     &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
+<span class="co">#&gt;  2 &lt;Comp… Actinostemon_co… Actinostemon con… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
+<span class="co">#&gt;  3 &lt;Comp… Gaura_neomexica… Gaura neomexican… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
+<span class="co">#&gt;  4 &lt;Comp… Eriogonum_longi… Eriogonum longif… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class="co">#&gt;  5 &lt;Comp… Succisa_pratens… Succisa pratensis &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
+<span class="co">#&gt;  6 &lt;Comp… Haplopappus_rad… Pyrrocoma radiata &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
+<span class="co">#&gt;  7 &lt;Comp… Astragalus_trem… Astragalus tremo… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt;  8 &lt;Comp… Plantago_corono… Plantago coronop… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
+<span class="co">#&gt;  9 &lt;Comp… Petrocoptis_pse… Silene glaucifol… &lt;NA&gt;       Sile… Caryo… Cary… Magn…</span>
+<span class="co">#&gt; 10 &lt;Comp… Astragalus_peck… Astragalus peckii &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
 <span class="co">#&gt; # … with 98 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
@@ -417,7 +417,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

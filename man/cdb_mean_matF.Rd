@@ -46,6 +46,19 @@ meanF <- cdb_mean_matF(Compadre)
 meanF[[16]]
 
 }
+\seealso{
+Other {data management}: 
+\code{\link{cdb_flatten}()},
+\code{\link{cdb_id_stages}()},
+\code{\link{cdb_id_studies}()},
+\code{\link{cdb_id}()},
+\code{\link{cdb_rbind}()},
+\code{\link{cdb_unflatten}()},
+\code{\link{cdb_unnest}()},
+\code{\link{mpm_mean}()},
+\code{\link{mpm_methods}},
+\code{\link{string_representation}}
+}
 \author{
 Danny Buss <dlb50@cam.ac.uk>
 
@@ -55,3 +68,4 @@ Iain Stott <stott@biology.sdu.dk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
+\concept{{data management}}

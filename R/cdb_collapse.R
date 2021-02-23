@@ -49,6 +49,8 @@
 #' 
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data checking}
+#' 
 #' @seealso \link{cdb_id_stages}
 #' 
 #' @examples

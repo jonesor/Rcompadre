@@ -176,6 +176,19 @@ objects of constant dimension.</p>
 mean matrix. If <code>na.rm == TRUE</code> and a given element is <code>NA</code> in
 <em>every</em> matrix within <code>x</code>, the value returned for that element will
 be <code>0</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other data management: 
+<code><a href='cdb_flatten.html'>cdb_flatten</a>()</code>,
+<code><a href='cdb_id_stages.html'>cdb_id_stages</a>()</code>,
+<code><a href='cdb_id_studies.html'>cdb_id_studies</a>()</code>,
+<code><a href='cdb_id.html'>cdb_id</a>()</code>,
+<code><a href='cdb_mean_matF.html'>cdb_mean_matF</a>()</code>,
+<code><a href='cdb_rbind.html'>cdb_rbind</a>()</code>,
+<code><a href='cdb_unflatten.html'>cdb_unflatten</a>()</code>,
+<code><a href='cdb_unnest.html'>cdb_unnest</a>()</code>,
+<code><a href='mpm_methods.html'>mpm_methods</a></code>,
+<code><a href='string_representation.html'>string_representation</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
@@ -222,12 +235,8 @@ be <code>0</code>.</p>
 #&gt; </div><div class='input'>
 <span class='co'># extract list of matA and take mean</span>
 <span class='va'>mats</span> <span class='op'>&lt;-</span> <span class='fu'><a href='CompadreMatrixMethods.html'>matA</a></span><span class='op'>(</span><span class='va'>mpms</span><span class='op'>)</span>
-<span class='fu'>mat_mean</span><span class='op'>(</span><span class='va'>mats</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           A1     A2      A3      A4
-#&gt; [1,] 0.00000 0.0000 0.00000 1.96575
-#&gt; [2,] 0.19725 0.4090 0.17650 0.15400
-#&gt; [3,] 0.03250 0.1605 0.38175 0.37500
-#&gt; [4,] 0.00000 0.1175 0.26100 0.37150</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in lapply(object@data$mat, function(M) {    M@matA}): trying to get slot "data" from an object of a basic class ("list") with no slots</span></div><div class='input'><span class='fu'>mat_mean</span><span class='op'>(</span><span class='va'>mats</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in vapply(x, nrow, numeric(1)): object 'mats' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +248,7 @@ be <code>0</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

@@ -13,6 +13,8 @@
 #' 
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
+#' @family {data checking}
+#' 
 #' @examples
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
 #' Compadre2 <- subset(Compadre, Continent == "Africa")

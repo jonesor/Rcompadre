@@ -15,6 +15,8 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data management}
+#' 
 #' @details
 #' Identifiers are assigned by pasting together the relevant columns, assigning
 #' factor levels based on alphabetical order, and then converting the factor

@@ -98,7 +98,7 @@
       <h1 data-toc-skip>Vectorizing with Rcompadre</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2021-02-21</h4>
+            <h4 class="date">2021-02-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorizingRcompadre.Rmd"><code>vignettes/a03_VectorizingRcompadre.Rmd</code></a></small>
       <div class="hidden name"><code>a03_VectorizingRcompadre.Rmd</code></div>
@@ -138,26 +138,26 @@
 <span class="co">#&gt; [1] 150</span>
 <span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>         <span class="co"># here are the first three</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;        A1   A2   A3   A4</span>
-<span class="co">#&gt; [1,] 0.61 0.38 0.30 1.16</span>
-<span class="co">#&gt; [2,] 0.23 0.50 0.31 0.32</span>
-<span class="co">#&gt; [3,] 0.00 0.18 0.54 0.41</span>
-<span class="co">#&gt; [4,] 0.00 0.05 0.08 0.50</span>
+<span class="co">#&gt;      A1   A2   A3   A4</span>
+<span class="co">#&gt; A1 0.61 0.38 0.30 1.16</span>
+<span class="co">#&gt; A2 0.23 0.50 0.31 0.32</span>
+<span class="co">#&gt; A3 0.00 0.18 0.54 0.41</span>
+<span class="co">#&gt; A4 0.00 0.05 0.08 0.50</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt;          A1    A2    A3       A4       A5        A6</span>
-<span class="co">#&gt; [1,] 0.8430 0.000 0.000 176.0600 635.7200 1601.2500</span>
-<span class="co">#&gt; [2,] 0.0003 0.000 0.000   0.0584   0.2109    0.5313</span>
-<span class="co">#&gt; [3,] 0.0000 0.476 0.132   0.1430   0.0000    0.0560</span>
-<span class="co">#&gt; [4,] 0.0000 0.095 0.105   0.2860   0.0000    0.0000</span>
-<span class="co">#&gt; [5,] 0.0000 0.167 0.474   0.4290   0.8000    0.0000</span>
-<span class="co">#&gt; [6,] 0.0000 0.143 0.237   0.0710   0.2000    0.8890</span>
+<span class="co">#&gt;        A1    A2    A3       A4       A5        A6</span>
+<span class="co">#&gt; A1 0.8430 0.000 0.000 176.0600 635.7200 1601.2500</span>
+<span class="co">#&gt; A2 0.0003 0.000 0.000   0.0584   0.2109    0.5313</span>
+<span class="co">#&gt; A3 0.0000 0.476 0.132   0.1430   0.0000    0.0560</span>
+<span class="co">#&gt; A4 0.0000 0.095 0.105   0.2860   0.0000    0.0000</span>
+<span class="co">#&gt; A5 0.0000 0.167 0.474   0.4290   0.8000    0.0000</span>
+<span class="co">#&gt; A6 0.0000 0.143 0.237   0.0710   0.2000    0.8890</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt;         A1    A2    A3</span>
-<span class="co">#&gt; [1,] 0.017 0.000 1.142</span>
-<span class="co">#&gt; [2,] 0.655 0.902 0.009</span>
-<span class="co">#&gt; [3,] 0.000 0.001 0.988</span></code></pre></div>
+<span class="co">#&gt;       A1    A2    A3</span>
+<span class="co">#&gt; A1 0.017 0.000 1.142</span>
+<span class="co">#&gt; A2 0.655 0.902 0.009</span>
+<span class="co">#&gt; A3 0.000 0.001 0.988</span></code></pre></div>
 <p>Let’s say we want to calculate the dimension of every matrix in <code>Compadre$matA</code>. In fact, <code>Compadre</code> already has this data in the column ‘MatrixDimension’, but let’s say we want to double-check it. We’ll use the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, and assume that the number of rows and columns are equal. But we can’t use <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> directly on <code>Compadre$matA</code>, because the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> isn’t vectorized. It can only take one object at a time.</p>
 <div id="manual-approach" class="section level4">
 <h4 class="hasAnchor">
@@ -272,7 +272,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">lifeExpectancy</span>,             <span class="co"># function</span>
        <span class="va">CompUnnest</span><span class="op">$</span><span class="va">matU</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,       <span class="co"># first argument to vectorize over</span>
        <span class="va">CompUnnest</span><span class="op">$</span><span class="va">start_life</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span> <span class="co"># second argument to vectorize over</span>
-<span class="co">#&gt; [1]  5.727 22.195  8.440  3.010 10.877 18.182</span></code></pre></div>
+<span class="co">#&gt;     U1     U2     U1     U1     U1     U1 </span>
+<span class="co">#&gt;  5.727 22.195  8.440  3.010 10.877 18.182</span></code></pre></div>
 </div>
 <div id="when-functions-fail" class="section level2">
 <h2 class="hasAnchor">
@@ -347,7 +348,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Julia Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, Tamora James, Owen Jones, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

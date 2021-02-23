@@ -19,6 +19,8 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data management}
+#' 
 #' @name mpm_mean
 #' 
 #' @examples 

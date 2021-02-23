@@ -15,6 +15,8 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
+#' @family {data management}
+#' 
 #' @examples 
 #' # with CompadreMat object
 #' mpm_has_prop(Compadre$mat[[1]])
