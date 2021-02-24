@@ -29,7 +29,6 @@ options(digits = 4)
 
 <!--- Continuous Integration Badges End --->
 
-
 An R package to facilitate working with the [COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix Population Databases.
 
 ## Installation
