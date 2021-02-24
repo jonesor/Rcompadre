@@ -1,11 +1,11 @@
-name: Codemeta
+name: Add Codemeta json
 
 on:
   repository_dispatch:
-    types: [02-codemeta]
-    #paths:
-    #  - DESCRIPTION
-      #- .github/workflows/main.yml
+    types: [devel-02-codemeta]
+    paths:
+      - DESCRIPTION
+      - .github/workflows/main.yml
 
 jobs:
   render:
@@ -31,6 +31,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPO_GHA_PAT }}
-          repository: StevenMMortimer/salesforcer
-          event-type: 03-R-CMD-check
+          repository: ${{ github.repository }}
+          event-type: devel-03-R-CMD-check
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

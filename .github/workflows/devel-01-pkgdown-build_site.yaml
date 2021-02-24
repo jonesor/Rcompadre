@@ -1,14 +1,14 @@
+name: Build pkgdown site
+
 on:
   push:
     branches:
       - devel
-      - master
+      #- master
   pull_request:
     branches:
       #- master
       #- devel
-
-name: 01-pkgdown-build_site
 
 jobs:
   R-CMD-check:
@@ -78,5 +78,5 @@ jobs:
         with:
           token: ${{ secrets.REPO_GHA_PAT }}
           repository: ${{ github.repository }}
-          event-type: 02-codemeta
+          event-type: devel-02-codemeta
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
