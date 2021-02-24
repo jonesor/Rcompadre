@@ -2,7 +2,7 @@ name: Add Codemeta json
 
 on:
   repository_dispatch:
-    types: [devel-02-codemeta]
+    types: devel-02-codemeta
     paths:
       - DESCRIPTION
       - .github/workflows/main.yml
