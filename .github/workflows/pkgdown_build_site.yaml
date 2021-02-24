@@ -52,8 +52,9 @@ jobs:
           install.packages("textshaping",type = "binary",dependencies = TRUE)
           install.packages("devtools")
           devtools::install(pkg = ".", dependencies = TRUE)
-          install.packages("knitr",dependencies = TRUE)
-          knitr::knit(input = "README.Rmd")
+          install.packages("rmarkdown",dependencies = TRUE)
+          rmarkdown::render(input = "README.Rmd","github_document",clean = TRUE)
+          unlink("README.html")
           install.packages("pkgdown", dependencies = TRUE)    
           pkgdown::build_site()
         shell: Rscript {0}
