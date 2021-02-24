@@ -1,4 +1,4 @@
-name: [03-R-CMD-check]
+name: R-CMD-check
 
 on:
   repository_dispatch:
