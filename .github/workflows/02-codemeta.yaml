@@ -1,4 +1,4 @@
-name: Render codemeta
+name: 02-codemeta
 
 on:
   repository_dispatch:

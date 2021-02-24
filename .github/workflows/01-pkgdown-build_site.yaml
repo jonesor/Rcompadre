@@ -10,7 +10,7 @@ on:
       #- master
       #- devel
 
-name: pkgdown_build_site
+name: 01-pkgdown-build_site
 
 jobs:
   R-CMD-check:
