@@ -1,11 +1,11 @@
-name: 02-codemeta
+name: [02-codemeta]
 
 on:
   repository_dispatch:
     types: [02-codemeta]
-    paths:
-      - DESCRIPTION
-      - .github/workflows/main.yml
+    #paths:
+    #  - DESCRIPTION
+      #- .github/workflows/main.yml
 
 jobs:
   render:

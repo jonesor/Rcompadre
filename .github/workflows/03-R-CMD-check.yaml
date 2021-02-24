@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [03-R-CMD-check]
 
-name: 03-R-CMD-check
+name: [03-R-CMD-check]
 
 jobs:
   R-CMD-check:
