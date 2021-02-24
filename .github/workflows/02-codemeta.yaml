@@ -1,17 +1,12 @@
+name: Render codemeta
+
 on:
-  push:
-    branches:
-      - master
-      - devel
-  pull_request:
-    branches:
-      - master
-      - devel
+  repository_dispatch:
+    types: [02-codemeta]
     paths:
       - DESCRIPTION
       - .github/workflows/main.yml
 
-name: Render codemeta
 jobs:
   render:
     name: Render codemeta
@@ -30,3 +25,12 @@ jobs:
         run: |
           git commit codemeta.json -m 'Re-build codemeta.json' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+
+      - name: Trigger next workflow
+        if: success()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_GHA_PAT }}
+          repository: StevenMMortimer/salesforcer
+          event-type: 03-R-CMD-check
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
