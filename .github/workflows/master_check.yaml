@@ -1,14 +1,17 @@
-# Name
-name: master R-CMD-check
+# This workflow does a build check with R-CMD-check
+# On the master branch only
+
+# Name (appears on badge, keep it short)
+name: R-CMD-check
 
 # When to run
 on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+#  pull_request:
+#    branches:
+#      - master
       
       
 # Define job

@@ -1,4 +1,7 @@
-# Name
+# This workflow does a build check with R-CMD-check
+# On devel branch only, for PULL requests
+
+# Name (appears on badge, keep it short)
 name: devel pull R-CMD-check
 
 

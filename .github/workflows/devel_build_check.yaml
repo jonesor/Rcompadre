@@ -1,5 +1,9 @@
-# Name
-name: devel build-site and R-CMD-check
+# This workflow builds the site, renders the codemeta data, and 
+# then does a build check with R-CMD-check
+
+
+# Name (appears on badge, keep it short)
+name: R-CMD-check
 
 
 # When to run
