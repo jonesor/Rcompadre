@@ -106,7 +106,6 @@ jobs:
 
 #Commit changes to the codemeta, site and README.
 #Need only run on macOS-latest with release version of R
-#But I can't make the if-statement work.
       - name: Commit results
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
         #if: "!contains(github.event.head_commit.message, 'cm-skip')"
