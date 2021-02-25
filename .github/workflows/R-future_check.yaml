@@ -1,16 +1,21 @@
-# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
-# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
-on:
-  push:
-    branches:
-      - devel
-      - master
-  pull_request:
-    branches:
-      - devel
-      - master
+# This workflow does a build check with R-CMD-check
+# for the development version of R. 
+# It will often fail, but it is useful to know what the failures are
+# because we can fix them in advance of a new R release.
 
-name: R-CMD-check
+# Name (appears on badge, keep it short)
+name: Future R version check
+
+# When to run
+on:
+  schedule:
+    - cron: "0 13 * * 1*" # Every Monday at 1PM UTC (9AM EST)
+    branches:
+      - master
+      - devel
+
+# Define job
+# What systems to run on (the matrix)
 
 jobs:
   R-CMD-check:
@@ -22,18 +27,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: 'oldrel'}
           - {os: windows-latest, r: 'devel'}
-          - {os: macOS-latest, r: 'release'}
-          - {os: macOS-latest, r: 'oldrel'}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: macOS-latest, r: 'devel'}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
+
+# Set up the environment
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
 
+#Steps of the jobs
+# What things to use to complete the job
     steps:
       - uses: actions/checkout@v2
 
@@ -43,6 +48,7 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
+#Add dependencies
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -50,6 +56,7 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
+#Windows
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v2
@@ -58,22 +65,25 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install system dependencies
+#System dependencies for linux
+      - name: Install system dependencies for Linux
         if: runner.os == 'Linux'
         run: |
           while read -r cmd
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-     
-      - name: Install XQuartz
+
+#Add quartz for macOS only
+      - name: Install XQuartz for macOS
         if: runner.os == 'macOS'
         run: |
           wget https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
           sudo hdiutil attach XQuartz-2.7.11.dmg
           sudo installer -package /Volumes/XQuartz-2.7.11/XQuartz.pkg -target / 
-        
-      - name: Install dependencies
+
+#R script to install rcmdcheck and Rage
+      - name: Install dependencies, rcmdcheck, Rage
         run: |
           remotes::install_deps(dependencies = TRUE, force = TRUE)
           remotes::install_cran("rcmdcheck")
@@ -100,3 +110,5 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+          
+          
