@@ -104,7 +104,6 @@ jobs:
           codemetar::write::write_codemeta()
         shell: Rscript {0}
 
-#Commit results
       -name: Commit results
        #if: "!contains(github.event.head_commit.message, 'cm-skip')" && runner.os == 'macOS' && ${{ matrix.config.r }} == 'release'
        run: |
