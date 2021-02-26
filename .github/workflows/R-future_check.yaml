@@ -11,7 +11,7 @@ name: Future R version check
 # Use http://www.cronmaker.com/
 on:
   schedule:
-    - cron: "0 0 13 ? * MON *"
+    - cron: "0 0 13 * * 1"
     branches:
       - master
       - devel
