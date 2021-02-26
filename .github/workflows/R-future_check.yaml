@@ -9,12 +9,14 @@ name: Future R version check
 # When to run
 # Every Monday at 1PM UTC (9AM EST)
 # Use http://www.cronmaker.com/
+
 on:
-  schedule:
-    - cron: "0 0 13 * * 1"
-    branches:
-      - master
-      - devel
+  schedule: 
+    # runs once a week on sunday
+    - cron: "55 23 * * 0"
+  branches:
+    - master
+    - devel
 
 # Define job
 # What systems to run on (the matrix)
