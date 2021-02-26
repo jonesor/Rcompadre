@@ -11,8 +11,6 @@ name: Future R version check
 # Use http://www.cronmaker.com/
 
 on:  
-  push:
-  pull_request:
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
 
