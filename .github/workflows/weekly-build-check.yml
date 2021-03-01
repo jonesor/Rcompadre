@@ -9,7 +9,8 @@ name: Weekly-build-check
 # When to run
 # Every Monday at 1PM UTC (9AM EST)
 # Use http://www.cronmaker.com/
-on:
+
+on:  
   schedule:
     - cron:  '0 0 * * SUN'
 
