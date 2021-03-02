@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Methods for CompadreDB objects — CompadreDB-Methods • Rcompadre</title>
+<title>Changelog • Rcompadre</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,13 +46,7 @@
 
 
 
-<meta property="og:title" content="Methods for CompadreDB objects — CompadreDB-Methods" />
-<meta property="og:description" content="This page describes a variety of methods that can be used with CompadreDB
-objects, including common data frame operations (head, names,
-and merge), conversion methods (as.data.frame and
-as_tibble), and methods to calculate the number of species
-(NumberAcceptedSpecies), studies (NumberStudies), or matrices
-(NumberMatrices)." />
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -72,7 +66,7 @@ as_tibble), and methods to calculate the number of species
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -145,84 +139,52 @@ as_tibble), and methods to calculate the number of species
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Methods for CompadreDB objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jonesor/Rcompadre/blob/master/R/CompadreDB-Methods.R'><code>R/CompadreDB-Methods.R</code></a></small>
-    <div class="hidden name"><code>CompadreDB-Methods.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/jonesor/Rcompadre/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>This page describes a variety of methods that can be used with CompadreDB
-objects, including common data frame operations (<code>head</code>, <code>names</code>,
-and <code>merge</code>), conversion methods (<code>as.data.frame</code> and
-<code>as_tibble</code>), and methods to calculate the number of species
-(<code>NumberAcceptedSpecies</code>), studies (<code>NumberStudies</code>), or matrices
-(<code>NumberMatrices</code>).</p>
-    </div>
-
-    <pre class="usage"><span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'>as_tibble</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span>, n <span class='op'>=</span> <span class='fl'>6L</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span><span class='op'>(</span><span class='va'>x</span>, n <span class='op'>=</span> <span class='fl'>6L</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CompadreDB</span>
-<span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>NumberAcceptedSpecies</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for CompadreDB</span>
-<span class='fu'>NumberAcceptedSpecies</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='fu'>NumberStudies</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for CompadreDB</span>
-<span class='fu'>NumberStudies</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='fu'>NumberMatrices</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for CompadreDB</span>
-<span class='fu'>NumberMatrices</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x, object</th>
-      <td><p>A CompadreDB object</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional arguments</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p>The number of rows to extract</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>A data.frame to merge with x</p></td>
-    </tr>
-    </table>
-
-
+    <div id="version-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#version-020" class="anchor"></a>Version 0.2.0</h1>
+<ul>
+<li>Modifications to improve the class definitions, which are renamed to <code>CompadreDB</code> and <code>CompadreM</code>.</li>
+<li>Added generic functionality wuth accessor methods via <code>ClassUnionMethods</code>. e.g. functions <code>matA</code>, <code>matU</code>, <code>matF</code>, and <code>matC</code> output all A,U,F, or C matrices from a database.</li>
+<li>Added <code>cdb_fetch</code> function to obtain the latest version of COMPADRE or COMADRE.</li>
+<li>The database object behaves more like a data frame than the complex hierarchical object it is.</li>
+<li>Added Tidyverse support so that most <code>dplyr</code> functions can be used with the database (e.g. filter).</li>
+<li>Generic subsetting methods including <code>subset</code>, <code>[]</code> now work.</li>
+<li>Database can be used with <code>magrittr</code> pipes.</li>
+<li>Most functions renamed with <code>cdb_</code> prefix, followed by verb (e.g. <code>dbCompare</code> becomes <code>cdb_compare</code> and <code>cleanDatabase</code> becomes <code>cdb_flag</code>).</li>
+<li>The function <code>cdb_unnest</code> unnests the DB by spreading the matrices into separate list columns.</li>
+<li>The function <code>convert2flat</code> is replaced with <code>cdb_flatten</code>, but works on an entire databse rather than a single matrix. <code>cdb_unflatten</code> reverses the procedure.</li>
+<li>Other functions are also renamed with more intuitive names.</li>
+<li>Functions <code>collapseMatrix</code>, <code>identifyReprodStages</code>, <code>rearrangeMatrix</code>, <code>splitMatrix</code> moved to the <code>Rage</code> package.</li>
+<li>Added simple vignettes.</li>
+<li>Added unit tests for all functions.</li>
+</ul>
+</div>
+    <div id="version-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#version-010" class="anchor"></a>Version 0.1.0</h1>
+<ul>
+<li>First pre-release version!</li>
+<li>Established S4 class <code>CompadreData</code> with definition and methods.</li>
+<li>Established S4 class <code>CompadreM</code> with definition and methods.</li>
+<li>Functions to <code>checkspecies</code>, check for matrix problems (<code>cleanDatabase</code>),</li>
+<li>Functions to manipulate the databases: merge databases (<code>mergeDB</code>), compare database versions (<code>dbCompare</code>), subset the database (<code>subsetDB</code>).</li>
+<li>Functions to manipulate matrices: to collapse matrix to a smaller number of stages (<code>collapseMatrix</code>), convert matrix to a “flat” format (<code>convert2flat</code>), calculate the mean F matrix (<code>getMeanMatF</code>), segregate reproductive/non-reproductive stages <code>rearrangeMatrix</code>, split the matrix into submatrices (<code>splitMatrix</code>)</li>
+<li>Function to produce a matrix from a string representation <code>stringtomatrix</code>.</li>
+<li>Added continuous integration.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
