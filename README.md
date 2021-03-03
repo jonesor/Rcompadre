@@ -122,11 +122,18 @@ of the database too.
 Specific earlier releases of this package can be installed using the
 appropriate `@` tag.
 
-To install version 0.1.0, our (thus far) only release:
+For example to install version 0.1.0:
 
 ``` r
 remotes::install_github("jonesor/Rcompadre@v0.1.0")
 ```
+
+See the Changelog for more details.
+
+## Citation
+
+We are working on a manuscript to describe the package. In the meantime,
+please use `citation("Rcompadre")`.
 
 ## Contributions
 
