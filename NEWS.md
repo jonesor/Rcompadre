@@ -8,10 +8,13 @@
 * Matrix accessor functions (`matA`, `matU` etc.) now ensure that the matrices are provided with named columns and rows. Names are prefixed by matrix type (e.g. A1, A2, A3 or U1, U2, U3).
 * Added machine-readable codemeta-data information (`codemeta.json`)
 * Unit tests improved to increase coverage.
+* Modified build checks via continuous integration on Travis, Appveyor and Github actions (including weekly checks).
 
 
 
-# Rcompadre v. 0.2.0
+# Rcompadre v. 0.2.0 
+
+_Released on 16th January 2019_
 
 * Modifications to improve the class definitions, which are renamed to `CompadreDB` and `CompadreM`.
 * Added generic functionality wuth accessor methods via `ClassUnionMethods`. e.g. functions `matA`, `matU`, `matF`, and `matC` output all A,U,F, or C matrices from a database.
@@ -29,6 +32,8 @@
 * Added unit tests for all functions.
 
 # Rcompadre v. 0.1.0
+
+_Released on 30th August 2018_
 
 * First pre-release version!
 * Established S4 class `CompadreData` with definition and methods.
