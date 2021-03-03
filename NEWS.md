@@ -11,7 +11,7 @@
 
 
 
-# Version 0.2.0
+# Rcompadre v. 0.2.0
 
 * Modifications to improve the class definitions, which are renamed to `CompadreDB` and `CompadreM`.
 * Added generic functionality wuth accessor methods via `ClassUnionMethods`. e.g. functions `matA`, `matU`, `matF`, and `matC` output all A,U,F, or C matrices from a database.
@@ -28,7 +28,7 @@
 * Added simple vignettes.
 * Added unit tests for all functions.
 
-# Version 0.1.0
+# Rcompadre v. 0.1.0
 
 * First pre-release version!
 * Established S4 class `CompadreData` with definition and methods.
