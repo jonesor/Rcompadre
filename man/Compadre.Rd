@@ -119,6 +119,6 @@ the COMPADRE Plant Matrix Database and COMADRE Animal Matrix Database,
 respectively, that are used for testing and examples. Each object is of class
 'CompadreDB' and therefore has the following two slots: \code{data} and \code{version}.
 
-For full documentation see the \href{https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide}{COMPADRE User Guide}.
+For full documentation see the \href{https://jonesor.github.io/CompadreGuides/}{COMPADRE User Guide}.
 }
 \keyword{datasets}
