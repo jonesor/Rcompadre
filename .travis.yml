@@ -25,7 +25,7 @@ cache: packages
 # Branches
 branches:
   only:
-  - master
+  - main
   - devel
 
 
