@@ -101,7 +101,7 @@
       <h1 data-toc-skip>Obtaining References</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-03-03</h4>
+            <h4 class="date">2021-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a04_ObtainingReferences.Rmd"><code>vignettes/a04_ObtainingReferences.Rmd</code></a></small>
       <div class="hidden name"><code>a04_ObtainingReferences.Rmd</code></div>
@@ -140,6 +140,7 @@
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI.ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: 10.1016/S0006-3207%2801%2900265-8 w/ (504) -</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"</span>
 <span class="co">#&gt; </span>
@@ -147,7 +148,7 @@
 <span class="co">#&gt; [1] "Carroll, C., Noss, R. F., Paquet, P. C., &amp; Schumaker, N. H. (2003). USE OF POPULATION VIABILITY ANALYSIS AND RESERVE SELECTION ALGORITHMS IN REGIONAL CONSERVATION PLANS. Ecological Applications, 13(6), 1773–1789. doi:10.1890/02-5195"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] "Wielgus, R. B. (2002). Minimum viable population and reserve sizes for naturally regulated grizzly bears in British Columbia. Biological Conservation, 106(3), 381–388. doi:10.1016/s0006-3207(01)00265-8"</span></code></pre></div>
+<span class="co">#&gt; NULL</span></code></pre></div>
 <p>Various other formats and styles of output are available, see <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">?rcrossref::cr_cn</a></code> for details.</p>
   </div>
 
