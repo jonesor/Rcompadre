@@ -131,7 +131,7 @@
 #' 'CompadreDB' and therefore has the following two slots: `data` and `version`.
 #' 
 #' For full documentation see the [COMPADRE User
-#' Guide](https://github.com/jonesor/compadreDB/tree/master/COMPADRE-UserGuide).
+#' Guide](https://jonesor.github.io/CompadreGuides/).
 #' 
 #' @md
 #' 
