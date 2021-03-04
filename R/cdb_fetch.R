@@ -49,7 +49,9 @@ cdb_fetch <- function(cdb) {
   
   message("This is ", name, " version ", version, " (release date ", release,
           ")", "\n", "See user agreement at ",
-          "https://www.compadre-db.org/Page/UserAgreement")
+          "https://compadre-db.org/Help/UserAgreement","\n",
+          "See how to cite at ",
+          "https://compadre-db.org/Help/HowToCite")
   
  return(dbOut) 
 }

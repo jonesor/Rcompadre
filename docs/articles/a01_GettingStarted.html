@@ -134,7 +134,7 @@
 <p>For this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses! You can load it like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
-<p>We can now ask for a summary of this object, which will tell us that it is a <code>CompadreDB</code> class <code>S4</code> object. Simply typing the name of the object (<code>Compadre</code> in this case) will give a brief summary of its contents and display the first few rows of the data (which is a <code>tibble</code>).</p>
+<p>We can now ask for a summary of this object, which will tell us that it is a <code>CompadreDB</code> class <code>S4</code> object. Simply typing the name of the object (<code>Compadre</code> in this case) will give a brief summary of its contents and display the first few rows of the data (which is a <code>tibble</code>). Please see the <code>tibble</code> vignette<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> for information about this object type, and how it differs from <code>data.table</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt;     Length      Class       Mode </span>
@@ -406,6 +406,12 @@
 <p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. doi: <a href="http://doi.org/10.1111/1365-2745.12334">10.1111/1365-2745.12334</a></p>
 <p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. doi: <a href="http://doi.org/10.1111/1365-2656.12482">10.1111/1365-2656.12482</a></p>
 </div>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Tibbles: <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html" class="uri">https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
   </div>
 
