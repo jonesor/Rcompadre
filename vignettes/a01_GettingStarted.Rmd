@@ -65,7 +65,7 @@ For this vignette we will use the sample of COMPADRE data that is distributed wi
 data(Compadre)
 ```
 
-We can now ask for a summary of this object, which will tell us that it is a `CompadreDB` class `S4` object. Simply typing the name of the object (`Compadre` in this case) will give a brief summary of its contents and display the first few rows of the data (which is a `tibble`).
+We can now ask for a summary of this object, which will tell us that it is a `CompadreDB` class `S4` object. Simply typing the name of the object (`Compadre` in this case) will give a brief summary of its contents and display the first few rows of the data (which is a `tibble`). Please see the `tibble` vignette^[Tibbles: https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html] for information about this object type, and how it differs from `data.table`.
 
 ```{r Summarise the database}
 summary(Compadre)
