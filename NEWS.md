@@ -12,9 +12,9 @@
 
 
 
-# Rcompadre v. 0.2.0 
+# Rcompadre 0.2.0 
 
-_Released on 16th January 2019_
+_Released on Github on 16th January 2019_
 
 * Modifications to improve the class definitions, which are renamed to `CompadreDB` and `CompadreM`.
 * Added generic functionality wuth accessor methods via `ClassUnionMethods`. e.g. functions `matA`, `matU`, `matF`, and `matC` output all A,U,F, or C matrices from a database.
@@ -31,9 +31,9 @@ _Released on 16th January 2019_
 * Added simple vignettes.
 * Added unit tests for all functions.
 
-# Rcompadre v. 0.1.0
+# Rcompadre 0.1.0
 
-_Released on 30th August 2018_
+_Released on Github on 30th August 2018_
 
 * First pre-release version!
 * Established S4 class `CompadreData` with definition and methods.
