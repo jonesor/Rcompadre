@@ -1,10 +1,10 @@
 ---
-title: "Obtaining References"
+title: "Obtaining references"
 author: "Owen Jones"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Obtaining References}
+  %\VignetteIndexEntry{Obtaining references}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
