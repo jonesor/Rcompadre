@@ -11,7 +11,7 @@
 #' 
 #' @family {data acquisition}
 #'   
-#' @details Transform the Large CompadreDB object into a tibble and drops the
+#' @details Transforms the large CompadreDB object into a tibble and drops the
 #' matrix column ("mat").
 #'   
 #' @examples
