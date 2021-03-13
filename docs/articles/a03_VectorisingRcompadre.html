@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vectorizing with Rcompadre • Rcompadre</title>
+<title>Vectorising with Rcompadre • Rcompadre</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Vectorizing with Rcompadre">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Vectorising with Rcompadre">
 <meta property="og:description" content="Rcompadre">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,16 +61,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a01_GettingStarted.html">Getting Started with Rcompadre</a>
+      <a href="../articles/a01_GettingStarted.html">Getting started with Rcompadre</a>
     </li>
     <li>
-      <a href="../articles/a02_RcompadreTidy.html">Using Rcompadre with the Tidyverse</a>
+      <a href="../articles/a02_RcompadreTidy.html">Using Rcompadre with the tidyverse</a>
     </li>
     <li>
-      <a href="../articles/a03_VectorizingRcompadre.html">Vectorizing with Rcompadre</a>
+      <a href="../articles/a03_VectorisingRcompadre.html">Vectorising with Rcompadre</a>
     </li>
     <li>
-      <a href="../articles/a04_ObtainingReferences.html">Obtaining References</a>
+      <a href="../articles/a04_ObtainingReferences.html">Obtaining references</a>
     </li>
   </ul>
 </li>
@@ -95,16 +95,16 @@
 
       
 
-      </header><script src="a03_VectorizingRcompadre_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="a03_VectorisingRcompadre_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Vectorizing with Rcompadre</h1>
+      <h1 data-toc-skip>Vectorising with Rcompadre</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2021-03-11</h4>
+            <h4 class="date">2021-03-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorizingRcompadre.Rmd"><code>vignettes/a03_VectorizingRcompadre.Rmd</code></a></small>
-      <div class="hidden name"><code>a03_VectorizingRcompadre.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorisingRcompadre.Rmd"><code>vignettes/a03_VectorisingRcompadre.Rmd</code></a></small>
+      <div class="hidden name"><code>a03_VectorisingRcompadre.Rmd</code></div>
 
     </div>
 
@@ -113,8 +113,8 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>COM(P)ADRE databases contain thousands of matrix population models. If we want to derive traits from a large set of these matrices, we’ll need to use either loops or vectorization.</p>
-<p>Vectorizing means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a data frame, a list of matrices, etc. Vectorized code generally runs faster than loops, and many R users find that vectorized code is easier to write and understand.</p>
+<p>COM(P)ADRE databases contain thousands of matrix population models. If we want to derive traits from a large set of these matrices, we’ll need to use either loops or vectorisation.</p>
+<p>Vectorising means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a data frame, a list of matrices, etc. Vectorised code generally runs faster than loops, and many R users find that vectorised code is easier to write and understand.</p>
 </div>
 <div id="preliminaries" class="section level2">
 <h2 class="hasAnchor">
@@ -125,10 +125,10 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popbio</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="introduction-to-vectorization" class="section level2">
+<div id="introduction-to-vectorisation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction-to-vectorization" class="anchor"></a>Introduction to vectorization</h2>
-<p>To understand vectorization, we first need a vector. For this purpose, we’ll extract a list of <strong>A</strong> matrices from the <code>mat</code> column of <code>Compadre</code>, and add this list of matrices to <code>Compadre</code> as a new column.</p>
+<a href="#introduction-to-vectorisation" class="anchor"></a>Introduction to vectorisation</h2>
+<p>To understand vectorisation, we first need a vector. For this purpose, we’ll extract a list of <strong>A</strong> matrices from the <code>mat</code> column of <code>Compadre</code>, and add this list of matrices to <code>Compadre</code> as a new column.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
 <p>This new column, <code>Compadre$matA</code>, is both a vector and a list.</p>
@@ -161,7 +161,7 @@
 <span class="co">#&gt; A1 0.017 0.000 1.142</span>
 <span class="co">#&gt; A2 0.655 0.902 0.009</span>
 <span class="co">#&gt; A3 0.000 0.001 0.988</span></code></pre></div>
-<p>Let’s say we want to calculate the dimension of every matrix in <code>Compadre$matA</code>. In fact, <code>Compadre</code> already has this data in the column ‘MatrixDimension’, but let’s say we want to double-check it. We’ll use the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, and assume that the number of rows and columns are equal. But we can’t use <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> directly on <code>Compadre$matA</code>, because the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> isn’t vectorized. It can only take one object at a time.</p>
+<p>Let’s say we want to calculate the dimension of every matrix in <code>Compadre$matA</code>. In fact, <code>Compadre</code> already has this data in the column ‘MatrixDimension’, but let’s say we want to double-check it. We’ll use the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, and assume that the number of rows and columns are equal. But we can’t use <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> directly on <code>Compadre$matA</code>, because the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> isn’t vectorised. It can only take one object at a time.</p>
 <div id="manual-approach" class="section level4">
 <h4 class="hasAnchor">
 <a href="#manual-approach" class="anchor"></a>Manual approach</h4>
@@ -187,33 +187,33 @@
   <span class="va">Compadre</span><span class="op">$</span><span class="va">dim</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="vectorized-approach" class="section level4">
+<div id="vectorised-approach" class="section level4">
 <h4 class="hasAnchor">
-<a href="#vectorized-approach" class="anchor"></a>Vectorized approach</h4>
-<p>An even nicer approach is to <em>vectorize</em> the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> over the vector <code>Compadre$matA</code> using <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>.</p>
+<a href="#vectorised-approach" class="anchor"></a>Vectorised approach</h4>
+<p>An even nicer approach is to <em>vectorise</em> the function <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> over the vector <code>Compadre$matA</code> using <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre</span><span class="op">$</span><span class="va">dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span>, <span class="va">nrow</span><span class="op">)</span></code></pre></div>
 <p><code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> applies the function specified in the 2nd argument (<code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>) to every element of the vector in the first argument (<code>Compadre$matA</code>), and returns a vector of the results. The advantage of <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> over the loop is that we don’t need to pre-define an object to store the results.</p>
 </div>
-<div id="vectorizing-custom-functions" class="section level4">
+<div id="vectorising-custom-functions" class="section level4">
 <h4 class="hasAnchor">
-<a href="#vectorizing-custom-functions" class="anchor"></a>Vectorizing custom functions</h4>
-<p>We can also vectorize with a custom function. Let’s say we want to know, for every matrix, whether there are stages with no transitions (i.e. any column sums equal to zero). Here’s a vectorized approach.</p>
+<a href="#vectorising-custom-functions" class="anchor"></a>Vectorising custom functions</h4>
+<p>We can also vectorise with a custom function. Let’s say we want to know, for every matrix, whether there are stages with no transitions (i.e. any column sums equal to sero). Here’s a vectorised approach.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># function to determine whether matrix 'mat' has any stages with no transitions</span>
 <span class="va">NullStages</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="co"># apply function to every element of A</span>
 <span class="va">Compadre</span><span class="op">$</span><span class="va">null_stages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span>, <span class="va">NullStages</span><span class="op">)</span></code></pre></div>
-<p>The key to vectorizing is to make sure the function works on individual elements of the vector.</p>
+<p>The key to vectorising is to make sure the function works on individual elements of the vector.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">NullStages</span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">matA</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="co"># apply function to single element</span></code></pre></div>
 </div>
 </div>
-<div id="accessor-functions-and-vectorization" class="section level2">
+<div id="accessor-functions-and-vectorisation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#accessor-functions-and-vectorization" class="anchor"></a>Accessor functions and vectorization</h2>
-<p>Note that, in the example above, it wasn’t necessary to create the column <code>Compadre$matA</code> before vectorizing over the <strong>A</strong> matrices. We could have simply used the <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code> accessor within <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>.</p>
+<a href="#accessor-functions-and-vectorisation" class="anchor"></a>Accessor functions and vectorisation</h2>
+<p>Note that, in the example above, it wasn’t necessary to create the column <code>Compadre$matA</code> before vectorising over the <strong>A</strong> matrices. We could have simply used the <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code> accessor within <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre</span><span class="op">$</span><span class="va">null_stages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>, <span class="va">NullStages</span><span class="op">)</span></code></pre></div>
 <div id="using-cdb_unnest-to-avoid-accessors" class="section level4">
@@ -260,7 +260,7 @@
 <span class="co">#&gt; [[4]]</span>
 <span class="co">#&gt;     U1     U2     U3     U4     U5 </span>
 <span class="co">#&gt; 0.8382 0.8285 0.7534 0.8667 0.0500</span></code></pre></div>
-<p><code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> is for vectorizing over multiple arguments. For example, the <code>lifeExpectancy()</code> function below (taken from the package <a href="https://github.com/jonesor/Rage">Rage</a>) calculates life expectancy given two arguments: a <strong>U</strong> matrix, and an integer indicator for the stage class reflecting the ‘start of life’. The start of life is often defined as the first ‘active’ stage class (i.e. not propagule or dormant), the index of which will vary from row to row.</p>
+<p><code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> is for vectorising over multiple arguments. For example, the <code>lifeExpectancy()</code> function below (taken from the package <a href="https://github.com/jonesor/Rage">Rage</a>) calculates life expectancy given two arguments: a <strong>U</strong> matrix, and an integer indicator for the stage class reflecting the ‘start of life’. The start of life is often defined as the first ‘active’ stage class (i.e. not propagule or dormant), the index of which will vary from row to row.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># function to calculate life expectancy</span>
 <span class="va">lifeExpectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">matU</span>, <span class="va">startLife</span><span class="op">)</span> <span class="op">{</span>
@@ -271,17 +271,17 @@
 <span class="co"># get index of first active stage class with mpm_first_active()</span>
 <span class="va">CompUnnest</span><span class="op">$</span><span class="va">start_life</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_first_active</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">)</span>
 
-<span class="co"># vectorize lifeExpectancy over matU and start_life</span>
+<span class="co"># vectorise lifeExpectancy over matU and start_life</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">lifeExpectancy</span>,             <span class="co"># function</span>
-       <span class="va">CompUnnest</span><span class="op">$</span><span class="va">matU</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,       <span class="co"># first argument to vectorize over</span>
-       <span class="va">CompUnnest</span><span class="op">$</span><span class="va">start_life</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span> <span class="co"># second argument to vectorize over</span>
+       <span class="va">CompUnnest</span><span class="op">$</span><span class="va">matU</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,       <span class="co"># first argument to vectorise over</span>
+       <span class="va">CompUnnest</span><span class="op">$</span><span class="va">start_life</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span> <span class="co"># second argument to vectorise over</span>
 <span class="co">#&gt;     U1     U2     U1     U1     U1     U1 </span>
 <span class="co">#&gt;  5.727 22.195  8.440  3.010 10.877 18.182</span></code></pre></div>
 </div>
 <div id="when-functions-fail" class="section level2">
 <h2 class="hasAnchor">
 <a href="#when-functions-fail" class="anchor"></a>When functions fail</h2>
-<p>Just like loops, vectorization fails if the function being vectorized throws an error on <em>any</em> element of the vector. Here’s an example. The <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> function from <a href="https://cran.r-project.org/web/packages/popbio/index.html">popbio</a> calculates the expected population growth rate given a projection matrix. It’ll work on most of the <strong>A</strong> matrices in <code>Compadre</code>, but fails on matrices that contain missing values (<code>NA</code>).</p>
+<p>Just like loops, vectorisation fails if the function being vectorised throws an error on <em>any</em> element of the vector. Here’s an example. The <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> function from <a href="https://cran.r-project.org/web/packages/popbio/index.html">popbio</a> calculates the expected population growth rate given a projection matrix. It’ll work on most of the <strong>A</strong> matrices in <code>Compadre</code>, but fails on matrices that contain missing values (<code>NA</code>).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># works for a single matrix</span>
 <span class="fu"><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">$</span><span class="va">matA</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
@@ -319,7 +319,7 @@
 <div id="modify-the-function" class="section level4">
 <h4 class="hasAnchor">
 <a href="#modify-the-function" class="anchor"></a>2. Modify the function</h4>
-<p>A second approach is to modify the function we want to vectorize with so that it can natively handle special cases. For example, we might modify <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> so that it returns <code>NA</code> if a matrix contains missing values.</p>
+<p>A second approach is to modify the function we want to vectorise with so that it can natively handle special cases. For example, we might modify <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> so that it returns <code>NA</code> if a matrix contains missing values.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># check mat for missing values: if TRUE return NA, else return lambda(mat)</span>

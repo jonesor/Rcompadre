@@ -15,7 +15,7 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data management}
+#' @family {data checking}
 #' 
 #' @examples 
 #' # with CompadreMat object

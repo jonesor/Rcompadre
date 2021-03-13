@@ -1,10 +1,10 @@
 ---
-title: "Using Rcompadre with the Tidyverse"
+title: "Using Rcompadre with the tidyverse"
 author: "Patrick Barks"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using Rcompadre with the Tidyverse}
+  %\VignetteIndexEntry{Using Rcompadre with the tidyverse}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

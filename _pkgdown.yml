@@ -11,7 +11,6 @@ reference:
     desc: "Functions for manipulating and managing data."
     contents:
       - has_concept("data management")
-
   - title: "All functions"
     desc: "All functions listed alphabetically."
     contents:
