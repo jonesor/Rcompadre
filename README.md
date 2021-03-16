@@ -4,11 +4,10 @@
 # Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
 
 <!--- Continuous integration badges --->
-
 <!--- BE CAREFUL WITH THE FORMATTING --->
 
 | Project                                                                                                                                                                                                | Main branch                                                                                                                                                                | Devel branch                                                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)                                                                | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml) | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml) |
 | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) | [![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=main)](https://travis-ci.org/jonesor/Rcompadre)                                                        | [![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=main)](https://travis-ci.org/jonesor/Rcompadre)                                                                      |
 |                                                                                                                                                                                                        | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=main&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)   | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)                |
@@ -17,7 +16,7 @@
 <!--- Continuous Integration Badges End --->
 
 An R package to facilitate working with the
-[COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix
+[COM(P)ADRE](https://compadre-db.org/) Plant and Animal Matrix
 Population Databases.
 
 ## Installation
@@ -48,7 +47,7 @@ library(Rcompadre)
 #### Fetching a database
 
 Fetch the most recent database version from
-[compadre-db.org](https://www.compadre-db.org/) with
+[compadre-db.org](https://compadre-db.org/) with
 
 ``` r
 compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database
