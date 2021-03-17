@@ -101,7 +101,7 @@
       <h1 data-toc-skip>Vectorising with Rcompadre</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2021-03-12</h4>
+            <h4 class="date">2021-03-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorisingRcompadre.Rmd"><code>vignettes/a03_VectorisingRcompadre.Rmd</code></a></small>
       <div class="hidden name"><code>a03_VectorisingRcompadre.Rmd</code></div>
@@ -281,7 +281,7 @@
 <div id="when-functions-fail" class="section level2">
 <h2 class="hasAnchor">
 <a href="#when-functions-fail" class="anchor"></a>When functions fail</h2>
-<p>Just like loops, vectorisation fails if the function being vectorised throws an error on <em>any</em> element of the vector. Here’s an example. The <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> function from <a href="https://cran.r-project.org/web/packages/popbio/index.html">popbio</a> calculates the expected population growth rate given a projection matrix. It’ll work on most of the <strong>A</strong> matrices in <code>Compadre</code>, but fails on matrices that contain missing values (<code>NA</code>).</p>
+<p>Just like loops, vectorisation fails if the function being vectorised throws an error on <em>any</em> element of the vector. Here’s an example. The <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> function from <a href="https://CRAN.R-project.org/package=popbio">popbio</a> calculates the expected population growth rate given a projection matrix. It’ll work on most of the <strong>A</strong> matrices in <code>Compadre</code>, but fails on matrices that contain missing values (<code>NA</code>).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># works for a single matrix</span>
 <span class="fu"><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">$</span><span class="va">matA</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>

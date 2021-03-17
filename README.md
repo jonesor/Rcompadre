@@ -17,7 +17,7 @@
 <!--- Continuous Integration Badges End --->
 
 An R package to facilitate working with the
-[COM(P)ADRE](https://www.compadre-db.org/) Plant and Animal Matrix
+[COM(P)ADRE](https://compadre-db.org/) Plant and Animal Matrix
 Population Databases.
 
 ## Installation
@@ -48,7 +48,7 @@ library(Rcompadre)
 #### Fetching a database
 
 Fetch the most recent database version from
-[compadre-db.org](https://www.compadre-db.org/) with
+[compadre-db.org](https://compadre-db.org/) with
 
 ``` r
 compadre <- cdb_fetch("compadre") # or use 'comadre' for the animal database

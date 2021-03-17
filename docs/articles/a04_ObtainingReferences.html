@@ -101,7 +101,7 @@
       <h1 data-toc-skip>Obtaining references</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-03-12</h4>
+            <h4 class="date">2021-03-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a04_ObtainingReferences.Rmd"><code>vignettes/a04_ObtainingReferences.Rmd</code></a></small>
       <div class="hidden name"><code>a04_ObtainingReferences.Rmd</code></div>
@@ -140,6 +140,7 @@
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI.ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: 10.1890/09-1641 agency not found - proceeding with 'crossref' ...</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; [1] "Hunter, C. M., Caswell, H., Runge, M. C., Regehr, E. V., Amstrup, S. C., &amp; Stirling, I. (2010). Climate change threatens polar bear populations: a stochastic demographic analysis. Ecology, 91(10), 2883–2897. doi:10.1890/09-1641.1"</span>
 <span class="co">#&gt; </span>

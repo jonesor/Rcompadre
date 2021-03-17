@@ -181,7 +181,7 @@ mapply(lifeExpectancy,             # function
 
 ## When functions fail
 
-Just like loops, vectorisation fails if the function being vectorised throws an error on _any_ element of the vector. Here's an example. The `lambda()` function from [popbio](https://cran.r-project.org/web/packages/popbio/index.html) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
+Just like loops, vectorisation fails if the function being vectorised throws an error on _any_ element of the vector. Here's an example. The `lambda()` function from [popbio](https://CRAN.R-project.org/package=popbio) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
 
 ```{r error=TRUE}
 # works for a single matrix

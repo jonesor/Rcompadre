@@ -101,7 +101,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-03-12</h4>
+            <h4 class="date">2021-03-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -115,7 +115,7 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>The COMPADRE and COMADRE Plant and Animal Matrix Databases contain matrix population models (MPMs) and associated metadata obtained from the published literature (Salguero-Gomez et al. 2015, 2016).</p>
 <p>Wherever possible the full MPM (the <strong>A</strong> matrix) has been split into three additional constituent matrices based on the nature of the demographic processes involved. These are the <strong>U</strong> matrix, which summarises growth and survival; the <strong>F</strong> matrix, which summarises sexual reproduction; and the <strong>C</strong> matrix, which summarises asexual (clonal) reproduction. These additional matrices sum to equal the <strong>A</strong> matrix (<strong>A</strong> = <strong>U</strong> + <strong>F</strong> + <strong>C</strong>). Thus, each MPM is presented as a list of these 4 matrices in the databases together with information about the MPM stages defined by the author.</p>
-<p>In addition, each set of MPMs is associated with metadata including taxonomy of the species studied, the geographic location, the published source information and so on. For further details please see the two papers on COMPADRE and COMADRE (Salguero-Gomez et al. 2015, 2016), and the User Guide which is available via the website (<a href="http://www.compadre-db.org">www.compadre-db.org</a>).</p>
+<p>In addition, each set of MPMs is associated with metadata including taxonomy of the species studied, the geographic location, the published source information and so on. For further details please see the two papers on COMPADRE and COMADRE (Salguero-Gomez et al. 2015, 2016), and the User Guide which is available via the website (<a href="https://compadre-db.org/">compadre-db.org/</a>).</p>
 <p>The databases are distributed as <code>Rdata</code> files containing a <code>list</code> class object which provides the data in a structured format. Although it is possible to use the database without using the <em>Rcompadre</em> package this is not recommended. <em>Rcompadre</em> provides users with a range of useful tools for working with the database that will greatly improve user experience.</p>
 <p>Importantly, <em>Rcompadre</em> coerces the data as a so-called <code>CompadreDB</code> S4 class object. The details of what this means is beyond the scope of this vignette, apart from that the object has two <em>slots</em> called <code>CompadreData</code> and <code>VersionData</code>.</p>
 <p><code>CompadreData</code> contains a tibble-style data frame that includes a list column of matrix population models (MPMs) alongside associated metadata columns. Each element of the matrix column of the data frame (<code>mat</code>) contains a list of MPMs, while remaining columns include metadata associated with the matrices, while <code>VersionData</code> is a list of information about the database version. In practice, knowledge of the details of this structure is not necessary thanks to the tools provided by the <code>Rcompadre</code> package.</p>
@@ -123,7 +123,7 @@
 <div id="obtaining-and-loading-the-data-" class="section level2">
 <h2 class="hasAnchor">
 <a href="#obtaining-and-loading-the-data-" class="anchor"></a>Obtaining and loading the data.</h2>
-<p>To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at <a href="http://www.compadre-db.org">www.compadre-db.org</a>.</p>
+<p>To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at <a href="https://compadre-db.org/">compadre-db.org/</a>.</p>
 <p>When you have done that you can load it into R using the command <code>load</code>. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command <code>as_cdb</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span>
@@ -403,14 +403,14 @@
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <p>Caswell, H. (2001). Matrix Population Models: Construction, Analysis, and Interpretation. 2nd edition. Sinauer Associates, Sunderland, MA. ISBN-10: 0878930965</p>
-<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. doi: <a href="http://doi.org/10.1111/1365-2745.12334">10.1111/1365-2745.12334</a></p>
-<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. doi: <a href="http://doi.org/10.1111/1365-2656.12482">10.1111/1365-2656.12482</a></p>
+<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. &lt;:10.1111/1365-2745.12334&gt;</p>
+<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. &lt;:10.1111/1365-2656.12482&gt;</p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Tibbles: <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html" class="uri">https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Tibbles: <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
