@@ -1,6 +1,6 @@
 ---
 title: "Using Rcompadre with the tidyverse"
-author: "Patrick Barks"
+author: "Patrick Barks & Owen Jones"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -99,9 +99,9 @@ The `mutate()` function in dplyr adds one or more new columns to a data frame (o
 Let's say we want to conduct an analysis comparing Nordic countries to the rest of Europe. We can use `subset()` to limit the database to Europe, and then use `mutate()` to create a new column identifying rows from Nordic countries.
 
 ```{r, warning=FALSE}
-#compadre_euro <- Compadre %>%
-#  subset(Continent == "Europe") %>% 
-#  mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
+compadre_euro <- Compadre %>%
+  subset(Continent == "Europe") %>% 
+  mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
 ```
 
 
@@ -199,6 +199,16 @@ compadre_replicated_pops <- Compadre %>%
 ```
 
 Make sure to use `ungroup()` after you're finished with the groups, to prevent unexpected behaviour later on.
+
+## Obtaining a single representative of each species
+
+It is a common task in comparative analyses to obtain a single representative of each species. One way that users can do that is by using `group_by()`, followed by `slice()` and `sample()` to randomly select a representative from each accepted species. 
+
+```{r}
+singleRepresentativeSpecies <- Compadre %>% 
+  group_by(SpeciesAccepted) %>% 
+  slice(sample(1))
+```
 
 
 ## Using CompadreDB objects with `ggplot`
