@@ -17,7 +17,7 @@ Extract a tibble with only metadata information from a CompadreDB object, by
 dropping the matrix column "mat".
 }
 \details{
-Transform the Large CompadreDB object into a tibble and drops the
+Transforms the large CompadreDB object into a tibble and drops the
 matrix column ("mat").
 }
 \examples{

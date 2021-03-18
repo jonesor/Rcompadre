@@ -39,7 +39,8 @@ CompadreSubset <- cdb_check_species(Compadre, species, return_db = TRUE)
 Other {data checking}: 
 \code{\link{cdb_collapse}()},
 \code{\link{cdb_compare}()},
-\code{\link{cdb_flag}()}
+\code{\link{cdb_flag}()},
+\code{\link{mpm_methods}}
 }
 \author{
 Danny Buss <dlb50@cam.ac.uk>
