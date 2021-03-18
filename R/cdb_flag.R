@@ -21,6 +21,7 @@
 #'     \code{\link[popdemo]{isIrreducible}})?
 #'   \item \code{check_primitive}: is matA primitive (see
 #'     \code{\link[popdemo]{isPrimitive}})?
+#'   \item \code{check_surv_gte_1}: does matU contains values that are equal to or greater than 1?
 #' }
 #' 
 #' @param cdb A CompadreDB object
@@ -28,7 +29,7 @@
 #' 
 #'   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
 #'   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-#'   "check_ergodic", "check_irreducible", "check_primitive")}
+#'   "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")}
 #' 
 #' @return Returns \code{cdb} with extra columns appended to the data slot
 #'   (columns have the same names as the corresponding elements of
@@ -40,6 +41,7 @@
 #' returned if the matrix sum of matU, matF, and matC consists only of zeros
 #' and/or \code{NA}, indicating that the matrix has not been split.
 #' 
+#' @author Owen Jones <jones@@biology.sdu.dk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
 #' @author Roberto Salguero-Gomez <rob.salguero@@zoo.ox.ac.uk>
 #' @author Danny Buss <dlb50@@cam.ac.uk>
@@ -65,7 +67,8 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
                                      "check_component_sum",
                                      "check_ergodic",
                                      "check_irreducible",
-                                     "check_primitive")) {
+                                     "check_primitive",
+                                     "check_surv_gte_1")) {
   
   if (!inherits(cdb, "CompadreDB")) {
     stop("cdb must be of class CompadreDB. See function as_cdb")
@@ -80,7 +83,8 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
                     "check_component_sum",
                     "check_ergodic",
                     "check_irreducible",
-                    "check_primitive")
+                    "check_primitive",
+                    "check_surv_gte_1")
   
   checks_check <- checks %in% checks_allow
   
@@ -157,7 +161,11 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
       MoreArgs = list(fn = isPrimitive)
     )
   }
-  
+
+  if ("check_surv_gte_1" %in% checks) {
+    dat$check_surv_gte_1 <- sapply(matU,max,na.rm = TRUE)>=1
+  }
+    
   new("CompadreDB",
       data = dat,
       version = cdb@version)
