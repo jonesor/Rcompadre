@@ -1,15 +1,5 @@
 # Language is R
 language: r
-
-# R versions to build with ------
-# R-devel has a new method of building vignettes that breaks backward
-# compatability. I will exclude it from the build matrix for now so
-# workshop participants aren't confused by the build error badge.
-# See below for more details on the development branch
-# http://r.789695.n4.nabble.com/R-CMD-build-then-check-fails-on-R-devel-due-to-serialization-version-td4747582.html
-
-
-language: r
 warnings_are_errors: true
 sudo: false
 cache: packages
@@ -25,18 +15,16 @@ matrix:
       r: release
     - os: linux
       dist: xenial
-      r: oldrelease
-    - os: osx
+      r: devel
+    - os: osx 
       osx_image: xcode12
-      r: oldrelease
+      r: devel 
       
 # Branches
 branches:
   only:
   - main
   - devel
-
-
 
 after_success:
   - Rscript -e 'covr::codecov()'
