@@ -32,7 +32,8 @@ cdb_compare(Compadre1, Compadre2)
 Other {data checking}: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_collapse}()},
-\code{\link{cdb_flag}()}
+\code{\link{cdb_flag}()},
+\code{\link{mpm_methods}}
 }
 \author{
 Owen R. Jones <jones@biology.sdu.dk>

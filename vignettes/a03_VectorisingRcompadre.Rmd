@@ -100,7 +100,7 @@ Compadre$dim <- sapply(Compadre$matA, nrow)
 
 #### Vectorising custom functions
 
-We can also vectorise with a custom function. Let's say we want to know, for every matrix, whether there are stages with no transitions (i.e. any column sums equal to sero). Here's a vectorised approach.
+We can also vectorise with a custom function. Let's say we want to know, for every matrix, whether there are stages with no transitions (i.e. any column sums equal to zero). Here's a vectorised approach.
 
 ```{r}
 # function to determine whether matrix 'mat' has any stages with no transitions

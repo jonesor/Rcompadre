@@ -73,7 +73,8 @@ CompCollapse <- cdb_collapse(CompSub, columns = c("id_stage"))
 Other {data checking}: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_compare}()},
-\code{\link{cdb_flag}()}
+\code{\link{cdb_flag}()},
+\code{\link{mpm_methods}}
 }
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>

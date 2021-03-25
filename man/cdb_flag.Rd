@@ -8,7 +8,7 @@ cdb_flag(
   cdb,
   checks = c("check_NA_A", "check_NA_U", "check_NA_F", "check_NA_C", "check_zero_U",
     "check_singular_U", "check_component_sum", "check_ergodic", "check_irreducible",
-    "check_primitive")
+    "check_primitive", "check_surv_gte_1")
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ cdb_flag(
 
   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-  "check_ergodic", "check_irreducible", "check_primitive")}}
+  "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")}}
 }
 \value{
 Returns \code{cdb} with extra columns appended to the data slot
@@ -47,6 +47,7 @@ Optional checks include:
     \code{\link[popdemo]{isIrreducible}})?
   \item \code{check_primitive}: is matA primitive (see
     \code{\link[popdemo]{isPrimitive}})?
+  \item \code{check_surv_gte_1}: does matU contains values that are equal to or greater than 1?
 }
 }
 \details{
@@ -65,9 +66,12 @@ CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
 Other {data checking}: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_collapse}()},
-\code{\link{cdb_compare}()}
+\code{\link{cdb_compare}()},
+\code{\link{mpm_methods}}
 }
 \author{
+Owen Jones <jones@biology.sdu.dk>
+
 Julia Jones <juliajones@biology.sdu.dk>
 
 Roberto Salguero-Gomez <rob.salguero@zoo.ox.ac.uk>
