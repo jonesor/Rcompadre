@@ -162,8 +162,16 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
     )
   }
 
+  maxifnotNAs <- function(x) {
+    if (sum(is.na(x)) == length(x)) {
+      return(NA)
+    } else {
+      return(max(x, na.rm = TRUE))
+    }
+  }
+  
   if ("check_surv_gte_1" %in% checks) {
-    dat$check_surv_gte_1 <- sapply(matU,max,na.rm = TRUE)>=1
+    dat$check_surv_gte_1 <- sapply(matU,maxifnotNAs)>=1
   }
     
   new("CompadreDB",
