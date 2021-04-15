@@ -101,7 +101,7 @@
       <h1 data-toc-skip>Using Rcompadre with the tidyverse</h1>
                         <h4 class="author">Patrick Barks &amp; Owen Jones</h4>
             
-            <h4 class="date">2021-03-26</h4>
+            <h4 class="date">2021-04-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a02_RcompadreTidy.Rmd"><code>vignettes/a02_RcompadreTidy.Rmd</code></a></small>
       <div class="hidden name"><code>a02_RcompadreTidy.Rmd</code></div>
@@ -159,18 +159,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>               <span class="co"># first argument is Compadre, from previous line</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># first argument is output of cdb_flag()</span>
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># first argument is output of cdb_flag()</span></code></pre></div>
 <p>The advantage of piping here is that we don’t have to use nested functions (<code><a href="https://rdrr.io/r/base/subset.html">subset(cdb_flag())</a></code>), and we don’t have to create object names for every intermediate step in our analysis.</p>
 </div>
 </div>
@@ -211,18 +200,7 @@
   <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>      <span class="co"># remove matrices with missing values</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mat_A <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>          <span class="co"># extract list-column of matA</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span>  <span class="co"># apply lambda() to every matA</span>
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span>
-
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): no non-missing arguments to max; returning -Inf</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span>  <span class="co"># apply lambda() to every matA</span></code></pre></div>
 <p>In the example above, <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> which always returns a list. In the example below we use <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> to calculate vectors of stage-specific survival (column sums of matU) for every row of the database.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_stage_surv</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
