@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 options(digits = 4)
 ```
 
-# Rcompadre  <img src="man/figures/logo.png" height="160px" align="right" />
+# Rcompadre  <img src="man/figures/logo_rcompadre.png" height="160px" align="right" />
 
 
 
