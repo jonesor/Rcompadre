@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rcompadre <img src="man/figures/logo.png" height="160px" align="right" />
+# Rcompadre <img src="man/figures/logo_rcompadre.png" height="160px" align="right" />
 
 <!--- Continuous integration badges --->
 
