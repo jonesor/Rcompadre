@@ -1,5 +1,11 @@
 # Rcompadre (Development version)
 
+* No changes yet.
+
+# Rcompadre 1.0.0
+
+_Released on GitHub on 25th April 2021_
+
 * Updated DESCRIPTION with new contributors.
 * Improved documentation to ensure it is more understandable to less experienced users.
 * Grouped functions by type in the documentation.
