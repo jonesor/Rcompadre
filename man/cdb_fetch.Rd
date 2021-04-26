@@ -21,7 +21,11 @@ file.
 }
 \examples{
 \dontrun{
-compadre <- cdb_fetch('compadre')
+#Download direct from the COMPADRE website
+compadre <- cdb_fetch("compadre")
+
+#using file path to downloaded data
+compadre <- cdb_fetch("data/COMPADRE_v.5.0.1.RData") 
 }
 }
 \seealso{
