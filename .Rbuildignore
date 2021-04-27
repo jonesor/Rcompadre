@@ -17,3 +17,5 @@
 ^README_cache$
 ^tests/spelling\.Rout\.save$
 ^tests/testthat-problems\.rds$
+^CRAN-RELEASE$
+
