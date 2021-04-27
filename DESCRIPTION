@@ -42,7 +42,7 @@ Authors@R: c(
            role = "aut",
            email = "levisc8@gmail.com",
            comment = c(ORCID = "0000-0002-3289-9925"))) 
-Description: Utility functions for interacting with the COMPADRE and COMADRE databases of matrix population models.
+Description: Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models.
 License: GPL-2 | file LICENSE
 URL: https://github.com/jonesor/Rcompadre
 BugReports: https://github.com/jonesor/Rcompadre/issues
