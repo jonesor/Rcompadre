@@ -4,8 +4,6 @@
 
 # Rcompadre 1.0.0
 
-_Released on GitHub on 25th April 2021_
-
 * Updated DESCRIPTION with new contributors.
 * Improved documentation to ensure it is more understandable to less experienced users.
 * Grouped functions by type in the documentation.
@@ -17,11 +15,7 @@ _Released on GitHub on 25th April 2021_
 * Unit tests improved to increase coverage.
 * Modified build checks via continuous integration on Travis, Appveyor and GitHub actions (including weekly checks).
 
-
-
 # Rcompadre 0.2.0 
-
-_Released on GitHub on 16th January 2019_
 
 * Modifications to improve the class definitions, which are renamed to `CompadreDB` and `CompadreM`.
 * Added generic functionality with accessor methods via `ClassUnionMethods`. e.g. functions `matA`, `matU`, `matF`, and `matC` output all A,U,F, or C matrices from a database.
@@ -39,8 +33,6 @@ _Released on GitHub on 16th January 2019_
 * Added unit tests for all functions.
 
 # Rcompadre 0.1.0
-
-_Released on GitHub on 30th August 2018_
 
 * First pre-release version!
 * Established S4 class `CompadreData` with definition and methods.

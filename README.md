@@ -22,6 +22,12 @@ Population Databases.
 
 ## Installation
 
+Install the stable release package from CRAN with:
+
+``` r
+install.packages("Rcompadre")
+```
+
 Install the package from GitHub with:
 
 ``` r
