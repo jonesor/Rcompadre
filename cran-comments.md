@@ -148,8 +148,12 @@ __R latest release__
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs or NOTEs.
+There were no ERRORs or WARNINGs.
 
+There was 1 NOTE:
+Non-standard file/directory found at top level:
+  'cran-comments.md'
+  
 This is the first submission to CRAN.
 
 ## Downstream dependencies
