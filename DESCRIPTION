@@ -1,6 +1,6 @@
 Package: Rcompadre
 Type: Package
-Title: Utilities for Working with the COMPADRE/COMADRE Plant and Animal Matrix Model Databases
+Title: Utilities for Working with the 'COMPADRE'/'COMADRE' Plant and Animal Matrix Model Databases
 Version: 1.0.0
 Authors@R: c(
     person(given = "Patrick", 
