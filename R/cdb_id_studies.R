@@ -15,7 +15,7 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data management}
+#' @family data management
 #' 
 #' @details
 #' Identifiers are assigned by pasting together the relevant columns, assigning

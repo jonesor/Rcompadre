@@ -68,7 +68,7 @@ string_to_mat(mat_str)
 \seealso{
 \link{cdb_flatten} \link{cdb_unflatten}
 
-Other {data management}: 
+Other data management: 
 \code{\link{cdb_flatten}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
@@ -84,4 +84,4 @@ Owen R. Jones <jones@biology.sdu.dk>
 
 Patrick M. Barks <patrick.barks@gmail.com>
 }
-\concept{{data management}}
+\concept{data management}

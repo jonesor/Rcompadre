@@ -15,7 +15,7 @@
 #'
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data management}
+#' @family data management
 #' 
 #' @seealso \link{cdb_flatten} \link{string_representation}
 #' 

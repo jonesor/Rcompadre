@@ -45,7 +45,7 @@ CompadreUnnest <- cdb_unnest(Compadre, c("matU", "MatrixClassAuthor"))
 
 }
 \seealso{
-Other {data management}: 
+Other data management: 
 \code{\link{cdb_flatten}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
@@ -59,4 +59,4 @@ Other {data management}:
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>
 }
-\concept{{data management}}
+\concept{data management}

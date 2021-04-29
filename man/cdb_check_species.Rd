@@ -36,7 +36,7 @@ CompadreSubset <- cdb_check_species(Compadre, species, return_db = TRUE)
 
 }
 \seealso{
-Other {data checking}: 
+Other data checking: 
 \code{\link{cdb_collapse}()},
 \code{\link{cdb_compare}()},
 \code{\link{cdb_flag}()},
@@ -51,4 +51,4 @@ Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
-\concept{{data checking}}
+\concept{data checking}

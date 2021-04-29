@@ -50,7 +50,7 @@
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
-#' @family {data checking}
+#' @family data checking
 #' 
 #' @seealso \link{cdb_id_stages}
 #' 

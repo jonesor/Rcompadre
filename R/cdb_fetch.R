@@ -13,7 +13,7 @@
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
-#' @family {data acquisition}
+#' @family data acquisition
 #' 
 #' @examples
 #' \dontrun{

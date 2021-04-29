@@ -16,7 +16,7 @@
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data management}
+#' @family data management
 #' 
 #' @details
 #' The vector 'MatrixClassOrganized' reflects standardized stage classes

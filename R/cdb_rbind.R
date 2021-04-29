@@ -10,7 +10,7 @@
 #' @author Sam Levin <levisc8@@gmail.com>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
-#' @family {data management}
+#' @family data management
 #' 
 #' @examples 
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
