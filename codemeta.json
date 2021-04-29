@@ -5,11 +5,11 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "Rcompadre",
-  "description": "Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models.",
-  "name": "Rcompadre: Utilities for Working with the 'COMPADRE'/'COMADRE' Plant and Animal Matrix Model Databases",
+  "description": "Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models. Described in Jones et al. (2021) <doi:10.1101/2021.04.26.441330>.",
+  "name": "Rcompadre: Utilities for using the 'COM(P)ADRE' Matrix Model Database",
   "codeRepository": "https://github.com/jonesor/Rcompadre",
   "issueTracker": "https://github.com/jonesor/Rcompadre/issues",
-  "license": "https://spdx.org/licenses/GPL-2.0",
+  "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "1.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
@@ -65,6 +65,20 @@
       "familyName": "Jones",
       "email": "jones@biology.sdu.dk",
       "@id": "https://orcid.org/0000-0001-5720-4686"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Julia",
+      "familyName": "Jones",
+      "email": "juagjones@gmail.com",
+      "@id": "https://orcid.org/0000-0001-9223-1778"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Gesa",
+      "familyName": "Römer",
+      "email": "gesa@biology.sdu.dk",
+      "@id": "https://orcid.org/0000-0002-4859-5870"
     },
     {
       "@type": "Person",
@@ -260,5 +274,91 @@
   "fileSize": "0KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=main"],
-  "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md"
+  "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2021",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": ["Owen", "R."],
+          "familyName": "Jones"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Patrick",
+          "familyName": "Barks"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["Iain", "M"],
+          "familyName": "Stott"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["Tamora", "D"],
+          "familyName": "James"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["Sam", "C"],
+          "familyName": "Levin"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["William", "K"],
+          "familyName": "Petry"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Pol",
+          "familyName": "Capdevila"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Judy",
+          "familyName": "Che-Castaldo"
+        },
+        {
+          "@type": "Person",
+          "givenName": "John",
+          "familyName": "Jackson"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Gesa",
+          "familyName": "Römer"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Caroline",
+          "familyName": "Schuette"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["Chelsea", "C"],
+          "familyName": "Thomas"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Roberto",
+          "familyName": "Salguero-Gómez"
+        }
+      ],
+      "name": "Rcompadre and Rage - two {R} packages to facilitate the use of\n              the {COMPADRE} and {COMADRE} databases and calculation of life\n              history traits from matrix population models",
+      "identifier": "10.1101/2021.04.26.441330",
+      "pagination": "2021.04.26.441330",
+      "@id": "https://doi.org/10.1101/2021.04.26.441330",
+      "sameAs": "https://doi.org/10.1101/2021.04.26.441330",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "datePublished": "2021",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "bioRxiv"
+        }
+      }
+    }
+  ]
 }
