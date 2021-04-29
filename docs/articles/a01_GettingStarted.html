@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-04-27</h4>
+            <h4 class="date">2021-04-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -271,12 +271,12 @@
 <span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt;          A1     A2     A3   A4      A5</span>
-<span class="co">#&gt; A1 0.060000 0.0000 0.0000 0.00 3.91724</span>
-<span class="co">#&gt; A2 0.002069 0.0000 0.0000 0.00 0.13505</span>
-<span class="co">#&gt; A3 0.000000 0.7333 0.4062 0.12 0.01923</span>
-<span class="co">#&gt; A4 0.000000 0.0000 0.3438 0.70 0.53846</span>
-<span class="co">#&gt; A5 0.000000 0.0000 0.0000 0.14 0.36538</span></code></pre></div>
+<span class="co">#&gt;           A1        A2      A3   A4         A5</span>
+<span class="co">#&gt; A1 0.0600000 0.0000000 0.00000 0.00 3.91724308</span>
+<span class="co">#&gt; A2 0.0020685 0.0000000 0.00000 0.00 0.13504696</span>
+<span class="co">#&gt; A3 0.0000000 0.7333333 0.40625 0.12 0.01923077</span>
+<span class="co">#&gt; A4 0.0000000 0.0000000 0.34375 0.70 0.53846154</span>
+<span class="co">#&gt; A5 0.0000000 0.0000000 0.00000 0.14 0.36538462</span></code></pre></div>
 <p>Thus one could select particular matrices from this list using <code>[[ ]]</code> syntax</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
@@ -394,7 +394,7 @@
 <code class="sourceCode R"><span class="va">lambdaVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs</a></span>, what<span class="op">=</span><span class="st">"lambda"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lambdaVals</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span class="co">#&gt;   0.230   0.933   1.002   1.248   1.136   6.615</span>
+<span class="co">#&gt;  0.2303  0.9331  1.0024  1.2482  1.1355  6.6145</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">lambdaVals</span>, main <span class="op">=</span> <span class="st">"Lambda values"</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_GettingStarted_files/figure-html/matrix%20calculations-1.png" width="700"></p>
 </div>
@@ -425,7 +425,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">

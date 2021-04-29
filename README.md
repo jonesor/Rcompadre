@@ -138,8 +138,10 @@ See the Changelog for more details.
 
 ## Citation
 
-We are working on a manuscript to describe the package. In the meantime,
-please use `citation("Rcompadre")`.
+Jones, O. R. et al. (2021) ‘Rcompadre and Rage - two R packages to
+facilitate the use of the COMPADRE and COMADRE databases and calculation
+of life history traits from matrix population models’, *bioRxiv*.
+<doi:10.1101/2021.04.26.441330>.
 
 ## Contributions
 

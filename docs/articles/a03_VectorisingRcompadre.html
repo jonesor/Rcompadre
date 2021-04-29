@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Vectorising with Rcompadre</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2021-04-27</h4>
+            <h4 class="date">2021-04-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorisingRcompadre.Rmd"><code>vignettes/a03_VectorisingRcompadre.Rmd</code></a></small>
       <div class="hidden name"><code>a03_VectorisingRcompadre.Rmd</code></div>
@@ -257,8 +257,8 @@
 <span class="co">#&gt; 0.672 0.903 0.997 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt;     U1     U2     U3     U4     U5 </span>
-<span class="co">#&gt; 0.8382 0.8285 0.7534 0.8667 0.0500</span></code></pre></div>
+<span class="co">#&gt;      U1      U2      U3      U4      U5 </span>
+<span class="co">#&gt; 0.83820 0.82850 0.75345 0.86665 0.05000</span></code></pre></div>
 <p><code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> is for vectorising over multiple arguments. For example, the <code>lifeExpectancy()</code> function below (taken from the package <a href="https://github.com/jonesor/Rage">Rage</a>) calculates life expectancy given two arguments: a <strong>U</strong> matrix, and an integer indicator for the stage class reflecting the ‘start of life’. The start of life is often defined as the first ‘active’ stage class (i.e. not propagule or dormant), the index of which will vary from row to row.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># function to calculate life expectancy</span>
@@ -274,8 +274,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">lifeExpectancy</span>,             <span class="co"># function</span>
        <span class="va">CompUnnest</span><span class="op">$</span><span class="va">matU</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,       <span class="co"># first argument to vectorise over</span>
        <span class="va">CompUnnest</span><span class="op">$</span><span class="va">start_life</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span> <span class="co"># second argument to vectorise over</span>
-<span class="co">#&gt;     U1     U2     U1     U1     U1     U1 </span>
-<span class="co">#&gt;  5.727 22.195  8.440  3.010 10.877 18.182</span></code></pre></div>
+<span class="co">#&gt;        U1        U2        U1        U1        U1        U1 </span>
+<span class="co">#&gt;  5.727060 22.194872  8.439966  3.009829 10.877215 18.181818</span></code></pre></div>
 </div>
 <div id="when-functions-fail" class="section level2">
 <h2 class="hasAnchor">
@@ -284,7 +284,7 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># works for a single matrix</span>
 <span class="fu"><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">$</span><span class="va">matA</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; [1] 1.058</span>
+<span class="co">#&gt; [1] 1.058029</span>
 
 <span class="co"># but fails when applied to all matrices because a few have missing values</span>
 <span class="va">CompUnnest</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">$</span><span class="va">matA</span>, <span class="va">lambda</span><span class="op">)</span>
@@ -350,7 +350,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Sam Levin.</p>
+  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">
