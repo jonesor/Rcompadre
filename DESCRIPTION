@@ -1,6 +1,6 @@
 Package: Rcompadre
 Type: Package
-Title: Utilities for Working with the 'COMPADRE'/'COMADRE' Plant and Animal Matrix Model Databases
+Title: Utilities for using the 'COM(P)ADRE' Matrix Model Database
 Version: 1.0.0
 Authors@R: c(
     person(given = "Patrick", 
@@ -37,13 +37,23 @@ Authors@R: c(
            email = "jones@biology.sdu.dk",
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5720-4686")),
+    person(given = "Julia",
+           family = "Jones",
+           email = "juagjones@gmail.com",
+           role = "aut",
+           comment = c(ORCID = "0000-0001-9223-1778")),
+    person(given = "Gesa",
+           family = "Römer",
+           email = "gesa@biology.sdu.dk",
+           role = "aut",
+           comment = c(ORCID = "0000-0002-4859-5870")),
     person(given = "Sam",
            family = "Levin",
            role = "aut",
            email = "levisc8@gmail.com",
            comment = c(ORCID = "0000-0002-3289-9925"))) 
-Description: Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models.
-License: GPL-2 | file LICENSE
+Description: Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models. Described in Jones et al. (2021) <doi:10.1101/2021.04.26.441330>.
+License: GPL-3
 URL: https://github.com/jonesor/Rcompadre
 BugReports: https://github.com/jonesor/Rcompadre/issues
 Encoding: UTF-8

@@ -5,6 +5,8 @@
 #' that the \code{mat} column will always be retained during subsetting, even if
 #' it is not included in the user's column subset.
 #' 
+#' @return No return value, called for side effects
+#' 
 #' @name CompadreDB-Subsetting
 #' 
 #' @examples

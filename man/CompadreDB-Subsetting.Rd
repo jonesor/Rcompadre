@@ -25,6 +25,9 @@
 
 \item{select}{expression indicating which columns to keep}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 \code{CompadreDB} objects can be subset just like a regular
 \code{data.frame}, using either \code{[} or \code{subset()}. Note, however,

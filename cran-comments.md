@@ -1,14 +1,30 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Reduced title length to less than 65 characters.
+
+* Removed LICENSE file and reference to it in description.
+
+* Added missing authors to DESCRIPTION Authors@R.
+
+* Added preprint DOI to DESCRIPTION. Also added CITATION file.
+
+* Added \value to .Rd files regarding exported methods (all with "no return value, called for side effects")
+
+* Removed lines in vignettes where we changed user's options().
+
 ## Test environments
 
-## local
+### local
 
 - R version 4.0.4 (2021-02-15)
 - Platform: x86_64-apple-darwin17.0 (64-bit)
 - Running under: macOS Catalina 10.15.7
 
-## GitHub Actions
+### GitHub Actions
 
-### Microsoft Windows
+#### Microsoft Windows
 
 __R latest release__
 
@@ -16,13 +32,11 @@ __R latest release__
 - Platform: x86_64-w64-mingw32/x64 (64-bit)
 - Running under: Windows Server x64 (build 17763)
 
-
 __R old release__
 
 - R version 3.6.3 (2020-02-29)
 - Platform: x86_64-w64-mingw32/x64 (64-bit)
 - Running under: Windows Server x64 (build 17763)
-
 
 __R development version__
 
@@ -30,8 +44,7 @@ __R development version__
 - Platform: x86_64-w64-mingw32/x64 (64-bit)
 - Running under: Windows Server x64 (build 17763)
 
-
-### Apple OSX
+#### Apple OSX
 
 __R old release__
 
@@ -39,13 +52,11 @@ __R old release__
 - Platform: x86_64-apple-darwin15.6.0 (64-bit)
 - Running under: macOS Catalina 10.15.7
 
-
 __R latest release__
 
 - R version 4.0.5 (2021-03-31)
 - Platform: x86_64-apple-darwin17.0 (64-bit)
 - Running under: macOS Catalina 10.15.7
-
 
 __R development version__
 
@@ -53,8 +64,7 @@ __R development version__
 - Platform: x86_64-apple-darwin17.0 (64-bit)
 - Running under: macOS Catalina 10.15.7
 
-
-### Linux (Ubuntu)
+#### Linux (Ubuntu)
 
 __R old release__
 
@@ -62,13 +72,11 @@ __R old release__
 - Platform: x86_64-pc-linux-gnu (64-bit)
 - Running under: Ubuntu 20.04.2 LTS
 
-
 __R latest release__
 
 - R version 4.0.5 (2021-03-31)
 - Platform: x86_64-pc-linux-gnu (64-bit)
 - Running under: Ubuntu 20.04.2 LTS
-
 
 __R development version__
 
@@ -76,10 +84,9 @@ __R development version__
 - Platform: x86_64-pc-linux-gnu (64-bit)
 - Running under: Ubuntu 20.04.2 LTS
 
+### Appveyor
 
-## Appveyor
-
-### Microsoft Windows 64 bit
+#### Microsoft Windows 64 bit
 
 __R latest release__
 
@@ -99,8 +106,7 @@ __R old version__
 - Platform: x86_64-w64-mingw32/x64 (64-bit)
 - Running under: Windows Server 2012 R2 x64 (build 9600)
 
-
-### Microsoft Windows 32 bit
+#### Microsoft Windows 32 bit
 
 __R latest release__
 
@@ -120,9 +126,9 @@ __R old version__
 - Platform: i386-w64-mingw32/i386 (32-bit)
 - Running under: Windows Server 2012 R2 x64 (build 9600)
 
-## Travis-CI
+### Travis-CI
 
-### Linux (Ubuntu)
+#### Linux (Ubuntu)
 
 __R latest release__
 
@@ -136,8 +142,7 @@ __R development version__
 - Platform: x86_64-pc-linux-gnu (64-bit)
 - 798Running under: Ubuntu 16.04.6 LTS
 
-
-### Apple OSX
+#### Apple OSX
 
 __R latest release__
 
@@ -145,17 +150,17 @@ __R latest release__
 - Platform: x86_64-apple-darwin17.0 (64-bit)
 - Running under: macOS Catalina 10.15.7
 
-
 ## R CMD check results
 
 There were no ERRORs or WARNINGs.
 
 There was 1 NOTE:
-Non-standard file/directory found at top level:
-  'cran-comments.md'
-  
-This is the first submission to CRAN.
+
+    Maintainer: ‘Owen Jones <jones@biology.sdu.dk>’
+    New submission
+
 
 ## Downstream dependencies
 
 There are no current downstream dependencies.
+

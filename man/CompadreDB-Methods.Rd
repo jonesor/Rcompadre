@@ -52,6 +52,9 @@ NumberMatrices(object)
 
 \item{y}{A data.frame to merge with x}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 This page describes a variety of methods that can be used with CompadreDB
 objects, including common data frame operations (\code{head}, \code{names},

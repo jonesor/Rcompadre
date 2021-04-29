@@ -34,5 +34,7 @@ Other {data acquisition}:
 }
 \author{
 Patrick M. Barks <patrick.barks@gmail.com>
+
+Owen R. Jones <jones@biology.sdu.dk>
 }
 \concept{{data acquisition}}

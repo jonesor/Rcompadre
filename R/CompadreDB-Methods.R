@@ -12,6 +12,8 @@
 #' @param n The number of rows to extract
 #' @param ... additional arguments
 #' 
+#' @return No return value, called for side effects
+#' 
 #' @name CompadreDB-Methods
 NULL
 

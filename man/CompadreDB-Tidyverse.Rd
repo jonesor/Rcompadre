@@ -95,6 +95,9 @@ full_join.CompadreDB(
 
 \item{suffix}{see \code{\link[dplyr]{join}}}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 CompadreDB methods for functions in \link[dplyr]{dplyr} and
 \link[ggplot2]{ggplot2}.

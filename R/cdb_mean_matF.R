@@ -23,6 +23,7 @@
 #' @return Returns a list of matrices, representing the mean fecundity matrix
 #'   associated with each row of the database.
 #' 
+#' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Julia Jones <juliajones@@biology.sdu.dk>
 #' @author Iain Stott <stott@@biology.sdu.dk>

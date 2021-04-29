@@ -18,6 +18,7 @@
 #' @return A matrix (\code{mat_mean}) or a CompadreMat object (\code{mpm_mean}).
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>
+#' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
 #' @family {data management}
 #' 
