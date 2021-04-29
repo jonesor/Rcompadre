@@ -7,7 +7,8 @@
 #' @return A CompadreDB object created by binding the rows of \code{cdb1} and
 #'   \code{cdb2}
 #' 
-#' @author Sam Levin
+#' @author Sam Levin <levisc8@@gmail.com>
+#' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' 
 #' @family {data management}
 #' 

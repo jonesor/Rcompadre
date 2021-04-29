@@ -43,6 +43,9 @@ mpm_first_active(object)
 \arguments{
 \item{object}{A CompadreMat or CompadreDB object}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Methods for extracting stage-class information from CompadreMat or CompadreDB
 objects, including whether the matrix population model includes one or more

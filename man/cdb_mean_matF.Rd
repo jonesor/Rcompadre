@@ -59,6 +59,8 @@ Other {data management}:
 \code{\link{string_representation}}
 }
 \author{
+Owen R. Jones <jones@biology.sdu.dk>
+
 Danny Buss <dlb50@cam.ac.uk>
 
 Julia Jones <juliajones@biology.sdu.dk>

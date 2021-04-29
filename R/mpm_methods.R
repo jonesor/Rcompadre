@@ -11,6 +11,8 @@
 #' vector of values if passed a CompadreDB object (one value for every
 #' CompadreMat object within the column 'mat').
 #' 
+#' @return No return value, called for side effects
+#' 
 #' @name mpm_methods
 #' 
 #' @author Patrick Barks <patrick.barks@@gmail.com>

@@ -36,6 +36,8 @@ Other {data management}:
 \code{\link{string_representation}}
 }
 \author{
-Sam Levin
+Sam Levin <levisc8@gmail.com>
+
+Owen R. Jones <jones@biology.sdu.dk>
 }
 \concept{{data management}}

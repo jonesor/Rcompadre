@@ -14,7 +14,7 @@
 #' @param add Logical indicating whether to overwrite existing groups
 #'   (\code{FALSE}) or add to any existing groups (\code{TRUE})
 NULL
-
+#' @return No return value, called for side effects
 
 #' @rdname CompadreDB-Tidyverse
 fortify.CompadreDB <- function(model, data, ...) model@data

@@ -52,5 +52,7 @@ Other {data management}:
 }
 \author{
 Patrick Barks <patrick.barks@gmail.com>
+
+Owen R. Jones <jones@biology.sdu.dk>
 }
 \concept{{data management}}
