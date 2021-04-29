@@ -8,7 +8,7 @@ This is a resubmission. In this version I have:
 
 * Added missing authors to DESCRIPTION Authors@R.
 
-* Added preprint DOI to DESCRIPTION. Also added CITATION file.
+* Added preprint DOI to DESCRIPTION. Also added CITATION file to inst.
 
 * Added \value to .Rd files regarding exported methods (all with "no return value, called for side effects")
 
