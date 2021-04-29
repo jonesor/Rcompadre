@@ -2,17 +2,7 @@
 
 This is a resubmission. In this version I have:
 
-* Reduced title length to less than 65 characters.
-
-* Removed LICENSE file and reference to it in description.
-
-* Added missing authors to DESCRIPTION Authors@R.
-
-* Added preprint DOI to DESCRIPTION. Also added CITATION file to inst.
-
-* Added \value to .Rd files regarding exported methods (all with "no return value, called for side effects")
-
-* Removed lines in vignettes where we changed user's options().
+* Replaced the double braces {{}} around \concept in the Rd files with single ones.
 
 ## Test environments
 
