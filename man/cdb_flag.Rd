@@ -63,7 +63,7 @@ CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
 
 }
 \seealso{
-Other {data checking}: 
+Other data checking: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_collapse}()},
 \code{\link{cdb_compare}()},
@@ -80,4 +80,4 @@ Danny Buss <dlb50@cam.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }
-\concept{{data checking}}
+\concept{data checking}

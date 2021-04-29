@@ -9,7 +9,7 @@
 #'   
 #' @author Gesa Römer <gesa.roemer@@gmail.com>
 #' 
-#' @family {data acquisition}
+#' @family data acquisition
 #'   
 #' @details Transforms the large CompadreDB object into a tibble and drops the
 #' matrix column ("mat").

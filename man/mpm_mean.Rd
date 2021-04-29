@@ -39,7 +39,7 @@ mats <- matA(mpms)
 mat_mean(mats)
 }
 \seealso{
-Other {data management}: 
+Other data management: 
 \code{\link{cdb_flatten}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
@@ -55,4 +55,4 @@ Patrick Barks <patrick.barks@gmail.com>
 
 Owen R. Jones <jones@biology.sdu.dk>
 }
-\concept{{data management}}
+\concept{data management}

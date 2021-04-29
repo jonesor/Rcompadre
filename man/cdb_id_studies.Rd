@@ -38,7 +38,7 @@ Compadre$StudyID <- cdb_id_studies(Compadre)
 \seealso{
 \link{cdb_id}
 
-Other {data management}: 
+Other data management: 
 \code{\link{cdb_flatten}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id}()},
@@ -52,4 +52,4 @@ Other {data management}:
 \author{
 Patrick Barks <patrick.barks@gmail.com>
 }
-\concept{{data management}}
+\concept{data management}

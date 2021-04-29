@@ -23,7 +23,7 @@
 #' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data checking}
+#' @family data checking
 #' 
 #' @examples
 #' species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")

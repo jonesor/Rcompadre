@@ -72,7 +72,7 @@ mpm_first_active(Compadre)
 
 }
 \seealso{
-Other {data checking}: 
+Other data checking: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_collapse}()},
 \code{\link{cdb_compare}()},
@@ -81,4 +81,4 @@ Other {data checking}:
 \author{
 Patrick Barks <patrick.barks@gmail.com>
 }
-\concept{{data checking}}
+\concept{data checking}

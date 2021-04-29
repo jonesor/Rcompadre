@@ -29,7 +29,7 @@ cdb_compare(Compadre1, Compadre2)
 
 }
 \seealso{
-Other {data checking}: 
+Other data checking: 
 \code{\link{cdb_check_species}()},
 \code{\link{cdb_collapse}()},
 \code{\link{cdb_flag}()},
@@ -38,4 +38,4 @@ Other {data checking}:
 \author{
 Owen R. Jones <jones@biology.sdu.dk>
 }
-\concept{{data checking}}
+\concept{data checking}

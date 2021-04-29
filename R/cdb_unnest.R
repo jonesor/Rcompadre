@@ -25,7 +25,7 @@
 #'
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
 #' 
-#' @family {data management}
+#' @family data management
 #' 
 #' @examples
 #' # unnest all components

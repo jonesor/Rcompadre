@@ -24,7 +24,7 @@ cdb_rbind(Compadre1, Compadre2)
 
 }
 \seealso{
-Other {data management}: 
+Other data management: 
 \code{\link{cdb_flatten}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
@@ -40,4 +40,4 @@ Sam Levin <levisc8@gmail.com>
 
 Owen R. Jones <jones@biology.sdu.dk>
 }
-\concept{{data management}}
+\concept{data management}

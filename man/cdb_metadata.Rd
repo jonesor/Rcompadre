@@ -25,10 +25,10 @@ Compadre_metadata <- cdb_metadata(Compadre)
 
 }
 \seealso{
-Other {data acquisition}: 
+Other data acquisition: 
 \code{\link{cdb_fetch}()}
 }
 \author{
 Gesa Römer <gesa.roemer@gmail.com>
 }
-\concept{{data acquisition}}
+\concept{data acquisition}
