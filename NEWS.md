@@ -2,7 +2,11 @@
 
 * No changes yet.
 
-# Rcompadre 1.0.0
+# Rcompadre 1.0.0 
+
+* Released on CRAN on 20210430
+
+# Rcompadre 0.3.0 
 
 * Updated DESCRIPTION with new contributors.
 * Improved documentation to ensure it is more understandable to less experienced users.
