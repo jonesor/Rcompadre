@@ -30,6 +30,7 @@ compadre <- cdb_fetch("data/COMPADRE_v.5.0.1.RData")
 }
 \seealso{
 Other data acquisition: 
+\code{\link{cdb_build_cdb}()},
 \code{\link{cdb_metadata}()}
 }
 \author{
