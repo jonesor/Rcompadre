@@ -23,11 +23,18 @@ cdb_build_cdb(
 
 \item{mat_c}{A [list] of C matrices (representing clonal reproduction)}
 
-\item{stages}{A [list] of stage definitions provided as [data.frame]s that include two columns: `MatrixClassOrganized` and `MatrixClassAuthor`. If this argument is not provided, numeric stage names are generated automatically}
+\item{stages}{A [list] of stage definitions provided as [data.frame]s that
+include two columns: `MatrixClassOrganized` and `MatrixClassAuthor`. If
+this argument is not provided, numeric stage names are generated
+automatically}
 
-\item{version}{An optional string allowing users to add version information to their output object. If this argument is not provided the current date and time is used.}
+\item{version}{An optional string allowing users to add version information
+to their output object. If this argument is not provided the current date
+and time is used.}
 
-\item{metadata}{A [data.frame] of metadata associated with each matrix. Metadata should be provided by row in the same order as the matrices are placed in the lists.}
+\item{metadata}{A [data.frame] of metadata associated with each matrix.
+Metadata should be provided by row in the same order as the matrices are
+placed in the lists.}
 }
 \value{
 A valid CompadreDB object
@@ -95,15 +102,27 @@ mat_f_list <- mget(ls(pattern = "mat_f[0-9]"))
 meta <- data.frame(idNum = 1:2, SpeciesAccepted = c("A", "B"), x = 4:5)
 
 stageInfo <- list(
-  data.frame(MatrixClassOrganized = rep("active", 2), MatrixClassAuthor = c("small", "large")),
-  data.frame(MatrixClassOrganized = rep("active", 3), MatrixClassAuthor = c("small", "medium", "large"))
+  data.frame(
+    MatrixClassOrganized = rep("active", 2),
+    MatrixClassAuthor = c("small", "large")
+  ),
+  data.frame(
+    MatrixClassOrganized = rep("active", 3),
+    MatrixClassAuthor = c("small", "medium", "large")
+  )
 )
 
 
-my_compadre <- cdb_build_cdb(mat_u = mat_u_list, mat_f = mat_f_list, metadata = meta, stages = stageInfo)
+my_compadre <- cdb_build_cdb(
+  mat_u = mat_u_list, mat_f = mat_f_list,
+  metadata = meta, stages = stageInfo
+)
 my_compadre
 
-my_compadre <- cdb_build_cdb(mat_u = mat_u_list, mat_f = mat_f_list, metadata = meta)
+my_compadre <- cdb_build_cdb(
+  mat_u = mat_u_list, mat_f = mat_f_list,
+  metadata = meta
+)
 my_compadre
 }
 \seealso{
