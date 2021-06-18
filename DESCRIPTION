@@ -85,6 +85,7 @@ Collate:
     'CompadreMat.R'
     'ClassUnionMethods.R'
     'cdb_check_species.R'
+    'cdb_build_cdb.R'
     'cdb_collapse.R'
     'cdb_compare.R'
     'cdb_fetch.R'
