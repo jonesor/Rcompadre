@@ -1,7 +1,7 @@
 Package: Rcompadre
 Type: Package
 Title: Utilities for using the 'COM(P)ADRE' Matrix Model Database
-Version: 1.0.0.9000  
+Version: 1.0.0.9000
 Authors@R: c(
     person(given = "Patrick", 
            family = "Barks",
