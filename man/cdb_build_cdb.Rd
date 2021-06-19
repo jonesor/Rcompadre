@@ -15,15 +15,15 @@ cdb_build_cdb(
 )
 }
 \arguments{
-\item{mat_a}{A [list] of A matrices}
+\item{mat_a}{A `list` of A matrices}
 
-\item{mat_u}{A [list] of U matrices (representing survival and growth)}
+\item{mat_u}{A `list` of U matrices (representing survival and growth)}
 
-\item{mat_f}{A [list] of F matrices (representing sexual reproduction)}
+\item{mat_f}{A `list` of F matrices (representing sexual reproduction)}
 
-\item{mat_c}{A [list] of C matrices (representing clonal reproduction)}
+\item{mat_c}{A `list` of C matrices (representing clonal reproduction)}
 
-\item{stages}{A [list] of stage definitions provided as [data.frame]s that
+\item{stages}{A `list` of stage definitions provided as `data.frame`s that
 include two columns: `MatrixClassOrganized` and `MatrixClassAuthor`. If
 this argument is not provided, numeric stage names are generated
 automatically}
@@ -32,7 +32,7 @@ automatically}
 to their output object. If this argument is not provided the current date
 and time is used.}
 
-\item{metadata}{A [data.frame] of metadata associated with each matrix.
+\item{metadata}{A `data.frame` of metadata associated with each matrix.
 Metadata should be provided by row in the same order as the matrices are
 placed in the lists.}
 }
