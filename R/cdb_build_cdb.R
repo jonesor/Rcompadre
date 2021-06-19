@@ -8,15 +8,15 @@
 #' provided, the others are assumed to be 0. If only the A matrices are
 #' provided, the submatrices are recorded as `NA`.
 #'
-#' @param mat_a A [list] of A matrices
-#' @param mat_u A [list] of U matrices (representing survival and growth)
-#' @param mat_f A [list] of F matrices (representing sexual reproduction)
-#' @param mat_c A [list] of C matrices (representing clonal reproduction)
-#' @param stages A [list] of stage definitions provided as [data.frame]s that
+#' @param mat_a A `list` of A matrices
+#' @param mat_u A `list` of U matrices (representing survival and growth)
+#' @param mat_f A `list` of F matrices (representing sexual reproduction)
+#' @param mat_c A `list` of C matrices (representing clonal reproduction)
+#' @param stages A `list` of stage definitions provided as `data.frame`s that
 #'   include two columns: `MatrixClassOrganized` and `MatrixClassAuthor`. If
 #'   this argument is not provided, numeric stage names are generated
 #'   automatically
-#' @param metadata A [data.frame] of metadata associated with each matrix.
+#' @param metadata A `data.frame` of metadata associated with each matrix.
 #'   Metadata should be provided by row in the same order as the matrices are
 #'   placed in the lists.
 #' @param version An optional string allowing users to add version information
@@ -127,14 +127,11 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   AUFC <- includedMatrices$present
 
   if (sum(AUFC) == 0) {
-    stop("No matrices provided: matrices must be provided as (i) a list of
-         A matrices; (ii) lists of U and F matrices; or (iii) lists of U, F
-         and C matrices.")
+    stop("No matrices provided: matrices must be provided as (i) a list of A matrices; (ii) lists of U and F matrices; or (iii) lists of U, F and C matrices.")
   }
 
   if (hasArg(mat_a) && any(hasArg(mat_u), hasArg(mat_f), hasArg(mat_c))) {
-    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be
-         provided,")
+    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be provided,")
   }
 
   # If mat U is provided, mat F needs be provided.
@@ -187,8 +184,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
       matDims <- c(nrow(matU), nrow(matF), nrow(matC))
 
       if (!abs(max(matDims) - min(matDims)) < .Machine$double.eps) {
-        stop("Dimensions of submatrices U, F and C (if included) must be
-             identical within each set.")
+        stop("Dimensions of submatrices U, F and C (if included) must be identical within each set.")
       }
 
       # Check that dimensions
@@ -246,18 +242,16 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # metadata ----
   if (!hasArg(metadata)) {
     metadata <- data.frame(
-      matrixID = 1:length(mat_a),
-      SpeciesAccepted = "unknown"
+      matrixID = 1:length(mat_a)
     )
   }
 
   if (hasArg(metadata)) {
     if (nrow(metadata) != length(mat)) {
-      stop("The number of rows of metadata does not match the number of
-           matrices")
+      stop("The number of rows of metadata does not match the number of matrices")
     }
     if (!"SpeciesAccepted" %in% names(metadata)) {
-      stop("Metadata should include a `SpeciesAccepted` column")
+      warning("Metadata does not include a `SpeciesAccepted` column, so number of species not provided when viewing object.")
     }
   }
 
