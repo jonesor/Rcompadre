@@ -68,7 +68,7 @@ First we need to load the library, and `tidyverse` packages
 
 ```{r}
 library(Rcompadre)
-library(tidyverse)
+library(dplyr)
 ```
 
 
