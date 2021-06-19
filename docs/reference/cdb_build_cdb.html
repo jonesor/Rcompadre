@@ -119,6 +119,9 @@ provided, the submatrices are recorded as `NA`." />
     <li>
       <a href="../articles/a04_ObtainingReferences.html">Obtaining references</a>
     </li>
+    <li>
+      <a href="../articles/a05_UsingYourOwnData.html">Using your own matrix data</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -175,23 +178,23 @@ provided, the submatrices are recorded as `NA`.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mat_a</th>
-      <td><p>A [list] of A matrices</p></td>
+      <td><p>A `list` of A matrices</p></td>
     </tr>
     <tr>
       <th>mat_u</th>
-      <td><p>A [list] of U matrices (representing survival and growth)</p></td>
+      <td><p>A `list` of U matrices (representing survival and growth)</p></td>
     </tr>
     <tr>
       <th>mat_f</th>
-      <td><p>A [list] of F matrices (representing sexual reproduction)</p></td>
+      <td><p>A `list` of F matrices (representing sexual reproduction)</p></td>
     </tr>
     <tr>
       <th>mat_c</th>
-      <td><p>A [list] of C matrices (representing clonal reproduction)</p></td>
+      <td><p>A `list` of C matrices (representing clonal reproduction)</p></td>
     </tr>
     <tr>
       <th>stages</th>
-      <td><p>A [list] of stage definitions provided as [data.frame]s that
+      <td><p>A `list` of stage definitions provided as `data.frame`s that
 include two columns: `MatrixClassOrganized` and `MatrixClassAuthor`. If
 this argument is not provided, numeric stage names are generated
 automatically</p></td>
@@ -204,7 +207,7 @@ and time is used.</p></td>
     </tr>
     <tr>
       <th>metadata</th>
-      <td><p>A [data.frame] of metadata associated with each matrix.
+      <td><p>A `data.frame` of metadata associated with each matrix.
 Metadata should be provided by row in the same order as the matrices are
 placed in the lists.</p></td>
     </tr>
@@ -245,15 +248,15 @@ placed in the lists.</p></td>
 <span class='va'>mat_a_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/get.html'>mget</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>"mat_a[0-9]"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='va'>my_compadre</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_build_cdb</span><span class='op'>(</span>mat_a <span class='op'>=</span> <span class='va'>mat_a_list</span>, version <span class='op'>=</span> <span class='st'>"testrun"</span><span class='op'>)</span>
-<span class='va'>my_compadre</span>
-</div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 3 MATRICES.
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Metadata does not include a `SpeciesAccepted` column, so number of species not provided when viewing object.</span></div><div class='input'><span class='va'>my_compadre</span>
+</div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with ?? SPECIES and 3 MATRICES.
 #&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 3 x 3</span>
-#&gt;   mat        matrixID SpeciesAccepted
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
-#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        1 unknown        
-#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        2 unknown        
-#&gt; <span style='color: #BCBCBC;'>3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        3 unknown        </div><div class='input'>
+#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span>
+#&gt;   mat        matrixID
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        1
+#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        2
+#&gt; <span style='color: #BCBCBC;'>3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        3</div><div class='input'>
 
 <span class='va'>mat_u1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.0</span><span class='op'>)</span>,

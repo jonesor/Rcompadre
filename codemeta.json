@@ -232,6 +232,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=rcrossref"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "MCMCpack",
+      "name": "MCMCpack",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=MCMCpack"
     }
   ],
   "softwareRequirements": [
@@ -271,7 +283,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "80074.652KB",
+  "fileSize": "80083.529KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=main"],
   "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
@@ -366,5 +378,6 @@
     "@type": "Organization",
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
-  }
+  },
+  "readme": "https://github.com/jonesor/Rcompadre/blob/main/README.md"
 }
