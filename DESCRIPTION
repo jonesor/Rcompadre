@@ -69,7 +69,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    popbio,
     ggplot2,
     maps,
     dplyr,

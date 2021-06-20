@@ -25,7 +25,7 @@ knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 
 ## Introduction
 
-Rcompadre includes methods for a variety of functions in the "[Tidyverse](https://www.tidyverse.org/)", a popular group of R packages geared toward data analysis, including [dplyr](https://dplyr.tidyverse.org/) (a grammar of data manipulation) and [ggplot2](https://ggplot2.tidyverse.org/) (a grammar of graphics). This vignette covers manipulation of CompadreDB objects using dplyr, and a few examples of plotting CompadreDB objects using ggplot2. Users new to these packages may wish to check out more introductory materials (e.g. the [dplyr vignette](https://CRAN.R-project.org/package=dplyr), or the [Data Visualization chapter](https://r4ds.had.co.nz/data-visualisation.html) of _R for Data Science_).
+Rcompadre includes methods for a variety of functions in the "[Tidyverse](https://www.tidyverse.org/)", a popular group of R packages geared toward data analysis, including [dplyr](https://dplyr.tidyverse.org/) (a grammar of data manipulation) and [ggplot2](https://ggplot2.tidyverse.org/) (a grammar of graphics). This vignette covers manipulation of `CompadreDB` objects using `dplyr`, and a few examples of plotting `CompadreDB` objects using `ggplot2.` Users new to these packages may wish to check out more introductory materials (e.g. the [dplyr vignette](https://CRAN.R-project.org/package=dplyr), or the [Data Visualization chapter](https://r4ds.had.co.nz/data-visualisation.html) of _R for Data Science_).
 
 
 ## Preliminaries
@@ -36,8 +36,8 @@ We'll begin by loading a few packages.
 library(Rcompadre)
 library(dplyr)
 library(ggplot2)
+library(popdemo)
 library(maps)     # for plotting world map
-library(popbio)   # for calculating population growth rates
 ```
 
 ## Introduction to piping
@@ -80,7 +80,7 @@ compadre_flag <- cdb_flag(Compadre)
 compadre_use <- subset(compadre_flag, check_NA_A == FALSE)
 ```
 
-and here's the equivalent piped sequence
+and here's the equivalent piped sequence:
 
 ```{r}
 compadre_use <- Compadre %>% 
@@ -88,7 +88,7 @@ compadre_use <- Compadre %>%
   subset(check_NA_A == FALSE)  # first argument is output of cdb_flag()
 ```
 
-The advantage of piping here is that we don't have to use nested functions (`subset(cdb_flag())`), and we don't have to create object names for every intermediate step in our analysis.
+The advantage of piping here is that we don't have to use nested functions (`subset(cdb_flag())`), and we don't have to create object names for every intermediate step in our analysis. An additional alternative is to use `filter()` instead of `subset()`.
 
 
 ## The `mutate` function
@@ -131,16 +131,16 @@ compadre_unnest <- Compadre %>%
 
 Just like creating a new column with `$` (e.g. `compadre$new_col <- ...`), each expression within `mutate()` must return a vector of the same length as the number of rows in the data frame, or return a single value which will be recycled for all rows. For some operations this requires vectorization.
 
-Let's say we want to calculate the population growth rate for every matrix in the database. We can use the `lambda()` function in the [popbio](https://CRAN.R-project.org/package=popbio) library, but it can only take a single matrix at a time.
+Let's say we want to calculate the population growth rate for every matrix in the database. We can use the `eigs()` function in the [popdemo](https://CRAN.R-project.org/package=popdemo) package, but it can only take a single matrix at a time.
 
-To apply `lambda()` to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `lambda()` to fail.
+To apply `eigs()` to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `eigs()` to fail.
 
 ```{r}
 compadre_lambda <- Compadre %>% 
   cdb_flag() %>% 
   subset(check_NA_A == FALSE) %>%      # remove matrices with missing values
   mutate(mat_A = matA(.)) %>%          # extract list-column of matA
-  mutate(lam = sapply(mat_A, lambda))  # apply lambda() to every matA
+  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))  # get lambda for every matA
 ```
 
 In the example above, `sapply()` returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function `lapply()` which always returns a list. In the example below we use `lapply()` to calculate vectors of stage-specific survival (column sums of matU) for every row of the database.
