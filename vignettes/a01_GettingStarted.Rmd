@@ -45,14 +45,14 @@ Importantly, *Rcompadre* coerces the data as a so-called `CompadreDB` S4 class o
 
 To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at [compadre-db.org/](https://compadre-db.org/).
 
-When you have done that you can load it into R using the command `load`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command `as_cdb`:
+When you have done that you can load it into R using `load()`. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using `as_cdb()`:
 
 ```{r fake load the data, eval=FALSE}
 load("COMPADRE_v.4.0.1.RData")
 compadre <- as_cdb(compadre)
 ```
 
-Alternatively, the function `cdb_fetch` will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:
+Alternatively, `cdb_fetch()` will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:
 
 ```{r fake fetch data with cdb_fetch, eval=FALSE}
 Compadre <- cdb_fetch('compadre')
@@ -79,7 +79,7 @@ VersionData(Compadre)
 
 ## Exploring the data
 
-The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the `names` command, in the same way that you would for a data frame. Each element of the `mat` column contains a list of the four matrices (**A**, **U**, **F**, **C**) and information on matrix stages while the other columns are ordinary vectors.
+The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the `names()` command, in the same way that you would for a data frame. Each element of the `mat` column contains a list of the four matrices (**A**, **U**, **F**, **C**) and information on matrix stages while the other columns are ordinary vectors.
 
 ```{r Names}
 names(Compadre)
@@ -95,7 +95,7 @@ plot(Compadre$Lon,Compadre$Lat,main = "Location")
 
 ## Finding data for for a particular species
 
-If, for example, you want to check if a species is in the database you can use the `cdb_check_species` function. For example, we can ask if the species _Succisa pratensis_ is present.
+If, for example, you want to check if a species is in the database you can use the `cdb_check_species()` function. For example, we can ask if the species _Succisa pratensis_ is present.
 
 ```{r Check species}
 cdb_check_species(Compadre, "Succisa pratensis")
@@ -119,7 +119,7 @@ compadre_succisa
 
 Matrices in `CompadreDB` objects are stored in a special vector, called `mat` as part of the data. However, the matrices are stored as special objects within the data frame and should be addressed using Rcompadre accessor functions to obtain the A, U, F and C matrices (see the User Guide), or information about the stage definitions used.
 
-Thus, to obtain the A matrix, which includes all types of transition one would use the `matA` function, which will return a list of A matrices from the database (there are equivalent functions, `matU`, `matF` and `matC`:
+Thus, to obtain the A matrix, which includes all types of transition one would use the `matA()` function, which will return a list of A matrices from the database (there are equivalent functions, `matU()`, `matF()` and `matC()`:
 
 ```{r get matrices 1}
 matA(compadre_succisa)
@@ -132,7 +132,7 @@ x <- matA(compadre_succisa)
 x[[1]]
 ```
 
-It is often desirable to know what the stages are in the matrices. To access this information you can use the `matrixClass` function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.
+It is often desirable to know what the stages are in the matrices. To access this information you can use the `matrixClass()` function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.
 
 ```{r get matrices 3}
 classInfo <- matrixClass(compadre_succisa)
@@ -140,14 +140,15 @@ classInfo[[1]]
 classInfo[[1]]$MatrixClassAuthor
 ```
 
-# Subsetting the database based on metadata
+# Filtering/subsetting the database based on metadata
 
-It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using `subset`. For example, I could subset to only Eudicot species as follows:
+It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using `subset()`. For example, I could subset to only Eudicot species as follows:
 
 ```{r subset 1}
 x <- subset(Compadre, DicotMonoc == "Eudicot")
 x
 ```
+
 
 These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is >2 I could use the following command:
 
@@ -157,7 +158,7 @@ x <- subset(Compadre,DicotMonoc == "Eudicot" &
               MatrixDimension > 2)
 ```
 
-You can compare compadre data sets using the `cdb_compare` command:
+You can compare compadre data sets using the `cdb_compare()` command:
 
 ```{r compare }
 cdb_compare(Compadre,x)
@@ -167,13 +168,13 @@ cdb_compare(Compadre,x)
 
 Numerous matrix calculations (Caswell 2001) have particular requirements for use. The details are beyond the scope of this vignette, but include things like (1) ergodicity, (2) primitivity, (3) singularity and (4) irreducibility. In addition, most matrix calculations will not work if there are missing values (i.e. `NA`) in the MPM. 
 
-We can flag these by adding metadata using the `cdb_flag` function.
+We can flag these by adding metadata using the `cdb_flag()` function.
 
 ```{r cdb_flag }
 Compadre_flagged <- cdb_flag(Compadre)
 ```
 
-We could then use `subset` like this:
+We could then use `subset()` like this:
 
 ```{r subset flagged }
 x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
@@ -181,7 +182,7 @@ x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
 
 ## Calculations from matrices
 
-When we have a set of matrices that we want to make calculations from, we can use `sapply` to apply a function across all the matrices in the list produced by `matA`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
+When we have a set of matrices that we want to make calculations from, we can use `sapply()` to apply a function across all the matrices in the list produced by `matA()`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs()` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
 
 ```{r matrix calculations}
 lambdaVals <- sapply(matA(x), popdemo::eigs, what="lambda")

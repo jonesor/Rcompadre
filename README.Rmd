@@ -44,7 +44,7 @@ Install the package from GitHub with:
 ```{r, eval=FALSE}
 # install package 'remotes' if necessary
 # will already be installed if 'devtools' is installed
-install.packages("remotes") 
+install.packages("remotes")
 
 # argument 'build_opts = NULL' only needed if you want to build vignettes
 remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
@@ -85,19 +85,22 @@ compadre <- as_cdb(compadre)
 
 #### Subsetting
 
-For the most part `CompadreDB` objects work like a data frame. They can be subset using `[` or `subset()`
+For the most part `CompadreDB` objects work like a data frame. They can be subset using `[`,  `subset()` or `filter()`
 
 ```{r, eval=FALSE, results="hide"}
 # subset to the first 10 rows
-compadre[1:10,]
+compadre[1:10, ]
 
 # subset to the species 'Echinacea angustifolia'
 subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
+
+# subset to the species 'Echinacea angustifolia'
+filter(compadre, SpeciesAccepted == "Echinacea angustifolia")
 ```
 
 #### Example analysis: calculating population growth rates
 
-First we'll use the function `cdb_flag` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicity, irreducibility, or primitivity.
+First we'll use the function `cdb_flag()` to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don't meet assumptions like ergodicity, irreducibility, or primitivity.
 
 ```{r,eval=FALSE}
 compadre_flags <- cdb_flag(compadre)
@@ -106,18 +109,19 @@ compadre_flags <- cdb_flag(compadre)
 We'll only be able to calculate population growth rates from matrices that don't contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we'll subset the database accordingly.
 
 ```{r, eval=FALSE}
-compadre_sub <- subset(compadre_flags,
-                       check_NA_A == FALSE & check_ergodic == TRUE)
+compadre_sub <- subset(
+  compadre_flags,
+  check_NA_A == FALSE & check_ergodic == TRUE
+)
 ```
 
-Finally, we'll use the `lambda` function from the library [popbio](https://github.com/cstubben/popbio) to calculate the population growth rate for every matrix in `compadre_sub`.
+Finally, we'll use the `eigs()` function from the [popdemo](https://CRAN.R-project.org/package=popdemo) package to calculate the population growth rate for every matrix in `compadre_sub`.
 
 ```{r, eval=FALSE}
-library(popbio)
-compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
+compadre_sub$lambda <- sapply(matA(compadre_sub), popbio::eigs, what = "lambda")
 ```
 
-In the code above, the accessor function `matA()` is used to extract a list of projection matrices (the full matrix, "matA") from every row of `compadre_sub`. There are also accessor functions for the matrix subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts of the database too.
+In the code above, the accessor function `matA()` is used to extract a list of projection matrices (the full matrix, `matA`) from every row of `compadre_sub`. There are also accessor functions for the matrix subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts of the database too.
 
 ## Previous releases
 

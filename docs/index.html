@@ -71,6 +71,9 @@
     <li>
       <a href="articles/a04_ObtainingReferences.html">Obtaining references</a>
     </li>
+    <li>
+      <a href="articles/a05_UsingYourOwnData.html">Using your own matrix data</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -115,7 +118,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://www.gnu.org/licenses/old-licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v2"></a></td>
+<td><a href="https://www.gnu.org/licenses/gpl-3.0.html"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></td>
 <td align="left"><a href="https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml"><img src="https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml/badge.svg" alt="R-CMD-check"></a></td>
 <td align="left"><a href="https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml"><img src="https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml/badge.svg" alt="R-CMD-check"></a></td>
 </tr>
@@ -147,7 +150,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install package 'remotes' if necessary</span>
 <span class="co"># will already be installed if 'devtools' is installed</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 
 <span class="co"># argument 'build_opts = NULL' only needed if you want to build vignettes</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre"</span>, build_opts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
@@ -177,29 +180,33 @@
 <div id="subsetting" class="section level4">
 <h4 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h4>
-<p>For the most part <code>CompadreDB</code> objects work like a data frame. They can be subset using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> or <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code></p>
+<p>For the most part <code>CompadreDB</code> objects work like a data frame. They can be subset using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>, <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code> or <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># subset to the first 10 rows</span>
-<span class="va">compadre</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>
+<span class="va">compadre</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
 
 <span class="co"># subset to the species 'Echinacea angustifolia'</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span>
+
+<span class="co"># subset to the species 'Echinacea angustifolia'</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example-analysis-calculating-population-growth-rates" class="section level4">
 <h4 class="hasAnchor">
 <a href="#example-analysis-calculating-population-growth-rates" class="anchor"></a>Example analysis: calculating population growth rates</h4>
-<p>First we’ll use the function <code>cdb_flag</code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
+<p>First we’ll use the function <code><a href="reference/cdb_flag.html">cdb_flag()</a></code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
 <p>We’ll only be able to calculate population growth rates from matrices that don’t contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we’ll subset the database accordingly.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre_flags</span>,
-                       <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Finally, we’ll use the <code>lambda</code> function from the library <a href="https://github.com/cstubben/popbio">popbio</a> to calculate the population growth rate for every matrix in <code>compadre_sub</code>.</p>
+<code class="sourceCode R"><span class="va">compadre_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span>
+  <span class="va">compadre_flags</span>,
+  <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p>Finally, we’ll use the <code>eigs()</code> function from the <a href="https://CRAN.R-project.org/package=popdemo">popdemo</a> package to calculate the population growth rate for every matrix in <code>compadre_sub</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popbio</span><span class="op">)</span>
-<span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="va">lambda</span><span class="op">)</span></code></pre></div>
-<p>In the code above, the accessor function <code><a href="reference/CompadreMatrixMethods.html">matA()</a></code> is used to extract a list of projection matrices (the full matrix, “matA”) from every row of <code>compadre_sub</code>. There are also accessor functions for the matrix subcomponents (<code><a href="reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matF()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matC()</a></code>), and for many other parts of the database too.</p>
+<code class="sourceCode R"><span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="fu">popbio</span><span class="fu">::</span><span class="va">eigs</span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
+<p>In the code above, the accessor function <code><a href="reference/CompadreMatrixMethods.html">matA()</a></code> is used to extract a list of projection matrices (the full matrix, <code>matA</code>) from every row of <code>compadre_sub</code>. There are also accessor functions for the matrix subcomponents (<code><a href="reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matF()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matC()</a></code>), and for many other parts of the database too.</p>
 </div>
 </div>
 <div id="previous-releases" class="section level2">

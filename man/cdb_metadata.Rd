@@ -26,6 +26,7 @@ Compadre_metadata <- cdb_metadata(Compadre)
 }
 \seealso{
 Other data acquisition: 
+\code{\link{cdb_build_cdb}()},
 \code{\link{cdb_fetch}()}
 }
 \author{

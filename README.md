@@ -4,10 +4,11 @@
 # Rcompadre <img src="man/figures/logo_rcompadre.png" height="160px" align="right" />
 
 <!--- Continuous integration badges --->
+
 <!--- BE CAREFUL WITH THE FORMATTING --->
 
 | Project                                                                                                                                                                                                | Main branch                                                                                                                                                                | Devel branch                                                                                                                                                                             |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)                                                                                | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml) | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml) |
 | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) | [![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=main)](https://travis-ci.org/jonesor/Rcompadre)                                                        | [![Build Status](https://travis-ci.org/jonesor/Rcompadre.svg?branch=main)](https://travis-ci.org/jonesor/Rcompadre)                                                                      |
 | ![](http://cranlogs.r-pkg.org/badges/grand-total/Rcompadre)                                                                                                                                            | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=main&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)   | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jonesor/Rcompadre?branch=devel&svg=true)](https://ci.appveyor.com/project/jonesor/Rcompadre)                |
@@ -32,7 +33,7 @@ Install the package from GitHub with:
 ``` r
 # install package 'remotes' if necessary
 # will already be installed if 'devtools' is installed
-install.packages("remotes") 
+install.packages("remotes")
 
 # argument 'build_opts = NULL' only needed if you want to build vignettes
 remotes::install_github("jonesor/Rcompadre", build_opts = NULL)
@@ -76,19 +77,22 @@ compadre <- as_cdb(compadre)
 #### Subsetting
 
 For the most part `CompadreDB` objects work like a data frame. They can
-be subset using `[` or `subset()`
+be subset using `[`, `subset()` or `filter()`
 
 ``` r
 # subset to the first 10 rows
-compadre[1:10,]
+compadre[1:10, ]
 
 # subset to the species 'Echinacea angustifolia'
 subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
+
+# subset to the species 'Echinacea angustifolia'
+filter(compadre, SpeciesAccepted == "Echinacea angustifolia")
 ```
 
 #### Example analysis: calculating population growth rates
 
-First we’ll use the function `cdb_flag` to add columns to the database
+First we’ll use the function `cdb_flag()` to add columns to the database
 flagging potential issues with the projection matrices, such as missing
 values, or matrices that don’t meet assumptions like ergodicity,
 irreducibility, or primitivity.
@@ -103,21 +107,22 @@ meet the assumption of ergodicity, so we’ll subset the database
 accordingly.
 
 ``` r
-compadre_sub <- subset(compadre_flags,
-                       check_NA_A == FALSE & check_ergodic == TRUE)
+compadre_sub <- subset(
+  compadre_flags,
+  check_NA_A == FALSE & check_ergodic == TRUE
+)
 ```
 
-Finally, we’ll use the `lambda` function from the library
-[popbio](https://github.com/cstubben/popbio) to calculate the population
-growth rate for every matrix in `compadre_sub`.
+Finally, we’ll use the `eigs()` function from the
+[popdemo](https://CRAN.R-project.org/package=popdemo) package to
+calculate the population growth rate for every matrix in `compadre_sub`.
 
 ``` r
-library(popbio)
-compadre_sub$lambda <- sapply(matA(compadre_sub), lambda)
+compadre_sub$lambda <- sapply(matA(compadre_sub), popbio::eigs, what = "lambda")
 ```
 
 In the code above, the accessor function `matA()` is used to extract a
-list of projection matrices (the full matrix, “matA”) from every row of
+list of projection matrices (the full matrix, `matA`) from every row of
 `compadre_sub`. There are also accessor functions for the matrix
 subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts
 of the database too.

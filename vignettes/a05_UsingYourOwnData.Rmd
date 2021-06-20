@@ -1,0 +1,187 @@
+---
+title: "Using your own matrix data"
+author: "Owen Jones"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using your own matrix data}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The utility of `Rcompadre` extends beyond the use of data from the COMPADRE and COMADRE matrix databases. By coercing user-provided matrix population model (MPM) data (and metadata) into the standardised format used by the `Rcompadre` package (a `CompadreDB` object) you can make use of all the functionality of the package. The central function to carry out this is `cdb_build_cdb()`. 
+
+This vignette illustrates some simple use cases.
+
+## The `CompadreDB` object
+
+Before illustrating the construction of a `CompadreDB` object using `cdb_build_cdb()` is it first necessary to outline the anatomy of the object.
+
+The `CompadreDB` object consists of four parts: (1) the matrices; (2) the stage information; (3) the metadata describing the matrices; and (4) version information. Much of this information can be generated automatically by the `cdb_build_cdb()` function.
+
+### The matrices 
+
+
+MPM data can exist as *A* matrices (i.e. the whole MPM model) but can also exist as a series of submatrices that sum to the *A* matrix. Typically these matrices are based on demographic processes such as growth and survival, sexual reproduction and clonal reproduction. These matrices are commonly denoted as the *U*, *F* and *C* matrices respectively, and *A* = *U* + *F* + *C* (Caswell 2001, Salguero-Gómez et al. 2015, 2016).
+
+Thus, each MPM in the `CompadreDB` object is provided as a list object with four elements representing this set of matrices:  *A*, the full MPM and the three demographic process-based submatrices (*U*, *F* and *C*).
+
+In some cases it is not desirable (or perhaps impossible) to provide information for the set of submatrices. For example, it may not be possible to distinguish between sexual (*F*) and clonal (*C*) reproduction, or between growth/survival (*U*) and reproduction (*F* and/or *C*). Alternatively, it may simply be that the planned analyses do not require the potentially laborious splitting of the *A* matrix into these submatrices. Nevertheless, `CompadreDB` requires the full set of four matrices. Thankfully, the matrices can be provided as `NA` matrices and can often be generated automatically from the provided data (see below). 
+
+- If only the *A* matrices are provided, `cdb_build_cdb()` will automatically populate the *U*, *F* and *c* matrices with `NA` values.
+- If a *U* matrix is provided, an *F* and/or *C* matrix must also be provided. If only one of the *F* and *C* matrices is provided, the other is assumed to be 0. The *A* matrix is then calculated automatically from these sets as *A* = *U* + *F* + *C*. 
+
+Sets of matrices of the same type must be provided as a `list` for each type. For example, you could provide two lists: one for the *U* matrices and one for the matching *F* matrices. The function conducts some error checks to ensure that these lists have the same length, and that all matrices in each set has the same dimensions.
+
+### The stage information
+
+Each MPM has a life-cycle divided into two or more discrete stages. The `CompadreDB` object must include this information, and it is provided as a `list` of `data.frame`s (one for each MPM).
+
+### The metadata
+
+A valid `CompadreDB` object MUST include a `data.frame` of metadata with a number of rows equal to the number of MPMs.
+
+This metadata, can be minimal or very extensive, depending on the users' needs. In the simplest case, for example with simulated data, this might simply be an ID number, or perhaps parameters used in simulation. In cases with empirical MPMs the metadata will typically include taxonomic information on the species, the geographic location, the name of the study site, the year or time-frame of study and so on. Thus, the metadata data.frame can include anything from one to hundreds of columns.
+
+### Version information
+
+Finally, some version information must be included. This can simply be a name, or a date intended to help keep track of multiple version of the data. 
+
+## Data preparation
+
+
+The main function used for creating a `CompadreDB` object from user-defined data is `cdb_build_cdb()`. This function takes the components described above, performs some error checks, and combines them into a single `CompadreDB` object. 
+
+
+# A simple example
+
+First we need to load the library, and the `dplyr` package.
+
+```{r}
+library(Rcompadre)
+library(dplyr)
+```
+
+
+In this example we generate a series of 2 dimension *A* matrices using a series of uniform distributions for the *U* submatrix, and a gamma distribution, to approximate the average of a Poisson process. In this case, the matrices all have the same dimension, but it is not necessary for dimension to be the same. This is a bit long-winded, and there are certainly better ways to simulate these data (e.g. using a Dirichlet distribution), but the example serves a useful purpose here.
+
+```{r}
+nMat <- 20
+mort1 <- runif(nMat, 0, 1)
+u1 <- runif(nMat, 0, 1 - mort1)
+u2 <- 1 - mort1 - u1
+mort2 <- runif(nMat, 0, 1)
+u3 <- runif(nMat, 0, 1 - mort2)
+u4 <- 1 - mort2 - u3
+
+Uvals <- cbind(u1, u2, u3, u4)
+Fvals <- rgamma(nMat, rep(1:4, each = 5))
+Avals <- Uvals
+Avals[, 3] <- Avals[, 3] + Fvals
+
+Alist <- lapply(as.list(as.data.frame(t(Avals))), matrix,
+  byrow = FALSE,
+  nrow = 2, ncol = 2
+)
+```
+
+Next we use `cdb_build_cdb()` to convert this list of matrices into a COMPADRE object. 
+Here I am adding an identifier to each matrix, and a column for the shape parameter for the Gamma distribution used to simulate the data.
+
+```{r}
+meta <- data.frame(idNum = 1:20, shapeParam = rep(1:4, each = 5))
+
+x <- cdb_build_cdb(mat_a = Alist, metadata = meta)
+x
+```
+
+We can look at the matrices using the normal `Rcompadre` function `matA()`.
+
+```{r}
+matA(x)[1]
+```
+
+Now the matrices are stored in a `CompadreDB` object they can be manipulated in the same diverse ways as the `CompadreDB` object downloaded from the COMPADRE/COMADRE database.
+
+For example, filtering based on part of the metadata, in this case, `shapeParam`.
+```{r}
+x %>%
+  filter(shapeParam > 2)
+```
+
+
+# Including stage descriptions and version information
+
+In the above example, I did not include any information about the stage definitions. Since these information were not provided, `cdb_build_cdb()` automatically creates some information. You can view that information like this (using square brackets to choose a particular matrix model):
+
+```{r}
+matrixClass(x)[1]
+```
+
+
+In the following example I illustrate how one can include descriptions of the stages
+
+First I create a data frame describing the matrix stages. 
+
+```{r}
+(stageDescriptor <- data.frame(
+  MatrixClassOrganized = rep("active", 2),
+  MatrixClassAuthor = c("small", "large")
+))
+```
+
+In this case, all stages are the same and I can simply repeat the `stageDescriptor` in a list. However, the size of these data frames, and the information within them may vary.
+
+```{r}
+stageDesc <- list()
+stageDesc[1:20] <- list(stageDescriptor)
+```
+
+```{r}
+y <- cdb_build_cdb(
+  mat_a = Alist, metadata = meta, stages = stageDesc,
+  version = "Matrices Rock!"
+)
+```
+
+Now you can access the stage/class description information like this, using square brackets to find the information for particular matrices.
+
+```{r}
+matrixClass(y)[5]
+MatrixClassAuthor(y)[5]
+```
+
+
+
+You can also obtain the version information.
+```{r}
+Version(y)
+DateCreated(y)
+```
+
+The newly-created database can be saved like this:
+```{r,eval=FALSE}
+save(y, "myMatrixDatabase.Rdata")
+```
+
+
+
+
+
+
+## References
+
+Caswell, H. (2001). Matrix Population Models: Construction, Analysis, and Interpretation. 2nd edition. Sinauer Associates, Sunderland, MA. ISBN-10: 0878930965
+
+Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. <\doi:10.1111/1365-2745.12334>
+
+Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. <\doi:10.1111/1365-2656.12482>

@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/a04_ObtainingReferences.html">Obtaining references</a>
     </li>
+    <li>
+      <a href="../articles/a05_UsingYourOwnData.html">Using your own matrix data</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -94,13 +97,13 @@
 
       
 
-      </header><script src="a01_GettingStarted_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="a01_GettingStarted_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-05-05</h4>
+            <h4 class="date">2021-06-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -123,11 +126,11 @@
 <h2 class="hasAnchor">
 <a href="#obtaining-and-loading-the-data-" class="anchor"></a>Obtaining and loading the data.</h2>
 <p>To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at <a href="https://compadre-db.org/">compadre-db.org/</a>.</p>
-<p>When you have done that you can load it into R using the command <code>load</code>. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using the command <code>as_cdb</code>:</p>
+<p>When you have done that you can load it into R using <code><a href="https://rdrr.io/r/base/load.html">load()</a></code>. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using <code><a href="../reference/as_cdb.html">as_cdb()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span>
 <span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, the function <code>cdb_fetch</code> will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:</p>
+<p>Alternatively, <code><a href="../reference/cdb_fetch.html">cdb_fetch()</a></code> will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">'compadre'</span><span class="op">)</span></code></pre></div>
 <p>For this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses! You can load it like this:</p>
@@ -182,7 +185,7 @@
 <div id="exploring-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exploring-the-data" class="anchor"></a>Exploring the data</h2>
-<p>The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the <code>names</code> command, in the same way that you would for a data frame. Each element of the <code>mat</code> column contains a list of the four matrices (<strong>A</strong>, <strong>U</strong>, <strong>F</strong>, <strong>C</strong>) and information on matrix stages while the other columns are ordinary vectors.</p>
+<p>The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> command, in the same way that you would for a data frame. Each element of the <code>mat</code> column contains a list of the four matrices (<strong>A</strong>, <strong>U</strong>, <strong>F</strong>, <strong>C</strong>) and information on matrix stages while the other columns are ordinary vectors.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "mat"                    "SpeciesAuthor"          "SpeciesAccepted"       </span>
@@ -216,7 +219,7 @@
 <div id="finding-data-for-for-a-particular-species" class="section level2">
 <h2 class="hasAnchor">
 <a href="#finding-data-for-for-a-particular-species" class="anchor"></a>Finding data for for a particular species</h2>
-<p>If, for example, you want to check if a species is in the database you can use the <code>cdb_check_species</code> function. For example, we can ask if the species <em>Succisa pratensis</em> is present.</p>
+<p>If, for example, you want to check if a species is in the database you can use the <code><a href="../reference/cdb_check_species.html">cdb_check_species()</a></code> function. For example, we can ask if the species <em>Succisa pratensis</em> is present.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span><span class="op">)</span>
 <span class="co">#&gt;             species in_db</span>
@@ -258,7 +261,7 @@
 <h2 class="hasAnchor">
 <a href="#accessing-the-matrices" class="anchor"></a>Accessing the matrices</h2>
 <p>Matrices in <code>CompadreDB</code> objects are stored in a special vector, called <code>mat</code> as part of the data. However, the matrices are stored as special objects within the data frame and should be addressed using Rcompadre accessor functions to obtain the A, U, F and C matrices (see the User Guide), or information about the stage definitions used.</p>
-<p>Thus, to obtain the A matrix, which includes all types of transition one would use the <code>matA</code> function, which will return a list of A matrices from the database (there are equivalent functions, <code>matU</code>, <code>matF</code> and <code>matC</code>:</p>
+<p>Thus, to obtain the A matrix, which includes all types of transition one would use the <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code> function, which will return a list of A matrices from the database (there are equivalent functions, <code><a href="../reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="../reference/CompadreMatrixMethods.html">matF()</a></code> and <code><a href="../reference/CompadreMatrixMethods.html">matC()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
@@ -288,7 +291,7 @@
 <span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
 <span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
 <span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></code></pre></div>
-<p>It is often desirable to know what the stages are in the matrices. To access this information you can use the <code>matrixClass</code> function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.</p>
+<p>It is often desirable to know what the stages are in the matrices. To access this information you can use the <code><a href="../reference/CompadreMatrixMethods.html">matrixClass()</a></code> function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">classInfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matrixClass</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
@@ -321,10 +324,10 @@
 <span class="co">#&gt; [5] "Small flowering"                                                   </span>
 <span class="co">#&gt; [6] "Large flowering"</span></code></pre></div>
 </div>
-<div id="subsetting-the-database-based-on-metadata" class="section level1">
+<div id="filteringsubsetting-the-database-based-on-metadata" class="section level1">
 <h1 class="hasAnchor">
-<a href="#subsetting-the-database-based-on-metadata" class="anchor"></a>Subsetting the database based on metadata</h1>
-<p>It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using <code>subset</code>. For example, I could subset to only Eudicot species as follows:</p>
+<a href="#filteringsubsetting-the-database-based-on-metadata" class="anchor"></a>Filtering/subsetting the database based on metadata</h1>
+<p>It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code>. For example, I could subset to only Eudicot species as follows:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span><span class="op">)</span>
 <span class="va">x</span>
@@ -361,7 +364,7 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> 
               <span class="va">Country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> 
               <span class="va">MatrixDimension</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p>You can compare compadre data sets using the <code>cdb_compare</code> command:</p>
+<p>You can compare compadre data sets using the <code><a href="../reference/cdb_compare.html">cdb_compare()</a></code> command:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cdb_compare.html">cdb_compare</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; Quick Summary...</span>
@@ -379,17 +382,17 @@
 <h2 class="hasAnchor">
 <a href="#potential-issues-with-mpms" class="anchor"></a>Potential issues with MPMs</h2>
 <p>Numerous matrix calculations (Caswell 2001) have particular requirements for use. The details are beyond the scope of this vignette, but include things like (1) ergodicity, (2) primitivity, (3) singularity and (4) irreducibility. In addition, most matrix calculations will not work if there are missing values (i.e. <code>NA</code>) in the MPM.</p>
-<p>We can flag these by adding metadata using the <code>cdb_flag</code> function.</p>
+<p>We can flag these by adding metadata using the <code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre_flagged</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
-<p>We could then use <code>subset</code> like this:</p>
+<p>We could then use <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code> like this:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Compadre_flagged</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="calculations-from-matrices" class="section level2">
 <h2 class="hasAnchor">
 <a href="#calculations-from-matrices" class="anchor"></a>Calculations from matrices</h2>
-<p>When we have a set of matrices that we want to make calculations from, we can use <code>sapply</code> to apply a function across all the matrices in the list produced by <code>matA</code>. For example, to calculate lambda from all the <strong>A</strong> matrices we can apply the function <code>eigs</code> from the <code>popdemo</code> package to obtain lambda for the matrices in the <code>x</code> object produced above. Then we can examine a summary, produce a histogram etc.</p>
+<p>When we have a set of matrices that we want to make calculations from, we can use <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> to apply a function across all the matrices in the list produced by <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code>. For example, to calculate lambda from all the <strong>A</strong> matrices we can apply the function <code>eigs()</code> from the <code>popdemo</code> package to obtain lambda for the matrices in the <code>x</code> object produced above. Then we can examine a summary, produce a histogram etc.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lambdaVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs</a></span>, what<span class="op">=</span><span class="st">"lambda"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lambdaVals</span><span class="op">)</span>

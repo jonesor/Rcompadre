@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
+# The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -27,15 +27,15 @@ knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 
 COM(P)ADRE databases contain thousands of matrix population models. If we want to derive traits from a large set of these matrices, we'll need to use either loops or vectorisation.
 
-Vectorising means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a data frame, a list of matrices, etc. Vectorised code generally runs faster than loops, and many R users find that vectorised code is easier to write and understand.
+Vectorising means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a `data.frame`, a `list` of matrices, etc. Vectorised code generally runs faster than loops, and many R users find that vectorised code is easier to write and understand.
 
 ## Preliminaries
 
-We'll start by loading a few packages and a dataset that we'll be using throughout this vignette. The dataset `Compadre` is a subset of a recent COMPADRE release that's built into Rcompadre.
+We'll start by loading a few packages and a dataset that we'll be using throughout this vignette. The dataset `Compadre` is a subset of a recent COMPADRE release that's built into `Rcompadre`.
 
 ```{r}
 library(Rcompadre)
-library(popbio)
+library(popdemo)
 data(Compadre)
 ```
 
@@ -50,10 +50,10 @@ Compadre$matA <- matA(Compadre)
 This new column, `Compadre$matA`, is both a vector and a list.
 
 ```{r}
-is.vector(Compadre$matA)   # it really is a vector
-is.list(Compadre$matA)     # and also a list
-length(Compadre$matA)      # with 150 matrices
-Compadre$matA[1:3]         # here are the first three
+is.vector(Compadre$matA) # it really is a vector
+is.list(Compadre$matA) # and also a list
+length(Compadre$matA) # with 150 matrices
+Compadre$matA[1:3] # here are the first three
 ```
 
 Let's say we want to calculate the dimension of every matrix in `Compadre$matA`. In fact, `Compadre` already has this data in the column 'MatrixDimension', but let's say we want to double-check it. We'll use the function `nrow()`, and assume that the number of rows and columns are equal. But we can't use `nrow()` directly on `Compadre$matA`, because the function `nrow()` isn't vectorised. It can only take one object at a time.
@@ -64,10 +64,10 @@ Let's say we want to calculate the dimension of every matrix in `Compadre$matA`.
 We could do something like this...
 
 ```{r}
-Compadre$dim <- numeric(nrow(Compadre))  # create empty vector to store output
-Compadre$dim[1] <- nrow(Compadre$matA[[1]])  # nrow matrix 1
-Compadre$dim[2] <- nrow(Compadre$matA[[2]])  # nrow matrix 2
-Compadre$dim[3] <- nrow(Compadre$matA[[3]])  # nrow matrix 3
+Compadre$dim <- numeric(nrow(Compadre)) # create empty vector to store output
+Compadre$dim[1] <- nrow(Compadre$matA[[1]]) # nrow matrix 1
+Compadre$dim[2] <- nrow(Compadre$matA[[2]]) # nrow matrix 2
+Compadre$dim[3] <- nrow(Compadre$matA[[3]]) # nrow matrix 3
 # ... all the way to 150
 ```
 
@@ -82,7 +82,7 @@ A loop would be much more efficient here.
 Compadre$dim <- numeric(nrow(Compadre))
 
 # loop through all rows of Compadre
-for(i in seq_len(nrow(Compadre))) {
+for (i in seq_len(nrow(Compadre))) {
   Compadre$dim[i] <- nrow(Compadre$matA[[i]])
 }
 ```
@@ -153,7 +153,7 @@ sapply(CompUnnest$matA[1:6], nrow)
 vapply(CompUnnest$matA[1:6], nrow, numeric(1)) # must specify output type
 ```
 
-`lapply()` always returns a list, so it's useful if our output is more complex than a single value for each input. For example, we could use lapply to calculate vectors of stage-specific survival (column sums of matU).
+`lapply()` always returns a `list`, so it's useful if our output is more complex than a single value for each input. For example, we could use `lapply` to calculate vectors of stage-specific survival (column sums of `matU`).
 
 ```{r}
 lapply(CompUnnest$matU[1:4], function(m) colSums(m))
@@ -172,29 +172,31 @@ lifeExpectancy <- function(matU, startLife) {
 CompUnnest$start_life <- mpm_first_active(CompUnnest)
 
 # vectorise lifeExpectancy over matU and start_life
-mapply(lifeExpectancy,             # function
-       CompUnnest$matU[1:6],       # first argument to vectorise over
-       CompUnnest$start_life[1:6]) # second argument to vectorise over
+mapply(
+  lifeExpectancy, # function
+  CompUnnest$matU[1:6], # first argument to vectorise over
+  CompUnnest$start_life[1:6]
+) # second argument to vectorise over
 ```
 
 
 ## When functions fail
 
-Just like loops, vectorisation fails if the function being vectorised throws an error on _any_ element of the vector. Here's an example. The `lambda()` function from [popbio](https://CRAN.R-project.org/package=popbio) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
+Just like loops, vectorisation fails if the function being vectorised throws an error on _any_ element of the vector. Here's an example. The `eigs()` function from [popdemo](https://CRAN.R-project.org/package=popdemo) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
 
 ```{r error=TRUE}
 # works for a single matrix
-lambda(CompUnnest$matA[[1]])
+popdemo::eigs(CompUnnest$matA[[1]], what = "lambda")
 
 # but fails when applied to all matrices because a few have missing values
-CompUnnest$lambda <- sapply(CompUnnest$matA, lambda)
+CompUnnest$lambda <- sapply(CompUnnest$matA, popdemo::eigs, what = "lambda")
 ```
 
 There are two basic approaches to overcoming this:
 
 #### 1. Remove or skip problem elements
 
-If `lambda()` doesn't work on matrices with missing values, one approach is to simply remove matrices with missing values. The `cdb_flag()` function is an easy way to check for missing values, and other common issues that might hinder our analyses.
+If `eigs()` doesn't work on matrices with missing values, one approach is to simply remove matrices with missing values. The `cdb_flag()` function is an easy way to check for missing values, and other common issues that might hinder our analyses.
 
 ```{r}
 # add column 'check_NA_A', indicating whether matA contains missing values (T/F)
@@ -204,10 +206,10 @@ CompFlag <- cdb_flag(CompUnnest, checks = "check_NA_A")
 CompSub <- subset(CompFlag, check_NA_A == FALSE)
 
 # apply lambda() to every remaining matA
-CompSub$lambda <- sapply(CompSub$matA, lambda)
+CompSub$lambda <- sapply(matA(CompSub), popdemo::eigs, what = "lambda")
 ```
 
-Alternatively, if we want to avoid subsetting, we could pre-define a placeholder column for the result, and then selectively apply the `lambda()` function to only those matrices that don't contain missing values.
+Alternatively, if we want to avoid subsetting, we could pre-define a placeholder column for the result, and then selectively apply the `eigs()` function to only those matrices that don't contain missing values.
 
 ```{r}
 # identify rows with no missing values in matA
@@ -216,35 +218,34 @@ no_missing <- which(CompFlag$check_NA_A == FALSE)
 # create placeholder column for lambda
 CompFlag$lambda <- NA
 
-# apply lambda() to all matA with no missing values
-CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing], lambda)
+# apply eigs() to all matA with no missing values
+CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing], popdemo::eigs, what = "lambda")
 ```
 
-Rows where there were missing values in matA retain the original placeholder value of `NA`.
+Rows where there were missing values in `matA` retain the original placeholder value of `NA`.
 
 #### 2. Modify the function
 
-A second approach is to modify the function we want to vectorise with so that it can natively handle special cases. For example, we might modify `lambda()` so that it returns `NA` if a matrix contains missing values.
+A second approach is to modify the function we want to vectorise with so that it can natively handle special cases. For example, we might modify `eigs()` so that it returns `NA` if a matrix contains missing values.
 
 ```{r}
-lambda2 <- function(mat) {
-  # check mat for missing values: if TRUE return NA, else return lambda(mat)
-  ifelse(any(is.na(mat)), NA, lambda(mat))     
+lambdaFn1 <- function(mat) {
+  # check mat for missing values: if TRUE return NA, else return eigs(mat)
+  ifelse(any(is.na(mat)), NA, popdemo::eigs(mat, what = "lambda"))
 }
 
-CompUnnest$lambda <- sapply(CompUnnest$matA, lambda2)
+CompUnnest$lambda <- sapply(CompUnnest$matA, lambdaFn1)
 ```
 
 If the special cases are harder to test for, we could use R's condition-handling functions like `try()` or `tryCatch()`. Here's an example.
 
 ```{r}
-lambda3 <- function(mat) {
-  # try lambda(mat): if error return NA
-  tryCatch(lambda(mat), error = function(err) NA)
-} 
+lambdaFn2 <- function(mat) {
+  # try eigs(mat): if error return NA
+  tryCatch(eigs(mat, what = "lambda"), error = function(err) NA)
+}
 
-CompUnnest$lambda <- sapply(CompUnnest$matA, lambda3)
+CompUnnest$lambda <- sapply(CompUnnest$matA, lambdaFn2)
 ```
 
 This latter approach requires caution, as we'll get an `NA` for _any_ error. Some errors might reflect problems with our data or code that are fixable, in which case an `NA` may be misleading.
-
