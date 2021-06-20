@@ -68,7 +68,6 @@ Suggests:
     covr,
     dplyr,
     ggplot2,
-    ggtern,
     knitr,
     maps,
     MCMCpack,
