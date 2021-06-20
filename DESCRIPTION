@@ -70,7 +70,6 @@ Suggests:
     ggplot2,
     knitr,
     maps,
-    MCMCpack,
     rcrossref,
     rmarkdown,
     spelling,
