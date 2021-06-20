@@ -186,7 +186,7 @@ Just like loops, vectorisation fails if the function being vectorised throws an 
 
 ```{r error=TRUE}
 # works for a single matrix
-lambda(CompUnnest$matA[[1]])
+popdemo::eigs(CompUnnest$matA[[1]], what = "lambda")
 
 # but fails when applied to all matrices because a few have missing values
 CompUnnest$lambda <- sapply(CompUnnest$matA, popdemo::eigs, what = "lambda")
@@ -206,7 +206,7 @@ CompFlag <- cdb_flag(CompUnnest, checks = "check_NA_A")
 CompSub <- subset(CompFlag, check_NA_A == FALSE)
 
 # apply lambda() to every remaining matA
-CompSub$lambda <- sapply(CompSub$matA, popdemo::eigs, what = "lambda")
+CompSub$lambda <- sapply(matA(CompSub), popdemo::eigs, what = "lambda")
 ```
 
 Alternatively, if we want to avoid subsetting, we could pre-define a placeholder column for the result, and then selectively apply the `eigs()` function to only those matrices that don't contain missing values.
