@@ -18,15 +18,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-The utility of `Rcompadre` extends beyond the use of data from the COMPADRE and COMADRE matrix databases. By coercing user-provided matrix population model (MPM) data (and metadata) into the standardised format used by the `Rcompadre` package (a `CompadreDB` object) you can make use of all the functionality of the package. The central function to carry out this is `cdb_build_cdb`. 
+The utility of `Rcompadre` extends beyond the use of data from the COMPADRE and COMADRE matrix databases. By coercing user-provided matrix population model (MPM) data (and metadata) into the standardised format used by the `Rcompadre` package (a `CompadreDB` object) you can make use of all the functionality of the package. The central function to carry out this is `cdb_build_cdb()`. 
 
 This vignette illustrates some simple use cases.
 
 ## The `CompadreDB` object
 
-Before illustrating the construction of a `CompadreDB` object using `cdb_build_cdb` is it first necessary to outline the anatomy of the object.
+Before illustrating the construction of a `CompadreDB` object using `cdb_build_cdb()` is it first necessary to outline the anatomy of the object.
 
-The `CompadreDB` object consists of four parts: (1) the matrices; (2) the stage information; (3) the metadata describing the matrices; and (4) version information. Much of this information can be generated automatically by the `cdb_build_cdb` function.
+The `CompadreDB` object consists of four parts: (1) the matrices; (2) the stage information; (3) the metadata describing the matrices; and (4) version information. Much of this information can be generated automatically by the `cdb_build_cdb()` function.
 
 ### The matrices 
 
@@ -37,7 +37,7 @@ Thus, each MPM in the `CompadreDB` object is provided as a list object with four
 
 In some cases it is not desirable (or perhaps impossible) to provide information for the set of submatrices. For example, it may not be possible to distinguish between sexual (*F*) and clonal (*C*) reproduction, or between growth/survival (*U*) and reproduction (*F* and/or *C*). Alternatively, it may simply be that the planned analyses do not require the potentially laborious splitting of the *A* matrix into these submatrices. Nevertheless, `CompadreDB` requires the full set of four matrices. Thankfully, the matrices can be provided as `NA` matrices and can often be generated automatically from the provided data (see below). 
 
-- If only the *A* matrices are provided, `cdb_build_cdb` will automatically populate the *U*, *F* and *c* matrices with `NA` values.
+- If only the *A* matrices are provided, `cdb_build_cdb()` will automatically populate the *U*, *F* and *c* matrices with `NA` values.
 - If a *U* matrix is provided, an *F* and/or *C* matrix must also be provided. If only one of the *F* and *C* matrices is provided, the other is assumed to be 0. The *A* matrix is then calculated automatically from these sets as *A* = *U* + *F* + *C*. 
 
 Sets of matrices of the same type must be provided as a `list` for each type. For example, you could provide two lists: one for the *U* matrices and one for the matching *F* matrices. The function conducts some error checks to ensure that these lists have the same length, and that all matrices in each set has the same dimensions.
@@ -59,12 +59,12 @@ Finally, some version information must be included. This can simply be a name, o
 ## Data preparation
 
 
-The main function used for creating a `CompadreDB` object from user-defined data is `cdb_build_cdb`. This function takes the components described above, performs some error checks, and combines them into a single `CompadreDB` object. 
+The main function used for creating a `CompadreDB` object from user-defined data is `cdb_build_cdb()`. This function takes the components described above, performs some error checks, and combines them into a single `CompadreDB` object. 
 
 
 # A simple example
 
-First we need to load the library, and `tidyverse` packages
+First we need to load the library, and the `dplyr` package.
 
 ```{r}
 library(Rcompadre)
@@ -94,7 +94,7 @@ Alist <- lapply(as.list(as.data.frame(t(Avals))), matrix,
 )
 ```
 
-Next we use `cdb_build_cdb` to convert this list of matrices into a COMPADRE object. 
+Next we use `cdb_build_cdb()` to convert this list of matrices into a COMPADRE object. 
 Here I am adding an identifier to each matrix, and a column for the shape parameter for the Gamma distribution used to simulate the data.
 
 ```{r}
@@ -104,7 +104,7 @@ x <- cdb_build_cdb(mat_a = Alist, metadata = meta)
 x
 ```
 
-We can look at the matrices using the normal `Rcompadre` function `matA`.
+We can look at the matrices using the normal `Rcompadre` function `matA()`.
 
 ```{r}
 matA(x)[1]
@@ -121,7 +121,7 @@ x %>%
 
 # Including stage descriptions and version information
 
-In the above example, I did not include any information about the stage definitions. Since these information were not provided, the `cdb_build_cdb` function automatically creates some information. You can view that information like this (using square brackets to choose a particular matrix model):
+In the above example, I did not include any information about the stage definitions. Since these information were not provided, `cdb_build_cdb()` automatically creates some information. You can view that information like this (using square brackets to choose a particular matrix model):
 
 ```{r}
 matrixClass(x)[1]

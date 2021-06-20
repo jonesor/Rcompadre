@@ -60,7 +60,7 @@ Comadre$YearPublication
 Comadre$DOI.ISBN
 ```
 
-We are now ready to obtain the full references for these data. The `rcrossref` package has a convenient function, `cr_cn` which obtains citations in various formats from CrossRef based on the DOIs. 
+We are now ready to obtain the full references for these data. The `rcrossref` package has a convenient function, `cr_cn()` which obtains citations in various formats from CrossRef based on the DOIs. 
 
 Thus, we can obtain the full references for this subset of the COMADRE database like this:
 
