@@ -251,12 +251,12 @@ placed in the lists.</p></td>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Metadata does not include a `SpeciesAccepted` column, so number of species not provided when viewing object.</span></div><div class='input'><span class='va'>my_compadre</span>
 </div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with ?? SPECIES and 3 MATRICES.
 #&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span>
+#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span><span>
 #&gt;   mat        matrixID
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        1
-#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        2
-#&gt; <span style='color: #BCBCBC;'>3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>        3</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>        1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>        2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>        3</div><div class='input'>
 
 <span class='va'>mat_u1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.0</span><span class='op'>)</span>,
@@ -304,11 +304,11 @@ placed in the lists.</p></td>
 <span class='va'>my_compadre</span>
 </div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 2 SPECIES and 2 MATRICES.
 #&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 2 x 4</span>
+#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
 #&gt;   mat        idNum SpeciesAccepted     x
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>     1 A                   4
-#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>     2 B                   5</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>     1 A                   4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>     2 B                   5</div><div class='input'>
 <span class='va'>my_compadre</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_build_cdb</span><span class='op'>(</span>
   mat_u <span class='op'>=</span> <span class='va'>mat_u_list</span>, mat_f <span class='op'>=</span> <span class='va'>mat_f_list</span>,
   metadata <span class='op'>=</span> <span class='va'>meta</span>
@@ -316,11 +316,11 @@ placed in the lists.</p></td>
 <span class='va'>my_compadre</span>
 </div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 2 SPECIES and 2 MATRICES.
 #&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 2 x 4</span>
+#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
 #&gt;   mat        idNum SpeciesAccepted     x
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>     1 A                   4
-#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span>     2 B                   5</div></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>     1 A                   4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> </span><span style='color: #949494;'>&lt;CompdrMt&gt;</span><span>     2 B                   5</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
