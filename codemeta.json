@@ -151,18 +151,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "popbio",
-      "name": "popbio",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=popbio"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "provider": {
@@ -283,7 +271,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "80083.529KB",
+  "fileSize": "80083.649KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "contIntegration": ["https://travis-ci.org/jonesor/Rcompadre", "https://travis-ci.org/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=main"],
   "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
@@ -378,6 +366,5 @@
     "@type": "Organization",
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
-  },
-  "readme": "https://github.com/jonesor/Rcompadre/blob/main/README.md"
+  }
 }
