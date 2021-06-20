@@ -149,12 +149,6 @@ x <- subset(Compadre, DicotMonoc == "Eudicot")
 x
 ```
 
-The `filter()` command works in the same way:
-
-```{r filter 1}
-x <- filter(Compadre, DicotMonoc == "Eudicot")
-x
-```
 
 These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is >2 I could use the following command:
 
