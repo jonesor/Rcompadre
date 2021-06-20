@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using Rcompadre with the tidyverse</h1>
                         <h4 class="author">Patrick Barks &amp; Owen Jones</h4>
             
-            <h4 class="date">2021-06-19</h4>
+            <h4 class="date">2021-06-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a02_RcompadreTidy.Rmd"><code>vignettes/a02_RcompadreTidy.Rmd</code></a></small>
       <div class="hidden name"><code>a02_RcompadreTidy.Rmd</code></div>
@@ -115,7 +115,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Rcompadre includes methods for a variety of functions in the “<a href="https://www.tidyverse.org/">Tidyverse</a>”, a popular group of R packages geared toward data analysis, including <a href="https://dplyr.tidyverse.org/">dplyr</a> (a grammar of data manipulation) and <a href="https://ggplot2.tidyverse.org/">ggplot2</a> (a grammar of graphics). This vignette covers manipulation of CompadreDB objects using dplyr, and a few examples of plotting CompadreDB objects using ggplot2. Users new to these packages may wish to check out more introductory materials (e.g. the <a href="https://CRAN.R-project.org/package=dplyr">dplyr vignette</a>, or the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualization chapter</a> of <em>R for Data Science</em>).</p>
+<p>Rcompadre includes methods for a variety of functions in the “<a href="https://www.tidyverse.org/">Tidyverse</a>”, a popular group of R packages geared toward data analysis, including <a href="https://dplyr.tidyverse.org/">dplyr</a> (a grammar of data manipulation) and <a href="https://ggplot2.tidyverse.org/">ggplot2</a> (a grammar of graphics). This vignette covers manipulation of <code>CompadreDB</code> objects using <code>dplyr</code>, and a few examples of plotting <code>CompadreDB</code> objects using <code>ggplot2.</code> Users new to these packages may wish to check out more introductory materials (e.g. the <a href="https://CRAN.R-project.org/package=dplyr">dplyr vignette</a>, or the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualization chapter</a> of <em>R for Data Science</em>).</p>
 </div>
 <div id="preliminaries" class="section level2">
 <h2 class="hasAnchor">
@@ -125,8 +125,8 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre">Rcompadre</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>     <span class="co"># for plotting world map</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popbio</span><span class="op">)</span>   <span class="co"># for calculating population growth rates</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popdemo</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>     <span class="co"># for plotting world map</span></code></pre></div>
 </div>
 <div id="introduction-to-piping" class="section level2">
 <h2 class="hasAnchor">
@@ -157,12 +157,12 @@
 <span class="co"># approach 2 (intermediate step)</span>
 <span class="va">compadre_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre_flag</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p>and here’s the equivalent piped sequence</p>
+<p>and here’s the equivalent piped sequence:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>               <span class="co"># first argument is Compadre, from previous line</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># first argument is output of cdb_flag()</span></code></pre></div>
-<p>The advantage of piping here is that we don’t have to use nested functions (<code><a href="https://rdrr.io/r/base/subset.html">subset(cdb_flag())</a></code>), and we don’t have to create object names for every intermediate step in our analysis.</p>
+<p>The advantage of piping here is that we don’t have to use nested functions (<code><a href="https://rdrr.io/r/base/subset.html">subset(cdb_flag())</a></code>), and we don’t have to create object names for every intermediate step in our analysis. An additional alternative is to use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> instead of <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code>.</p>
 </div>
 </div>
 <div id="the-mutate-function" class="section level2">
@@ -195,14 +195,16 @@
 <h4 class="hasAnchor">
 <a href="#vectorizing-within-mutate-with-the-apply-functions" class="anchor"></a>Vectorizing within <code>mutate</code> with the apply functions</h4>
 <p>Just like creating a new column with <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> (e.g. <code>compadre$new_col &lt;- ...</code>), each expression within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> must return a vector of the same length as the number of rows in the data frame, or return a single value which will be recycled for all rows. For some operations this requires vectorization.</p>
-<p>Let’s say we want to calculate the population growth rate for every matrix in the database. We can use the <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> function in the <a href="https://CRAN.R-project.org/package=popbio">popbio</a> library, but it can only take a single matrix at a time.</p>
-<p>To apply <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> to a list of matrices we can use <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. But first we need to remove matrices with missing values, because these will cause <code><a href="https://rdrr.io/pkg/popbio/man/lambda.html">lambda()</a></code> to fail.</p>
+<p>Let’s say we want to calculate the population growth rate for every matrix in the database. We can use the <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> function in the <a href="https://CRAN.R-project.org/package=popdemo">popdemo</a> package, but it can only take a single matrix at a time.</p>
+<p>To apply <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> to a list of matrices we can use <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. But first we need to remove matrices with missing values, because these will cause <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> to fail.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_lambda</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>      <span class="co"># remove matrices with missing values</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mat_A <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>          <span class="co"># extract list-column of matA</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span>  <span class="co"># apply lambda() to every matA</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs</a></span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># get lambda for every matA</span>
+<span class="co">#&gt; Warning in FUN(X[[i]], ...): More than one eigenvalues have equal absolute</span>
+<span class="co">#&gt; magnitude</span></code></pre></div>
 <p>In the example above, <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> which always returns a list. In the example below we use <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> to calculate vectors of stage-specific survival (column sums of matU) for every row of the database.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_stage_surv</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
