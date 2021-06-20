@@ -77,7 +77,7 @@ compadre <- as_cdb(compadre)
 #### Subsetting
 
 For the most part `CompadreDB` objects work like a data frame. They can
-be subset using `[` or `subset()`
+be subset using `[`, `subset()` or `filter()`
 
 ``` r
 # subset to the first 10 rows
@@ -85,11 +85,14 @@ compadre[1:10, ]
 
 # subset to the species 'Echinacea angustifolia'
 subset(compadre, SpeciesAccepted == "Echinacea angustifolia")
+
+# subset to the species 'Echinacea angustifolia'
+filter(compadre, SpeciesAccepted == "Echinacea angustifolia")
 ```
 
 #### Example analysis: calculating population growth rates
 
-First we’ll use the function `cdb_flag` to add columns to the database
+First we’ll use the function `cdb_flag()` to add columns to the database
 flagging potential issues with the projection matrices, such as missing
 values, or matrices that don’t meet assumptions like ergodicity,
 irreducibility, or primitivity.
@@ -110,13 +113,12 @@ compadre_sub <- subset(
 )
 ```
 
-Finally, we’ll use the `eigs` function from the
+Finally, we’ll use the `eigs()` function from the
 [popdemo](https://CRAN.R-project.org/package=popdemo) package to
 calculate the population growth rate for every matrix in `compadre_sub`.
 
 ``` r
-library(popbio)
-compadre_sub$lambda <- sapply(matA(compadre_sub), eigs, what = "lambda")
+compadre_sub$lambda <- sapply(matA(compadre_sub), popbio::eigs, what = "lambda")
 ```
 
 In the code above, the accessor function `matA()` is used to extract a

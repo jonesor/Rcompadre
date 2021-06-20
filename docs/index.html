@@ -180,18 +180,21 @@
 <div id="subsetting" class="section level4">
 <h4 class="hasAnchor">
 <a href="#subsetting" class="anchor"></a>Subsetting</h4>
-<p>For the most part <code>CompadreDB</code> objects work like a data frame. They can be subset using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> or <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code></p>
+<p>For the most part <code>CompadreDB</code> objects work like a data frame. They can be subset using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>, <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code> or <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># subset to the first 10 rows</span>
 <span class="va">compadre</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
 
 <span class="co"># subset to the species 'Echinacea angustifolia'</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span>
+
+<span class="co"># subset to the species 'Echinacea angustifolia'</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example-analysis-calculating-population-growth-rates" class="section level4">
 <h4 class="hasAnchor">
 <a href="#example-analysis-calculating-population-growth-rates" class="anchor"></a>Example analysis: calculating population growth rates</h4>
-<p>First we’ll use the function <code>cdb_flag</code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
+<p>First we’ll use the function <code><a href="reference/cdb_flag.html">cdb_flag()</a></code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
 <p>We’ll only be able to calculate population growth rates from matrices that don’t contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we’ll subset the database accordingly.</p>
@@ -200,10 +203,9 @@
   <span class="va">compadre_flags</span>,
   <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
-<p>Finally, we’ll use the <code>eigs</code> function from the <a href="https://CRAN.R-project.org/package=popdemo">popdemo</a> package to calculate the population growth rate for every matrix in <code>compadre_sub</code>.</p>
+<p>Finally, we’ll use the <code>eigs()</code> function from the <a href="https://CRAN.R-project.org/package=popdemo">popdemo</a> package to calculate the population growth rate for every matrix in <code>compadre_sub</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popbio</span><span class="op">)</span>
-<span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="va">eigs</span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="fu">popbio</span><span class="fu">::</span><span class="va">eigs</span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
 <p>In the code above, the accessor function <code><a href="reference/CompadreMatrixMethods.html">matA()</a></code> is used to extract a list of projection matrices (the full matrix, <code>matA</code>) from every row of <code>compadre_sub</code>. There are also accessor functions for the matrix subcomponents (<code><a href="reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matF()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matC()</a></code>), and for many other parts of the database too.</p>
 </div>
 </div>
