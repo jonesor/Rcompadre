@@ -72,11 +72,18 @@ library(dplyr)
 ```
 
 
-In this example we generate a series of 2 dimension *A* matrices using a Dirichlet distribution for the *U* submatrix (i.e. to ensure the column sums of the *U* submatrix sums to 1), and a gamma distribution, to approximate the average of a Poisson process. In this case, the matrices all have the same dimension, but it is not necessary for dimension to be the same.
+In this example we generate a series of 2 dimension *A* matrices using a series of uniform distributions for the *U* submatrix, and a gamma distribution, to approximate the average of a Poisson process. In this case, the matrices all have the same dimension, but it is not necessary for dimension to be the same. This is a bit long-winded, and there are certainly better ways to simulate these data (e.g. using a Dirichlet distribution), but the example serves a useful purpose here.
 
 ```{r}
 nMat <- 20
-Uvals <- cbind(MCMCpack::rdirichlet(nMat, c(1, 1)), MCMCpack::rdirichlet(nMat, c(1, 1)))
+mort1 <- runif(nMat, 0, 1)
+u1 <- runif(nMat, 0, 1 - mort1)
+u2 <- 1 - mort1 - u1
+mort2 <- runif(nMat, 0, 1)
+u3 <- runif(nMat, 0, 1 - mort2)
+u4 <- 1 - mort2 - u3
+
+Uvals <- cbind(u1, u2, u3, u4)
 Fvals <- rgamma(nMat, rep(1:4, each = 5))
 Avals <- Uvals
 Avals[, 3] <- Avals[, 3] + Fvals
