@@ -65,17 +65,17 @@ Imports:
   popdemo,
   tibble
 Suggests: 
-    spelling,
-    knitr,
-    rmarkdown,
-    testthat,
-    ggplot2,
-    maps,
-    dplyr,
-    ggtern,
     covr,
+    dplyr,
+    ggplot2,
+    ggtern,
+    knitr,
+    maps,
+    MCMCpack,
     rcrossref,
-    MCMCpack
+    rmarkdown,
+    spelling,
+    testthat
 VignetteBuilder: knitr
 Collate: 
     'CompadreDB.R'
