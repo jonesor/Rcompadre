@@ -249,7 +249,7 @@
   ],
   "fileSize": "80084.061KB",
   "developmentStatus": "https://www.repostatus.org/#active",
-  "contIntegration": ["https://travis-ci.com/jonesor/Rcompadre", "https://travis-ci.com/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/github/jonesor/Rcompadre?branch=main"],
+  "contIntegration": ["https://travis-ci.com/jonesor/Rcompadre", "https://travis-ci.com/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/gh/jonesor/Rcompadre"],
   "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
   "citation": [
     {
