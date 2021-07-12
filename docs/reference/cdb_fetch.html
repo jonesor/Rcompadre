@@ -155,7 +155,7 @@ file." />
 file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cdb_fetch</span><span class='op'>(</span><span class='va'>cdb</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cdb_fetch</span><span class='op'>(</span><span class='va'>cdb</span>, flag <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,6 +165,12 @@ file.</p>
       <td><p>Either "comadre" or "compadre" (case insensitive) to fetch the
 most recent database from <a href='https://compadre-db.org'>https://compadre-db.org</a>, or a path to an
 existing COMPADRE database (i.e. .RData file) stored on the local machine.</p></td>
+    </tr>
+    <tr>
+      <th>flag</th>
+      <td><p>Logical argument where `TRUE` will automatically run
+<a href='cdb_flag.html'>cdb_flag</a> to add logical columns to the metadata to flag potential
+problems in the matrix population models. Default is `FALSE`.</p></td>
     </tr>
     </table>
 

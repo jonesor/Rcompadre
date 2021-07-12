@@ -247,7 +247,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "80084.061KB",
+  "fileSize": "80084.871KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "contIntegration": ["https://travis-ci.com/jonesor/Rcompadre", "https://travis-ci.com/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://ci.appveyor.com/project/jonesor/Rcompadre", "https://codecov.io/gh/jonesor/Rcompadre"],
   "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
@@ -342,5 +342,6 @@
     "@type": "Organization",
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
-  }
+  },
+  "readme": "https://github.com/jonesor/Rcompadre/blob/main/README.md"
 }
