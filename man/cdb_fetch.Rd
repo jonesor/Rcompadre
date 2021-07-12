@@ -4,12 +4,16 @@
 \alias{cdb_fetch}
 \title{Fetch the COM(P)ADRE database from compadre-db.org or a local file}
 \usage{
-cdb_fetch(cdb)
+cdb_fetch(cdb, flag = FALSE)
 }
 \arguments{
 \item{cdb}{Either "comadre" or "compadre" (case insensitive) to fetch the
 most recent database from \url{https://compadre-db.org}, or a path to an
 existing COMPADRE database (i.e. .RData file) stored on the local machine.}
+
+\item{flag}{Logical argument where `TRUE` will automatically run
+\link{cdb_flag} to add logical columns to the metadata to flag potential
+problems in the matrix population models. Default is `FALSE`.}
 }
 \value{
 A CompadreDB object
