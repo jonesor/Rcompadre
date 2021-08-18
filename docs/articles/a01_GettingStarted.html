@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-07-12</h4>
+            <h4 class="date">2021-08-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -144,32 +144,26 @@
 <span class="va">Compadre</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 150 x 48</span>
-<span class="co">#&gt;    mat    SpeciesAuthor    SpeciesAccepted   CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    &lt;list&gt; &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
-<span class="co">#&gt;  1 &lt;Comp… Setaria_incrass… Setaria incrassa… &lt;NA&gt;       Seta… Poace… Poal… Lili…</span>
-<span class="co">#&gt;  2 &lt;Comp… Lechea_cernua    Lechea cernua     &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt;  3 &lt;Comp… Actinostemon_co… Actinostemon con… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt;  4 &lt;Comp… Gaura_neomexica… Gaura neomexican… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt;  5 &lt;Comp… Eriogonum_longi… Eriogonum longif… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt;  6 &lt;Comp… Platanthera_hoo… Platanthera hook… &lt;NA&gt;       Plat… Orchi… Aspa… Lili…</span>
-<span class="co">#&gt;  7 &lt;Comp… Succisa_pratens… Succisa pratensis &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt;  8 &lt;Comp… Haplopappus_rad… Pyrrocoma radiata &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt;  9 &lt;Comp… Astragalus_trem… Astragalus tremo… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; 10 &lt;Comp… Plantago_corono… Plantago coronop… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
+<span class="co">#&gt; # A tibble: 150 × 48</span>
+<span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
+<span class="co">#&gt;    &lt;list&gt;     &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
+<span class="co">#&gt;  1 &lt;CompdrMt&gt; Setaria_incra… Setaria incras… &lt;NA&gt;       Seta… Poace… Poal… Lili…</span>
+<span class="co">#&gt;  2 &lt;CompdrMt&gt; Lechea_cernua  Lechea cernua   &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
+<span class="co">#&gt;  3 &lt;CompdrMt&gt; Actinostemon_… Actinostemon c… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
+<span class="co">#&gt;  4 &lt;CompdrMt&gt; Gaura_neomexi… Gaura neomexic… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
+<span class="co">#&gt;  5 &lt;CompdrMt&gt; Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class="co">#&gt;  6 &lt;CompdrMt&gt; Platanthera_h… Platanthera ho… &lt;NA&gt;       Plat… Orchi… Aspa… Lili…</span>
+<span class="co">#&gt;  7 &lt;CompdrMt&gt; Succisa_prate… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
+<span class="co">#&gt;  8 &lt;CompdrMt&gt; Haplopappus_r… Pyrrocoma radi… &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
+<span class="co">#&gt;  9 &lt;CompdrMt&gt; Astragalus_tr… Astragalus tre… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt; 10 &lt;CompdrMt&gt; Plantago_coro… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
 <span class="co">#&gt; # … with 140 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
 <span class="co">#&gt; #   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Altitude &lt;dbl&gt;, Country &lt;fct&gt;, Continent &lt;fct&gt;, Ecoregion &lt;chr&gt;,</span>
-<span class="co">#&gt; #   StudiedSex &lt;fct&gt;, MatrixComposite &lt;fct&gt;, MatrixTreatment &lt;chr&gt;,</span>
-<span class="co">#&gt; #   MatrixCaptivity &lt;fct&gt;, MatrixStartYear &lt;dbl&gt;, MatrixStartSeason &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixStartMonth &lt;chr&gt;, MatrixEndYear &lt;dbl&gt;, MatrixEndSeason &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixEndMonth &lt;chr&gt;, MatrixSplit &lt;fct&gt;, MatrixFec &lt;fct&gt;,</span>
-<span class="co">#&gt; #   Observation &lt;fct&gt;, MatrixDimension &lt;dbl&gt;, SurvivalIssue &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
 <p>This summary tells us that we have successfully loaded the data, and that there are 150 matrices. The database also contains some Version information which can be accessed using the command <code><a href="../reference/CompadreDB.html">VersionData(Compadre)</a></code>. This includes information including the version number, date created, and link to the database user agreement.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreDB.html">VersionData</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
@@ -238,7 +232,7 @@
 <span class="va">compadre_succisa</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 2 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 2 x 48</span>
+<span class="co">#&gt; # A tibble: 2 × 48</span>
 <span class="co">#&gt;   mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class Phylum</span>
 <span class="co">#&gt;   &lt;lis&gt; &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; </span>
 <span class="co">#&gt; 1 &lt;Com… Succisa_prat… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn… Magno…</span>
@@ -249,13 +243,7 @@
 <span class="co">#&gt; #   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;, MatrixCriteriaSize &lt;fct&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaOntogeny &lt;fct&gt;, MatrixCriteriaAge &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Country &lt;fct&gt;, Continent &lt;fct&gt;, Ecoregion &lt;chr&gt;, StudiedSex &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixComposite &lt;fct&gt;, MatrixTreatment &lt;chr&gt;, MatrixCaptivity &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixStartYear &lt;dbl&gt;, MatrixStartSeason &lt;fct&gt;, MatrixStartMonth &lt;chr&gt;,</span>
-<span class="co">#&gt; #   MatrixEndYear &lt;dbl&gt;, MatrixEndSeason &lt;fct&gt;, MatrixEndMonth &lt;chr&gt;,</span>
-<span class="co">#&gt; #   MatrixSplit &lt;fct&gt;, MatrixFec &lt;fct&gt;, Observation &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixDimension &lt;dbl&gt;, SurvivalIssue &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;, …</span></code></pre></div>
 </div>
 <div id="accessing-the-matrices" class="section level2">
 <h2 class="hasAnchor">
@@ -333,32 +321,26 @@
 <span class="va">x</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 80 SPECIES and 108 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 108 x 48</span>
-<span class="co">#&gt;    mat    SpeciesAuthor    SpeciesAccepted   CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    &lt;list&gt; &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
-<span class="co">#&gt;  1 &lt;Comp… Lechea_cernua    Lechea cernua     &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt;  2 &lt;Comp… Actinostemon_co… Actinostemon con… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt;  3 &lt;Comp… Gaura_neomexica… Gaura neomexican… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt;  4 &lt;Comp… Eriogonum_longi… Eriogonum longif… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt;  5 &lt;Comp… Succisa_pratens… Succisa pratensis &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt;  6 &lt;Comp… Haplopappus_rad… Pyrrocoma radiata &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt;  7 &lt;Comp… Astragalus_trem… Astragalus tremo… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt;  8 &lt;Comp… Plantago_corono… Plantago coronop… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
-<span class="co">#&gt;  9 &lt;Comp… Petrocoptis_pse… Silene glaucifol… &lt;NA&gt;       Sile… Caryo… Cary… Magn…</span>
-<span class="co">#&gt; 10 &lt;Comp… Astragalus_peck… Astragalus peckii &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt; # A tibble: 108 × 48</span>
+<span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
+<span class="co">#&gt;    &lt;list&gt;     &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
+<span class="co">#&gt;  1 &lt;CompdrMt&gt; Lechea_cernua  Lechea cernua   &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
+<span class="co">#&gt;  2 &lt;CompdrMt&gt; Actinostemon_… Actinostemon c… &lt;NA&gt;       Acti… Eupho… Malp… Magn…</span>
+<span class="co">#&gt;  3 &lt;CompdrMt&gt; Gaura_neomexi… Gaura neomexic… &lt;NA&gt;       Gaura Onagr… Myrt… Magn…</span>
+<span class="co">#&gt;  4 &lt;CompdrMt&gt; Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class="co">#&gt;  5 &lt;CompdrMt&gt; Succisa_prate… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn…</span>
+<span class="co">#&gt;  6 &lt;CompdrMt&gt; Haplopappus_r… Pyrrocoma radi… &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
+<span class="co">#&gt;  7 &lt;CompdrMt&gt; Astragalus_tr… Astragalus tre… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
+<span class="co">#&gt;  8 &lt;CompdrMt&gt; Plantago_coro… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
+<span class="co">#&gt;  9 &lt;CompdrMt&gt; Petrocoptis_p… Silene glaucif… &lt;NA&gt;       Sile… Caryo… Cary… Magn…</span>
+<span class="co">#&gt; 10 &lt;CompdrMt&gt; Astragalus_pe… Astragalus pec… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
 <span class="co">#&gt; # … with 98 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
 <span class="co">#&gt; #   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Altitude &lt;dbl&gt;, Country &lt;fct&gt;, Continent &lt;fct&gt;, Ecoregion &lt;chr&gt;,</span>
-<span class="co">#&gt; #   StudiedSex &lt;fct&gt;, MatrixComposite &lt;fct&gt;, MatrixTreatment &lt;chr&gt;,</span>
-<span class="co">#&gt; #   MatrixCaptivity &lt;fct&gt;, MatrixStartYear &lt;dbl&gt;, MatrixStartSeason &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixStartMonth &lt;chr&gt;, MatrixEndYear &lt;dbl&gt;, MatrixEndSeason &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixEndMonth &lt;chr&gt;, MatrixSplit &lt;fct&gt;, MatrixFec &lt;fct&gt;,</span>
-<span class="co">#&gt; #   Observation &lt;fct&gt;, MatrixDimension &lt;dbl&gt;, SurvivalIssue &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
 <p>These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is &gt;2 I could use the following command:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> 
