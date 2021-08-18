@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using Rcompadre with the tidyverse</h1>
                         <h4 class="author">Patrick Barks &amp; Owen Jones</h4>
             
-            <h4 class="date">2021-06-20</h4>
+            <h4 class="date">2021-08-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a02_RcompadreTidy.Rmd"><code>vignettes/a02_RcompadreTidy.Rmd</code></a></small>
       <div class="hidden name"><code>a02_RcompadreTidy.Rmd</code></div>
@@ -241,7 +241,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n_populations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">MatrixPopulation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n_populations</span><span class="op">)</span><span class="op">)</span> <span class="co"># arrange in descending order of n_pops</span>
-<span class="co">#&gt; # A tibble: 110 x 2</span>
+<span class="co">#&gt; # A tibble: 110 × 2</span>
 <span class="co">#&gt;    SpeciesAccepted        n_populations</span>
 <span class="co">#&gt;    &lt;chr&gt;                          &lt;int&gt;</span>
 <span class="co">#&gt;  1 Aster amellus                      3</span>

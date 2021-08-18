@@ -8,6 +8,10 @@
 #'   most recent database from \url{https://compadre-db.org}, or a path to an
 #'   existing COMPADRE database (i.e. .RData file) stored on the local machine.
 #' 
+#' @param flag Logical argument where `TRUE` will automatically run
+#'   \link{cdb_flag} to add logical columns to the metadata to flag potential
+#'   problems in the matrix population models. Default is `FALSE`.
+#' 
 #' @return A CompadreDB object
 #' 
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
@@ -24,7 +28,7 @@
 #' compadre <- cdb_fetch("data/COMPADRE_v.5.0.1.RData") 
 #' }
 #' @export
-cdb_fetch <- function(cdb) {
+cdb_fetch <- function(cdb, flag = FALSE) {
   
   # get url or path
   if (tolower(cdb) == 'comadre') {
@@ -45,6 +49,11 @@ cdb_fetch <- function(cdb) {
     dbOut <- dbFetch
   } else {
     dbOut <- as_cdb(dbFetch)
+  }
+  
+  #optional flag of problematic matrices
+  if(flag == TRUE){
+    dbOut <- cdb_flag(dbOut)
   }
   
   # print db name, version, and release date
