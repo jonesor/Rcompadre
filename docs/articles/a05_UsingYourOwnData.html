@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using your own matrix data</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-09-30</h4>
+            <h4 class="date">2021-10-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a05_UsingYourOwnData.Rmd"><code>vignettes/a05_UsingYourOwnData.Rmd</code></a></small>
       <div class="hidden name"><code>a05_UsingYourOwnData.Rmd</code></div>
@@ -225,9 +225,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;           [,1]        [,2]</span>
-<span class="co">#&gt; [1,] 0.7296514 2.652766840</span>
-<span class="co">#&gt; [2,] 0.1991778 0.008346592</span></code></pre></div>
+<span class="co">#&gt;           [,1]       [,2]</span>
+<span class="co">#&gt; [1,] 0.5796340 1.16899428</span>
+<span class="co">#&gt; [2,] 0.1361164 0.03903706</span></code></pre></div>
 <p>Now the matrices are stored in a <code>CompadreDB</code> object they can be manipulated in the same diverse ways as the <code>CompadreDB</code> object downloaded from the COMPADRE/COMADRE database.</p>
 <p>For example, filtering based on part of the metadata, in this case, <code>shapeParam</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -296,7 +296,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreDB.html">Version</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Matrices Rock!"</span>
 <span class="fu"><a href="../reference/CompadreDB.html">DateCreated</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2021-09-30"</span></code></pre></div>
+<span class="co">#&gt; [1] "2021-10-01"</span></code></pre></div>
 <p>The newly-created database can be saved like this:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"myMatrixDatabase.Rdata"</span><span class="op">)</span></code></pre></div>
