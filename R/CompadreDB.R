@@ -161,6 +161,19 @@ as_cdb <- function(from) {
   dat <- as_tibble(from$metadata)
   dat <- add_column(dat, mat = mat, .before = 1)
   
+  #Modify the column names to reflect database backend updates if necessary
+  #DOI.ISBN becomes DOI_ISBN
+  if("DOI.ISBN" %in% names(dat)){
+    dat <- dat %>% 
+      rename(DOI_ISBN = DOI.ISBN)
+  }
+  #AnnualPeriodicity becomes ProjectionInterval
+  if("AnnualPeriodicity" %in% names(dat)){
+    dat <- dat %>% 
+      rename(ProjectionInterval = AnnualPeriodicity)
+  }
+  
+  
   # strip out species/study/matrix counts from legacy db, if any
   db_version <- from$version
   db_version$NumberAcceptedSpecies <- NULL
