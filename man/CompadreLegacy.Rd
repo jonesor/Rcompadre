@@ -30,14 +30,16 @@ are \code{NA}.
 thesis")
 \item YearPublication - Year of publication
 \item DOI.ISBN - Digital Object Identifier or International Standard Book Number
-codes to identify each publication
+codes to identify each publication (note that the name has changed to
+DOI_ISBN in later database versions.)
 \item AdditionalSource - Additional source(s) used to reconstruct the matrix or
 obtain additional metadata for the matrix (if applicable)
 \item StudyDuration - Number of years of observation in study (\code{StudyEnd - StudyStart})
 \item StudyStart - Study start year
 \item StudyEnd - Study end year
 \item AnnualPeriodicity - Inverse of the length of the projection interval (in
-years)
+years). Note that the name has changed to ProjectionInterval in later
+database versions.
 \item NumberPopulations - The number of study populations as defined by the
 authors. Within site replication of permanent plots is not defined as
 separate populations
