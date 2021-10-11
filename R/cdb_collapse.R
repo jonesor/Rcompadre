@@ -13,7 +13,7 @@
 #'
 #' All members of a group \emph{must} have the same matrix dimension (consider
 #' adding MatrixDimension as a grouping variable). All members of a group
-#' \emph{should} have the same AnnualPeriodicity and matrix stage class
+#' \emph{should} have the same ProjectionInterval and matrix stage class
 #' definitions (see \code{\link{cdb_id_stages}}). Note that Seasonal matrices
 #' should not be collapsed using this method (they should be matrix-multiplied
 #' rather than averaged).
@@ -26,7 +26,7 @@
 #' 
 #' @details 
 #' Will give a warning if members of any group do not all share the same
-#' AnnualPeriodicity or stage class definitions, or if \code{cdb} contains any
+#' ProjectionInterval or stage class definitions, or if \code{cdb} contains any
 #' rows with a MatrixComposite value of "Seasonal".
 #' 
 #' Prior to collapsing, columns of class 'factor' will be coerced to
