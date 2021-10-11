@@ -34,7 +34,8 @@
 #'   thesis")
 #' * YearPublication - Year of publication
 #' * DOI.ISBN - Digital Object Identifier or International Standard Book Number
-#'   codes to identify each publication
+#'   codes to identify each publication (note that the name has changed to
+#'   DOI_ISBN in later database versions.)
 #' * AdditionalSource - Additional source(s) used to reconstruct the matrix or
 #'   obtain additional metadata for the matrix (if applicable)
 #' * StudyDuration - Number of years of observation in study (`StudyEnd -
@@ -42,7 +43,8 @@
 #' * StudyStart - Study start year
 #' * StudyEnd - Study end year
 #' * AnnualPeriodicity - Inverse of the length of the projection interval (in
-#'   years)
+#'   years). Note that the name has changed to ProjectionInterval in later
+#'   database versions.
 #' * NumberPopulations - The number of study populations as defined by the
 #'   authors. Within site replication of permanent plots is not defined as
 #'   separate populations
