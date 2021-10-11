@@ -6,7 +6,7 @@
 \usage{
 cdb_id_studies(
   cdb,
-  columns = c("Authors", "Journal", "YearPublication", "DOI.ISBN")
+  columns = c("Authors", "Journal", "YearPublication", "DOI_ISBN")
 )
 }
 \arguments{
@@ -14,7 +14,7 @@ cdb_id_studies(
 
 \item{columns}{Vector of column names from which unique combinations should
 be identified. Defaults to \code{c("Authors", "Journal", "YearPublication",
-"DOI.ISBN")}.}
+"DOI_ISBN")}.}
 }
 \value{
 Vector of integer study identifiers corresponding to the rows of
