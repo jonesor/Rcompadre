@@ -1,5 +1,3 @@
-context("cdb_collapse")
-
 test_that("cdb_collapse works correctly", {
   
   

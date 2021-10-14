@@ -1,5 +1,3 @@
-context("mpm_methods")
-
 test_that("mpm_methods methods work correctly", {
   
   prop_db <- mpm_has_prop(Compadre)

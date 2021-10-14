@@ -1,5 +1,3 @@
-context("cdb_id")
-
 test_that("cdb_id works correctly", {
   
   id1 <- cdb_id(Compadre, c("SpeciesAuthor", "MatrixPopulation"))

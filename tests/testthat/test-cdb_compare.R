@@ -1,5 +1,3 @@
-context("cdb_compare")
-
 test_that("cdb_compare works correctly", {
   
   db1 <- Compadre[1:50,]
