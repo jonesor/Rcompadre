@@ -97,7 +97,7 @@
 
       
 
-      </header><script src="a05_UsingYourOwnData_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="a05_UsingYourOwnData_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using your own matrix data</h1>
@@ -198,7 +198,7 @@
 <span class="va">x</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with ?? SPECIES and 20 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 20 x 3</span>
+<span class="co">#&gt; # A tibble: 20 × 3</span>
 <span class="co">#&gt;    mat        idNum shapeParam</span>
 <span class="co">#&gt;    &lt;list&gt;     &lt;int&gt;      &lt;int&gt;</span>
 <span class="co">#&gt;  1 &lt;CompdrMt&gt;     1          1</span>
@@ -225,9 +225,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;           [,1]      [,2]</span>
-<span class="co">#&gt; [1,] 0.5695535 3.1779672</span>
-<span class="co">#&gt; [2,] 0.1715890 0.4787669</span></code></pre></div>
+<span class="co">#&gt;            [,1]      [,2]</span>
+<span class="co">#&gt; [1,] 0.03665583 0.6548161</span>
+<span class="co">#&gt; [2,] 0.88378346 0.3266225</span></code></pre></div>
 <p>Now the matrices are stored in a <code>CompadreDB</code> object they can be manipulated in the same diverse ways as the <code>CompadreDB</code> object downloaded from the COMPADRE/COMADRE database.</p>
 <p>For example, filtering based on part of the metadata, in this case, <code>shapeParam</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -235,7 +235,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">shapeParam</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with ?? SPECIES and 10 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 10 x 3</span>
+<span class="co">#&gt; # A tibble: 10 × 3</span>
 <span class="co">#&gt;    mat        idNum shapeParam</span>
 <span class="co">#&gt;    &lt;list&gt;     &lt;int&gt;      &lt;int&gt;</span>
 <span class="co">#&gt;  1 &lt;CompdrMt&gt;    11          3</span>
