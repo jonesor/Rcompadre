@@ -12,6 +12,7 @@
 #'   \item \code{check_NA_F}: missing values in matF?
 #'   \item \code{check_NA_C}: missing values in matC?
 #'   \item \code{check_zero_U}: matU all zeros (including NA)?
+#'   \item \code{check_zero_F}: matF all zeros (including NA)?
 #'   \item \code{check_singular_U}: matU singular (i.e. non-invertable)?
 #'   \item \code{check_component_sum}: do matU/matF/matC components sum to matA
 #'     (see \emph{Details})?
@@ -63,6 +64,8 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
                                      "check_NA_F",
                                      "check_NA_C",
                                      "check_zero_U",
+                                     "check_zero_F",
+                                     "check_zero_U_colsum",
                                      "check_singular_U",
                                      "check_component_sum",
                                      "check_ergodic",
@@ -79,6 +82,8 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
                     "check_NA_F",
                     "check_NA_C",
                     "check_zero_U",
+                    "check_zero_F",
+                    "check_zero_U_colsum",
                     "check_singular_U",
                     "check_component_sum",
                     "check_ergodic",
@@ -121,7 +126,12 @@ cdb_flag <- function(cdb, checks = c("check_NA_A",
   if ("check_zero_U" %in% checks) {
     dat$check_zero_U <- vapply(matU, function(x) all(x == 0 | is.na(x)), FALSE)
   }
-  
+  if ("check_zero_F" %in% checks) {
+    dat$check_zero_F <- vapply(matF, function(x) all(x == 0 | is.na(x)), FALSE)
+  }
+  if ("check_zero_U_colsum" %in% checks) {
+    dat$check_zero_U_colsum <- vapply(matU, function(x) any(base::colSums(x,na.rm = TRUE) == 0), FALSE)
+  }
   if ("check_singular_U" %in% checks) {
     dat$check_singular_U <- mapply(
       CheckMats,

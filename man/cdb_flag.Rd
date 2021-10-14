@@ -7,8 +7,8 @@
 cdb_flag(
   cdb,
   checks = c("check_NA_A", "check_NA_U", "check_NA_F", "check_NA_C", "check_zero_U",
-    "check_singular_U", "check_component_sum", "check_ergodic", "check_irreducible",
-    "check_primitive", "check_surv_gte_1")
+    "check_zero_F", "check_zero_U_colsum", "check_singular_U", "check_component_sum",
+    "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")
 )
 }
 \arguments{
@@ -38,6 +38,7 @@ Optional checks include:
   \item \code{check_NA_F}: missing values in matF?
   \item \code{check_NA_C}: missing values in matC?
   \item \code{check_zero_U}: matU all zeros (including NA)?
+  \item \code{check_zero_F}: matF all zeros (including NA)?
   \item \code{check_singular_U}: matU singular (i.e. non-invertable)?
   \item \code{check_component_sum}: do matU/matF/matC components sum to matA
     (see \emph{Details})?
