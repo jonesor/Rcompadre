@@ -1,5 +1,3 @@
-context("string_representation")
-
 test_that("string_representation functions work correctly", {
   
   ms1 <- "[3.3 5.2 6.1 0.1 0.2 0.3 0.2 0.4 0.1]"

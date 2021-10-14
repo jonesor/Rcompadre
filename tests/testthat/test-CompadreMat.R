@@ -1,5 +1,3 @@
-context("CompadreMat")
-
 test_that("CompadreMat works correctly", {
   
   cmat1 <- cmat2 <- cmat3 <- cmat4 <- methods::new(

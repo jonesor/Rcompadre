@@ -1,5 +1,3 @@
-context("cdb_metadata")
-
 test_that("cdb_metadata works correctly", {
   
   Compadre_metadata <- cdb_metadata(Compadre)

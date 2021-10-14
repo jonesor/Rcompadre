@@ -1,5 +1,3 @@
-context("cdb_unnest")
-
 test_that("cdb_unnest works correctly", {
   
   d1 <- cdb_unnest(Compadre)

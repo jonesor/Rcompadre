@@ -145,6 +145,16 @@
       <small>Source: <a href='https://github.com/jonesor/Rcompadre/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rcompadre-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#rcompadre-development-version" class="anchor"></a>Rcompadre (development version)<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code>cdb_build_cdb</code> function, which allows users to build <code>compadreDB</code> objects from their own data</li>
+<li>Added <code>flag</code> argument to <code>cdb_fetch</code>. If this is set to <code>TRUE</code> then the checks from <code>cdb_flag</code> will be run on the database during the downloaded process thus streamlining coding.</li>
+<li>Added additional flags to <code>cdb_fetch</code>: <code>check_zero_F</code> which checks whether the F (sexual reproduction) matrix is all zeros (TRUE if all zero) and <code>check_zero_U_colsum</code> which checks whether there are any columns of the U matrix that are all zero (i.e. whether there are some stages where there is 100% mortality)</li>
+</ul>
+</div>
     <div id="rcompadre-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
 <a href="#rcompadre-100" class="anchor"></a>Rcompadre 1.0.0<small> 2021-04-30 </small>

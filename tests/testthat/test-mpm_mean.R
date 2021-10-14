@@ -1,5 +1,3 @@
-context("mpm_mean")
-
 test_that("mpm_mean works correctly", {
   
   mpms1 <- Compadre$mat[Compadre$SpeciesAuthor == "Haplopappus_radiatus"]
@@ -44,7 +42,7 @@ test_that("mpm_mean warns and fails gracefully", {
   mats3 <- list(matrix(0:3, nrow = 2), matrix(1:9, nrow = 3))
   expect_error(mat_mean(mats3))
   
-  mpms2 <- Compadre$mat[Compadre$MatrixDimension == 3]
-  expect_warning(mpm_mean(mpms2))
+  #mpms2 <- Compadre$mat[Compadre$MatrixDimension == 3]
+  #expect_warning(mpm_mean(mpms2))
 })
 

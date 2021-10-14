@@ -1,5 +1,3 @@
-context("ClassUnion")
-
 test_that("ClassUnion methods work correctly", {
   
   a1 <- matA(Compadre)

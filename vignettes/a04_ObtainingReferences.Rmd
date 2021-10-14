@@ -52,12 +52,12 @@ Here we will create a subset of matrices containing data for species in the *Urs
 Comadre <- subset(Comadre, Family == "Ursidae")
 ```
 
-In this case, our subset contains `r length(matA(Comadre))` matrices, and we can examine the source information for these by asking for the `Authors`, `Journal`, publication year (`YearPublication`) and DOI (`DOI.ISBN`) like this:
+In this case, our subset contains `r length(matA(Comadre))` matrices, and we can examine the source information for these by asking for the `Authors`, `Journal`, publication year (`YearPublication`) and DOI (`DOI_ISBN`) like this:
 
 ```{r}
 Comadre$Authors
 Comadre$YearPublication
-Comadre$DOI.ISBN
+Comadre$DOI_ISBN
 ```
 
 We are now ready to obtain the full references for these data. The `rcrossref` package has a convenient function, `cr_cn()` which obtains citations in various formats from CrossRef based on the DOIs. 
@@ -65,7 +65,7 @@ We are now ready to obtain the full references for these data. The `rcrossref` p
 Thus, we can obtain the full references for this subset of the COMADRE database like this:
 
 ```{r}
-rcrossref::cr_cn(unique(Comadre$DOI.ISBN),format = "text",style = "apa")
+rcrossref::cr_cn(unique(Comadre$DOI_ISBN),format = "text",style = "apa")
 ```
 
 Various other formats and styles of output are available, see `?rcrossref::cr_cn` for details.

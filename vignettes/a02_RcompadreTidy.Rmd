@@ -237,7 +237,7 @@ compadre_life_expect <- Compadre %>%
   filter(MatrixComposite != "Seasonal", # filter is the dplyr version of subset
          MatrixTreatment == "Unmanipulated",
          MatrixCaptivity == "W",
-         AnnualPeriodicity == "1") %>% 
+         ProjectionInterval == "1") %>% 
   mutate(StageID = cdb_id_stages(.)) %>%
   cdb_collapse(columns = "StageID") %>%
   cdb_flag() %>% 
