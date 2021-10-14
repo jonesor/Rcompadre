@@ -49,7 +49,7 @@
 <meta property="og:title" content="Create a vector of unique study identifiers from a COM(P)ADRE database — cdb_id_studies" />
 <meta property="og:description" content="Creates a vector of integer study identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the columns 'Authors',
-'Journal', 'YearPublication', and 'DOI.ISBN' (or optionally, a different set
+'Journal', 'YearPublication', and 'DOI_ISBN' (or optionally, a different set
 of columns supplied by the user)." />
 
 
@@ -153,13 +153,13 @@ of columns supplied by the user)." />
     <div class="ref-description">
     <p>Creates a vector of integer study identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the columns 'Authors',
-'Journal', 'YearPublication', and 'DOI.ISBN' (or optionally, a different set
+'Journal', 'YearPublication', and 'DOI_ISBN' (or optionally, a different set
 of columns supplied by the user).</p>
     </div>
 
     <pre class="usage"><span class='fu'>cdb_id_studies</span><span class='op'>(</span>
   <span class='va'>cdb</span>,
-  columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Authors"</span>, <span class='st'>"Journal"</span>, <span class='st'>"YearPublication"</span>, <span class='st'>"DOI.ISBN"</span><span class='op'>)</span>
+  columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Authors"</span>, <span class='st'>"Journal"</span>, <span class='st'>"YearPublication"</span>, <span class='st'>"DOI_ISBN"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,7 +173,7 @@ of columns supplied by the user).</p>
       <th>columns</th>
       <td><p>Vector of column names from which unique combinations should
 be identified. Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("Authors", "Journal", "YearPublication",
-"DOI.ISBN")</a></code>.</p></td>
+"DOI_ISBN")</a></code>.</p></td>
     </tr>
     </table>
 

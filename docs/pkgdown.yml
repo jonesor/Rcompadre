@@ -1,4 +1,4 @@
-pandoc: 2.7.3
+pandoc: 2.14.0.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -7,5 +7,5 @@ articles:
   a03_VectorisingRcompadre: a03_VectorisingRcompadre.html
   a04_ObtainingReferences: a04_ObtainingReferences.html
   a05_UsingYourOwnData: a05_UsingYourOwnData.html
-last_built: 2021-10-01T08:09Z
+last_built: 2021-10-14T18:00Z
 

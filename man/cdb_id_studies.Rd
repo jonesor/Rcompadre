@@ -6,7 +6,7 @@
 \usage{
 cdb_id_studies(
   cdb,
-  columns = c("Authors", "Journal", "YearPublication", "DOI.ISBN")
+  columns = c("Authors", "Journal", "YearPublication", "DOI_ISBN")
 )
 }
 \arguments{
@@ -14,7 +14,7 @@ cdb_id_studies(
 
 \item{columns}{Vector of column names from which unique combinations should
 be identified. Defaults to \code{c("Authors", "Journal", "YearPublication",
-"DOI.ISBN")}.}
+"DOI_ISBN")}.}
 }
 \value{
 Vector of integer study identifiers corresponding to the rows of
@@ -23,7 +23,7 @@ Vector of integer study identifiers corresponding to the rows of
 \description{
 Creates a vector of integer study identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the columns 'Authors',
-'Journal', 'YearPublication', and 'DOI.ISBN' (or optionally, a different set
+'Journal', 'YearPublication', and 'DOI_ISBN' (or optionally, a different set
 of columns supplied by the user).
 }
 \details{
