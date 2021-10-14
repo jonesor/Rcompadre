@@ -1,5 +1,3 @@
-context("cdb_rbind")
-
 test_that("cdb_rbind works correctly", {
   
   db1 <- Compadre[1:50,]

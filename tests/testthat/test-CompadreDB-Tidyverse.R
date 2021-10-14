@@ -1,5 +1,3 @@
-context("CompadreDB-Tidyverse")
-
 suppressMessages(library(ggplot2))
 suppressMessages(library(dplyr))
 

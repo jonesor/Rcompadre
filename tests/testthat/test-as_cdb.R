@@ -1,5 +1,3 @@
-context("as_cdb")
-
 test_that("as_cdb works correctly", {
   
   db <- as_cdb(CompadreLegacy)

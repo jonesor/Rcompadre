@@ -1,5 +1,3 @@
-context("cdb_unflatten")
-
 test_that("cdb_unflatten works correctly", {
   
   db1 <- cdb_flatten(Compadre)

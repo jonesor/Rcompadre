@@ -1,5 +1,3 @@
-context("cdb_id_stages")
-
 test_that("cdb_id_stages works correctly", {
   
   id1 <- cdb_id_stages(Compadre, "MatrixClassOrganized")

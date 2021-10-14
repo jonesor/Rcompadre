@@ -1,5 +1,3 @@
-context("cdb_fetch")
-
 test_that("cdb_fetch works correctly", {
   
   local_path <- paste0(system.file("testdata", package = "Rcompadre"),
