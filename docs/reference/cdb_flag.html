@@ -47,26 +47,73 @@
 
 
 <meta property="og:title" content="Flag potential issues in matrices of a COM(P)ADRE database — cdb_flag" />
-<meta property="og:description" content="Adds columns to the data slot of a CompadreDB object that flag potential
+<meta property="og:description" content="Adds columns to the data slot of a `CompadreDB` object that flag potential
 problems in the matrix population models. These columns can subsequently be
 used to subset the database by logical argument.
 Optional checks include:
-check_NA_A: missing values in matA?
-check_NA_U: missing values in matU?
-check_NA_F: missing values in matF?
-check_NA_C: missing values in matC?
-check_zero_U: matU all zeros (including NA)?
-check_zero_F: matF all zeros (including NA)?
-check_singular_U: matU singular (i.e. non-invertable)?
-check_component_sum: do matU/matF/matC components sum to matA
-    (see Details)?
-check_ergodic: is matA ergodic (see
-    isErgodic)?
-check_irreducible: is matA irreducible (see
-    isIrreducible)?
-check_primitive: is matA primitive (see
-    isPrimitive)?
-check_surv_gte_1: does matU contains values that are equal to or greater than 1?
+check_NA_A: missing values in `matA`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.
+check_NA_U: missing values in `matU`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.
+check_NA_F: missing values in `matF`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.
+check_NA_C: missing values in `matC`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.
+check_zero_U: `matU` all zeros (including `NA`)? Submatrices
+  composed entirely of zero values can be problematic. There may be good
+  biological reasons for this phenomenon. For example, in the particular
+  focal population in the particular focal year, there was truly zero
+  survival recorded. Nevertheless, zero-value submatrices can cause some
+  calculations to fail and it may be necessary to exclude them.
+check_zero_F: `matF` all zeros (including `NA`)? Submatrices
+  composed entirely of zero values can be problematic. There may be good
+  biological reasons for this phenomenon. For example, in the particular
+  focal population in the particular focal year, there was truly zero
+  reproduction recorded. Nevertheless, zero-value submatrices can cause some
+  calculations to fail and it may be necessary to exclude them.
+check_zero_U_colsum: Columns of `matU` that sum to zero imply
+  that there is is no survival from that particular stage. This may be a
+  perfectly valid parameterisation for a particular year/place but is
+  biologically unreasonable in the longer term and users may wish to exclude
+  problematic matrices from their analysis.
+check_singular_U: `matU` singular? Matrices are said to be
+  singular if they cannot be inverted. Inversion is required for many matrix
+  calculations and, therefore, singularity can cause some calculations to
+  fail.
+check_component_sum: do `matU`/`matF`/`matC` submatrices sum
+  to `matA` (see Details)? A complete MPM (`matA`) can be split into
+  its component submatrices (i.e., `matU`, `matF` and  `matC`). The sum of
+  these submatrices should equal the complete MPM (i.e., `matA` = `matU` +
+  `matF` + `matC`). Sometimes, however, errors occur so that the submatrices
+  do NOT sum to `matA`. Normally, this is caused by rounding errors, but more
+  significant errors are possible.
+check_ergodic: is `matA` ergodic (see
+  isErgodic)? Some matrix calculations require that
+  the MPM (`matA`) be ergodic. Ergodic MPMs are those where there is a single
+  asymptotic stable state that does not depend on initial stage structure.
+  Conversely, non-ergodic MPMs are those where there are multiple asymptotic
+  stable states, which depend on initial stage structure. MPMs that are
+  non-ergodic are usually biologically unreasonable, both in terms of their
+  life cycle description and their projected dynamics. They cause some
+  calculations to fail.
+check_irreducible: is `matA` irreducible (see
+  isIrreducible)? Some matrix calculations require
+  that the MPM (`matA`) be irreducible. Irreducible MPMs are those where
+  parameterised transition rates facilitate pathways from all stages to all
+  other stages. Conversely, reducible MPMs depict incomplete life cycles
+  where pathways from all stages to every other stage are not possible. MPMs
+  that are reducible are usually biologically unreasonable, both in terms of
+  their life cycle description and their projected dynamics. They cause some
+  calculations to fail. Irreducibility is necessary but not sufficient for
+  ergodicity.
+check_primitive: is `matA` primitive (see
+  isPrimitive)? A primitive matrix is non-negative
+  matrix that is irreducible and has only a single eigenvalue of maximum
+  modulus. This check is therefore redundant due to the overlap with
+  `check_irreducible` and `checkErdogic`.
+check_surv_gte_1: does `matU` contains values that are equal to
+  or greater than 1? Survival is bounded between 0 and 1. Values in excess of
+  1 are biologically unreasonable.
 
 " />
 
@@ -100,7 +147,7 @@ check_surv_gte_1: does matU contains values that are equal to or greater than 1?
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -169,26 +216,73 @@ check_surv_gte_1: does matU contains values that are equal to or greater than 1?
     </div>
 
     <div class="ref-description">
-    <p>Adds columns to the data slot of a CompadreDB object that flag potential
+    <p>Adds columns to the data slot of a `CompadreDB` object that flag potential
 problems in the matrix population models. These columns can subsequently be
 used to subset the database by logical argument.</p>
 <p>Optional checks include:</p><ul>
-<li><p><code>check_NA_A</code>: missing values in matA?</p></li>
-<li><p><code>check_NA_U</code>: missing values in matU?</p></li>
-<li><p><code>check_NA_F</code>: missing values in matF?</p></li>
-<li><p><code>check_NA_C</code>: missing values in matC?</p></li>
-<li><p><code>check_zero_U</code>: matU all zeros (including NA)?</p></li>
-<li><p><code>check_zero_F</code>: matF all zeros (including NA)?</p></li>
-<li><p><code>check_singular_U</code>: matU singular (i.e. non-invertable)?</p></li>
-<li><p><code>check_component_sum</code>: do matU/matF/matC components sum to matA
-    (see <em>Details</em>)?</p></li>
-<li><p><code>check_ergodic</code>: is matA ergodic (see
-    <code><a href='https://rdrr.io/pkg/popdemo/man/isErgodic.html'>isErgodic</a></code>)?</p></li>
-<li><p><code>check_irreducible</code>: is matA irreducible (see
-    <code><a href='https://rdrr.io/pkg/popdemo/man/isIrreducible.html'>isIrreducible</a></code>)?</p></li>
-<li><p><code>check_primitive</code>: is matA primitive (see
-    <code><a href='https://rdrr.io/pkg/popdemo/man/isPrimitive.html'>isPrimitive</a></code>)?</p></li>
-<li><p><code>check_surv_gte_1</code>: does matU contains values that are equal to or greater than 1?</p></li>
+<li><p><code>check_NA_A</code>: missing values in `matA`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.</p></li>
+<li><p><code>check_NA_U</code>: missing values in `matU`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.</p></li>
+<li><p><code>check_NA_F</code>: missing values in `matF`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.</p></li>
+<li><p><code>check_NA_C</code>: missing values in `matC`? Missing (`NA`) values in
+  matrices prevent most calculations using those matrices.</p></li>
+<li><p><code>check_zero_U</code>: `matU` all zeros (including `NA`)? Submatrices
+  composed entirely of zero values can be problematic. There may be good
+  biological reasons for this phenomenon. For example, in the particular
+  focal population in the particular focal year, there was truly zero
+  survival recorded. Nevertheless, zero-value submatrices can cause some
+  calculations to fail and it may be necessary to exclude them.</p></li>
+<li><p><code>check_zero_F</code>: `matF` all zeros (including `NA`)? Submatrices
+  composed entirely of zero values can be problematic. There may be good
+  biological reasons for this phenomenon. For example, in the particular
+  focal population in the particular focal year, there was truly zero
+  reproduction recorded. Nevertheless, zero-value submatrices can cause some
+  calculations to fail and it may be necessary to exclude them.</p></li>
+<li><p><code>check_zero_U_colsum</code>: Columns of `matU` that sum to zero imply
+  that there is is no survival from that particular stage. This may be a
+  perfectly valid parameterisation for a particular year/place but is
+  biologically unreasonable in the longer term and users may wish to exclude
+  problematic matrices from their analysis.</p></li>
+<li><p><code>check_singular_U</code>: `matU` singular? Matrices are said to be
+  singular if they cannot be inverted. Inversion is required for many matrix
+  calculations and, therefore, singularity can cause some calculations to
+  fail.</p></li>
+<li><p><code>check_component_sum</code>: do `matU`/`matF`/`matC` submatrices sum
+  to `matA` (see <em>Details</em>)? A complete MPM (`matA`) can be split into
+  its component submatrices (i.e., `matU`, `matF` and  `matC`). The sum of
+  these submatrices should equal the complete MPM (i.e., `matA` = `matU` +
+  `matF` + `matC`). Sometimes, however, errors occur so that the submatrices
+  do NOT sum to `matA`. Normally, this is caused by rounding errors, but more
+  significant errors are possible.</p></li>
+<li><p><code>check_ergodic</code>: is `matA` ergodic (see
+  <code><a href='https://rdrr.io/pkg/popdemo/man/isErgodic.html'>isErgodic</a></code>)? Some matrix calculations require that
+  the MPM (`matA`) be ergodic. Ergodic MPMs are those where there is a single
+  asymptotic stable state that does not depend on initial stage structure.
+  Conversely, non-ergodic MPMs are those where there are multiple asymptotic
+  stable states, which depend on initial stage structure. MPMs that are
+  non-ergodic are usually biologically unreasonable, both in terms of their
+  life cycle description and their projected dynamics. They cause some
+  calculations to fail.</p></li>
+<li><p><code>check_irreducible</code>: is `matA` irreducible (see
+  <code><a href='https://rdrr.io/pkg/popdemo/man/isIrreducible.html'>isIrreducible</a></code>)? Some matrix calculations require
+  that the MPM (`matA`) be irreducible. Irreducible MPMs are those where
+  parameterised transition rates facilitate pathways from all stages to all
+  other stages. Conversely, reducible MPMs depict incomplete life cycles
+  where pathways from all stages to every other stage are not possible. MPMs
+  that are reducible are usually biologically unreasonable, both in terms of
+  their life cycle description and their projected dynamics. They cause some
+  calculations to fail. Irreducibility is necessary but not sufficient for
+  ergodicity.</p></li>
+<li><p><code>check_primitive</code>: is `matA` primitive (see
+  <code><a href='https://rdrr.io/pkg/popdemo/man/isPrimitive.html'>isPrimitive</a></code>)? A primitive matrix is non-negative
+  matrix that is irreducible and has only a single eigenvalue of maximum
+  modulus. This check is therefore redundant due to the overlap with
+  `check_irreducible` and `checkErdogic`.</p></li>
+<li><p><code>check_surv_gte_1</code>: does `matU` contains values that are equal to
+  or greater than 1? Survival is bounded between 0 and 1. Values in excess of
+  1 are biologically unreasonable.</p></li>
 </ul>
 
     </div>
@@ -196,8 +290,9 @@ used to subset the database by logical argument.</p>
     <pre class="usage"><span class='fu'>cdb_flag</span><span class='op'>(</span>
   <span class='va'>cdb</span>,
   checks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_NA_A"</span>, <span class='st'>"check_NA_U"</span>, <span class='st'>"check_NA_F"</span>, <span class='st'>"check_NA_C"</span>, <span class='st'>"check_zero_U"</span>,
-    <span class='st'>"check_zero_F"</span>, <span class='st'>"check_zero_U_colsum"</span>, <span class='st'>"check_singular_U"</span>, <span class='st'>"check_component_sum"</span>,
-    <span class='st'>"check_ergodic"</span>, <span class='st'>"check_irreducible"</span>, <span class='st'>"check_primitive"</span>, <span class='st'>"check_surv_gte_1"</span><span class='op'>)</span>
+    <span class='st'>"check_zero_F"</span>, <span class='st'>"check_zero_C"</span>, <span class='st'>"check_zero_U_colsum"</span>, <span class='st'>"check_singular_U"</span>,
+    <span class='st'>"check_component_sum"</span>, <span class='st'>"check_ergodic"</span>, <span class='st'>"check_irreducible"</span>, <span class='st'>"check_primitive"</span>,
+    <span class='st'>"check_surv_gte_1"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -227,6 +322,11 @@ used to subset the database by logical argument.</p>
     <p>For the flag <code>check_component_sum</code>, a value of <code>NA</code> will be
 returned if the matrix sum of matU, matF, and matC consists only of zeros
 and/or <code>NA</code>, indicating that the matrix has not been split.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Stott, I., Townley, S., &amp; Carslake, D. 2010. On reducibility and
+  ergodicity of population projection matrix models. Methods in Ecology and
+  Evolution. 1 (3), 242-252</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other data checking: 
@@ -247,7 +347,6 @@ and/or <code>NA</code>, indicating that the matrix has not been split.</p>
 
 <span class='co'># only check whether matA has missing values, and whether matA is ergodic</span>
 <span class='va'>CompadreFlag</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_flag</span><span class='op'>(</span><span class='va'>Compadre</span>, checks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_NA_A"</span>, <span class='st'>"check_ergodic"</span><span class='op'>)</span><span class='op'>)</span>
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
