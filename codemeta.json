@@ -247,7 +247,7 @@
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     }
   ],
-  "fileSize": "512.423KB",
+  "fileSize": "519.071KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "contIntegration": ["https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml", "https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml", "https://app.codecov.io/gh/jonesor/Rcompadre"],
   "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
