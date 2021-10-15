@@ -1,9 +1,3 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* Replaced the double braces {{}} around \concept in the Rd files with single ones.
-
 ## Test environments
 
 ### local
@@ -34,8 +28,6 @@ __R development version__
 - R Under development (unstable) (2021-10-13 r81052)
 - Platform: x86_64-w64-mingw32/x64 (64-bit)
 - Running under: Windows Server x64 (build 17763)
-
-
 
 #### Apple OSX
 
@@ -78,11 +70,8 @@ There were no ERRORs or WARNINGs.
 There was 1 NOTE:
 
     Maintainer: ‘Owen Jones <jones@biology.sdu.dk>’
-    New submission
-
 
 ## Downstream dependencies
 
-The package "Rage" (which I am maintainer of) is a downstream dependency. 
-It works fine with this version, and will shortly be updated too.
+The package "Rage" (which I, Owen Jones <jones@biology.sdu.dk>, am maintainer of) is a downstream dependency. It works fine with this version of Rcompadre.
 
