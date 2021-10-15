@@ -1,4 +1,4 @@
-# Rcompadre (development version)
+# Rcompadre 1.1.0
 
 * Added `cdb_build_cdb` function, which allows users to build `compadreDB` objects from their own data
 * Added `flag` argument to `cdb_fetch`. If this is set to `TRUE` then the checks from `cdb_flag` will be run on the database during the downloaded process thus streamlining coding.
