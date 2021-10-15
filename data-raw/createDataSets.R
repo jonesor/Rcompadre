@@ -66,6 +66,19 @@ CompadreLegacy$metadata <- CompadreLegacy$metadata[s1,]
 CompadreLegacy$mat <- CompadreLegacy$mat[s1]
 CompadreLegacy$matrixClass <- CompadreLegacy$matrixClass[s1]
 
+#Add columns for AnnualPeriodicity which has changed in the
+#backend and will be deprecated in the next version.
+#I'm adding these columns to the included datasets here to ensure that the Rage
+#package will still compile properly
+Comadre <- Comadre %>% 
+        mutate (AnnualPeriodicity = ProjectionInterval)
+
+Compadre <- Compadre %>% 
+        mutate (AnnualPeriodicity = ProjectionInterval)
+
+
+
+
 
 # Write the files into the data folder
 usethis::use_data(Comadre,
