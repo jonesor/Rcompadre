@@ -1,5 +1,3 @@
-context("cdb_id_studies")
-
 test_that("cdb_id_studies works correctly", {
   
   s1 <- cdb_id_studies(Compadre)

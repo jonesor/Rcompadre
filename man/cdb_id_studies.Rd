@@ -23,7 +23,7 @@ Vector of integer study identifiers corresponding to the rows of
 \description{
 Creates a vector of integer study identifiers corresponding to the rows of a
 CompadreDB object, based on unique combinations of the columns 'Authors',
-'Journal', 'YearPublication', and 'DOI.ISBN' (or optionally, a different set
+'Journal', 'YearPublication', and 'DOI_ISBN' (or optionally, a different set
 of columns supplied by the user).
 }
 \details{

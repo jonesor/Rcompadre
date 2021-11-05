@@ -1,5 +1,3 @@
-context("CompadreDB-Tidyverse")
-
 suppressMessages(library(ggplot2))
 suppressMessages(library(dplyr))
 
@@ -56,7 +54,7 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   expect_true(all(names(db7) == c("mat", "SpeciesAccepted")))
   
   # rename
-  db8 <- rename(Compadre, Species = SpeciesAuthor, doi = DOI.ISBN)
+  db8 <- rename(Compadre, Species = SpeciesAuthor, doi = DOI_ISBN)
   expect_s4_class(db8, "CompadreDB")
   expect_true("Species" %in% names(db8@data))
   expect_true("doi" %in% names(db8@data))

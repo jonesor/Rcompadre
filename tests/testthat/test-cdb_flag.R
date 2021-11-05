@@ -1,5 +1,3 @@
-context("cdb_flag")
-
 test_that("cdb_flag works correctly", {
   
   db_clean <- cdb_flag(Compadre)

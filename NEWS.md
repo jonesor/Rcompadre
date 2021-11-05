@@ -1,9 +1,12 @@
-# Rcompadre (Development version)
+# Rcompadre (development version)
+
+# Rcompadre 1.1.0
 
 * Added `cdb_build_cdb` function, which allows users to build `compadreDB` objects from their own data
 * Added `flag` argument to `cdb_fetch`. If this is set to `TRUE` then the checks from `cdb_flag` will be run on the database during the downloaded process thus streamlining coding.
 * Added additional flags to `cdb_fetch`: `check_zero_F` which checks whether the F (sexual reproduction) matrix is all zeros (TRUE if all zero) and `check_zero_U_colsum` which checks whether there are any columns of the U matrix that are all zero (i.e. whether there are some stages where there is 100% mortality).
 * Updated Compadre and Comadre data samples with the new names for AnnualPeriodicity (changed to ProjectionInterval) and DOI.ISBN (changed to DOI_ISBN).
+
 
 # Rcompadre 1.0.0 
 

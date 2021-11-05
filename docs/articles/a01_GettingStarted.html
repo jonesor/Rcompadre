@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-10-01</h4>
+            <h4 class="date">2021-10-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -144,7 +144,7 @@
 <span class="va">Compadre</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 150 × 48</span>
+<span class="co">#&gt; # A tibble: 150 × 49</span>
 <span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
 <span class="co">#&gt;    &lt;list&gt;     &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
 <span class="co">#&gt;  1 &lt;CompdrMt&gt; Setaria_incra… Setaria incras… &lt;NA&gt;       Seta… Poace… Poal… Lili…</span>
@@ -157,11 +157,11 @@
 <span class="co">#&gt;  8 &lt;CompdrMt&gt; Haplopappus_r… Pyrrocoma radi… &lt;NA&gt;       Pyrr… Compo… Aste… Magn…</span>
 <span class="co">#&gt;  9 &lt;CompdrMt&gt; Astragalus_tr… Astragalus tre… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
 <span class="co">#&gt; 10 &lt;CompdrMt&gt; Plantago_coro… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
-<span class="co">#&gt; # … with 140 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 140 more rows, and 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
-<span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span>
 <span class="co">#&gt; #   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
 <p>This summary tells us that we have successfully loaded the data, and that there are 150 matrices. The database also contains some Version information which can be accessed using the command <code><a href="../reference/CompadreDB.html">VersionData(Compadre)</a></code>. This includes information including the version number, date created, and link to the database user agreement.</p>
@@ -187,9 +187,9 @@
 <span class="co">#&gt;  [7] "Order"                  "Class"                  "Phylum"                </span>
 <span class="co">#&gt; [10] "Kingdom"                "OrganismType"           "DicotMonoc"            </span>
 <span class="co">#&gt; [13] "AngioGymno"             "Authors"                "Journal"               </span>
-<span class="co">#&gt; [16] "YearPublication"        "DOI.ISBN"               "AdditionalSource"      </span>
+<span class="co">#&gt; [16] "YearPublication"        "DOI_ISBN"               "AdditionalSource"      </span>
 <span class="co">#&gt; [19] "StudyDuration"          "StudyStart"             "StudyEnd"              </span>
-<span class="co">#&gt; [22] "AnnualPeriodicity"      "NumberPopulations"      "MatrixCriteriaSize"    </span>
+<span class="co">#&gt; [22] "ProjectionInterval"     "NumberPopulations"      "MatrixCriteriaSize"    </span>
 <span class="co">#&gt; [25] "MatrixCriteriaOntogeny" "MatrixCriteriaAge"      "MatrixPopulation"      </span>
 <span class="co">#&gt; [28] "Lat"                    "Lon"                    "Altitude"              </span>
 <span class="co">#&gt; [31] "Country"                "Continent"              "Ecoregion"             </span>
@@ -197,7 +197,8 @@
 <span class="co">#&gt; [37] "MatrixCaptivity"        "MatrixStartYear"        "MatrixStartSeason"     </span>
 <span class="co">#&gt; [40] "MatrixStartMonth"       "MatrixEndYear"          "MatrixEndSeason"       </span>
 <span class="co">#&gt; [43] "MatrixEndMonth"         "MatrixSplit"            "MatrixFec"             </span>
-<span class="co">#&gt; [46] "Observation"            "MatrixDimension"        "SurvivalIssue"</span></code></pre></div>
+<span class="co">#&gt; [46] "Observation"            "MatrixDimension"        "SurvivalIssue"         </span>
+<span class="co">#&gt; [49] "AnnualPeriodicity"</span></code></pre></div>
 <p>We can explore this information in various ways, for example, by producing tables, histograms, or other plots of variables of interest.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">DicotMonoc</span><span class="op">)</span>
@@ -232,18 +233,18 @@
 <span class="va">compadre_succisa</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 2 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 2 × 48</span>
+<span class="co">#&gt; # A tibble: 2 × 49</span>
 <span class="co">#&gt;   mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class Phylum</span>
 <span class="co">#&gt;   &lt;lis&gt; &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; </span>
 <span class="co">#&gt; 1 &lt;Com… Succisa_prat… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn… Magno…</span>
 <span class="co">#&gt; 2 &lt;Com… Succisa_prat… Succisa praten… &lt;NA&gt;       Succ… Capri… Dips… Magn… Magno…</span>
-<span class="co">#&gt; # … with 39 more variables: Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 40 more variables: Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span>
 <span class="co">#&gt; #   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span>
-<span class="co">#&gt; #   YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span>
+<span class="co">#&gt; #   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span>
 <span class="co">#&gt; #   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;, MatrixCriteriaSize &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixCriteriaOntogeny &lt;fct&gt;, MatrixCriteriaAge &lt;fct&gt;,</span>
-<span class="co">#&gt; #   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;, …</span></code></pre></div>
+<span class="co">#&gt; #   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
+<span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
 </div>
 <div id="accessing-the-matrices" class="section level2">
 <h2 class="hasAnchor">
@@ -321,7 +322,7 @@
 <span class="va">x</span>
 <span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 80 SPECIES and 108 MATRICES.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 108 × 48</span>
+<span class="co">#&gt; # A tibble: 108 × 49</span>
 <span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
 <span class="co">#&gt;    &lt;list&gt;     &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;</span>
 <span class="co">#&gt;  1 &lt;CompdrMt&gt; Lechea_cernua  Lechea cernua   &lt;NA&gt;       Lech… Cista… Malv… Magn…</span>
@@ -334,11 +335,11 @@
 <span class="co">#&gt;  8 &lt;CompdrMt&gt; Plantago_coro… Plantago coron… &lt;NA&gt;       Plan… Plant… Lami… Magn…</span>
 <span class="co">#&gt;  9 &lt;CompdrMt&gt; Petrocoptis_p… Silene glaucif… &lt;NA&gt;       Sile… Caryo… Cary… Magn…</span>
 <span class="co">#&gt; 10 &lt;CompdrMt&gt; Astragalus_pe… Astragalus pec… &lt;NA&gt;       Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; # … with 98 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
+<span class="co">#&gt; # … with 98 more rows, and 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
 <span class="co">#&gt; #   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
-<span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI.ISBN &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span>
 <span class="co">#&gt; #   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, AnnualPeriodicity &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
 <p>These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is &gt;2 I could use the following command:</p>

@@ -1,5 +1,3 @@
-context("cdb_check_species")
-
 test_that("cdb_check_species works correctly", {
   
   species <- c("Primula vulgaris", "Trillium ovatum", "Homo sapiens")

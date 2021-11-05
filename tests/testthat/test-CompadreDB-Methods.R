@@ -1,5 +1,3 @@
-context("CompadreDB-Methods")
-
 test_that("CompadreDB-Methods work correctly", {
   
   df <- as.data.frame(Compadre)

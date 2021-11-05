@@ -1,5 +1,3 @@
-context("CompadreDB-Subsetting")
-
 test_that("CompadreDB-Subsetting works correctly", {
   
   # [

@@ -1,5 +1,3 @@
-context("cdb_flatten")
-
 test_that("cdb_flatten works correctly", {
   
   dbf1 <- cdb_flatten(Compadre)

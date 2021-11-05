@@ -1,5 +1,3 @@
-context("cdb_mean_matF")
-
 test_that("cdb_mean_matF works correctly", {
   
   x <- cdb_mean_matF(Compadre)

@@ -1,5 +1,3 @@
-context("CompadreDB")
-
 test_that("CompadreDB works correctly", {
   
   db1 <- db2 <- db3 <- db4 <- as_cdb(CompadreLegacy)

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Obtaining references</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-10-01</h4>
+            <h4 class="date">2021-10-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a04_ObtainingReferences.Rmd"><code>vignettes/a04_ObtainingReferences.Rmd</code></a></small>
       <div class="hidden name"><code>a04_ObtainingReferences.Rmd</code></div>
@@ -127,7 +127,7 @@
 <p>Here we will create a subset of matrices containing data for species in the <em>Ursidae</em> family:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Comadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Comadre</span>, <span class="va">Family</span> <span class="op">==</span> <span class="st">"Ursidae"</span><span class="op">)</span></code></pre></div>
-<p>In this case, our subset contains 3 matrices, and we can examine the source information for these by asking for the <code>Authors</code>, <code>Journal</code>, publication year (<code>YearPublication</code>) and DOI (<code>DOI.ISBN</code>) like this:</p>
+<p>In this case, our subset contains 3 matrices, and we can examine the source information for these by asking for the <code>Authors</code>, <code>Journal</code>, publication year (<code>YearPublication</code>) and DOI (<code>DOI_ISBN</code>) like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Comadre</span><span class="op">$</span><span class="va">Authors</span>
 <span class="co">#&gt; [1] "Hunter; Caswell; Runge; Regehr; Amstrup; Stirling"</span>
@@ -135,13 +135,13 @@
 <span class="co">#&gt; [3] "Wielgus"</span>
 <span class="va">Comadre</span><span class="op">$</span><span class="va">YearPublication</span>
 <span class="co">#&gt; [1] "2010" "2003" "2002"</span>
-<span class="va">Comadre</span><span class="op">$</span><span class="va">DOI.ISBN</span>
+<span class="va">Comadre</span><span class="op">$</span><span class="va">DOI_ISBN</span>
 <span class="co">#&gt; [1] "10.1890/09-1641"               "10.1890/02-5195"              </span>
 <span class="co">#&gt; [3] "10.1016/S0006-3207(01)00265-8"</span></code></pre></div>
 <p>We are now ready to obtain the full references for these data. The <code>rcrossref</code> package has a convenient function, <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn()</a></code> which obtains citations in various formats from CrossRef based on the DOIs.</p>
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI.ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI_ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1890/09-1641'. See error detail in results.</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1890/02-5195'. See error detail in results.</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1016/S0006-3207(01)00265-8'. See error detail</span>
