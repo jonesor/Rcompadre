@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Vectorising with Rcompadre</h1>
                         <h4 class="author">Patrick Barks</h4>
             
-            <h4 class="date">2021-10-15</h4>
+            <h4 class="date">2021-11-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a03_VectorisingRcompadre.Rmd"><code>vignettes/a03_VectorisingRcompadre.Rmd</code></a></small>
       <div class="hidden name"><code>a03_VectorisingRcompadre.Rmd</code></div>
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create new columns matA, matU, matF, matC, MatrixClassAuthor, etc..</span>
 <span class="va">CompUnnest</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_unnest.html">cdb_unnest</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
-<p>Then we can refer to any component using <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, e.g.</p>
+<p>Then we can refer to any component using <code>$</code>, e.g.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># apply NullStages to every matA</span>
 <span class="va">CompUnnest</span><span class="op">$</span><span class="va">null_stages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">CompUnnest</span><span class="op">$</span><span class="va">matA</span>, <span class="va">NullStages</span><span class="op">)</span>

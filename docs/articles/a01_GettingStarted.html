@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-10-15</h4>
+            <h4 class="date">2021-11-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a01_GettingStarted.Rmd"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -164,7 +164,7 @@
 <span class="co">#&gt; #   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
 <span class="co">#&gt; #   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></code></pre></div>
-<p>This summary tells us that we have successfully loaded the data, and that there are 150 matrices. The database also contains some Version information which can be accessed using the command <code><a href="../reference/CompadreDB.html">VersionData(Compadre)</a></code>. This includes information including the version number, date created, and link to the database user agreement.</p>
+<p>This summary tells us that we have successfully loaded the data, and that there are 150 matrices. The database also contains some Version information which can be accessed using the command <code>VersionData(Compadre)</code>. This includes information including the version number, date created, and link to the database user agreement.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreDB.html">VersionData</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt; $Version</span>
@@ -345,7 +345,7 @@
 <p>These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is &gt;2 I could use the following command:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> 
-              <span class="va">Country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> 
+              <span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> 
               <span class="va">MatrixDimension</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>You can compare compadre data sets using the <code><a href="../reference/cdb_compare.html">cdb_compare()</a></code> command:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">

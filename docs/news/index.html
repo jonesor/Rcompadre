@@ -152,12 +152,13 @@
 </div>
     <div id="rcompadre-110" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
-<a href="#rcompadre-110" class="anchor"></a>Rcompadre 1.1.0<small> Unreleased </small>
+<a href="#rcompadre-110" class="anchor"></a>Rcompadre 1.1.0<small> 2021-10-15 </small>
 </h1>
 <ul>
 <li>Added <code>cdb_build_cdb</code> function, which allows users to build <code>compadreDB</code> objects from their own data</li>
 <li>Added <code>flag</code> argument to <code>cdb_fetch</code>. If this is set to <code>TRUE</code> then the checks from <code>cdb_flag</code> will be run on the database during the downloaded process thus streamlining coding.</li>
-<li>Added additional flags to <code>cdb_fetch</code>: <code>check_zero_F</code>, <code>check_zero_C</code>, which checks whether the F and C matrices (sexual and clonal reproduction respectively) are all zeros (TRUE if all zero) and <code>check_zero_U_colsum</code> which checks whether there are any columns of the U matrix that are all zero (i.e. whether there are some stages where there is 100% mortality)</li>
+<li>Added additional flags to <code>cdb_fetch</code>: <code>check_zero_F</code> which checks whether the F (sexual reproduction) matrix is all zeros (TRUE if all zero) and <code>check_zero_U_colsum</code> which checks whether there are any columns of the U matrix that are all zero (i.e. whether there are some stages where there is 100% mortality).</li>
+<li>Updated Compadre and Comadre data samples with the new names for AnnualPeriodicity (changed to ProjectionInterval) and DOI.ISBN (changed to DOI_ISBN).</li>
 </ul>
 </div>
     <div id="rcompadre-100" class="section level1">

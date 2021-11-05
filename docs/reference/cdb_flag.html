@@ -305,9 +305,9 @@ used to subset the database by logical argument.</p>
     <tr>
       <th>checks</th>
       <td><p>Character vector specifying which checks to run.</p>
-<p>Defaults to all, i.e. <code><a href='https://rdrr.io/r/base/c.html'>c("check_NA_A", "check_NA_U", "check_NA_F",
+<p>Defaults to all, i.e. <code>c("check_NA_A", "check_NA_U", "check_NA_F",
   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-  "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")</a></code></p></td>
+  "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")</code></p></td>
     </tr>
     </table>
 
@@ -343,11 +343,11 @@ and/or <code>NA</code>, indicating that the matrix has not been split.</p>
 <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>CompadreFlag</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_flag</span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span>
-
-<span class='co'># only check whether matA has missing values, and whether matA is ergodic</span>
-<span class='va'>CompadreFlag</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_flag</span><span class='op'>(</span><span class='va'>Compadre</span>, checks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_NA_A"</span>, <span class='st'>"check_ergodic"</span><span class='op'>)</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>CompadreFlag</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_flag</span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># only check whether matA has missing values, and whether matA is ergodic</span></span>
+<span class='r-in'><span class='va'>CompadreFlag</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_flag</span><span class='op'>(</span><span class='va'>Compadre</span>, checks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_NA_A"</span>, <span class='st'>"check_ergodic"</span><span class='op'>)</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -187,8 +187,8 @@ is non-reproductive).</p>
     <tr>
       <th>columns</th>
       <td><p>Vector of column names from which unique populations should be
-identified. Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("SpeciesAuthor", "MatrixPopulation",
-"MatrixDimension")</a></code>.</p></td>
+identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
+"MatrixDimension")</code>.</p></td>
     </tr>
     </table>
 
@@ -217,81 +217,83 @@ identified. Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("Species
 <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># print matF associated with row 16 of database</span>
-<span class='va'>Compadre</span><span class='op'>$</span><span class='va'>mat</span><span class='op'>[[</span><span class='fl'>16</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; A compadre matrix object with 7 stages.
-#&gt; 
-#&gt;   MatrixClassOrganized
-#&gt; 1                 prop
-#&gt; 2               active
-#&gt; 3               active
-#&gt; 4               active
-#&gt; 5               active
-#&gt; 6               active
-#&gt; 7               active
-#&gt;                                           MatrixClassAuthor
-#&gt; 1                                     Seeds in the seedbank
-#&gt; 2                                     Seedling: &lt;1 year old
-#&gt; 3                               Small saplings: ≤ 0,072 cm²
-#&gt; 4                    Medium saplings: 0,072 &lt; d ≤ 0,787 cm²
-#&gt; 5                    Large saplings: 0,787 &lt; d ≤ 19,643 cm²
-#&gt; 6 Small adults: (with reproduction) 19,643 &lt; d ≤ 63,643 cm²
-#&gt; 7            Large adults: (with reproduction) &gt; 63,643 cm²
-#&gt; 
-#&gt; matA:
-#&gt;       1     2     3     4     5     6      7
-#&gt; 1 0.586 0.000 0.000 0.000 0.000 73.25 87.800
-#&gt; 2 0.015 0.000 0.000 0.000 0.000  1.24  1.490
-#&gt; 3 0.000 0.384 0.411 0.063 0.000  0.00  0.000
-#&gt; 4 0.000 0.384 0.429 0.785 0.000  0.00  0.000
-#&gt; 5 0.000 0.000 0.000 0.090 0.923  0.00  0.000
-#&gt; 6 0.000 0.000 0.000 0.000 0.020  0.88  0.000
-#&gt; 7 0.000 0.000 0.000 0.000 0.000  0.02  0.962
-#&gt; 
-#&gt; matU:
-#&gt;       1     2     3     4     5    6     7
-#&gt; 1 0.586 0.000 0.000 0.000 0.000 0.00 0.000
-#&gt; 2 0.015 0.000 0.000 0.000 0.000 0.00 0.000
-#&gt; 3 0.000 0.384 0.411 0.063 0.000 0.00 0.000
-#&gt; 4 0.000 0.384 0.429 0.785 0.000 0.00 0.000
-#&gt; 5 0.000 0.000 0.000 0.090 0.923 0.00 0.000
-#&gt; 6 0.000 0.000 0.000 0.000 0.020 0.88 0.000
-#&gt; 7 0.000 0.000 0.000 0.000 0.000 0.02 0.962
-#&gt; 
-#&gt; matF:
-#&gt;   1 2 3 4 5     6     7
-#&gt; 1 0 0 0 0 0 73.25 87.80
-#&gt; 2 0 0 0 0 0  1.24  1.49
-#&gt; 3 0 0 0 0 0  0.00  0.00
-#&gt; 4 0 0 0 0 0  0.00  0.00
-#&gt; 5 0 0 0 0 0  0.00  0.00
-#&gt; 6 0 0 0 0 0  0.00  0.00
-#&gt; 7 0 0 0 0 0  0.00  0.00
-#&gt; 
-#&gt; matC:
-#&gt;   1 2 3 4 5 6 7
-#&gt; 1 0 0 0 0 0 0 0
-#&gt; 2 0 0 0 0 0 0 0
-#&gt; 3 0 0 0 0 0 0 0
-#&gt; 4 0 0 0 0 0 0 0
-#&gt; 5 0 0 0 0 0 0 0
-#&gt; 6 0 0 0 0 0 0 0
-#&gt; 7 0 0 0 0 0 0 0
-#&gt; </div><div class='input'>
-<span class='co'># create list of meanMatFs</span>
-<span class='va'>meanF</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_mean_matF</span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span>
-
-<span class='co'># print meanMatF associated with row 16 of database</span>
-<span class='va'>meanF</span><span class='op'>[[</span><span class='fl'>16</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt;    F1 F2 F3 F4 F5        F6         F7
-#&gt; F1  0  0  0  0  0 77.316667 261.666667
-#&gt; F2  0  0  0  0  0  1.306667   4.196667
-#&gt; F3  0  0  0  0  0  0.000000   0.000000
-#&gt; F4  0  0  0  0  0  0.000000   0.000000
-#&gt; F5  0  0  0  0  0  0.000000   0.000000
-#&gt; F6  0  0  0  0  0  0.000000   0.000000
-#&gt; F7  0  0  0  0  0  0.000000   0.000000</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># print matF associated with row 16 of database</span></span>
+<span class='r-in'><span class='va'>Compadre</span><span class='op'>$</span><span class='va'>mat</span><span class='op'>[[</span><span class='fl'>16</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A compadre matrix object with 7 stages.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   MatrixClassOrganized</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                 prop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7               active</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                           MatrixClassAuthor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                                     Seeds in the seedbank</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2                                     Seedling: &lt;1 year old</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3                               Small saplings: ≤ 0,072 cm²</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                    Medium saplings: 0,072 &lt; d ≤ 0,787 cm²</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                    Large saplings: 0,787 &lt; d ≤ 19,643 cm²</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 Small adults: (with reproduction) 19,643 &lt; d ≤ 63,643 cm²</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7            Large adults: (with reproduction) &gt; 63,643 cm²</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> matA:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       1     2     3     4     5     6      7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.586 0.000 0.000 0.000 0.000 73.25 87.800</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.015 0.000 0.000 0.000 0.000  1.24  1.490</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0.000 0.384 0.411 0.063 0.000  0.00  0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0.000 0.384 0.429 0.785 0.000  0.00  0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 0.000 0.000 0.000 0.090 0.923  0.00  0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.000 0.000 0.000 0.000 0.020  0.88  0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0.000 0.000 0.000 0.000 0.000  0.02  0.962</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> matU:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       1     2     3     4     5    6     7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.586 0.000 0.000 0.000 0.000 0.00 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.015 0.000 0.000 0.000 0.000 0.00 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0.000 0.384 0.411 0.063 0.000 0.00 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0.000 0.384 0.429 0.785 0.000 0.00 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 0.000 0.000 0.000 0.090 0.923 0.00 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.000 0.000 0.000 0.000 0.020 0.88 0.000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0.000 0.000 0.000 0.000 0.000 0.02 0.962</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> matF:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1 2 3 4 5     6     7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0 0 0 0 0 73.25 87.80</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0 0 0 0 0  1.24  1.49</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0 0 0 0 0  0.00  0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0 0 0 0 0  0.00  0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 0 0 0 0 0  0.00  0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0 0 0 0 0  0.00  0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0 0 0 0 0  0.00  0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> matC:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1 2 3 4 5 6 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0 0 0 0 0 0 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># create list of meanMatFs</span></span>
+<span class='r-in'><span class='va'>meanF</span> <span class='op'>&lt;-</span> <span class='fu'>cdb_mean_matF</span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># print meanMatF associated with row 16 of database</span></span>
+<span class='r-in'><span class='va'>meanF</span><span class='op'>[[</span><span class='fl'>16</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    F1 F2 F3 F4 F5        F6         F7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F1  0  0  0  0  0 77.316667 261.666667</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F2  0  0  0  0  0  1.306667   4.196667</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F3  0  0  0  0  0  0.000000   0.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F4  0  0  0  0  0  0.000000   0.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F5  0  0  0  0  0  0.000000   0.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F6  0  0  0  0  0  0.000000   0.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> F7  0  0  0  0  0  0.000000   0.000000</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -186,7 +186,7 @@ Defaults to "MatrixClassAuthor".</p></td>
     <p>The vector 'MatrixClassOrganized' reflects standardized stage classes
 ('prop', 'active', or 'dorm'), whereas 'MatrixClassAuthor' reflects a
 description of the stage classes as defined by the original author (e.g.
-<code><a href='https://rdrr.io/r/base/c.html'>c('Seedling', 'Medium rosette', 'Large (2 rosettes)', 'Flowering')</a></code>).</p>
+<code>c('Seedling', 'Medium rosette', 'Large (2 rosettes)', 'Flowering')</code>).</p>
 <p>Because the 'MatrixClassAuthor' definitions are less standardized, they are
 more prone to typos that could lead to slight differences between stage
 descriptions of matrices that really do have the same stage classes (e.g. a
@@ -222,17 +222,18 @@ different (because they are based on alphabetical order).</p>
     <p>Patrick Barks &lt;patrick.barks@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>cdb_id_stages</span><span class='op'>(</span><span class='va'>Compadre</span>, stage_def <span class='op'>=</span> <span class='st'>"MatrixClassOrganized"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1]  98  65   3  49  44  89 103  93  20  87  99  17  63 105  19  85  56  83
-#&gt;  [19]  34 111  77  45  79  97  81  23  68  80 107 102   6 110  37  35  25  60
-#&gt;  [37]  46  87  11  91  90  69  62  96   5  21  51 113  93  85  26  61  33 100
-#&gt;  [55]  59 114  67  35  11  66   4   8  22 106   1  43  14 112 114  30  28   9
-#&gt;  [73]  88  67  71  32  76  35  66  92  95  93  40  48  26 108  13  54  57  12
-#&gt;  [91]  16  84  41  70  18  14  78   8  13  73  67  42  58  85  82  15 109   7
-#&gt; [109] 104  71  86 101  70  74  25  31  55  97 112  40  17  93 110  58   2  72
-#&gt; [127]  35  75  36  91  52  38 102  43  29  27  39  94  47  89  79  15  53  64
-#&gt; [145]  29  10  50  15  24  43</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>cdb_id_stages</span><span class='op'>(</span><span class='va'>Compadre</span>, stage_def <span class='op'>=</span> <span class='st'>"MatrixClassOrganized"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1]  98  65   3  49  44  89 103  93  20  87  99  17  63 105  19  85  56  83</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [19]  34 111  77  45  79  97  81  23  68  80 107 102   6 110  37  35  25  60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [37]  46  87  11  91  90  69  62  96   5  21  51 113  93  85  26  61  33 100</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [55]  59 114  67  35  11  66   4   8  22 106   1  43  14 112 114  30  28   9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73]  88  67  71  32  76  35  66  92  95  93  40  48  26 108  13  54  57  12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [91]  16  84  41  70  18  14  78   8  13  73  67  42  58  85  82  15 109   7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [109] 104  71  86 101  70  74  25  31  55  97 112  40  17  93 110  58   2  72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [127]  35  75  36  91  52  38 102  43  29  27  39  94  47  89  79  15  53  64</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [145]  29  10  50  15  24  43</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

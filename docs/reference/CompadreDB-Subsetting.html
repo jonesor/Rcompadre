@@ -152,7 +152,7 @@ it is not included in the user's column subset." />
 
     <div class="ref-description">
     <p><code>CompadreDB</code> objects can be subset just like a regular
-<code>data.frame</code>, using either <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> or <code><a href='https://rdrr.io/r/base/subset.html'>subset()</a></code>. Note, however,
+<code>data.frame</code>, using either <code>[</code> or <code><a href='https://rdrr.io/r/base/subset.html'>subset()</a></code>. Note, however,
 that the <code>mat</code> column will always be retained during subsetting, even if
 it is not included in the user's column subset.</p>
     </div>
@@ -201,78 +201,81 @@ subset(x, subset, select, drop = FALSE, ...)</pre>
     <p>No return value, called for side effects</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># subset to the first 10 rows</span>
-<span class='va'>Compadre</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,<span class='op'>]</span>
-</div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 10 SPECIES and 10 MATRICES.
-#&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 10 × 49</span>
-#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style='color: #BB0000;'>NA</span>         Seta… Poace… Poal… Lili…
-#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style='color: #BB0000;'>NA</span>         Lech… Cista… Malv… Magn…
-#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style='color: #BB0000;'>NA</span>         Acti… Eupho… Malp… Magn…
-#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style='color: #BB0000;'>NA</span>         Gaura Onagr… Myrt… Magn…
-#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…
-#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Platanthera_h… Platanthera ho… <span style='color: #BB0000;'>NA</span>         Plat… Orchi… Aspa… Lili…
-#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style='color: #BB0000;'>NA</span>         Succ… Capri… Dips… Magn…
-#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style='color: #BB0000;'>NA</span>         Pyrr… Compo… Aste… Magn…
-#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style='color: #BB0000;'>NA</span>         Astr… Legum… Faba… Magn…
-#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style='color: #BB0000;'>NA</span>         Plan… Plant… Lami… Magn…
-#&gt; <span style='color: #949494;'># … with 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></div><div class='input'>
-<span class='co'># subset to the species 'Echinacea angustifolia'</span>
-<span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>Compadre</span>, <span class='va'>SpeciesAccepted</span> <span class='op'>==</span> <span class='st'>"Echinacea angustifolia"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 4 MATRICES.
-#&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 4 × 49</span>
-#&gt;   mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class Phylum
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lis&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> 
-#&gt; <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…
-#&gt; <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…
-#&gt; <span style='color: #BCBCBC;'>3</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…
-#&gt; <span style='color: #BCBCBC;'>4</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…
-#&gt; <span style='color: #949494;'># … with 40 more variables: Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></div><div class='input'>
-<span class='co'># remove the column SurvivalIssue</span>
-<span class='va'>Compadre</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span> <span class='op'>!=</span> <span class='st'>"SurvivalIssue"</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.
-#&gt; 
-#&gt; <span style='color: #949494;'># A tibble: 150 × 48</span>
-#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style='color: #BB0000;'>NA</span>         Seta… Poace… Poal… Lili…
-#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style='color: #BB0000;'>NA</span>         Lech… Cista… Malv… Magn…
-#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style='color: #BB0000;'>NA</span>         Acti… Eupho… Malp… Magn…
-#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style='color: #BB0000;'>NA</span>         Gaura Onagr… Myrt… Magn…
-#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…
-#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Platanthera_h… Platanthera ho… <span style='color: #BB0000;'>NA</span>         Plat… Orchi… Aspa… Lili…
-#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style='color: #BB0000;'>NA</span>         Succ… Capri… Dips… Magn…
-#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style='color: #BB0000;'>NA</span>         Pyrr… Compo… Aste… Magn…
-#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style='color: #BB0000;'>NA</span>         Astr… Legum… Faba… Magn…
-#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style='color: #BB0000;'>NA</span>         Plan… Plant… Lami… Magn…
-#&gt; <span style='color: #949494;'># … with 140 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></div><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># column selection doesn't include mat, but mat will still be returned with a</span>
-<span class='co'>#  along with a warning</span>
-<span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>Compadre</span>, select <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SpeciesAccepted"</span>, <span class='st'>"Authors"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># subset to the first 10 rows</span></span>
+<span class='r-in'><span class='va'>Compadre</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,<span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A COM(P)ADRE database ('CompadreDB') object with 10 SPECIES and 10 MATRICES.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 10 × 49</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style='color: #BB0000;'>NA</span>         Seta… Poace… Poal… Lili…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style='color: #BB0000;'>NA</span>         Lech… Cista… Malv… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style='color: #BB0000;'>NA</span>         Acti… Eupho… Malp… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style='color: #BB0000;'>NA</span>         Gaura Onagr… Myrt… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Platanthera_h… Platanthera ho… <span style='color: #BB0000;'>NA</span>         Plat… Orchi… Aspa… Lili…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style='color: #BB0000;'>NA</span>         Succ… Capri… Dips… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style='color: #BB0000;'>NA</span>         Pyrr… Compo… Aste… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style='color: #BB0000;'>NA</span>         Astr… Legum… Faba… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style='color: #BB0000;'>NA</span>         Plan… Plant… Lami… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># subset to the species 'Echinacea angustifolia'</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>Compadre</span>, <span class='va'>SpeciesAccepted</span> <span class='op'>==</span> <span class='st'>"Echinacea angustifolia"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 4 MATRICES.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 49</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   mat   SpeciesAuthor SpeciesAccepted CommonName Genus Family Order Class Phylum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;lis&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> <span style='color: #949494;'>&lt;Com</span>… Echinacea_an… Echinacea angu… Narrow-le… Echi… Compo… Aste… Magn… Magno…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 40 more variables: Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># remove the column SurvivalIssue</span></span>
+<span class='r-in'><span class='va'>Compadre</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>Compadre</span><span class='op'>)</span> <span class='op'>!=</span> <span class='st'>"SurvivalIssue"</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 150 × 48</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style='color: #BB0000;'>NA</span>         Seta… Poace… Poal… Lili…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style='color: #BB0000;'>NA</span>         Lech… Cista… Malv… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style='color: #BB0000;'>NA</span>         Acti… Eupho… Malp… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style='color: #BB0000;'>NA</span>         Gaura Onagr… Myrt… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Platanthera_h… Platanthera ho… <span style='color: #BB0000;'>NA</span>         Plat… Orchi… Aspa… Lili…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style='color: #BB0000;'>NA</span>         Succ… Capri… Dips… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style='color: #BB0000;'>NA</span>         Pyrr… Compo… Aste… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style='color: #BB0000;'>NA</span>         Astr… Legum… Faba… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style='color: #BB0000;'>NA</span>         Plan… Plant… Lami… Magn…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 140 more rows, and 40 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># column selection doesn't include mat, but mat will still be returned with a</span></span>
+<span class='r-in'><span class='co'>#  along with a warning</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>Compadre</span>, select <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SpeciesAccepted"</span>, <span class='st'>"Authors"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
