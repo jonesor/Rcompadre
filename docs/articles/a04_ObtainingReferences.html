@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -82,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jonesor/Rcompadre/">
+  <a href="https://github.com/jonesor/Rcompadre/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,11 +97,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Obtaining references</h1>
-                        <h4 class="author">Owen Jones</h4>
+                        <h4 data-toc-skip class="author">Owen Jones</h4>
             
-            <h4 class="date">2021-11-05</h4>
+            <h4 data-toc-skip class="date">2022-01-30</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a04_ObtainingReferences.Rmd"><code>vignettes/a04_ObtainingReferences.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/HEAD/vignettes/a04_ObtainingReferences.Rmd" class="external-link"><code>vignettes/a04_ObtainingReferences.Rmd</code></a></small>
       <div class="hidden name"><code>a04_ObtainingReferences.Rmd</code></div>
 
     </div>
@@ -113,20 +109,20 @@
     
     
 <p>The following example illustrates how to find the full formatted citations for the publications used in COMADRE or COMPADRE. This can be useful to find further details of the matrices you may be using in your study, or to provide references for your data e.g. in supplementary information.</p>
-<p>The code relies on the package <code>rcrossref</code> (<a href="https://github.com/ropensci/rcrossref" class="uri">https://github.com/ropensci/rcrossref</a>) which queries <em>CrossRef</em>, a Digital Object Identifier (DOI) Registration Agency of the International DOI Foundation.</p>
+<p>The code relies on the package <code>rcrossref</code> (<a href="https://github.com/ropensci/rcrossref" class="external-link uri">https://github.com/ropensci/rcrossref</a>) which queries <em>CrossRef</em>, a Digital Object Identifier (DOI) Registration Agency of the International DOI Foundation.</p>
 <p>To install the <code>rcrossref</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rcrossref"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rcrossref"</span><span class="op">)</span></code></pre></div>
 <p>We should then load the required packages like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre">Rcompadre</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/">rcrossref</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre" class="external-link">Rcompadre</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/" class="external-link">rcrossref</a></span><span class="op">)</span></code></pre></div>
 <p>We aim to obtain the full reference and DOI for the matrices for a set of matrices. In this example we will use the example data available in the <code>Rcompadre</code> package.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">)</span></code></pre></div>
 <p>Here we will create a subset of matrices containing data for species in the <em>Ursidae</em> family:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Comadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Comadre</span>, <span class="va">Family</span> <span class="op">==</span> <span class="st">"Ursidae"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">Comadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Comadre</span>, <span class="va">Family</span> <span class="op">==</span> <span class="st">"Ursidae"</span><span class="op">)</span></code></pre></div>
 <p>In this case, our subset contains 3 matrices, and we can examine the source information for these by asking for the <code>Authors</code>, <code>Journal</code>, publication year (<code>YearPublication</code>) and DOI (<code>DOI_ISBN</code>) like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Comadre</span><span class="op">$</span><span class="va">Authors</span>
@@ -138,10 +134,10 @@
 <span class="va">Comadre</span><span class="op">$</span><span class="va">DOI_ISBN</span>
 <span class="co">#&gt; [1] "10.1890/09-1641"               "10.1890/02-5195"              </span>
 <span class="co">#&gt; [3] "10.1016/S0006-3207(01)00265-8"</span></code></pre></div>
-<p>We are now ready to obtain the full references for these data. The <code>rcrossref</code> package has a convenient function, <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn()</a></code> which obtains citations in various formats from CrossRef based on the DOIs.</p>
+<p>We are now ready to obtain the full references for these data. The <code>rcrossref</code> package has a convenient function, <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html" class="external-link">cr_cn()</a></code> which obtains citations in various formats from CrossRef based on the DOIs.</p>
 <p>Thus, we can obtain the full references for this subset of the COMADRE database like this:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI_ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">rcrossref</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html" class="external-link">cr_cn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">Comadre</span><span class="op">$</span><span class="va">DOI_ISBN</span><span class="op">)</span>,format <span class="op">=</span> <span class="st">"text"</span>,style <span class="op">=</span> <span class="st">"apa"</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1890/09-1641'. See error detail in results.</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1890/02-5195'. See error detail in results.</span>
 <span class="co">#&gt; Warning: Failure in resolving '10.1016/S0006-3207(01)00265-8'. See error detail</span>
@@ -168,7 +164,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]$error</span>
 <span class="co">#&gt; [1] "Error in cr_GET(endpoint = sprintf(\"works/%s/agency\", x), args = list(),  : \n  res$response_headers$`content-type` == \"application/json;charset=UTF-8\" is not TRUE\n"</span></code></pre></div>
-<p>Various other formats and styles of output are available, see <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html">?rcrossref::cr_cn</a></code> for details.</p>
+<p>Various other formats and styles of output are available, see <code><a href="https://docs.ropensci.org/rcrossref/reference/cr_cn.html" class="external-link">?rcrossref::cr_cn</a></code> for details.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -180,11 +176,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
+  <p></p>
+<p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -192,6 +190,8 @@
 
   
 
+
+  
 
   </body>
 </html>
