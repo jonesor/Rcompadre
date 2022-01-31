@@ -164,12 +164,12 @@ as_cdb <- function(from) {
   #Modify the column names to reflect database backend updates if necessary
   #DOI.ISBN becomes DOI_ISBN
   if("DOI.ISBN" %in% names(dat)){
-    dat <- dat |> 
+    dat <- dat %>% 
       dplyr::rename(DOI_ISBN = DOI.ISBN)
   }
   #AnnualPeriodicity becomes ProjectionInterval
   if("AnnualPeriodicity" %in% names(dat)){
-    dat <- dat |>
+    dat <- dat %>%
       dplyr::rename(ProjectionInterval = AnnualPeriodicity)
   }
   
