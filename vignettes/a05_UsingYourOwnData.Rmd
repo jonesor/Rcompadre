@@ -114,7 +114,7 @@ Now the matrices are stored in a `CompadreDB` object they can be manipulated in 
 
 For example, filtering based on part of the metadata, in this case, `shapeParam`.
 ```{r}
-x |>
+x %>%
   filter(shapeParam > 2)
 ```
 
