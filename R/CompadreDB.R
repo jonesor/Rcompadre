@@ -184,11 +184,11 @@ as_cdb <- function(from) {
   # instead of ProjectionInterval.
   # DOI.ISBN becomes DOI_ISBN
   if ("DOI.ISBN" %in% names(dat)) {
-    dat <- dplyr::rename(dat, DOI_ISBN = DOI.ISBN)
+    names(dat)[names(dat) == "DOI.ISBN"] <- "DOI_ISBN"
   }
   # AnnualPeriodicity becomes ProjectionInterval
   if ("AnnualPeriodicity" %in% names(dat)) {
-    dat <- dplyr::rename(dat, ProjectionInterval = AnnualPeriodicity)
+    names(dat)[names(dat) == "AnnualPeriodicity"] <- "ProjectionInterval"
   }
 
 
