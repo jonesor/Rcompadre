@@ -1,77 +1,36 @@
-## Test environments
-
-### local
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Big Sur 11.3.1
-
-### GitHub Actions
-
-#### Microsoft Windows
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-__R development version__
-
-- R Under development (unstable) (2021-10-13 r81052)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-#### Apple OSX
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Catalina 10.15.7
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Catalina 10.15.7
-
-#### Linux (Ubuntu)
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
-__R development version__
-
-- R Under development (unstable) (2021-10-12 r81044)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
+── Rcompadre 1.1.0.9000: NOTE
 
-There was 1 NOTE:
+  Build ID:   Rcompadre_1.1.0.9000.tar.gz-053c5714bfac4483a6fa50566573e5e8
+  Platform:   Windows Server 2022, R-devel, 64 bit
+  Submitted:  8m 27.3s ago
+  Build time: 6m 51.5s
 
-    Maintainer: ‘Owen Jones <jones@biology.sdu.dk>’
+❯ checking CRAN incoming feasibility ... [24s] NOTE
+  Maintainer: 'Owen Jones <jones@biology.sdu.dk>'
+  
+  Version contains large components (1.1.0.9000)
 
-## Downstream dependencies
+❯ checking for detritus in the temp directory ... NOTE
+  Found the following files/directories:
+    'lastMiKTeXException'
 
-The package "Rage" (which I, Owen Jones <jones@biology.sdu.dk>, am maintainer of) is a downstream dependency. It works fine with this version of Rcompadre.
+0 errors ✔ | 0 warnings ✔ | 2 notes ✖
 
+── Rcompadre 1.1.0.9000: CREATED
+
+  Build ID:   Rcompadre_1.1.0.9000.tar.gz-a86e498a88564194926cad6b1b4a1871
+  Platform:   Ubuntu Linux 20.04.1 LTS, R-release, GCC
+  Submitted:  8m 27.3s ago
+
+
+── Rcompadre 1.1.0.9000: CREATED
+
+  Build ID:   Rcompadre_1.1.0.9000.tar.gz-d6665040f7784de5acffd6a3345dc2fd
+  Platform:   Fedora Linux, R-devel, clang, gfortran
+  Submitted:  8m 27.3s ago
+  
+0 errors | 0 warnings | 1 note
+
+* This is a new release.

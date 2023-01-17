@@ -1,4 +1,4 @@
-# Rcompadre (development version)
+# Rcompadre 1.2.0
 
 * Improvements to `cdb_fetch`. Can add a comment as an attribute on import. Can download particular versions of the databases by version number. Can force quiet running (no messages).
 
