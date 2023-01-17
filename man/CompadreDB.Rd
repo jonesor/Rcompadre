@@ -85,7 +85,6 @@ Compadre$SpeciesAccepted
 
 # create new list-column with stage-specific survival
 Compadre$stage_survival <- lapply(Compadre$mat, function(x) colSums(x@matU))
-
 }
 \seealso{
 \code{\link{CompadreDB-Methods}} \code{\link{CompadreDB-Subsetting}}

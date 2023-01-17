@@ -43,7 +43,7 @@
 #'
 #' # Examine the attributes of the downloaded database
 #' attributes(compadre)
-#' 
+#'
 #' # Download COMPADRE version 3.0.0 direct from the website
 #' compadre <- cdb_fetch("compadre", version = "3.0.0")
 #'
@@ -100,7 +100,7 @@ cdb_fetch <- function(cdb, version = NULL, flag = FALSE, userComment = NULL, qui
     "This is ", name, " version ", version, " (release date ", release,
     ")", "\n", "See user agreement at ",
     "https://compadre-db.org/Help/UserAgreement", "\n",
-    "See how to cite with `citation(Rcompadre)`","\n"
+    "See how to cite with `citation(Rcompadre)`", "\n"
   )
 
   return(dbOut)

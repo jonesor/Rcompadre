@@ -148,8 +148,10 @@ as_cdb <- function(from) {
       "See ?CompadreDB",
       call. = FALSE
     )
-    from$version <- list(Database = NA, Version = NA, DateCreated = NA, 
-                         Agreement = "https://www.compadre-db.org/UserAgreement")
+    from$version <- list(
+      Database = NA, Version = NA, DateCreated = NA,
+      Agreement = "https://www.compadre-db.org/UserAgreement"
+    )
   }
 
   # do all the matrix list elements contain matA, matF, matU and matC?

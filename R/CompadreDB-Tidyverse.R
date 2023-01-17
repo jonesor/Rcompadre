@@ -1,8 +1,8 @@
 #' Tidyverse methods for CompadreDB objects
-#' 
+#'
 #' CompadreDB methods for functions in \link[dplyr]{dplyr} and
 #' \link[ggplot2]{ggplot2}.
-#' 
+#'
 #' @name CompadreDB-Tidyverse
 #' @param x,model,.data A CompadreDB object
 #' @param data see \code{\link[ggplot2]{fortify}}
@@ -26,8 +26,9 @@ filter.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -37,8 +38,9 @@ slice.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -48,8 +50,9 @@ arrange.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -59,8 +62,9 @@ mutate.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -70,8 +74,9 @@ group_by.CompadreDB <- function(.data, ..., add = FALSE) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -81,8 +86,9 @@ ungroup.CompadreDB <- function(x, ...) {
   vers <- x@version
   x <- x@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -106,8 +112,9 @@ select.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -117,8 +124,9 @@ rename.CompadreDB <- function(.data, ...) {
   vers <- .data@version
   .data <- .data@data
   new("CompadreDB",
-      data = callGeneric(),
-      version = vers)
+    data = callGeneric(),
+    version = vers
+  )
 }
 
 
@@ -130,12 +138,14 @@ left_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
   x <- x@data
   x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
   out <- new("CompadreDB",
-             data = callGeneric(),
-             version = vers)
+    data = callGeneric(),
+    version = vers
+  )
   if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
     warning("One or more rows of the CompadreDB object appear to have been ",
-            "duplicated during the join, indicating non-unique matches",
-            call. = FALSE)
+      "duplicated during the join, indicating non-unique matches",
+      call. = FALSE
+    )
   }
   out@data$DoNotUse_Temp_Sequence <- NULL
   return(out)
@@ -150,12 +160,14 @@ right_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
   x <- x@data
   x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
   out <- new("CompadreDB",
-             data = callGeneric(),
-             version = vers)
+    data = callGeneric(),
+    version = vers
+  )
   if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
     warning("One or more rows of the CompadreDB object appear to have been ",
-            "duplicated during the join, indicating non-unique matches",
-            call. = FALSE)
+      "duplicated during the join, indicating non-unique matches",
+      call. = FALSE
+    )
   }
   out@data$DoNotUse_Temp_Sequence <- NULL
   return(out)
@@ -170,12 +182,14 @@ inner_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
   x <- x@data
   x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
   out <- new("CompadreDB",
-             data = callGeneric(),
-             version = vers)
+    data = callGeneric(),
+    version = vers
+  )
   if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
     warning("One or more rows of the CompadreDB object appear to have been ",
-            "duplicated during the join, indicating non-unique matches",
-            call. = FALSE)
+      "duplicated during the join, indicating non-unique matches",
+      call. = FALSE
+    )
   }
   out@data$DoNotUse_Temp_Sequence <- NULL
   return(out)
@@ -190,12 +204,14 @@ full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
   x <- x@data
   x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
   out <- new("CompadreDB",
-             data = callGeneric(),
-             version = vers)
+    data = callGeneric(),
+    version = vers
+  )
   if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
     warning("One or more rows of the CompadreDB object appear to have been ",
-            "duplicated during the join, indicating non-unique matches",
-            call. = FALSE)
+      "duplicated during the join, indicating non-unique matches",
+      call. = FALSE
+    )
   }
   out@data$DoNotUse_Temp_Sequence <- NULL
   return(out)
@@ -204,8 +220,8 @@ full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 
 
 # from https://github.com/r-spatial/sf/blob/master/R/tidyverse.R (Nov 30 2018)
-#nocov start
-register_all_s3_methods = function() {
+# nocov start
+register_all_s3_methods <- function() {
   register_s3_method("ggplot2", "fortify", "CompadreDB")
   register_s3_method("dplyr", "filter", "CompadreDB")
   register_s3_method("dplyr", "slice", "CompadreDB")
@@ -228,17 +244,17 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
   stopifnot(is.character(pkg), length(pkg) == 1)
   stopifnot(is.character(generic), length(generic) == 1)
   stopifnot(is.character(class), length(class) == 1)
-  
+
   if (is.null(fun)) {
     fun <- get(paste0(generic, ".", class), envir = parent.frame())
   } else {
     stopifnot(is.function(fun))
   }
-  
+
   if (pkg %in% loadedNamespaces()) {
     registerS3method(generic, class, fun, envir = asNamespace(pkg))
   }
-  
+
   # Always register hook in case package is later unloaded & reloaded
   setHook(
     packageEvent(pkg, "onLoad"),
@@ -247,4 +263,4 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
     }
   )
 }
-#nocov end
+# nocov end

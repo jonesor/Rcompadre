@@ -10,7 +10,7 @@
 #' as csv (see \link{string_representation}).
 #'
 #' @param cdb A CompadreDB object
-#' 
+#'
 #' @return A data frame based on the data slot of \code{cdb}, but with the
 #'   column \code{mat} replaced by six separate columns (for matrices
 #'   \code{matA}, \code{matU}, \code{matF}, \code{matC}, and vectors
@@ -19,31 +19,30 @@
 #'
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #' @author Patrick M. Barks <patrick.barks@@gmail.com>
-#' 
+#'
 #' @family data management
-#' 
+#'
 #' @seealso \link{cdb_unflatten} \link{string_representation}
-#' 
+#'
 #' @examples
 #' CompadreFlat <- cdb_flatten(Compadre)
-#' 
+#'
 #' @export cdb_flatten
 cdb_flatten <- function(cdb) {
-  
   if (!inherits(cdb, "CompadreDB")) {
     stop("cdb must be of class CompadreDB. See function as_cdb")
   }
-  
+
   cdb <- cdb_unnest(cdb)
   db <- cdb@data
   db$mat <- NULL
-  
+
   db$matA <- vapply(db$matA, mat_to_string, "")
   db$matU <- vapply(db$matU, mat_to_string, "")
   db$matF <- vapply(db$matF, mat_to_string, "")
   db$matC <- vapply(db$matC, mat_to_string, "")
   db$MatrixClassAuthor <- vapply(db$MatrixClassAuthor, vec_to_string, "")
   db$MatrixClassOrganized <- vapply(db$MatrixClassOrganized, vec_to_string, "")
-  
+
   return(db)
 }

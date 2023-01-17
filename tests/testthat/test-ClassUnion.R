@@ -1,5 +1,4 @@
 test_that("ClassUnion methods work correctly", {
-  
   a1 <- matA(Compadre)
   u1 <- matU(Compadre)
   f1 <- matF(Compadre)
@@ -8,7 +7,7 @@ test_that("ClassUnion methods work correctly", {
   mca1 <- MatrixClassAuthor(Compadre)
   mco1 <- MatrixClassOrganized(Compadre)
   mcn1 <- MatrixClassNumber(Compadre)
-  
+
   expect_type(a1, "list")
   expect_type(u1, "list")
   expect_type(f1, "list")
@@ -17,10 +16,10 @@ test_that("ClassUnion methods work correctly", {
   expect_type(mca1, "list")
   expect_type(mco1, "list")
   expect_type(mcn1, "list")
-  
+
   expect_true(all.equal(length(a1), length(u1), length(f1), length(c1)))
-  
-  
+
+
   a2 <- matA(Compadre@data$mat)
   u2 <- matU(Compadre@data$mat)
   f2 <- matF(Compadre@data$mat)
@@ -29,7 +28,7 @@ test_that("ClassUnion methods work correctly", {
   mca2 <- MatrixClassAuthor(Compadre@data$mat)
   mco2 <- MatrixClassOrganized(Compadre@data$mat)
   mcn2 <- MatrixClassNumber(Compadre@data$mat)
-  
+
   expect_type(a2, "list")
   expect_type(u2, "list")
   expect_type(f2, "list")
@@ -38,7 +37,7 @@ test_that("ClassUnion methods work correctly", {
   expect_type(mca2, "list")
   expect_type(mco2, "list")
   expect_type(mcn2, "list")
-  
+
   a3 <- matA(Compadre@data$mat[[1]])
   u3 <- matU(Compadre@data$mat[[1]])
   f3 <- matF(Compadre@data$mat[[1]])
@@ -47,7 +46,7 @@ test_that("ClassUnion methods work correctly", {
   mca3 <- MatrixClassAuthor(Compadre@data$mat[[1]])
   mco3 <- MatrixClassOrganized(Compadre@data$mat[[1]])
   mcn3 <- MatrixClassNumber(Compadre@data$mat[[1]])
-  
+
   expect_true("matrix" %in% class(a3))
   expect_true("matrix" %in% class(u3))
   expect_true("matrix" %in% class(f3))
@@ -56,7 +55,7 @@ test_that("ClassUnion methods work correctly", {
   expect_type(mca3, "character")
   expect_type(mco3, "character")
   expect_true(class(mcn3) == "numeric")
-  
+
   expect_true(all.equal(a1[[1]], a2[[1]]) & all.equal(a1[[1]], a3))
   expect_true(all.equal(u1[[1]], u2[[1]]) & all.equal(u1[[1]], u3))
   expect_true(all.equal(f1[[1]], f2[[1]]) & all.equal(f1[[1]], f3))
@@ -69,10 +68,9 @@ test_that("ClassUnion methods work correctly", {
 
 
 test_that("ClassUnion methods warn and fail gracefully", {
-  
   dat <- CompadreData(Compadre)
   dat$mat[[56]] <- "test"
-  
+
   expect_error(matA(dat$mat))
   expect_error(matU(dat$mat))
   expect_error(matF(dat$mat))
@@ -82,4 +80,3 @@ test_that("ClassUnion methods warn and fail gracefully", {
   expect_error(MatrixClassOrganized(dat$mat))
   expect_error(MatrixClassNumber(dat$mat))
 })
-

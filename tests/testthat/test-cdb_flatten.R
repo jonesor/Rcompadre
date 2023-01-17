@@ -1,7 +1,6 @@
 test_that("cdb_flatten works correctly", {
-  
   dbf1 <- cdb_flatten(Compadre)
-  
+
   expect_s3_class(dbf1, "data.frame")
   expect_type(dbf1$matA, "character")
   expect_type(dbf1$matU, "character")
@@ -12,7 +11,5 @@ test_that("cdb_flatten works correctly", {
 
 
 test_that("cdb_flatten warns and fails gracefully", {
-  
   expect_error(cdb_flatten(Compadre@data))
 })
-
