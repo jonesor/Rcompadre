@@ -89,32 +89,43 @@ vertical bars ("[Seedling||Juvenile||Reproductive]").</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mat_to_string</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span>
-
-<span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span>
-
-<span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span>
-
-<span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec_str</span>, numeric <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mat_to_string</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec_str</span>, numeric <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>mat</dt>
 <dd><p>A square numeric matrix</p></dd>
+
+
 <dt>vec</dt>
 <dd><p>A vector</p></dd>
+
+
 <dt>mat_str</dt>
 <dd><p>A square numeric matrix in string representation</p></dd>
+
+
 <dt>vec_str</dt>
 <dd><p>A vector in string representation</p></dd>
+
+
 <dt>numeric</dt>
 <dd><p>Logical value indicating whether a string representation of a
 vector should be coerced to numeric (if FALSE remains character)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A square numeric matrix (<code>string_to_mat</code>), vector
+    
+
+<p>A square numeric matrix (<code>string_to_mat</code>), vector
 (<code>string_to_vec</code>), or string (<code>mat_to_string</code> or
 <code>vec_to_string</code>).</p>
     </div>
@@ -140,28 +151,28 @@ vector should be coerced to numeric (if FALSE remains character)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mat_str</span> <span class="op">&lt;-</span> <span class="st">"[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">vec1_str</span> <span class="op">&lt;-</span> <span class="st">"[0.30||0.42||0.19||0.09]"</span></span>
-<span class="r-in"><span class="va">vec1</span> <span class="op">&lt;-</span> <span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec1_str</span>, numeric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">vec2_str</span> <span class="op">&lt;-</span> <span class="st">"[Seedling 1||Seedling 2||Juvenile||Reproductive]"</span></span>
-<span class="r-in"><span class="va">vec2</span> <span class="op">&lt;-</span> <span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec2_str</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># convert back to string format</span></span>
-<span class="r-in"><span class="fu">mat_to_string</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mat_str</span> <span class="op">&lt;-</span> <span class="st">"[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">vec1_str</span> <span class="op">&lt;-</span> <span class="st">"[0.30||0.42||0.19||0.09]"</span></span></span>
+<span class="r-in"><span><span class="va">vec1</span> <span class="op">&lt;-</span> <span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec1_str</span>, numeric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">vec2_str</span> <span class="op">&lt;-</span> <span class="st">"[Seedling 1||Seedling 2||Juvenile||Reproductive]"</span></span></span>
+<span class="r-in"><span><span class="va">vec2</span> <span class="op">&lt;-</span> <span class="fu">string_to_vec</span><span class="op">(</span><span class="va">vec2_str</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># convert back to string format</span></span></span>
+<span class="r-in"><span><span class="fu">mat_to_string</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"</span>
-<span class="r-in"><span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[0.3||0.42||0.19||0.09]"</span>
-<span class="r-in"><span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_to_string</span><span class="op">(</span><span class="va">vec2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[Seedling 1||Seedling 2||Juvenile||Reproductive]"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># non-square matrix</span></span>
-<span class="r-in"><span class="va">mat_str</span> <span class="op">&lt;-</span> <span class="st">"[0.42 0.52 0.15 0.23 0.14]"</span></span>
-<span class="r-in"><span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># non-square matrix</span></span></span>
+<span class="r-in"><span><span class="va">mat_str</span> <span class="op">&lt;-</span> <span class="st">"[0.42 0.52 0.15 0.23 0.14]"</span></span></span>
+<span class="r-in"><span><span class="fu">string_to_mat</span><span class="op">(</span><span class="va">mat_str</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -176,7 +187,7 @@ vector should be coerced to numeric (if FALSE remains character)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

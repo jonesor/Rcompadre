@@ -81,25 +81,31 @@ of columns supplied by the user).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_id_studies</span><span class="op">(</span>
-  <span class="va">cdb</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Authors"</span>, <span class="st">"Journal"</span>, <span class="st">"YearPublication"</span>, <span class="st">"DOI_ISBN"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_id_studies</span><span class="op">(</span></span>
+<span>  <span class="va">cdb</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Authors"</span>, <span class="st">"Journal"</span>, <span class="st">"YearPublication"</span>, <span class="st">"DOI_ISBN"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>Vector of column names from which unique combinations should
 be identified. Defaults to <code>c("Authors", "Journal", "YearPublication",
 "DOI_ISBN")</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Vector of integer study identifiers corresponding to the rows of
-<code>cdb</code>, based on unique combinations of the elements in <code>columns</code>.</p>
+    
+
+<p>Vector of integer study identifiers corresponding to the rows of</p>
+<p></p>
+<p><code>cdb</code>, based on unique combinations of the elements in <code>columns</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -128,8 +134,8 @@ levels to integers.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">Compadre</span><span class="op">$</span><span class="va">StudyID</span> <span class="op">&lt;-</span> <span class="fu">cdb_id_studies</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Compadre</span><span class="op">$</span><span class="va">StudyID</span> <span class="op">&lt;-</span> <span class="fu">cdb_id_studies</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -144,7 +150,7 @@ levels to integers.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

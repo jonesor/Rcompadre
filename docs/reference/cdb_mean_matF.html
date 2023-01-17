@@ -96,24 +96,29 @@ is non-reproductive).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_mean_matF</span><span class="op">(</span>
-  <span class="va">cdb</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SpeciesAuthor"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixDimension"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_mean_matF</span><span class="op">(</span></span>
+<span>  <span class="va">cdb</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SpeciesAuthor"</span>, <span class="st">"MatrixPopulation"</span>, <span class="st">"MatrixDimension"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>Vector of column names from which unique populations should be
 identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
 "MatrixDimension")</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a list of matrices, representing the mean fecundity matrix
+    
+
+<p>Returns a list of matrices, representing the mean fecundity matrix
   associated with each row of the database.</p>
     </div>
     <div id="see-also">
@@ -140,8 +145,8 @@ identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># print matF associated with row 16 of database</span></span>
-<span class="r-in"><span class="va">Compadre</span><span class="op">$</span><span class="va">mat</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># print matF associated with row 16 of database</span></span></span>
+<span class="r-in"><span><span class="va">Compadre</span><span class="op">$</span><span class="va">mat</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A compadre matrix object with 7 stages.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   MatrixClassOrganized</span>
@@ -201,12 +206,12 @@ identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 0 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># create list of meanMatFs</span></span>
-<span class="r-in"><span class="va">meanF</span> <span class="op">&lt;-</span> <span class="fu">cdb_mean_matF</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># print meanMatF associated with row 16 of database</span></span>
-<span class="r-in"><span class="va">meanF</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create list of meanMatFs</span></span></span>
+<span class="r-in"><span><span class="va">meanF</span> <span class="op">&lt;-</span> <span class="fu">cdb_mean_matF</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print meanMatF associated with row 16 of database</span></span></span>
+<span class="r-in"><span><span class="va">meanF</span><span class="op">[[</span><span class="fl">16</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    F1 F2 F3 F4 F5        F6         F7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F1  0  0  0  0  0 77.316667 261.666667</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F2  0  0  0  0  0  1.306667   4.196667</span>
@@ -215,7 +220,7 @@ identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
 <span class="r-out co"><span class="r-pr">#&gt;</span> F5  0  0  0  0  0  0.000000   0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F6  0  0  0  0  0  0.000000   0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F7  0  0  0  0  0  0.000000   0.000000</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -230,7 +235,7 @@ identified. Defaults to <code>c("SpeciesAuthor", "MatrixPopulation",
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
