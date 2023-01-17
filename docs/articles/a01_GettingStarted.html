@@ -49,7 +49,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -93,13 +93,13 @@
 
       
 
-      </header><script src="a01_GettingStarted_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 data-toc-skip class="author">Owen Jones</h4>
             
-            <h4 data-toc-skip class="date">2022-02-01</h4>
+            <h4 data-toc-skip class="date">2023-01-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/HEAD/vignettes/a01_GettingStarted.Rmd" class="external-link"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -111,28 +111,78 @@
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>The COMPADRE and COMADRE Plant and Animal Matrix Databases contain matrix population models (MPMs) and associated metadata obtained from the published literature (Salguero-Gomez et al. 2015, 2016).</p>
-<p>Wherever possible the full MPM (the <strong>A</strong> matrix) has been split into three additional constituent matrices based on the nature of the demographic processes involved. These are the <strong>U</strong> matrix, which summarises growth and survival; the <strong>F</strong> matrix, which summarises sexual reproduction; and the <strong>C</strong> matrix, which summarises asexual (clonal) reproduction. These additional matrices sum to equal the <strong>A</strong> matrix (<strong>A</strong> = <strong>U</strong> + <strong>F</strong> + <strong>C</strong>). Thus, each MPM is presented as a list of these 4 matrices in the databases together with information about the MPM stages defined by the author.</p>
-<p>In addition, each set of MPMs is associated with metadata including taxonomy of the species studied, the geographic location, the published source information and so on. For further details please see the two papers on COMPADRE and COMADRE (Salguero-Gomez et al. 2015, 2016), and the User Guide which is available via the website (<a href="https://compadre-db.org/" class="external-link">compadre-db.org/</a>).</p>
-<p>The databases are distributed as <code>Rdata</code> files containing a <code>list</code> class object which provides the data in a structured format. Although it is possible to use the database without using the <em>Rcompadre</em> package this is not recommended. <em>Rcompadre</em> provides users with a range of useful tools for working with the database that will greatly improve user experience.</p>
-<p>Importantly, <em>Rcompadre</em> coerces the data as a so-called <code>CompadreDB</code> S4 class object. The details of what this means is beyond the scope of this vignette, apart from that the object has two <em>slots</em> called <code>CompadreData</code> and <code>VersionData</code>.</p>
-<p><code>CompadreData</code> contains a tibble-style data frame that includes a list column of matrix population models (MPMs) alongside associated metadata columns. Each element of the matrix column of the data frame (<code>mat</code>) contains a list of MPMs, while remaining columns include metadata associated with the matrices, while <code>VersionData</code> is a list of information about the database version. In practice, knowledge of the details of this structure is not necessary thanks to the tools provided by the <code>Rcompadre</code> package.</p>
+<p>The COMPADRE and COMADRE Plant and Animal Matrix Databases contain
+matrix population models (MPMs) and associated metadata obtained from
+the published literature (Salguero-Gomez et al. 2015, 2016).</p>
+<p>Wherever possible the full MPM (the <strong>A</strong> matrix) has
+been split into three additional constituent matrices based on the
+nature of the demographic processes involved. These are the
+<strong>U</strong> matrix, which summarises growth and survival; the
+<strong>F</strong> matrix, which summarises sexual reproduction; and the
+<strong>C</strong> matrix, which summarises asexual (clonal)
+reproduction. These additional matrices sum to equal the
+<strong>A</strong> matrix (<strong>A</strong> = <strong>U</strong> +
+<strong>F</strong> + <strong>C</strong>). Thus, each MPM is presented as
+a list of these 4 matrices in the databases together with information
+about the MPM stages defined by the author.</p>
+<p>In addition, each set of MPMs is associated with metadata including
+taxonomy of the species studied, the geographic location, the published
+source information and so on. For further details please see the two
+papers on COMPADRE and COMADRE (Salguero-Gomez et al. 2015, 2016), and
+the User Guide which is available via the website (<a href="https://compadre-db.org/" class="external-link">compadre-db.org/</a>).</p>
+<p>The databases are distributed as <code>Rdata</code> files containing
+a <code>list</code> class object which provides the data in a structured
+format. Although it is possible to use the database without using the
+<em>Rcompadre</em> package this is not recommended. <em>Rcompadre</em>
+provides users with a range of useful tools for working with the
+database that will greatly improve user experience.</p>
+<p>Importantly, <em>Rcompadre</em> coerces the data as a so-called
+<code>CompadreDB</code> S4 class object. The details of what this means
+is beyond the scope of this vignette, apart from that the object has two
+<em>slots</em> called <code>CompadreData</code> and
+<code>VersionData</code>.</p>
+<p><code>CompadreData</code> contains a tibble-style data frame that
+includes a list column of matrix population models (MPMs) alongside
+associated metadata columns. Each element of the matrix column of the
+data frame (<code>mat</code>) contains a list of MPMs, while remaining
+columns include metadata associated with the matrices, while
+<code>VersionData</code> is a list of information about the database
+version. In practice, knowledge of the details of this structure is not
+necessary thanks to the tools provided by the <code>Rcompadre</code>
+package.</p>
 </div>
 <div class="section level3">
 <h3 id="obtaining-and-loading-the-data-">Obtaining and loading the data.<a class="anchor" aria-label="anchor" href="#obtaining-and-loading-the-data-"></a>
 </h3>
-<p>To get started you will first need to download the COMPADRE (or COMADRE) dataset from the website at <a href="https://compadre-db.org/" class="external-link">compadre-db.org/</a>.</p>
-<p>When you have done that you can load it into R using <code><a href="https://rdrr.io/r/base/load.html" class="external-link">load()</a></code>. It is usually a good idea to set up your working directory at this point. Assuming you are working in the same directory as your database file we can load the database like this. You should ensure that the database is of the correct class using <code><a href="../reference/as_cdb.html">as_cdb()</a></code>:</p>
+<p>To get started you will first need to download the COMPADRE (or
+COMADRE) dataset from the website at <a href="https://compadre-db.org/" class="external-link">compadre-db.org/</a>.</p>
+<p>When you have done that you can load it into R using
+<code><a href="https://rdrr.io/r/base/load.html" class="external-link">load()</a></code>. It is usually a good idea to set up your working
+directory at this point. Assuming you are working in the same directory
+as your database file we can load the database like this. You should
+ensure that the database is of the correct class using
+<code><a href="../reference/as_cdb.html">as_cdb()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span>
 <span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, <code><a href="../reference/cdb_fetch.html">cdb_fetch()</a></code> will automatically download the latest version of COMPADRE or COMADRE from the website, and ensure it is of the correct class. For example:</p>
+<p>Alternatively, <code><a href="../reference/cdb_fetch.html">cdb_fetch()</a></code> will automatically download
+the latest version of COMPADRE or COMADRE from the website, and ensure
+it is of the correct class. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">'compadre'</span><span class="op">)</span></code></pre></div>
-<p>For this vignette we will use the sample of COMPADRE data that is distributed with the package. This dataset is intended for demonstration and learning purposes only and should not be used for real analyses! You can load it like this:</p>
+<p>For this vignette we will use the sample of COMPADRE data that is
+distributed with the package. This dataset is intended for demonstration
+and learning purposes only and should not be used for real analyses! You
+can load it like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
-<p>We can now ask for a summary of this object, which will tell us that it is a <code>CompadreDB</code> class <code>S4</code> object. Simply typing the name of the object (<code>Compadre</code> in this case) will give a brief summary of its contents and display the first few rows of the data (which is a <code>tibble</code>). Please see the <code>tibble</code> vignette<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> for information about this object type, and how it differs from <code>data.table</code>.</p>
+<p>We can now ask for a summary of this object, which will tell us that
+it is a <code>CompadreDB</code> class <code>S4</code> object. Simply
+typing the name of the object (<code>Compadre</code> in this case) will
+give a brief summary of its contents and display the first few rows of
+the data (which is a <code>tibble</code>). Please see the
+<code>tibble</code> vignette<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> for information about this object type, and
+how it differs from <code>data.table</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt;     Length      Class       Mode </span>
@@ -160,7 +210,12 @@
 <span class="co">#&gt; <span style="color: #949494;">#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></code></pre></div>
-<p>This summary tells us that we have successfully loaded the data, and that there are 150 matrices. The database also contains some Version information which can be accessed using the command <code>VersionData(Compadre)</code>. This includes information including the version number, date created, and link to the database user agreement.</p>
+<p>This summary tells us that we have successfully loaded the data, and
+that there are 150 matrices. The database also contains some Version
+information which can be accessed using the command
+<code>VersionData(Compadre)</code>. This includes information including
+the version number, date created, and link to the database user
+agreement.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreDB.html">VersionData</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt; $Version</span>
@@ -175,7 +230,16 @@
 <div class="section level3">
 <h3 id="exploring-the-data">Exploring the data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
 </h3>
-<p>The database includes a range of metadata associated with the matrices including taxonomic information, geolocation, details of the publication from which matrix was obtained and so on. A full description of these variables can be found in the User Guide via the COMPADRE website. A list of metadata can be obtained simply by using the <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> command, in the same way that you would for a data frame. Each element of the <code>mat</code> column contains a list of the four matrices (<strong>A</strong>, <strong>U</strong>, <strong>F</strong>, <strong>C</strong>) and information on matrix stages while the other columns are ordinary vectors.</p>
+<p>The database includes a range of metadata associated with the
+matrices including taxonomic information, geolocation, details of the
+publication from which matrix was obtained and so on. A full description
+of these variables can be found in the User Guide via the COMPADRE
+website. A list of metadata can be obtained simply by using the
+<code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> command, in the same way that you would for a data
+frame. Each element of the <code>mat</code> column contains a list of
+the four matrices (<strong>A</strong>, <strong>U</strong>,
+<strong>F</strong>, <strong>C</strong>) and information on matrix stages
+while the other columns are ordinary vectors.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "mat"                    "SpeciesAuthor"          "SpeciesAccepted"       </span>
@@ -195,7 +259,9 @@
 <span class="co">#&gt; [43] "MatrixEndMonth"         "MatrixSplit"            "MatrixFec"             </span>
 <span class="co">#&gt; [46] "Observation"            "MatrixDimension"        "SurvivalIssue"         </span>
 <span class="co">#&gt; [49] "AnnualPeriodicity"</span></code></pre></div>
-<p>We can explore this information in various ways, for example, by producing tables, histograms, or other plots of variables of interest.</p>
+<p>We can explore this information in various ways, for example, by
+producing tables, histograms, or other plots of variables of
+interest.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">DicotMonoc</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -210,7 +276,9 @@
 <div class="section level3">
 <h3 id="finding-data-for-for-a-particular-species">Finding data for for a particular species<a class="anchor" aria-label="anchor" href="#finding-data-for-for-a-particular-species"></a>
 </h3>
-<p>If, for example, you want to check if a species is in the database you can use the <code><a href="../reference/cdb_check_species.html">cdb_check_species()</a></code> function. For example, we can ask if the species <em>Succisa pratensis</em> is present.</p>
+<p>If, for example, you want to check if a species is in the database
+you can use the <code><a href="../reference/cdb_check_species.html">cdb_check_species()</a></code> function. For example,
+we can ask if the species <em>Succisa pratensis</em> is present.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span><span class="op">)</span>
 <span class="co">#&gt;             species in_db</span>
@@ -223,7 +291,8 @@
 <span class="co">#&gt; 1 Succisa pratensis  TRUE</span>
 <span class="co">#&gt; 2       Onodrim ent FALSE</span>
 <span class="co">#&gt; 3     Aster amellus  TRUE</span></code></pre></div>
-<p>Optionally, the function can return a subset of the database restricted to matched species names.</p>
+<p>Optionally, the function can return a subset of the database
+restricted to matched species names.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">compadre_succisa</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span>, return_db <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">compadre_succisa</span>
@@ -245,8 +314,16 @@
 <div class="section level3">
 <h3 id="accessing-the-matrices">Accessing the matrices<a class="anchor" aria-label="anchor" href="#accessing-the-matrices"></a>
 </h3>
-<p>Matrices in <code>CompadreDB</code> objects are stored in a special vector, called <code>mat</code> as part of the data. However, the matrices are stored as special objects within the data frame and should be addressed using Rcompadre accessor functions to obtain the A, U, F and C matrices (see the User Guide), or information about the stage definitions used.</p>
-<p>Thus, to obtain the A matrix, which includes all types of transition one would use the <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code> function, which will return a list of A matrices from the database (there are equivalent functions, <code><a href="../reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="../reference/CompadreMatrixMethods.html">matF()</a></code> and <code><a href="../reference/CompadreMatrixMethods.html">matC()</a></code>:</p>
+<p>Matrices in <code>CompadreDB</code> objects are stored in a special
+vector, called <code>mat</code> as part of the data. However, the
+matrices are stored as special objects within the data frame and should
+be addressed using Rcompadre accessor functions to obtain the A, U, F
+and C matrices (see the User Guide), or information about the stage
+definitions used.</p>
+<p>Thus, to obtain the A matrix, which includes all types of transition
+one would use the <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code> function, which will return a list
+of A matrices from the database (there are equivalent functions,
+<code><a href="../reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="../reference/CompadreMatrixMethods.html">matF()</a></code> and <code><a href="../reference/CompadreMatrixMethods.html">matC()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
@@ -265,7 +342,8 @@
 <span class="co">#&gt; A3 0.0000000 0.7333333 0.40625 0.12 0.01923077</span>
 <span class="co">#&gt; A4 0.0000000 0.0000000 0.34375 0.70 0.53846154</span>
 <span class="co">#&gt; A5 0.0000000 0.0000000 0.00000 0.14 0.36538462</span></code></pre></div>
-<p>Thus one could select particular matrices from this list using <code>[[ ]]</code> syntax</p>
+<p>Thus one could select particular matrices from this list using
+<code>[[ ]]</code> syntax</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
@@ -276,7 +354,10 @@
 <span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
 <span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
 <span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></code></pre></div>
-<p>It is often desirable to know what the stages are in the matrices. To access this information you can use the <code><a href="../reference/CompadreMatrixMethods.html">matrixClass()</a></code> function. As with the other matrix accessor functions, the function returns a list which can be subsetted using square brackets.</p>
+<p>It is often desirable to know what the stages are in the matrices. To
+access this information you can use the <code><a href="../reference/CompadreMatrixMethods.html">matrixClass()</a></code>
+function. As with the other matrix accessor functions, the function
+returns a list which can be subsetted using square brackets.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">classInfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matrixClass</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
 <span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
@@ -312,7 +393,10 @@
 <div class="section level2">
 <h2 id="filteringsubsetting-the-database-based-on-metadata">Filtering/subsetting the database based on metadata<a class="anchor" aria-label="anchor" href="#filteringsubsetting-the-database-based-on-metadata"></a>
 </h2>
-<p>It is often desirable to subset the data based on sets of criteria. As with a normal data frame these databases can be subset using <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code>. For example, I could subset to only Eudicot species as follows:</p>
+<p>It is often desirable to subset the data based on sets of criteria.
+As with a normal data frame these databases can be subset using
+<code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code>. For example, I could subset to only Eudicot
+species as follows:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span><span class="op">)</span>
 <span class="va">x</span>
@@ -338,12 +422,16 @@
 <span class="co">#&gt; <span style="color: #949494;">#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></code></pre></div>
-<p>These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is &gt;2 I could use the following command:</p>
+<p>These subset arguments can be as complex as needed. For example, to
+subset to only Eudicot species from the United States or Canada and
+where the matrix dimension is &gt;2 I could use the following
+command:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> 
               <span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> 
               <span class="va">MatrixDimension</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p>You can compare compadre data sets using the <code><a href="../reference/cdb_compare.html">cdb_compare()</a></code> command:</p>
+<p>You can compare compadre data sets using the
+<code><a href="../reference/cdb_compare.html">cdb_compare()</a></code> command:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cdb_compare.html">cdb_compare</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; Quick Summary...</span>
@@ -360,8 +448,13 @@
 <div class="section level3">
 <h3 id="potential-issues-with-mpms">Potential issues with MPMs<a class="anchor" aria-label="anchor" href="#potential-issues-with-mpms"></a>
 </h3>
-<p>Numerous matrix calculations (Caswell 2001) have particular requirements for use. The details are beyond the scope of this vignette, but include things like (1) ergodicity, (2) primitivity, (3) singularity and (4) irreducibility. In addition, most matrix calculations will not work if there are missing values (i.e. <code>NA</code>) in the MPM.</p>
-<p>We can flag these by adding metadata using the <code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> function.</p>
+<p>Numerous matrix calculations (Caswell 2001) have particular
+requirements for use. The details are beyond the scope of this vignette,
+but include things like (1) ergodicity, (2) primitivity, (3) singularity
+and (4) irreducibility. In addition, most matrix calculations will not
+work if there are missing values (i.e. <code>NA</code>) in the MPM.</p>
+<p>We can flag these by adding metadata using the
+<code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Compadre_flagged</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
 <p>We could then use <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> like this:</p>
@@ -371,7 +464,14 @@
 <div class="section level3">
 <h3 id="calculations-from-matrices">Calculations from matrices<a class="anchor" aria-label="anchor" href="#calculations-from-matrices"></a>
 </h3>
-<p>When we have a set of matrices that we want to make calculations from, we can use <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code> to apply a function across all the matrices in the list produced by <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code>. For example, to calculate lambda from all the <strong>A</strong> matrices we can apply the function <code>eigs()</code> from the <code>popdemo</code> package to obtain lambda for the matrices in the <code>x</code> object produced above. Then we can examine a summary, produce a histogram etc.</p>
+<p>When we have a set of matrices that we want to make calculations
+from, we can use <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code> to apply a function across all
+the matrices in the list produced by <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></code>. For example,
+to calculate lambda from all the <strong>A</strong> matrices we can
+apply the function <code>eigs()</code> from the <code>popdemo</code>
+package to obtain lambda for the matrices in the <code>x</code> object
+produced above. Then we can examine a summary, produce a histogram
+etc.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lambdaVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs</a></span>, what<span class="op">=</span><span class="st">"lambda"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lambdaVals</span><span class="op">)</span>
@@ -383,12 +483,29 @@
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h3>
-<p>Caswell, H. (2001). Matrix Population Models: Construction, Analysis, and Interpretation. 2nd edition. Sinauer Associates, Sunderland, MA. ISBN-10: 0878930965</p>
-<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M., Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde, D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. , Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. , Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. , Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. , Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015), The COMPADRE Plant Matrix Database: an open online repository for plant demography. J Ecol, 103: 202-218. &lt;:10.1111/1365-2745.12334&gt;</p>
-<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. , Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. , Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. , Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a global data base of animal demography. J Anim Ecol, 85: 371-384. &lt;:10.1111/1365-2656.12482&gt;</p>
+<p>Caswell, H. (2001). Matrix Population Models: Construction, Analysis,
+and Interpretation. 2nd edition. Sinauer Associates, Sunderland, MA.
+ISBN-10: 0878930965</p>
+<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Buckley, Y. M.,
+Che‐Castaldo, J. , Caswell, H. , Hodgson, D. , Scheuerlein, A. , Conde,
+D. A., Brinks, E. , Buhr, H. , Farack, C. , Gottschalk, F. , Hartmann,
+A. , Henning, A. , Hoppe, G. , Römer, G. , Runge, J. , Ruoff, T. ,
+Wille, J. , Zeh, S. , Davison, R. , Vieregg, D. , Baudisch, A. ,
+Altwegg, R. , Colchero, F. , Dong, M. , Kroon, H. , Lebreton, J. ,
+Metcalf, C. J., Neel, M. M., Parker, I. M., Takada, T. , Valverde, T. ,
+Vélez‐Espino, L. A., Wardle, G. M., Franco, M. and Vaupel, J. W. (2015),
+The COMPADRE Plant Matrix Database: an open online repository for plant
+demography. J Ecol, 103: 202-218. &lt;:10.1111/1365-2745.12334&gt;</p>
+<p>Salguero‐Gómez, R. , Jones, O. R., Archer, C. R., Bein, C. , Buhr, H.
+, Farack, C. , Gottschalk, F. , Hartmann, A. , Henning, A. , Hoppe, G. ,
+Römer, G. , Ruoff, T. , Sommer, V. , Wille, J. , Voigt, J. , Zeh, S. ,
+Vieregg, D. , Buckley, Y. M., Che‐Castaldo, J. , Hodgson, D. ,
+Scheuerlein, A. , Caswell, H. and Vaupel, J. W. (2016), COMADRE: a
+global data base of animal demography. J Anim Ecol, 85: 371-384.
+&lt;:10.1111/1365-2656.12482&gt;</p>
 </div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
 <li id="fn1"><p>Tibbles: <a href="https://CRAN.R-project.org/package=tibble" class="external-link uri">https://CRAN.R-project.org/package=tibble</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
@@ -413,7 +530,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
