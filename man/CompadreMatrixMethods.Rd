@@ -105,11 +105,11 @@ MatrixClassNumber(object)
 \item{object}{A CompadreDB object}
 }
 \description{
-This page describes methods for accessing any matrix information from 
+This page describes methods for accessing any matrix information from
 CompadreMat and CompadreDB objects.
 
-Most methods for working with matrices are applicable to both CompadreMat and 
-CompadreDB objects. These are described on this page (along with a couple) 
+Most methods for working with matrices are applicable to both CompadreMat and
+CompadreDB objects. These are described on this page (along with a couple)
 of methods applicable to only CompadreMat or CompadreDB objects).
 }
 \section{Slots}{

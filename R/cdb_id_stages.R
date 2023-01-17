@@ -10,14 +10,14 @@
 #' @param stage_def Whether to define matrix stage class based on
 #'   "MatrixClassAuthor" or "MatrixClassOrganized" (see \emph{Details}).
 #'   Defaults to "MatrixClassAuthor".
-#' 
+#'
 #' @return Vector of integer identifiers corresponding to the rows of
 #'   \code{cdb}.
-#' 
+#'
 #' @author Patrick Barks <patrick.barks@@gmail.com>
-#' 
+#'
 #' @family data management
-#' 
+#'
 #' @details
 #' The vector 'MatrixClassOrganized' reflects standardized stage classes
 #' ('prop', 'active', or 'dorm'), whereas 'MatrixClassAuthor' reflects a
@@ -43,26 +43,26 @@
 #' stage definitions will usually be similar. Note, however, that the actual
 #' integers returned for the different stage definitions are likely to be very
 #' different (because they are based on alphabetical order).
-#' 
+#'
 #' @seealso \link{cdb_id}
-#' 
+#'
 #' @examples
 #' cdb_id_stages(Compadre, stage_def = "MatrixClassOrganized")
-#' 
+#'
 #' @export cdb_id_stages
 cdb_id_stages <- function(cdb, stage_def = "MatrixClassAuthor") {
-
   if (!inherits(cdb, "CompadreDB")) {
     stop("db must be of class CompadreDB. See function as_cdb")
   }
-  
-  stage_def <- match.arg(stage_def,
-                         c("MatrixClassOrganized", "MatrixClassAuthor"))
-  
+
+  stage_def <- match.arg(
+    stage_def,
+    c("MatrixClassOrganized", "MatrixClassAuthor")
+  )
+
   stage_fun <- match.fun(stage_def)
   cdb@data$stage_def <- stage_fun(cdb)
   cdb@data$stage_def <- vapply(cdb@data$stage_def, paste, "", collapse = ", ")
-  
+
   cdb_id(cdb, columns = c("SpeciesAccepted", "stage_def"))
 }
-

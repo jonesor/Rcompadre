@@ -18,7 +18,6 @@ object.
 }
 \examples{
 Compadre <- as_cdb(CompadreLegacy)
-
 }
 \author{
 Iain M. Stott

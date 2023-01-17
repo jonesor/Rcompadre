@@ -36,13 +36,13 @@ it is not included in the user's column subset.
 }
 \examples{
 # subset to the first 10 rows
-Compadre[1:10,]
+Compadre[1:10, ]
 
 # subset to the species 'Echinacea angustifolia'
 subset(Compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 # remove the column SurvivalIssue
-Compadre[,names(Compadre) != "SurvivalIssue"]
+Compadre[, names(Compadre) != "SurvivalIssue"]
 
 \dontrun{
 # column selection doesn't include mat, but mat will still be returned with a

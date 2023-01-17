@@ -143,11 +143,11 @@ See the Changelog for more details.
 ## Citation
 
 Jones, Owen R., Patrick Barks, Iain M. Stott, Tamora D. James, Sam C.
-Levin, William K. Petry, Pol Capdevila, et al. 2021. “Rcompadre and Rage
+Levin, William K. Petry, Pol Capdevila, et al. 2022. “Rcompadre and Rage
 – Two R Packages to Facilitate the Use of the COMPADRE and COMADRE
 Databases and Calculation of Life History Traits from Matrix Population
-Models.” *bioRxiv*. doi:
-[10.1101/2021.04.26.441330](https://doi.org/10.1101/2021.04.26.441330).
+Models.” *Methods in Ecology and Evolution*. doi:
+[10.1111/2041-210X.13792](https://doi.org/10.1111/2041-210X.13792).
 
 ## Contributions
 

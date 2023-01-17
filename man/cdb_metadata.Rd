@@ -13,7 +13,7 @@ cdb_metadata(cdb)
 Tibble with all metadata columns of \code{cdb}
 }
 \description{
-Extract a tibble with only metadata information from a CompadreDB object, by 
+Extract a tibble with only metadata information from a CompadreDB object, by
 dropping the matrix column "mat".
 }
 \details{

@@ -12,15 +12,15 @@ citEntry(
     as.person("Gesa Römer"), as.person("Caroline Schuette"), as.person("Chelsea C Thomas"), 
     as.person("Roberto Salguero-Gómez")
   ),
-  journal = "bioRxiv",
-  year = "2021",
-  pages = "2021.04.26.441330",
-  doi = "10.1101/2021.04.26.441330",
+  journal = "Methods in Ecology and Evolution",
+  year = "2022",
+  pages = "",
+  doi = "10.1111/2041-210X.13792",
   textVersion =
     paste(
-      "Jones, OR et al. (2021).",
+      "Jones, OR et al. (2022).",
       "Rcompadre and Rage - two R packages to facilitate the use of the COMPADRE and COMADRE databases and calculation of life history traits from matrix population models.",
-      "bioRxiv, 2021.04.26.441330",
-      "URL https://www.biorxiv.org/content/10.1101/2021.04.26.441330v1."
+      "Methods in Ecology and Evolution",
+      "URL https://doi.org/10.1111/2041-210X.13792"
     )
 )

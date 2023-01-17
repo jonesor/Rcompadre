@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,23 +39,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -82,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jonesor/Rcompadre/">
+  <a href="https://github.com/jonesor/Rcompadre/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,220 +97,219 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Rcompadre with the tidyverse</h1>
-                        <h4 class="author">Patrick Barks &amp; Owen Jones</h4>
+                        <h4 data-toc-skip class="author">Patrick Barks &amp; Owen Jones</h4>
             
-            <h4 class="date">2021-10-15</h4>
+            <h4 data-toc-skip class="date">2023-01-17</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/master/vignettes/a02_RcompadreTidy.Rmd"><code>vignettes/a02_RcompadreTidy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/HEAD/vignettes/a02_RcompadreTidy.Rmd" class="external-link"><code>vignettes/a02_RcompadreTidy.Rmd</code></a></small>
       <div class="hidden name"><code>a02_RcompadreTidy.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Rcompadre includes methods for a variety of functions in the “<a href="https://www.tidyverse.org/">Tidyverse</a>”, a popular group of R packages geared toward data analysis, including <a href="https://dplyr.tidyverse.org/">dplyr</a> (a grammar of data manipulation) and <a href="https://ggplot2.tidyverse.org/">ggplot2</a> (a grammar of graphics). This vignette covers manipulation of <code>CompadreDB</code> objects using <code>dplyr</code>, and a few examples of plotting <code>CompadreDB</code> objects using <code>ggplot2.</code> Users new to these packages may wish to check out more introductory materials (e.g. the <a href="https://CRAN.R-project.org/package=dplyr">dplyr vignette</a>, or the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualization chapter</a> of <em>R for Data Science</em>).</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>Rcompadre includes methods for a variety of functions in the “<a href="https://www.tidyverse.org/" class="external-link">Tidyverse</a>”, a popular group of R packages geared toward data analysis, including <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> (a grammar of data manipulation) and <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a> (a grammar of graphics). This vignette covers manipulation of <code>CompadreDB</code> objects using <code>dplyr</code>, and a few examples of plotting <code>CompadreDB</code> objects using <code>ggplot2.</code> Users new to these packages may wish to check out more introductory materials (e.g. the <a href="https://CRAN.R-project.org/package=dplyr" class="external-link">dplyr vignette</a>, or the <a href="https://r4ds.had.co.nz/data-visualisation.html" class="external-link">Data Visualization chapter</a> of <em>R for Data Science</em>).</p>
 </div>
-<div id="preliminaries" class="section level2">
-<h2 class="hasAnchor">
-<a href="#preliminaries" class="anchor"></a>Preliminaries</h2>
+<div class="section level2">
+<h2 id="preliminaries">Preliminaries<a class="anchor" aria-label="anchor" href="#preliminaries"></a>
+</h2>
 <p>We’ll begin by loading a few packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre">Rcompadre</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">popdemo</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>     <span class="co"># for plotting world map</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre" class="external-link">Rcompadre</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">popdemo</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>     <span class="co"># for plotting world map</span></span></code></pre></div>
 </div>
-<div id="introduction-to-piping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction-to-piping" class="anchor"></a>Introduction to piping</h2>
-<p>The dplyr package includes an operator called the pipe (<code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>) (from the <a href="https://magrittr.tidyverse.org/">magrittr</a> package), which passes an object on the left to the first argument of a function on the right.</p>
+<div class="section level2">
+<h2 id="introduction-to-piping">Introduction to piping<a class="anchor" aria-label="anchor" href="#introduction-to-piping"></a>
+</h2>
+<p>We can take advantage of piping. The pipe (<code>%&gt;%</code>) (from the <a href="https://magrittr.tidyverse.org/" class="external-link">magrittr</a> package), passes an object on the left to the first argument of a function on the right. There is also a native pipe (after R v. 4.1.0) but the <code>magrittr</code> pipe has some advantages because it has a placeholder element for when one does not want the left hand side result to go to the <em>first</em> argument of the right hand expression.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">4.1</span>, <span class="fl">3.7</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>         <span class="co"># 'normal' expression</span>
-<span class="va">y</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span>    <span class="co"># piped expression</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">4.1</span>, <span class="fl">3.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>         <span class="co"># 'normal' expression</span></span>
+<span><span class="va">y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span>    <span class="co"># piped expression</span></span></code></pre></div>
 <p>Though we generally don’t need to, we can explicitly refer to the object on the left using a dot (<code>"."</code>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span>       <span class="co"># dot is implicit</span>
-<span class="va">y</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.</span><span class="op">)</span>  <span class="co"># dot is explicit</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span>       <span class="co"># dot is implicit</span></span>
+<span><span class="va">y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.</span><span class="op">)</span>  <span class="co"># dot is explicit</span></span></code></pre></div>
 <p>The dot notation is particularly helpful if we want to pass the object on the left to an argument <em>other</em> than the first one.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
-<span class="va">y</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="va">x</span>, col2 <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="co"># use dot to pass object to second argument</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span><span class="va">y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="va">x</span>, col2 <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="co"># use dot to pass object to second argument</span></span></code></pre></div>
 <p>Using a pipe in a single line isn’t that helpful. The real benefits come when we use pipes in multi-line expressions to carry out a sequence of related operations.</p>
-<div id="piping-with-rcompadre" class="section level4">
-<h4 class="hasAnchor">
-<a href="#piping-with-rcompadre" class="anchor"></a>Piping with Rcompadre</h4>
-<p>Let’s say we want to remove all rows where matA contains missing values (<code>NA</code>). We can use <code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> to add a column checking for <code>NA</code> (column “check_NA_A”), and then use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> to remove those rows. Here are two approaches without piping:</p>
+<div class="section level4">
+<h4 id="piping-with-rcompadre">Piping with Rcompadre<a class="anchor" aria-label="anchor" href="#piping-with-rcompadre"></a>
+</h4>
+<p>Let’s say we want to remove all rows where matA contains missing values (<code>NA</code>). We can use <code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> to add a column checking for <code>NA</code> (column “check_NA_A”), and then use <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> to remove those rows. Here are two approaches without piping:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># approach 1 (nested functions)</span>
-<span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># approach 2 (intermediate step)</span>
-<span class="va">compadre_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
-<span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">compadre_flag</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># approach 1 (nested functions)</span></span>
+<span><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># approach 2 (intermediate step)</span></span>
+<span><span class="va">compadre_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
+<span><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">compadre_flag</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>and here’s the equivalent piped sequence:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>               <span class="co"># first argument is Compadre, from previous line</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># first argument is output of cdb_flag()</span></code></pre></div>
-<p>The advantage of piping here is that we don’t have to use nested functions (<code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter(cdb_flag())</a></code>), and we don’t have to create object names for every intermediate step in our analysis. An additional alternative is to use <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>.</p>
+<code class="sourceCode R"><span><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>               <span class="co"># first argument is Compadre, from previous line</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># first argument is output of cdb_flag()</span></span></code></pre></div>
+<p>The advantage of piping here is that we don’t have to use nested functions (<code>filter(cdb_flag())</code>), and we don’t have to create object names for every intermediate step in our analysis. An additional alternative is to use <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>.</p>
 </div>
 </div>
-<div id="the-mutate-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-mutate-function" class="anchor"></a>The <code>mutate</code> function</h2>
-<p>The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function in dplyr adds one or more new columns to a data frame (or in our case, a <code>CompadreDB</code> object). Often the new column will be based on some transformation of one or more of the existing columns.</p>
-<p>Let’s say we want to conduct an analysis comparing Nordic countries to the rest of Europe. We can use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> to limit the database to Europe, and then use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> to create a new column identifying rows from Nordic countries.</p>
+<div class="section level2">
+<h2 id="the-mutate-function">The <code>mutate</code> function<a class="anchor" aria-label="anchor" href="#the-mutate-function"></a>
+</h2>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> function in dplyr adds one or more new columns to a data frame (or in our case, a <code>CompadreDB</code> object). Often the new column will be based on some transformation of one or more of the existing columns.</p>
+<p>Let’s say we want to conduct an analysis comparing Nordic countries to the rest of Europe. We can use <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> to limit the database to Europe, and then use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> to create a new column identifying rows from Nordic countries.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_euro</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Continent</span> <span class="op">==</span> <span class="st">"Europe"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Nordic <span class="op">=</span> <span class="va">Country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NOR"</span>, <span class="st">"SWE"</span>, <span class="st">"DNK"</span>, <span class="st">"ISL"</span>, <span class="st">"FIN"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="using-mutate-with-rcompadre-functions-that-return-vectors" class="section level4">
-<h4 class="hasAnchor">
-<a href="#using-mutate-with-rcompadre-functions-that-return-vectors" class="anchor"></a>Using <code>mutate</code> with Rcompadre functions that return vectors</h4>
-<p>A variety of <code>Rcompadre</code> functions take a <code>CompadreDB</code> object as their first argument and return a vector. To use these functions within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> in a piped sequence, we generally need to explicitly refer to the object on the left side of the pipe with a dot (<code>"."</code>).</p>
+<code class="sourceCode R"><span><span class="va">compadre_euro</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Continent</span> <span class="op">==</span> <span class="st">"Europe"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Nordic <span class="op">=</span> <span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NOR"</span>, <span class="st">"SWE"</span>, <span class="st">"DNK"</span>, <span class="st">"ISL"</span>, <span class="st">"FIN"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="using-mutate-with-rcompadre-functions-that-return-vectors">Using <code>mutate</code> with Rcompadre functions that return vectors<a class="anchor" aria-label="anchor" href="#using-mutate-with-rcompadre-functions-that-return-vectors"></a>
+</h4>
+<p>A variety of <code>Rcompadre</code> functions take a <code>CompadreDB</code> object as their first argument and return a vector. To use these functions within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> in a piped sequence, we generally need to explicitly refer to the object on the left side of the pipe with a dot (<code>"."</code>).</p>
 <p>Here’s an example with the Rcompadre functions <code><a href="../reference/mpm_methods.html">mpm_has_active()</a></code> and <code><a href="../reference/cdb_id_studies.html">cdb_id_studies()</a></code>, each of which take a <code>CompadreDB</code> object and return a vector.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>has_active <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_has_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">has_active</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>StudyID <span class="op">=</span> <span class="fu"><a href="../reference/cdb_id_studies.html">cdb_id_studies</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>In the example above, the pipe passes a <code>CompadreDB</code> object to the first arguments of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code>, respectively. The dot for the first argument is implicit. Then, within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, we use the dot again (explicitly this time) to pass the <code>CompadreDB</code> object to <code><a href="../reference/mpm_methods.html">mpm_has_active()</a></code> or <code><a href="../reference/cdb_id_studies.html">cdb_id_studies()</a></code>.</p>
+<code class="sourceCode R"><span><span class="va">compadre_use</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>has_active <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_has_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">has_active</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>StudyID <span class="op">=</span> <span class="fu"><a href="../reference/cdb_id_studies.html">cdb_id_studies</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>In the example above, the pipe passes a <code>CompadreDB</code> object to the first arguments of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code>, respectively. The dot for the first argument is implicit. Then, within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>, we use the dot again (explicitly this time) to pass the <code>CompadreDB</code> object to <code><a href="../reference/mpm_methods.html">mpm_has_active()</a></code> or <code><a href="../reference/cdb_id_studies.html">cdb_id_studies()</a></code>.</p>
 <p>We can also use the dot notation approach to extract components from the <code>CompadreMat</code> objects in the column <code>mat</code>, such as <code>matA</code>, <code>matU</code>, <code>matF</code>, <code>matC</code>, <code>matrixClass</code>, <code>MatrixClassOrganized</code>, or <code>MatrixClassAuthor.</code> Each of these components can be accessed using an accessor function of the same name. Here’s how to extract a list of <code>matU</code> and a list of <code>MatrixClassOrganized</code> from each row of the database, and add these lists to a <code>CompadreDB</code> object as new columns:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_unnest</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mat_U <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,
-         m_class_organized <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">MatrixClassOrganized</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">compadre_unnest</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mat_U <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,</span>
+<span>         m_class_organized <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">MatrixClassOrganized</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="vectorizing-within-mutate-with-the-apply-functions" class="section level4">
-<h4 class="hasAnchor">
-<a href="#vectorizing-within-mutate-with-the-apply-functions" class="anchor"></a>Vectorizing within <code>mutate</code> with the apply functions</h4>
-<p>Just like creating a new column with <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> (e.g. <code>compadre$new_col &lt;- ...</code>), each expression within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> must return a vector of the same length as the number of rows in the data frame, or return a single value which will be recycled for all rows. For some operations this requires vectorization.</p>
-<p>Let’s say we want to calculate the population growth rate for every matrix in the database. We can use the <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> function in the <a href="https://CRAN.R-project.org/package=popdemo">popdemo</a> package, but it can only take a single matrix at a time.</p>
-<p>To apply <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> to a list of matrices we can use <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. But first we need to remove matrices with missing values, because these will cause <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs()</a></code> to fail.</p>
+<div class="section level4">
+<h4 id="vectorizing-within-mutate-with-the-apply-functions">Vectorizing within <code>mutate</code> with the apply functions<a class="anchor" aria-label="anchor" href="#vectorizing-within-mutate-with-the-apply-functions"></a>
+</h4>
+<p>Just like creating a new column with <code>$</code> (e.g. <code>compadre$new_col &lt;- ...</code>), each expression within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> must return a vector of the same length as the number of rows in the data frame, or return a single value which will be recycled for all rows. For some operations this requires vectorization.</p>
+<p>Let’s say we want to calculate the population growth rate for every matrix in the database. We can use the <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs()</a></code> function in the <a href="https://CRAN.R-project.org/package=popdemo" class="external-link">popdemo</a> package, but it can only take a single matrix at a time.</p>
+<p>To apply <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs()</a></code> to a list of matrices we can use <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code>. But first we need to remove matrices with missing values, because these will cause <code><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs()</a></code> to fail.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_lambda</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>      <span class="co"># remove matrices with missing values</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mat_A <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>          <span class="co"># extract list-column of matA</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html">eigs</a></span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># get lambda for every matA</span>
-<span class="co">#&gt; Warning in FUN(X[[i]], ...): More than one eigenvalues have equal absolute</span>
-<span class="co">#&gt; magnitude</span></code></pre></div>
-<p>In the example above, <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> which always returns a list. In the example below we use <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> to calculate vectors of stage-specific survival (column sums of <code>matU</code>) for every row of the database.</p>
+<code class="sourceCode R"><span><span class="va">compadre_lambda</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>      <span class="co"># remove matrices with missing values</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mat_A <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>          <span class="co"># extract list-column of matA</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>lam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">mat_A</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs</a></span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># get lambda for every matA</span></span>
+<span><span class="co">#&gt; Warning in FUN(X[[i]], ...): More than one eigenvalues have equal absolute</span></span>
+<span><span class="co">#&gt; magnitude</span></span></code></pre></div>
+<p>In the example above, <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code> returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> which always returns a list. In the example below we use <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> to calculate vectors of stage-specific survival (column sums of <code>matU</code>) for every row of the database.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_stage_surv</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>stage_survival <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="va">colSums</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># print vector of stage-specific survival for 20th row</span>
-<span class="va">compadre_stage_surv</span><span class="op">$</span><span class="va">stage_survival</span><span class="op">[[</span><span class="fl">20</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt;    U1    U2    U3    U4    U5    U6 </span>
-<span class="co">#&gt; 0.145 0.888 0.788 0.928 0.907 0.999</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">compadre_stage_surv</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>stage_survival <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="va">colSums</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># print vector of stage-specific survival for 20th row</span></span>
+<span><span class="va">compadre_stage_surv</span><span class="op">$</span><span class="va">stage_survival</span><span class="op">[[</span><span class="fl">20</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt;    U1    U2    U3    U4    U5    U6 </span></span>
+<span><span class="co">#&gt; 0.145 0.888 0.788 0.928 0.907 0.999</span></span></code></pre></div>
 </div>
-<div id="vectorizing-over-multiple-arguments" class="section level4">
-<h4 class="hasAnchor">
-<a href="#vectorizing-over-multiple-arguments" class="anchor"></a>Vectorizing over multiple arguments</h4>
+<div class="section level4">
+<h4 id="vectorizing-over-multiple-arguments">Vectorizing over multiple arguments<a class="anchor" aria-label="anchor" href="#vectorizing-over-multiple-arguments"></a>
+</h4>
 <p>Let’s say we want to know the survival probability for the first ‘active’ stage class (i.e. a stage that’s not dormant or propagule) for every row of the database. One approach is to write our own function that takes <code>matU</code> and the integer index of the first active stage class, and returns the corresponding survival probability, e.g.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">SurvFirstActive</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">matU</span>, <span class="va">first_active</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">matU</span><span class="op">)</span><span class="op">[</span><span class="va">first_active</span><span class="op">]</span></code></pre></div>
-<p>Notice that this function has two arguments, both of which will vary across rows of the database. We therefore need to vectorize this function over both arguments, which we can do with <code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> (i.e. “multivariate apply”). Here’s an example:</p>
+<code class="sourceCode R"><span><span class="va">SurvFirstActive</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">matU</span>, <span class="va">first_active</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">matU</span><span class="op">)</span><span class="op">[</span><span class="va">first_active</span><span class="op">]</span></span></code></pre></div>
+<p>Notice that this function has two arguments, both of which will vary across rows of the database. We therefore need to vectorize this function over both arguments, which we can do with <code><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply()</a></code> (i.e. “multivariate apply”). Here’s an example:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_surv_first_active</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>surv_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="va">SurvFirstActive</span>,              <span class="co"># function</span>
-                         matU <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,                     <span class="co"># argument 1</span>
-                         first_active <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_first_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="co"># argument 2</span>
-         <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">compadre_surv_first_active</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>surv_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="va">SurvFirstActive</span>,              <span class="co"># function</span></span>
+<span>                         matU <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,                     <span class="co"># argument 1</span></span>
+<span>                         first_active <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_first_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="co"># argument 2</span></span>
+<span>         <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="the-group_by-and-summarize-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-group_by-and-summarize-functions" class="anchor"></a>The <code>group_by</code> and <code>summarize</code> functions</h2>
-<p>The <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> functions are used for split-apply-combine operations, where we want to apply a function separately to different groups within our data, and then recombine the results.</p>
-<p>Here’s an example. We’ll use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> to group our database by unique values of species (column <code>SpeciesAccepted</code>), and then use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> to count the number of unique populations (column <code>MatrixPopulation</code>) for each group. Notice that the output is a regular tibble (i.e. no longer a <code>CompadreDB</code> object) with one row for each unique ‘group’ (i.e. species).</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># count number of unique populations by species</span>
-<span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n_populations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">MatrixPopulation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n_populations</span><span class="op">)</span><span class="op">)</span> <span class="co"># arrange in descending order of n_pops</span>
-<span class="co">#&gt; # A tibble: 110 × 2</span>
-<span class="co">#&gt;    SpeciesAccepted        n_populations</span>
-<span class="co">#&gt;    &lt;chr&gt;                          &lt;int&gt;</span>
-<span class="co">#&gt;  1 Aster amellus                      3</span>
-<span class="co">#&gt;  2 Echinacea angustifolia             3</span>
-<span class="co">#&gt;  3 Lepidium davisii                   3</span>
-<span class="co">#&gt;  4 Pyrrocoma radiata                  3</span>
-<span class="co">#&gt;  5 Androsace elongata                 2</span>
-<span class="co">#&gt;  6 Armeria caespitosa                 2</span>
-<span class="co">#&gt;  7 Asarum canadense                   2</span>
-<span class="co">#&gt;  8 Astragalus peckii                  2</span>
-<span class="co">#&gt;  9 Astragalus scaphoides              2</span>
-<span class="co">#&gt; 10 Calochortus lyallii                2</span>
-<span class="co">#&gt; # … with 100 more rows</span></code></pre></div>
-<p>If, instead of a summary table with one row per species, we would rather append the number of populations per species as a new column of our <code>CompadreDB</code> object, then we can follow <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>. Here’s an example:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># subset to species with 10+ unique populations</span>
-<span class="va">compadre_replicated_pops</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n_pops <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">MatrixPopulation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">n_pops</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<p>Make sure to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> after you’re finished with the groups, to prevent unexpected behaviour later on.</p>
-</div>
-<div id="obtaining-a-single-representative-of-each-species" class="section level2">
-<h2 class="hasAnchor">
-<a href="#obtaining-a-single-representative-of-each-species" class="anchor"></a>Obtaining a single representative of each species</h2>
-<p>It is a common task in comparative analyses to obtain a single representative of each species. One way that users can do that is by using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>, followed by <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> and <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> to randomly select a representative from each accepted species.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">singleRepresentativeSpecies</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="using-compadredb-objects-with-ggplot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-compadredb-objects-with-ggplot" class="anchor"></a>Using CompadreDB objects with <code>ggplot</code>
+<div class="section level2">
+<h2 id="the-group_by-and-summarize-functions">The <code>group_by</code> and <code>summarize</code> functions<a class="anchor" aria-label="anchor" href="#the-group_by-and-summarize-functions"></a>
 </h2>
-<p>Rcompadre includes methods that allow CompadreDB objects to be used as data arguments within <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, just like any old data frame. Below are some example plots.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> functions are used for split-apply-combine operations, where we want to apply a function separately to different groups within our data, and then recombine the results.</p>
+<p>Here’s an example. We’ll use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> to group our database by unique values of species (column <code>SpeciesAccepted</code>), and then use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> to count the number of unique populations (column <code>MatrixPopulation</code>) for each group. Notice that the output is a regular tibble (i.e. no longer a <code>CompadreDB</code> object) with one row for each unique ‘group’ (i.e. species).</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># count number of unique populations by species</span></span>
+<span><span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>n_populations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">MatrixPopulation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_populations</span><span class="op">)</span><span class="op">)</span> <span class="co"># arrange in descending order of n_pops</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 110 × 2</span></span></span>
+<span><span class="co">#&gt;    SpeciesAccepted        n_populations</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Aster amellus                      3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Echinacea angustifolia             3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Lepidium davisii                   3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Pyrrocoma radiata                  3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Androsace elongata                 2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Armeria caespitosa                 2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Asarum canadense                   2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Astragalus peckii                  2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Astragalus scaphoides              2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Calochortus lyallii                2</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 100 more rows</span></span></span></code></pre></div>
+<p>If, instead of a summary table with one row per species, we would rather append the number of populations per species as a new column of our <code>CompadreDB</code> object, then we can follow <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>. Here’s an example:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># subset to species with 10+ unique populations</span></span>
+<span><span class="va">compadre_replicated_pops</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>n_pops <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">MatrixPopulation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">n_pops</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<p>Make sure to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> after you’re finished with the groups, to prevent unexpected behaviour later on.</p>
+</div>
+<div class="section level2">
+<h2 id="obtaining-a-single-representative-of-each-species">Obtaining a single representative of each species<a class="anchor" aria-label="anchor" href="#obtaining-a-single-representative-of-each-species"></a>
+</h2>
+<p>It is a common task in comparative analyses to obtain a single representative of each species. One way that users can do that is by using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>, followed by <code><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice()</a></code> and <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code> to randomly select a representative from each accepted species.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">singleRepresentativeSpecies</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">SpeciesAccepted</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="using-compadredb-objects-with-ggplot">Using CompadreDB objects with <code>ggplot</code><a class="anchor" aria-label="anchor" href="#using-compadredb-objects-with-ggplot"></a>
+</h2>
+<p>Rcompadre includes methods that allow CompadreDB objects to be used as data arguments within <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code>, just like any old data frame. Below are some example plots.</p>
 <p><strong>Plot study coordinates on world map:</strong></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Lon</span>, <span class="va">Lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/borders.html">borders</a></span><span class="op">(</span>database <span class="op">=</span> <span class="st">"world"</span>, fill <span class="op">=</span> <span class="st">"grey80"</span>, col <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"steelblue"</span>, size <span class="op">=</span> <span class="fl">1.8</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Lon</span>, <span class="va">Lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders</a></span><span class="op">(</span>database <span class="op">=</span> <span class="st">"world"</span>, fill <span class="op">=</span> <span class="st">"grey80"</span>, col <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"steelblue"</span>, size <span class="op">=</span> <span class="fl">1.8</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a02_RcompadreTidy_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 <p><strong>Boxplots of life expectancy from the first non-propagule stage, arranged by OrganismType, based on ‘grand mean matrices’ from studies of wild, unmanipulated populations:</strong></p>
 <p>This one is rather advanced, combining all of the topics in this vignette. So don’t worry if you can’t immediately understand every line.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># function to calculate life expectancy</span>
-<span class="va">lifeExpectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">matU</span>, <span class="va">startLife</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">matU</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="va">matU</span><span class="op">)</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">[</span><span class="va">startLife</span><span class="op">]</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">compadre_life_expect</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">MatrixComposite</span> <span class="op">!=</span> <span class="st">"Seasonal"</span>, <span class="co"># filter is the dplyr version of subset</span>
-         <span class="va">MatrixTreatment</span> <span class="op">==</span> <span class="st">"Unmanipulated"</span>,
-         <span class="va">MatrixCaptivity</span> <span class="op">==</span> <span class="st">"W"</span>,
-         <span class="va">ProjectionInterval</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>StageID <span class="op">=</span> <span class="fu"><a href="../reference/cdb_id_stages.html">cdb_id_stages</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/cdb_collapse.html">cdb_collapse</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"StageID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">check_NA_U</span> <span class="op">==</span> <span class="cn">FALSE</span>,
-         <span class="va">check_zero_U</span> <span class="op">==</span> <span class="cn">FALSE</span>,
-         <span class="va">check_singular_U</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>matU <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, start_life <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_first_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>life_expectancy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">lifeExpectancy</span>, <span class="va">matU</span>, <span class="va">start_life</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">life_expectancy</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>OrganismType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">OrganismType</span>, <span class="va">life_expectancy</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">compadre_life_expect</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">OrganismType</span>, <span class="va">life_expectancy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Life expectancy (years)"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># function to calculate life expectancy</span></span>
+<span><span class="va">lifeExpectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">matU</span>, <span class="va">startLife</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">matU</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="va">matU</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">[</span><span class="va">startLife</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">compadre_life_expect</span> <span class="op">&lt;-</span> <span class="va">Compadre</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">MatrixComposite</span> <span class="op">!=</span> <span class="st">"Seasonal"</span>, <span class="co"># filter is the dplyr version of subset</span></span>
+<span>         <span class="va">MatrixTreatment</span> <span class="op">==</span> <span class="st">"Unmanipulated"</span>,</span>
+<span>         <span class="va">MatrixCaptivity</span> <span class="op">==</span> <span class="st">"W"</span>,</span>
+<span>         <span class="va">ProjectionInterval</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>StageID <span class="op">=</span> <span class="fu"><a href="../reference/cdb_id_stages.html">cdb_id_stages</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/cdb_collapse.html">cdb_collapse</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"StageID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">check_NA_U</span> <span class="op">==</span> <span class="cn">FALSE</span>,</span>
+<span>         <span class="va">check_zero_U</span> <span class="op">==</span> <span class="cn">FALSE</span>,</span>
+<span>         <span class="va">check_singular_U</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>matU <span class="op">=</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matU</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, start_life <span class="op">=</span> <span class="fu"><a href="../reference/mpm_methods.html">mpm_first_active</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>life_expectancy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">lifeExpectancy</span>, <span class="va">matU</span>, <span class="va">start_life</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">life_expectancy</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>OrganismType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">OrganismType</span>, <span class="va">life_expectancy</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">compadre_life_expect</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">OrganismType</span>, <span class="va">life_expectancy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Life expectancy (years)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a02_RcompadreTidy_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 </div>
   </div>
@@ -330,11 +325,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
+  <p></p>
+<p>Developed by Patrick Barks, Danny Buss, Roberto Salguero-Gomez, Iain Stott, William K. Petry, Tamora James, Owen Jones, Julia Jones, Gesa Römer, Sam Levin.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -342,6 +339,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -42,7 +42,7 @@ library(maps)     # for plotting world map
 
 ## Introduction to piping
 
-The dplyr package includes an operator called the pipe (`%>%`) (from the [magrittr](https://magrittr.tidyverse.org/) package), which passes an object on the left to the first argument of a function on the right.
+We can take advantage of piping. The pipe (`%>%`) (from the [magrittr](https://magrittr.tidyverse.org/) package), passes an object on the left to the first argument of a function on the right. There is also a native pipe (after R v. 4.1.0) but the `magrittr` pipe has some advantages because it has a placeholder element for when one does not want the left hand side result to go to the *first* argument of the right hand expression.
 
 ```{r results=FALSE}
 y <- c(0.2, 4.1, 3.7)

@@ -4,16 +4,29 @@
 \alias{cdb_fetch}
 \title{Fetch the COM(P)ADRE database from compadre-db.org or a local file}
 \usage{
-cdb_fetch(cdb, flag = FALSE)
+cdb_fetch(cdb, version = NULL, flag = FALSE, userComment = NULL, quiet = FALSE)
 }
 \arguments{
 \item{cdb}{Either "comadre" or "compadre" (case insensitive) to fetch the
 most recent database from \url{https://compadre-db.org}, or a path to an
 existing COMPADRE database (i.e. .RData file) stored on the local machine.}
 
+\item{version}{Optional. The version number of a particular database to be
+downloaded e.g. "3.0.0". If this is not included (as default) the latest
+versions are downloaded.}
+
 \item{flag}{Logical argument where `TRUE` will automatically run
 \link{cdb_flag} to add logical columns to the metadata to flag potential
 problems in the matrix population models. Default is `FALSE`.}
+
+\item{userComment}{An optional string to enable users to add a comment as an
+attribute to the returned data frame. This could be useful for keeping
+track of multiple versions of the database. Accessed by
+`attributes(db)$comment`.}
+
+\item{quiet}{A logical argument. If `TRUE` the download message that includes
+version information and link to the user agreement is suppressed. Default
+is `FALSE`.}
 }
 \value{
 A CompadreDB object
@@ -23,13 +36,24 @@ Fetches the current version of a COM(P)ADRE database from
 \url{https://compadre-db.org}, or load any version stored in a local .RData
 file.
 }
+\note{
+The downloaded databases include a set of attributes accessible with
+  `attributes`. These include version information and date and time of
+  creation.
+}
 \examples{
 \dontrun{
-#Download direct from the COMPADRE website
+# Download latest version of COMPADRE direct from the website
 compadre <- cdb_fetch("compadre")
 
-#using file path to downloaded data
-compadre <- cdb_fetch("data/COMPADRE_v.5.0.1.RData") 
+# Examine the attributes of the downloaded database
+attributes(compadre)
+
+# Download COMPADRE version 3.0.0 direct from the website
+compadre <- cdb_fetch("compadre", version = "3.0.0")
+
+# using file path to downloaded data
+compadre <- cdb_fetch("data/COMPADRE_v.5.0.1.RData")
 }
 }
 \seealso{
@@ -38,8 +62,8 @@ Other data acquisition:
 \code{\link{cdb_metadata}()}
 }
 \author{
-Patrick M. Barks <patrick.barks@gmail.com>
-
 Owen R. Jones <jones@biology.sdu.dk>
+
+Patrick M. Barks <patrick.barks@gmail.com>
 }
 \concept{data acquisition}

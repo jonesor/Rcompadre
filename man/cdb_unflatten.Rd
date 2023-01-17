@@ -23,7 +23,7 @@ Converts a flattened COM(P)ADRE database (created by \link{cdb_flatten}) back
 to the CompadreDB class
 }
 \examples{
-CompadreFlat <- cdb_flatten(Compadre)    # flatten
+CompadreFlat <- cdb_flatten(Compadre) # flatten
 Compadre2 <- cdb_unflatten(CompadreFlat) # reconstitute
 
 }

@@ -231,7 +231,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # Where stage information IS provided: check that the dimensions match and
   # that correct information is provided
   if (hasArg(stages)) {
-    if (class(stages) != "list") {
+    if (!inherits(stages, "list")) {
       stop("stages must be provided as a list of data.frame objects")
     }
     for (i in 1:length(stages)) {
