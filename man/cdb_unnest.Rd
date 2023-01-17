@@ -16,8 +16,8 @@ cdb_unnest(
 
 \item{components}{Character vector specifying which components to extract.
 
-Defaults to all, i.e. \code{c("matA", "matU", "matF", "matC",
-"MatrixClassAuthor", "MatrixClassOrganized", "MatrixClassNumber")}}
+  Defaults to all, i.e. \code{c("matA", "matU", "matF", "matC",
+  "MatrixClassAuthor", "MatrixClassOrganized", "MatrixClassNumber")}}
 }
 \value{
 \code{cdb} with additional list-columns for each element of argument

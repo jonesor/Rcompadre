@@ -104,9 +104,9 @@ Slot \strong{version} - A list with the following elements:
 \item Agreement - Link to the COMADRE license agreement
 }
 
-An object of class \code{CompadreDB} with 150 rows and 49 columns.
+An object of class \code{CompadreDB} of length 1.
 
-An object of class \code{CompadreDB} with 150 rows and 49 columns.
+An object of class \code{CompadreDB} of length 1.
 }
 \usage{
 Compadre

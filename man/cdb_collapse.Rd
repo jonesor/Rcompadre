@@ -2,7 +2,7 @@
 % Please edit documentation in R/cdb_collapse.R
 \name{cdb_collapse}
 \alias{cdb_collapse}
-\title{Collapse a COM(P)ADRE database by averaging matrices over levels of one or 
+\title{Collapse a COM(P)ADRE database by averaging matrices over levels of one or
 more grouping variables}
 \usage{
 cdb_collapse(cdb, columns)

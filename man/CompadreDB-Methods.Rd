@@ -19,7 +19,7 @@
 \usage{
 \method{as.data.frame}{CompadreDB}(x, ...)
 
-\method{as_tibble}{CompadreDB}(x)
+as_tibble.CompadreDB(x)
 
 \method{head}{CompadreDB}(x, n = 6L, ...)
 
