@@ -21,7 +21,7 @@ set of columns."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -82,27 +82,21 @@ set of columns.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_id</span><span class="op">(</span><span class="va">cdb</span>, <span class="va">columns</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_id</span><span class="op">(</span><span class="va">cdb</span>, <span class="va">columns</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
-
-
 <dt>columns</dt>
 <dd><p>Vector of column names from which unique combinations should
 be identified</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>Vector of integer identifiers corresponding to the rows of</p>
-<p></p>
-<p><code>cdb</code>, based on unique combinations of the elements in <code>columns</code>.</p>
+    <p>Vector of integer identifiers corresponding to the rows of
+<code>cdb</code>, based on unique combinations of the elements in <code>columns</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -130,7 +124,7 @@ levels to integers.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cdb_id</span><span class="op">(</span><span class="va">Compadre</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SpeciesAuthor"</span>, <span class="st">"MatrixTreatment"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">cdb_id</span><span class="op">(</span><span class="va">Compadre</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SpeciesAuthor"</span>, <span class="st">"MatrixTreatment"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 108  71   3  53  48 100 111  57  20  98  93  17  69 113  19  96  62  92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  35 119  85  49  88 107  90  23  76  89 115  58   6 118  39  37  25  66</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  50  98  11 102 101  77  68 106   5  21  55 121  57  95  26  67  34 109</span>
@@ -140,7 +134,7 @@ levels to integers.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [109] 112  79  75 110  78  82  25  32  61 107 120  42  17  57 118  64   2  80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [127]  36  83  38 102  56  40  58  47  29  27  41 104  51 100  87  15  59  70</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [145]  30  10  54  15  24  46</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +149,7 @@ levels to integers.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

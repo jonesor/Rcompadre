@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -100,7 +100,9 @@
 <div class="section level1">
 <div class="page-header"><h1 id="rcompadre-">Rcompadre <img src="reference/figures/logo_rcompadre.png" height="160px" align="right"><a class="anchor" aria-label="anchor" href="#rcompadre-"></a>
 </h1></div>
-<!--- Continuous integration badges ---><!--- BE CAREFUL WITH THE FORMATTING ---><table class="table">
+<!--- Continuous integration badges --->
+<!--- BE CAREFUL WITH THE FORMATTING --->
+<table class="table">
 <colgroup>
 <col width="35%">
 <col width="30%">
@@ -140,67 +142,67 @@
 </h2>
 <p>Install the stable release package from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcompadre"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcompadre"</span><span class="op">)</span></code></pre></div>
 <p>Install the package from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install package 'remotes' if necessary</span></span>
-<span><span class="co"># will already be installed if 'devtools' is installed</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># argument 'build_opts = NULL' only needed if you want to build vignettes</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre"</span>, build_opts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="co"># install package 'remotes' if necessary</span>
+<span class="co"># will already be installed if 'devtools' is installed</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+
+<span class="co"># argument 'build_opts = NULL' only needed if you want to build vignettes</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre"</span>, build_opts <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <p>To install from the development branch use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre"</span>, ref <span class="op">=</span> <span class="st">"devel"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre"</span>, ref <span class="op">=</span> <span class="st">"devel"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre" class="external-link">Rcompadre</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre" class="external-link">Rcompadre</a></span><span class="op">)</span></code></pre></div>
 <div class="section level4">
 <h4 id="fetching-a-database">Fetching a database<a class="anchor" aria-label="anchor" href="#fetching-a-database"></a>
 </h4>
 <p>Fetch the most recent database version from <a href="https://compadre-db.org/" class="external-link">compadre-db.org</a> with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">"compadre"</span><span class="op">)</span> <span class="co"># or use 'comadre' for the animal database</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">"compadre"</span><span class="op">)</span> <span class="co"># or use 'comadre' for the animal database</span></code></pre></div>
 <p>or load from a local <code>.RData</code> file with</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">"path/to/file/COMPADRE_v.4.0.1.RData"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">"path/to/file/COMPADRE_v.4.0.1.RData"</span><span class="op">)</span></code></pre></div>
 <p>If you prefer using <code><a href="https://rdrr.io/r/base/load.html" class="external-link">load()</a></code> to load your local copy of a legacy database, use <code><a href="reference/as_cdb.html">as_cdb()</a></code> to convert it to the <code>CompadreDB</code> class</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span> <span class="co"># loads object 'compadre'</span></span>
-<span><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span> <span class="co"># loads object 'compadre'</span>
+<span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
 </h4>
 <p>For the most part <code>CompadreDB</code> objects work like a data frame. They can be subset using <code>[</code>, <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> or <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># subset to the first 10 rows</span></span>
-<span><span class="va">compadre</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span></span>
-<span></span>
-<span><span class="co"># subset to the species 'Echinacea angustifolia'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># subset to the species 'Echinacea angustifolia'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="co"># subset to the first 10 rows</span>
+<span class="va">compadre</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
+
+<span class="co"># subset to the species 'Echinacea angustifolia'</span>
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span>
+
+<span class="co"># subset to the species 'Echinacea angustifolia'</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">compadre</span>, <span class="va">SpeciesAccepted</span> <span class="op">==</span> <span class="st">"Echinacea angustifolia"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="example-analysis-calculating-population-growth-rates">Example analysis: calculating population growth rates<a class="anchor" aria-label="anchor" href="#example-analysis-calculating-population-growth-rates"></a>
 </h4>
 <p>First we’ll use the function <code><a href="reference/cdb_flag.html">cdb_flag()</a></code> to add columns to the database flagging potential issues with the projection matrices, such as missing values, or matrices that don’t meet assumptions like ergodicity, irreducibility, or primitivity.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compadre_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
 <p>We’ll only be able to calculate population growth rates from matrices that don’t contain missing values, and we only want to use matrices that meet the assumption of ergodicity, so we’ll subset the database accordingly.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compadre_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
-<span>  <span class="va">compadre_flags</span>,</span>
-<span>  <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>
+  <span class="va">compadre_flags</span>,
+  <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
 <p>Finally, we’ll use the <code>eigs()</code> function from the <a href="https://CRAN.R-project.org/package=popdemo" class="external-link">popdemo</a> package to calculate the population growth rate for every matrix in <code>compadre_sub</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="fu">popbio</span><span class="fu">::</span><span class="va">eigs</span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">compadre_sub</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_sub</span><span class="op">)</span>, <span class="fu">popbio</span><span class="fu">::</span><span class="va">eigs</span>, what <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
 <p>In the code above, the accessor function <code><a href="reference/CompadreMatrixMethods.html">matA()</a></code> is used to extract a list of projection matrices (the full matrix, <code>matA</code>) from every row of <code>compadre_sub</code>. There are also accessor functions for the matrix subcomponents (<code><a href="reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matF()</a></code>, <code><a href="reference/CompadreMatrixMethods.html">matC()</a></code>), and for many other parts of the database too.</p>
 </div>
 </div>
@@ -210,7 +212,7 @@
 <p>Specific earlier releases of this package can be installed using the appropriate <code>@</code> tag.</p>
 <p>For example to install version 0.1.0:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre@v0.1.0"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonesor/Rcompadre@v0.1.0"</span><span class="op">)</span></code></pre></div>
 <p>See the Changelog for more details.</p>
 </div>
 <div class="section level2">
@@ -287,7 +289,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

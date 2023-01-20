@@ -20,7 +20,7 @@ that are present in one database but not the other."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -81,25 +81,20 @@ that are present in one database but not the other.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_compare</span><span class="op">(</span><span class="va">cdb1</span>, <span class="va">cdb2</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_compare</span><span class="op">(</span><span class="va">cdb1</span>, <span class="va">cdb2</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb1, cdb2</dt>
 <dd><p>CompadreDB objects to compare</p></dd>
-
-
 <dt>verbose</dt>
 <dd><p>Logical argument indicating whether or not to return lots of
 detail</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>NULL. Output is printed rather than returned.</p>
+    <p>NULL. Output is printed rather than returned.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -116,10 +111,10 @@ detail</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Compadre1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">Continent</span> <span class="op">==</span> <span class="st">"Asia"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">Compadre2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">Continent</span> <span class="op">==</span> <span class="st">"Africa"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">cdb_compare</span><span class="op">(</span><span class="va">Compadre1</span>, <span class="va">Compadre2</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">Compadre1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">Continent</span> <span class="op">==</span> <span class="st">"Asia"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">Compadre2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">Continent</span> <span class="op">==</span> <span class="st">"Africa"</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu">cdb_compare</span><span class="op">(</span><span class="va">Compadre1</span>, <span class="va">Compadre2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Quick Summary...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cdb1 contains data for:</span>
@@ -132,7 +127,7 @@ detail</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 accepted species</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 matrices</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -147,7 +142,7 @@ detail</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

@@ -21,7 +21,7 @@ the species of interest."><!-- mathjax --><script src="https://cdnjs.cloudflare.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -83,36 +83,26 @@ the species of interest.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">cdb</span>, <span class="va">species</span>, return_db <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">cdb</span>, <span class="va">species</span>, return_db <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
-
-
 <dt>species</dt>
 <dd><p>Character vector of binomial species names, with the genus and
 specific epithet separated by either an underscore or a space (e.g.
 <code>c("Acipenser_fulvescens", "Borrelia_burgdorferi")</code>)</p></dd>
-
-
 <dt>return_db</dt>
 <dd><p>Logical argument indicating whether a database should be
 returned</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>If <code>return_db == FALSE</code>, returns a data frame with a column of
+    <p>If <code>return_db == FALSE</code>, returns a data frame with a column of
   species names and a column indicating whether a species occurs in the
-  database. If <code>return_db == TRUE</code>, returns a subset of <code>cdb</code></p>
-
-
-<p>containing only those species within argument <code>species</code>.</p>
+  database. If <code>return_db == TRUE</code>, returns a subset of <code>cdb</code>  containing only those species within argument <code>species</code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -132,14 +122,14 @@ returned</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Primula vulgaris"</span>, <span class="st">"Trillium ovatum"</span>, <span class="st">"Homo sapiens"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">species</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Primula vulgaris"</span>, <span class="st">"Trillium ovatum"</span>, <span class="st">"Homo sapiens"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">species</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            species in_db</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Primula vulgaris  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  Trillium ovatum  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     Homo sapiens FALSE</span>
-<span class="r-in"><span><span class="va">CompadreSubset</span> <span class="op">&lt;-</span> <span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">species</span>, return_db <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span class="va">CompadreSubset</span> <span class="op">&lt;-</span> <span class="fu">cdb_check_species</span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">species</span>, return_db <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -154,7 +144,7 @@ returned</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>
