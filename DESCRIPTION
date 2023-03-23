@@ -52,7 +52,7 @@ Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Collate: 
     'CompadreDB.R'
     'CompadreDB-Methods.R'
