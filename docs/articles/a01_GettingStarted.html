@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Getting started with Rcompadre</h1>
                         <h4 data-toc-skip class="author">Owen Jones</h4>
             
-            <h4 data-toc-skip class="date">2023-01-21</h4>
+            <h4 data-toc-skip class="date">2023-03-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/HEAD/vignettes/a01_GettingStarted.Rmd" class="external-link"><code>vignettes/a01_GettingStarted.Rmd</code></a></small>
       <div class="hidden name"><code>a01_GettingStarted.Rmd</code></div>
@@ -163,19 +163,19 @@ as your database file we can load the database like this. You should
 ensure that the database is of the correct class using
 <code><a href="../reference/as_cdb.html">as_cdb()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span>
-<span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"COMPADRE_v.4.0.1.RData"</span><span class="op">)</span></span>
+<span><span class="va">compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_cdb.html">as_cdb</a></span><span class="op">(</span><span class="va">compadre</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, <code><a href="../reference/cdb_fetch.html">cdb_fetch()</a></code> will automatically download
 the latest version of COMPADRE or COMADRE from the website, and ensure
 it is of the correct class. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">'compadre'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Compadre</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_fetch.html">cdb_fetch</a></span><span class="op">(</span><span class="st">'compadre'</span><span class="op">)</span></span></code></pre></div>
 <p>For this vignette we will use the sample of COMPADRE data that is
 distributed with the package. This dataset is intended for demonstration
 and learning purposes only and should not be used for real analyses! You
 can load it like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></code></pre></div>
 <p>We can now ask for a summary of this object, which will tell us that
 it is a <code>CompadreDB</code> class <code>S4</code> object. Simply
 typing the name of the object (<code>Compadre</code> in this case) will
@@ -184,32 +184,32 @@ the data (which is a <code>tibble</code>). Please see the
 <code>tibble</code> vignette<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> for information about this object type, and
 how it differs from <code>data.table</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
-<span class="co">#&gt;     Length      Class       Mode </span>
-<span class="co">#&gt;          1 CompadreDB         S4</span>
-<span class="va">Compadre</span>
-<span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 150 × 49</span></span>
-<span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style="color: #BB0000;">NA</span>         Seta… Poace… Poal… Lili…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style="color: #BB0000;">NA</span>         Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style="color: #BB0000;">NA</span>         Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style="color: #BB0000;">NA</span>         Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Platanthera_h… Platanthera ho… <span style="color: #BB0000;">NA</span>         Plat… Orchi… Aspa… Lili…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style="color: #BB0000;">NA</span>         Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style="color: #BB0000;">NA</span>         Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style="color: #BB0000;">NA</span>         Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style="color: #BB0000;">NA</span>         Plan… Plant… Lami… Magn…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows, and 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     Length      Class       Mode </span></span>
+<span><span class="co">#&gt;          1 CompadreDB         S4</span></span>
+<span><span class="va">Compadre</span></span>
+<span><span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 110 SPECIES and 150 MATRICES.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 150 × 49</span></span></span>
+<span><span class="co">#&gt;    mat        SpeciesA…¹ Speci…² Commo…³ Genus Family Order Class Phylum Kingdom</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Setaria_i… Setari… <span style="color: #BB0000;">NA</span>      Seta… Poace… Poal… Lili… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Lechea_ce… Lechea… <span style="color: #BB0000;">NA</span>      Lech… Cista… Malv… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Actinoste… Actino… <span style="color: #BB0000;">NA</span>      Acti… Eupho… Malp… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Gaura_neo… Gaura … <span style="color: #BB0000;">NA</span>      Gaura Onagr… Myrt… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Eriogonum… Eriogo… Buckwh… Erio… Polyg… Cary… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Platanthe… Platan… <span style="color: #BB0000;">NA</span>      Plat… Orchi… Aspa… Lili… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_p… Succis… <span style="color: #BB0000;">NA</span>      Succ… Capri… Dips… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Haplopapp… Pyrroc… <span style="color: #BB0000;">NA</span>      Pyrr… Compo… Aste… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalu… Astrag… <span style="color: #BB0000;">NA</span>      Astr… Legum… Faba… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Plantago_… Planta… <span style="color: #BB0000;">NA</span>      Plan… Plant… Lami… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows, 39 more variables: OrganismType &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p>This summary tells us that we have successfully loaded the data, and
 that there are 150 matrices. The database also contains some Version
 information which can be accessed using the command
@@ -217,15 +217,15 @@ information which can be accessed using the command
 the version number, date created, and link to the database user
 agreement.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/CompadreDB.html">VersionData</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
-<span class="co">#&gt; $Version</span>
-<span class="co">#&gt; [1] "X.X.X"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $DateCreated</span>
-<span class="co">#&gt; [1] "Nov_22_2017"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $Agreement</span>
-<span class="co">#&gt; [1] "http://www.compadre-db.org/Page/UserAgreement"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/CompadreDB.html">VersionData</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $Version</span></span>
+<span><span class="co">#&gt; [1] "X.X.X"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DateCreated</span></span>
+<span><span class="co">#&gt; [1] "Nov_22_2017"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $Agreement</span></span>
+<span><span class="co">#&gt; [1] "http://www.compadre-db.org/Page/UserAgreement"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="exploring-the-data">Exploring the data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
@@ -241,36 +241,36 @@ the four matrices (<strong>A</strong>, <strong>U</strong>,
 <strong>F</strong>, <strong>C</strong>) and information on matrix stages
 while the other columns are ordinary vectors.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "mat"                    "SpeciesAuthor"          "SpeciesAccepted"       </span>
-<span class="co">#&gt;  [4] "CommonName"             "Genus"                  "Family"                </span>
-<span class="co">#&gt;  [7] "Order"                  "Class"                  "Phylum"                </span>
-<span class="co">#&gt; [10] "Kingdom"                "OrganismType"           "DicotMonoc"            </span>
-<span class="co">#&gt; [13] "AngioGymno"             "Authors"                "Journal"               </span>
-<span class="co">#&gt; [16] "YearPublication"        "DOI_ISBN"               "AdditionalSource"      </span>
-<span class="co">#&gt; [19] "StudyDuration"          "StudyStart"             "StudyEnd"              </span>
-<span class="co">#&gt; [22] "ProjectionInterval"     "NumberPopulations"      "MatrixCriteriaSize"    </span>
-<span class="co">#&gt; [25] "MatrixCriteriaOntogeny" "MatrixCriteriaAge"      "MatrixPopulation"      </span>
-<span class="co">#&gt; [28] "Lat"                    "Lon"                    "Altitude"              </span>
-<span class="co">#&gt; [31] "Country"                "Continent"              "Ecoregion"             </span>
-<span class="co">#&gt; [34] "StudiedSex"             "MatrixComposite"        "MatrixTreatment"       </span>
-<span class="co">#&gt; [37] "MatrixCaptivity"        "MatrixStartYear"        "MatrixStartSeason"     </span>
-<span class="co">#&gt; [40] "MatrixStartMonth"       "MatrixEndYear"          "MatrixEndSeason"       </span>
-<span class="co">#&gt; [43] "MatrixEndMonth"         "MatrixSplit"            "MatrixFec"             </span>
-<span class="co">#&gt; [46] "Observation"            "MatrixDimension"        "SurvivalIssue"         </span>
-<span class="co">#&gt; [49] "AnnualPeriodicity"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "mat"                    "SpeciesAuthor"          "SpeciesAccepted"       </span></span>
+<span><span class="co">#&gt;  [4] "CommonName"             "Genus"                  "Family"                </span></span>
+<span><span class="co">#&gt;  [7] "Order"                  "Class"                  "Phylum"                </span></span>
+<span><span class="co">#&gt; [10] "Kingdom"                "OrganismType"           "DicotMonoc"            </span></span>
+<span><span class="co">#&gt; [13] "AngioGymno"             "Authors"                "Journal"               </span></span>
+<span><span class="co">#&gt; [16] "YearPublication"        "DOI_ISBN"               "AdditionalSource"      </span></span>
+<span><span class="co">#&gt; [19] "StudyDuration"          "StudyStart"             "StudyEnd"              </span></span>
+<span><span class="co">#&gt; [22] "ProjectionInterval"     "NumberPopulations"      "MatrixCriteriaSize"    </span></span>
+<span><span class="co">#&gt; [25] "MatrixCriteriaOntogeny" "MatrixCriteriaAge"      "MatrixPopulation"      </span></span>
+<span><span class="co">#&gt; [28] "Lat"                    "Lon"                    "Altitude"              </span></span>
+<span><span class="co">#&gt; [31] "Country"                "Continent"              "Ecoregion"             </span></span>
+<span><span class="co">#&gt; [34] "StudiedSex"             "MatrixComposite"        "MatrixTreatment"       </span></span>
+<span><span class="co">#&gt; [37] "MatrixCaptivity"        "MatrixStartYear"        "MatrixStartSeason"     </span></span>
+<span><span class="co">#&gt; [40] "MatrixStartMonth"       "MatrixEndYear"          "MatrixEndSeason"       </span></span>
+<span><span class="co">#&gt; [43] "MatrixEndMonth"         "MatrixSplit"            "MatrixFec"             </span></span>
+<span><span class="co">#&gt; [46] "Observation"            "MatrixDimension"        "SurvivalIssue"         </span></span>
+<span><span class="co">#&gt; [49] "AnnualPeriodicity"</span></span></code></pre></div>
 <p>We can explore this information in various ways, for example, by
 producing tables, histograms, or other plots of variables of
 interest.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">DicotMonoc</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Eudicot Monocot </span>
-<span class="co">#&gt;     108      37</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">StudyDuration</span>,main <span class="op">=</span> <span class="st">"StudyDuration"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">DicotMonoc</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Eudicot Monocot </span></span>
+<span><span class="co">#&gt;     108      37</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">StudyDuration</span>,main <span class="op">=</span> <span class="st">"StudyDuration"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a01_GettingStarted_files/figure-html/Tables_and_Histograms-1.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">Lon</span>,<span class="va">Compadre</span><span class="op">$</span><span class="va">Lat</span>,main <span class="op">=</span> <span class="st">"Location"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">Lon</span>,<span class="va">Compadre</span><span class="op">$</span><span class="va">Lat</span>,main <span class="op">=</span> <span class="st">"Location"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a01_GettingStarted_files/figure-html/Tables_and_Histograms-2.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -280,36 +280,36 @@ interest.</p>
 you can use the <code><a href="../reference/cdb_check_species.html">cdb_check_species()</a></code> function. For example,
 we can ask if the species <em>Succisa pratensis</em> is present.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span><span class="op">)</span>
-<span class="co">#&gt;             species in_db</span>
-<span class="co">#&gt; 1 Succisa pratensis  TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             species in_db</span></span>
+<span><span class="co">#&gt; 1 Succisa pratensis  TRUE</span></span></code></pre></div>
 <p>The function works with vectors of species names as follows.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Succisa pratensis"</span>, <span class="st">"Onodrim ent"</span>, <span class="st">"Aster amellus"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">spList</span><span class="op">)</span>
-<span class="co">#&gt;             species in_db</span>
-<span class="co">#&gt; 1 Succisa pratensis  TRUE</span>
-<span class="co">#&gt; 2       Onodrim ent FALSE</span>
-<span class="co">#&gt; 3     Aster amellus  TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Succisa pratensis"</span>, <span class="st">"Onodrim ent"</span>, <span class="st">"Aster amellus"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">spList</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             species in_db</span></span>
+<span><span class="co">#&gt; 1 Succisa pratensis  TRUE</span></span>
+<span><span class="co">#&gt; 2       Onodrim ent FALSE</span></span>
+<span><span class="co">#&gt; 3     Aster amellus  TRUE</span></span></code></pre></div>
 <p>Optionally, the function can return a subset of the database
 restricted to matched species names.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">compadre_succisa</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span>, return_db <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">compadre_succisa</span>
-<span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 2 MATRICES.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 49</span></span>
-<span class="co">#&gt;   mat        SpeciesAuthor   SpeciesAccepted CommonName Genus Family Order Class</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_praten… Succisa praten… <span style="color: #BB0000;">NA</span>         Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_praten… Succisa praten… <span style="color: #BB0000;">NA</span>         Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">compadre_succisa</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_check_species.html">cdb_check_species</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="st">"Succisa pratensis"</span>, return_db <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">compadre_succisa</span></span>
+<span><span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 1 SPECIES and 2 MATRICES.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 49</span></span></span>
+<span><span class="co">#&gt;   mat        SpeciesAu…¹ Speci…² Commo…³ Genus Family Order Class Phylum Kingdom</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_pr… Succis… <span style="color: #BB0000;">NA</span>      Succ… Capri… Dips… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_pr… Succis… <span style="color: #BB0000;">NA</span>      Succ… Capri… Dips… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more variables: OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;, YearPublication &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   NumberPopulations &lt;dbl&gt;, MatrixCriteriaSize &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaOntogeny &lt;fct&gt;, MatrixCriteriaAge &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;, …</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="accessing-the-matrices">Accessing the matrices<a class="anchor" aria-label="anchor" href="#accessing-the-matrices"></a>
@@ -325,70 +325,70 @@ one would use the <code><a href="../reference/CompadreMatrixMethods.html">matA()
 of A matrices from the database (there are equivalent functions,
 <code><a href="../reference/CompadreMatrixMethods.html">matU()</a></code>, <code><a href="../reference/CompadreMatrixMethods.html">matF()</a></code> and <code><a href="../reference/CompadreMatrixMethods.html">matC()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span>
-<span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span>
-<span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span>
-<span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span>
-<span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
-<span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
-<span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt;           A1        A2      A3   A4         A5</span>
-<span class="co">#&gt; A1 0.0600000 0.0000000 0.00000 0.00 3.91724308</span>
-<span class="co">#&gt; A2 0.0020685 0.0000000 0.00000 0.00 0.13504696</span>
-<span class="co">#&gt; A3 0.0000000 0.7333333 0.40625 0.12 0.01923077</span>
-<span class="co">#&gt; A4 0.0000000 0.0000000 0.34375 0.70 0.53846154</span>
-<span class="co">#&gt; A5 0.0000000 0.0000000 0.00000 0.14 0.36538462</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span></span>
+<span><span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span></span>
+<span><span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span></span>
+<span><span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span></span>
+<span><span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span></span>
+<span><span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span></span>
+<span><span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt;           A1        A2      A3   A4         A5</span></span>
+<span><span class="co">#&gt; A1 0.0600000 0.0000000 0.00000 0.00 3.91724308</span></span>
+<span><span class="co">#&gt; A2 0.0020685 0.0000000 0.00000 0.00 0.13504696</span></span>
+<span><span class="co">#&gt; A3 0.0000000 0.7333333 0.40625 0.12 0.01923077</span></span>
+<span><span class="co">#&gt; A4 0.0000000 0.0000000 0.34375 0.70 0.53846154</span></span>
+<span><span class="co">#&gt; A5 0.0000000 0.0000000 0.00000 0.14 0.36538462</span></span></code></pre></div>
 <p>Thus one could select particular matrices from this list using
 <code>[[ ]]</code> syntax</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
-<span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span>
-<span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span>
-<span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span>
-<span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span>
-<span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span>
-<span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span>
-<span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span></span>
+<span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt;      A1    A2    A3    A4    A5    A6</span></span>
+<span><span class="co">#&gt; A1 0.00 0.000 0.000 0.000 1.006 1.851</span></span>
+<span><span class="co">#&gt; A2 0.55 0.492 0.150 0.000 0.000 0.000</span></span>
+<span><span class="co">#&gt; A3 0.25 0.356 0.450 0.067 0.000 0.099</span></span>
+<span><span class="co">#&gt; A4 0.00 0.137 0.321 0.568 0.358 0.197</span></span>
+<span><span class="co">#&gt; A5 0.00 0.000 0.064 0.167 0.269 0.197</span></span>
+<span><span class="co">#&gt; A6 0.00 0.000 0.000 0.184 0.358 0.493</span></span></code></pre></div>
 <p>It is often desirable to know what the stages are in the matrices. To
 access this information you can use the <code><a href="../reference/CompadreMatrixMethods.html">matrixClass()</a></code>
 function. As with the other matrix accessor functions, the function
 returns a list which can be subsetted using square brackets.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">classInfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matrixClass</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span>
-<span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt;   MatrixClassOrganized</span>
-<span class="co">#&gt; 1               active</span>
-<span class="co">#&gt; 2               active</span>
-<span class="co">#&gt; 3               active</span>
-<span class="co">#&gt; 4               active</span>
-<span class="co">#&gt; 5               active</span>
-<span class="co">#&gt; 6               active</span>
-<span class="co">#&gt;                                                    MatrixClassAuthor</span>
-<span class="co">#&gt; 1                                                           Seedling</span>
-<span class="co">#&gt; 2                                                           Juvenile</span>
-<span class="co">#&gt; 3                                                   Small vegetative</span>
-<span class="co">#&gt; 4 Large vegetative (not flowering but larger than small vegetatives)</span>
-<span class="co">#&gt; 5                                                    Small flowering</span>
-<span class="co">#&gt; 6                                                    Large flowering</span>
-<span class="co">#&gt;   MatrixClassNumber</span>
-<span class="co">#&gt; 1                 1</span>
-<span class="co">#&gt; 2                 2</span>
-<span class="co">#&gt; 3                 3</span>
-<span class="co">#&gt; 4                 4</span>
-<span class="co">#&gt; 5                 5</span>
-<span class="co">#&gt; 6                 6</span>
-<span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">MatrixClassAuthor</span>
-<span class="co">#&gt; [1] "Seedling"                                                          </span>
-<span class="co">#&gt; [2] "Juvenile"                                                          </span>
-<span class="co">#&gt; [3] "Small vegetative"                                                  </span>
-<span class="co">#&gt; [4] "Large vegetative (not flowering but larger than small vegetatives)"</span>
-<span class="co">#&gt; [5] "Small flowering"                                                   </span>
-<span class="co">#&gt; [6] "Large flowering"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">classInfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CompadreMatrixMethods.html">matrixClass</a></span><span class="op">(</span><span class="va">compadre_succisa</span><span class="op">)</span></span>
+<span><span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   MatrixClassOrganized</span></span>
+<span><span class="co">#&gt; 1               active</span></span>
+<span><span class="co">#&gt; 2               active</span></span>
+<span><span class="co">#&gt; 3               active</span></span>
+<span><span class="co">#&gt; 4               active</span></span>
+<span><span class="co">#&gt; 5               active</span></span>
+<span><span class="co">#&gt; 6               active</span></span>
+<span><span class="co">#&gt;                                                    MatrixClassAuthor</span></span>
+<span><span class="co">#&gt; 1                                                           Seedling</span></span>
+<span><span class="co">#&gt; 2                                                           Juvenile</span></span>
+<span><span class="co">#&gt; 3                                                   Small vegetative</span></span>
+<span><span class="co">#&gt; 4 Large vegetative (not flowering but larger than small vegetatives)</span></span>
+<span><span class="co">#&gt; 5                                                    Small flowering</span></span>
+<span><span class="co">#&gt; 6                                                    Large flowering</span></span>
+<span><span class="co">#&gt;   MatrixClassNumber</span></span>
+<span><span class="co">#&gt; 1                 1</span></span>
+<span><span class="co">#&gt; 2                 2</span></span>
+<span><span class="co">#&gt; 3                 3</span></span>
+<span><span class="co">#&gt; 4                 4</span></span>
+<span><span class="co">#&gt; 5                 5</span></span>
+<span><span class="co">#&gt; 6                 6</span></span>
+<span><span class="va">classInfo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">MatrixClassAuthor</span></span>
+<span><span class="co">#&gt; [1] "Seedling"                                                          </span></span>
+<span><span class="co">#&gt; [2] "Juvenile"                                                          </span></span>
+<span><span class="co">#&gt; [3] "Small vegetative"                                                  </span></span>
+<span><span class="co">#&gt; [4] "Large vegetative (not flowering but larger than small vegetatives)"</span></span>
+<span><span class="co">#&gt; [5] "Small flowering"                                                   </span></span>
+<span><span class="co">#&gt; [6] "Large flowering"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="filteringsubsetting-the-database-based-on-metadata">Filtering/subsetting the database based on metadata<a class="anchor" aria-label="anchor" href="#filteringsubsetting-the-database-based-on-metadata"></a>
@@ -398,53 +398,53 @@ As with a normal data frame these databases can be subset using
 <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code>. For example, I could subset to only Eudicot
 species as follows:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span><span class="op">)</span>
-<span class="va">x</span>
-<span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 80 SPECIES and 108 MATRICES.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 108 × 49</span></span>
-<span class="co">#&gt;    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Lechea_cernua  Lechea cernua   <span style="color: #BB0000;">NA</span>         Lech… Cista… Malv… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Actinostemon_… Actinostemon c… <span style="color: #BB0000;">NA</span>         Acti… Eupho… Malp… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Gaura_neomexi… Gaura neomexic… <span style="color: #BB0000;">NA</span>         Gaura Onagr… Myrt… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Eriogonum_lon… Eriogonum long… Buckwheat  Erio… Polyg… Cary… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_prate… Succisa praten… <span style="color: #BB0000;">NA</span>         Succ… Capri… Dips… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Haplopappus_r… Pyrrocoma radi… <span style="color: #BB0000;">NA</span>         Pyrr… Compo… Aste… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalus_tr… Astragalus tre… <span style="color: #BB0000;">NA</span>         Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Plantago_coro… Plantago coron… <span style="color: #BB0000;">NA</span>         Plan… Plant… Lami… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Petrocoptis_p… Silene glaucif… <span style="color: #BB0000;">NA</span>         Sile… Caryo… Cary… Magn…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalus_pe… Astragalus pec… <span style="color: #BB0000;">NA</span>         Astr… Legum… Faba… Magn…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 98 more rows, and 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   Journal &lt;chr&gt;, YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>, <span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span><span class="op">)</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with 80 SPECIES and 108 MATRICES.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 108 × 49</span></span></span>
+<span><span class="co">#&gt;    mat        SpeciesA…¹ Speci…² Commo…³ Genus Family Order Class Phylum Kingdom</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Lechea_ce… Lechea… <span style="color: #BB0000;">NA</span>      Lech… Cista… Malv… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Actinoste… Actino… <span style="color: #BB0000;">NA</span>      Acti… Eupho… Malp… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Gaura_neo… Gaura … <span style="color: #BB0000;">NA</span>      Gaura Onagr… Myrt… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Eriogonum… Eriogo… Buckwh… Erio… Polyg… Cary… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Succisa_p… Succis… <span style="color: #BB0000;">NA</span>      Succ… Capri… Dips… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Haplopapp… Pyrroc… <span style="color: #BB0000;">NA</span>      Pyrr… Compo… Aste… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalu… Astrag… <span style="color: #BB0000;">NA</span>      Astr… Legum… Faba… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Plantago_… Planta… <span style="color: #BB0000;">NA</span>      Plan… Plant… Lami… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Petrocopt… Silene… <span style="color: #BB0000;">NA</span>      Sile… Caryo… Cary… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Astragalu… Astrag… <span style="color: #BB0000;">NA</span>      Astr… Legum… Faba… Magn… Magno… Plantae</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 98 more rows, 39 more variables: OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;, YearPublication &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   NumberPopulations &lt;dbl&gt;, MatrixCriteriaSize &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixCriteriaOntogeny &lt;fct&gt;, MatrixCriteriaAge &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p>These subset arguments can be as complex as needed. For example, to
 subset to only Eudicot species from the United States or Canada and
 where the matrix dimension is &gt;2 I could use the following
 command:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> 
-              <span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> 
-              <span class="va">MatrixDimension</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">DicotMonoc</span> <span class="op">==</span> <span class="st">"Eudicot"</span> <span class="op">&amp;</span> </span>
+<span>              <span class="va">Country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span><span class="op">)</span> <span class="op">&amp;</span> </span>
+<span>              <span class="va">MatrixDimension</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>You can compare compadre data sets using the
 <code><a href="../reference/cdb_compare.html">cdb_compare()</a></code> command:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/cdb_compare.html">cdb_compare</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; Quick Summary...</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; cdb1 contains data for:</span>
-<span class="co">#&gt; 95 source papers</span>
-<span class="co">#&gt; 110 accepted species</span>
-<span class="co">#&gt; 150 matrices</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; cdb2 contains data for:</span>
-<span class="co">#&gt; 28 source papers</span>
-<span class="co">#&gt; 29 accepted species</span>
-<span class="co">#&gt; 41 matrices</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cdb_compare.html">cdb_compare</a></span><span class="op">(</span><span class="va">Compadre</span>,<span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Quick Summary...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; cdb1 contains data for:</span></span>
+<span><span class="co">#&gt; 95 source papers</span></span>
+<span><span class="co">#&gt; 110 accepted species</span></span>
+<span><span class="co">#&gt; 150 matrices</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; cdb2 contains data for:</span></span>
+<span><span class="co">#&gt; 28 source papers</span></span>
+<span><span class="co">#&gt; 29 accepted species</span></span>
+<span><span class="co">#&gt; 41 matrices</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="potential-issues-with-mpms">Potential issues with MPMs<a class="anchor" aria-label="anchor" href="#potential-issues-with-mpms"></a>
 </h3>
@@ -456,10 +456,10 @@ work if there are missing values (i.e. <code>NA</code>) in the MPM.</p>
 <p>We can flag these by adding metadata using the
 <code><a href="../reference/cdb_flag.html">cdb_flag()</a></code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Compadre_flagged</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Compadre_flagged</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_flag.html">cdb_flag</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></code></pre></div>
 <p>We could then use <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> like this:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre_flagged</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Compadre_flagged</span>, <span class="va">check_NA_A</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">&amp;</span> <span class="va">check_ergodic</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="calculations-from-matrices">Calculations from matrices<a class="anchor" aria-label="anchor" href="#calculations-from-matrices"></a>
@@ -473,11 +473,11 @@ package to obtain lambda for the matrices in the <code>x</code> object
 produced above. Then we can examine a summary, produce a histogram
 etc.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lambdaVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs</a></span>, what<span class="op">=</span><span class="st">"lambda"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lambdaVals</span><span class="op">)</span>
-<span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span class="co">#&gt;  0.2303  0.9331  1.0024  1.2482  1.1355  6.6145</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">lambdaVals</span>, main <span class="op">=</span> <span class="st">"Lambda values"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">lambdaVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">popdemo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/popdemo/man/eigs.html" class="external-link">eigs</a></span>, what<span class="op">=</span><span class="st">"lambda"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lambdaVals</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span><span class="co">#&gt;  0.2303  0.9331  1.0024  1.2482  1.1355  6.6145</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">lambdaVals</span>, main <span class="op">=</span> <span class="st">"Lambda values"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a01_GettingStarted_files/figure-html/matrix_calculations-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -530,7 +530,7 @@ global data base of animal demography. J Anim Ecol, 85: 371-384.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

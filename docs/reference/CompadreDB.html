@@ -22,7 +22,7 @@ objects to the CompadreDB class (see as_cdb)."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -122,16 +122,27 @@ DateCreated(object)</code></pre></div>
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>x</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>name</dt>
 <dd><p>The name of a column within x</p></dd>
+
+
 <dt>value</dt>
 <dd><p>Vector of values to assign to the column</p></dd>
+
+
 <dt>i, j</dt>
 <dd><p>elements to extract or replace (see <a href="https://rdrr.io/r/base/Extract.data.frame.html" class="external-link">[[.data.frame</a>)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>ignored</p></dd>
+
 </dl></div>
     <div id="slots">
     <h2>Slots</h2>
@@ -161,15 +172,15 @@ link to the User Agreement)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># extract entire 'data' slot</span></span>
-<span class="r-in"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">CompadreData</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># access the date of database creation</span></span>
-<span class="r-in"><span class="fu">DateCreated</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># extract entire 'data' slot</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">CompadreData</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># access the date of database creation</span></span></span>
+<span class="r-in"><span><span class="fu">DateCreated</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Nov_22_2017"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># extract column SpeciesAccepted</span></span>
-<span class="r-in"><span class="va">Compadre</span><span class="op">$</span><span class="va">SpeciesAccepted</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># extract column SpeciesAccepted</span></span></span>
+<span class="r-in"><span><span class="va">Compadre</span><span class="op">$</span><span class="va">SpeciesAccepted</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Setaria incrassata"                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [2] "Lechea cernua"                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [3] "Actinostemon concolor"               </span>
@@ -320,9 +331,9 @@ link to the User Agreement)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [148] "Aster amellus"                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [149] "Bromus tectorum"                     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [150] "Echinacea angustifolia"              </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># create new list-column with stage-specific survival</span></span>
-<span class="r-in"><span class="va">Compadre</span><span class="op">$</span><span class="va">stage_survival</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">mat</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">@</span><span class="va">matU</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create new list-column with stage-specific survival</span></span></span>
+<span class="r-in"><span><span class="va">Compadre</span><span class="op">$</span><span class="va">stage_survival</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">Compadre</span><span class="op">$</span><span class="va">mat</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">x</span><span class="op">@</span><span class="va">matU</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -337,7 +348,7 @@ link to the User Agreement)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

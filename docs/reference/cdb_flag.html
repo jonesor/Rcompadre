@@ -85,7 +85,7 @@ check_surv_gte_1: does `matU` contains values that are equal to
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -208,30 +208,36 @@ used to subset the database by logical argument.</p>
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_flag</span><span class="op">(</span>
-  <span class="va">cdb</span>,
-  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_NA_A"</span>, <span class="st">"check_NA_U"</span>, <span class="st">"check_NA_F"</span>, <span class="st">"check_NA_C"</span>, <span class="st">"check_zero_U"</span>,
-    <span class="st">"check_zero_F"</span>, <span class="st">"check_zero_C"</span>, <span class="st">"check_zero_U_colsum"</span>, <span class="st">"check_singular_U"</span>,
-    <span class="st">"check_component_sum"</span>, <span class="st">"check_ergodic"</span>, <span class="st">"check_irreducible"</span>, <span class="st">"check_primitive"</span>,
-    <span class="st">"check_surv_gte_1"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_flag</span><span class="op">(</span></span>
+<span>  <span class="va">cdb</span>,</span>
+<span>  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_NA_A"</span>, <span class="st">"check_NA_U"</span>, <span class="st">"check_NA_F"</span>, <span class="st">"check_NA_C"</span>, <span class="st">"check_zero_U"</span>,</span>
+<span>    <span class="st">"check_zero_F"</span>, <span class="st">"check_zero_C"</span>, <span class="st">"check_zero_U_colsum"</span>, <span class="st">"check_singular_U"</span>,</span>
+<span>    <span class="st">"check_component_sum"</span>, <span class="st">"check_ergodic"</span>, <span class="st">"check_irreducible"</span>, <span class="st">"check_primitive"</span>,</span>
+<span>    <span class="st">"check_surv_gte_1"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>checks</dt>
 <dd><p>Character vector specifying which checks to run.</p>
 <p>Defaults to all, i.e. <code>c("check_NA_A", "check_NA_U", "check_NA_F",
   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
   "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns <code>cdb</code> with extra columns appended to the data slot
-  (columns have the same names as the corresponding elements of
-<code>checks</code>) to indicate (TRUE/FALSE) whether there are potential
+    
+
+<p>Returns <code>cdb</code> with extra columns appended to the data slot
+  (columns have the same names as the corresponding elements of</p>
+<p></p>
+<p><code>checks</code>) to indicate (TRUE/FALSE) whether there are potential
   problems with the matrices corresponding to a given row of the data.</p>
     </div>
     <div id="details">
@@ -265,10 +271,10 @@ and/or <code>NA</code>, indicating that the matrix has not been split.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">CompadreFlag</span> <span class="op">&lt;-</span> <span class="fu">cdb_flag</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># only check whether matA has missing values, and whether matA is ergodic</span></span>
-<span class="r-in"><span class="va">CompadreFlag</span> <span class="op">&lt;-</span> <span class="fu">cdb_flag</span><span class="op">(</span><span class="va">Compadre</span>, checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_NA_A"</span>, <span class="st">"check_ergodic"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">CompadreFlag</span> <span class="op">&lt;-</span> <span class="fu">cdb_flag</span><span class="op">(</span><span class="va">Compadre</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># only check whether matA has missing values, and whether matA is ergodic</span></span></span>
+<span class="r-in"><span><span class="va">CompadreFlag</span> <span class="op">&lt;-</span> <span class="fu">cdb_flag</span><span class="op">(</span><span class="va">Compadre</span>, checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_NA_A"</span>, <span class="st">"check_ergodic"</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -283,7 +289,7 @@ and/or <code>NA</code>, indicating that the matrix has not been split.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

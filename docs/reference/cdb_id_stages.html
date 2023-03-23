@@ -22,7 +22,7 @@ CompadreDB object, based on unique combinations of the column
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -84,22 +84,28 @@ CompadreDB object, based on unique combinations of the column
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cdb_id_stages</span><span class="op">(</span><span class="va">cdb</span>, stage_def <span class="op">=</span> <span class="st">"MatrixClassAuthor"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cdb_id_stages</span><span class="op">(</span><span class="va">cdb</span>, stage_def <span class="op">=</span> <span class="st">"MatrixClassAuthor"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>cdb</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>stage_def</dt>
 <dd><p>Whether to define matrix stage class based on
 "MatrixClassAuthor" or "MatrixClassOrganized" (see <em>Details</em>).
 Defaults to "MatrixClassAuthor".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Vector of integer identifiers corresponding to the rows of
-<code>cdb</code>.</p>
+    
+
+<p>Vector of integer identifiers corresponding to the rows of</p>
+<p></p>
+<p><code>cdb</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -146,7 +152,7 @@ different (because they are based on alphabetical order).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">cdb_id_stages</span><span class="op">(</span><span class="va">Compadre</span>, stage_def <span class="op">=</span> <span class="st">"MatrixClassOrganized"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cdb_id_stages</span><span class="op">(</span><span class="va">Compadre</span>, stage_def <span class="op">=</span> <span class="st">"MatrixClassOrganized"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  98  65   3  49  44  89 103  93  20  87  99  17  63 105  19  85  56  83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  34 111  77  45  79  97  81  23  68  80 107 102   6 110  37  35  25  60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  46  87  11  91  90  69  62  96   5  21  51 113  93  85  26  61  33 100</span>
@@ -156,7 +162,7 @@ different (because they are based on alphabetical order).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [109] 104  71  86 101  70  74  25  31  55  97 112  40  17  93 110  58   2  72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [127]  35  75  36  91  52  38 102  43  29  27  39  94  47  89  79  15  53  64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [145]  29  10  50  15  24  43</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -171,7 +177,7 @@ different (because they are based on alphabetical order).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

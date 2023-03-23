@@ -18,7 +18,7 @@ ggplot2."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -77,88 +77,105 @@ ggplot2."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fortify.CompadreDB</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">filter.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">slice.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">arrange.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">mutate.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">group_by.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, add <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ungroup.CompadreDB</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">summarize.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">summarise.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">select.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">rename.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">left_join.CompadreDB</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  by <span class="op">=</span> <span class="cn">NULL</span>,
-  copy <span class="op">=</span> <span class="cn">FALSE</span>,
-  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">right_join.CompadreDB</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  by <span class="op">=</span> <span class="cn">NULL</span>,
-  copy <span class="op">=</span> <span class="cn">FALSE</span>,
-  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">inner_join.CompadreDB</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  by <span class="op">=</span> <span class="cn">NULL</span>,
-  copy <span class="op">=</span> <span class="cn">FALSE</span>,
-  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">full_join.CompadreDB</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  by <span class="op">=</span> <span class="cn">NULL</span>,
-  copy <span class="op">=</span> <span class="cn">FALSE</span>,
-  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fortify.CompadreDB</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">filter.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">slice.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">arrange.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">mutate.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">group_by.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, add <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ungroup.CompadreDB</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">summarize.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">summarise.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">select.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rename.CompadreDB</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">left_join.CompadreDB</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  copy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">right_join.CompadreDB</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  copy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">inner_join.CompadreDB</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  copy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">full_join.CompadreDB</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  copy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".x"</span>, <span class="st">".y"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>see <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>other arguments</p></dd>
+
+
 <dt>add</dt>
 <dd><p>Logical indicating whether to overwrite existing groups
 (<code>FALSE</code>) or add to any existing groups (<code>TRUE</code>)</p></dd>
+
+
 <dt>x, model, .data</dt>
 <dd><p>A CompadreDB object</p></dd>
+
+
 <dt>y</dt>
 <dd><p>see <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">join</a></code></p></dd>
+
+
 <dt>by</dt>
 <dd><p>see <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">join</a></code></p></dd>
+
+
 <dt>copy</dt>
 <dd><p>see <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">join</a></code></p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>see <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">join</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>No return value, called for side effects</p>
+    
+
+<p>No return value, called for side effects</p>
     </div>
 
   </div>
@@ -173,7 +190,7 @@ ggplot2."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

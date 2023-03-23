@@ -21,7 +21,7 @@ of methods applicable to only CompadreMat or CompadreDB objects)."><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -83,99 +83,100 @@ of methods applicable to only CompadreMat or CompadreDB objects).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreMat</span>
-<span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for CompadreDB</span>
-<span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
-
-<span class="co"># S4 method for list</span>
-<span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">matA</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">matU</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">matF</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">matC</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">matrixClass</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">MatrixClassAuthor</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">MatrixClassOrganized</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreMat</span></span>
+<span><span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for CompadreDB</span></span>
+<span><span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for list</span></span>
+<span><span class="fu">MatrixClassNumber</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>A CompadreDB object</p></dd>
+
 </dl></div>
     <div id="slots">
     <h2>Slots</h2>
@@ -222,7 +223,7 @@ stage number)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

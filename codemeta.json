@@ -1,8 +1,5 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "Rcompadre",
   "description": "Utility functions for interacting with the 'COMPADRE' and 'COMADRE' databases of matrix population models. Described in Jones et al. (2021) <doi:10.1101/2021.04.26.441330>.",
@@ -10,13 +7,19 @@
   "codeRepository": "https://github.com/jonesor/Rcompadre",
   "issueTracker": "https://github.com/jonesor/Rcompadre/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.0.9000",
+  "version": "1.2.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "runtimePlatform": "R version 4.2.3 (2023-03-15)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -88,9 +91,6 @@
       "@id": "https://orcid.org/0000-0002-3289-9925"
     }
   ],
-  "contributor": {},
-  "copyrightHolder": {},
-  "funder": {},
   "maintainer": [
     {
       "@type": "Person",
@@ -101,18 +101,6 @@
     }
   ],
   "softwareSuggestions": [
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
-    },
     {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
@@ -210,19 +198,19 @@
       "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 2.10"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "popdemo",
       "name": "popdemo",
@@ -234,7 +222,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=popdemo"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -245,16 +233,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
-    }
-  ],
-  "fileSize": "519.071KB",
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "contIntegration": ["https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml", "https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml", "https://app.codecov.io/gh/jonesor/Rcompadre"],
-  "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "518.426KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
-      "datePublished": "2021",
+      "datePublished": "2022",
       "author": [
         {
           "@type": "Person",
@@ -323,26 +314,22 @@
         }
       ],
       "name": "Rcompadre and Rage - two {R} packages to facilitate the use of\n              the {COMPADRE} and {COMADRE} databases and calculation of life\n              history traits from matrix population models",
-      "identifier": "10.1101/2021.04.26.441330",
-      "pagination": "2021.04.26.441330",
-      "@id": "https://doi.org/10.1101/2021.04.26.441330",
-      "sameAs": "https://doi.org/10.1101/2021.04.26.441330",
+      "identifier": "10.1111/2041-210X.13792",
+      "@id": "https://doi.org/10.1111/2041-210X.13792",
+      "sameAs": "https://doi.org/10.1111/2041-210X.13792",
       "isPartOf": {
         "@type": "PublicationIssue",
-        "datePublished": "2021",
+        "datePublished": "2022",
         "isPartOf": {
           "@type": ["PublicationVolume", "Periodical"],
-          "name": "bioRxiv"
+          "name": "Methods in Ecology and Evolution"
         }
       }
     }
   ],
-  "provider": {
-    "@id": "https://cran.r-project.org",
-    "@type": "Organization",
-    "name": "Comprehensive R Archive Network (CRAN)",
-    "url": "https://cran.r-project.org"
-  },
+  "releaseNotes": "https://github.com/jonesor/Rcompadre/blob/master/NEWS.md",
   "readme": "https://github.com/jonesor/Rcompadre/blob/main/README.md",
+  "contIntegration": ["https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml", "https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml", "https://app.codecov.io/gh/jonesor/Rcompadre"],
+  "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": "https://CRAN.R-project.org/package=Rcompadre"
 }
