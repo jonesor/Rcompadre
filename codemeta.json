@@ -241,7 +241,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "519.311KB",
+  "fileSize": "519.352KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -315,6 +315,7 @@
       ],
       "name": "Rcompadre and Rage - two {R} packages to facilitate the use of\n              the {COMPADRE} and {COMADRE} databases and calculation of life\n              history traits from matrix population models",
       "identifier": "10.1111/2041-210X.13792",
+      "pagination": "770-781",
       "@id": "https://doi.org/10.1111/2041-210X.13792",
       "sameAs": "https://doi.org/10.1111/2041-210X.13792",
       "isPartOf": {
@@ -322,6 +323,7 @@
         "datePublished": "2022",
         "isPartOf": {
           "@type": ["PublicationVolume", "Periodical"],
+          "volumeNumber": "13",
           "name": "Methods in Ecology and Evolution"
         }
       }
