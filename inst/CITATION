@@ -1,7 +1,7 @@
 citHeader("To cite Rcompadre in publications use:")
 
-citEntry(
-  entry = "Article",
+bibentry(
+  bibtype = "Article",
   title = "Rcompadre and Rage - two {R} packages to facilitate the use of
               the {COMPADRE} and {COMADRE} databases and calculation of life
               history traits from matrix population models",
@@ -14,13 +14,14 @@ citEntry(
   ),
   journal = "Methods in Ecology and Evolution",
   year = "2022",
-  pages = "",
+  pages = "770-781",
+  volume = 13L,
   doi = "10.1111/2041-210X.13792",
   textVersion =
     paste(
       "Jones, OR et al. (2022).",
       "Rcompadre and Rage - two R packages to facilitate the use of the COMPADRE and COMADRE databases and calculation of life history traits from matrix population models.",
-      "Methods in Ecology and Evolution",
+      "Methods in Ecology and Evolution", "13: 770-781.",
       "URL https://doi.org/10.1111/2041-210X.13792"
     )
 )
