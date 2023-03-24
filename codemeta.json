@@ -241,7 +241,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "519.352KB",
+  "fileSize": "519.411KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -259,22 +259,22 @@
         },
         {
           "@type": "Person",
-          "givenName": ["Iain", "M"],
+          "givenName": ["Iain", "M."],
           "familyName": "Stott"
         },
         {
           "@type": "Person",
-          "givenName": ["Tamora", "D"],
+          "givenName": ["Tamora", "D."],
           "familyName": "James"
         },
         {
           "@type": "Person",
-          "givenName": ["Sam", "C"],
+          "givenName": ["Sam", "C."],
           "familyName": "Levin"
         },
         {
           "@type": "Person",
-          "givenName": ["William", "K"],
+          "givenName": ["William", "K."],
           "familyName": "Petry"
         },
         {
