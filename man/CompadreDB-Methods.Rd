@@ -19,7 +19,13 @@
 \usage{
 \method{as.data.frame}{CompadreDB}(x, ...)
 
-\method{as_tibble}{CompadreDB}(x)
+\method{as_tibble}{CompadreDB}(
+  x,
+  .rows = NULL,
+  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  rownames = NULL,
+  ...
+)
 
 \method{head}{CompadreDB}(x, n = 6L, ...)
 
@@ -47,6 +53,12 @@ NumberMatrices(object)
 \item{x, object}{A CompadreDB object}
 
 \item{...}{additional arguments}
+
+\item{.rows}{passed to [tibble::as_tibble()]}
+
+\item{.name_repair}{passed to [tibble::as_tibble()]}
+
+\item{rownames}{passed to [tibble::as_tibble()]}
 
 \item{n}{The number of rows to extract}
 
