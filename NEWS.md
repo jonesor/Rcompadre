@@ -1,3 +1,5 @@
+# Rcompadre (development version)
+
 # Rcompadre 1.2.1 
 
 * Fixed an error in `cdb_build_cdb` causing an error in the construction of the A matrix when a C matrix was not provided.
