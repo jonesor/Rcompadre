@@ -140,11 +140,13 @@ as_cdb <- function(from) {
     )
   }
 
-  # Some old versions did not contain version information. This warning mentions that.
+  # Some old versions did not contain version information. This warning mentions
+  # that.
   if (!"version" %in% names(from)) {
     warning("This object does not contain `version` information, ",
       "possibly because it is an older database file.\n ",
-      "Minimal information has been added to comply with formal object requirements.",
+      "Minimal information has been added to comply with formal object 
+      requirements.",
       "See ?CompadreDB",
       call. = FALSE
     )

@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
+#The following line seems to be required by pkgdown::build_site() on my machine,
+#but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -111,7 +112,8 @@ cdb_check_species(Compadre, spList)
 Optionally, the function can return a subset of the database restricted to matched species names.
 
 ```{r Check species3}
-compadre_succisa<- cdb_check_species(Compadre, "Succisa pratensis", return_db = TRUE)
+compadre_succisa<- cdb_check_species(Compadre, "Succisa pratensis", 
+                                     return_db = TRUE)
 compadre_succisa
 ```
 

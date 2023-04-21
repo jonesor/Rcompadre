@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
+#The following line seems to be required by pkgdown::build_site() on my machine,
+#but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -138,9 +139,9 @@ To apply `eigs()` to a list of matrices we can use `sapply()`. But first we need
 ```{r}
 compadre_lambda <- Compadre %>% 
   cdb_flag() %>% 
-  filter(check_NA_A == FALSE) %>%      # remove matrices with missing values
+  filter(check_NA_A == FALSE) %>%      # remove matrices with NA values
   mutate(mat_A = matA(.)) %>%          # extract list-column of matA
-  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))  # get lambda for every matA
+  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))
 ```
 
 In the example above, `sapply()` returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function `lapply()` which always returns a list. In the example below we use `lapply()` to calculate vectors of stage-specific survival (column sums of `matU`) for every row of the database.
