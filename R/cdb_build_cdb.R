@@ -171,23 +171,23 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   if (!hasArg(mat_a)) {
     mat <- NULL
     for (i in 1:length(mat_u)) {
+      
+      #If mat_c is not present, assume it is 0.
       if (!hasArg(mat_c)) {
-        matC <- matrix(nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
+        matC <- matrix(0,nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
       }
 
       matU <- mat_u[[i]]
       matF <- mat_f[[i]]
+      
       if (hasArg(mat_c)) {
         matC <- mat_c[[i]]
       }
 
-      matDims <- c(nrow(matU), nrow(matF), nrow(matC))
-
-      if (!abs(max(matDims) - min(matDims)) < .Machine$double.eps) {
+      
+      if (!identical(nrow(matU), nrow(matF), nrow(matC))) {
         stop("Dimensions of submatrices U, F and C (if included) must be identical within each set.")
       }
-
-      # Check that dimensions
 
       matA <- matU + matF + matC
 
@@ -242,7 +242,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # metadata ----
   if (!hasArg(metadata)) {
     metadata <- data.frame(
-      matrixID = 1:length(mat_a)
+      matrixID = 1:length(mat)
     )
   }
 

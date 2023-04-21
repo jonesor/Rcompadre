@@ -1,7 +1,7 @@
 Type: Package
 Package: Rcompadre
 Title: Utilities for using the 'COM(P)ADRE' Matrix Model Database
-Version: 1.1.0.9000
+Version: 1.2.1
 Authors@R: c(
     person("Patrick", "Barks", , "barks@biology.sdu.dk", role = "aut",
            comment = c(ORCID = "0000-0002-5947-8151")),
@@ -52,7 +52,7 @@ Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Collate: 
     'CompadreDB.R'
     'CompadreDB-Methods.R'

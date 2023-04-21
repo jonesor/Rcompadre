@@ -12,8 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Rcompadre  <img src="man/figures/logo_rcompadre.png" height="160px" align="right" />
-
+# Rcompadre  <img src="man/figures/logo_rcompadre.png" align="right" height="160" style="float:right; height:160px;">
 
 
 <!--- Continuous integration badges --->

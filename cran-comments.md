@@ -1,77 +1,54 @@
-## Test environments
-
-### local
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Big Sur 11.3.1
-
-### GitHub Actions
-
-#### Microsoft Windows
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-__R development version__
-
-- R Under development (unstable) (2021-10-13 r81052)
-- Platform: x86_64-w64-mingw32/x64 (64-bit)
-- Running under: Windows Server x64 (build 17763)
-
-#### Apple OSX
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Catalina 10.15.7
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-apple-darwin17.0 (64-bit)
-- Running under: macOS Catalina 10.15.7
-
-#### Linux (Ubuntu)
-
-__R old release__
-
-- R version 4.0.5 (2021-03-31)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
-__R latest release__
-
-- R version 4.1.1 (2021-08-10)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
-__R development version__
-
-- R Under development (unstable) (2021-10-12 r81044)
-- Platform: x86_64-pc-linux-gnu (64-bit)
-- Running under: Ubuntu 20.04.3 LTS
-
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
+* This is a new release.
+* Minor improvements to functionality.
+* Fixes WARNING about S3 generic/method consistency.
 
-There was 1 NOTE:
+── Rcompadre 1.2.1: NOTE
 
-    Maintainer: ‘Owen Jones <jones@biology.sdu.dk>’
+  Build ID:   Rcompadre_1.2.1.tar.gz-985d5c200371489f878c76dc56b9a7a2
+  Platform:   Windows Server 2022, R-devel, 64 bit
+  Submitted:  17h 36m 39.1s ago
+  Build time: 8m 28.4s
 
-## Downstream dependencies
+❯ checking for detritus in the temp directory ... NOTE
+  Found the following files/directories:
+    'lastMiKTeXException'
 
-The package "Rage" (which I, Owen Jones <jones@biology.sdu.dk>, am maintainer of) is a downstream dependency. It works fine with this version of Rcompadre.
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
 
+── Rcompadre 1.2.1: NOTE
+
+  Build ID:   Rcompadre_1.2.1.tar.gz-7dcc7b8a86ab4409954c524a9f1e575b
+  Platform:   Ubuntu Linux 20.04.1 LTS, R-release, GCC
+  Submitted:  17h 36m 39.2s ago
+  Build time: 2h 21m 18.2s
+
+❯ checking CRAN incoming feasibility ... NOTE
+  Maintainer: ‘Owen Jones <jones@biology.sdu.dk>’
+  
+  Found the following (possibly) invalid URLs:
+    URL: https://doi.org/10.1111/2041-210X.13792
+      From: README.md
+      Status: 403
+      Message: Forbidden
+  
+  Found the following (possibly) invalid DOIs:
+    DOI: 10.1111/2041-210X.13792
+      From: inst/CITATION
+      Status: Forbidden
+      Message: 403
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
+
+── Rcompadre 1.2.1: NOTE
+
+  Build ID:   Rcompadre_1.2.1.tar.gz-fdfb3c5f85a148d99c8872b2f826f073
+  Platform:   Fedora Linux, R-devel, clang, gfortran
+  Submitted:  17h 36m 39.3s ago
+  Build time: 2h 21m 57.8s
+
+❯ checking HTML version of manual ... NOTE
+  Skipping checking HTML validation: no command 'tidy' found
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
