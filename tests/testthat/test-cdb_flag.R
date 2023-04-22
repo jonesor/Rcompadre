@@ -39,3 +39,17 @@ test_that("cdb_flag warns and fails gracefully", {
   expect_error(cdb_flag(Compadre@data))
   expect_error(cdb_flag(Compadre, checks = "blah"))
 })
+
+test_that("individual checks function well", {
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_NA_A"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_NA_U"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_NA_F"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_NA_C"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_zero_U"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_zero_F"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_zero_C"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_zero_U_colsum"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_singular_U"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_component_sum"), "CompadreDB"))
+testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_ergodic"), "CompadreDB"))
+})
