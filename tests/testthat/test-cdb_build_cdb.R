@@ -19,19 +19,27 @@ my_compadre <- cdb_build_cdb(mat_a = mat_a_list, version = "testrun")
 
 testthat::expect_true(inherits(my_compadre, "CompadreDB"))
 
-testthat::expect_error(my_compadre <- cdb_build_cdb( version = "testrun"))
+testthat::expect_error(my_compadre <- cdb_build_cdb(version = "testrun"))
 
-testthat::expect_error(cdb_build_cdb(mat_a = mat_a_list, 
-                                     mat_u = mat_a_list, 
-                                     version = "testrun"))
+testthat::expect_error(cdb_build_cdb(
+  mat_a = mat_a_list,
+  mat_u = mat_a_list,
+  version = "testrun"
+))
 
-testthat::expect_error(cdb_build_cdb(mat_u = mat_a_list, 
-                                     version = "testrun"))
+testthat::expect_error(cdb_build_cdb(
+  mat_u = mat_a_list,
+  version = "testrun"
+))
 
-testthat::expect_error(cdb_build_cdb(mat_c = mat_a_list, 
-                                     version = "testrun"))
+testthat::expect_error(cdb_build_cdb(
+  mat_c = mat_a_list,
+  version = "testrun"
+))
 
-my_compadre_2<-cdb_build_cdb(mat_u = mat_a_list,
-                                     mat_f = mat_a_list,
-                                     version = "testrun")
+my_compadre_2 <- cdb_build_cdb(
+  mat_u = mat_a_list,
+  mat_f = mat_a_list,
+  version = "testrun"
+)
 testthat::expect_true(inherits(my_compadre_2, "CompadreDB"))

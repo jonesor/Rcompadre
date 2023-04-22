@@ -85,4 +85,3 @@ db12 <- full_join(Compadre, traits, by = "SpeciesAccepted")
 testthat::expect_s4_class(db12, "CompadreDB")
 testthat::expect_true(nrow(db12@data) == nrow(Compadre@data))
 testthat::expect_true(all(traits$trait %in% db12$trait))
-
