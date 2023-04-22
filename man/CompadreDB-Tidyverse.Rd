@@ -19,63 +19,35 @@
 \alias{full_join.CompadreDB}
 \title{Tidyverse methods for CompadreDB objects}
 \usage{
-fortify.CompadreDB(model, data, ...)
+\method{fortify}{CompadreDB}(model, data, ...)
 
-filter.CompadreDB(.data, ...)
+\method{filter}{CompadreDB}(.data, ...)
 
-slice.CompadreDB(.data, ...)
+\method{slice}{CompadreDB}(.data, ...)
 
-arrange.CompadreDB(.data, ...)
+\method{arrange}{CompadreDB}(.data, ...)
 
-mutate.CompadreDB(.data, ...)
+\method{mutate}{CompadreDB}(.data, ...)
 
-group_by.CompadreDB(.data, ..., add = FALSE)
+\method{group_by}{CompadreDB}(.data, ..., add = FALSE)
 
-ungroup.CompadreDB(x, ...)
+\method{ungroup}{CompadreDB}(x, ...)
 
-summarize.CompadreDB(.data, ...)
+\method{summarize}{CompadreDB}(.data, ...)
 
-summarise.CompadreDB(.data, ...)
+\method{summarise}{CompadreDB}(.data, ...)
 
-select.CompadreDB(.data, ...)
+\method{select}{CompadreDB}(.data, ...)
 
-rename.CompadreDB(.data, ...)
+\method{rename}{CompadreDB}(.data, ...)
 
-left_join.CompadreDB(
-  x,
-  y,
-  by = NULL,
-  copy = FALSE,
-  suffix = c(".x", ".y"),
-  ...
-)
+\method{left_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
 
-right_join.CompadreDB(
-  x,
-  y,
-  by = NULL,
-  copy = FALSE,
-  suffix = c(".x", ".y"),
-  ...
-)
+\method{right_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
 
-inner_join.CompadreDB(
-  x,
-  y,
-  by = NULL,
-  copy = FALSE,
-  suffix = c(".x", ".y"),
-  ...
-)
+\method{inner_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
 
-full_join.CompadreDB(
-  x,
-  y,
-  by = NULL,
-  copy = FALSE,
-  suffix = c(".x", ".y"),
-  ...
-)
+\method{full_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
 }
 \arguments{
 \item{data}{see \code{\link[ggplot2]{fortify}}}
