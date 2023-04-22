@@ -43,12 +43,11 @@ Suggests:
     maps,
     rcrossref,
     rmarkdown,
-    spelling,
     testthat
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
-Config/testthat/parallel: true
+Config/testthat/parallel: false
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
