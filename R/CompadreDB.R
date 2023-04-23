@@ -88,11 +88,11 @@ validCompadreDB <- function(object) {
     errors <- c(errors, msg)
   }
   if ("mat" %in% names(dat)) {
-    if (!(class(dat$mat) %in% "list")) {
+    if (!inherits(dat$mat, "list")) {
       msg <- "column 'mat' must be a list column"
       errors <- c(errors, msg)
     }
-    if (class(dat$mat) %in% "list") {
+    if (inherits(dat$mat, "list")) {
       if (!(all(vapply(dat$mat, class, "") %in% "CompadreMat"))) {
         msg <- "all elements of 'mat' must be 'CompadreMat' objects"
         errors <- c(errors, msg)

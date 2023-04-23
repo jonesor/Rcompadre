@@ -27,7 +27,7 @@
 #' @importFrom methods new
 #' @export cdb_unflatten
 cdb_unflatten <- function(db) {
-  if (!"data.frame" %in% class(db)) {
+  if (!inherits(db, "data.frame")) {
     stop("db must have class data.frame")
   }
 

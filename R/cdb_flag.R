@@ -271,7 +271,7 @@ CheckSingular <- function(matU) {
   N <- try(solve(diag(nrow(matU)) - matU), silent = TRUE)
 
   # flag if singular
-  ifelse(("try-error" %in% class(N)) && grepl("singular", N[1]),
+  ifelse(inherits(N, "try-error") && grepl("singular", N[1]),
     TRUE,
     FALSE
   )
