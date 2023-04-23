@@ -177,7 +177,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
 
       #If mat_c is not present, assume it is 0.
       if (!hasArg(mat_c)) {
-        matC <- matrix(0,nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
+        matC <- matrix(0, nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
       }
 
       matU <- mat_u[[i]]
