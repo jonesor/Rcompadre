@@ -233,7 +233,7 @@ A second approach is to modify the function we want to vectorise with so that it
 ```{r}
 lambdaFn1 <- function(mat) {
   # check mat for missing values: if TRUE return NA, else return eigs(mat)
-  ifelse(any(is.na(mat)), NA, popdemo::eigs(mat, what = "lambda"))
+  ifelse(anyNA(mat), NA, popdemo::eigs(mat, what = "lambda"))
 }
 
 CompUnnest$lambda <- sapply(CompUnnest$matA, lambdaFn1)

@@ -164,10 +164,10 @@ cdb_flag <- function(cdb, checks = c(
   matC <- matC(cdb)
 
   # calculate outside conditionals because may be required later
-  vec_NA_A <- vapply(matA, function(x) any(is.na(x)), FALSE)
-  vec_NA_U <- vapply(matU, function(x) any(is.na(x)), FALSE)
-  vec_NA_F <- vapply(matF, function(x) any(is.na(x)), FALSE)
-  vec_NA_C <- vapply(matC, function(x) any(is.na(x)), FALSE)
+  vec_NA_A <- vapply(matA, function(x) anyNA(x), FALSE)
+  vec_NA_U <- vapply(matU, function(x) anyNA(x), FALSE)
+  vec_NA_F <- vapply(matF, function(x) anyNA(x), FALSE)
+  vec_NA_C <- vapply(matC, function(x) anyNA(x), FALSE)
 
   if ("check_NA_A" %in% checks) {
     dat$check_NA_A <- vec_NA_A
