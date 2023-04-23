@@ -220,7 +220,7 @@ no_missing <- which(CompFlag$check_NA_A == FALSE)
 CompFlag$lambda <- NA
 
 # apply eigs() to all matA with no missing values
-CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing], 
+CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing],
                                       popdemo::eigs, what = "lambda")
 ```
 

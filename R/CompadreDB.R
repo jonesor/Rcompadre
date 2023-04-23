@@ -225,12 +225,11 @@ setMethod("show",
       "Version: Unknown"
     )
     # start
-    cat(paste("A COM(P)ADRE database ('CompadreDB') object with ",
+    cat(paste0("A COM(P)ADRE database ('CompadreDB') object with ",
       as.character(Sno),
       " SPECIES and ",
       as.character(Mno),
-      " MATRICES.\n\n",
-      sep = ""
+      " MATRICES.\n\n"
     ))
     print(object@data)
   }

@@ -90,8 +90,8 @@ We can explore this information in various ways, for example, by producing table
 
 ```{r Tables_and_Histograms}
 table(Compadre$DicotMonoc)
-hist(Compadre$StudyDuration,main = "StudyDuration")
-plot(Compadre$Lon,Compadre$Lat,main = "Location")
+hist(Compadre$StudyDuration, main = "StudyDuration")
+plot(Compadre$Lon, Compadre$Lat, main = "Location")
 ```
 
 ## Finding data for for a particular species
@@ -112,7 +112,7 @@ cdb_check_species(Compadre, spList)
 Optionally, the function can return a subset of the database restricted to matched species names.
 
 ```{r Check species3}
-compadre_succisa<- cdb_check_species(Compadre, "Succisa pratensis", 
+compadre_succisa<- cdb_check_species(Compadre, "Succisa pratensis",
                                      return_db = TRUE)
 compadre_succisa
 ```
@@ -155,15 +155,15 @@ x
 These subset arguments can be as complex as needed. For example, to subset to only Eudicot species from the United States or Canada and where the matrix dimension is >2 I could use the following command:
 
 ```{r subset 2}
-x <- subset(Compadre,DicotMonoc == "Eudicot" & 
-              Country %in% c("USA", "CAN") & 
+x <- subset(Compadre, DicotMonoc == "Eudicot" &
+              Country %in% c("USA", "CAN") &
               MatrixDimension > 2)
 ```
 
 You can compare compadre data sets using the `cdb_compare()` command:
 
 ```{r compare }
-cdb_compare(Compadre,x)
+cdb_compare(Compadre, x)
 ```
 
 ## Potential issues with MPMs

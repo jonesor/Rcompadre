@@ -33,7 +33,7 @@ cdb_id <- function(cdb, columns) {
   col_check <- columns %in% names(cdb@data)
   if (!all(col_check)) {
     stop("cdb does not appear to have the following required columns: ",
-      paste(columns[!col_check], collapse = ", "),
+      toString(columns[!col_check]),
       call. = FALSE
     )
   }

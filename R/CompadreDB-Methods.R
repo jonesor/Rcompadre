@@ -38,18 +38,18 @@ setAs("CompadreDB", "data.frame", function(from) {
 #' @param .name_repair passed to [tibble::as_tibble()]
 #' @param rownames passed to [tibble::as_tibble()]
 #' @export
-as_tibble.CompadreDB <- function(x, 
-                                 .rows = NULL, 
-                                 .name_repair = c("check_unique", "unique", 
-                                                  "universal", "minimal"), 
+as_tibble.CompadreDB <- function(x,
+                                 .rows = NULL,
+                                 .name_repair = c("check_unique", "unique",
+                                                  "universal", "minimal"),
                                  rownames = NULL, ...) {
   as_tibble(
-    x@data, 
-    .rows = .rows, 
-    .name_repair = .name_repair, 
-    rownames = rownames, 
+    x@data,
+    .rows = .rows,
+    .name_repair = .name_repair,
+    rownames = rownames,
     ...
-  )  
+  )
 }
 
 
@@ -159,7 +159,7 @@ setMethod("NumberStudies",
     if (length(col_missing) > 0) {
       stop(
         "Cannot count number of studies because the following ",
-        "columns are missing: ", paste(col_missing, collapse = ", ")
+        "columns are missing: ", toString(col_missing)
       )
     } else {
       return(length(unique(paste0(

@@ -151,7 +151,7 @@ cdb_flag <- function(cdb, checks = c(
 
   if (any(!checks_check)) {
     stop("The following elements of argument 'checks' are not valid: ",
-      paste(checks[!checks_check], collapse = ", "),
+      toString(checks[!checks_check]),
       call. = FALSE
     )
   }
@@ -191,9 +191,15 @@ cdb_flag <- function(cdb, checks = c(
     dat$check_zero_C <- vapply(matC, function(x) all(x == 0 | is.na(x)), FALSE)
   }
   if ("check_zero_U_colsum" %in% checks) {
-    dat$check_zero_U_colsum <- vapply(matU, function(x) {
-      any(base::colSums(x, na.rm = TRUE) == 0)
-    }, FALSE)  }
+    dat$check_zero_U_colsum <- vapply(
+      matU,
+      function(x) {
+        any(colSums(x,
+          na.rm = TRUE
+        ) == 0)
+      }, FALSE
+    )
+  }
   if ("check_singular_U" %in% checks) {
     dat$check_singular_U <- mapply(
       CheckMats,
