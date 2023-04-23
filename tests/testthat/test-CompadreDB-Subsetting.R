@@ -46,7 +46,7 @@ test_that("CompadreDB-Subsetting warns and fails gracefully", {
   expect_warning(Compadre[, "SpeciesAccepted"])
   expect_warning(Compadre[, names(Compadre) != "mat"])
   expect_error(Compadre[, expression(-1)])
-  
+
   expect_error(subset(Compadre, 1:5))
   expect_warning(subset(Compadre, select = 5:10))
 })

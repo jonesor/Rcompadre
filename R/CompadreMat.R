@@ -135,7 +135,7 @@ setMethod("show",
     ))
     if (Mdim > 0) {
       # matrixClass info
-      showstages <- matrixClass(object)[, c("MatrixClassOrganized", 
+      showstages <- matrixClass(object)[, c("MatrixClassOrganized",
                                             "MatrixClassAuthor")]
       print(showstages)
       cat("\n")
