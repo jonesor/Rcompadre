@@ -60,7 +60,7 @@ cdb_unnest <- function(cdb, components = c(
 
   comp_check <- components %in% comp_allow
 
-  if (any(!comp_check)) {
+  if (!any(comp_check)) {
     stop("The following elements of argument 'components' are not valid: ",
       toString(components[!comp_check]),
       call. = FALSE
