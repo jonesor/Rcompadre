@@ -31,19 +31,17 @@ cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
   cat("Quick Summary...\n\n")
 
   # File 1
-  cat(paste("cdb1 contains data for:\n",
+  cat(paste0("cdb1 contains data for:\n",
     NumberStudies(cdb1), " source papers\n",
     NumberAcceptedSpecies(cdb1), " accepted species\n",
-    NumberMatrices(cdb1), " matrices\n\n",
-    sep = ""
+    NumberMatrices(cdb1), " matrices\n\n"
   ))
 
   # File 2
-  cat(paste("cdb2 contains data for:\n",
+  cat(paste0("cdb2 contains data for:\n",
     NumberStudies(cdb2), " source papers\n",
     NumberAcceptedSpecies(cdb2), " accepted species\n",
-    NumberMatrices(cdb2), " matrices\n\n",
-    sep = ""
+    NumberMatrices(cdb2), " matrices\n\n"
   ))
 
   if (verbose == TRUE) {
@@ -59,16 +57,14 @@ cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
     cat("Species in cdb2 not in cdb1:\n")
     print(sp2[which(!sp2 %in% sp1)])
 
-    uniqueSource1 <- unique(paste(cdb1$Authors, " (",
+    uniqueSource1 <- unique(paste0(cdb1$Authors, " (",
       cdb1$YearPublication, ") ",
-      cdb1$Journal,
-      sep = ""
+      cdb1$Journal
     ))
 
-    uniqueSource2 <- unique(paste(cdb2$Authors, " (",
+    uniqueSource2 <- unique(paste0(cdb2$Authors, " (",
       cdb2$YearPublication, ") ",
-      cdb2$Journal,
-      sep = ""
+      cdb2$Journal
     ))
 
     cat("\n\nSource papers in cdb2 not in cdb1\n")

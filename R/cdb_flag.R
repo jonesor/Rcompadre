@@ -151,7 +151,7 @@ cdb_flag <- function(cdb, checks = c(
 
   if (any(!checks_check)) {
     stop("The following elements of argument 'checks' are not valid: ",
-      paste(checks[!checks_check], collapse = ", "),
+      toString(checks[!checks_check]),
       call. = FALSE
     )
   }

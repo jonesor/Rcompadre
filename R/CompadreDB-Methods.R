@@ -159,7 +159,7 @@ setMethod("NumberStudies",
     if (length(col_missing) > 0) {
       stop(
         "Cannot count number of studies because the following ",
-        "columns are missing: ", paste(col_missing, collapse = ", ")
+        "columns are missing: ", toString(col_missing)
       )
     } else {
       return(length(unique(paste0(
