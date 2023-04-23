@@ -46,7 +46,7 @@ setClass("CompadreMat",
 )
 
 ################################################################################
-## Initialize & check
+#' Initialize & check
 
 ## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject

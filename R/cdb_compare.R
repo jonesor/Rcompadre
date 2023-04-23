@@ -59,22 +59,6 @@ cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
     cat("Species in cdb2 not in cdb1:\n")
     print(sp2[which(!sp2 %in% sp1)])
 
-    # Get unique author species for both files
-    # asp1 <- unique(SpeciesAuthor(cdb1))
-    # asp2 <- unique(SpeciesAuthor(cdb2))
-
-    # cat("Number of study-species combinations in cdb1\n")
-    # print(length(asp1))
-
-    # cat("Number of study-species combinations in cdb2\n")
-    # print(length(asp2))
-
-    # cat("Study-species in cdb1 that are not in cdb2\n")
-    # print(asp1[which(!asp1%in%asp2)])
-
-    # cat("Study-species in cdb2 that are not in cdb1\n")
-    # print(asp2[which(!asp2%in%asp1)])
-
     uniqueSource1 <- unique(paste(cdb1$Authors, " (",
       cdb1$YearPublication, ") ",
       cdb1$Journal,

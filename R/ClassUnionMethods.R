@@ -50,7 +50,7 @@ setMethod("matA",
         "CompadreMat"
       )
     }
-    # return(lapply(object, function(M) { M@matA }))
+
     return(lapply(object, function(M) {
       rownames(M@matA) <- colnames(M@matA)
       return(M@matA)
@@ -102,7 +102,7 @@ setMethod("matU",
         "CompadreMat"
       )
     }
-    # return(lapply(object, function(M) { M@matU }))
+
     return(lapply(object, function(M) {
       rownames(M@matU) <- colnames(M@matU)
       return(M@matU)
@@ -156,7 +156,7 @@ setMethod("matF",
         "CompadreMat"
       )
     }
-    # return(lapply(object, function(M) { M@matF }))
+
     return(lapply(object, function(M) {
       rownames(M@matF) <- colnames(M@matF)
       return(M@matF)
@@ -210,7 +210,7 @@ setMethod("matC",
         "CompadreMat"
       )
     }
-    # return(lapply(object, function(M) { M@matC }))
+
     return(lapply(object, function(M) {
       rownames(M@matC) <- colnames(M@matC)
       return(M@matC)
