@@ -21,7 +21,7 @@
 #' @importFrom methods new
 #' @export cdb_rbind
 cdb_rbind <- function(cdb1, cdb2) {
-  if (!inherits(cdb1, "CompadreDB") | !inherits(cdb2, "CompadreDB")) {
+  if (!inherits(cdb1, "CompadreDB") || !inherits(cdb2, "CompadreDB")) {
     stop("cdbs must be of class CompadreDB. See function as_cdb")
   }
 

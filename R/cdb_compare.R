@@ -23,7 +23,7 @@
 #'
 #' @export cdb_compare
 cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
-  if (!inherits(cdb1, "CompadreDB") | !inherits(cdb2, "CompadreDB")) {
+  if (!inherits(cdb1, "CompadreDB") || !inherits(cdb2, "CompadreDB")) {
     stop("cdbs must be of class CompadreDB. See function as_cdb")
   }
 
