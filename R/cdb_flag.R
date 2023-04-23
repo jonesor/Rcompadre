@@ -67,9 +67,9 @@
 #'   matrix that is irreducible and has only a single eigenvalue of maximum
 #'   modulus. This check is therefore redundant due to the overlap with
 #'   `check_irreducible` and `checkErdogic`.
-#'   \item \code{check_surv_gte_1}: does `matU` contains values that are equal to
-#'   or greater than 1? Survival is bounded between 0 and 1. Values in excess of
-#'   1 are biologically unreasonable.
+#'   \item \code{check_surv_gte_1}: does `matU` contains values that are equal
+#'   to or greater than 1? Survival is bounded between 0 and 1. Values in excess
+#'   of 1 are biologically unreasonable.
 #' }
 #'
 #' @param cdb A CompadreDB object
@@ -77,7 +77,8 @@
 #'
 #'   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
 #'   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-#'   "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")}
+#'   "check_ergodic", "check_irreducible", "check_primitive",
+#'   "check_surv_gte_1")}
 #'
 #' @return Returns \code{cdb} with extra columns appended to the data slot
 #'   (columns have the same names as the corresponding elements of
@@ -190,7 +191,14 @@ cdb_flag <- function(cdb, checks = c(
     dat$check_zero_C <- vapply(matC, function(x) all(x == 0 | is.na(x)), FALSE)
   }
   if ("check_zero_U_colsum" %in% checks) {
-    dat$check_zero_U_colsum <- vapply(matU, function(x) any(base::colSums(x, na.rm = TRUE) == 0), FALSE)
+    dat$check_zero_U_colsum <- vapply(
+      matU,
+      function(x) {
+        any(colSums(x,
+          na.rm = TRUE
+        ) == 0)
+      }, FALSE
+    )
   }
   if ("check_singular_U" %in% checks) {
     dat$check_singular_U <- mapply(
