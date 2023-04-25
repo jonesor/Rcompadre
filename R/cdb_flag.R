@@ -271,10 +271,7 @@ CheckSingular <- function(matU) {
   N <- try(solve(diag(nrow(matU)) - matU), silent = TRUE)
 
   # flag if singular
-  ifelse(inherits(N, "try-error") && grepl("singular", N[1]),
-    TRUE,
-    FALSE
-  )
+  inherits(N, "try-error") && grepl("singular", N, fixed = TRUE)
 }
 
 ComponentSum <- function(mA, mU, mF, mC) {
@@ -293,7 +290,7 @@ ComponentSum <- function(mA, mU, mF, mC) {
       x = c(mat_sum), y = c(mA)
     )
 
-    out <- ifelse(all(val_check), TRUE, FALSE)
+    out <- all(val_check)
   }
 
   return(out)
