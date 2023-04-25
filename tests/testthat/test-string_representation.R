@@ -2,9 +2,9 @@ test_that("string_representation functions work correctly", {
   ms1 <- "[3.3 5.2 6.1 0.1 0.2 0.3 0.2 0.4 0.1]"
   m1 <- string_to_mat(ms1)
 
-  expect_true("matrix" %in% class(m1))
-  expect_true("numeric" %in% class(c(m1)))
-
+  expect_true(inherits(m1, "matrix"))
+  expect_true(inherits(c(m1), "numeric"))
+  
   expect_true(!anyNA(m1))
   expect_true(nrow(m1) == ncol(m1))
 
