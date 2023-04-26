@@ -127,12 +127,7 @@ setMethod("show",
   signature = (object <- "CompadreMat"),
   function(object) {
     Mdim <- dim(matA(object))[1]
-    # start
-    #start <- cat(paste(
-    #  "A compadre matrix object with",
-    #  as.character(Mdim),
-    #  "stages.\n\n"
-    #))
+
     if (Mdim > 0) {
       # matrixClass info
       showstages <- matrixClass(object)[, c("MatrixClassOrganized",
