@@ -77,7 +77,7 @@ vec_to_string <- function(vec) {
 #' @export string_to_mat
 string_to_mat <- function(mat_str) {
   mat <- gsub("^\\[|\\]$", "", mat_str)
-  mat <- gsub(pattern = ";", " ", mat)
+  mat <- gsub(pattern = ";", " ", mat, fixed = TRUE)
   mat <- strsplit(mat, split = "[[:space:]]")[[1]]
   mat[mat == "NA"] <- NA_real_
 
