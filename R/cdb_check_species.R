@@ -49,5 +49,7 @@ cdb_check_species <- function(cdb, species, return_db = FALSE) {
 
 # Utility function
 findSpecies <- function(species, db) {
-  tolower(species) %in% tolower(gsub("_", " ", db$SpeciesAccepted, fixed = TRUE))
+  tolower(species) %in% tolower(gsub("_", " ",
+                                     db$SpeciesAccepted,
+                                     fixed = TRUE))
 }

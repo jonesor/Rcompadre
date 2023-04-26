@@ -3,7 +3,6 @@ test_that("cdb_mean_matF works correctly", {
 
   expect_type(x, "list")
   expect_true(inherits(x[[1]], "matrix"))
-  
   expect_length(x, nrow(Compadre@data))
 })
 

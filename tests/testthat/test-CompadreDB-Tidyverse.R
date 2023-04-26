@@ -44,11 +44,11 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   sum2 <- summarise(db5, n = n())
   expect_true(inherits(sum1, "tbl"))
   expect_true(inherits(sum2, "tbl"))
-  
+
   # ungroup
   db6 <- ungroup(db5)
   expect_s4_class(db6, "CompadreDB")
-  expect_false("grouped_df" %in% class(db6@data))
+  expect_false(inherits(db6@data, "grouped_df"))
 
   # select
   db7 <- select(Compadre, mat, SpeciesAccepted, -MatrixDimension)

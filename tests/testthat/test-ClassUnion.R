@@ -55,7 +55,7 @@ test_that("ClassUnion methods work correctly", {
   expect_true(inherits(mca3, "character"))
   expect_true(inherits(mco3, "character"))
   expect_true(inherits(mcn3, "numeric"))
-  
+
   expect_true(all.equal(a1[[1]], a2[[1]]) & all.equal(a1[[1]], a3))
   expect_true(all.equal(u1[[1]], u2[[1]]) & all.equal(u1[[1]], u3))
   expect_true(all.equal(f1[[1]], f2[[1]]) & all.equal(f1[[1]], f3))

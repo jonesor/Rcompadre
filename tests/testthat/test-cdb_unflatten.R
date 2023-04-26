@@ -4,8 +4,8 @@ test_that("cdb_unflatten works correctly", {
 
   expect_s4_class(CompadreUnflat, "CompadreDB")
   expect_identical(CompadreUnflat$SpeciesAuthor, Compadre$SpeciesAuthor)
-  expect_identical(as.vector(matA(CompadreUnflat)[[65]]), as.vector(matA(Compadre)[[65]]))
-  
+  expect_identical(as.vector(matA(CompadreUnflat)[[65]]),
+                   as.vector(matA(Compadre)[[65]]))
   })
 
 

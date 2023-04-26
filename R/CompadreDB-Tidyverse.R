@@ -241,9 +241,11 @@ register_all_s3_methods <- function() {
 
 
 register_s3_method <- function(pkg, generic, class, fun = NULL) {
-  stopifnot(is.character(pkg) && length(pkg) == 1,
-            is.character(generic) && length(generic) == 1,
-            is.character(class) && length(class) == 1)
+  stopifnot(
+    is.character(pkg), length(pkg) == 1,
+    is.character(generic), length(generic) == 1,
+    is.character(class), length(class) == 1
+  )
 
   if (is.null(fun)) {
     fun <- get(paste0(generic, ".", class), envir = parent.frame())

@@ -14,10 +14,10 @@ test_that("CompadreDB-Subsetting works correctly", {
   expect_identical(ncol(sub3@data), 10L)
 
   sub4 <- Compadre[, -10]
-  expect_equal(ncol(sub4@data), ncol(Compadre@data) - 1)
+  expect_identical(ncol(sub4@data), as.integer(ncol(Compadre@data) - 1))
 
   sub5 <- suppressWarnings(Compadre[, -(1:2)])
-  expect_equal(ncol(sub5@data), ncol(Compadre@data) - 1)
+  expect_identical(ncol(sub5@data), as.integer(ncol(Compadre@data) - 1))
 
   sub6 <- Compadre[, c("mat", "SpeciesAuthor")]
   expect_identical(ncol(sub6@data), 2L)

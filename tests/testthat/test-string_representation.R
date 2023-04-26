@@ -4,9 +4,9 @@ test_that("string_representation functions work correctly", {
 
   expect_true(inherits(m1, "matrix"))
   expect_true(inherits(c(m1), "numeric"))
-  
+
   expect_false(anyNA(m1))
-  expect_true(nrow(m1) == ncol(m1))
+  expect_identical(nrow(m1), ncol(m1))
 
   ms2 <- "[3.3 5.2 6.1 0.1 NA 0.3 0.2 0.4 0.1]"
   m2 <- string_to_mat(ms2)
@@ -14,7 +14,7 @@ test_that("string_representation functions work correctly", {
 
   vs1 <- "[0.2||0.5||0.3]"
   v1 <- string_to_vec(vs1, numeric = TRUE)
-  expect_true("numeric" %in% class(v1))
+  expect_true(inherits(v1, "numeric"))
 
   expect_length(v1, 3)
 
@@ -25,7 +25,7 @@ test_that("string_representation functions work correctly", {
 
   vs3 <- "[1.0]"
   v3 <- string_to_vec(vs3, numeric = TRUE)
-  expect_true("numeric" %in% class(v3))
+  expect_true(inherits(v3, "numeric"))
   expect_length(v3, 1)
 
   ms1_reconv <- mat_to_string(m1)

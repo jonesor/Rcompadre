@@ -220,10 +220,10 @@ setMethod("show",
       NumberAcceptedSpecies(object),
       "??"
     )
-    V <- ifelse(is.character(Version(object)),
-      paste("Version:", Version(object)),
-      "Version: Unknown"
-    )
+    #V <- ifelse(is.character(Version(object)),
+    #  paste("Version:", Version(object)),
+    #  "Version: Unknown"
+    #)
     # start
     cat(paste0("A COM(P)ADRE database ('CompadreDB') object with ",
       as.character(Sno),
