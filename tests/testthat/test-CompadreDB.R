@@ -31,7 +31,7 @@ test_that("CompadreDB works correctly", {
 
   db1 <- Compadre
   db1[["ones"]] <- 1L
-  expect_identical(ncol(db1@data), ncol(Compadre@data) + 1)
+  expect_equal(ncol(db1@data), ncol(Compadre@data) + 1)
   expect_true(all(db1$ones == 1L))
 
   expect_error(Compadre[["mat"]] <- 1L)
