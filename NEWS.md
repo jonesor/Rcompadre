@@ -1,6 +1,7 @@
 # Rcompadre (development version)
 
 * Minor performance enhancements, some of which speed up functions while others improve code readability and stability.
+* Added functions `mpm_sd` and `mpm_median` which join the existing `mpm_mean` function to calculate element-wise summary statistics across MPMs of the same dimension. Code contributed by Darren Norris.
 
 # Rcompadre 1.2.1 
 
