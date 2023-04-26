@@ -97,7 +97,7 @@ string_to_mat <- function(mat_str) {
 #' @export string_to_vec
 string_to_vec <- function(vec_str, numeric = FALSE) {
   vec <- gsub("^\\[|\\]$", "", vec_str)
-  vec <- strsplit(vec, split = "\\|\\|")[[1]]
+  vec <- strsplit(vec, split = "||", fixed = TRUE)[[1]]
   vec[vec == "NA"] <- NA
 
   if (numeric) {
