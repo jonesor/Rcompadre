@@ -14,7 +14,7 @@ test_that("CompadreDB-Methods work correctly", {
   expect_true(nrow(tl@data) == 10)
 
   nm <- names(Compadre)
-  expect_equal(nm, names(Compadre@data))
+  expect_identical(nm, names(Compadre@data))
 
   dm <- dim(Compadre)
   expect_true(inherits(dm, "integer"))

@@ -4,8 +4,8 @@ test_that("cdb_rbind works correctly", {
   dbm1 <- cdb_rbind(db1, db2)
 
   expect_s4_class(dbm1, "CompadreDB")
-  expect_true(nrow(dbm1@data) == nrow(db1@data) + nrow(db2@data))
-  expect_true(ncol(dbm1@data) == ncol(db1@data))
+  expect_identical(nrow(dbm1@data), nrow(db1@data) + nrow(db2@data))
+  expect_identical(ncol(dbm1@data), ncol(db1@data))
 
   db2@version$Version <- "X.Y.Z"
   dbm2 <- cdb_rbind(db1, db2)

@@ -6,7 +6,7 @@ test_that("cdb_flatten works correctly", {
   expect_type(dbf1$matU, "character")
   expect_type(dbf1$matF, "character")
   expect_type(dbf1$matC, "character")
-  expect_equal(dbf1$SpeciesAuthor, Compadre@data$SpeciesAuthor)
+  expect_identical(dbf1$SpeciesAuthor, Compadre@data$SpeciesAuthor)
 })
 
 

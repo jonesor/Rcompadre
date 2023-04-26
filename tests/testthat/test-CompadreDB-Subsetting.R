@@ -16,27 +16,27 @@ test_that("CompadreDB-Subsetting works correctly", {
   sub4 <- Compadre[, -10]
   expect_true(ncol(sub4@data) == ncol(Compadre@data) - 1)
 
-  sub5 <- suppressWarnings(Compadre[, -c(1:2)])
+  sub5 <- suppressWarnings(Compadre[, -1:2])
   expect_true(ncol(sub5@data) == ncol(Compadre@data) - 1)
 
   sub6 <- Compadre[, c("mat", "SpeciesAuthor")]
-  expect_true(ncol(sub6@data) == 2)
+  expect_identical(ncol(sub6@data), 2)
 
   sub7 <- Compadre[, names(Compadre) %in% c("mat", "SpeciesAuthor")]
-  expect_true(ncol(sub7@data) == 2)
+  expect_identical(ncol(sub7@data), 2)
 
   sub1 <- subset(Compadre, SpeciesAccepted == "Lechea cernua")
   n1 <- length(which(Compadre@data$SpeciesAccepted == "Lechea cernua"))
   expect_s4_class(sub1, "CompadreDB")
-  expect_true(nrow(sub1@data) == n1)
+  expect_identical(nrow(sub1@data), n1)
 
   sub2 <- subset(Compadre, select = c("mat", "SpeciesAccepted"))
   expect_true(ncol(sub2@data) == 2)
 
   sub3 <- subset(Compadre, MatrixDimension == 4, select = 1:5)
   n3 <- length(which(Compadre@data$MatrixDimension == 4))
-  expect_true(nrow(sub3@data) == n3)
-  expect_true(ncol(sub3@data) == 5)
+  expect_identical(nrow(sub3@data), n3)
+  expect_identical(ncol(sub3@data), 5)
 })
 
 

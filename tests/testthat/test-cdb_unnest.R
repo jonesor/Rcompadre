@@ -9,11 +9,11 @@ test_that("cdb_unnest works correctly", {
   expect_type(d1$MatrixClassAuthor, "list")
   expect_type(d1$MatrixClassOrganized, "list")
   expect_type(d1$MatrixClassNumber, "list")
-  expect_equal(d1$SpeciesAuthor, Compadre@data$SpeciesAuthor)
+  expect_identical(d1$SpeciesAuthor, Compadre@data$SpeciesAuthor)
 
   d2 <- cdb_unnest(Compadre, c("matF", "MatrixClassOrganized"))
   expect_s4_class(d2, "CompadreDB")
-  expect_true(!any(c("matA", "matU", "matC") %in% names(d2)))
+  expect_false(any(c("matA", "matU", "matC") %in% names(d2)))
 })
 
 

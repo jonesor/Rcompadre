@@ -85,7 +85,7 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
 
   db12 <- full_join(Compadre, traits, by = "SpeciesAccepted")
   expect_s4_class(db12, "CompadreDB")
-  expect_true(nrow(db12@data) == nrow(Compadre@data))
+  expect_identical(nrow(db12@data), nrow(Compadre@data))
   expect_true(all(traits$trait %in% db12$trait))
 
   traits_dup <- rbind(traits, traits[5, ])

@@ -1,10 +1,10 @@
 test_that("cdb_collapse works correctly", {
   CompSub <- subset(Compadre, MatrixComposite != "Seasonal")
   CompSub$IdStage <- cdb_id_stages(CompSub, "MatrixClassAuthor")
-  CompCollapse <- cdb_collapse(CompSub, columns = c("IdStage"))
+  CompCollapse <- cdb_collapse(CompSub, columns = "IdStage")
 
   expect_s4_class(CompCollapse, "CompadreDB")
-  expect_true(nrow(CompCollapse@data) == length(unique(CompSub$IdStage)))
+  expect_identical(nrow(CompCollapse@data), length(unique(CompSub$IdStage)))
 })
 
 

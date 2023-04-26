@@ -4,7 +4,7 @@ test_that("cdb_check_species works correctly", {
 
   expect_s3_class(df1, "data.frame")
   expect_type(df1$in_db, "logical")
-  expect_true(nrow(df1) == length(species))
+  expect_identical(nrow(df1), length(species))
 
 
   db1 <- cdb_check_species(Compadre, species, return_db = TRUE)
