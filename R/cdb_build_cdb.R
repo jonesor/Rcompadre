@@ -122,7 +122,8 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
     present = c(
       hasArg(mat_a), hasArg(mat_u),
       hasArg(mat_f), hasArg(mat_c)
-    )
+    ),
+    stringsAsFactors = FALSE
   )
   AUFC <- includedMatrices$present
 
@@ -239,7 +240,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
       stop("stages must be provided as a list of data.frame objects")
     }
     for (i in seq_along(stages)) {
-      stages[[i]]$MatrixClassNumber <- seq_along(stages[[i]][,1])
+      stages[[i]]$MatrixClassNumber <- seq_along(stages[[i]][, 1])
     }
     matrixClassInfo <- stages
   }
