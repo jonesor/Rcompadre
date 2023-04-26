@@ -21,7 +21,7 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   # slice
   db2 <- slice(Compadre, 11:15)
   expect_s4_class(db2, "CompadreDB")
-  expect_true(nrow(db2@data) == 5)
+  expect_identical(nrow(db2@data), 5L)
 
   # arrange
   db3 <- arrange(Compadre, SurvivalIssue)
@@ -32,7 +32,7 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   # mutate
   db4 <- mutate(Compadre, newcol = 5L)
   expect_s4_class(db4, "CompadreDB")
-  expect_true(all(db4$newcol == 5L))
+  expect_true(all(db4$newcol, 5L))
 
   # group_by
   db5 <- group_by(Compadre, Family)
@@ -70,7 +70,7 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
 
   db9 <- left_join(Compadre, traits, by = "SpeciesAccepted")
   expect_s4_class(db9, "CompadreDB")
-  expect_true(nrow(db9@data) == nrow(Compadre@data))
+  expect_identical(nrow(db9@data), nrow(Compadre@data))
   expect_true(all(traits$trait %in% db9$trait))
 
   db10 <- right_join(Compadre, traits, by = "SpeciesAccepted")
