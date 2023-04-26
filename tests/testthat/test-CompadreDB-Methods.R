@@ -7,11 +7,11 @@ test_that("CompadreDB-Methods work correctly", {
 
   hd <- head(Compadre, n = 10)
   expect_s4_class(hd, "CompadreDB")
-  expect_true(nrow(hd@data) == 10)
+  expect_identical(nrow(hd@data), 10L)
 
   tl <- tail(Compadre, n = 10)
   expect_s4_class(tl, "CompadreDB")
-  expect_true(nrow(tl@data) == 10)
+  expect_identical(nrow(tl@data), 10L)
 
   nm <- names(Compadre)
   expect_identical(nm, names(Compadre@data))
