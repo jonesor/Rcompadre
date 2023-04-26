@@ -4,7 +4,7 @@
 #' Calculates an element-wise mean over a list of matrices or CompadreMat
 #' objects of constant dimension.
 #'
-#' @param x List of matrices (\code{mat_mean}) or list of CompadreMat objects
+#' @param x List of matrices or list of CompadreMat objects
 #'   (\code{mpm_mean}), all of same dimension
 #' @param na.rm Logical indicating whether missing values should be excluded
 #'   (see \emph{Details}). Defaults to \code{FALSE}.
