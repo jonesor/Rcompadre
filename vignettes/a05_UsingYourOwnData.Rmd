@@ -135,7 +135,8 @@ First I create a data frame describing the matrix stages.
 ```{r}
 (stageDescriptor <- data.frame(
   MatrixClassOrganized = rep("active", 2),
-  MatrixClassAuthor = c("small", "large")
+  MatrixClassAuthor = c("small", "large"),
+  stringsAsFactors = FALSE
 ))
 ```
 
