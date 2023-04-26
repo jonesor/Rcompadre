@@ -1,5 +1,7 @@
 # Rcompadre (development version)
 
+* Minor performance enhancements, some of which speed up functions while others improve code readability and stability.
+
 # Rcompadre 1.2.1 
 
 * Fixed an error in `cdb_build_cdb` causing an error in the construction of the A matrix when a C matrix was not provided.
