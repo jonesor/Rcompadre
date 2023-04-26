@@ -156,7 +156,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # If A is provided, make U, F, and C `NA`.
   if (hasArg(mat_a)) {
     mat <- NULL
-    for (i in 1:length(mat_a)) {
+    for (i in seq_along(mat_a)) {
       mat_u[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
       mat_f[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
       mat_c[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
@@ -173,7 +173,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # If U and F provided, make C `NA` or 0 depending on optional matC argument.
   if (!hasArg(mat_a)) {
     mat <- NULL
-    for (i in 1:length(mat_u)) {
+    for (i in seq_along(mat_u)) {
 
       #If mat_c is not present, assume it is 0.
       if (!hasArg(mat_c)) {
@@ -238,15 +238,15 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
     if (!inherits(stages, "list")) {
       stop("stages must be provided as a list of data.frame objects")
     }
-    for (i in 1:length(stages)) {
-      stages[[i]]$MatrixClassNumber <- 1:nrow(stages[[i]])
+    for (i in seq_along(stages)) {
+      stages[[i]]$MatrixClassNumber <- seq_along(stages[[i]][,1])
     }
     matrixClassInfo <- stages
   }
   # metadata ----
   if (!hasArg(metadata)) {
     metadata <- data.frame(
-      matrixID = 1:length(mat)
+      matrixID = seq_along(mat)
     )
   }
 
