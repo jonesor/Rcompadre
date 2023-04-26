@@ -201,43 +201,40 @@ cdb_flag <- function(cdb, checks = c(
     )
   }
   if ("check_singular_U" %in% checks) {
-    dat$check_singular_U <- mapply(
-      CheckMats,
-      has_na = vec_NA_U,
-      mat = matU,
-      MoreArgs = list(fn = CheckSingular)
-    )
+    dat$check_singular_U <- unlist(Map(CheckMats, matU,
+      fn = "CheckSingular",
+      has_na = vec_NA_U
+    ))
   }
 
   if ("check_component_sum" %in% checks) {
-    dat$check_component_sum <- mapply(ComponentSum, matA, matU, matF, matC)
+    dat$check_component_sum <- unlist(Map(ComponentSum,
+      mA = matA,
+      mU = matU,
+      mF = matF,
+      mC = matC
+    ))
   }
 
   if ("check_ergodic" %in% checks) {
-    dat$check_ergodic <- mapply(
-      CheckMats,
-      has_na = vec_NA_A,
-      mat = matA,
-      MoreArgs = list(fn = isErgodic)
-    )
+    dat$check_ergodic <- unlist(Map(CheckMats, matA,
+      fn = "isErgodic",
+      has_na = vec_NA_A
+    ))
   }
 
   if ("check_irreducible" %in% checks) {
-    dat$check_irreducible <- mapply(
-      CheckMats,
-      has_na = vec_NA_A,
-      mat = matA,
-      MoreArgs = list(fn = isIrreducible)
-    )
+    dat$check_irreducible <- unlist(Map(CheckMats, matA,
+      fn = "isIrreducible",
+      has_na = vec_NA_A
+    ))
   }
 
   if ("check_primitive" %in% checks) {
-    dat$check_primitive <- mapply(
-      CheckMats,
-      has_na = vec_NA_A,
-      mat = matA,
-      MoreArgs = list(fn = isPrimitive)
-    )
+    dat$check_primitive <- unlist(Map(CheckMats, matA,
+      fn = "isPrimitive",
+      has_na = vec_NA_A
+    ))
   }
 
   maxifnotNAs <- function(x) {
@@ -249,7 +246,7 @@ cdb_flag <- function(cdb, checks = c(
   }
 
   if ("check_surv_gte_1" %in% checks) {
-    dat$check_surv_gte_1 <- sapply(matU, maxifnotNAs) >= 1
+    dat$check_surv_gte_1 <- vapply(matU, maxifnotNAs, numeric(1)) >= 1
   }
 
   new("CompadreDB",
@@ -278,18 +275,27 @@ CheckSingular <- function(matU) {
 ComponentSum <- function(mA, mU, mF, mC) {
   mat_dim <- nrow(mA)
 
-  if (all(is.na(mU))) mU <- matrix(0, mat_dim, mat_dim)
-  if (all(is.na(mF))) mF <- matrix(0, mat_dim, mat_dim)
-  if (all(is.na(mC))) mC <- matrix(0, mat_dim, mat_dim)
+  if (all(is.na(mU))) {
+    mU <- matrix(0, mat_dim, mat_dim)
+  }
+  if (all(is.na(mF))) {
+    mF <- matrix(0, mat_dim, mat_dim)
+  }
+  if (all(is.na(mC))) {
+    mC <- matrix(0, mat_dim, mat_dim)
+  }
 
   mat_sum <- mU + mF + mC
 
   if (all(mat_sum == 0 | is.na(mat_sum))) {
     out <- NA
   } else {
-    val_check <- mapply(function(x, y) isTRUE(all.equal(x, y)),
-      x = c(mat_sum), y = c(mA)
-    )
+    val_check <- unlist(Map(
+      function(x, y) {
+        isTRUE(all.equal(x, y))
+      },
+      x = mat_sum, y = mA
+    ))
 
     out <- all(val_check)
   }
