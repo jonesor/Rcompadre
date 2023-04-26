@@ -87,10 +87,18 @@ test_that("CompadreDB-Tidyverse functions work correctly", {
   expect_s4_class(db12, "CompadreDB")
   expect_true(nrow(db12@data) == nrow(Compadre@data))
   expect_true(all(traits$trait %in% db12$trait))
-
-  traits_dup <- rbind(traits, traits[5, ])
-  expect_warning(left_join(Compadre, traits_dup, by = "SpeciesAccepted"))
-  expect_warning(right_join(Compadre, traits_dup, by = "SpeciesAccepted"))
-  expect_warning(inner_join(Compadre, traits_dup, by = "SpeciesAccepted"))
-  expect_warning(full_join(Compadre, traits_dup, by = "SpeciesAccepted"))
 })
+
+# joins
+traits <- data.frame(
+  SpeciesAccepted = sample(unique(Compadre$SpeciesAccepted), 5),
+  trait = 1:5,
+  stringsAsFactors = FALSE
+)
+
+
+traits_dup <- rbind(traits, traits[5, ])
+testthat::expect_warning(left_join(Compadre, traits_dup, by = "SpeciesAccepted"))
+testthat::expect_warning(right_join(Compadre, traits_dup, by = "SpeciesAccepted"))
+testthat::expect_warning(inner_join(Compadre, traits_dup, by = "SpeciesAccepted"))
+testthat::expect_warning(full_join(Compadre, traits_dup, by = "SpeciesAccepted"))
