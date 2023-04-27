@@ -55,4 +55,3 @@ testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_ergodic"), "Co
 testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_irreducible"), "CompadreDB"))
 testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_primitive"), "CompadreDB"))
 testthat::expect_true(inherits(cdb_flag(Compadre, checks = "check_surv_gte_1"), "CompadreDB"))
-

@@ -226,7 +226,7 @@ cdb_flag <- function(cdb, checks = c(
       MoreArgs = list(fn = isErgodic)
     )
   }
-  
+
   if ("check_irreducible" %in% checks) {
     dat$check_irreducible <- mapply(
       CheckMats,
@@ -235,7 +235,7 @@ cdb_flag <- function(cdb, checks = c(
       MoreArgs = list(fn = isIrreducible)
     )
   }
-  
+
   if ("check_primitive" %in% checks) {
     dat$check_primitive <- mapply(
       CheckMats,
@@ -318,7 +318,7 @@ CheckSingular <- function(matU) {
 #' @param mU A matrix
 #' @param mF A matrix
 #' @param mC A matrix
-#' 
+#'
 #' @return A logical value indicating whether the sum of the three matrices is
 #'   equal to the reference matrix
 #' @export

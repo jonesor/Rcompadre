@@ -16,9 +16,13 @@ mat_a3 <- rbind(
 mat_a_list <- mget(ls(pattern = "mat_a[0-9]"))
 
 
-testthat::expect_true(inherits(cdb_build_cdb(mat_a = mat_a_list, 
-                                             version = "testrun"),
-                               "CompadreDB"))
+testthat::expect_true(inherits(
+  cdb_build_cdb(
+    mat_a = mat_a_list,
+    version = "testrun"
+  ),
+  "CompadreDB"
+))
 
 # add U and F matrices
 mat_u1 <- rbind(
@@ -86,7 +90,7 @@ stageInfo_with_error2 <- list(
   )
 )
 
-#No matrices
+# No matrices
 testthat::expect_error(cdb_build_cdb(
   mat_u = NULL, mat_f = NULL,
   metadata = meta, stages = stageInfo
@@ -124,7 +128,7 @@ testthat::expect_true(inherits(cdb_build_cdb(
 
 testthat::expect_error(cdb_build_cdb(
   mat_u = mat_u_list, mat_f = mat_f_list,
-  metadata = rbind(meta,meta), stages = stageInfo
+  metadata = rbind(meta, meta), stages = stageInfo
 ))
 
 
@@ -143,7 +147,7 @@ testthat::expect_error(cdb_build_cdb(
   metadata = meta, stages = stageInfo_with_error1
 ))
 
-#Bad dimensions
+# Bad dimensions
 
 # add U and F matrices
 mat_u2 <- rbind(
@@ -182,4 +186,3 @@ testthat::expect_error(cdb_build_cdb(
   mat_u = mat_u_list, mat_f = mat_f_list,
   metadata = meta, stages = stageInfo
 ))
-

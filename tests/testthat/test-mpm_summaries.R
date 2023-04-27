@@ -11,12 +11,12 @@ mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 # print the list of matrices
 mat_list
 
-testthat::expect_true(inherits(mpm_median(mat_list),"matrix"))
+testthat::expect_true(inherits(mpm_median(mat_list), "matrix"))
 
 # create a function that generates a matrix with random values
 create_matrix_with_NA <- function() {
   m1 <- matrix(runif(9, 0, 1), nrow = 3)
-  m1[sample(3,1),sample(3,1)]<- NA
+  m1[sample(3, 1), sample(3, 1)] <- NA
   return(m1)
 }
 
@@ -26,12 +26,12 @@ mat_list_NA <- replicate(20, create_matrix_with_NA(), simplify = FALSE)
 # print the list of matrices
 mat_list_NA
 
-testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = TRUE),"matrix"))
-testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = FALSE),"matrix"))
+testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = TRUE), "matrix"))
+testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = FALSE), "matrix"))
 
 # create a function that generates a matrix with different dimensions
 create_matrix_r_dim <- function() {
-  m_dim <- sample(2:10,1)
+  m_dim <- sample(2:10, 1)
   matrix(runif(m_dim^2, 0, 1), nrow = m_dim)
 }
 
@@ -59,12 +59,12 @@ mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 # print the list of matrices
 mat_list
 
-testthat::expect_true(inherits(mpm_sd(mat_list),"matrix"))
+testthat::expect_true(inherits(mpm_sd(mat_list), "matrix"))
 
 # create a function that generates a matrix with random values
 create_matrix_with_NA <- function() {
   m1 <- matrix(runif(9, 0, 1), nrow = 3)
-  m1[sample(3,1),sample(3,1)]<- NA
+  m1[sample(3, 1), sample(3, 1)] <- NA
   return(m1)
 }
 
@@ -74,12 +74,12 @@ mat_list_NA <- replicate(20, create_matrix_with_NA(), simplify = FALSE)
 # print the list of matrices
 mat_list_NA
 
-testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = TRUE),"matrix"))
-testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = FALSE),"matrix"))
+testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = TRUE), "matrix"))
+testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = FALSE), "matrix"))
 
 # create a function that generates a matrix with different dimensions
 create_matrix_r_dim <- function() {
-  m_dim <- sample(2:10,1)
+  m_dim <- sample(2:10, 1)
   matrix(runif(m_dim^2, 0, 1), nrow = m_dim)
 }
 
@@ -90,5 +90,3 @@ mat_list_r_dim <- replicate(20, create_matrix_r_dim(), simplify = FALSE)
 mat_list_r_dim
 
 testthat::expect_error(mpm_sd(mat_list_r_dim))
-
-
