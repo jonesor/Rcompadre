@@ -40,7 +40,6 @@ Suggests:
     dplyr,
     ggplot2,
     knitr,
-    maps,
     rcrossref,
     rmarkdown,
     spelling,
@@ -78,5 +77,6 @@ Collate:
     'data.R'
     'mpm_mean.R'
     'mpm_methods.R'
+    'mpm_summaries.R'
     'string_representation.R'
     'zzz.R'
