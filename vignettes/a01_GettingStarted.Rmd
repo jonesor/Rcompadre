@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine,
-#but causes build to break with R-CMD-CHECK on GH
+# The following line seems to be required by pkgdown::build_site() on my machine,
+# but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -113,7 +113,8 @@ Optionally, the function can return a subset of the database restricted to match
 
 ```{r Check species3}
 compadre_succisa <- cdb_check_species(Compadre, "Succisa pratensis",
-                                     return_db = TRUE)
+  return_db = TRUE
+)
 compadre_succisa
 ```
 
@@ -156,8 +157,8 @@ These subset arguments can be as complex as needed. For example, to subset to on
 
 ```{r subset 2}
 x <- subset(Compadre, DicotMonoc == "Eudicot" &
-              Country %in% c("USA", "CAN") &
-              MatrixDimension > 2)
+  Country %in% c("USA", "CAN") &
+  MatrixDimension > 2)
 ```
 
 You can compare compadre data sets using the `cdb_compare()` command:

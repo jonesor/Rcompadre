@@ -258,11 +258,40 @@ cdb_flag <- function(cdb, checks = c(
 
 
 # utilities
+
+#' Check matrices for NA values and apply a function
+#'
+#' This function checks a matrix for NA values and applies a specified function
+#' to it. If the matrix contains any NA values, the function returns NA.
+#'
+#' @param has_na A logical value indicating whether the matrix may contain NA
+#'   values
+#' @param mat A matrix
+#' @param fn A function to apply to the matrix
+#'
+#' @return The result of applying the function to the matrix, or NA if the
+#'   matrix contains any NA values
+#'
+#' @examples
+#' CheckMats(FALSE, matrix(1:9, nrow = 3), sum)
+#'
+#' @noRd
 CheckMats <- function(has_na, mat, fn) {
   fn <- match.fun(fn)
   ifelse(has_na, NA, fn(mat))
 }
 
+#' Check if a matrix is singular
+#'
+#' This function checks if a matrix is singular by attempting to calculate its
+#' fundamental matrix using the \code{\link{solve}} function. If the matrix is
+#' singular, the function returns `TRUE`.
+#'
+#' @param matU A matrix
+#'
+#' @return A logical value indicating whether the matrix is singular
+#' @export
+#' @noRd
 CheckSingular <- function(matU) {
   # try calculating fundamental matrix
   N <- try(solve(diag(nrow(matU)) - matU), silent = TRUE)
@@ -272,6 +301,23 @@ CheckSingular <- function(matU) {
   return(out)
 }
 
+#' Calculate the sum of three matrices and compare to a reference matrix
+#'
+#' This function calculates the sum of three matrices (`mU`, `mF`, and `mC`) and
+#' compares it to a reference matrix (`mA`). If the sum of the three matrices is
+#' equal to the reference matrix, the function returns `TRUE.` Otherwise, it
+#' returns `FALSE` or `NA` if the sum of the three matrices is zero or contains
+#' NA values.
+#'
+#' @param mA A matrix
+#' @param mU A matrix
+#' @param mF A matrix
+#' @param mC A matrix
+#' 
+#' @return A logical value indicating whether the sum of the three matrices is
+#'   equal to the reference matrix
+#' @export
+#' @noRd
 ComponentSum <- function(mA, mU, mF, mC) {
   mat_dim <- nrow(mA)
 

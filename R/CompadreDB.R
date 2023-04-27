@@ -145,7 +145,7 @@ as_cdb <- function(from) {
   if (!"version" %in% names(from)) {
     warning("This object does not contain `version` information, ",
       "possibly because it is an older database file.\n ",
-      "Minimal information has been added to comply with formal object 
+      "Minimal information has been added to comply with formal object
       requirements.",
       "See ?CompadreDB",
       call. = FALSE
@@ -221,7 +221,8 @@ setMethod("show",
       "??"
     )
 
-    cat(paste0("A COM(P)ADRE database ('CompadreDB') object with ",
+    cat(paste0(
+      "A COM(P)ADRE database ('CompadreDB') object with ",
       as.character(Sno),
       " SPECIES and ",
       as.character(Mno),

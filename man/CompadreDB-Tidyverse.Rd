@@ -21,33 +21,61 @@
 \usage{
 fortify.CompadreDB(model, data, ...)
 
-\method{filter}{CompadreDB}(.data, ...)
+filter.CompadreDB(.data, ...)
 
-\method{slice}{CompadreDB}(.data, ...)
+slice.CompadreDB(.data, ...)
 
-\method{arrange}{CompadreDB}(.data, ...)
+arrange.CompadreDB(.data, ...)
 
-\method{mutate}{CompadreDB}(.data, ...)
+mutate.CompadreDB(.data, ...)
 
-\method{group_by}{CompadreDB}(.data, ..., add = FALSE)
+group_by.CompadreDB(.data, ..., add = FALSE)
 
-\method{ungroup}{CompadreDB}(x, ...)
+ungroup.CompadreDB(x, ...)
 
-\method{summarize}{CompadreDB}(.data, ...)
+summarize.CompadreDB(.data, ...)
 
-\method{summarise}{CompadreDB}(.data, ...)
+summarise.CompadreDB(.data, ...)
 
-\method{select}{CompadreDB}(.data, ...)
+select.CompadreDB(.data, ...)
 
-\method{rename}{CompadreDB}(.data, ...)
+rename.CompadreDB(.data, ...)
 
-\method{left_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+left_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-\method{right_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+right_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-\method{inner_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+inner_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 
-\method{full_join}{CompadreDB}(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+full_join.CompadreDB(
+  x,
+  y,
+  by = NULL,
+  copy = FALSE,
+  suffix = c(".x", ".y"),
+  ...
+)
 }
 \arguments{
 \item{data}{see \code{\link[ggplot2]{fortify}}}

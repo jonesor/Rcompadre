@@ -53,21 +53,24 @@
 #' @export
 cdb_fetch <- function(cdb, version = NULL, flag = FALSE, userComment = NULL,
                       quiet = FALSE) {
-
   # get url or path
   if (tolower(cdb) == "comadre") {
     if (is.null(version)) {
       path <- url("https://www.compadre-db.org/Data/ComadreDownload")
     } else {
-      path <- url(paste0("https://www.compadre-db.org/Data/Download/",
-                         toupper(cdb), "_", "v.", version, ".RData"))
+      path <- url(paste0(
+        "https://www.compadre-db.org/Data/Download/",
+        toupper(cdb), "_", "v.", version, ".RData"
+      ))
     }
   } else if (tolower(cdb) == "compadre") {
     if (is.null(version)) {
       path <- url("https://www.compadre-db.org/Data/CompadreDownload")
     } else {
-      path <- url(paste0("https://www.compadre-db.org/Data/Download/",
-                         toupper(cdb), "_", "v.", version, ".RData"))
+      path <- url(paste0(
+        "https://www.compadre-db.org/Data/Download/",
+        toupper(cdb), "_", "v.", version, ".RData"
+      ))
     }
   } else {
     path <- path.expand(cdb)

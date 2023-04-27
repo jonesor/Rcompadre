@@ -40,8 +40,10 @@ setAs("CompadreDB", "data.frame", function(from) {
 #' @export
 as_tibble.CompadreDB <- function(x,
                                  .rows = NULL,
-                                 .name_repair = c("check_unique", "unique",
-                                                  "universal", "minimal"),
+                                 .name_repair = c(
+                                   "check_unique", "unique",
+                                   "universal", "minimal"
+                                 ),
                                  rownames = NULL, ...) {
   as_tibble(
     x@data,

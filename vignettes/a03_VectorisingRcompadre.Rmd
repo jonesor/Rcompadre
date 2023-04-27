@@ -221,7 +221,9 @@ CompFlag$lambda <- NA
 
 # apply eigs() to all matA with no missing values
 CompFlag$lambda[no_missing] <- sapply(CompFlag$matA[no_missing],
-                                      popdemo::eigs, what = "lambda")
+  popdemo::eigs,
+  what = "lambda"
+)
 ```
 
 Rows where there were missing values in `matA` retain the original placeholder value of `NA`.

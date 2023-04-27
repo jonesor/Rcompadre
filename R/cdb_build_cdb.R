@@ -111,7 +111,6 @@
 cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
                           mat_c = NULL, stages = NULL, version = NULL,
                           metadata = NULL) {
-
   # Check matrices
   # Which matrices are provided
   includedMatrices <- data.frame(
@@ -128,13 +127,13 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   AUFC <- includedMatrices$present
 
   if (sum(AUFC) == 0) {
-    stop("No matrices provided: matrices must be provided as (i) a list of A 
-         matrices; (ii) lists of U and F matrices; or (iii) lists of U, F and 
+    stop("No matrices provided: matrices must be provided as (i) a list of A
+         matrices; (ii) lists of U and F matrices; or (iii) lists of U, F and
          C matrices.")
   }
 
   if (hasArg(mat_a) && any(hasArg(mat_u), hasArg(mat_f), hasArg(mat_c))) {
-    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be 
+    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be
          provided,")
   }
 
@@ -175,8 +174,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   if (!hasArg(mat_a)) {
     mat <- NULL
     for (i in seq_along(mat_u)) {
-
-      #If mat_c is not present, assume it is 0.
+      # If mat_c is not present, assume it is 0.
       if (!hasArg(mat_c)) {
         matC <- matrix(0, nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
       }
@@ -190,7 +188,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
 
 
       if (!identical(nrow(matU), nrow(matF), nrow(matC))) {
-        stop("Dimensions of submatrices U, F and C (if included) must be 
+        stop("Dimensions of submatrices U, F and C (if included) must be
              identical within each set.")
       }
 
@@ -253,11 +251,11 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
 
   if (hasArg(metadata)) {
     if (nrow(metadata) != length(mat)) {
-      stop("The number of rows of metadata does not match the number of 
+      stop("The number of rows of metadata does not match the number of
            matrices")
     }
     if (!"SpeciesAccepted" %in% names(metadata)) {
-      warning("Metadata does not include a `SpeciesAccepted` column, so number 
+      warning("Metadata does not include a `SpeciesAccepted` column, so number
               of species not provided when viewing object.")
     }
   }

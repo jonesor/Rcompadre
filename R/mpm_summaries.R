@@ -72,11 +72,12 @@ mpm_sd <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) !=
-      1) {
+    1) {
     stop("All matrices in list must be of same dimension")
   }
-  if (na.rm)
+  if (na.rm) {
     x <- lapply(x, zero_NA)
+  }
   n <- length(x)
   rc <- dim(x[[1]])
   rownames_mat <- rownames(x[[1]])
