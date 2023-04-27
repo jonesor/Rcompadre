@@ -19,7 +19,7 @@
 #' @author Darren Norris
 #'
 #' @family data management
-#'
+#' @importFrom stats median
 #'
 #' @export mpm_sd
 mpm_median <- function(x, na.rm = FALSE) {
@@ -66,7 +66,7 @@ mpm_median <- function(x, na.rm = FALSE) {
 #'
 #' @family data management
 #'
-#'
+#' @importFrom stats sd
 #' @export mpm_sd
 mpm_sd <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
