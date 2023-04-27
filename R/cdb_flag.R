@@ -218,7 +218,7 @@ cdb_flag <- function(cdb, checks = c(
 
   if ("check_ergodic" %in% checks) {
     dat$check_ergodic <- unlist(Map(CheckMats, matA,
-      fn = "isErgodic",
+      fn = get("isErgodic", envir = asNamespace("popdemo")),
       has_na = vec_NA_A
     ))
   }
