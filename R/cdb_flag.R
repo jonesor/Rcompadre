@@ -201,10 +201,12 @@ cdb_flag <- function(cdb, checks = c(
     )
   }
   if ("check_singular_U" %in% checks) {
-    dat$check_singular_U <- unlist(Map(CheckMats, matU,
-      fn = "CheckSingular",
-      has_na = vec_NA_U
-    ))
+    dat$check_singular_U <- mapply(
+      CheckMats,
+      has_na = vec_NA_U,
+      mat = matU,
+      MoreArgs = list(fn = CheckSingular)
+    )
   }
 
   if ("check_component_sum" %in% checks) {
@@ -217,24 +219,30 @@ cdb_flag <- function(cdb, checks = c(
   }
 
   if ("check_ergodic" %in% checks) {
-    dat$check_ergodic <- unlist(Map(CheckMats, matA,
-      fn = get("isErgodic", envir = asNamespace("popdemo")),
-      has_na = vec_NA_A
-    ))
+    dat$check_ergodic <- mapply(
+      CheckMats,
+      has_na = vec_NA_A,
+      mat = matA,
+      MoreArgs = list(fn = isErgodic)
+    )
   }
-
+  
   if ("check_irreducible" %in% checks) {
-    dat$check_irreducible <- unlist(Map(CheckMats, matA,
-      fn = "isIrreducible",
-      has_na = vec_NA_A
-    ))
+    dat$check_irreducible <- mapply(
+      CheckMats,
+      has_na = vec_NA_A,
+      mat = matA,
+      MoreArgs = list(fn = isIrreducible)
+    )
   }
-
+  
   if ("check_primitive" %in% checks) {
-    dat$check_primitive <- unlist(Map(CheckMats, matA,
-      fn = "isPrimitive",
-      has_na = vec_NA_A
-    ))
+    dat$check_primitive <- mapply(
+      CheckMats,
+      has_na = vec_NA_A,
+      mat = matA,
+      MoreArgs = list(fn = isPrimitive)
+    )
   }
 
   maxifnotNAs <- function(x) {
@@ -271,10 +279,7 @@ cdb_flag <- function(cdb, checks = c(
 #'
 #' @return The result of applying the function to the matrix, or NA if the
 #'   matrix contains any NA values
-#'
-#' @examples
-#' CheckMats(FALSE, matrix(1:9, nrow = 3), sum)
-#'
+#' @export
 #' @noRd
 CheckMats <- function(has_na, mat, fn) {
   fn <- match.fun(fn)
