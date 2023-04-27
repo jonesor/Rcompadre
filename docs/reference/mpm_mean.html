@@ -18,7 +18,7 @@ objects of constant dimension."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1.9000</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@ objects of constant dimension.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
-<dd><p>List of matrices (<code>mat_mean</code>) or list of CompadreMat objects
+<dd><p>List of matrices or list of CompadreMat objects
 (<code>mpm_mean</code>), all of same dimension</p></dd>
 
 
@@ -118,6 +118,8 @@ be <code>0</code>.</p>
 <code><a href="cdb_rbind.html">cdb_rbind</a>()</code>,
 <code><a href="cdb_unflatten.html">cdb_unflatten</a>()</code>,
 <code><a href="cdb_unnest.html">cdb_unnest</a>()</code>,
+<code><a href="mpm_median.html">mpm_median</a>()</code>,
+<code><a href="mpm_sd.html">mpm_sd</a>()</code>,
 <code><a href="string_representation.html">string_representation</a></code></p></div>
     </div>
     <div id="author">
@@ -131,8 +133,6 @@ be <code>0</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># there are four rows for species 'Haplopappus_radiatus' in Compadre</span></span></span>
 <span class="r-in"><span><span class="va">mpms</span> <span class="op">&lt;-</span> <span class="va">Compadre</span><span class="op">$</span><span class="va">mat</span><span class="op">[</span><span class="va">Compadre</span><span class="op">$</span><span class="va">SpeciesAuthor</span> <span class="op">==</span> <span class="st">"Haplopappus_radiatus"</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu">mpm_mean</span><span class="op">(</span><span class="va">mpms</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A compadre matrix object with 4 stages.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   MatrixClassOrganized  MatrixClassAuthor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1               active           Seedling</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2               active Small reproductive</span>

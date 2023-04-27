@@ -279,7 +279,7 @@ cdb_flag <- function(cdb, checks = c(
 #'
 #' @return The result of applying the function to the matrix, or NA if the
 #'   matrix contains any NA values
-#' @export
+#' @keywords internal
 #' @noRd
 CheckMats <- function(has_na, mat, fn) {
   fn <- match.fun(fn)
@@ -291,11 +291,11 @@ CheckMats <- function(has_na, mat, fn) {
 #' This function checks if a matrix is singular by attempting to calculate its
 #' fundamental matrix using the \code{\link{solve}} function. If the matrix is
 #' singular, the function returns `TRUE`.
-#'
+#'s
 #' @param matU A matrix
 #'
 #' @return A logical value indicating whether the matrix is singular
-#' @export
+#' @keywords internal
 #' @noRd
 CheckSingular <- function(matU) {
   # try calculating fundamental matrix
@@ -321,7 +321,7 @@ CheckSingular <- function(matU) {
 #'
 #' @return A logical value indicating whether the sum of the three matrices is
 #'   equal to the reference matrix
-#' @export
+#' @keywords internal
 #' @noRd
 ComponentSum <- function(mA, mU, mF, mC) {
   mat_dim <- nrow(mA)

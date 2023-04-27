@@ -19,7 +19,7 @@
 \usage{
 \method{as.data.frame}{CompadreDB}(x, ...)
 
-as_tibble.CompadreDB(
+\method{as_tibble}{CompadreDB}(
   x,
   .rows = NULL,
   .name_repair = c("check_unique", "unique", "universal", "minimal"),

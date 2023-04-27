@@ -106,7 +106,13 @@
     <loc>/reference/mpm_mean.html</loc>
   </url>
   <url>
+    <loc>/reference/mpm_median.html</loc>
+  </url>
+  <url>
     <loc>/reference/mpm_methods.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mpm_sd.html</loc>
   </url>
   <url>
     <loc>/reference/string_representation.html</loc>
