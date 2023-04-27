@@ -2,7 +2,6 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(dplyr))
 
 test_that("CompadreDB-Tidyverse functions work correctly", {
-
   # ggplot fortify
   cf <- fortify(Compadre)
   expect_s3_class(cf, "data.frame")

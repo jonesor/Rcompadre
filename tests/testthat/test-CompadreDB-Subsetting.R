@@ -1,5 +1,4 @@
 test_that("CompadreDB-Subsetting works correctly", {
-
   # [
   sub1 <- Compadre[1:5, ]
   expect_s4_class(sub1, "CompadreDB")
@@ -41,7 +40,6 @@ test_that("CompadreDB-Subsetting works correctly", {
 
 
 test_that("CompadreDB-Subsetting warns and fails gracefully", {
-
   expect_warning(Compadre[, -1])
   expect_warning(Compadre[, "SpeciesAccepted"])
   expect_warning(Compadre[, names(Compadre) != "mat"])

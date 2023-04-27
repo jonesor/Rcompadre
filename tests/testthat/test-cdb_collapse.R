@@ -9,7 +9,6 @@ test_that("cdb_collapse works correctly", {
 
 
 test_that("cdb_collapse warns and fails gracefully", {
-
   # contains Seasonal
   Compadre$IdStage <- cdb_id_stages(Compadre, "MatrixClassAuthor")
   expect_warning(cdb_collapse(Compadre, "IdStage"))
