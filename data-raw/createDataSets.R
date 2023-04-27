@@ -1,4 +1,3 @@
-
 # Script that creates the subsetted versions of the COM(P)ADRE
 # data bases distributed in RCompadre
 
