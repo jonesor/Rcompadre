@@ -55,6 +55,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Collate: 
     'CompadreDB.R'
+    'Rcompadre-package.R'
     'CompadreDB-Methods.R'
     'CompadreDB-Subsetting.R'
     'CompadreDB-Tidyverse.R'
