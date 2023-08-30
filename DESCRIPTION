@@ -41,6 +41,7 @@ Suggests:
     dplyr,
     ggplot2,
     knitr,
+    maps,
     rcrossref,
     rmarkdown,
     spelling,
