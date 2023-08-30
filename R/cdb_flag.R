@@ -291,7 +291,7 @@ CheckMats <- function(has_na, mat, fn) {
 #' This function checks if a matrix is singular by attempting to calculate its
 #' fundamental matrix using the \code{\link{solve}} function. If the matrix is
 #' singular, the function returns `TRUE`.
-#'s
+#' s
 #' @param matU A matrix
 #'
 #' @return A logical value indicating whether the matrix is singular
