@@ -15,22 +15,22 @@
 #' mean matrix. If \code{na.rm == TRUE} and a given element is \code{NA} in
 #' \emph{every} matrix within \code{x}, the value returned for that element will
 #' be \code{0}.
-#' 
+#'
 #' @examples
 #' # set seed for repeatability
 #' set.seed(42)
-#' 
+#'
 #' # create a function that generates a matrix with random values
 #' create_matrix <- function() {
 #'   matrix(runif(9, 0, 1), nrow = 3)
 #' }
-#' 
+#'
 #' # use replicate() to call the create_matrix() function 20 times
 #' mat_list <- replicate(20, create_matrix(), simplify = FALSE)
-#' 
+#'
 #' # get the median matrix
 #' mpm_median(mat_list)
-#' 
+#'
 #' # If the matrices are in an RCompadre object, extract them using `matA` before
 #' # passing to `mpm_median`
 #' my_compadre <- cdb_build_cdb(mat_a = mat_list)
@@ -85,23 +85,23 @@ mpm_median <- function(x, na.rm = FALSE) {
 #' @examples
 #' # set seed for repeatability
 #' set.seed(42)
-#' 
+#'
 #' # create a function that generates a matrix with random values
 #' create_matrix <- function() {
 #'   matrix(runif(9, 0, 1), nrow = 3)
 #' }
-#' 
+#'
 #' # use replicate() to call the create_matrix() function 20 times
 #' mat_list <- replicate(20, create_matrix(), simplify = FALSE)
-#' 
+#'
 #' # get the sd matrix
 #' mpm_sd(mat_list)
-#' 
+#'
 #' # If the matrices are in an RCompadre object, extract them using `matA` before
 #' # passing to `mpm_sd`
 #' my_compadre <- cdb_build_cdb(mat_a = mat_list)
 #' mpm_sd(matA(my_compadre))
-#' 
+#'
 #' @author Darren Norris
 #'
 #' @family data management
