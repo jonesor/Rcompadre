@@ -11,7 +11,7 @@ mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 # print the list of matrices
 mat_list
 
-testthat::expect_true(inherits(mpm_median(mat_list), "matrix"))
+testthat::expect_true(inherits(mat_median(mat_list), "matrix"))
 
 # create a function that generates a matrix with random values
 create_matrix_with_NA <- function() {
@@ -26,8 +26,8 @@ mat_list_NA <- replicate(20, create_matrix_with_NA(), simplify = FALSE)
 # print the list of matrices
 mat_list_NA
 
-testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = TRUE), "matrix"))
-testthat::expect_true(inherits(mpm_median(mat_list_NA, na.rm = FALSE), "matrix"))
+testthat::expect_true(inherits(mat_median(mat_list_NA, na.rm = TRUE), "matrix"))
+testthat::expect_true(inherits(mat_median(mat_list_NA, na.rm = FALSE), "matrix"))
 
 # create a function that generates a matrix with different dimensions
 create_matrix_r_dim <- function() {
@@ -41,7 +41,7 @@ mat_list_r_dim <- replicate(20, create_matrix_r_dim(), simplify = FALSE)
 # print the list of matrices
 mat_list_r_dim
 
-testthat::expect_error(mpm_median(mat_list_r_dim))
+testthat::expect_error(mat_median(mat_list_r_dim))
 
 
 # sd function
@@ -59,7 +59,7 @@ mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 # print the list of matrices
 mat_list
 
-testthat::expect_true(inherits(mpm_sd(mat_list), "matrix"))
+testthat::expect_true(inherits(mat_sd(mat_list), "matrix"))
 
 # create a function that generates a matrix with random values
 create_matrix_with_NA <- function() {
@@ -74,8 +74,8 @@ mat_list_NA <- replicate(20, create_matrix_with_NA(), simplify = FALSE)
 # print the list of matrices
 mat_list_NA
 
-testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = TRUE), "matrix"))
-testthat::expect_true(inherits(mpm_sd(mat_list_NA, na.rm = FALSE), "matrix"))
+testthat::expect_true(inherits(mat_sd(mat_list_NA, na.rm = TRUE), "matrix"))
+testthat::expect_true(inherits(mat_sd(mat_list_NA, na.rm = FALSE), "matrix"))
 
 # create a function that generates a matrix with different dimensions
 create_matrix_r_dim <- function() {
@@ -89,4 +89,4 @@ mat_list_r_dim <- replicate(20, create_matrix_r_dim(), simplify = FALSE)
 # print the list of matrices
 mat_list_r_dim
 
-testthat::expect_error(mpm_sd(mat_list_r_dim))
+testthat::expect_error(mat_sd(mat_list_r_dim))
