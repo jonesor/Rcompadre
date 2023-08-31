@@ -64,12 +64,19 @@ mat_median <- function(x, na.rm = FALSE) {
 }
 
 
-#' Calculate a standard deviation over a list of matrices
+#' Calculate a standard deviation over a list of matrices or CompadreMat objects
 #'
-#' Calculates an element-wise standard deviation over a list of matrices of
-#' constant dimension.
+#' Calculates an element-wise standard deviation over a list of matrices or
+#' CompadreMat objects of constant dimension.
+#' 
+#' The difference between function \code{mat_sd}) and (\code{mpm_sd} is that
+#' \code{mat_sd} takes input as a list of matrices (e.g., a list of **A**
+#' matrices) while \code{mat_sd} takes input as a list of `CompadreMat` objects and
+#' thus calculates the mean matrices for both the **A** matrix and its
+#' submatrices (**U**, **F**, **C**).
 #'
-#' @param x List of matrices all of same dimension
+#' @param x A list of matrices or, for \code{mpm_sd} a list of `CompadreMat` objects,
+#'   all of the same dimension
 #' @param na.rm Logical indicating whether missing values should be excluded
 #'   (see \emph{Details}). Defaults to \code{FALSE}.
 #'
@@ -107,7 +114,7 @@ mat_median <- function(x, na.rm = FALSE) {
 #' @family data management
 #'
 #' @importFrom stats sd
-#' @export mat_sd
+#' @export mpm_sd
 mat_sd <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
@@ -127,4 +134,55 @@ mat_sd <- function(x, na.rm = FALSE) {
   rownames(mat_out) <- rownames_mat
   colnames(mat_out) <- colnames_mat
   return(mat_out)
+}
+
+
+#' @rdname mpm_sd
+#' @importFrom methods new
+#' @export
+mpm_sd <- function(x, na.rm = FALSE) {
+  if(!inherits(x, "list")){
+    stop("x must be a list of CompadreMat objects")
+  }
+  if(!inherits(x[[1]], "CompadreMat")){
+    stop("x must be a list of CompadreMat objects")
+  }
+  
+  #Use lapply to get matrices, stages when x is a list of compadre objects
+  matA <- lapply(x, function(m) m@matA)
+  matU <- lapply(x, function(m) m@matU)
+  matF <- lapply(x, function(m) m@matF)
+  matC <- lapply(x, function(m) m@matC)
+  stage_org <- lapply(x, function(m) m@matrixClass$MatrixClassOrganized)
+  stage_aut <- lapply(x, function(m) m@matrixClass$MatrixClassAuthor)
+  
+  stage_org_col <- vapply(stage_org, paste, collapse = " ", "")
+  stage_aut_col <- vapply(stage_aut, paste, collapse = " ", "")
+  if (length(unique(stage_org_col)) != 1L) {
+    warning(
+      "CompadreMat objects in given list do not all have the same ",
+      "MatrixClassOrganized. Returning MatrixClassOrganized from ",
+      "first list element"
+    )
+  }
+  if (length(unique(stage_aut_col)) != 1L) {
+    warning(
+      "CompadreMat objects in given list do not all have the same ",
+      "MatrixClassAuthor. Returning MatrixClassAuthor from first ",
+      "list element"
+    )
+  }
+  
+  sdA <- mat_sd(matA, na.rm = na.rm)
+  sdU <- mat_sd(matU, na.rm = na.rm)
+  sdF <- mat_sd(matF, na.rm = na.rm)
+  sdC <- mat_sd(matC, na.rm = na.rm)
+  
+  new("CompadreMat",
+      matA = sdA,
+      matU = sdU,
+      matF = sdF,
+      matC = sdC,
+      matrixClass = x[[1]]@matrixClass
+  )
 }
