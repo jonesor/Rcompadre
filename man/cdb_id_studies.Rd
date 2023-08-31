@@ -46,9 +46,9 @@ Other data management:
 \code{\link{cdb_rbind}()},
 \code{\link{cdb_unflatten}()},
 \code{\link{cdb_unnest}()},
+\code{\link{mat_median}()},
+\code{\link{mat_sd}()},
 \code{\link{mpm_mean}()},
-\code{\link{mpm_median}()},
-\code{\link{mpm_sd}()},
 \code{\link{string_representation}}
 }
 \author{

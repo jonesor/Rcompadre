@@ -29,20 +29,20 @@
 #' mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 #'
 #' # get the median matrix
-#' mpm_median(mat_list)
+#' mat_median(mat_list)
 #'
 #' # If the matrices are in an RCompadre object, extract them using `matA` before
-#' # passing to `mpm_median`
+#' # passing to `mat_median`
 #' my_compadre <- cdb_build_cdb(mat_a = mat_list)
-#' mpm_median(matA(my_compadre))
+#' mat_median(matA(my_compadre))
 #'
 #' @author Darren Norris
 #'
 #' @family data management
 #' @importFrom stats median
 #'
-#' @export mpm_median
-mpm_median <- function(x, na.rm = FALSE) {
+#' @export mat_median
+mat_median <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) !=
@@ -95,20 +95,20 @@ mpm_median <- function(x, na.rm = FALSE) {
 #' mat_list <- replicate(20, create_matrix(), simplify = FALSE)
 #'
 #' # get the sd matrix
-#' mpm_sd(mat_list)
+#' mat_sd(mat_list)
 #'
 #' # If the matrices are in an RCompadre object, extract them using `matA` before
-#' # passing to `mpm_sd`
+#' # passing to `mat_sd`
 #' my_compadre <- cdb_build_cdb(mat_a = mat_list)
-#' mpm_sd(matA(my_compadre))
+#' mat_sd(matA(my_compadre))
 #'
 #' @author Darren Norris
 #'
 #' @family data management
 #'
 #' @importFrom stats sd
-#' @export mpm_sd
-mpm_sd <- function(x, na.rm = FALSE) {
+#' @export mat_sd
+mat_sd <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) !=
