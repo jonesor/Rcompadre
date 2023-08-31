@@ -2,12 +2,13 @@
 % Please edit documentation in R/mpm_summaries.R
 \name{mat_sd}
 \alias{mat_sd}
-\title{Calculate a standard deviation over a list of matrices}
+\title{Calculate a standard deviation over a list of matrices or CompadreMat objects}
 \usage{
 mat_sd(x, na.rm = FALSE)
 }
 \arguments{
-\item{x}{List of matrices all of same dimension}
+\item{x}{A list of matrices or, for \code{mpm_sd} a list of `CompadreMat` objects,
+all of the same dimension}
 
 \item{na.rm}{Logical indicating whether missing values should be excluded
 (see \emph{Details}). Defaults to \code{FALSE}.}
@@ -17,10 +18,17 @@ A matrix containing the standard deviation of each element across all
   matrices in the list
 }
 \description{
-Calculates an element-wise standard deviation over a list of matrices of
-constant dimension.
+Calculates an element-wise standard deviation over a list of matrices or
+CompadreMat objects of constant dimension.
 }
 \details{
+The difference between function \code{mat_sd}) and (\code{mpm_sd} is that
+\code{mat_sd} takes input as a list of matrices (e.g., a list of **A**
+matrices) while \code{mat_sd} takes input as a list of `CompadreMat` objects and
+thus calculates the mean matrices for both the **A** matrix and its
+submatrices (**U**, **F**, **C**).
+
+
 If \code{na.rm == TRUE}, missing values are ignored in the calculation of the
 mean matrix. If \code{na.rm == TRUE} and a given element is \code{NA} in
 \emph{every} matrix within \code{x}, the value returned for that element will
@@ -63,5 +71,7 @@ Other data management:
 }
 \author{
 Darren Norris
+
+Owen R. Jones <jones@biology.sdu.dk>
 }
 \concept{data management}
