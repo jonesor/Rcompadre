@@ -80,6 +80,7 @@ Collate:
     'data.R'
     'mpm_mean.R'
     'mpm_methods.R'
-    'mpm_summaries.R'
+    'mpm_sd.R'
+    'mpm_median.R'
     'string_representation.R'
     'zzz.R'
