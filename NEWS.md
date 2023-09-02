@@ -4,6 +4,10 @@
 * Added functions `mpm_sd`/`mat_sd` and `mpm_median`/`mat_median` which join the existing `mpm_mean`/`mat_mean` functions to calculate element-wise summary statistics across MPMs of the same dimension. Code contributed by Darren Norris with modifications by Owen Jones. A future version will include a generic "summarise matrix" function.
 * Increased test coverage.
 
+# Rcompadre 1.2.2
+
+* Fixed minor errors causing some tests to fail.
+
 # Rcompadre 1.2.1 
 
 * Fixed an error in `cdb_build_cdb` causing an error in the construction of the A matrix when a C matrix was not provided.
