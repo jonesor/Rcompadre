@@ -19,7 +19,8 @@ cdb_flag(
 
   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-  "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")}}
+  "check_ergodic", "check_irreducible", "check_primitive",
+  "check_surv_gte_1")}}
 }
 \value{
 Returns \code{cdb} with extra columns appended to the data slot
@@ -94,9 +95,9 @@ Optional checks include:
   matrix that is irreducible and has only a single eigenvalue of maximum
   modulus. This check is therefore redundant due to the overlap with
   `check_irreducible` and `checkErdogic`.
-  \item \code{check_surv_gte_1}: does `matU` contains values that are equal to
-  or greater than 1? Survival is bounded between 0 and 1. Values in excess of
-  1 are biologically unreasonable.
+  \item \code{check_surv_gte_1}: does `matU` contains values that are equal
+  to or greater than 1? Survival is bounded between 0 and 1. Values in excess
+  of 1 are biologically unreasonable.
 }
 }
 \details{

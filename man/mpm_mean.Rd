@@ -10,8 +10,8 @@ mat_mean(x, na.rm = FALSE)
 mpm_mean(x, na.rm = FALSE)
 }
 \arguments{
-\item{x}{List of matrices (\code{mat_mean}) or list of CompadreMat objects
-(\code{mpm_mean}), all of same dimension}
+\item{x}{A list of matrices or, for \code{mpm_mean} a list of `CompadreMat` objects,
+all of the same dimension}
 
 \item{na.rm}{Logical indicating whether missing values should be excluded
 (see \emph{Details}). Defaults to \code{FALSE}.}
@@ -21,7 +21,13 @@ A matrix (\code{mat_mean}) or a CompadreMat object (\code{mpm_mean}).
 }
 \description{
 Calculates an element-wise mean over a list of matrices or CompadreMat
-objects of constant dimension.
+objects of constant dimension. 
+
+The difference between function \code{mat_mean}) and (\code{mpm_mean} is that
+\code{mat_mean} takes input as a list of matrices (e.g., a list of **A**
+matrices) while \code{mat_mean} takes input as a list of `CompadreMat` objects and
+thus calculates the mean matrices for both the **A** matrix and its
+submatrices (**U**, **F**, **C**).
 }
 \details{
 If \code{na.rm == TRUE}, missing values are ignored in the calculation of the
@@ -32,6 +38,11 @@ be \code{0}.
 \examples{
 # there are four rows for species 'Haplopappus_radiatus' in Compadre
 mpms <- Compadre$mat[Compadre$SpeciesAuthor == "Haplopappus_radiatus"]
+
+#The object mpms is a list, containing compadre objects
+class(mpms)
+class(mpms[[1]])
+
 mpm_mean(mpms)
 
 # extract list of matA and take mean
@@ -48,6 +59,8 @@ Other data management:
 \code{\link{cdb_rbind}()},
 \code{\link{cdb_unflatten}()},
 \code{\link{cdb_unnest}()},
+\code{\link{mpm_median}()},
+\code{\link{mpm_sd}()},
 \code{\link{string_representation}}
 }
 \author{

@@ -46,7 +46,7 @@ setClass("CompadreMat",
 )
 
 ################################################################################
-## Initialize & check
+# Initialize and check
 
 ## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
@@ -82,7 +82,7 @@ validCompadreMat <- function(object) {
     m <- c("matA", "matU", "matF", "matC")
     errors <- c(errors, paste(
       "The following matrices are not square:",
-      paste(m[!check_square], collapse = ", ")
+      toString(m[!check_square])
     ))
   }
   if (!check_equal_dims) {
@@ -98,7 +98,7 @@ validCompadreMat <- function(object) {
       errors,
       paste(
         "The following columns are missing from matrixClass:",
-        paste(m_names[!m_names_present], collapse = ", ")
+        toString(m_names[!m_names_present])
       )
     )
   }
@@ -127,15 +127,13 @@ setMethod("show",
   signature = (object <- "CompadreMat"),
   function(object) {
     Mdim <- dim(matA(object))[1]
-    # start
-    start <- cat(paste(
-      "A compadre matrix object with",
-      as.character(Mdim),
-      "stages.\n\n"
-    ))
+
     if (Mdim > 0) {
       # matrixClass info
-      showstages <- matrixClass(object)[, c("MatrixClassOrganized", "MatrixClassAuthor")]
+      showstages <- matrixClass(object)[, c(
+        "MatrixClassOrganized",
+        "MatrixClassAuthor"
+      )]
       print(showstages)
       cat("\n")
       # matA

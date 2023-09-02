@@ -67,9 +67,9 @@
 #'   matrix that is irreducible and has only a single eigenvalue of maximum
 #'   modulus. This check is therefore redundant due to the overlap with
 #'   `check_irreducible` and `checkErdogic`.
-#'   \item \code{check_surv_gte_1}: does `matU` contains values that are equal to
-#'   or greater than 1? Survival is bounded between 0 and 1. Values in excess of
-#'   1 are biologically unreasonable.
+#'   \item \code{check_surv_gte_1}: does `matU` contains values that are equal
+#'   to or greater than 1? Survival is bounded between 0 and 1. Values in excess
+#'   of 1 are biologically unreasonable.
 #' }
 #'
 #' @param cdb A CompadreDB object
@@ -77,7 +77,8 @@
 #'
 #'   Defaults to all, i.e. \code{c("check_NA_A", "check_NA_U", "check_NA_F",
 #'   "check_NA_C", "check_zero_U", "check_singular_U", "check_component_sum",
-#'   "check_ergodic", "check_irreducible", "check_primitive", "check_surv_gte_1")}
+#'   "check_ergodic", "check_irreducible", "check_primitive",
+#'   "check_surv_gte_1")}
 #'
 #' @return Returns \code{cdb} with extra columns appended to the data slot
 #'   (columns have the same names as the corresponding elements of
@@ -148,9 +149,9 @@ cdb_flag <- function(cdb, checks = c(
 
   checks_check <- checks %in% checks_allow
 
-  if (any(!checks_check)) {
+  if (!any(checks_check)) {
     stop("The following elements of argument 'checks' are not valid: ",
-      paste(checks[!checks_check], collapse = ", "),
+      toString(checks[!checks_check]),
       call. = FALSE
     )
   }
@@ -163,10 +164,10 @@ cdb_flag <- function(cdb, checks = c(
   matC <- matC(cdb)
 
   # calculate outside conditionals because may be required later
-  vec_NA_A <- vapply(matA, function(x) any(is.na(x)), FALSE)
-  vec_NA_U <- vapply(matU, function(x) any(is.na(x)), FALSE)
-  vec_NA_F <- vapply(matF, function(x) any(is.na(x)), FALSE)
-  vec_NA_C <- vapply(matC, function(x) any(is.na(x)), FALSE)
+  vec_NA_A <- vapply(matA, function(x) anyNA(x), FALSE)
+  vec_NA_U <- vapply(matU, function(x) anyNA(x), FALSE)
+  vec_NA_F <- vapply(matF, function(x) anyNA(x), FALSE)
+  vec_NA_C <- vapply(matC, function(x) anyNA(x), FALSE)
 
   if ("check_NA_A" %in% checks) {
     dat$check_NA_A <- vec_NA_A
@@ -190,7 +191,14 @@ cdb_flag <- function(cdb, checks = c(
     dat$check_zero_C <- vapply(matC, function(x) all(x == 0 | is.na(x)), FALSE)
   }
   if ("check_zero_U_colsum" %in% checks) {
-    dat$check_zero_U_colsum <- vapply(matU, function(x) any(base::colSums(x, na.rm = TRUE) == 0), FALSE)
+    dat$check_zero_U_colsum <- vapply(
+      matU,
+      function(x) {
+        any(colSums(x,
+          na.rm = TRUE
+        ) == 0)
+      }, FALSE
+    )
   }
   if ("check_singular_U" %in% checks) {
     dat$check_singular_U <- mapply(
@@ -202,7 +210,12 @@ cdb_flag <- function(cdb, checks = c(
   }
 
   if ("check_component_sum" %in% checks) {
-    dat$check_component_sum <- mapply(ComponentSum, matA, matU, matF, matC)
+    dat$check_component_sum <- unlist(Map(ComponentSum,
+      mA = matA,
+      mU = matU,
+      mF = matF,
+      mC = matC
+    ))
   }
 
   if ("check_ergodic" %in% checks) {
@@ -241,7 +254,7 @@ cdb_flag <- function(cdb, checks = c(
   }
 
   if ("check_surv_gte_1" %in% checks) {
-    dat$check_surv_gte_1 <- sapply(matU, maxifnotNAs) >= 1
+    dat$check_surv_gte_1 <- vapply(matU, maxifnotNAs, numeric(1)) >= 1
   }
 
   new("CompadreDB",
@@ -253,39 +266,89 @@ cdb_flag <- function(cdb, checks = c(
 
 
 # utilities
+
+#' Check matrices for NA values and apply a function
+#'
+#' This function checks a matrix for NA values and applies a specified function
+#' to it. If the matrix contains any NA values, the function returns NA.
+#'
+#' @param has_na A logical value indicating whether the matrix may contain NA
+#'   values
+#' @param mat A matrix
+#' @param fn A function to apply to the matrix
+#'
+#' @return The result of applying the function to the matrix, or NA if the
+#'   matrix contains any NA values
+#' @keywords internal
+#' @noRd
 CheckMats <- function(has_na, mat, fn) {
   fn <- match.fun(fn)
   ifelse(has_na, NA, fn(mat))
 }
 
+#' Check if a matrix is singular
+#'
+#' This function checks if a matrix is singular by attempting to calculate its
+#' fundamental matrix using the \code{\link{solve}} function. If the matrix is
+#' singular, the function returns `TRUE`.
+#' s
+#' @param matU A matrix
+#'
+#' @return A logical value indicating whether the matrix is singular
+#' @keywords internal
+#' @noRd
 CheckSingular <- function(matU) {
   # try calculating fundamental matrix
   N <- try(solve(diag(nrow(matU)) - matU), silent = TRUE)
 
   # flag if singular
-  ifelse(("try-error" %in% class(N)) && grepl("singular", N[1]),
-    TRUE,
-    FALSE
-  )
+  out <- inherits(N, "try-error") && grepl("singular", N[1], fixed = TRUE)
+  return(out)
 }
 
+#' Calculate the sum of three matrices and compare to a reference matrix
+#'
+#' This function calculates the sum of three matrices (`mU`, `mF`, and `mC`) and
+#' compares it to a reference matrix (`mA`). If the sum of the three matrices is
+#' equal to the reference matrix, the function returns `TRUE.` Otherwise, it
+#' returns `FALSE` or `NA` if the sum of the three matrices is zero or contains
+#' NA values.
+#'
+#' @param mA A matrix
+#' @param mU A matrix
+#' @param mF A matrix
+#' @param mC A matrix
+#'
+#' @return A logical value indicating whether the sum of the three matrices is
+#'   equal to the reference matrix
+#' @keywords internal
+#' @noRd
 ComponentSum <- function(mA, mU, mF, mC) {
   mat_dim <- nrow(mA)
 
-  if (all(is.na(mU))) mU <- matrix(0, mat_dim, mat_dim)
-  if (all(is.na(mF))) mF <- matrix(0, mat_dim, mat_dim)
-  if (all(is.na(mC))) mC <- matrix(0, mat_dim, mat_dim)
+  if (all(is.na(mU))) {
+    mU <- matrix(0, mat_dim, mat_dim)
+  }
+  if (all(is.na(mF))) {
+    mF <- matrix(0, mat_dim, mat_dim)
+  }
+  if (all(is.na(mC))) {
+    mC <- matrix(0, mat_dim, mat_dim)
+  }
 
   mat_sum <- mU + mF + mC
 
   if (all(mat_sum == 0 | is.na(mat_sum))) {
     out <- NA
   } else {
-    val_check <- mapply(function(x, y) isTRUE(all.equal(x, y)),
-      x = c(mat_sum), y = c(mA)
-    )
+    val_check <- unlist(Map(
+      function(x, y) {
+        isTRUE(all.equal(x, y))
+      },
+      x = mat_sum, y = mA
+    ))
 
-    out <- ifelse(all(val_check), TRUE, FALSE)
+    out <- all(val_check)
   }
 
   return(out)

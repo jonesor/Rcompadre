@@ -2,7 +2,7 @@ test_that("cdb_metadata works correctly", {
   Compadre_metadata <- cdb_metadata(Compadre)
 
   expect_s3_class(Compadre_metadata, "tbl_df")
-  expect_true(ncol(Compadre_metadata) == (ncol(Compadre) - 1))
+  expect_identical(ncol(Compadre_metadata), as.integer(ncol(Compadre) - 1))
 })
 
 

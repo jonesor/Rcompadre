@@ -23,7 +23,7 @@
 #'
 #' @export cdb_compare
 cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
-  if (!inherits(cdb1, "CompadreDB") | !inherits(cdb2, "CompadreDB")) {
+  if (!inherits(cdb1, "CompadreDB") || !inherits(cdb2, "CompadreDB")) {
     stop("cdbs must be of class CompadreDB. See function as_cdb")
   }
 
@@ -31,19 +31,19 @@ cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
   cat("Quick Summary...\n\n")
 
   # File 1
-  cat(paste("cdb1 contains data for:\n",
+  cat(paste0(
+    "cdb1 contains data for:\n",
     NumberStudies(cdb1), " source papers\n",
     NumberAcceptedSpecies(cdb1), " accepted species\n",
-    NumberMatrices(cdb1), " matrices\n\n",
-    sep = ""
+    NumberMatrices(cdb1), " matrices\n\n"
   ))
 
   # File 2
-  cat(paste("cdb2 contains data for:\n",
+  cat(paste0(
+    "cdb2 contains data for:\n",
     NumberStudies(cdb2), " source papers\n",
     NumberAcceptedSpecies(cdb2), " accepted species\n",
-    NumberMatrices(cdb2), " matrices\n\n",
-    sep = ""
+    NumberMatrices(cdb2), " matrices\n\n"
   ))
 
   if (verbose == TRUE) {
@@ -59,32 +59,16 @@ cdb_compare <- function(cdb1, cdb2, verbose = FALSE) {
     cat("Species in cdb2 not in cdb1:\n")
     print(sp2[which(!sp2 %in% sp1)])
 
-    # Get unique author species for both files
-    # asp1 <- unique(SpeciesAuthor(cdb1))
-    # asp2 <- unique(SpeciesAuthor(cdb2))
-
-    # cat("Number of study-species combinations in cdb1\n")
-    # print(length(asp1))
-
-    # cat("Number of study-species combinations in cdb2\n")
-    # print(length(asp2))
-
-    # cat("Study-species in cdb1 that are not in cdb2\n")
-    # print(asp1[which(!asp1%in%asp2)])
-
-    # cat("Study-species in cdb2 that are not in cdb1\n")
-    # print(asp2[which(!asp2%in%asp1)])
-
-    uniqueSource1 <- unique(paste(cdb1$Authors, " (",
+    uniqueSource1 <- unique(paste0(
+      cdb1$Authors, " (",
       cdb1$YearPublication, ") ",
-      cdb1$Journal,
-      sep = ""
+      cdb1$Journal
     ))
 
-    uniqueSource2 <- unique(paste(cdb2$Authors, " (",
+    uniqueSource2 <- unique(paste0(
+      cdb2$Authors, " (",
       cdb2$YearPublication, ") ",
-      cdb2$Journal,
-      sep = ""
+      cdb2$Journal
     ))
 
     cat("\n\nSource papers in cdb2 not in cdb1\n")

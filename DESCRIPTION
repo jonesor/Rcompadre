@@ -1,7 +1,7 @@
 Type: Package
 Package: Rcompadre
 Title: Utilities for using the 'COM(P)ADRE' Matrix Model Database
-Version: 1.2.2
+Version: 1.3.0
 Authors@R: c(
     person("Patrick", "Barks", , "barks@biology.sdu.dk", role = "aut",
            comment = c(ORCID = "0000-0002-5947-8151")),
@@ -34,6 +34,7 @@ Depends:
 Imports:
     methods,
     popdemo,
+    stats,
     tibble,
     utils
 Suggests: 
@@ -54,6 +55,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Collate: 
     'CompadreDB.R'
+    'Rcompadre-package.R'
     'CompadreDB-Methods.R'
     'CompadreDB-Subsetting.R'
     'CompadreDB-Tidyverse.R'
@@ -77,5 +79,7 @@ Collate:
     'data.R'
     'mpm_mean.R'
     'mpm_methods.R'
+    'mpm_sd.R'
+    'mpm_median.R'
     'string_representation.R'
     'zzz.R'

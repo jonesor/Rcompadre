@@ -17,21 +17,21 @@ test_that("CompadreDB works correctly", {
   expect_false(isTRUE(validCompadreDB(db4)))
 
   # $ and $<-
-  expect_equal(Compadre$SpeciesAuthor, Compadre@data$SpeciesAuthor)
+  expect_identical(Compadre$SpeciesAuthor, Compadre@data$SpeciesAuthor)
 
   db1 <- Compadre
   db1$ones <- 1L
-  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_identical(ncol(db1@data), as.integer((ncol(Compadre@data) + 1)))
   expect_true(all(db1$ones == 1L))
 
   expect_error(Compadre$mat <- 1L)
 
   # [[ and [[<-
-  expect_equal(Compadre[["SpeciesAuthor"]], Compadre@data$SpeciesAuthor)
+  expect_identical(Compadre[["SpeciesAuthor"]], Compadre@data$SpeciesAuthor)
 
   db1 <- Compadre
   db1[["ones"]] <- 1L
-  expect_true(ncol(db1@data) == ncol(Compadre@data) + 1)
+  expect_identical(ncol(db1@data), as.integer(ncol(Compadre@data) + 1))
   expect_true(all(db1$ones == 1L))
 
   expect_error(Compadre[["mat"]] <- 1L)

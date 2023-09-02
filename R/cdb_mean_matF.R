@@ -47,7 +47,6 @@ cdb_mean_matF <- function(cdb, columns = c(
                             "MatrixPopulation",
                             "MatrixDimension"
                           )) {
-
   # leave validation to cdb_id
 
   # create a unique identifier for each population in the database

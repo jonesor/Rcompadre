@@ -1,4 +1,3 @@
-
 # Script that creates the subsetted versions of the COM(P)ADRE
 # data bases distributed in RCompadre
 
@@ -14,12 +13,8 @@ load("~/COMPADRE_v.X.X.X.RData")
 Compadre <- as_cdb(compadre)
 Comadre <- as_cdb(comadre)
 
-# # create reproducible random subsamples
-# s1 <- sample(seq_along(Compadre$SpeciesAccepted), 150)
-# s2 <- sample(seq_along(Comadre$SpeciesAccepted), 150)
-#
-# dput(s1)
-# dput(s2)
+# # create reproducible subsample
+
 s1 <- c(
   4910L, 3337L, 6743L, 2664L, 2350L, 4193L, 5083L, 2809L, 1207L,
   4149L, 4008L, 1153L, 450L, 5139L, 1172L, 7139L, 2971L, 6655L,

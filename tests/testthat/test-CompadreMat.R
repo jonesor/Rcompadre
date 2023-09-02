@@ -20,7 +20,6 @@ test_that("CompadreMat works correctly", {
   cmat3@matU <- matrix(1:6, nrow = 2)
   expect_false(isTRUE(validCompadreMat(cmat3)))
 
-  # nrow(matrixClass) != nrow(matA)
   cmat4@matrixClass <- rbind(cmat4@matrixClass, cmat4@matrixClass)
   expect_false(isTRUE(validCompadreMat(cmat4)))
 })

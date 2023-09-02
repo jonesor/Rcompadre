@@ -141,7 +141,7 @@ left_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
     data = callGeneric(),
     version = vers
   )
-  if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
+  if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
     warning("One or more rows of the CompadreDB object appear to have been ",
       "duplicated during the join, indicating non-unique matches",
       call. = FALSE
@@ -163,7 +163,7 @@ right_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
     data = callGeneric(),
     version = vers
   )
-  if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
+  if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
     warning("One or more rows of the CompadreDB object appear to have been ",
       "duplicated during the join, indicating non-unique matches",
       call. = FALSE
@@ -185,7 +185,7 @@ inner_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
     data = callGeneric(),
     version = vers
   )
-  if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
+  if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
     warning("One or more rows of the CompadreDB object appear to have been ",
       "duplicated during the join, indicating non-unique matches",
       call. = FALSE
@@ -207,7 +207,7 @@ full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
     data = callGeneric(),
     version = vers
   )
-  if (any(duplicated(out@data$DoNotUse_Temp_Sequence))) {
+  if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
     warning("One or more rows of the CompadreDB object appear to have been ",
       "duplicated during the join, indicating non-unique matches",
       call. = FALSE
@@ -241,9 +241,11 @@ register_all_s3_methods <- function() {
 
 
 register_s3_method <- function(pkg, generic, class, fun = NULL) {
-  stopifnot(is.character(pkg), length(pkg) == 1)
-  stopifnot(is.character(generic), length(generic) == 1)
-  stopifnot(is.character(class), length(class) == 1)
+  stopifnot(
+    is.character(pkg), length(pkg) == 1,
+    is.character(generic), length(generic) == 1,
+    is.character(class), length(class) == 1
+  )
 
   if (is.null(fun)) {
     fun <- get(paste0(generic, ".", class), envir = parent.frame())

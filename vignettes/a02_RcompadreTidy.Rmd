@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
+# The following line seems to be required by pkgdown::build_site() on my machine,
+# but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -37,7 +38,6 @@ library(Rcompadre)
 library(dplyr)
 library(ggplot2)
 library(popdemo)
-library(maps)     # for plotting world map
 ```
 
 ## Introduction to piping
@@ -47,15 +47,15 @@ We can take advantage of piping. The pipe (`%>%`) (from the [magrittr](https://m
 ```{r results=FALSE}
 y <- c(0.2, 4.1, 3.7)
 
-mean(y)         # 'normal' expression
-y %>% mean()    # piped expression
+mean(y) # 'normal' expression
+y %>% mean() # piped expression
 ```
 
 Though we generally don't need to, we can explicitly refer to the object on the left using a dot (`"."`).
 
 ```{r results=FALSE}
-y %>% mean()       # dot is implicit
-y %>% mean(x = .)  # dot is explicit
+y %>% mean() # dot is implicit
+y %>% mean(x = .) # dot is explicit
 ```
 
 The dot notation is particularly helpful if we want to pass the object on the left to an argument _other_ than the first one.
@@ -83,9 +83,9 @@ compadre_use <- filter(compadre_flag, check_NA_A == FALSE)
 and here's the equivalent piped sequence:
 
 ```{r}
-compadre_use <- Compadre %>% 
-  cdb_flag() %>%               # first argument is Compadre, from previous line
-  subset(check_NA_A == FALSE)  # first argument is output of cdb_flag()
+compadre_use <- Compadre %>%
+  cdb_flag() %>% # first argument is Compadre, from previous line
+  subset(check_NA_A == FALSE) # first argument is output of cdb_flag()
 ```
 
 The advantage of piping here is that we don't have to use nested functions (`filter(cdb_flag())`), and we don't have to create object names for every intermediate step in our analysis. An additional alternative is to use `subset()` instead of `filter()`.
@@ -99,7 +99,7 @@ Let's say we want to conduct an analysis comparing Nordic countries to the rest 
 
 ```{r, warning=FALSE}
 compadre_euro <- Compadre %>%
-  filter(Continent == "Europe") %>% 
+  filter(Continent == "Europe") %>%
   mutate(Nordic = Country %in% c("NOR", "SWE", "DNK", "ISL", "FIN"))
 ```
 
@@ -111,9 +111,9 @@ A variety of `Rcompadre` functions take a `CompadreDB` object as their first arg
 Here's an example with the Rcompadre functions `mpm_has_active()` and `cdb_id_studies()`, each of which take a `CompadreDB` object and return a vector.
 
 ```{r}
-compadre_use <- Compadre %>% 
-  mutate(has_active = mpm_has_active(.)) %>% 
-  filter(has_active == TRUE) %>% 
+compadre_use <- Compadre %>%
+  mutate(has_active = mpm_has_active(.)) %>%
+  filter(has_active == TRUE) %>%
   mutate(StudyID = cdb_id_studies(.))
 ```
 
@@ -122,9 +122,11 @@ In the example above, the pipe passes a `CompadreDB` object to the first argumen
 We can also use the dot notation approach to extract components from the `CompadreMat` objects in the column `mat`, such as `matA`, `matU`, `matF`, `matC`, `matrixClass`, `MatrixClassOrganized`, or `MatrixClassAuthor.` Each of these components can be accessed using an accessor function of the same name. Here's how to extract a list of `matU` and a list of `MatrixClassOrganized` from each row of the database, and add these lists to a `CompadreDB` object as new columns:
 
 ```{r}
-compadre_unnest <- Compadre %>% 
-  mutate(mat_U = matU(.),
-         m_class_organized = MatrixClassOrganized(.))
+compadre_unnest <- Compadre %>%
+  mutate(
+    mat_U = matU(.),
+    m_class_organized = MatrixClassOrganized(.)
+  )
 ```
 
 #### Vectorizing within `mutate` with the apply functions
@@ -136,17 +138,17 @@ Let's say we want to calculate the population growth rate for every matrix in th
 To apply `eigs()` to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `eigs()` to fail.
 
 ```{r}
-compadre_lambda <- Compadre %>% 
-  cdb_flag() %>% 
-  filter(check_NA_A == FALSE) %>%      # remove matrices with missing values
-  mutate(mat_A = matA(.)) %>%          # extract list-column of matA
-  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))  # get lambda for every matA
+compadre_lambda <- Compadre %>%
+  cdb_flag() %>%
+  filter(check_NA_A == FALSE) %>% # remove matrices with missing values
+  mutate(mat_A = matA(.)) %>% # extract list-column of matA
+  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))
 ```
 
 In the example above, `sapply()` returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function `lapply()` which always returns a list. In the example below we use `lapply()` to calculate vectors of stage-specific survival (column sums of `matU`) for every row of the database.
 
 ```{r}
-compadre_stage_surv <- Compadre %>% 
+compadre_stage_surv <- Compadre %>%
   mutate(stage_survival = lapply(matU(.), colSums))
 
 # print vector of stage-specific survival for 20th row
@@ -164,11 +166,14 @@ SurvFirstActive <- function(matU, first_active) colSums(matU)[first_active]
 Notice that this function has two arguments, both of which will vary across rows of the database. We therefore need to vectorize this function over both arguments, which we can do with `mapply()` (i.e. "multivariate apply"). Here's an example:
 
 ```{r}
-compadre_surv_first_active <- Compadre %>% 
-  mutate(surv_1 = mapply(FUN = SurvFirstActive,              # function
-                         matU = matU(.),                     # argument 1
-                         first_active = mpm_first_active(.)) # argument 2
-         )
+compadre_surv_first_active <- Compadre %>%
+  mutate(
+    surv_1 = mapply(
+      FUN = SurvFirstActive, # function
+      matU = matU(.), # argument 1
+      first_active = mpm_first_active(.)
+    ) # argument 2
+  )
 ```
 
 
@@ -180,9 +185,9 @@ Here's an example. We'll use `group_by()` to group our database by unique values
 
 ```{r}
 # count number of unique populations by species
-Compadre %>% 
-  group_by(SpeciesAccepted) %>% 
-  summarize(n_populations = length(unique(MatrixPopulation))) %>% 
+Compadre %>%
+  group_by(SpeciesAccepted) %>%
+  summarize(n_populations = length(unique(MatrixPopulation))) %>%
   arrange(desc(n_populations)) # arrange in descending order of n_pops
 ```
 
@@ -190,9 +195,9 @@ If, instead of a summary table with one row per species, we would rather append 
 
 ```{r}
 # subset to species with 10+ unique populations
-compadre_replicated_pops <- Compadre %>% 
-  group_by(SpeciesAccepted) %>% 
-  mutate(n_pops = length(unique(MatrixPopulation))) %>% 
+compadre_replicated_pops <- Compadre %>%
+  group_by(SpeciesAccepted) %>%
+  mutate(n_pops = length(unique(MatrixPopulation))) %>%
   ungroup() %>%
   subset(n_pops >= 10)
 ```
@@ -204,8 +209,8 @@ Make sure to use `ungroup()` after you're finished with the groups, to prevent u
 It is a common task in comparative analyses to obtain a single representative of each species. One way that users can do that is by using `group_by()`, followed by `slice()` and `sample()` to randomly select a representative from each accepted species. 
 
 ```{r}
-singleRepresentativeSpecies <- Compadre %>% 
-  group_by(SpeciesAccepted) %>% 
+singleRepresentativeSpecies <- Compadre %>%
+  group_by(SpeciesAccepted) %>%
   slice(sample(1))
 ```
 
@@ -234,19 +239,23 @@ lifeExpectancy <- function(matU, startLife) {
 }
 
 compadre_life_expect <- Compadre %>%
-  filter(MatrixComposite != "Seasonal", # filter is the dplyr version of subset
-         MatrixTreatment == "Unmanipulated",
-         MatrixCaptivity == "W",
-         ProjectionInterval == "1") %>% 
+  filter(
+    MatrixComposite != "Seasonal", # filter is the dplyr version of subset
+    MatrixTreatment == "Unmanipulated",
+    MatrixCaptivity == "W",
+    ProjectionInterval == "1"
+  ) %>%
   mutate(StageID = cdb_id_stages(.)) %>%
   cdb_collapse(columns = "StageID") %>%
-  cdb_flag() %>% 
-  filter(check_NA_U == FALSE,
-         check_zero_U == FALSE,
-         check_singular_U == FALSE) %>% 
-  mutate(matU = matU(.), start_life = mpm_first_active(.)) %>% 
-  mutate(life_expectancy = mapply(lifeExpectancy, matU, start_life)) %>% 
-  filter(life_expectancy >= 1) %>% 
+  cdb_flag() %>%
+  filter(
+    check_NA_U == FALSE,
+    check_zero_U == FALSE,
+    check_singular_U == FALSE
+  ) %>%
+  mutate(matU = matU(.), start_life = mpm_first_active(.)) %>%
+  mutate(life_expectancy = mapply(lifeExpectancy, matU, start_life)) %>%
+  filter(life_expectancy >= 1) %>%
   mutate(OrganismType = reorder(OrganismType, life_expectancy, median))
 
 ggplot2::ggplot(compadre_life_expect, aes(OrganismType, life_expectancy)) +

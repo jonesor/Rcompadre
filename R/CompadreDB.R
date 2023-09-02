@@ -88,11 +88,11 @@ validCompadreDB <- function(object) {
     errors <- c(errors, msg)
   }
   if ("mat" %in% names(dat)) {
-    if (!(class(dat$mat) %in% "list")) {
+    if (!inherits(dat$mat, "list")) {
       msg <- "column 'mat' must be a list column"
       errors <- c(errors, msg)
     }
-    if (class(dat$mat) %in% "list") {
+    if (inherits(dat$mat, "list")) {
       if (!(all(vapply(dat$mat, class, "") %in% "CompadreMat"))) {
         msg <- "all elements of 'mat' must be 'CompadreMat' objects"
         errors <- c(errors, msg)
@@ -140,11 +140,13 @@ as_cdb <- function(from) {
     )
   }
 
-  # Some old versions did not contain version information. This warning mentions that.
+  # Some old versions did not contain version information. This warning mentions
+  # that.
   if (!"version" %in% names(from)) {
     warning("This object does not contain `version` information, ",
       "possibly because it is an older database file.\n ",
-      "Minimal information has been added to comply with formal object requirements.",
+      "Minimal information has been added to comply with formal object
+      requirements.",
       "See ?CompadreDB",
       call. = FALSE
     )
@@ -218,17 +220,13 @@ setMethod("show",
       NumberAcceptedSpecies(object),
       "??"
     )
-    V <- ifelse(is.character(Version(object)),
-      paste("Version:", Version(object)),
-      "Version: Unknown"
-    )
-    # start
-    cat(paste("A COM(P)ADRE database ('CompadreDB') object with ",
+
+    cat(paste0(
+      "A COM(P)ADRE database ('CompadreDB') object with ",
       as.character(Sno),
       " SPECIES and ",
       as.character(Mno),
-      " MATRICES.\n\n",
-      sep = ""
+      " MATRICES.\n\n"
     ))
     print(object@data)
   }

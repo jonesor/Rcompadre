@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -105,6 +105,8 @@
 <code><a href="cdb_unflatten.html">cdb_unflatten</a>()</code>,
 <code><a href="cdb_unnest.html">cdb_unnest</a>()</code>,
 <code><a href="mpm_mean.html">mpm_mean</a>()</code>,
+<code><a href="mpm_median.html">mpm_median</a>()</code>,
+<code><a href="mpm_sd.html">mpm_sd</a>()</code>,
 <code><a href="string_representation.html">string_representation</a></code></p></div>
     </div>
     <div id="author">
@@ -122,27 +124,27 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> A COM(P)ADRE database ('CompadreDB') object with 9 SPECIES and 12 MATRICES.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 49</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    mat        SpeciesA…¹ Speci…² Commo…³ Genus Family Order Class Phylum Kingdom</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanth… Phylla… Amla    Phyl… Phyll… Malp… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanth… Phylla… Amla    Phyl… Phyll… Malp… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Sambucus_… Sambuc… <span style="color: #BB0000;">NA</span>      Samb… Adoxa… Dips… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanth… Phylla… Amla    Phyl… Phyll… Malp… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Magnolia_… Magnol… <span style="color: #BB0000;">NA</span>      Magn… Magno… Magn… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Hordeum_s… Hordeu… Wild b… Hord… Poace… Poal… Lili… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanth… Phylla… Amla    Phyl… Phyll… Malp… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Hordeum_s… Hordeu… Wild b… Hord… Poace… Poal… Lili… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Acer_amoe… Acer p… <span style="color: #BB0000;">NA</span>      Acer  Sapin… Sapi… Magn… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Setaria_i… Setari… <span style="color: #BB0000;">NA</span>      Seta… Poace… Poal… Lili… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Borassus_… Borass… <span style="color: #BB0000;">NA</span>      Bora… Areca… Arec… Lili… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Themeda_t… Themed… <span style="color: #BB0000;">NA</span>      Them… Poace… Poal… Lili… Magno… Plantae</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 39 more variables: OrganismType &lt;fct&gt;, DicotMonoc &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;, YearPublication &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;, StudyDuration &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;, ProjectionInterval &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   NumberPopulations &lt;dbl&gt;, MatrixCriteriaSize &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MatrixCriteriaOntogeny &lt;fct&gt;, MatrixCriteriaAge &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, Altitude &lt;dbl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    mat        SpeciesAuthor  SpeciesAccepted CommonName Genus Family Order Class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanthus_i… Phyllanthus in… Amla       Phyl… Phyll… Malp… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanthus_i… Phyllanthus in… Amla       Phyl… Phyll… Malp… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Sambucus_race… Sambucus siebo… <span style="color: #BB0000;">NA</span>         Samb… Adoxa… Dips… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanthus_e… Phyllanthus em… Amla       Phyl… Phyll… Malp… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Magnolia_sali… Magnolia salic… <span style="color: #BB0000;">NA</span>         Magn… Magno… Magn… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Hordeum_spont… Hordeum sponta… Wild barl… Hord… Poace… Poal… Lili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Phyllanthus_i… Phyllanthus in… Amla       Phyl… Phyll… Malp… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Hordeum_spont… Hordeum sponta… Wild barl… Hord… Poace… Poal… Lili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Acer_amoenum   Acer palmatum   <span style="color: #BB0000;">NA</span>         Acer  Sapin… Sapi… Magn…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Setaria_incra… Setaria incras… <span style="color: #BB0000;">NA</span>         Seta… Poace… Poal… Lili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Borassus_aeth… Borassus aethi… <span style="color: #BB0000;">NA</span>         Bora… Areca… Arec… Lili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> <span style="color: #949494;">&lt;CompdrMt&gt;</span> Themeda_trian… Themeda triand… <span style="color: #BB0000;">NA</span>         Them… Poace… Poal… Lili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 41 more variables: Phylum &lt;fct&gt;, Kingdom &lt;fct&gt;, OrganismType &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   DicotMonoc &lt;fct&gt;, AngioGymno &lt;fct&gt;, Authors &lt;chr&gt;, Journal &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   YearPublication &lt;chr&gt;, DOI_ISBN &lt;chr&gt;, AdditionalSource &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   StudyDuration &lt;dbl&gt;, StudyStart &lt;dbl&gt;, StudyEnd &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ProjectionInterval &lt;chr&gt;, NumberPopulations &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MatrixCriteriaSize &lt;fct&gt;, MatrixCriteriaOntogeny &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MatrixCriteriaAge &lt;fct&gt;, MatrixPopulation &lt;chr&gt;, Lat &lt;dbl&gt;, Lon &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

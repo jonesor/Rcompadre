@@ -111,7 +111,6 @@
 cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
                           mat_c = NULL, stages = NULL, version = NULL,
                           metadata = NULL) {
-
   # Check matrices
   # Which matrices are provided
   includedMatrices <- data.frame(
@@ -122,16 +121,20 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
     present = c(
       hasArg(mat_a), hasArg(mat_u),
       hasArg(mat_f), hasArg(mat_c)
-    )
+    ),
+    stringsAsFactors = FALSE
   )
   AUFC <- includedMatrices$present
 
   if (sum(AUFC) == 0) {
-    stop("No matrices provided: matrices must be provided as (i) a list of A matrices; (ii) lists of U and F matrices; or (iii) lists of U, F and C matrices.")
+    stop("No matrices provided: matrices must be provided as (i) a list of A
+         matrices; (ii) lists of U and F matrices; or (iii) lists of U, F and
+         C matrices.")
   }
 
   if (hasArg(mat_a) && any(hasArg(mat_u), hasArg(mat_f), hasArg(mat_c))) {
-    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be provided,")
+    stop("When mat_a is provided, mat_u, mat_f, and mat_c should NOT be
+         provided,")
   }
 
   # If mat U is provided, mat F needs be provided.
@@ -153,7 +156,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # If A is provided, make U, F, and C `NA`.
   if (hasArg(mat_a)) {
     mat <- NULL
-    for (i in 1:length(mat_a)) {
+    for (i in seq_along(mat_a)) {
       mat_u[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
       mat_f[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
       mat_c[[i]] <- matrix(nrow = nrow(mat_a[[i]]), ncol = nrow(mat_a[[i]]))
@@ -170,8 +173,7 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
   # If U and F provided, make C `NA` or 0 depending on optional matC argument.
   if (!hasArg(mat_a)) {
     mat <- NULL
-    for (i in 1:length(mat_u)) {
-
+    for (i in seq_along(mat_u)) {
       # If mat_c is not present, assume it is 0.
       if (!hasArg(mat_c)) {
         matC <- matrix(0, nrow = nrow(mat_u[[i]]), ncol = nrow(mat_u[[i]]))
@@ -186,7 +188,8 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
 
 
       if (!identical(nrow(matU), nrow(matF), nrow(matC))) {
-        stop("Dimensions of submatrices U, F and C (if included) must be identical within each set.")
+        stop("Dimensions of submatrices U, F and C (if included) must be
+             identical within each set.")
       }
 
       matA <- matU + matF + matC
@@ -234,24 +237,26 @@ cdb_build_cdb <- function(mat_a = NULL, mat_u = NULL, mat_f = NULL,
     if (!inherits(stages, "list")) {
       stop("stages must be provided as a list of data.frame objects")
     }
-    for (i in 1:length(stages)) {
-      stages[[i]]$MatrixClassNumber <- 1:nrow(stages[[i]])
+    for (i in seq_along(stages)) {
+      stages[[i]]$MatrixClassNumber <- seq_along(stages[[i]][, 1])
     }
     matrixClassInfo <- stages
   }
   # metadata ----
   if (!hasArg(metadata)) {
     metadata <- data.frame(
-      matrixID = 1:length(mat)
+      matrixID = seq_along(mat)
     )
   }
 
   if (hasArg(metadata)) {
     if (nrow(metadata) != length(mat)) {
-      stop("The number of rows of metadata does not match the number of matrices")
+      stop("The number of rows of metadata does not match the number of
+           matrices")
     }
     if (!"SpeciesAccepted" %in% names(metadata)) {
-      warning("Metadata does not include a `SpeciesAccepted` column, so number of species not provided when viewing object.")
+      warning("Metadata does not include a `SpeciesAccepted` column, so number
+              of species not provided when viewing object.")
     }
   }
 

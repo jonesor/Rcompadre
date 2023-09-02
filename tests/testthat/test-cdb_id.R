@@ -6,7 +6,7 @@ test_that("cdb_id works correctly", {
   id2 <- cdb_id(Compadre, "Family")
   expect_type(id2, "integer")
   expect_length(id2, nrow(Compadre@data))
-  expect_true(length(unique(id2)) == length(unique(Compadre@data$Family)))
+  expect_length(unique(id2), length(unique(Compadre@data$Family)))
 })
 
 

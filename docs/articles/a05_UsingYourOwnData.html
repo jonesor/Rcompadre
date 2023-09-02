@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Using your own matrix data</h1>
                         <h4 data-toc-skip class="author">Owen Jones</h4>
             
-            <h4 data-toc-skip class="date">2023-03-24</h4>
+            <h4 data-toc-skip class="date">2023-09-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jonesor/Rcompadre/blob/HEAD/vignettes/a05_UsingYourOwnData.Rmd" class="external-link"><code>vignettes/a05_UsingYourOwnData.Rmd</code></a></small>
       <div class="hidden name"><code>a05_UsingYourOwnData.Rmd</code></div>
@@ -259,9 +259,8 @@ used to simulate the data.</p>
 <code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>idNum <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, shapeParam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, each <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cdb_build_cdb.html">cdb_build_cdb</a></span><span class="op">(</span>mat_a <span class="op">=</span> <span class="va">Alist</span>, metadata <span class="op">=</span> <span class="va">meta</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in cdb_build_cdb(mat_a = Alist, metadata = meta): Metadata does not</span></span>
-<span><span class="co">#&gt; include a `SpeciesAccepted` column, so number of species not provided when</span></span>
-<span><span class="co">#&gt; viewing object.</span></span>
+<span><span class="co">#&gt; Warning in cdb_build_cdb(mat_a = Alist, metadata = meta): Metadata does not include a `SpeciesAccepted` column, so number</span></span>
+<span><span class="co">#&gt;               of species not provided when viewing object.</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; A COM(P)ADRE database ('CompadreDB') object with ?? SPECIES and 20 MATRICES.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -293,9 +292,9 @@ function <code><a href="../reference/CompadreMatrixMethods.html">matA()</a></cod
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CompadreMatrixMethods.html">matA</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt;            [,1]       [,2]</span></span>
-<span><span class="co">#&gt; [1,] 0.09780744 2.52843776</span></span>
-<span><span class="co">#&gt; [2,] 0.20492352 0.04488368</span></span></code></pre></div>
+<span><span class="co">#&gt;           [,1]      [,2]</span></span>
+<span><span class="co">#&gt; [1,] 0.4502977 1.3480711</span></span>
+<span><span class="co">#&gt; [2,] 0.5431960 0.3539099</span></span></code></pre></div>
 <p>Now the matrices are stored in a <code>CompadreDB</code> object they
 can be manipulated in the same diverse ways as the
 <code>CompadreDB</code> object downloaded from the COMPADRE/COMADRE
@@ -341,7 +340,8 @@ descriptions of the stages</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">stageDescriptor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  MatrixClassOrganized <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"active"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span>  MatrixClassAuthor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"small"</span>, <span class="st">"large"</span><span class="op">)</span></span>
+<span>  MatrixClassAuthor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"small"</span>, <span class="st">"large"</span><span class="op">)</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   MatrixClassOrganized MatrixClassAuthor</span></span>
 <span><span class="co">#&gt; 1               active             small</span></span>
@@ -357,9 +357,8 @@ frames, and the information within them may vary.</p>
 <span>  mat_a <span class="op">=</span> <span class="va">Alist</span>, metadata <span class="op">=</span> <span class="va">meta</span>, stages <span class="op">=</span> <span class="va">stageDesc</span>,</span>
 <span>  version <span class="op">=</span> <span class="st">"Matrices Rock!"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in cdb_build_cdb(mat_a = Alist, metadata = meta, stages = stageDesc, :</span></span>
-<span><span class="co">#&gt; Metadata does not include a `SpeciesAccepted` column, so number of species not</span></span>
-<span><span class="co">#&gt; provided when viewing object.</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning in cdb_build_cdb(mat_a = Alist, metadata = meta, stages = stageDesc, : Metadata does not include a `SpeciesAccepted` column, so number</span></span>
+<span><span class="co">#&gt;               of species not provided when viewing object.</span></span></code></pre></div>
 <p>Now you can access the stage/class description information like this,
 using square brackets to find the information for particular
 matrices.</p>
@@ -377,7 +376,7 @@ matrices.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CompadreDB.html">Version</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Matrices Rock!"</span></span>
 <span><span class="fu"><a href="../reference/CompadreDB.html">DateCreated</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-03-24"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-09-02"</span></span></code></pre></div>
 <p>The newly-created database can be saved like this:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"myMatrixDatabase.Rdata"</span><span class="op">)</span></span></code></pre></div>

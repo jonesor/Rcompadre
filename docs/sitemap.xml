@@ -52,6 +52,9 @@
     <loc>/reference/CompadreMatrixMethods.html</loc>
   </url>
   <url>
+    <loc>/reference/Rcompadre-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/as_cdb.html</loc>
   </url>
   <url>
@@ -103,10 +106,22 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/mat_median.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mat_sd.html</loc>
+  </url>
+  <url>
     <loc>/reference/mpm_mean.html</loc>
   </url>
   <url>
+    <loc>/reference/mpm_median.html</loc>
+  </url>
+  <url>
     <loc>/reference/mpm_methods.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mpm_sd.html</loc>
   </url>
   <url>
     <loc>/reference/string_representation.html</loc>

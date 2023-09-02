@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rcompadre</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -70,7 +70,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.1" id="rcompadre-121">Rcompadre 1.2.1<a class="anchor" aria-label="anchor" href="#rcompadre-121"></a></h2>
+<h2 class="page-header" data-toc-text="1.3.0" id="rcompadre-130">Rcompadre 1.3.0<a class="anchor" aria-label="anchor" href="#rcompadre-130"></a></h2>
+<ul><li>Minor performance enhancements, some of which speed up functions while others improve code readability and stability.</li>
+<li>Added functions <code>mpm_sd</code>/<code>mat_sd</code> and <code>mpm_median</code>/<code>mat_median</code> which join the existing <code>mpm_mean</code>/<code>mat_mean</code> functions to calculate element-wise summary statistics across MPMs of the same dimension. Code contributed by Darren Norris with modifications by Owen Jones. A future version will include a generic “summarise matrix” function.</li>
+<li>Increased test coverage.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.1" id="rcompadre-121">Rcompadre 1.2.1<small>2023-03-26</small><a class="anchor" aria-label="anchor" href="#rcompadre-121"></a></h2>
 <ul><li>Fixed an error in <code>cdb_build_cdb</code> causing an error in the construction of the A matrix when a C matrix was not provided.</li>
 <li>Fixed a technical issue with <code>as_tibble.CompadreDB</code> that caused a build failure on some platforms.</li>
 </ul></div>

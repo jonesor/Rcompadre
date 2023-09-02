@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-#The following line seems to be required by pkgdown::build_site() on my machine, but causes build to break with R-CMD-CHECK on GH
+# The following line seems to be required by pkgdown::build_site() on my machine,
+# but causes build to break with R-CMD-CHECK on GH
 knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 ```
 
@@ -65,7 +66,7 @@ We are now ready to obtain the full references for these data. The `rcrossref` p
 Thus, we can obtain the full references for this subset of the COMADRE database like this:
 
 ```{r}
-rcrossref::cr_cn(unique(Comadre$DOI_ISBN),format = "text",style = "apa")
+cr_cn(unique(Comadre$DOI_ISBN), format = "text", style = "apa")
 ```
 
 Various other formats and styles of output are available, see `?rcrossref::cr_cn` for details.
