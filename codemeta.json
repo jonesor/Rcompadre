@@ -139,6 +139,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "maps",
+      "name": "maps",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=maps"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rcrossref",
       "name": "rcrossref",
       "provider": {
@@ -234,7 +246,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "539.287KB",
+  "fileSize": "546.162KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
