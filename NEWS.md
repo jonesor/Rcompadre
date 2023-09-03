@@ -1,3 +1,5 @@
+# Rcompadre (development version)
+
 # Rcompadre 1.3.0
 
 * Minor performance enhancements, some of which speed up functions while others improve code readability and stability.
