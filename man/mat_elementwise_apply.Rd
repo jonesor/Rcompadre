@@ -14,8 +14,8 @@ mat_elementwise_apply(matrix_list, fun, na_handling = "stop", ...)
 \item{na_handling}{A character string specifying how to handle NA values.
 Possible values are "stop" (throw an error when NA values are encountered),
 "zero" (convert NA values to 0), and "ignore" (NA values are ignored and
-passed to `fun`). Handling can then be processed apprpriately by that
-function (e.g., with na.rm).}
+passed to `fun`). Handling can then be processed appropriately by that
+function (e.g., with `na.rm`).}
 }
 \value{
 A matrix containing the result of applying the function element-wise
@@ -50,6 +50,19 @@ mats[[2]]
 #min and max values
 mat_elementwise_apply(mats, min)
 mat_elementwise_apply(mats, max)
+
+#Demonstrating NA handling
+#First adding some NA values to the matrices
+mats[[2]][3,2] <- NA
+
+#replace the NA with a 0
+mat_elementwise_apply(mats, min, na_handling = "zero")
+
+#ignore the NA
+mat_elementwise_apply(mats, min, na_handling = "ignore")
+
+#ignore the NA, but pass na.rm = TRUE to the function (min)
+mat_elementwise_apply(mats, min, na_handling = "ignore", na.rm = TRUE)
 }
 \seealso{
 Other data management: 
