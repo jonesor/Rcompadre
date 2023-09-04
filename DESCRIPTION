@@ -77,6 +77,7 @@ Collate:
     'cdb_unflatten.R'
     'cdb_unnest.R'
     'data.R'
+    'mpm_elementwise_apply.R'
     'mpm_mean.R'
     'mpm_methods.R'
     'mpm_sd.R'
