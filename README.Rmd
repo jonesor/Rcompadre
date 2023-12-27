@@ -117,7 +117,7 @@ compadre_sub <- subset(
 Finally, we'll use the `eigs()` function from the [popdemo](https://CRAN.R-project.org/package=popdemo) package to calculate the population growth rate for every matrix in `compadre_sub`.
 
 ```{r, eval=FALSE}
-compadre_sub$lambda <- sapply(matA(compadre_sub), popbio::eigs, what = "lambda")
+compadre_sub$lambda <- sapply(matA(compadre_sub), popdemo::eigs, what = "lambda")
 ```
 
 In the code above, the accessor function `matA()` is used to extract a list of projection matrices (the full matrix, `matA`) from every row of `compadre_sub`. There are also accessor functions for the matrix subcomponents (`matU()`, `matF()`, `matC()`), and for many other parts of the database too.
