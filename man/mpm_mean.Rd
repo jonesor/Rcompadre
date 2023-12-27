@@ -59,6 +59,7 @@ Other data management:
 \code{\link{cdb_rbind}()},
 \code{\link{cdb_unflatten}()},
 \code{\link{cdb_unnest}()},
+\code{\link{mpm_elementwise_apply}()},
 \code{\link{mpm_median}()},
 \code{\link{mpm_sd}()},
 \code{\link{string_representation}}
