@@ -117,7 +117,7 @@ Finally, we’ll use the `eigs()` function from the
 calculate the population growth rate for every matrix in `compadre_sub`.
 
 ``` r
-compadre_sub$lambda <- sapply(matA(compadre_sub), popbio::eigs, what = "lambda")
+compadre_sub$lambda <- sapply(matA(compadre_sub), popdemo::eigs, what = "lambda")
 ```
 
 In the code above, the accessor function `matA()` is used to extract a
