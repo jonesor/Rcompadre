@@ -47,7 +47,7 @@ Danny Buss <dlb50@cam.ac.uk>
 
 Owen R. Jones <jones@biology.sdu.dk>
 
-Rob Salguero-Gómez <rob.salguero@zoo.ox.ac.uk>
+Rob Salguero-Gomez <rob.salguero@zoo.ox.ac.uk>
 
 Patrick Barks <patrick.barks@gmail.com>
 }

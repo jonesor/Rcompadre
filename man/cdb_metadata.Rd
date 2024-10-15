@@ -30,6 +30,6 @@ Other data acquisition:
 \code{\link{cdb_fetch}()}
 }
 \author{
-Gesa Römer <gesa.roemer@gmail.com>
+Gesa Romer <gesa.roemer@gmail.com>
 }
 \concept{data acquisition}

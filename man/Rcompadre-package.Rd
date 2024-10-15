@@ -28,7 +28,7 @@ Authors:
   \item William K. Petry \email{wpetry@ncsu.edu} (\href{https://orcid.org/0000-0002-5230-5987}{ORCID})
   \item Tamora James \email{tamoradjames@protonmail.com} (\href{https://orcid.org/0000-0003-1363-4742}{ORCID})
   \item Julia Jones \email{juagjones@gmail.com} (\href{https://orcid.org/0000-0001-9223-1778}{ORCID})
-  \item Gesa Römer \email{gesa@biology.sdu.dk} (\href{https://orcid.org/0000-0002-4859-5870}{ORCID})
+  \item Gesa Romer \email{gesa@biology.sdu.dk} (\href{https://orcid.org/0000-0002-4859-5870}{ORCID})
   \item Sam Levin \email{levisc8@gmail.com} (\href{https://orcid.org/0000-0002-3289-9925}{ORCID})
 }
 

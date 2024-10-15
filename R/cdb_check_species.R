@@ -20,7 +20,7 @@
 #'
 #' @author Danny Buss <dlb50@@cam.ac.uk>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
-#' @author Rob Salguero-Gómez <rob.salguero@@zoo.ox.ac.uk>
+#' @author Rob Salguero-Gomez <rob.salguero@@zoo.ox.ac.uk>
 #' @author Patrick Barks <patrick.barks@@gmail.com>
 #'
 #' @family data checking

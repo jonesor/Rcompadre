@@ -28,7 +28,7 @@ knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
 
 COM(P)ADRE databases contain thousands of matrix population models. If we want to derive traits from a large set of these matrices, we'll need to use either loops or vectorisation.
 
-Vectorising means applying a function to each element of a vector. Here vector is defined broadly — it could be a sequence of character strings, a column of a `data.frame`, a `list` of matrices, etc. Vectorised code generally runs faster than loops, and many R users find that vectorised code is easier to write and understand.
+Vectorising means applying a function to each element of a vector. Here vector is defined broadly - it could be a sequence of character strings, a column of a `data.frame`, a `list` of matrices, etc. Vectorised code generally runs faster than loops, and many R users find that vectorised code is easier to write and understand.
 
 ## Preliminaries
 

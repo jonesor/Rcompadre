@@ -9,7 +9,7 @@
 | Project                                                                                                                                                                                                | Main branch                                                                                                                                                                | Devel branch                                                                                                                                                                             |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)                                                                                | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/main_check.yaml) | [![R-CMD-check](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml/badge.svg)](https://github.com/jonesor/Rcompadre/actions/workflows/devel_build_check.yaml) |
-| [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) | [![codecov](https://codecov.io/gh/jonesor/Rcompadre/branch/main/graph/badge.svg?token=S9G2a5K9k9)](https://app.codecov.io/gh/jonesor/Rcompadre)                            |                                                                                                                                                                                          |
+| [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) | [![codecov](https://codecov.io/gh/jonesor/Rcompadre/branch/main/graph/badge.svg?token=S9G2a5K9k9)](https://app.codecov.io/gh/jonesor/Rcompadre)                            |                                                                                                                                                                                          |
 | ![](http://cranlogs.r-pkg.org/badges/grand-total/Rcompadre)                                                                                                                                            | [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Rcompadre)](https://cran.r-project.org/package=Rcompadre)                                                       |                                                                                                                                                                                          |
 | ![](http://cranlogs.r-pkg.org/badges/Rcompadre)                                                                                                                                                        |                                                                                                                                                                            |                                                                                                                                                                                          |
 
@@ -91,18 +91,18 @@ filter(compadre, SpeciesAccepted == "Echinacea angustifolia")
 
 #### Example analysis: calculating population growth rates
 
-First we’ll use the function `cdb_flag()` to add columns to the database
+First we'll use the function `cdb_flag()` to add columns to the database
 flagging potential issues with the projection matrices, such as missing
-values, or matrices that don’t meet assumptions like ergodicity,
+values, or matrices that don't meet assumptions like ergodicity,
 irreducibility, or primitivity.
 
 ``` r
 compadre_flags <- cdb_flag(compadre)
 ```
 
-We’ll only be able to calculate population growth rates from matrices
-that don’t contain missing values, and we only want to use matrices that
-meet the assumption of ergodicity, so we’ll subset the database
+We'll only be able to calculate population growth rates from matrices
+that don't contain missing values, and we only want to use matrices that
+meet the assumption of ergodicity, so we'll subset the database
 accordingly.
 
 ``` r
@@ -112,7 +112,7 @@ compadre_sub <- subset(
 )
 ```
 
-Finally, we’ll use the `eigs()` function from the
+Finally, we'll use the `eigs()` function from the
 [popdemo](https://CRAN.R-project.org/package=popdemo) package to
 calculate the population growth rate for every matrix in `compadre_sub`.
 
@@ -142,10 +142,10 @@ See the Changelog for more details.
 ## Citation
 
 Jones, Owen R., Patrick Barks, Iain M. Stott, Tamora D. James, Sam C.
-Levin, William K. Petry, Pol Capdevila, et al. 2022. “Rcompadre and Rage
-– Two R Packages to Facilitate the Use of the COMPADRE and COMADRE
+Levin, William K. Petry, Pol Capdevila, et al. 2022. "Rcompadre and Rage
+- Two R Packages to Facilitate the Use of the COMPADRE and COMADRE
 Databases and Calculation of Life History Traits from Matrix Population
-Models.” *Methods in Ecology and Evolution*. doi:
+Models." *Methods in Ecology and Evolution*. doi:
 [10.1111/2041-210X.13792](https://doi.org/10.1111/2041-210X.13792).
 
 ## Contributions
@@ -161,7 +161,7 @@ There are numerous ways of contributing.
     issue](https://github.com/jonesor/Rcompadre/issues).
 
 2.  You can copy or fork the repository, make your own code edits and
-    then send us a pull request. [Here’s how to do
+    then send us a pull request. [Here's how to do
     that](https://jarv.is/notes/how-to-pull-request-fork-github/).
 
 3.  You can get to know us and join as a collaborator on the main
