@@ -2,6 +2,7 @@
 
 * Added a function `mpm_elementwise_apply` which can apply any function over elements in a matrix. For example, `mean`, `min`, `max`, `sd`, `var` etc. to allow summaries to conveniently be made across matrices of the same dimension. Replaces some of the functionality of `mpm_sd`/`mat_sd`, `mpm_median`/`mat_median` and `mpm_mean`/`mat_mean`, which are retained for backwards compatibility.
 * Removed non-ASCII characters in package (including data) to satisfy CRAN requirements.
+* Fixed test for cdb_fetch that required connection to COMPADRE Database and thus threw error.
 
 # Rcompadre 1.3.0
 
