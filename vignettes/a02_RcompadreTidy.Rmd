@@ -222,6 +222,8 @@ Rcompadre includes methods that allow CompadreDB objects to be used as data argu
 __Plot study coordinates on world map:__
 
 ```{r warning=FALSE, fig.width = 6, fig.height = 4}
+#| fig.alt: >
+#|   A world map showing geographic distribution of COMPADRE data. 
 ggplot2::ggplot(Compadre, aes(Lon, Lat)) +
   borders(database = "world", fill = "grey80", col = NA) +
   geom_point(col = "steelblue", size = 1.8, alpha = 0.8)
@@ -232,6 +234,11 @@ __Boxplots of life expectancy from the first non-propagule stage, arranged by Or
 This one is rather advanced, combining all of the topics in this vignette. So don't worry if you can't immediately understand every line.
 
 ```{r warning=FALSE, fig.width = 6, fig.height = 4}
+#| fig.alt: >
+#|   Boxplots of life expectancy from the first non-propagule stage, 
+#|   arranged by OrganismType, based on 'grand mean matrices' from 
+#|   studies of wild, unmanipulated populations 
+
 # function to calculate life expectancy
 lifeExpectancy <- function(matU, startLife) {
   N <- solve(diag(nrow(matU)) - matU)

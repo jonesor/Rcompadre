@@ -1,3 +1,6 @@
+url: https://github.com/jonesor/Rcompadre
+template:
+  bootstrap: 5
 reference:
   - title: "Data acquisition"
     desc: "Functions for acquiring data from COMPADRE/COMADRE."
