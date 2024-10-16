@@ -1,5 +1,5 @@
-pandoc: 3.1.1
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   a01_GettingStarted: a01_GettingStarted.html
@@ -7,5 +7,4 @@ articles:
   a03_VectorisingRcompadre: a03_VectorisingRcompadre.html
   a04_ObtainingReferences: a04_ObtainingReferences.html
   a05_UsingYourOwnData: a05_UsingYourOwnData.html
-last_built: 2023-12-27T14:24Z
-
+last_built: 2024-10-16T07:54Z

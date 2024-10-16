@@ -1,132 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a01_GettingStarted.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a02_RcompadreTidy.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a03_VectorisingRcompadre.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a04_ObtainingReferences.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a05_UsingYourOwnData.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Compadre.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreDB-Methods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreDB-Subsetting.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreDB-Tidyverse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreDB.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreLegacy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CompadreMatrixMethods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Rcompadre-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_cdb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_build_cdb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_check_species.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_collapse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_compare.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_fetch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_flag.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_flatten.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_id.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_id_stages.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_id_studies.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_mean_matF.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_metadata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_rbind.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_unflatten.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cdb_unnest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mat_elementwise_apply.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mat_median.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mat_sd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mpm_mean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mpm_median.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mpm_methods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mpm_sd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/string_representation.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/a01_GettingStarted.html</loc></url>
+<url><loc>/articles/a02_RcompadreTidy.html</loc></url>
+<url><loc>/articles/a03_VectorisingRcompadre.html</loc></url>
+<url><loc>/articles/a04_ObtainingReferences.html</loc></url>
+<url><loc>/articles/a05_UsingYourOwnData.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/Compadre.html</loc></url>
+<url><loc>/reference/CompadreDB-Methods.html</loc></url>
+<url><loc>/reference/CompadreDB-Subsetting.html</loc></url>
+<url><loc>/reference/CompadreDB-Tidyverse.html</loc></url>
+<url><loc>/reference/CompadreDB.html</loc></url>
+<url><loc>/reference/CompadreLegacy.html</loc></url>
+<url><loc>/reference/CompadreMatrixMethods.html</loc></url>
+<url><loc>/reference/Rcompadre-package.html</loc></url>
+<url><loc>/reference/as_cdb.html</loc></url>
+<url><loc>/reference/cdb_build_cdb.html</loc></url>
+<url><loc>/reference/cdb_check_species.html</loc></url>
+<url><loc>/reference/cdb_collapse.html</loc></url>
+<url><loc>/reference/cdb_compare.html</loc></url>
+<url><loc>/reference/cdb_fetch.html</loc></url>
+<url><loc>/reference/cdb_flag.html</loc></url>
+<url><loc>/reference/cdb_flatten.html</loc></url>
+<url><loc>/reference/cdb_id.html</loc></url>
+<url><loc>/reference/cdb_id_stages.html</loc></url>
+<url><loc>/reference/cdb_id_studies.html</loc></url>
+<url><loc>/reference/cdb_mean_matF.html</loc></url>
+<url><loc>/reference/cdb_metadata.html</loc></url>
+<url><loc>/reference/cdb_rbind.html</loc></url>
+<url><loc>/reference/cdb_unflatten.html</loc></url>
+<url><loc>/reference/cdb_unnest.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/mpm_elementwise_apply.html</loc></url>
+<url><loc>/reference/mpm_mean.html</loc></url>
+<url><loc>/reference/mpm_median.html</loc></url>
+<url><loc>/reference/mpm_methods.html</loc></url>
+<url><loc>/reference/mpm_sd.html</loc></url>
+<url><loc>/reference/string_representation.html</loc></url>
 </urlset>
+
