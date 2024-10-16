@@ -1,6 +1,7 @@
-# Rcompadre (development version)
+# Rcompadre 1.4.0
 
-* Added a function `mpm_elementwise_apply` which can apply any function over elements in a matrix. For example, `mean`, `min`, `max`, `sd`, `var` etc. to allow summaries to conveniently be made across matrices of the same dimension. Replaces some of the functionality of `mpm_sd`/`mat_sd`, `mpm_median`/`mat_median` and `mpm_mean`/`mat_mean`, which are retained for convenience.
+* Added a function `mpm_elementwise_apply` which can apply any function over elements in a matrix. For example, `mean`, `min`, `max`, `sd`, `var` etc. to allow summaries to conveniently be made across matrices of the same dimension. Replaces some of the functionality of `mpm_sd`/`mat_sd`, `mpm_median`/`mat_median` and `mpm_mean`/`mat_mean`, which are retained for backwards compatibility.
+* Removed non-ASCII characters in package (including data) to satisfy CRAN requirements.
 
 # Rcompadre 1.3.0
 
