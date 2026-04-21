@@ -1,11 +1,11 @@
-#' Merge two COM(P)ADRE databases via row-bind
+#' Merge COM(P)ADRE databases via row-bind
 #'
-#' Merges two CompadreDB objects via a row-bind of the data slots.
+#' Merges one or more CompadreDB objects via a row-bind of the data slots.
 #'
-#' @param cdb1,cdb2 CompadreDB objects
+#' @param ... CompadreDB objects
 #'
-#' @return A CompadreDB object created by binding the rows of \code{cdb1} and
-#'   \code{cdb2}
+#' @return A CompadreDB object created by binding the rows of all supplied
+#'   CompadreDB objects
 #'
 #' @author Sam Levin <levisc8@@gmail.com>
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
@@ -16,19 +16,28 @@
 #' Compadre1 <- subset(Compadre, Continent == "Asia")
 #' Compadre2 <- subset(Compadre, Continent == "Africa")
 #'
+#' Compadre3 <- subset(Compadre, Continent == "Europe")
+#'
 #' cdb_rbind(Compadre1, Compadre2)
+#' cdb_rbind(Compadre1, Compadre2, Compadre3)
 #'
 #' @importFrom methods new
 #' @export cdb_rbind
-cdb_rbind <- function(cdb1, cdb2) {
-  if (!inherits(cdb1, "CompadreDB") || !inherits(cdb2, "CompadreDB")) {
+cdb_rbind <- function(...) {
+  cdbs <- list(...)
+
+  if (length(cdbs) < 2) {
+    stop("Please provide at least two CompadreDB objects.")
+  }
+
+  if (!all(vapply(cdbs, inherits, logical(1), what = "CompadreDB"))) {
     stop("cdbs must be of class CompadreDB. See function as_cdb")
   }
 
   # cdbs must have matching columns to merge
-  dat1 <- CompadreData(cdb1)
-  dat2 <- CompadreData(cdb2)
-  if (!identical(names(dat1), names(dat2))) {
+  dats <- lapply(cdbs, CompadreData)
+  ref_names <- names(dats[[1]])
+  if (!all(vapply(dats, function(x) identical(names(x), ref_names), logical(1)))) {
     stop("Data components do not have identical names. ",
       "Make sure the data slot \n",
       "in each is identical to other.",
@@ -37,20 +46,20 @@ cdb_rbind <- function(cdb1, cdb2) {
   }
 
   # test whether cdbs have same version info
-  vers1 <- VersionData(cdb1)
-  vers2 <- VersionData(cdb2)
+  versions <- lapply(cdbs, VersionData)
+  ref_version <- versions[[1]]
 
-  if (isTRUE(all.equal(vers1, vers2))) {
-    vers_out <- vers1
+  if (all(vapply(versions, function(x) isTRUE(all.equal(ref_version, x)), logical(1)))) {
+    vers_out <- ref_version
   } else {
     # if version info differs, set Version and DateCreated to NA
-    vers_out <- vers1
+    vers_out <- ref_version
     vers_out$Version <- NA_character_
     vers_out$DateCreated <- NA_character_
   }
 
   new("CompadreDB",
-    data = rbind(dat1, dat2),
+    data = do.call(rbind, dats),
     version = vers_out
   )
 }
