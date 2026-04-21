@@ -98,6 +98,17 @@ dim.CompadreDB <- function(x) {
 
 
 #' @rdname CompadreDB-Methods
+#' @importFrom methods new
+#' @export
+droplevels.CompadreDB <- function(x, ...) {
+  new("CompadreDB",
+    data = droplevels(x@data, ...),
+    version = x@version
+  )
+}
+
+
+#' @rdname CompadreDB-Methods
 #' @importFrom tibble as_tibble
 #' @importFrom methods new
 #' @export

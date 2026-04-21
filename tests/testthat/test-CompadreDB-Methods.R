@@ -20,6 +20,13 @@ test_that("CompadreDB-Methods work correctly", {
   expect_true(inherits(dm, "integer"))
   expect_length(dm, 2)
 
+  db_drop <- subset(Compadre, Family == "Poaceae" | Family == "Cistaceae")
+  expect_gt(nlevels(db_drop@data$Family), 2)
+  db_drop <- droplevels(db_drop)
+  expect_s4_class(db_drop, "CompadreDB")
+  expect_identical(nlevels(db_drop@data$Family), 2L)
+  expect_true(all(levels(db_drop@data$Family) %in% c("Cistaceae", "Poaceae")))
+
   n_row <- nrow(Compadre)
   n_col <- ncol(Compadre)
   expect_type(n_row, "integer")
