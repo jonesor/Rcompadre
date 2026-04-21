@@ -2,7 +2,7 @@
 # On the main branch only
 
 # Name (appears on badge, keep it short)
-name: R-CMD-check
+name: main R-CMD-check
 
 # When to run
 on:
@@ -12,8 +12,8 @@ on:
 #  pull_request:
 #    branches:
 #      - main
-      
-      
+
+
 # Define job
 # What systems to run on (the matrix)
 
@@ -33,15 +33,14 @@ jobs:
           - {os: macOS-latest, r: 'oldrel'}
           - {os: macOS-latest, r: 'release'}
           - {os: macOS-latest, r: 'devel'}
-          - {os: ubuntu-20.04, r: 'oldrel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-22.04, r: 'oldrel'}
+          - {os: ubuntu-22.04, r: 'release'}
+          - {os: ubuntu-22.04, r: 'devel'}
 
 
 # Set up the environment
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 #Steps of the jobs
@@ -52,6 +51,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -79,15 +79,12 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04"))')
 
 #Add quartz for macOS only
       - name: Install XQuartz for macOS
         if: runner.os == 'macOS'
-        run: |
-          wget https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.7.11/XQuartz-2.7.11.dmg
-          sudo hdiutil attach XQuartz-2.7.11.dmg
-          sudo installer -package /Volumes/XQuartz-2.7.11/XQuartz.pkg -target / 
+        run: brew install --cask xquartz
 
 #R script to install rcmdcheck and Rage
       - name: Install dependencies, rcmdcheck, Rage
@@ -117,5 +114,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-          
-          
