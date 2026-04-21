@@ -2,7 +2,7 @@ test_that("CompadreDB-Methods work correctly", {
   df <- as.data.frame(Compadre)
   expect_s3_class(df, "data.frame")
 
-  tb <- as_tibble(Compadre)
+  tb <- tibble::as_tibble(Compadre)
   expect_s3_class(tb, "tbl_df")
 
   hd <- head(Compadre, n = 10)

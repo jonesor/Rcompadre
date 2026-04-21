@@ -16,12 +16,24 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+has_rcrossref <- requireNamespace("rcrossref", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
-# The following line seems to be required by pkgdown::build_site() on my machine,
-# but causes build to break with R-CMD-CHECK on GH
-knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
+# Prefer cairo-png for pkgdown on macOS when available, but fall back quietly
+# when XQuartz/Cairo is not installed.
+png_probe <- tempfile(fileext = ".png")
+can_use_cairo_png <- isTRUE(tryCatch({
+  grDevices::png(filename = png_probe, type = "cairo-png")
+  grDevices::dev.off()
+  TRUE
+}, error = function(...) FALSE, warning = function(...) FALSE))
+unlink(png_probe)
+
+if (can_use_cairo_png) {
+  knitr::opts_chunk$set(dev = "png", dev.args = list(type = "cairo-png"))
+}
 ```
 
 The following example illustrates how to find the full formatted citations for the publications used in COMADRE or COMPADRE. This can be useful to find further details of the matrices you may be using in your study, or to provide references for your data e.g. in supplementary information.
@@ -38,8 +50,13 @@ We should then load the required packages like this:
 
 ```{r}
 library(Rcompadre)
-library(rcrossref)
+if (has_rcrossref) {
+  library(rcrossref)
+}
 ```
+
+If `rcrossref` is not installed, the citation lookup example below will be
+shown but not executed during vignette rendering.
 
 We aim to obtain the full reference and DOI for the matrices for a set of matrices. In this example we will use the example data available in the `Rcompadre` package.
 
@@ -65,9 +82,8 @@ We are now ready to obtain the full references for these data. The `rcrossref` p
 
 Thus, we can obtain the full references for this subset of the COMADRE database like this:
 
-```{r}
+```{r, eval = has_rcrossref}
 cr_cn(unique(Comadre$DOI_ISBN), format = "text", style = "apa")
 ```
 
 Various other formats and styles of output are available, see `?rcrossref::cr_cn` for details.
-

@@ -1,20 +1,20 @@
 test_that("CompadreDB works correctly", {
   db1 <- db2 <- db3 <- db4 <- as_cdb(CompadreLegacy)
 
-  expect_true(validCompadreDB(db1))
+  expect_true(isTRUE(methods::validObject(db1, test = TRUE)))
   expect_output(print(db1))
 
   # missing mat column
   db2@data <- db2@data[, 5:10]
-  expect_false(isTRUE(validCompadreDB(db2)))
+  expect_false(isTRUE(methods::validObject(db2, test = TRUE)))
 
   # mat not a list-column
   db3@data$mat <- 1L
-  expect_false(isTRUE(validCompadreDB(db3)))
+  expect_false(isTRUE(methods::validObject(db3, test = TRUE)))
 
   # mat a list-column but without CompadreMat objects
   db4@data$mat <- CompadreLegacy$mat
-  expect_false(isTRUE(validCompadreDB(db4)))
+  expect_false(isTRUE(methods::validObject(db4, test = TRUE)))
 
   # $ and $<-
   expect_identical(Compadre$SpeciesAuthor, Compadre@data$SpeciesAuthor)

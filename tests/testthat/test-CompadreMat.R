@@ -9,17 +9,17 @@ test_that("CompadreMat works correctly", {
   )
 
   expect_s4_class(cmat1, "CompadreMat")
-  expect_true(validCompadreMat(cmat1))
+  expect_true(isTRUE(methods::validObject(cmat1, test = TRUE)))
   expect_output(print(cmat1))
 
   # missing MatrixClassAuthor
   cmat2@matrixClass$MatrixClassAuthor <- NULL
-  expect_false(isTRUE(validCompadreMat(cmat2)))
+  expect_false(isTRUE(methods::validObject(cmat2, test = TRUE)))
 
   # non-square matrix
   cmat3@matU <- matrix(1:6, nrow = 2)
-  expect_false(isTRUE(validCompadreMat(cmat3)))
+  expect_false(isTRUE(methods::validObject(cmat3, test = TRUE)))
 
   cmat4@matrixClass <- rbind(cmat4@matrixClass, cmat4@matrixClass)
-  expect_false(isTRUE(validCompadreMat(cmat4)))
+  expect_false(isTRUE(methods::validObject(cmat4, test = TRUE)))
 })
