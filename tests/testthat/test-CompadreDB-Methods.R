@@ -16,9 +16,14 @@ test_that("CompadreDB-Methods work correctly", {
   nm <- names(Compadre)
   expect_identical(nm, names(Compadre@data))
 
+  cnm <- colnames(Compadre)
+  expect_identical(cnm, colnames(Compadre@data))
+
   dm <- dim(Compadre)
   expect_true(inherits(dm, "integer"))
   expect_length(dm, 2)
+
+  expect_output(print(Compadre, n = 20), "20")
 
   db_drop <- subset(Compadre, Family == "Poaceae" | Family == "Cistaceae")
   expect_gt(nlevels(db_drop@data$Family), 2)

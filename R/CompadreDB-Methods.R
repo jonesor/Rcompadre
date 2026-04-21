@@ -2,8 +2,9 @@
 #'
 #' This page describes a variety of methods that can be used with CompadreDB
 #' objects, including common data frame operations (\code{head}, \code{names},
-#' and \code{merge}), conversion methods (\code{as.data.frame} and
-#' \code{as_tibble}), and methods to calculate the number of species
+#' \code{colnames}, \code{print}, and \code{merge}), conversion methods
+#' (\code{as.data.frame} and \code{as_tibble}), and methods to calculate the
+#' number of species
 #' (\code{NumberAcceptedSpecies}), studies (\code{NumberStudies}), or matrices
 #' (\code{NumberMatrices}).
 #'
@@ -17,6 +18,23 @@
 #' @name CompadreDB-Methods
 NULL
 
+
+.print_CompadreDB <- function(x, ...) {
+  Mno <- NumberMatrices(x)
+  Sno <- ifelse("SpeciesAccepted" %in% names(x@data),
+    NumberAcceptedSpecies(x),
+    "??"
+  )
+
+  cat(paste0(
+    "A COM(P)ADRE database ('CompadreDB') object with ",
+    as.character(Sno),
+    " SPECIES and ",
+    as.character(Mno),
+    " MATRICES.\n\n"
+  ))
+  print(x@data, ...)
+}
 
 
 
@@ -94,6 +112,22 @@ names.CompadreDB <- function(x) {
 #' @export
 dim.CompadreDB <- function(x) {
   dim(x@data)
+}
+
+
+#' @rdname CompadreDB-Methods
+#' @param do.NULL,prefix passed to [base::colnames()]
+#' @export
+setMethod("colnames", "CompadreDB", function(x, do.NULL = TRUE, prefix = "col") {
+  colnames(x@data, do.NULL = do.NULL, prefix = prefix)
+})
+
+
+#' @rdname CompadreDB-Methods
+#' @export
+print.CompadreDB <- function(x, ...) {
+  .print_CompadreDB(x, ...)
+  invisible(x)
 }
 
 

@@ -16,13 +16,18 @@ test_that("CompadreDB-Subsetting works correctly", {
   expect_identical(ncol(sub4@data), as.integer(ncol(Compadre@data) - 1))
 
   sub5 <- suppressWarnings(Compadre[, -(1:2)])
-  expect_identical(ncol(sub5@data), as.integer(ncol(Compadre@data) - 1))
+  expect_s3_class(sub5, "data.frame")
+  expect_false("mat" %in% names(sub5))
 
   sub6 <- Compadre[, c("mat", "SpeciesAuthor")]
   expect_identical(ncol(sub6@data), 2L)
 
   sub7 <- Compadre[, names(Compadre) %in% c("mat", "SpeciesAuthor")]
   expect_identical(ncol(sub7@data), 2L)
+
+  sub8 <- Compadre[, names(Compadre) != "mat"]
+  expect_s3_class(sub8, "data.frame")
+  expect_false("mat" %in% names(sub8))
 
   sub1 <- subset(Compadre, SpeciesAccepted == "Lechea cernua")
   n1 <- length(which(Compadre@data$SpeciesAccepted == "Lechea cernua"))
@@ -36,15 +41,15 @@ test_that("CompadreDB-Subsetting works correctly", {
   n3 <- length(which(Compadre@data$MatrixDimension == 4))
   expect_identical(nrow(sub3@data), n3)
   expect_identical(ncol(sub3@data), 5L)
+
+  sub4 <- subset(Compadre, select = c("SpeciesAccepted", "Authors"))
+  expect_s3_class(sub4, "data.frame")
+  expect_false("mat" %in% names(sub4))
 })
 
 
 test_that("CompadreDB-Subsetting warns and fails gracefully", {
-  expect_warning(Compadre[, -1])
-  expect_warning(Compadre[, "SpeciesAccepted"])
-  expect_warning(Compadre[, names(Compadre) != "mat"])
   expect_error(Compadre[, expression(-1)])
 
   expect_error(subset(Compadre, 1:5))
-  expect_warning(subset(Compadre, select = 5:10))
 })

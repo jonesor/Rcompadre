@@ -2,8 +2,9 @@
 #'
 #' \code{CompadreDB} objects can be subset just like a regular
 #' \code{data.frame}, using either \code{[} or \code{subset()}. Note, however,
-#' that the \code{mat} column will always be retained during subsetting, even if
-#' it is not included in the user's column subset.
+#' that returning a valid \code{CompadreDB} object requires the \code{mat}
+#' column. If a column subset excludes \code{mat}, a plain tabular object is
+#' returned instead of a \code{CompadreDB}.
 #'
 #' @return No return value, called for side effects
 #'
@@ -19,11 +20,7 @@
 #' # remove the column SurvivalIssue
 #' Compadre[, names(Compadre) != "SurvivalIssue"]
 #'
-#' \dontrun{
-#' # column selection doesn't include mat, but mat will still be returned with a
-#' #  along with a warning
 #' subset(Compadre, select = c("SpeciesAccepted", "Authors"))
-#' }
 NULL
 
 
@@ -52,49 +49,18 @@ setMethod(
           "numbers) or character (column / row names)"
         )
       }
-      mat_col <- which(names(dat) == "mat")
-      # test for length 1 b/c x[,TRUE] should select all columns
-      if (is.logical(j) & j[mat_col] != TRUE & length(j) != 1) {
-        warning(
-          "'mat' was included in the output by default, ",
-          "although not selected"
-        )
-        j[mat_col] <- TRUE
-      }
-      if (is.numeric(j)) {
-        if (all(j >= 0) & !(mat_col %in% j)) {
-          warning(
-            "'mat' was included in the output by default, ",
-            "although not selected"
-          )
-          j <- c(mat_col, j)
-        } else if (all(j < 0) & (mat_col %in% abs(j))) {
-          warning(
-            "'mat' was included in the output by default, ",
-            "although not selected"
-          )
-          if (length(j) == 1) {
-            # if trying to remove ONLY mat col, keep all cols
-            j <- TRUE
-          } else {
-            # if trying to remove mat col + others, remove only others
-            j <- j[-which(mat_col %in% abs(j))]
-          }
-        }
-      }
-      if (is.character(j) & !("mat" %in% j)) {
-        warning(
-          "'mat' was included in the output by default, ",
-          "although not selected"
-        )
-        j <- c("mat", j)
-      }
     }
 
-    new("CompadreDB",
-      data = dat[i, j],
-      version = x@version
-    )
+    out <- dat[i, j, drop = FALSE]
+
+    if ("mat" %in% names(out)) {
+      new("CompadreDB",
+        data = out,
+        version = x@version
+      )
+    } else {
+      out
+    }
   }
 )
 
