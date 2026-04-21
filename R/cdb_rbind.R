@@ -3,6 +3,9 @@
 #' Merges one or more CompadreDB objects via a row-bind of the data slots.
 #'
 #' @param ... CompadreDB objects
+#' @param fill Logical indicating whether data-slot columns should be unioned
+#'   across inputs and missing columns filled with \code{NA}. If \code{FALSE}
+#'   (default), all inputs must have identical column names.
 #'
 #' @return A CompadreDB object created by binding the rows of all supplied
 #'   CompadreDB objects
@@ -20,10 +23,11 @@
 #'
 #' cdb_rbind(Compadre1, Compadre2)
 #' cdb_rbind(Compadre1, Compadre2, Compadre3)
+#' cdb_rbind(Compadre1, Compadre2[, names(Compadre2) != "CommonName"], fill = TRUE)
 #'
 #' @importFrom methods new
 #' @export cdb_rbind
-cdb_rbind <- function(...) {
+cdb_rbind <- function(..., fill = FALSE) {
   cdbs <- list(...)
 
   if (length(cdbs) < 2) {
@@ -37,12 +41,16 @@ cdb_rbind <- function(...) {
   # cdbs must have matching columns to merge
   dats <- lapply(cdbs, CompadreData)
   ref_names <- names(dats[[1]])
-  if (!all(vapply(dats, function(x) identical(names(x), ref_names), logical(1)))) {
+  if (!fill &&
+      !all(vapply(dats, function(x) identical(names(x), ref_names), logical(1)))) {
     stop("Data components do not have identical names. ",
       "Make sure the data slot \n",
       "in each is identical to other.",
       Call. = FALSE
     )
+  }
+  if (fill) {
+    dats <- .align_cdb_rbind_cols(dats)
   }
 
   # test whether cdbs have same version info
@@ -62,4 +70,40 @@ cdb_rbind <- function(...) {
     data = do.call(rbind, dats),
     version = vers_out
   )
+}
+
+
+.cdb_missing_col_like <- function(proto, n) {
+  if (is.list(proto)) {
+    return(vector("list", n))
+  }
+
+  out <- proto[rep(NA_integer_, n)]
+  names(out) <- NULL
+  out
+}
+
+
+.align_cdb_rbind_cols <- function(dats) {
+  all_names <- unique(unlist(lapply(dats, names), use.names = FALSE))
+
+  prototypes <- lapply(all_names, function(col) {
+    for (dat in dats) {
+      if (col %in% names(dat)) {
+        return(dat[[col]])
+      }
+    }
+    NULL
+  })
+  names(prototypes) <- all_names
+
+  lapply(dats, function(dat) {
+    missing_cols <- setdiff(all_names, names(dat))
+
+    for (col in missing_cols) {
+      dat[[col]] <- .cdb_missing_col_like(prototypes[[col]], nrow(dat))
+    }
+
+    dat[, all_names, drop = FALSE]
+  })
 }
