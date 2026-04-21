@@ -31,8 +31,9 @@ No return value, called for side effects
 \description{
 \code{CompadreDB} objects can be subset just like a regular
 \code{data.frame}, using either \code{[} or \code{subset()}. Note, however,
-that the \code{mat} column will always be retained during subsetting, even if
-it is not included in the user's column subset.
+that returning a valid \code{CompadreDB} object requires the \code{mat}
+column. If a column subset excludes \code{mat}, a plain tabular object is
+returned instead of a \code{CompadreDB}.
 }
 \examples{
 # subset to the first 10 rows
@@ -44,9 +45,5 @@ subset(Compadre, SpeciesAccepted == "Echinacea angustifolia")
 # remove the column SurvivalIssue
 Compadre[, names(Compadre) != "SurvivalIssue"]
 
-\dontrun{
-# column selection doesn't include mat, but mat will still be returned with a
-#  along with a warning
 subset(Compadre, select = c("SpeciesAccepted", "Authors"))
-}
 }

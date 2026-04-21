@@ -8,6 +8,9 @@
 \alias{tail.CompadreDB}
 \alias{names.CompadreDB}
 \alias{dim.CompadreDB}
+\alias{colnames,CompadreDB-method}
+\alias{print.CompadreDB}
+\alias{droplevels.CompadreDB}
 \alias{merge.CompadreDB}
 \alias{NumberAcceptedSpecies}
 \alias{NumberAcceptedSpecies,CompadreDB-method}
@@ -34,6 +37,12 @@
 \method{names}{CompadreDB}(x)
 
 \method{dim}{CompadreDB}(x)
+
+\S4method{colnames}{CompadreDB}(x, do.NULL = TRUE, prefix = "col")
+
+\method{print}{CompadreDB}(x, ...)
+
+\method{droplevels}{CompadreDB}(x, ...)
 
 \method{merge}{CompadreDB}(x, y, ...)
 
@@ -62,6 +71,8 @@ NumberMatrices(object)
 
 \item{n}{The number of rows to extract}
 
+\item{do.NULL, prefix}{passed to \link[base:colnames]{colnames()}}
+
 \item{y}{A data.frame to merge with x}
 }
 \value{
@@ -70,8 +81,9 @@ No return value, called for side effects
 \description{
 This page describes a variety of methods that can be used with CompadreDB
 objects, including common data frame operations (\code{head}, \code{names},
-and \code{merge}), conversion methods (\code{as.data.frame} and
-\code{as_tibble}), and methods to calculate the number of species
+\code{colnames}, \code{print}, and \code{merge}), conversion methods
+(\code{as.data.frame} and \code{as_tibble}), and methods to calculate the
+number of species
 (\code{NumberAcceptedSpecies}), studies (\code{NumberStudies}), or matrices
 (\code{NumberMatrices}).
 }
