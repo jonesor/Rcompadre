@@ -23,11 +23,9 @@ fortify.CompadreDB <- function(model, data, ...) model@data
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 filter.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::filter(.data@data, ...),
+    version = .data@version
   )
 }
 
@@ -35,11 +33,9 @@ filter.CompadreDB <- function(.data, ...) {
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 slice.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::slice(.data@data, ...),
+    version = .data@version
   )
 }
 
@@ -47,11 +43,9 @@ slice.CompadreDB <- function(.data, ...) {
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 arrange.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::arrange(.data@data, ...),
+    version = .data@version
   )
 }
 
@@ -59,11 +53,9 @@ arrange.CompadreDB <- function(.data, ...) {
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 mutate.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::mutate(.data@data, ...),
+    version = .data@version
   )
 }
 
@@ -71,49 +63,41 @@ mutate.CompadreDB <- function(.data, ...) {
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 group_by.CompadreDB <- function(.data, ..., add = FALSE) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::group_by(.data@data, ..., .add = add),
+    version = .data@version
   )
 }
 
 
 #' @rdname CompadreDB-Tidyverse
-#' @importFrom methods new callGeneric
+#' @importFrom methods new
 ungroup.CompadreDB <- function(x, ...) {
-  vers <- x@version
-  x <- x@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::ungroup(x@data, ...),
+    version = x@version
   )
 }
 
 
 #' @rdname CompadreDB-Tidyverse
 summarize.CompadreDB <- function(.data, ...) {
-  .data <- .data@data
-  callGeneric()
+  dplyr::summarize(.data@data, ...)
 }
 
 
 #' @rdname CompadreDB-Tidyverse
 summarise.CompadreDB <- function(.data, ...) {
-  .data <- .data@data
-  callGeneric()
+  dplyr::summarise(.data@data, ...)
 }
 
 
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 select.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::select(.data@data, ...),
+    version = .data@version
   )
 }
 
@@ -121,24 +105,22 @@ select.CompadreDB <- function(.data, ...) {
 #' @rdname CompadreDB-Tidyverse
 #' @importFrom methods new
 rename.CompadreDB <- function(.data, ...) {
-  vers <- .data@version
-  .data <- .data@data
   new("CompadreDB",
-    data = callGeneric(),
-    version = vers
+    data = dplyr::rename(.data@data, ...),
+    version = .data@version
   )
 }
 
 
 #' @rdname CompadreDB-Tidyverse
-#' @importFrom methods new callGeneric
+#' @importFrom methods new
 left_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
                                  suffix = c(".x", ".y"), ...) {
   vers <- x@version
-  x <- x@data
-  x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
+  df <- x@data
+  df$DoNotUse_Temp_Sequence <- seq_len(nrow(df))
   out <- new("CompadreDB",
-    data = callGeneric(),
+    data = dplyr::left_join(df, y, by = by, copy = copy, suffix = suffix, ...),
     version = vers
   )
   if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
@@ -153,14 +135,14 @@ left_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 
 
 #' @rdname CompadreDB-Tidyverse
-#' @importFrom methods new callGeneric
+#' @importFrom methods new
 right_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
                                   suffix = c(".x", ".y"), ...) {
   vers <- x@version
-  x <- x@data
-  x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
+  df <- x@data
+  df$DoNotUse_Temp_Sequence <- seq_len(nrow(df))
   out <- new("CompadreDB",
-    data = callGeneric(),
+    data = dplyr::right_join(df, y, by = by, copy = copy, suffix = suffix, ...),
     version = vers
   )
   if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
@@ -175,14 +157,14 @@ right_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 
 
 #' @rdname CompadreDB-Tidyverse
-#' @importFrom methods new callGeneric
+#' @importFrom methods new
 inner_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
                                   suffix = c(".x", ".y"), ...) {
   vers <- x@version
-  x <- x@data
-  x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
+  df <- x@data
+  df$DoNotUse_Temp_Sequence <- seq_len(nrow(df))
   out <- new("CompadreDB",
-    data = callGeneric(),
+    data = dplyr::inner_join(df, y, by = by, copy = copy, suffix = suffix, ...),
     version = vers
   )
   if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {
@@ -197,14 +179,14 @@ inner_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 
 
 #' @rdname CompadreDB-Tidyverse
-#' @importFrom methods new callGeneric
+#' @importFrom methods new
 full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
                                  suffix = c(".x", ".y"), ...) {
   vers <- x@version
-  x <- x@data
-  x$DoNotUse_Temp_Sequence <- seq_len(nrow(x))
+  df <- x@data
+  df$DoNotUse_Temp_Sequence <- seq_len(nrow(df))
   out <- new("CompadreDB",
-    data = callGeneric(),
+    data = dplyr::full_join(df, y, by = by, copy = copy, suffix = suffix, ...),
     version = vers
   )
   if (anyDuplicated(out@data$DoNotUse_Temp_Sequence) > 0) {

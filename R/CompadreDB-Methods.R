@@ -134,6 +134,8 @@ print.CompadreDB <- function(x, ...) {
 
 #' @rdname CompadreDB-Methods
 #' @param deparse.level passed to [base::cbind()] or [base::rbind()]
+#' @param fill passed to [cdb_rbind()]; if `TRUE`, missing columns are filled
+#'   with `NA`
 #' @export
 rbind.CompadreDB <- function(..., deparse.level = 1, fill = FALSE) {
   cdb_rbind(..., fill = fill)
