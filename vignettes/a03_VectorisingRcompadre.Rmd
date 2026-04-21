@@ -214,7 +214,7 @@ If `eigs()` doesn't work on matrices with missing values, one approach is to sim
 CompFlag <- cdb_flag(CompUnnest, checks = "check_NA_A")
 
 # remove rows where matA contains missing values
-CompSub <- subset(CompFlag, check_NA_A == FALSE)
+CompSub <- dplyr::filter(CompFlag, check_NA_A == FALSE)
 
 # apply lambda() to every remaining matA
 CompSub$lambda <- sapply(matA(CompSub), popdemo::eigs, what = "lambda")
