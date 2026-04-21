@@ -59,7 +59,11 @@ NULL
 #' @rdname string_representation
 #' @export mat_to_string
 mat_to_string <- function(mat) {
-  if (!is.matrix(mat) || !is.numeric(mat) || (nrow(mat) != ncol(mat))) {
+  is_all_na_matrix <- is.matrix(mat) && all(is.na(mat))
+
+  if (!is.matrix(mat) ||
+      (!is.numeric(mat) && !is_all_na_matrix) ||
+      (nrow(mat) != ncol(mat))) {
     stop("mat must be a square numeric matrix", call. = FALSE)
   }
   paste0("[", paste(t(mat), collapse = " "), "]")

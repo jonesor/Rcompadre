@@ -39,6 +39,11 @@ test_that("string_representation functions work correctly", {
   expect_length(ms2_reconv, 1)
   expect_match(ms2_reconv, " NA ")
 
+  m3 <- matrix(NA, nrow = 2, ncol = 2)
+  ms3_reconv <- mat_to_string(m3)
+  expect_type(ms3_reconv, "character")
+  expect_identical(ms3_reconv, "[NA NA NA NA]")
+
   vs1_reconv <- vec_to_string(v1)
   expect_type(vs1_reconv, "character")
   expect_length(vs1_reconv, 1)
@@ -60,4 +65,7 @@ test_that("string_representation functions warn and fail gracefully", {
 
   m1 <- matrix(1:6, nrow = 2)
   expect_error(mat_to_string(m1))
+
+  m2 <- matrix(c(TRUE, FALSE, TRUE, FALSE), nrow = 2)
+  expect_error(mat_to_string(m2))
 })
