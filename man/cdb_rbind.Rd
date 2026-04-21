@@ -2,33 +2,42 @@
 % Please edit documentation in R/cdb_rbind.R
 \name{cdb_rbind}
 \alias{cdb_rbind}
-\title{Merge two COM(P)ADRE databases via row-bind}
+\title{Merge COM(P)ADRE databases via row-bind}
 \usage{
-cdb_rbind(cdb1, cdb2)
+cdb_rbind(..., fill = FALSE)
 }
 \arguments{
-\item{cdb1, cdb2}{CompadreDB objects}
+\item{...}{CompadreDB objects}
+
+\item{fill}{Logical indicating whether data-slot columns should be unioned
+across inputs and missing columns filled with \code{NA}. If \code{FALSE}
+(default), all inputs must have identical column names.}
 }
 \value{
-A CompadreDB object created by binding the rows of \code{cdb1} and
-  \code{cdb2}
+A CompadreDB object created by binding the rows of all supplied
+  CompadreDB objects
 }
 \description{
-Merges two CompadreDB objects via a row-bind of the data slots.
+Merges one or more CompadreDB objects via a row-bind of the data slots.
 }
 \examples{
 Compadre1 <- subset(Compadre, Continent == "Asia")
 Compadre2 <- subset(Compadre, Continent == "Africa")
 
+Compadre3 <- subset(Compadre, Continent == "Europe")
+
 cdb_rbind(Compadre1, Compadre2)
+cdb_rbind(Compadre1, Compadre2, Compadre3)
+cdb_rbind(Compadre1, Compadre2[, names(Compadre2) != "CommonName"], fill = TRUE)
 
 }
 \seealso{
 Other data management: 
+\code{\link{cdb_export_matlab}()},
 \code{\link{cdb_flatten}()},
+\code{\link{cdb_id}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
-\code{\link{cdb_id}()},
 \code{\link{cdb_mean_matF}()},
 \code{\link{cdb_unflatten}()},
 \code{\link{cdb_unnest}()},

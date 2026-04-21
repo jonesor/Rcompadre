@@ -48,10 +48,11 @@ meanF[[16]]
 }
 \seealso{
 Other data management: 
+\code{\link{cdb_export_matlab}()},
 \code{\link{cdb_flatten}()},
+\code{\link{cdb_id}()},
 \code{\link{cdb_id_stages}()},
 \code{\link{cdb_id_studies}()},
-\code{\link{cdb_id}()},
 \code{\link{cdb_rbind}()},
 \code{\link{cdb_unflatten}()},
 \code{\link{cdb_unnest}()},
