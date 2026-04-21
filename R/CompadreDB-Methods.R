@@ -2,15 +2,16 @@
 #'
 #' This page describes a variety of methods that can be used with CompadreDB
 #' objects, including common data frame operations (\code{head}, \code{names},
-#' \code{colnames}, \code{print}, and \code{merge}), conversion methods
-#' (\code{as.data.frame} and \code{as_tibble}), and methods to calculate the
-#' number of species
+#' \code{colnames}, \code{print}, \code{cbind}, \code{rbind}, and \code{merge}),
+#' conversion methods (\code{as.data.frame} and \code{as_tibble}), and methods
+#' to calculate the number of species
 #' (\code{NumberAcceptedSpecies}), studies (\code{NumberStudies}), or matrices
 #' (\code{NumberMatrices}).
 #'
 #' @param x,object A CompadreDB object
 #' @param y A data.frame to merge with x
 #' @param n The number of rows to extract
+#' @param deparse.level passed to [base::cbind()] or [base::rbind()]
 #' @param ... additional arguments
 #'
 #' @return No return value, called for side effects
@@ -128,6 +129,60 @@ setMethod("colnames", "CompadreDB", function(x, do.NULL = TRUE, prefix = "col") 
 print.CompadreDB <- function(x, ...) {
   .print_CompadreDB(x, ...)
   invisible(x)
+}
+
+
+#' @rdname CompadreDB-Methods
+#' @param deparse.level passed to [base::cbind()] or [base::rbind()]
+#' @export
+rbind.CompadreDB <- function(..., deparse.level = 1, fill = FALSE) {
+  cdb_rbind(..., fill = fill)
+}
+
+
+#' @rdname CompadreDB-Methods
+#' @importFrom tibble as_tibble
+#' @importFrom methods new
+#' @export
+cbind.CompadreDB <- function(..., deparse.level = 1) {
+  args <- list(...)
+
+  if (length(args) == 0) {
+    stop("Please provide at least one CompadreDB object.")
+  }
+
+  x <- args[[1]]
+  if (!inherits(x, "CompadreDB")) {
+    stop("First argument must be a CompadreDB object.")
+  }
+
+  extras <- args[-1]
+
+  if (any(vapply(extras, inherits, logical(1), what = "CompadreDB"))) {
+    stop(
+      "Column-binding multiple CompadreDB objects is not supported. ",
+      "Use rbind()/cdb_rbind() for row-binding, or extract the data slot ",
+      "explicitly if you want to bind metadata columns."
+    )
+  }
+
+  n <- nrow(x@data)
+  for (arg in extras) {
+    if (is.data.frame(arg)) {
+      if (nrow(arg) != n) {
+        stop("All data.frame arguments must have the same number of rows as x.")
+      }
+    } else if (length(arg) != n) {
+      stop("All non-data.frame arguments must have length equal to nrow(x).")
+    }
+  }
+
+  dataout <- as_tibble(do.call(base::cbind, c(list(x@data), extras)))
+
+  new("CompadreDB",
+    data = dataout,
+    version = x@version
+  )
 }
 
 

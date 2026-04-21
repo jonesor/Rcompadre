@@ -46,6 +46,21 @@ test_that("CompadreDB-Methods work correctly", {
   expect_s4_class(CompadreMerge, "CompadreDB")
   expect_true(all(CompadreMerge$value %in% traits$value))
 
+  db_rbind <- rbind(Compadre[1:2, ], Compadre[3:4, ])
+  expect_s4_class(db_rbind, "CompadreDB")
+  expect_identical(nrow(db_rbind@data), 4L)
+
+  db_cbind <- cbind(Compadre[1:3, ], extra = 1:3)
+  expect_s4_class(db_cbind, "CompadreDB")
+  expect_identical(db_cbind@data$extra, 1:3)
+
+  db_cbind2 <- cbind(
+    Compadre[1:3, ],
+    data.frame(extra2 = c("a", "b", "c"), stringsAsFactors = FALSE)
+  )
+  expect_s4_class(db_cbind2, "CompadreDB")
+  expect_identical(db_cbind2@data$extra2, c("a", "b", "c"))
+
   nspecies <- NumberAcceptedSpecies(Compadre)
   nstudies <- NumberStudies(Compadre)
   nmatrices <- NumberMatrices(Compadre)
@@ -63,4 +78,11 @@ test_that("Number_ functions fail gracefully", {
 
   expect_error(NumberAcceptedSpecies(comp_nospp))
   expect_error(NumberStudies(comp_noauth))
+})
+
+
+test_that("cbind and rbind fail gracefully", {
+  expect_error(cbind(Compadre[1:2, ], Compadre[3:4, ]))
+  expect_error(cbind(Compadre[1:2, ], extra = 1:3))
+  expect_error(cbind(Compadre[1:2, ], data.frame(extra = 1)))
 })
