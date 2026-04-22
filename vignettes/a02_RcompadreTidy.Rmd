@@ -42,7 +42,7 @@ if (can_use_cairo_png) {
 
 ## Introduction
 
-Rcompadre includes methods for a variety of functions in the "[Tidyverse](https://www.tidyverse.org/)", a popular group of R packages geared toward data analysis, including [dplyr](https://dplyr.tidyverse.org/) (a grammar of data manipulation) and [ggplot2](https://ggplot2.tidyverse.org/) (a grammar of graphics). This vignette covers manipulation of `CompadreDB` objects using `dplyr`, and a few examples of plotting `CompadreDB` objects using `ggplot2.` Users new to these packages may wish to check out more introductory materials (e.g. the [dplyr vignette](https://CRAN.R-project.org/package=dplyr), or the [Data Visualization chapter](https://r4ds.had.co.nz/data-visualisation.html) of _R for Data Science_).
+Rcompadre includes methods for a variety of functions in the "[Tidyverse](https://tidyverse.org/)", a popular group of R packages geared toward data analysis, including [dplyr](https://dplyr.tidyverse.org/) (a grammar of data manipulation) and [ggplot2](https://ggplot2.tidyverse.org/) (a grammar of graphics). This vignette covers manipulation of `CompadreDB` objects using `dplyr`, and a few examples of plotting `CompadreDB` objects using `ggplot2.` Users new to these packages may wish to check out more introductory materials (e.g. the [dplyr vignette](https://CRAN.R-project.org/package=dplyr), or the [Data Visualization chapter](https://r4ds.had.co.nz/data-visualisation.html) of _R for Data Science_).
 
 
 ## Preliminaries

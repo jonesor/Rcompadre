@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/jonesor/Rcompadre",
   "issueTracker": "https://github.com/jonesor/Rcompadre/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.5.0",
+  "version": "1.5.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -132,6 +132,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "maps",
+      "name": "maps",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=maps"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rcrossref",
       "name": "rcrossref",
       "provider": {
@@ -227,7 +239,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1616.069KB",
+  "fileSize": "1616.115KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

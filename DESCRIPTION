@@ -42,6 +42,7 @@ Suggests:
     ggplot2,
     grDevices,
     knitr,
+    maps,
     rcrossref,
     rmarkdown,
     testthat
