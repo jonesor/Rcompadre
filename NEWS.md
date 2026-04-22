@@ -1,4 +1,4 @@
-# Rcompadre (development version)
+# Rcompadre 1.5.0
 
 # Rcompadre 1.4.0
 
