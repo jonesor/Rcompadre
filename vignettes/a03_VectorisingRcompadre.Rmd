@@ -22,11 +22,15 @@ knitr::opts_chunk$set(
 # Prefer cairo-png for pkgdown on macOS when available, but fall back quietly
 # when XQuartz/Cairo is not installed.
 png_probe <- tempfile(fileext = ".png")
-can_use_cairo_png <- isTRUE(tryCatch({
-  grDevices::png(filename = png_probe, type = "cairo-png")
-  grDevices::dev.off()
-  TRUE
-}, error = function(...) FALSE, warning = function(...) FALSE))
+can_use_cairo_png <- isTRUE(tryCatch(
+  {
+    grDevices::png(filename = png_probe, type = "cairo-png")
+    grDevices::dev.off()
+    TRUE
+  },
+  error = function(...) FALSE,
+  warning = function(...) FALSE
+))
 unlink(png_probe)
 
 if (can_use_cairo_png) {

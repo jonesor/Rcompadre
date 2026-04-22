@@ -8,7 +8,6 @@
 NULL
 
 
-
 # matA
 #' @rdname CompadreMatrixMethods
 #' @param object A CompadreDB object
@@ -111,8 +110,6 @@ setMethod("matU",
 )
 
 
-
-
 # matF
 #' The 'matF' function extracts the matF (sexual reproduction) matrix from a
 #' CompadreMat or CompadreDB object. For CompadreMat objects, this is a single
@@ -163,8 +160,6 @@ setMethod("matF",
     }))
   }
 )
-
-
 
 
 # matC
@@ -219,9 +214,6 @@ setMethod("matC",
 )
 
 
-
-
-
 ## matrixClass slot
 
 # matrixClass
@@ -271,8 +263,6 @@ setMethod("matrixClass",
     }))
   }
 )
-
-
 
 
 # MatrixClassAuthor
@@ -387,8 +377,6 @@ setMethod("MatrixClassOrganized",
     ))
   }
 )
-
-
 
 
 # MatrixClassNumber

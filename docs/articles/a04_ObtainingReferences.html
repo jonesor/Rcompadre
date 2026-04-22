@@ -90,7 +90,7 @@ of the International DOI Foundation.</p>
 <p>We should then load the required packages like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonesor/Rcompadre">Rcompadre</a></span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="va">has_rcrossref</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rcrossref"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/" class="external-link">rcrossref</a></span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>If <code>rcrossref</code> is not installed, the citation lookup

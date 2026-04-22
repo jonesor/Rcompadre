@@ -23,7 +23,7 @@ test_that("cdb_fetch works correctly", {
   ))
 })
 
-#test_that("cdb_fetch works correctly using internet", {
+# test_that("cdb_fetch works correctly using internet", {
 #  # Check obtaining via internet
 #  expect_true(inherits(cdb_fetch("compadre"), "CompadreDB"))
 #  expect_true(inherits(cdb_fetch("comadre"), "CompadreDB"))
@@ -31,9 +31,9 @@ test_that("cdb_fetch works correctly", {
 #  expect_true(inherits(cdb_fetch("comadre", version = "4.23.3.1"), "CompadreDB"))
 #
 #
-#x <- cdb_fetch("compadre")
-#testthat::expect_true(inherits(x, "CompadreDB"))
+# x <- cdb_fetch("compadre")
+# testthat::expect_true(inherits(x, "CompadreDB"))
 #
-#x <- cdb_fetch("compadre", flag = FALSE)
-#testthat::expect_true(inherits(x, "CompadreDB"))
-#})
+# x <- cdb_fetch("compadre", flag = FALSE)
+# testthat::expect_true(inherits(x, "CompadreDB"))
+# })

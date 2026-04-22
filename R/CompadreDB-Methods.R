@@ -38,7 +38,6 @@ NULL
 }
 
 
-
 #' @rdname CompadreDB-Methods
 #' @export
 as.data.frame.CompadreDB <- function(x, ...) {

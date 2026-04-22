@@ -2,7 +2,7 @@
 #'
 #' Calculates an element-wise median over a list of matrices or
 #' CompadreMat objects of constant dimension.
-#' 
+#'
 #' The difference between function \code{mat_median}) and (\code{mpm_median} is that
 #' \code{mat_median} takes input as a list of matrices (e.g., a list of **A**
 #' matrices) while \code{mat_median} takes input as a list of `CompadreMat` objects and
@@ -27,7 +27,7 @@
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
 #'
 #' @family data management
-#' 
+#'
 #' @name mpm_median
 #'
 #' @examples
@@ -58,7 +58,7 @@ mat_median <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) !=
-      1) {
+    1) {
     stop("All matrices in list must be of same dimension")
   }
   if (na.rm) {
@@ -81,21 +81,21 @@ mat_median <- function(x, na.rm = FALSE) {
 #' @importFrom stats median
 #' @export
 mpm_median <- function(x, na.rm = FALSE) {
-  if(!inherits(x, "list")){
+  if (!inherits(x, "list")) {
     stop("x must be a list of CompadreMat objects")
   }
-  if(!inherits(x[[1]], "CompadreMat")){
+  if (!inherits(x[[1]], "CompadreMat")) {
     stop("x must be a list of CompadreMat objects")
   }
-  
-  #Use lapply to get matrices, stages when x is a list of compadre objects
+
+  # Use lapply to get matrices, stages when x is a list of compadre objects
   matA <- lapply(x, function(m) m@matA)
   matU <- lapply(x, function(m) m@matU)
   matF <- lapply(x, function(m) m@matF)
   matC <- lapply(x, function(m) m@matC)
   stage_org <- lapply(x, function(m) m@matrixClass$MatrixClassOrganized)
   stage_aut <- lapply(x, function(m) m@matrixClass$MatrixClassAuthor)
-  
+
   stage_org_col <- vapply(stage_org, paste, collapse = " ", "")
   stage_aut_col <- vapply(stage_aut, paste, collapse = " ", "")
   if (length(unique(stage_org_col)) != 1L) {
@@ -112,17 +112,17 @@ mpm_median <- function(x, na.rm = FALSE) {
       "list element"
     )
   }
-  
+
   medianA <- mat_median(matA, na.rm = na.rm)
   medianU <- mat_median(matU, na.rm = na.rm)
   medianF <- mat_median(matF, na.rm = na.rm)
   medianC <- mat_median(matC, na.rm = na.rm)
-  
+
   new("CompadreMat",
-      matA = medianA,
-      matU = medianU,
-      matF = medianF,
-      matC = medianC,
-      matrixClass = x[[1]]@matrixClass
+    matA = medianA,
+    matU = medianU,
+    matF = medianF,
+    matC = medianC,
+    matrixClass = x[[1]]@matrixClass
   )
 }

@@ -71,7 +71,6 @@ test_that("CompadreDB-Methods work correctly", {
 })
 
 
-
 test_that("Number_ functions fail gracefully", {
   comp_nospp <- Compadre[, -which(names(Compadre) == "SpeciesAccepted")]
   comp_noauth <- Compadre[, -which(names(Compadre) == "Authors")]

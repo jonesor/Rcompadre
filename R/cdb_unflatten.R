@@ -79,7 +79,6 @@ cdb_unflatten <- function(db) {
 }
 
 
-
 # utility
 AsMatrixClass <- function(MatrixClassOrganized, MatrixClassAuthor) {
   out <- data.frame(MatrixClassOrganized, MatrixClassAuthor)

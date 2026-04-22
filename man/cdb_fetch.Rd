@@ -8,7 +8,7 @@ cdb_fetch(cdb, version = NULL, flag = FALSE, userComment = NULL, quiet = FALSE)
 }
 \arguments{
 \item{cdb}{Either "comadre" or "compadre" (case insensitive) to fetch the
-most recent database from \url{https://compadre-db.org}, or a path to an
+most recent database from \url{https://compadre-db.org/}, or a path to an
 existing COMPADRE database (i.e. .RData file) stored on the local machine.}
 
 \item{version}{Optional. The version number of a particular database to be
@@ -33,7 +33,7 @@ A CompadreDB object
 }
 \description{
 Fetches the current version of a COM(P)ADRE database from
-\url{https://compadre-db.org}, or load any version stored in a local .RData
+\url{https://compadre-db.org/}, or load any version stored in a local .RData
 file.
 }
 \note{

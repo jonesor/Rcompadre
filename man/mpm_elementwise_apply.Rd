@@ -33,7 +33,7 @@ elements across a list of matrices.
 \examples{
 mpms <- Compadre$mat[Compadre$SpeciesAuthor == "Haplopappus_radiatus"]
 
-#The object mpms is a list, containing compadre objects
+# The object mpms is a list, containing compadre objects
 class(mpms)
 class(mpms[[1]])
 
@@ -54,24 +54,24 @@ mat_elementwise_apply(mats, mean, trim = 0.25)
 
 # weighted mean, where the second matrix is weighted to 100\% and the others to 0\%
 # do demonstrate usage. The result should be the same as mats[[2]]
-mat_elementwise_apply(mats, weighted.mean, w = c(0,1,0,0))
+mat_elementwise_apply(mats, weighted.mean, w = c(0, 1, 0, 0))
 mats[[2]]
 
-#min and max values
+# min and max values
 mat_elementwise_apply(mats, min)
 mat_elementwise_apply(mats, max)
 
-#Demonstrating NA handling
-#First adding some NA values to the matrices
-mats[[2]][3,2] <- NA
+# Demonstrating NA handling
+# First adding some NA values to the matrices
+mats[[2]][3, 2] <- NA
 
-#replace the NA with a 0
+# replace the NA with a 0
 mat_elementwise_apply(mats, min, na_handling = "zero")
 
-#ignore the NA
+# ignore the NA
 mat_elementwise_apply(mats, min, na_handling = "ignore")
 
-#ignore the NA, but pass na.rm = TRUE to the function (min)
+# ignore the NA, but pass na.rm = TRUE to the function (min)
 mat_elementwise_apply(mats, min, na_handling = "ignore", na.rm = TRUE)
 }
 \seealso{

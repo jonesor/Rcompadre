@@ -1,4 +1,3 @@
-
 # sd function
 
 set.seed(12)

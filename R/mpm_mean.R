@@ -2,8 +2,8 @@
 #'
 #' @description
 #' Calculates an element-wise mean over a list of matrices or CompadreMat
-#' objects of constant dimension. 
-#' 
+#' objects of constant dimension.
+#'
 #' The difference between function \code{mat_mean}) and (\code{mpm_mean} is that
 #' \code{mat_mean} takes input as a list of matrices (e.g., a list of **A**
 #' matrices) while \code{mat_mean} takes input as a list of `CompadreMat` objects and
@@ -33,11 +33,11 @@
 #' @examples
 #' # there are four rows for species 'Haplopappus_radiatus' in Compadre
 #' mpms <- Compadre$mat[Compadre$SpeciesAuthor == "Haplopappus_radiatus"]
-#' 
-#' #The object mpms is a list, containing compadre objects
+#'
+#' # The object mpms is a list, containing compadre objects
 #' class(mpms)
 #' class(mpms[[1]])
-#' 
+#'
 #' mpm_mean(mpms)
 #'
 #' # extract list of matA and take mean
@@ -50,13 +50,13 @@ NULL
 #' @rdname mpm_mean
 #' @export
 mat_mean <- function(x, na.rm = FALSE) {
-  if(!inherits(x,"list")){
+  if (!inherits(x, "list")) {
     stop("x must be a list of matrices")
   }
-  if(!inherits(x[[1]], "matrix")){
+  if (!inherits(x[[1]], "matrix")) {
     stop("x must be a list of matrices")
   }
-  
+
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) != 1) {
@@ -79,14 +79,14 @@ zero_NA <- function(m) {
 #' @importFrom methods new
 #' @export
 mpm_mean <- function(x, na.rm = FALSE) {
-  if(!inherits(x, "list")){
+  if (!inherits(x, "list")) {
     stop("x must be a list of CompadreMat objects")
   }
-  if(!inherits(x[[1]], "CompadreMat")){
+  if (!inherits(x[[1]], "CompadreMat")) {
     stop("x must be a list of CompadreMat objects")
   }
-  
-  #Use lapply to get matrices, stages when x is a list of compadre objects
+
+  # Use lapply to get matrices, stages when x is a list of compadre objects
   matA <- lapply(x, function(m) m@matA)
   matU <- lapply(x, function(m) m@matU)
   matF <- lapply(x, function(m) m@matF)

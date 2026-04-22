@@ -51,6 +51,6 @@ Other data management:
 \code{\link{string_representation}}
 }
 \author{
-OpenAI
+Owen R. Jones <jones@biology.sdu.dk>
 }
 \concept{data management}

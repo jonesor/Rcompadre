@@ -32,16 +32,16 @@ BugReports: https://github.com/jonesor/Rcompadre/issues
 Depends: 
     R (>= 2.10)
 Imports:
+    dplyr,
     methods,
     popdemo,
     stats,
     tibble,
     utils
 Suggests: 
-    dplyr,
     ggplot2,
+    grDevices,
     knitr,
-    maps,
     rcrossref,
     rmarkdown,
     testthat

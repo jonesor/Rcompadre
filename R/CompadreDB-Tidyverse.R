@@ -200,7 +200,6 @@ full_join.CompadreDB <- function(x, y, by = NULL, copy = FALSE,
 }
 
 
-
 # from https://github.com/r-spatial/sf/blob/master/R/tidyverse.R (Nov 30 2018)
 # nocov start
 register_all_s3_methods <- function() {

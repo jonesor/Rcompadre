@@ -17,8 +17,6 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-
-
 #' CompadreDB Class
 #'
 #' @description
@@ -63,7 +61,6 @@ setClass("CompadreDB",
 )
 
 
-
 ## define a method for initialize (does not need to be documented)
 #' @importFrom methods callNextMethod validObject
 setMethod(
@@ -74,7 +71,6 @@ setMethod(
     .Object
   }
 )
-
 
 
 ## define validity check function (does not need to be documented)
@@ -106,7 +102,6 @@ validCompadreDB <- function(object) {
   }
 }
 setValidity("CompadreDB", validCompadreDB)
-
 
 
 ## define method to coerce old compadre db object to CompadreDB class
@@ -210,7 +205,6 @@ as_cdb <- function(from) {
 }
 
 
-
 ## define a method for showing the object (does not need to be documented)
 setMethod("show",
   signature = (object <- "CompadreDB"),
@@ -218,7 +212,6 @@ setMethod("show",
     .print_CompadreDB(object)
   }
 )
-
 
 
 ## Accessors -------------------------------------------------------------------

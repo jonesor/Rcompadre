@@ -76,9 +76,6 @@ Compadre <- Compadre %>%
   mutate(AnnualPeriodicity = ProjectionInterval)
 
 
-
-
-
 # Write the files into the data folder
 usethis::use_data(Comadre,
   Compadre,

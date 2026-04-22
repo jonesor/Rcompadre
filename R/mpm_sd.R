@@ -2,7 +2,7 @@
 #'
 #' Calculates an element-wise standard deviation over a list of matrices or
 #' CompadreMat objects of constant dimension.
-#' 
+#'
 #' The difference between function \code{mat_sd}) and (\code{mpm_sd} is that
 #' \code{mat_sd} takes input as a list of matrices (e.g., a list of **A**
 #' matrices) while \code{mat_sd} takes input as a list of `CompadreMat` objects and
@@ -25,10 +25,10 @@
 #'
 #' @author Darren Norris
 #' @author Owen R. Jones <jones@@biology.sdu.dk>
-#' 
+#'
 #' @family data management
 #' @name mpm_sd
-#' 
+#'
 #' @examples
 #' # set seed for repeatability
 #' set.seed(42)
@@ -60,7 +60,7 @@ mat_sd <- function(x, na.rm = FALSE) {
   n_row <- vapply(x, nrow, numeric(1))
   n_col <- vapply(x, ncol, numeric(1))
   if (length(unique(n_row)) != 1 || length(unique(n_col)) !=
-      1) {
+    1) {
     stop("All matrices in list must be of same dimension")
   }
   if (na.rm) {
@@ -83,21 +83,21 @@ mat_sd <- function(x, na.rm = FALSE) {
 #' @importFrom stats sd
 #' @export
 mpm_sd <- function(x, na.rm = FALSE) {
-  if(!inherits(x, "list")){
+  if (!inherits(x, "list")) {
     stop("x must be a list of CompadreMat objects")
   }
-  if(!inherits(x[[1]], "CompadreMat")){
+  if (!inherits(x[[1]], "CompadreMat")) {
     stop("x must be a list of CompadreMat objects")
   }
-  
-  #Use lapply to get matrices, stages when x is a list of compadre objects
+
+  # Use lapply to get matrices, stages when x is a list of compadre objects
   matA <- lapply(x, function(m) m@matA)
   matU <- lapply(x, function(m) m@matU)
   matF <- lapply(x, function(m) m@matF)
   matC <- lapply(x, function(m) m@matC)
   stage_org <- lapply(x, function(m) m@matrixClass$MatrixClassOrganized)
   stage_aut <- lapply(x, function(m) m@matrixClass$MatrixClassAuthor)
-  
+
   stage_org_col <- vapply(stage_org, paste, collapse = " ", "")
   stage_aut_col <- vapply(stage_aut, paste, collapse = " ", "")
   if (length(unique(stage_org_col)) != 1L) {
@@ -114,17 +114,17 @@ mpm_sd <- function(x, na.rm = FALSE) {
       "list element"
     )
   }
-  
+
   sdA <- mat_sd(matA, na.rm = na.rm)
   sdU <- mat_sd(matU, na.rm = na.rm)
   sdF <- mat_sd(matF, na.rm = na.rm)
   sdC <- mat_sd(matC, na.rm = na.rm)
-  
+
   new("CompadreMat",
-      matA = sdA,
-      matU = sdU,
-      matF = sdF,
-      matC = sdC,
-      matrixClass = x[[1]]@matrixClass
+    matA = sdA,
+    matU = sdU,
+    matF = sdF,
+    matC = sdC,
+    matrixClass = x[[1]]@matrixClass
   )
 }

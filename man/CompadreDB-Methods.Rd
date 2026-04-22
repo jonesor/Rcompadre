@@ -81,7 +81,8 @@ NumberMatrices(object)
 
 \item{deparse.level}{passed to [base::cbind()] or [base::rbind()]}
 
-\item{fill}{passed to \code{cdb_rbind()}; if \code{TRUE}, missing columns are filled with \code{NA}}
+\item{fill}{passed to [cdb_rbind()]; if `TRUE`, missing columns are filled
+with `NA`}
 
 \item{y}{A data.frame to merge with x}
 }

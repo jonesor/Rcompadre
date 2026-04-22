@@ -74,7 +74,6 @@ cdb_mean_matF <- function(cdb, columns = c(
 }
 
 
-
 # function to return a mean matF given db and PopId
 meanMatF <- function(PopIdFocal, db_RowId, db_PopId, db_matF) {
   RowIdFocal <- db_RowId[db_PopId == PopIdFocal]

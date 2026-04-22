@@ -16,19 +16,21 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-has_rcrossref <- requireNamespace("rcrossref", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
 # Prefer cairo-png for pkgdown on macOS when available, but fall back quietly
 # when XQuartz/Cairo is not installed.
 png_probe <- tempfile(fileext = ".png")
-can_use_cairo_png <- isTRUE(tryCatch({
-  grDevices::png(filename = png_probe, type = "cairo-png")
-  grDevices::dev.off()
-  TRUE
-}, error = function(...) FALSE, warning = function(...) FALSE))
+can_use_cairo_png <- isTRUE(tryCatch(
+  {
+    grDevices::png(filename = png_probe, type = "cairo-png")
+    grDevices::dev.off()
+    TRUE
+  },
+  error = function(...) FALSE,
+  warning = function(...) FALSE
+))
 unlink(png_probe)
 
 if (can_use_cairo_png) {
@@ -50,7 +52,7 @@ We should then load the required packages like this:
 
 ```{r}
 library(Rcompadre)
-if (has_rcrossref) {
+if (requireNamespace("rcrossref", quietly = TRUE)) {
   library(rcrossref)
 }
 ```
@@ -82,7 +84,7 @@ We are now ready to obtain the full references for these data. The `rcrossref` p
 
 Thus, we can obtain the full references for this subset of the COMADRE database like this:
 
-```{r, eval = has_rcrossref}
+```{r, eval = requireNamespace("rcrossref", quietly = TRUE)}
 cr_cn(unique(Comadre$DOI_ISBN), format = "text", style = "apa")
 ```
 

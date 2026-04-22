@@ -42,7 +42,7 @@ cdb_rbind <- function(..., fill = FALSE) {
   dats <- lapply(cdbs, CompadreData)
   ref_names <- names(dats[[1]])
   if (!fill &&
-      !all(vapply(dats, function(x) identical(names(x), ref_names), logical(1)))) {
+    !all(vapply(dats, function(x) identical(names(x), ref_names), logical(1)))) {
     stop("Data components do not have identical names. ",
       "Make sure the data slot \n",
       "in each is identical to other.",

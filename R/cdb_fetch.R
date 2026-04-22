@@ -1,11 +1,11 @@
 #' Fetch the COM(P)ADRE database from compadre-db.org or a local file
 #'
 #' Fetches the current version of a COM(P)ADRE database from
-#' \url{https://compadre-db.org}, or load any version stored in a local .RData
+#' \url{https://compadre-db.org/}, or load any version stored in a local .RData
 #' file.
 #'
 #' @param cdb Either "comadre" or "compadre" (case insensitive) to fetch the
-#'   most recent database from \url{https://compadre-db.org}, or a path to an
+#'   most recent database from \url{https://compadre-db.org/}, or a path to an
 #'   existing COMPADRE database (i.e. .RData file) stored on the local machine.
 #'
 #' @param version Optional. The version number of a particular database to be
@@ -105,7 +105,7 @@ cdb_fetch <- function(cdb, version = NULL, flag = FALSE, userComment = NULL,
   message(
     "This is ", name, " version ", version, " (release date ", release,
     ")", "\n", "See user agreement at ",
-    "https://compadre-db.org/Help/UserAgreement", "\n",
+    "https://www.compadre-db.org/Help/UserAgreement", "\n",
     "See how to cite with `citation(Rcompadre)`", "\n"
   )
 

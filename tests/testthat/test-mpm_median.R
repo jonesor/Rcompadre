@@ -1,4 +1,4 @@
-#mat_median and mpm_median
+# mat_median and mpm_median
 set.seed(12)
 
 # create a function that generates a matrix with random values
@@ -43,4 +43,3 @@ mat_list_r_dim <- replicate(20, create_matrix_r_dim(), simplify = FALSE)
 mat_list_r_dim
 
 testthat::expect_error(mat_median(mat_list_r_dim))
-

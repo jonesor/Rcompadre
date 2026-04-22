@@ -14,7 +14,7 @@
 #'
 #' @return Invisibly returns the normalized path to the written file
 #'
-#' @author OpenAI
+#' @author Owen R. Jones <jones@@biology.sdu.dk>
 #'
 #' @family data management
 #'

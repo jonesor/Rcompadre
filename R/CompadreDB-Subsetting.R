@@ -65,7 +65,6 @@ setMethod(
 )
 
 
-
 #' @rdname CompadreDB-Subsetting
 #' @param subset logical expression indicating which rows to keep
 #' @param select expression indicating which columns to keep

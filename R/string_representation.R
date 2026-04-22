@@ -62,8 +62,8 @@ mat_to_string <- function(mat) {
   is_all_na_matrix <- is.matrix(mat) && all(is.na(mat))
 
   if (!is.matrix(mat) ||
-      (!is.numeric(mat) && !is_all_na_matrix) ||
-      (nrow(mat) != ncol(mat))) {
+    (!is.numeric(mat) && !is_all_na_matrix) ||
+    (nrow(mat) != ncol(mat))) {
     stop("mat must be a square numeric matrix", call. = FALSE)
   }
   paste0("[", paste(t(mat), collapse = " "), "]")

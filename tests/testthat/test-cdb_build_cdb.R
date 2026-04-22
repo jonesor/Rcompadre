@@ -26,7 +26,6 @@ test_that("test that cdb_build_cdb functions properly", {
 })
 
 
-
 test_that("test that cdb_build_cdb functions with various matrices", {
   # add U and F matrices
   mat_u1 <- rbind(
@@ -118,7 +117,6 @@ test_that("test that cdb_build_cdb functions with various matrices", {
   testthat::expect_error(cdb_build_cdb(
     metadata = meta, stages = stageInfo
   ))
-
 
 
   testthat::expect_true(inherits(cdb_build_cdb(

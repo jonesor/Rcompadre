@@ -117,10 +117,6 @@
 "CompadreLegacy"
 
 
-
-
-
-
 #' Subsamples of the COMPADRE Plant Matrix Database and COMADRE Animal
 #' Matrix Database for testing and examples
 #'

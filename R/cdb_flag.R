@@ -264,7 +264,6 @@ cdb_flag <- function(cdb, checks = c(
 }
 
 
-
 # utilities
 
 #' Check matrices for NA values and apply a function

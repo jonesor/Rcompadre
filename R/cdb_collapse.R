@@ -115,8 +115,6 @@ cdb_collapse <- function(cdb, columns) {
 }
 
 
-
-
 CollapseWrapper <- function(id, dat, id_collapse) {
   dat <- dat[id_collapse %in% id, ]
   CollapseFn(dat)
