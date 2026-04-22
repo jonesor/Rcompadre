@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/jonesor/Rcompadre",
   "issueTracker": "https://github.com/jonesor/Rcompadre/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.5.0.9000",
+  "version": "1.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -239,7 +239,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1616.115KB",
+  "fileSize": "1616.11KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
