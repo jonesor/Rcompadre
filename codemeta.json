@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/jonesor/Rcompadre",
   "issueTracker": "https://github.com/jonesor/Rcompadre/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.5.3 (2026-03-11)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -103,18 +103,6 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "provider": {
@@ -127,6 +115,11 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "grDevices",
+      "name": "grDevices"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "provider": {
@@ -136,18 +129,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "maps",
-      "name": "maps",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=maps"
     },
     {
       "@type": "SoftwareApplication",
@@ -195,10 +176,22 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "popdemo",
       "name": "popdemo",
@@ -210,12 +203,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=popdemo"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -227,14 +220,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
     "SystemRequirements": null
   },
-  "fileSize": "553.715KB",
+  "fileSize": "1089.588KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
