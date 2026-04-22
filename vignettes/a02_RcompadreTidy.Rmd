@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+has_maps <- requireNamespace("maps", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
@@ -235,7 +237,10 @@ Rcompadre includes methods that allow CompadreDB objects to be used as data argu
 
 __Plot study coordinates on world map:__
 
-```{r warning=FALSE, fig.width = 6, fig.height = 4}
+If the optional `maps` package is not installed, the world map example below
+will be shown but not executed during vignette rendering.
+
+```{r warning=FALSE, fig.width = 6, fig.height = 4, eval = has_maps}
 #| fig.alt: >
 #|   A world map showing geographic distribution of COMPADRE data.
 ggplot2::ggplot(Compadre, aes(Lon, Lat)) +
