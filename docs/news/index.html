@@ -44,8 +44,14 @@
 <h2 class="pkg-version" data-toc-text="development version" id="rcompadre-development-version">Rcompadre (development version)<a class="anchor" aria-label="anchor" href="#rcompadre-development-version"></a></h2>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0" id="rcompadre-150">Rcompadre 1.5.0<a class="anchor" aria-label="anchor" href="#rcompadre-150"></a></h2>
-</div>
+<h2 class="pkg-version" data-toc-text="1.5.0" id="rcompadre-150">Rcompadre 1.5.0<a class="anchor" aria-label="anchor" href="#rcompadre-150"></a></h2><p class="text-muted">CRAN release: 2026-04-23</p>
+<ul><li>Added <code><a href="../reference/cdb_export_matlab.html">cdb_export_matlab()</a></code> to export <code>CompadreDB</code> objects to Matlab-friendly CSV/TSV text files.</li>
+<li>Improved <code><a href="../reference/cdb_rbind.html">cdb_rbind()</a></code> so it can bind multiple <code>CompadreDB</code> objects and, with <code>fill = TRUE</code>, combine objects with mismatched metadata columns by filling missing values with <code>NA</code>.</li>
+<li>Added <code><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels()</a></code> support for <code>CompadreDB</code>.</li>
+<li>Improved <code>CompadreDB</code> usability by adding support for <code>print(..., n = ...)</code>, <code><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames()</a></code>, and base <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind()</a></code>/<code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code>. Subsetting now returns a plain tabular object when the mandatory <code>mat</code> column is removed.</li>
+<li>Fixed <code><a href="../reference/string_representation.html">mat_to_string()</a></code> and <code><a href="../reference/cdb_flatten.html">cdb_flatten()</a></code> handling of all-<code>NA</code> square matrices.</li>
+<li>Updated documentation, tests, and CI/build configuration for improved reliability across platforms.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.0" id="rcompadre-140">Rcompadre 1.4.0<a class="anchor" aria-label="anchor" href="#rcompadre-140"></a></h2><p class="text-muted">CRAN release: 2024-10-16</p>
 <ul><li>Added a function <code>mpm_elementwise_apply</code> which can apply any function over elements in a matrix. For example, <code>mean</code>, <code>min</code>, <code>max</code>, <code>sd</code>, <code>var</code> etc. to allow summaries to conveniently be made across matrices of the same dimension. Replaces some of the functionality of <code>mpm_sd</code>/<code>mat_sd</code>, <code>mpm_median</code>/<code>mat_median</code> and <code>mpm_mean</code>/<code>mat_mean</code>, which are retained for backwards compatibility.</li>

@@ -2,6 +2,13 @@
 
 # Rcompadre 1.5.0
 
+* Added `cdb_export_matlab()` to export `CompadreDB` objects to Matlab-friendly CSV/TSV text files.
+* Improved `cdb_rbind()` so it can bind multiple `CompadreDB` objects and, with `fill = TRUE`, combine objects with mismatched metadata columns by filling missing values with `NA`.
+* Added `droplevels()` support for `CompadreDB`.
+* Improved `CompadreDB` usability by adding support for `print(..., n = ...)`, `colnames()`, and base `rbind()`/`cbind()`. Subsetting now returns a plain tabular object when the mandatory `mat` column is removed.
+* Fixed `mat_to_string()` and `cdb_flatten()` handling of all-`NA` square matrices.
+* Updated documentation, tests, and CI/build configuration for improved reliability across platforms.
+
 # Rcompadre 1.4.0
 
 * Added a function `mpm_elementwise_apply` which can apply any function over elements in a matrix. For example, `mean`, `min`, `max`, `sd`, `var` etc. to allow summaries to conveniently be made across matrices of the same dimension. Replaces some of the functionality of `mpm_sd`/`mat_sd`, `mpm_median`/`mat_median` and `mpm_mean`/`mat_mean`, which are retained for backwards compatibility.
