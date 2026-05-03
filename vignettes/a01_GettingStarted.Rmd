@@ -207,13 +207,13 @@ x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
 
 ## Calculations from matrices
 
-When we have a set of matrices that we want to make calculations from, we can use `sapply()` to apply a function across all the matrices in the list produced by `matA()`. For example, to calculate lambda (the dominant eigenvalue) from all the **A** matrices we can use base R's `eigen()` function. Then we can examine a summary, produce a histogram etc.
+When we have a set of matrices that we want to make calculations from, we can use `sapply()` to apply a function across all the matrices in the list produced by `matA()`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs()` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
 
 ```{r matrix_calculations}
 #| fig.alt: >
 #|   A histogram showing ths distribution of lambda values in COMPADRE datasets.
 
-lambdaVals <- sapply(matA(x), function(m) Re(eigen(m, only.values = TRUE)$values[1]))
+lambdaVals <- sapply(matA(x), popdemo::eigs, what = "lambda")
 summary(lambdaVals)
 hist(lambdaVals, main = "Lambda values")
 ```

@@ -37,11 +37,12 @@ Imports:
     stats,
     tibble,
     utils
-Suggests: 
+Suggests:
     ggplot2,
     grDevices,
     knitr,
     maps,
+    popdemo,
     rcrossref,
     rmarkdown,
     testthat
