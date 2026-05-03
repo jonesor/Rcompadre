@@ -107,7 +107,6 @@
 #'
 #' # only check whether matA has missing values, and whether matA is ergodic
 #' CompadreFlag <- cdb_flag(Compadre, checks = c("check_NA_A", "check_ergodic"))
-#' @importFrom popdemo isErgodic isIrreducible isPrimitive
 #' @importFrom methods new
 #' @export cdb_flag
 cdb_flag <- function(cdb, checks = c(
@@ -223,7 +222,7 @@ cdb_flag <- function(cdb, checks = c(
       CheckMats,
       has_na = vec_NA_A,
       mat = matA,
-      MoreArgs = list(fn = isErgodic)
+      MoreArgs = list(fn = .isErgodic)
     )
   }
 
@@ -232,7 +231,7 @@ cdb_flag <- function(cdb, checks = c(
       CheckMats,
       has_na = vec_NA_A,
       mat = matA,
-      MoreArgs = list(fn = isIrreducible)
+      MoreArgs = list(fn = .isIrreducible)
     )
   }
 
@@ -241,7 +240,7 @@ cdb_flag <- function(cdb, checks = c(
       CheckMats,
       has_na = vec_NA_A,
       mat = matA,
-      MoreArgs = list(fn = isPrimitive)
+      MoreArgs = list(fn = .isPrimitive)
     )
   }
 

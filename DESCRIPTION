@@ -34,7 +34,6 @@ Depends:
 Imports:
     dplyr,
     methods,
-    popdemo,
     stats,
     tibble,
     utils
@@ -85,4 +84,5 @@ Collate:
     'mpm_sd.R'
     'mpm_median.R'
     'string_representation.R'
+    'utils_matrix.R'
     'zzz.R'
