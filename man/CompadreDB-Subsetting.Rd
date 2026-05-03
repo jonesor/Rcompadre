@@ -2,11 +2,11 @@
 % Please edit documentation in R/CompadreDB-Subsetting.R
 \name{CompadreDB-Subsetting}
 \alias{CompadreDB-Subsetting}
-\alias{[,CompadreDB,ANY,ANY-method}
+\alias{[,CompadreDB-method}
 \alias{subset.CompadreDB}
 \title{Subsetting CompadreDB objects}
 \usage{
-\S4method{[}{CompadreDB,ANY,ANY}(x, i, j, ..., drop = FALSE)
+\S4method{[}{CompadreDB}(x, i, j, ..., drop = FALSE)
 
 \method{subset}{CompadreDB}(x, subset, select, drop = FALSE, ...)
 }

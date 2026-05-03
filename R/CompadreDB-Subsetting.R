@@ -34,11 +34,7 @@ NULL
 #' @importFrom methods new
 #' @export
 setMethod(
-  f = "[", signature = signature(
-    x = "CompadreDB",
-    i = "ANY",
-    j = "ANY"
-  ),
+  f = "[", signature = "CompadreDB",
   function(x, i, j, ..., drop = FALSE) {
     dat <- x@data
     if (!missing(j)) {
