@@ -24,3 +24,5 @@
 ^CRAN-SUBMISSION$
 ^dev$
 ^compare_popdemo\.R$
+^\.positai$
+^\.claude$
