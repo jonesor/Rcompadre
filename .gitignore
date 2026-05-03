@@ -41,3 +41,4 @@ Meta
 tests/testthat-problems.rds
 tests/spelling.Rout.save
 localtesting/
+.positai
