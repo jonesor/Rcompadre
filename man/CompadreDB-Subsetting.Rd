@@ -3,6 +3,7 @@
 \name{CompadreDB-Subsetting}
 \alias{CompadreDB-Subsetting}
 \alias{[,CompadreDB,ANY,ANY,ANY-method}
+\alias{[,CompadreDB,ANY,ANY-method}
 \alias{subset.CompadreDB}
 \title{Subsetting CompadreDB objects}
 \usage{

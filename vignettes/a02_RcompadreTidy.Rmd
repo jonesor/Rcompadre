@@ -53,7 +53,6 @@ We'll begin by loading a few packages.
 library(Rcompadre)
 library(dplyr)
 library(ggplot2)
-library(popdemo)
 ```
 
 ## Introduction to piping
@@ -149,16 +148,18 @@ compadre_unnest <- Compadre %>%
 
 Just like creating a new column with `$` (e.g. `compadre$new_col <- ...`), each expression within `mutate()` must return a vector of the same length as the number of rows in the data frame, or return a single value which will be recycled for all rows. For some operations this requires vectorization.
 
-Let's say we want to calculate the population growth rate for every matrix in the database. We can use the `eigs()` function in the [popdemo](https://CRAN.R-project.org/package=popdemo) package, but it can only take a single matrix at a time.
+Let's say we want to calculate the population growth rate for every matrix in the database. We can use base R's `eigen()` to extract the dominant eigenvalue (lambda), but it can only take a single matrix at a time.
 
-To apply `eigs()` to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `eigs()` to fail.
+To apply it to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `eigen()` to fail.
 
 ```{r}
+lambda_fn <- function(m) Re(eigen(m, only.values = TRUE)$values[1])
+
 compadre_lambda <- Compadre %>%
   cdb_flag() %>%
   filter(check_NA_A == FALSE) %>% # remove matrices with missing values
   mutate(mat_A = matA(.)) %>% # extract list-column of matA
-  mutate(lam = sapply(mat_A, popdemo::eigs, what = "lambda"))
+  mutate(lam = sapply(mat_A, lambda_fn))
 ```
 
 In the example above, `sapply()` returns a scalar value for every row of the database. If we instead want to derive a more complex object for every row such as a vector or matrix, we can use the function `lapply()` which always returns a list. In the example below we use `lapply()` to calculate vectors of stage-specific survival (column sums of `matU`) for every row of the database.
