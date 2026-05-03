@@ -37,8 +37,7 @@ setMethod(
   f = "[", signature = signature(
     x = "CompadreDB",
     i = "ANY",
-    j = "ANY",
-    drop = "ANY"
+    j = "ANY"
   ),
   function(x, i, j, ..., drop = FALSE) {
     dat <- x@data
