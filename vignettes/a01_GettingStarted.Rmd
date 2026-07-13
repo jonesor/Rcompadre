@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# popdemo is a Suggests dependency; skip chunks that need it if unavailable
+has_popdemo <- requireNamespace("popdemo", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
@@ -209,7 +212,7 @@ x <- subset(Compadre_flagged, check_NA_A == FALSE & check_ergodic == TRUE)
 
 When we have a set of matrices that we want to make calculations from, we can use `sapply()` to apply a function across all the matrices in the list produced by `matA()`. For example, to calculate lambda from all the **A** matrices we can apply the function `eigs()` from the `popdemo` package to obtain lambda for the matrices in the `x` object produced above. Then we can examine a summary, produce a histogram etc.
 
-```{r matrix_calculations}
+```{r matrix_calculations, eval = has_popdemo}
 #| fig.alt: >
 #|   A histogram showing ths distribution of lambda values in COMPADRE datasets.
 

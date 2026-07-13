@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# popdemo is a Suggests dependency; skip chunks that need it if unavailable
+has_popdemo <- requireNamespace("popdemo", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
@@ -50,7 +53,7 @@ We'll start by loading a few packages and a dataset that we'll be using througho
 
 ```{r}
 library(Rcompadre)
-library(popdemo)
+if (requireNamespace("popdemo", quietly = TRUE)) library(popdemo)
 data(Compadre)
 ```
 
@@ -199,7 +202,7 @@ mapply(
 
 Just like loops, vectorisation fails if the function being vectorised throws an error on _any_ element of the vector. Here's an example. The `eigs()` function from [popdemo](https://CRAN.R-project.org/package=popdemo) calculates the expected population growth rate given a projection matrix. It'll work on most of the __A__ matrices in `Compadre`, but fails on matrices that contain missing values (`NA`).
 
-```{r error=TRUE}
+```{r error=TRUE, eval = has_popdemo}
 # works for a single matrix
 popdemo::eigs(CompUnnest$matA[[1]], what = "lambda")
 
@@ -213,7 +216,7 @@ There are two basic approaches to overcoming this:
 
 If `eigs()` doesn't work on matrices with missing values, one approach is to simply remove matrices with missing values. The `cdb_flag()` function is an easy way to check for missing values, and other common issues that might hinder our analyses.
 
-```{r}
+```{r, eval = has_popdemo}
 # add column 'check_NA_A', indicating whether matA contains missing values (T/F)
 CompFlag <- cdb_flag(CompUnnest, checks = "check_NA_A")
 
@@ -226,7 +229,7 @@ CompSub$lambda <- sapply(matA(CompSub), popdemo::eigs, what = "lambda")
 
 Alternatively, if we want to avoid subsetting, we could pre-define a placeholder column for the result, and then selectively apply the `eigs()` function to only those matrices that don't contain missing values.
 
-```{r}
+```{r, eval = has_popdemo}
 # identify rows with no missing values in matA
 no_missing <- which(CompFlag$check_NA_A == FALSE)
 
@@ -246,7 +249,7 @@ Rows where there were missing values in `matA` retain the original placeholder v
 
 A second approach is to modify the function we want to vectorise with so that it can natively handle special cases. For example, we might modify `eigs()` so that it returns `NA` if a matrix contains missing values.
 
-```{r}
+```{r, eval = has_popdemo}
 lambdaFn1 <- function(mat) {
   # check mat for missing values: if TRUE return NA, else return eigs(mat)
   ifelse(anyNA(mat), NA, popdemo::eigs(mat, what = "lambda"))
@@ -257,7 +260,7 @@ CompUnnest$lambda <- sapply(CompUnnest$matA, lambdaFn1)
 
 If the special cases are harder to test for, we could use R's condition-handling functions like `try()` or `tryCatch()`. Here's an example.
 
-```{r}
+```{r, eval = has_popdemo}
 lambdaFn2 <- function(mat) {
   # try eigs(mat): if error return NA
   tryCatch(eigs(mat, what = "lambda"), error = function(err) NA)

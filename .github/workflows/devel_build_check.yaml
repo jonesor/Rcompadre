@@ -82,6 +82,10 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, force = TRUE)
           remotes::install_cran("rcmdcheck")
+          # popdemo is a Suggests package used by the vignettes. Install it
+          # explicitly so a failure errors here rather than being swallowed as a
+          # warning by install_deps (see R_REMOTES_NO_ERRORS_FROM_WARNINGS).
+          remotes::install_cran("popdemo")
           remotes::install_github("jonesor/Rage") #in suggests
         shell: Rscript {0}
 

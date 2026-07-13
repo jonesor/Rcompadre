@@ -18,6 +18,9 @@ knitr::opts_chunk$set(
 )
 
 has_maps <- requireNamespace("maps", quietly = TRUE)
+
+# popdemo is a Suggests dependency; skip chunks that need it if unavailable
+has_popdemo <- requireNamespace("popdemo", quietly = TRUE)
 ```
 
 ```{r setupDarwin, include=FALSE, eval = Sys.info()[["sysname"]] == "Darwin"}
@@ -53,7 +56,7 @@ We'll begin by loading a few packages.
 library(Rcompadre)
 library(dplyr)
 library(ggplot2)
-library(popdemo)
+if (requireNamespace("popdemo", quietly = TRUE)) library(popdemo)
 ```
 
 ## Introduction to piping
@@ -153,7 +156,7 @@ Let's say we want to calculate the population growth rate for every matrix in th
 
 To apply `eigs()` to a list of matrices we can use `sapply()`. But first we need to remove matrices with missing values, because these will cause `eigs()` to fail.
 
-```{r}
+```{r, eval = has_popdemo}
 compadre_lambda <- Compadre %>%
   cdb_flag() %>%
   filter(check_NA_A == FALSE) %>% # remove matrices with missing values
